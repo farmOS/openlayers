@@ -69,23 +69,8 @@ class openlayers__source__googlemaps extends openlayers_source {
    * {@inheritdoc}
    */
   public function alterBuild(&$build, $map) {
-    $gmap_id = 'gmap-' . $map->getId();
-    $build['gmap'] = array(
-      '#theme' => 'html_tag',
-      '#tag' => 'div',
-      '#value' => '',
-      '#attributes' => array(
-        'id' => $gmap_id,
-        'class' => array('gmap-map'),
-        'style' => 'height: 100%; width: 100%;',
-      ),
-    );
-  }
+    $map_id = $map->getId();
 
-  /**
-   * {@inheritdoc}
-   */
-  public function attached() {
     $google_maps_script = '//maps.google.com/maps/api/js?v=3&language=' . $GLOBALS['language']->language . '&';
     $google_maps_script .= 'sensor=' . ($this->getOption('sensor', FALSE) ? 'false' : 'true') . '&';
     if (($key = $this->getOption('key', ''))) {
@@ -97,14 +82,47 @@ class openlayers__source__googlemaps extends openlayers_source {
     if (($channel = $this->getOption('channel', ''))) {
       $google_maps_script .= 'channel=' . $channel . '&';
     }
-    $this->attached['js'][$google_maps_script] = array(
+
+
+    // If this is an ajax call use async handling.
+    if ($this->isAsynchronous()) {
+      $google_maps_script .= 'callback=Drupal.openlayers.asyncIsReadyCallbacks.' . preg_replace('/[^0-9a-z]/i', '_', $map_id) . '&';
+    }
+
+    $attached['js'][$google_maps_script] = array(
       'data' => $google_maps_script,
       'type' => 'external',
       'group' => openlayers_config::JS_GROUP,
       'weight' => (openlayers_config::JS_WEIGHT - 1),
     );
 
+    $gmap_id = 'gmap-' . $map_id;
+    $build['gmap'] = array(
+      '#theme' => 'html_tag',
+      '#tag' => 'div',
+      '#value' => '',
+      '#attributes' => array(
+        'id' => $gmap_id,
+        'class' => array('gmap-map'),
+        'style' => 'height: 100%; width: 100%;',
+      ),
+      '#attached' => $attached,
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function attached() {
+
+
     return parent::attached();
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function isAsynchronous() {
+    return current_path() == 'system/ajax';
+  }
 }

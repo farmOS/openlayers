@@ -8,6 +8,18 @@
  * Interface openlayers_object_interface.
  */
 interface openlayers_object_interface {
+
+  /**
+   * Whether or not this object has to be processed asynchronously.
+   *
+   * If true the map this object relates to won't be processes right away by
+   * Drupals behaviour attach.
+   *
+   * @return bool
+   *   Whether or not this object has to be processed asynchronously.
+   */
+  public function isAsynchronous();
+
   /**
    * Return a list of default properties.
    *

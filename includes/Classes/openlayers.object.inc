@@ -280,4 +280,11 @@ abstract class openlayers_object implements openlayers_object_interface {
     return json_decode(json_encode($this), TRUE);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function isAsynchronous() {
+    return FALSE;
+  }
+
 }
