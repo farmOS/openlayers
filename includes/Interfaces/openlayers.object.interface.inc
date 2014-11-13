@@ -19,7 +19,7 @@ interface openlayers_object_interface {
   /**
    * Initializes the object.
    *
-   * @@param array $data
+   * @param array $data
    *   The configuration data.
    */
   public function init(array $data);

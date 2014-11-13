@@ -40,14 +40,11 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
    * {@inheritdoc}
    */
   public function getLayers() {
-    if ($layers = $this->getOption('layers')) {
-      $result = array();
-      foreach ($layers as $layer) {
-        $result[] = clone openlayers_object_load('layer', $layer);
-      }
-      return $result;
+    $result = array();
+    foreach ($this->getOption('layers', array()) as $layer) {
+      $result[] = clone openlayers_object_load('layer', $layer);
     }
-    return array();
+    return $result;
   }
 
   /**
@@ -75,9 +72,9 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
    * {@inheritdoc}
    */
   public function getStyles() {
-    $styles = $this->getOption('styles', array());
-    foreach ($styles as $index => $source) {
-      $styles[$index] = openlayers_object_load('style', $source);
+    $styles = array();
+    foreach ($this->getOption('styles', array()) as $source) {
+      $styles[] = openlayers_object_load('style', $source);
     }
 
     foreach ($this->getLayers() as $layer) {
@@ -94,10 +91,8 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
    */
   public function getControls() {
     $result = array();
-    if ($controls = $this->getOption('controls')) {
-      foreach ($controls as $control) {
-        $result[] = clone openlayers_object_load('control', $control);
-      }
+    foreach ($this->getOption('controls', array()) as $control) {
+      $result[] = clone openlayers_object_load('control', $control);
     }
     return $result;
   }
@@ -107,10 +102,8 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
    */
   public function getInteractions() {
     $result = array();
-    if ($interactions = $this->getOption('interactions')) {
-      foreach ($interactions as $index => $interaction) {
-        $result[] = clone openlayers_object_load('interaction', $interaction);
-      }
+    foreach ($this->getOption('interactions', array()) as $interaction) {
+      $result[] = clone openlayers_object_load('interaction', $interaction);
     }
     return $result;
   }
@@ -120,10 +113,8 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
    */
   public function getComponents() {
     $result = array();
-    if ($components = $this->getOption('components')) {
-      foreach ($components as $component) {
-        $result[] = clone openlayers_object_load('component', $component);
-      }
+    foreach ($this->getOption('components', array()) as $component) {
+      $result[] = clone openlayers_object_load('component', $component);
     }
     return $result;
   }
