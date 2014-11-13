@@ -1,11 +1,18 @@
 <?php
+/**
+ * @file
+ * Style handler that creates a map based on a view.
+ */
 
+/**
+ * Class openlayers_views_plugin_map_views.
+ */
 class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_source_vector {
 
   /**
    * Store the build map.
    *
-   * @var openlayers_map
+   * @var openlayers_map_interface
    */
   protected $map;
 

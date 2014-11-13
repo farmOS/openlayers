@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Class openlayers_layer.
+ */
 
+/**
+ * Class openlayers_layer.
+ */
 abstract class openlayers_layer extends openlayers_object implements openlayers_layer_interface {
 
   protected $attached = array();

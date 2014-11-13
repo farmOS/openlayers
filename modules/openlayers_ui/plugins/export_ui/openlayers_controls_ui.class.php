@@ -3,7 +3,7 @@
 class openlayers_controls_ui extends openlayers_objects_ui {
 
   /**
-   * hook_menu() entry point.
+   * Entry point of hook_menu().
    *
    * Child implementations that need to add or modify menu items should
    * probably call parent::hook_menu($items) and then modify as needed.

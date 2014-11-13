@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default maps.
+ */
 
+/**
+ * Implements hook_default_maps().
+ */
 function openlayers_examples_default_maps() {
   $export = array();
 
@@ -25,10 +32,10 @@ function openlayers_examples_default_maps() {
     ),
     'layers' => array(
       0 => 'layer_tile_stamen_toner',
-      1 => 'layer_vector_kml_earthquakes_heatmap'
+      1 => 'layer_vector_kml_earthquakes_heatmap',
     ),
     'controls' => array(
-      0 => 'control_zoom'
+      0 => 'control_zoom',
     ),
     'interactions' => array(
       0 => 'interaction_doubleclickzoom',
@@ -38,8 +45,8 @@ function openlayers_examples_default_maps() {
     'components' => array(
       0 => 'openlayers_examples_earthquake_style',
       1 => 'openlayers_examples_simple_popup_earthquakes',
-      2 => 'openlayers_examples_tooltip_earthquakes'
-    )
+      2 => 'openlayers_examples_tooltip_earthquakes',
+    ),
   );
   $export['openlayers_examples_map_earthquake'] = $map;
 
@@ -106,7 +113,7 @@ function openlayers_examples_default_maps() {
       0 => 'interaction_doubleclickzoom',
       1 => 'interaction_dragpan',
       2 => 'interaction_mousewheelzoom',
-    )
+    ),
   );
   $export['map_mapbox_example1'] = $map;
 
@@ -138,7 +145,7 @@ function openlayers_examples_default_maps() {
       0 => 'interaction_doubleclickzoom',
       1 => 'interaction_dragpan',
       2 => 'interaction_mousewheelzoom',
-    )
+    ),
   );
   $export['map_mapbox_example2'] = $map;
 
@@ -170,7 +177,7 @@ function openlayers_examples_default_maps() {
       0 => 'interaction_doubleclickzoom',
       1 => 'interaction_dragpan',
       2 => 'interaction_mousewheelzoom',
-    )
+    ),
   );
   $export['map_mapbox_example3'] = $map;
 
@@ -203,7 +210,7 @@ function openlayers_examples_default_maps() {
       0 => 'interaction_doubleclickzoom',
       1 => 'interaction_dragpan',
       2 => 'interaction_mousewheelzoom',
-    )
+    ),
   );
   $export['map_geojson_cities'] = $map;
 
@@ -236,7 +243,7 @@ function openlayers_examples_default_maps() {
       0 => 'interaction_doubleclickzoom',
       1 => 'interaction_dragpan',
       2 => 'interaction_mousewheelzoom',
-    )
+    ),
   );
   $export['map_geojson_cities_heatmap'] = $map;
 
@@ -270,8 +277,8 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
     'components' => array(
-      0 => 'openlayers_examples_geolocation'
-    )
+      0 => 'openlayers_examples_geolocation',
+    ),
   );
   $export['map_geolocation'] = $map;
 
@@ -309,7 +316,6 @@ function openlayers_examples_default_maps() {
     ),
   );
   $export['openlayers_examples_mapquest_sat_geojson_views'] = $map;
-
 
   $map = new stdClass();
   $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */

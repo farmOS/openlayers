@@ -1,9 +1,16 @@
 <?php
+/**
+ * @file
+ * Provide default interactions.
+ */
 
+/**
+ * Implements hook_default_interactions().
+ */
 function openlayers_default_interactions() {
   $export = array();
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_doubleclickzoom';
   $interaction->name = 'DoubleClickZoom';
@@ -12,7 +19,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_doubleclickzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_draganddrop';
   $interaction->name = 'DragAndDrop';
@@ -21,7 +28,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_draganddrop'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_dragbox';
   $interaction->name = 'DragBox';
@@ -30,7 +37,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_dragbox'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_dragpan';
   $interaction->name = 'DragPan';
@@ -43,7 +50,7 @@ function openlayers_default_interactions() {
   );
   $export['interaction_dragpan'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_dragrotate';
   $interaction->name = 'DragRotate';
@@ -52,7 +59,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_dragrotate'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_dragrotateandzoom';
   $interaction->name = 'DragRotateAndZoom';
@@ -61,7 +68,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_dragrotateandzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_dragzoom';
   $interaction->name = 'DragZoom';
@@ -70,7 +77,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_dragzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_draw';
   $interaction->name = 'Draw';
@@ -79,7 +86,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_draw'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_keyboardpan';
   $interaction->name = 'KeyboardPan';
@@ -88,7 +95,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_keyboardpan'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_keyboardzoom';
   $interaction->name = 'KeyboardZoom';
@@ -97,7 +104,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_keyboardzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_modify';
   $interaction->name = 'Modify';
@@ -106,7 +113,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_modify'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_mousewheelzoom';
   $interaction->name = 'MouseWheelZoom';
@@ -115,7 +122,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_mousewheelzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_pinchrotate';
   $interaction->name = 'PinchRotate';
@@ -124,7 +131,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_pinchrotate'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_pinchzoom';
   $interaction->name = 'PinchZoom';
@@ -133,7 +140,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_pinchzoom'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_pointer';
   $interaction->name = 'Pointer';
@@ -142,7 +149,7 @@ function openlayers_default_interactions() {
   $interaction->options = array();
   $export['interaction_pointer'] = $interaction;
 
-  $interaction = new stdClass;
+  $interaction = new stdClass();
   $interaction->api_version = 1;
   $interaction->machine_name = 'interaction_select';
   $interaction->name = 'Select';

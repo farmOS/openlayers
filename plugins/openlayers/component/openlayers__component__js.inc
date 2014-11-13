@@ -1,31 +1,45 @@
 <?php
+/**
+ * @file
+ * Component: JS Component.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__component__js_openlayers_component() {
   return array(
     'handler' => array(
       'class' => 'openlayers__component__js',
       'file' => 'openlayers__component__js.inc',
-    )
+    ),
   );
 }
 
+/**
+ * Class openlayers__component__js
+ */
 class openlayers__component__js extends openlayers_component {
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $attached = array();
-    //$form = array();
+    // $form = array();
 
     if (module_exists('ace_editor')) {
       $attached = array(
         'library' => array(
-          array('ace_editor', 'ace-editor')
+          array('ace_editor', 'ace-editor'),
         ),
         'js' => array(
-          drupal_get_path('module', 'openlayers') . '/js/editor.js'
-        )
+          drupal_get_path('module', 'openlayers') . '/js/editor.js',
+        ),
       );
-    } else {
-        drupal_set_message(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
+    }
+    else {
+      drupal_set_message(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
     }
 
     $form['options']['javascript'] = array(
@@ -35,9 +49,9 @@ class openlayers__component__js extends openlayers_component {
       '#rows' => 15,
       '#default_value' => $this->getOption('javascript'),
       '#attributes' => array(
-        'data-editor' => 'javascript'
+        'data-editor' => 'javascript',
       ),
-      '#attached' => $attached
+      '#attached' => $attached,
     );
   }
 

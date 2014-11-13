@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Class openlayers_config.
+ */
 
+/**
+ * Class openlayers_config.
+ */
 class openlayers_config {
   const JS_GROUP = 20;
   const JS_WEIGHT = 10;

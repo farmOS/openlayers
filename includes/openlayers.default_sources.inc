@@ -1,9 +1,16 @@
 <?php
+/**
+ * @file
+ * Provide default sources.
+ */
 
+/**
+ * Implements hook_default_sources().
+ */
 function openlayers_default_sources() {
   $export = array();
 
-  $source = new stdClass;
+  $source = new stdClass();
   $source->api_version = 1;
   $source->machine_name = 'source_osm';
   $source->name = 'OpenStreetMap';
@@ -24,7 +31,7 @@ function openlayers_default_sources() {
   );
   $export['source_osm_opencyclemap'] = $source;
 
-  $source = new stdClass;
+  $source = new stdClass();
   $source->api_version = 1;
   $source->machine_name = 'source_bingmaps';
   $source->name = 'Bing Maps';
@@ -33,7 +40,7 @@ function openlayers_default_sources() {
   $source->options = array();
   $export['source_bingmaps'] = $source;
 
-  $source = new stdClass;
+  $source = new stdClass();
   $source->api_version = 1;
   $source->machine_name = 'source_googlemaps';
   $source->name = 'Google Maps';
@@ -122,7 +129,7 @@ function openlayers_default_sources() {
   $source->description = 'A pseudo tile source, which does not fetch tiles from a server, but renders a grid outline for the tile grid/projection along with the coordinates for each tile.';
   $source->class = 'openlayers__source__tiledebug';
   $source->options = array(
-    'maxZoom' => 22
+    'maxZoom' => 22,
   );
   $export['source_tiledebug'] = $source;
 
@@ -134,7 +141,7 @@ function openlayers_default_sources() {
   $source->description = '';
   $source->class = 'openlayers__source__stamen';
   $source->options = array(
-    'layer' => 'terrain-labels'
+    'layer' => 'terrain-labels',
   );
   $export['source_stamen1'] = $source;
 
@@ -146,7 +153,7 @@ function openlayers_default_sources() {
   $source->description = '';
   $source->class = 'openlayers__source__stamen';
   $source->options = array(
-    'layer' => 'watercolor'
+    'layer' => 'watercolor',
   );
   $export['source_stamen2'] = $source;
 
@@ -158,7 +165,7 @@ function openlayers_default_sources() {
   $source->description = '';
   $source->class = 'openlayers__source__stamen';
   $source->options = array(
-    'layer' => 'toner'
+    'layer' => 'toner',
   );
   $export['source_stamen3'] = $source;
 
@@ -170,7 +177,7 @@ function openlayers_default_sources() {
   $source->description = '';
   $source->class = 'openlayers__source__xyz';
   $source->options = array(
-    'url' => 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+    'url' => 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
   );
   $export['source_esri'] = $source;
 

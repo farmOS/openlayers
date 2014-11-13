@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default maps from views.
+ */
 
+/**
+ * Implements hook_default_maps().
+ */
 function openlayers_views_default_maps() {
   $export = array();
 

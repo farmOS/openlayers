@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Openlayers views integration.
+ */
 
 /**
  * Implements hook_views_api().
@@ -26,7 +30,7 @@ function openlayers_views_ctools_plugin_api($module, $api) {
   $path = drupal_get_path('module', 'openlayers_views') . '/includes';
   return array(
     'version' => 1,
-    'path' => $path
+    'path' => $path,
   );
 }
 

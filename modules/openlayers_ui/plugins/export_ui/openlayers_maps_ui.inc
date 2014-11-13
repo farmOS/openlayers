@@ -1,7 +1,11 @@
 <?php
 /**
- * CTools Export UI required function for plugin definition
- * See function ctools_plugin_load_includes() in the module ctools.
+ * @file
+ * CTools Export UI plugin definition for maps.
+ */
+
+/**
+ * CTools Export UI plugin definition.
  */
 function openlayers_ui_openlayers_maps_ui_ctools_export_ui() {
   return array(
@@ -16,7 +20,7 @@ function openlayers_ui_openlayers_maps_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_maps_ui',
-      'parent' => 'ctools_export_ui'
+      'parent' => 'ctools_export_ui',
     ),
 
     'use wizard' => TRUE,
@@ -29,34 +33,34 @@ function openlayers_ui_openlayers_maps_ui_ctools_export_ui() {
         'interactions' => t('Interactions'),
         'components' => t('Components'),
         'styles' => t('Styles'),
-        'preview' => t('Preview')
+        'preview' => t('Preview'),
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_map_form_start'
+          'form id' => 'openlayers_map_form_start',
         ),
         'settings' => array(
-          'form id' => 'openlayers_map_form_settings'
+          'form id' => 'openlayers_map_form_settings',
         ),
         'layers' => array(
-          'form id' => 'openlayers_map_form_layers'
+          'form id' => 'openlayers_map_form_layers',
         ),
         'controls' => array(
-          'form id' => 'openlayers_map_form_controls'
+          'form id' => 'openlayers_map_form_controls',
         ),
         'interactions' => array(
-          'form id' => 'openlayers_map_form_interactions'
+          'form id' => 'openlayers_map_form_interactions',
         ),
         'components' => array(
-          'form id' => 'openlayers_map_form_components'
+          'form id' => 'openlayers_map_form_components',
         ),
         'styles' => array(
-          'form id' => 'openlayers_map_form_styles'
+          'form id' => 'openlayers_map_form_styles',
         ),
         'preview' => array(
-          'form id' => 'openlayers_map_form_preview'
-        )
-      )
+          'form id' => 'openlayers_map_form_preview',
+        ),
+      ),
     ),
 
     'export' => array(
@@ -76,8 +80,8 @@ function openlayers_ui_openlayers_maps_ui_ctools_export_ui() {
         ),
         'delete' => array(
           'success' => t('Map was deleted.'),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
@@ -124,7 +128,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 }
 
 function openlayers_map_form_settings_submit($form, &$form_state) {
-  // todo: fix
+  // todo: fix.
   if (empty($form_state['item']->class)) {
     $form_state['item']->class = 'openlayers__map__map';
   }
@@ -139,7 +143,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   $map = openlayers_object_load('map', $form_state['item']);
 
   $layers = array();
-  foreach($map->getLayers() as $index => $layer) {
+  foreach ($map->getLayers() as $index => $layer) {
     if (isset($all_layers[$layer->machine_name])) {
       $layers[$layer->machine_name] = $all_layers[$layer->machine_name];
       $layers[$layer->machine_name]->enable = 1;
@@ -160,43 +164,46 @@ function openlayers_map_form_layers($form, &$form_state) {
       'class' => $layer->class,
       'weight' => $i++,
       'enable' => isset($layer->enable) ? $layer->enable : 0,
-      'default' => 1
+      'default' => 1,
     );
   }
 
   $rows = array();
-  foreach($data as $id => $entry) {
+  $row_elements = array();
+  foreach ($data as $id => $entry) {
     $rows[$id] = array(
       'data' => array(
         array('class', array('entry-cross')),
-        array('data' => array(
-          '#type' => 'weight',
-          '#title' => t('Weight'),
-          '#title_display' => 'invisible',
-          '#default_value' => $entry['weight'],
-          '#parents' => array('layers', $id, 'weight'),
-          '#attributes' => array(
-            'class' => array('entry-order-weight'),
-          )
-        )),
-        array('data' => array(
-          '#type' => 'checkbox',
-          '#title' => t('Enable'),
-          '#title_display' => 'invisible',
-          '#default_value' => $entry['enable'],
-          '#parents' => array('layers', $id, 'enable'),
-        )),
+        array(
+          'data' => array(
+            '#type' => 'weight',
+            '#title' => t('Weight'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['weight'],
+            '#parents' => array('layers', $id, 'weight'),
+            '#attributes' => array(
+              'class' => array('entry-order-weight'),
+            ),
+          )),
+        array(
+          'data' => array(
+            '#type' => 'checkbox',
+            '#title' => t('Enable'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['enable'],
+            '#parents' => array('layers', $id, 'enable'),
+          )),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
         check_plain($entry['class']),
-        l(t('Edit'), 'admin/structure/openlayers/layers/list/'.$entry['machine_name'].'/edit/options',
+        l(t('Edit'), 'admin/structure/openlayers/layers/list/' . $entry['machine_name'] . '/edit/options',
           array(
             'query' => array(
               'destination' => current_path(),
             ),
           )
-        )
+        ),
       ),
       'class' => array('draggable'),
     );
@@ -211,7 +218,7 @@ function openlayers_map_form_layers($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => 'Layers',
     '#collapsible' => FALSE,
-    '#collapsed' => FALSE
+    '#collapsed' => FALSE,
   );
 
   // Add the table to the form.
@@ -236,12 +243,11 @@ function openlayers_map_form_layers($form, &$form_state) {
   );
   drupal_add_tabledrag('entry-order-layers', 'order', 'sibling', 'entry-order-weight');
 
-
   $all_sources = ctools_export_crud_load_all('openlayers_sources');
   $map = openlayers_object_load('map', $form_state['item']);
 
   $sources = array();
-  foreach($map->getSources() as $index => $source) {
+  foreach ($map->getSources() as $index => $source) {
     if (isset($all_sources[$source->machine_name])) {
       $sources[$source->machine_name] = $all_sources[$source->machine_name];
       $sources[$source->machine_name]->enable = 1;
@@ -262,50 +268,52 @@ function openlayers_map_form_layers($form, &$form_state) {
       'class' => $source->class,
       'weight' => $i++,
       'enable' => isset($source->enable) ? $source->enable : 0,
-      'default' => 1
+      'default' => 1,
     );
   }
 
   $rows = array();
-  foreach($data as $id => $entry) {
+  foreach ($data as $id => $entry) {
     $rows[$id] = array(
       'data' => array(
         array('class', array('entry-cross')),
-        array('data' => array(
-          '#type' => 'weight',
-          '#title' => t('Weight'),
-          '#title_display' => 'invisible',
-          '#default_value' => $entry['weight'],
-          '#parents' => array('sources', $id, 'weight'),
-          '#attributes' => array(
-            'class' => array('entry-order-weight'),
-          )
-        )),
-        array('data' => array(
-          '#type' => 'checkbox',
-          '#title' => t('Enable'),
-          '#title_display' => 'invisible',
-          '#default_value' => $entry['enable'],
-          '#parents' => array('sources', $id, 'enable'),
-        )),
+        array(
+          'data' => array(
+            '#type' => 'weight',
+            '#title' => t('Weight'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['weight'],
+            '#parents' => array('sources', $id, 'weight'),
+            '#attributes' => array(
+              'class' => array('entry-order-weight'),
+            ),
+          )),
+        array(
+          'data' => array(
+            '#type' => 'checkbox',
+            '#title' => t('Enable'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['enable'],
+            '#parents' => array('sources', $id, 'enable'),
+          )),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
         check_plain($entry['class']),
-        l(t('Edit'), 'admin/structure/openlayers/sources/list/'.$entry['machine_name'].'/edit/options',
+        l(t('Edit'), 'admin/structure/openlayers/sources/list/' . $entry['machine_name'] . '/edit/options',
           array(
             'query' => array(
               'destination' => current_path(),
             ),
           )
-        )
+        ),
       ),
       'class' => array('draggable'),
     );
     // Build rows of the form elements in the table.
     $row_elements[$id] = array(
       'weight' => &$rows[$id]['data'][1]['data'],
-      'enabled' => &$rows[$id]['data'][2]['data']
+      'enabled' => &$rows[$id]['data'][2]['data'],
     );
   }
 
@@ -313,7 +321,7 @@ function openlayers_map_form_layers($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => 'Sources',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE
+    '#collapsed' => TRUE,
   );
 
   // Add the table to the form.
@@ -345,7 +353,7 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   $layers = $form_state['values']['layers'];
 
   $layers_enabled = array();
-  foreach($layers as $id => $data) {
+  foreach ($layers as $id => $data) {
     if ($data['enable'] == 1) {
       $layers_enabled[$data['weight']] = $id;
     }
@@ -356,7 +364,7 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   $sources = $form_state['values']['sources'];
 
   $sources_enabled = array();
-  foreach($sources as $id => $data) {
+  foreach ($sources as $id => $data) {
     if ($data['enable'] == 1) {
       $sources_enabled[$data['weight']] = $id;
     }
@@ -375,7 +383,7 @@ function openlayers_map_form_controls($form, &$form_state) {
     'name' => t('Name'),
     'machine_name' => t('Machine name'),
     'description' => t('Description'),
-    'operations' => t('Operations')
+    'operations' => t('Operations'),
   );
 
   ctools_include('modal');
@@ -399,10 +407,10 @@ function openlayers_map_form_controls($form, &$form_state) {
           ),
           'attributes' => array(
             // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall'
-          )
+            'class' => 'ctools-use-modall',
+          ),
         )
-      )
+      ),
     );
   }
 
@@ -416,7 +424,7 @@ function openlayers_map_form_controls($form, &$form_state) {
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $rows,
-    '#default_value' => drupal_map_assoc($form_state['item']->options['controls'])
+    '#default_value' => drupal_map_assoc($form_state['item']->options['controls']),
   );
 
   return $form;
@@ -433,7 +441,7 @@ function openlayers_map_form_interactions($form, &$form_state) {
     'name' => t('Name'),
     'machine_name' => t('Machine name'),
     'description' => t('Description'),
-    'operations' => t('Operations')
+    'operations' => t('Operations'),
   );
 
   $rows = array();
@@ -444,17 +452,17 @@ function openlayers_map_form_interactions($form, &$form_state) {
       'description' => $interaction->description,
       'operations' => l(
         t('Edit'),
-        'admin/structure/openlayers/interactions/list/'.$machine_name.'/edit/options',
+        'admin/structure/openlayers/interactions/list/' . $machine_name . '/edit/options',
         array(
           'query' => array(
             'destination' => current_path(),
           ),
           'attributes' => array(
             // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall'
-          )
+            'class' => 'ctools-use-modall',
+          ),
         )
-      )
+      ),
     );
   }
 
@@ -468,7 +476,7 @@ function openlayers_map_form_interactions($form, &$form_state) {
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $rows,
-    '#default_value' => drupal_map_assoc($form_state['item']->options['interactions'])
+    '#default_value' => drupal_map_assoc($form_state['item']->options['interactions']),
   );
 
   return $form;
@@ -486,7 +494,7 @@ function openlayers_map_form_components($form, &$form_state) {
     'name' => t('Name'),
     'machine_name' => t('Machine name'),
     'description' => t('Description'),
-    'operations' => t('Operations')
+    'operations' => t('Operations'),
   );
 
   $rows = array();
@@ -497,18 +505,18 @@ function openlayers_map_form_components($form, &$form_state) {
       'description' => $component->description,
       'operations' => l(
         t('Edit'),
-        'admin/structure/openlayers/components/list/'.$machine_name.'/edit/options',
+        'admin/structure/openlayers/components/list/' . $machine_name . '/edit/options',
         array(
           'query' => array(
             'destination' => current_path(),
           ),
           'attributes' => array(
             // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall'
-          )
+            'class' => 'ctools-use-modall',
+          ),
         )
-      )
-  );
+      ),
+    );
   }
 
   $form['options']['#tree'] = TRUE;
@@ -521,7 +529,7 @@ function openlayers_map_form_components($form, &$form_state) {
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $rows,
-    '#default_value' => drupal_map_assoc($form_state['item']->options['components'])
+    '#default_value' => drupal_map_assoc($form_state['item']->options['components']),
   );
 
   return $form;
@@ -545,12 +553,14 @@ function openlayers_map_form_preview($form, &$form_state) {
   $map->setOption('contextualLinks', FALSE);
 
   $form['preview'] = array(
-    '#markup' => openlayers_render_map($map)
+    '#markup' => openlayers_render_map($map),
   );
 
   return $form;
 }
-function openlayers_map_form_preview_submit($form, &$form_state) {}
+function openlayers_map_form_preview_submit($form, &$form_state) {
+
+}
 
 function _openlayers_maps_sort_by_weight($a, $b) {
   if (isset($a['weight']) && isset($b['weight'])) {
@@ -558,4 +568,3 @@ function _openlayers_maps_sort_by_weight($a, $b) {
   }
   return 0;
 }
-

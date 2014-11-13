@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Class openlayers_objects_ui.
+ */
 
+/**
+ * Class openlayers_objects_ui.
+ */
 class openlayers_objects_ui extends ctools_export_ui {
 
   /**
@@ -10,7 +17,7 @@ class openlayers_objects_ui extends ctools_export_ui {
    * get the base form and then modify it as necessary to add search
    * gadgets for custom fields.
    */
-  function list_form(&$form, &$form_state) {
+  public function list_form(&$form, &$form_state) {
     parent::list_form($form, $form_state);
 
     $form['top row'] += $form['bottom row'];
@@ -19,7 +26,7 @@ class openlayers_objects_ui extends ctools_export_ui {
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#title' => t('Filters')
+      '#title' => t('Filters'),
     );
 
     $form['filters']['top row'] = $form['top row'];
@@ -34,7 +41,7 @@ class openlayers_objects_ui extends ctools_export_ui {
    * If you've added columns via list_build_row() but are still using a
    * table, override this method to set up the table header.
    */
-  function list_table_header() {
+  public function list_table_header() {
     $header = array();
     if (!empty($this->plugin['export']['admin_title'])) {
       $header[] = array('data' => t('Name'), 'class' => array('ctools-export-ui-title'));
@@ -55,26 +62,30 @@ class openlayers_objects_ui extends ctools_export_ui {
    * method, so this is building up a row suitable for theme('table').
    * This doesn't have to be true if you override both.
    */
-  function list_build_row($item, &$form_state, $operations) {
-    // Set up sorting
+  public function list_build_row($item, &$form_state, $operations) {
+    // Set up sorting.
     $name = $item->{$this->plugin['export']['key']};
     $schema = ctools_export_get_schema($this->plugin['schema']);
 
-    // Note: $item->{$schema['export']['export type string']} should have already been set up by export.inc so
-    // we can use it safely.
+    // Note: $item->{$schema['export']['export type string']} should have
+    // already been set up by export.inc so we can use it safely.
     switch ($form_state['values']['order']) {
       case 'disabled':
         $this->sorts[$name] = empty($item->disabled) . $name;
         break;
+
       case 'title':
         $this->sorts[$name] = $item->{$this->plugin['export']['admin_title']};
         break;
+
       case 'name':
         $this->sorts[$name] = $name;
         break;
+
       case 'class':
         $this->sorts[$name] = $name;
         break;
+
       case 'storage':
         $this->sorts[$name] = $item->{$schema['export']['export type string']} . $name;
         break;
@@ -91,7 +102,10 @@ class openlayers_objects_ui extends ctools_export_ui {
     $this->rows[$name]['data'][] = array('data' => check_plain($item->class), 'class' => array('ctools-export-ui-class'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
-    $ops = theme('links__ctools_dropbutton', array('links' => $operations, 'attributes' => array('class' => array('links', 'inline'))));
+    $ops = theme('links__ctools_dropbutton', array(
+      'links' => $operations,
+      'attributes' => array('class' => array('links', 'inline')),
+    ));
 
     $this->rows[$name]['data'][] = array('data' => $ops, 'class' => array('ctools-export-ui-operations'));
 

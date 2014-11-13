@@ -1,19 +1,21 @@
 <?php
+/**
+ * @file
+ * Class openlayers_components_ui.
+ */
 
+/**
+ * Class openlayers_components_ui.
+ */
 class openlayers_components_ui extends openlayers_objects_ui {
 
   /**
-   * hook_menu() entry point.
-   *
-   * Child implementations that need to add or modify menu items should
-   * probably call parent::hook_menu($items) and then modify as needed.
+   * {@inheritdoc}
    */
-  function hook_menu(&$items) {
+  public function hook_menu(&$items) {
     parent::hook_menu($items);
     $items['admin/structure/openlayers/components']['type'] = MENU_LOCAL_TASK;
     $items['admin/structure/openlayers/components']['weight'] = 3;
   }
-
-
 
 }

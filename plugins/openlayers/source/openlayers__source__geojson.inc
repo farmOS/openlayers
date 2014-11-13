@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Source: GeoJson.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__source__geojson_openlayers_source() {
   return array(
     'handler' => array(
@@ -9,18 +16,24 @@ function openlayers_openlayers__source__geojson_openlayers_source() {
   );
 }
 
+/**
+ * Class openlayers__source__geojson.
+ */
 class openlayers__source__geojson extends openlayers_source {
 
   /**
    * {@inheritdoc}
    */
-  function defauts_properties() {
-    $default_properties = parent::defauts_properties();
+  public function default_properties() {
+    $default_properties = parent::default_properties();
     $default_properties['options']['paramForwarding'] = TRUE;
     return $default_properties;
   }
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $form['options']['url'] = array(
       '#title' => t('URL'),
       '#type' => 'textfield',

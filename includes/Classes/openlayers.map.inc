@@ -1,16 +1,31 @@
 <?php
+/**
+ * @file
+ * Class openlayers_map.
+ */
 
+/**
+ * Class openlayers_map.
+ */
 class openlayers_map extends openlayers_object implements openlayers_map_interface {
 
+  /**
+   * @var string
+   */
   protected $id;
 
-  function init(array $data) {
+  /**
+   * {@inheritdoc}
+   */
+  public function init(array $data) {
     parent::init($data);
 
     $this->setOption('target', $this->getId());
   }
 
-
+  /**
+   * {@inheritdoc}
+   */
   public function getId() {
     if (isset($this->id)) {
       return $this->id;
@@ -21,10 +36,13 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return $this->id;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getLayers() {
     if ($layers = $this->getOption('layers')) {
       $result = array();
-      foreach($layers as $layer) {
+      foreach ($layers as $layer) {
         $result[] = clone openlayers_object_load('layer', $layer);
       }
       return $result;
@@ -32,6 +50,9 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return array();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getSources() {
     $sources = array();
     foreach ($this->getOption('sources', array()) as $index => $source) {
@@ -50,13 +71,16 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return array_values($sources);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getStyles() {
     $styles = $this->getOption('styles', array());
-    foreach($styles as $index => $source) {
+    foreach ($styles as $index => $source) {
       $styles[$index] = openlayers_object_load('style', $source);
     }
 
-    foreach($this->getLayers() as $layer) {
+    foreach ($this->getLayers() as $layer) {
       if ($style = $layer->getStyle()) {
         $styles[] = $style;
       }
@@ -65,36 +89,48 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return $styles;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getControls() {
     $result = array();
     if ($controls = $this->getOption('controls')) {
-      foreach($controls as $control) {
+      foreach ($controls as $control) {
         $result[] = clone openlayers_object_load('control', $control);
       }
     }
     return $result;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getInteractions() {
     $result = array();
     if ($interactions = $this->getOption('interactions')) {
-      foreach($interactions as $index => $interaction) {
+      foreach ($interactions as $index => $interaction) {
         $result[] = clone openlayers_object_load('interaction', $interaction);
       }
     }
     return $result;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getComponents() {
     $result = array();
     if ($components = $this->getOption('components')) {
-      foreach($components as $component) {
+      foreach ($components as $component) {
         $result[] = clone openlayers_object_load('component', $component);
       }
     }
     return $result;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function develop() {
     if ($layers = $this->getLayers()) {
       $this->options['layers'] = array();
@@ -126,6 +162,9 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getObjects() {
     $objects = array();
     $objects['layer'] = $this->getLayers();
@@ -137,7 +176,7 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
 
     $objects = unserialize(serialize($objects));
 
-    foreach($objects['layer'] as $index => $layer) {
+    foreach ($objects['layer'] as $index => $layer) {
       if ($source = $layer->getSource()) {
         $objects['layer'][$index]->options['source'] = $source->machine_name;
       }
@@ -149,11 +188,14 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return $objects;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getJSObjects() {
     $objects = $this->getObjects();
 
-    foreach(array('layer', 'source', 'control', 'interaction', 'component') as $type) {
-      foreach($objects[$type] as $index => $object) {
+    foreach (array('layer', 'source', 'control', 'interaction', 'component') as $type) {
+      foreach ($objects[$type] as $index => $object) {
         $objects[$type][$index] = (array) $object->toJSArray();
       }
     }
@@ -166,14 +208,18 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
     return $objects;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function attached() {
     $this->attached = parent::attached();
     $objects = $this->getObjects();
 
-    foreach($objects as $type => $list) {
-      if ($list == FALSE) continue;
-      foreach($list as $index => $data) {
-        $this->attached = drupal_array_merge_deep($this->attached, $data->attached());
+    foreach ($objects as $type => $list) {
+      if ($list != FALSE) {
+        foreach ($list as $index => $data) {
+          $this->attached = drupal_array_merge_deep($this->attached, $data->attached());
+        }
       }
     }
 

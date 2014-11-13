@@ -1,7 +1,11 @@
 <?php
 /**
- * CTools Export UI required function for plugin definition
- * See function ctools_plugin_load_includes() in the module ctools.
+ * @file
+ * CTools Export UI plugin definition for layers.
+ */
+
+/**
+ * CTools Export UI plugin definition.
  */
 function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
   return array(
@@ -16,7 +20,7 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_layers_ui',
-      'parent' => 'ctools_export_ui'
+      'parent' => 'ctools_export_ui',
     ),
 
     'use wizard' => TRUE,
@@ -29,18 +33,18 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_layer_form_start'
+          'form id' => 'openlayers_layer_form_start',
         ),
         'type' => array(
-          'form id' => 'openlayers_layer_form_type'
+          'form id' => 'openlayers_layer_form_type',
         ),
         'style' => array(
-          'form id' => 'openlayers_layer_form_style'
+          'form id' => 'openlayers_layer_form_style',
         ),
         'options' => array(
-          'form id' => 'openlayers_layer_form_options'
+          'form id' => 'openlayers_layer_form_options',
         ),
-      )
+      ),
     ),
 
     'export' => array(
@@ -60,8 +64,8 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
         ),
         'delete' => array(
           'success' => t('was deleted.'),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
@@ -73,9 +77,11 @@ function openlayers_layer_form_start($form, &$form_state) {
 
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array('' => 'Dont attach');
-  foreach($maps as $machine_name => $data) {
+  foreach ($maps as $machine_name => $data) {
     $map = openlayers_object_load('map', $machine_name);
-    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) continue;
+    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
+      continue;
+    }
     $options[$machine_name] = $data->name;
   }
 
@@ -83,7 +89,7 @@ function openlayers_layer_form_start($form, &$form_state) {
     '#type' => 'select',
     '#title' => 'Add this to a map ?',
     '#description' => 'Select the map to add this object to.',
-    '#options' => $options
+    '#options' => $options,
   );
 
   return $form;
@@ -118,35 +124,35 @@ function openlayers_layer_form_type($form, &$form_state) {
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class: '',
+    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of layer.'),
     '#options' => $options,
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   $sources = ctools_export_crud_load_all('openlayers_sources');
   $options = array('' => t('<Choose the source>'));
-  foreach($sources as $machine_name => $data) {
+  foreach ($sources as $machine_name => $data) {
     $options[$machine_name] = $data->name;
   }
 
   $form['options'] = array(
-    '#tree' => TRUE
+    '#tree' => TRUE,
   );
 
   $form['options']['source'] = array(
     '#type' => 'select',
     '#title' => t('Source'),
-    '#default_value' => isset($form_state['item']->options['source']) ? $form_state['item']->options['source']: '',
+    '#default_value' => isset($form_state['item']->options['source']) ? $form_state['item']->options['source'] : '',
     '#description' => t('Select the source.'),
     '#options' => $options,
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   $form['options']['visible'] = array(
     '#type' => 'checkbox',
     '#title' => t('Visible ?'),
-    '#default_value' => isset($form_state['item']->options['visible']) ? (bool) $form_state['item']->options['visible']: TRUE,
+    '#default_value' => isset($form_state['item']->options['visible']) ? (bool) $form_state['item']->options['visible'] : TRUE,
     '#description' => t('TODO'),
   );
 
@@ -161,21 +167,21 @@ function openlayers_layer_form_type_submit($form, &$form_state) {
 function openlayers_layer_form_style($form, &$form_state) {
   $styles = ctools_export_crud_load_all('openlayers_styles');
   $options = array('' => t('<Choose the style>'));
-  foreach($styles as $machine_name => $data) {
+  foreach ($styles as $machine_name => $data) {
     $options[$machine_name] = $data->name;
   }
 
   $form['options'] = array(
-    '#tree' => TRUE
+    '#tree' => TRUE,
   );
 
   $form['options']['style'] = array(
     '#type' => 'select',
     '#title' => t('Style'),
-    '#default_value' => isset($form_state['item']->options['style']) ? $form_state['item']->options['style']: '',
+    '#default_value' => isset($form_state['item']->options['style']) ? $form_state['item']->options['style'] : '',
     '#description' => t('Select the style.'),
     '#options' => $options,
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   return $form;

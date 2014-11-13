@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default layers from views.
+ */
 
+/**
+ * Implements hook_default_layers().
+ */
 function openlayers_views_default_layers() {
   $export = array();
 

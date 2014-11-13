@@ -1,17 +1,30 @@
 <?php
+/**
+ * @file
+ * Map: Map.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__map__map_openlayers_map() {
   return array(
     'handler' => array(
       'class' => 'openlayers__map__map',
-      'file' => 'openlayers__map__map.inc'
-    )
+      'file' => 'openlayers__map__map.inc',
+    ),
   );
 }
 
+/**
+ * Class openlayers__map__map.
+ */
 class openlayers__map__map extends openlayers_map {
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('Size of the map'),
@@ -65,7 +78,7 @@ class openlayers__map__map extends openlayers_map {
       $form['options']['view']['map'] = array(
         '#type' => 'openlayers',
         '#description' => t('You can drag this map with your mouse, click to center and you can hold alt and shift key to rotate.'),
-        '#map' => $map
+        '#map' => $map,
       );
     }
 
@@ -80,7 +93,7 @@ class openlayers__map__map extends openlayers_map {
         '#type' => 'textfield',
         '#title' => 'Longitude',
         '#default_value' => $this->getOption(array('view', 'center', 'lat'), 0),
-      )
+      ),
     );
     $form['options']['view']['rotation'] = array(
       '#type' => 'textfield',
@@ -104,7 +117,10 @@ class openlayers__map__map extends openlayers_map {
     );
   }
 
-  function attached() {
+  /**
+   * {@inheritdoc}
+   */
+  public function attached() {
     $attached = parent::attached();
     // TODO: OpenLayers settings form by default to debug mode.
     $variant = OPENLAYERS_CONFIG::LIBRARY_VARIANT;

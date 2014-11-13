@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * OpenLayers Block Switcher.
+ */
 
 /**
  * Implements hook_block_info().
@@ -11,7 +15,7 @@ function openlayers_block_switcher_block_info() {
     $map = openlayers_object_load('map', $map->machine_name);
     if ($map->getOption('provideBlockLayerSwitcher', 0)) {
       $blockid = _olebs_get_block_id($key);
-      $blocks[$blockid]['info'] = t('OpenLayers layer switcher for ' . $map->get('name'));
+      $blocks[$blockid]['info'] = t('OpenLayers layer switcher for %name', array('%name' => $map->get('name')));
     }
   }
 
@@ -33,10 +37,12 @@ function openlayers_block_switcher_block_view($delta = '') {
 }
 
 /**
- * Helper function.
- * Returns maps with the blockswitcher behavior enabled.
+ * Helper function that returns maps with the blockswitcher behavior enabled.
+ *
+ * Uses static caching.
  *
  * @return array
+ *   Array with maps.
  */
 function _olebs_get_maps_with_blockswitcher() {
   $maps = &drupal_static(__FUNCTION__);
@@ -50,16 +56,26 @@ function _olebs_get_maps_with_blockswitcher() {
 }
 
 /**
- * Helper function
- * Return the blocks delta according to the map_name.
+ * Helper function that return the blocks delta according to the map_name.
+ *
+ * @param string $map_name
+ *   The map name.
+ *
+ * @return string
+ *   The block id.
  */
 function _olebs_get_block_id($map_name) {
   return substr(sha1($map_name), 0, -32) . '_blockswitcher';
 }
 
 /**
- * Helper function
- * Return the map name according to the block delta.
+ * Helper function that return the map name according to the block delta.
+ *
+ * @param string $delta
+ *   The block delta.
+ *
+ * @return string
+ *   The map name.
  */
 function _olebs_get_map_name($delta) {
   foreach (_olebs_get_maps_with_blockswitcher() as $map_name => $map) {
@@ -72,20 +88,17 @@ function _olebs_get_map_name($delta) {
 
 /**
  * Form for the layer switcher.
- *
- * @param $form
- * @param $form_state
- * @param $map
- * @return mixed
  */
 function olebs_blockswitcher_form($form, &$form_state, $map) {
   $default_value = array();
   $options_overlays = array();
 
-  if (!is_object($map)) {return;}
+  if (!is_object($map)) {
+    return;
+  }
 
   if ($layers = $map->getOption('layers')) {
-    foreach($layers as $layer) {
+    foreach ($layers as $layer) {
       $layer = openlayers_object_load('layer', $layer->machine_name);
       $options_overlays[$layer->machine_name] = $layer->get('name');
       if ('1' == $layer->getOption('visible', 1)) {
@@ -95,15 +108,15 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   }
 
   if (!empty($options_overlays)) {
-    $form['overlays']= array(
+    $form['overlays'] = array(
       '#title'   => t('Overlays'),
       '#type'    => 'checkboxes',
       '#options' => $options_overlays,
-      '#default_value' => $default_value
+      '#default_value' => $default_value,
     );
   }
 
-  $form['map']= array(
+  $form['map'] = array(
     '#type'    => 'hidden',
     '#value' => $map->machine_name,
   );
@@ -112,7 +125,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   $form['#attached']['library'] = array();
   $form['#attached']['js'][] = array(
     'data' => drupal_get_path('module', 'openlayers_block_switcher') . '/olbs.js',
-    'type' => 'file'
+    'type' => 'file',
   );
 
   return $form;

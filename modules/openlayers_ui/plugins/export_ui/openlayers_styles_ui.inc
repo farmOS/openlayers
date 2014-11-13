@@ -1,7 +1,11 @@
 <?php
 /**
- * CTools Export UI required function for plugin definition
- * See function ctools_plugin_load_includes() in the module ctools.
+ * @file
+ * CTools Export UI plugin definition for styles.
+ */
+
+/**
+ * CTools Export UI plugin definition.
  */
 function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
   return array(
@@ -16,7 +20,7 @@ function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_styles_ui',
-      'parent' => 'ctools_export_ui'
+      'parent' => 'ctools_export_ui',
     ),
 
     'export' => array(
@@ -33,15 +37,15 @@ function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_style_form_start'
+          'form id' => 'openlayers_style_form_start',
         ),
         'type' => array(
-          'form id' => 'openlayers_style_form_type'
+          'form id' => 'openlayers_style_form_type',
         ),
         'options' => array(
-          'form id' => 'openlayers_style_form_options'
+          'form id' => 'openlayers_style_form_options',
         ),
-      )
+      ),
     ),
 
     'title singular' => t('style'),
@@ -56,8 +60,8 @@ function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
         ),
         'delete' => array(
           'success' => t('Style was deleted.'),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
@@ -92,10 +96,10 @@ function openlayers_style_form_type($form, &$form_state) {
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Style type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class: '',
+    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of style.'),
     '#options' => $options,
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   return $form;

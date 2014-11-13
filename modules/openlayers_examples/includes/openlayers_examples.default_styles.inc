@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default styles.
+ */
 
+/**
+ * Implements hook_default_styles().
+ */
 function openlayers_examples_default_styles() {
   $export = array();
 

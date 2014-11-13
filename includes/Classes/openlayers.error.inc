@@ -1,23 +1,30 @@
 <?php
+/**
+ * @file
+ * Class openlayers_config.
+ */
 
+/**
+ * Class openlayers_config.
+ */
 class openlayers_error extends openlayers_object implements openlayers_object_interface {
 
-  var $error_message;
+  public $error_message;
 
   function __construct() {
-    foreach ($this->defauts_properties() as $property => $value) {
+    foreach ($this->default_properties() as $property => $value) {
       $this->{$property} = $value;
     }
   }
 
-  function defauts_properties() {
-    $properties = parent::defauts_properties();
+  function default_properties() {
+    $properties = parent::default_properties();
     $properties['error_message'] = 'Error while loading object @machine_name having class @class.';
     return $properties;
   }
 
   function init(array $data) {
-    foreach ($this->defauts_properties() as $property => $value) {
+    foreach ($this->default_properties() as $property => $value) {
       if (isset($data[$property])) {
         $this->{$property} = $data[$property];
       }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * This file holds the functions for the main openlayers Admin settings.
@@ -17,10 +16,12 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   ctools_include('export');
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array();
-  foreach($maps as $machine_name => $data) {
+  foreach ($maps as $machine_name => $data) {
     $map = openlayers_object_load('map', $machine_name);
     // Todo: Rewrite properly and create a generic function to load all objects.
-    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) continue;
+    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
+      continue;
+    }
     $options[$machine_name] = $data->name;
   }
 
@@ -39,7 +40,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       'callback' => '_ajax_reload_default_map',
       'method' => 'replace',
       'wrapper' => 'default_map_ajax',
-      'effect' => 'fade'
+      'effect' => 'fade',
     ),
   );
 
@@ -54,10 +55,13 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $form['current_path'] = array('#type' => 'hidden', '#value' => current_path());
 
-  // Make a system setting form and return
+  // Make a system setting form and return.
   return system_settings_form($form);
 }
 
+/**
+ * @TODO: Document.
+ */
 function _ajax_reload_default_map($form, &$form_state) {
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback

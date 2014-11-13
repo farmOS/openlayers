@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default sources.
+ */
 
+/**
+ * Implements hook_default_sources().
+ */
 function openlayers_examples_default_sources() {
   $export = array();
 

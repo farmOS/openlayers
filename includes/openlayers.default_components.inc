@@ -1,9 +1,16 @@
 <?php
+/**
+ * @file
+ * Provide default components.
+ */
 
+/**
+ * Implements hook_default_components().
+ */
 function openlayers_default_components() {
   $export = array();
 
-  $component = new stdClass;
+  $component = new stdClass();
   $component->api_version = 1;
   $component->machine_name = 'component_bootstrapjs_popup';
   $component->name = 'Bootstrap JS popup';
@@ -12,14 +19,14 @@ function openlayers_default_components() {
   $component->options = array();
   $export['component_bootstrapjs_popup'] = $component;
 
-  $component = new stdClass;
+  $component = new stdClass();
   $component->api_version = 1;
   $component->machine_name = 'component_bootstrapjs_alert';
   $component->name = 'Bootstrap JS alert';
   $component->description = 'Display an alert on the top of the map.';
   $component->class = 'openlayers__component__bootstrapjs_alert';
   $component->options = array(
-    'message' => '<strong>Success !</strong>The map has been loaded.'
+    'message' => '<strong>Success !</strong>The map has been loaded.',
   );
   $export['component_bootstrapjs_alert'] = $component;
 

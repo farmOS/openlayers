@@ -1,17 +1,30 @@
 <?php
+/**
+ * @file
+ * Layer: Tile.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__layer__tile_openlayers_layer() {
   return array(
     'handler' => array(
       'class' => 'openlayers__layer__tile',
       'file' => 'openlayers__layer__tile.inc',
-    )
+    ),
   );
 }
 
+/**
+ * Class openlayers__layer__tile.
+ */
 class openlayers__layer__tile extends openlayers_layer {
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $form['options']['url'] = array(
       '#type' => 'textarea',
       '#title' => t('Base URL (template)'),
@@ -26,7 +39,7 @@ class openlayers__layer__tile extends openlayers_layer {
         range(0, 21),
         range(0, 21)),
       '#title' => t('Zoom offset'),
-      '#default_value' => $this->getOption('zoomOffset')
+      '#default_value' => $this->getOption('zoomOffset'),
     );
     $form['options']['wrapDateLine'] = array(
       '#type' => 'checkbox',

@@ -1,9 +1,16 @@
 <?php
+/**
+ * @file
+ * Provide default styles.
+ */
 
+/**
+ * Implements hook_default_styles().
+ */
 function openlayers_default_styles() {
   $export = array();
 
-  $style = new stdClass;
+  $style = new stdClass();
   $style->api_version = 1;
   $style->machine_name = 'openlayers_style_default';
   $style->name = 'OpenLayers default style';

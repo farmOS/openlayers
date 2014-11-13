@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * This file holds main views functions for the openlayers_views module.

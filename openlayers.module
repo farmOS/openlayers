@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Openlayers module.
+ */
 
 include 'includes/Classes/openlayers.config.inc';
 include 'includes/Interfaces/openlayers.object.interface.inc';
@@ -20,11 +24,14 @@ include 'includes/Classes/openlayers.layer.inc';
 include 'includes/Classes/openlayers.source.inc';
 include 'includes/openlayers.helpers.inc';
 
+/**
+ * Implements hook_ctools_plugin_api().
+ */
 function openlayers_ctools_plugin_api($module, $api) {
   $path = drupal_get_path('module', 'openlayers') . '/includes';
   return array(
     'version' => 1,
-    'path' => $path
+    'path' => $path,
   );
 }
 
@@ -42,35 +49,50 @@ function openlayers_ctools_plugin_type() {
   return array(
     'map' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'layer' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'style' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'source' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'control' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'interaction' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
+      'classes' => array('handler'),
     ),
     'component' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler')
-    )
+      'classes' => array('handler'),
+    ),
   );
 }
 
+/**
+ * Fetches the instance object of a certain type.
+ *
+ * @param string $object_type
+ *   The object type to look up. See openlayers_object_types() for a list of
+ *   available object types.
+ * @param string $object_class
+ *   The object class defined in the plugin.
+ * @param null|array $export
+ *   The exported object definition.
+ *
+ * @return mixed|openlayers_error
+ *   Returns the instance of the requested object or an instance of
+ *  openlayers_error on error.
+ */
 function openlayers_object_factory_create($object_type, $object_class, $export = NULL) {
   ctools_include('plugins');
 
@@ -80,7 +102,8 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
     $object = call_user_func(array(
         new ReflectionClass($object_class), 'newInstance')
     );
-  } else {
+  }
+  else {
     $object = new openlayers_error();
     $object->type = $object_type;
     $object->class = $object_class;
@@ -94,17 +117,31 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
 }
 
 
+/**
+ * Create an object instance for an export.
+ *
+ * @param string $object_type
+ *   The object type to look up. See openlayers_object_types() for a list of
+ *   available object types.
+ * @param array|string|object $export
+ *   The exported object.
+ * @param bool $develop
+ *
+ * @return mixed|openlayers_error
+ *   Returns the instance of the requested object or an instance of
+ *   openlayers_error on error.
+ */
 function openlayers_object_load($object_type, $export, $develop = TRUE) {
   ctools_include('export');
 
   $object = NULL;
 
   if (is_object($export)) {
-    $arrayObject = new ArrayObject($export);
-    $export = $arrayObject->getArrayCopy();
+    $array_object = new ArrayObject($export);
+    $export = $array_object->getArrayCopy();
   }
   if (is_string($export)) {
-    $export = (array) ctools_export_crud_load('openlayers_' . $object_type .'s', $export);
+    $export = (array) ctools_export_crud_load('openlayers_' . $object_type . 's', $export);
   }
   if (is_array($export) && isset($export['class'])) {
     $object = openlayers_object_factory_create($object_type, $export['class'], $export);
@@ -116,7 +153,7 @@ function openlayers_object_load($object_type, $export, $develop = TRUE) {
       'machine_name' => $args[1],
       'class' => 'undefined',
       'type' => $object_type,
-      'error_message' => 'Unable to load @type object @machine_name.'
+      'error_message' => 'Unable to load @type object @machine_name.',
     );
     return openlayers_object_factory_create($object_type, 'undefined', $export);
   }
@@ -132,7 +169,16 @@ function openlayers_object_load($object_type, $export, $develop = TRUE) {
   return $object;
 }
 
-function openlayers_render_build_map(openlayers_map $map) {
+/**
+ * Build the render array for a map.
+ *
+ * @param openlayers_map_interface $map
+ *   The map object.
+ *
+ * @return array
+ *   The render array of the map.
+ */
+function openlayers_render_build_map(openlayers_map_interface $map) {
   drupal_alter('openlayers_map_preprocess', $map);
 
   $objects = $map->getObjects();
@@ -144,14 +190,14 @@ function openlayers_render_build_map(openlayers_map $map) {
   $setting = array(
     'openlayers' => array(
       'maps' => array(
-        $map->getId() => $map->getJSObjects()
-      )
-    )
+        $map->getId() => $map->getJSObjects(),
+      ),
+    ),
   );
 
   $attached['js'][] = array(
     'data' => $setting,
-    'type' => 'setting'
+    'type' => 'setting',
   );
 
   $current_path = current_path();
@@ -164,14 +210,14 @@ function openlayers_render_build_map(openlayers_map $map) {
       'title' => 'Edit this map',
       'href' => 'admin/structure/openlayers/maps/list/' . $map->machine_name . '/edit',
       'query' => array(
-        'destination' => $current_path
-      )
+        'destination' => $current_path,
+      ),
     ),
   );
 
   $styles = array(
     'width' => $map->getOption('width'),
-    'height' => $map->getOption('height')
+    'height' => $map->getOption('height'),
   );
 
   $css_styles = '';
@@ -196,8 +242,8 @@ function openlayers_render_build_map(openlayers_map $map) {
       'style' => $css_styles,
       'class' => array(
         'contextual-links-region',
-        'openlayers-container'
-      )
+        'openlayers-container',
+      ),
     ),
     'map' => array(
       '#theme' => 'html_tag',
@@ -207,25 +253,25 @@ function openlayers_render_build_map(openlayers_map $map) {
         'id' => $map->getId(),
         'class' => array(
           'openlayers-map',
-          $map->machine_name
+          $map->machine_name,
         ),
       ),
       '#attached' => array(
         'library' => $attached['library'],
         'libraries_load' => $attached['libraries_load'],
         'js' => $attached['js'],
-        'css' => $attached['css']
+        'css' => $attached['css'],
       ),
-    )
+    ),
   );
 
   if ($map->getOption('contextualLinks') == FALSE) {
     unset($build['contextual_links']);
   }
 
-  // This is temporary and will need to be worked on.
-  foreach(array('style', 'layer', 'source', 'control', 'interaction', 'component') as $type) {
-    foreach($objects[$type] as $object) {
+  // @TODO: This is temporary and will need to be worked on.
+  foreach (openlayers_object_types() as $type) {
+    foreach ($objects[$type] as $object) {
       $object->alterBuild($build, $map);
     }
   }
@@ -233,7 +279,33 @@ function openlayers_render_build_map(openlayers_map $map) {
   return $build;
 }
 
-function openlayers_render_map(openlayers_map $map) {
+/**
+ * Returns a list of available object types.
+ *
+ * @return array
+ *   List of object types.
+ */
+function openlayers_object_types() {
+  return array(
+    'style',
+    'layer',
+    'source',
+    'control',
+    'interaction',
+    'component',
+  );
+}
+
+/**
+ * Renders a map object to markup.
+ *
+ * @param openlayers_map_interface $map
+ *   The map to render.
+ *
+ * @return string
+ *   The markup.
+ */
+function openlayers_render_map(openlayers_map_interface $map) {
   $build = openlayers_render_build_map($map);
   return render($build);
 }
@@ -252,32 +324,51 @@ function openlayers_libraries_info() {
       'lines' => 3,
     ),
     'files' => array(
-      'js' => array('closure-library/closure/goog/base.js', 'build/ol-deps.js', 'build/ol.js'),
-      'css' => array('css/ol.css')
+      'js' => array(
+        'closure-library/closure/goog/base.js',
+        'build/ol-deps.js', 'build/ol.js',
+      ),
+      'css' => array('css/ol.css'),
     ),
     'integration files' => array(
       'openlayers' => array(
-        'js' => array('js/openlayers.js' => array('type'=>'file', 'weight' => 0, 'group' => openlayers_config::JS_GROUP)),
-        'css' => array('css/openlayers.css' => array('weight' => 10))
+        'js' => array(
+          'js/openlayers.js' => array(
+            'type' => 'file',
+            'weight' => 0,
+            'group' => openlayers_config::JS_GROUP,
+          ),
+        ),
+        'css' => array(
+          'css/openlayers.css' => array('weight' => 10),
+        ),
       ),
     ),
     'variants' => array(
       'debug' => array(
         'files' => array(
-          'js' => array('closure-library/closure/goog/base.js', 'build/ol-deps.js', 'build/ol-debug.js'),
-          'css' => array('css/ol.css')
+          'js' => array(
+            'closure-library/closure/goog/base.js',
+            'build/ol-deps.js',
+            'build/ol-debug.js',
+          ),
+          'css' => array('css/ol.css'),
         ),
         'integration files' => array(
           'openlayers' => array(
             'js' => array(
-              'js/openlayers.js' => array('type'=>'file', 'weight' => 0, 'group' => openlayers_config::JS_GROUP),
-              'js/debug.js'
+              'js/openlayers.js' => array(
+                'type' => 'file',
+                'weight' => 0,
+                'group' => openlayers_config::JS_GROUP,
+              ),
+              'js/debug.js' => array('type' => 'file'),
             ),
-            'css' => array('css/openlayers.css' => array('weight' => 10))
+            'css' => array('css/openlayers.css' => array('weight' => 10)),
           ),
         ),
-      )
-    )
+      ),
+    ),
   );
 
   return $libraries;
@@ -285,8 +376,6 @@ function openlayers_libraries_info() {
 
 /**
  * Implements hook_element_info().
- *
- * @return array
  */
 function openlayers_element_info() {
   return array(
@@ -294,16 +383,21 @@ function openlayers_element_info() {
       '#input' => FALSE,
       '#tree' => TRUE,
       '#process' => array('openlayers_element_process_callback'),
-      '#theme_wrappers' => array('form_element')
-    )
+      '#theme_wrappers' => array('form_element'),
+    ),
   );
 }
 
+/**
+ * Process callback for the openlayers form element.
+ *
+ * Renders the map and returns the markup in an renderable array.
+ */
 function openlayers_element_process_callback($element, &$form_state) {
   $map = openlayers_object_load('map', $element['#map']);
   $build = openlayers_render_map($map);
   $element['map'] = array(
-    '#markup' => $build
+    '#markup' => $build,
   );
 
   return $element;
@@ -321,7 +415,7 @@ function openlayers_block_info() {
     $map = openlayers_object_load('map', $map->machine_name);
     if ($map->getOption('provideBlock', 1)) {
       $key = _openlayers_get_block_id($key);
-      $blocks[$key]['info'] = t('OpenLayers block for ' . $map->machine_name);
+      $blocks[$key]['info'] = t('OpenLayers block for %machine_name', array('%machine_name' => $map->machine_name));
     }
   }
 
@@ -347,15 +441,25 @@ function openlayers_block_view($delta = '') {
 }
 
 /**
- * Helper function
- * Return the blocks delta according to the map_name.
+ * Helper function that returns the blocks delta according to the map_name.
+ *
+ * @param string $map_name
+ *   The name of the map.
+ *
+ * @return string
+ *   The block delta.
  */
 function _openlayers_get_block_id($map_name) {
   return substr(sha1($map_name), 0, -32) . '_mapblock';
 }
 /**
- * Helper function
- * Return the map name according to the block delta.
+ * Helper function return the map name according to the block delta.
+ *
+ * @param string $delta
+ *   The block delta.
+ *
+ * @return string
+ *   The name of the map.
  */
 function _openlayers_get_map_name($delta) {
   $all_maps = ctools_export_crud_load_all('openlayers_maps');
@@ -366,4 +470,45 @@ function _openlayers_get_map_name($delta) {
     }
   }
   return FALSE;
+}
+
+/**
+ * Returns an array with positioning options.
+ *
+ * @return array
+ *   Array with positioning options.
+ */
+function openlayers_positioning_options() {
+  return array(
+    'bottom-left' => t('bottom-left'),
+    'bottom-center' => t('bottom-center'),
+    'bottom-right' => t('bottom-right'),
+    'center-left' => t('center-left'),
+    'center-center' => t('center-center'),
+    'center-right' => t('center-right'),
+    'top-left' => t('top-left'),
+    'top-center' => t('top-center'),
+    'top-right' => t('top-right'),
+  );
+}
+
+/**
+ * Returns an array with available source options.
+ *
+ * @param bool $empty_option
+ *   If disabled no empty option is added.
+ *
+ * @return array
+ *   Array with source options.
+ */
+function openlayers_source_options($empty_option = TRUE) {
+  $sources = ctools_export_crud_load_all('openlayers_sources');
+  $options = array();
+  if ($empty_option) {
+    $options[''] = t('<Choose the source>');
+  }
+  foreach ($sources as $machine_name => $data) {
+    $options[$machine_name] = $data->name;
+  }
+  return $options;
 }

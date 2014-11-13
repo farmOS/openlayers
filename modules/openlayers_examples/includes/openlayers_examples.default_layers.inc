@@ -1,9 +1,16 @@
 <?php
+/**
+ * @file
+ * Default layers.
+ */
 
+/**
+ * Implements hook_default_layers().
+ */
 function openlayers_examples_default_layers() {
   $export = array();
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_tile_mapbox_example1';
   $layer->name = 'MapBox example 1';
@@ -14,7 +21,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_tile_mapbox_example1'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_tile_mapbox_example2';
   $layer->name = 'MapBox example 2';
@@ -25,7 +32,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_tile_mapbox_example2'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_tile_mapbox_example3';
   $layer->name = 'MapBox example 2';
@@ -36,7 +43,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_tile_mapbox_example3'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_vector_geojson_cities';
   $layer->name = 'GeoJSON Cities';
@@ -47,7 +54,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_vector_geojson_cities'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_vector_geojson_cities_heatmap';
   $layer->name = 'GeoJSON Cities heatmap';
@@ -58,7 +65,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_vector_geojson_cities_heatmap'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_vector_kml_earthquakes';
   $layer->name = 'Earthquakes 2012';
@@ -69,7 +76,7 @@ function openlayers_examples_default_layers() {
   );
   $export['layer_vector_kml_earthquakes'] = $layer;
 
-  $layer = new stdClass;
+  $layer = new stdClass();
   $layer->api_version = 1;
   $layer->machine_name = 'layer_vector_kml_earthquakes_heatmap';
   $layer->name = 'Earthquakes 2012 Heatmap';

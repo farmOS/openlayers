@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Provide default maps.
+ */
 
+/**
+ * Implements hook_default_maps().
+ */
 function openlayers_default_maps() {
   $export = array();
 
@@ -283,7 +290,7 @@ function openlayers_default_maps() {
     ),
     'layers' => array(
       0 => 'layer_tile_openstreetmap',
-      1 => 'layer_tile_tiledebug'
+      1 => 'layer_tile_tiledebug',
     ),
     'controls' => array(),
     'interactions' => array(
@@ -319,7 +326,7 @@ function openlayers_default_maps() {
       1 => 'layer_tile_stamen_terrain_labels',
     ),
     'controls' => array(
-      0 => 'control_zoom'
+      0 => 'control_zoom',
     ),
     'interactions' => array(
       0 => 'interaction_doubleclickzoom',
@@ -353,7 +360,7 @@ function openlayers_default_maps() {
       0 => 'layer_tile_esri',
     ),
     'controls' => array(
-      0 => 'control_zoom'
+      0 => 'control_zoom',
     ),
     'interactions' => array(
       0 => 'interaction_doubleclickzoom',
@@ -363,7 +370,7 @@ function openlayers_default_maps() {
   );
   $export['map_esri'] = $map;
 
-  $map = new stdClass;
+  $map = new stdClass();
   $map->disabled = TRUE;
   $map->api_version = 1;
   $map->machine_name = 'map_view_edit_form';
@@ -400,7 +407,7 @@ function openlayers_default_maps() {
     'components' => array(
       0 => 'map_edit_form_values',
       1 => 'map_edit_form_setcenter',
-    )
+    ),
   );
   $export['map_view_edit_form'] = $map;
 

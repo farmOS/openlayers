@@ -1,14 +1,18 @@
 <?php
+/**
+ * @file
+ * Class openlayers_components_ui.
+ */
 
+/**
+ * Class openlayers_components_ui.
+ */
 class openlayers_projections_ui extends openlayers_objects_ui {
 
   /**
-   * hook_menu() entry point.
-   *
-   * Child implementations that need to add or modify menu items should
-   * probably call parent::hook_menu($items) and then modify as needed.
+   * {@inheritdoc}
    */
-  function hook_menu(&$items) {
+  public function hook_menu(&$items) {
     parent::hook_menu($items);
     $items['admin/structure/openlayers/projections']['type'] = MENU_LOCAL_TASK;
     $items['admin/structure/openlayers/projections']['weight'] = -8;
@@ -21,23 +25,26 @@ class openlayers_projections_ui extends openlayers_objects_ui {
    * method, so this is building up a row suitable for theme('table').
    * This doesn't have to be true if you override both.
    */
-  function list_build_row($item, &$form_state, $operations) {
-    // Set up sorting
+  public function list_build_row($item, &$form_state, $operations) {
+    // Set up sorting,
     $name = $item->{$this->plugin['export']['key']};
     $schema = ctools_export_get_schema($this->plugin['schema']);
 
-    // Note: $item->{$schema['export']['export type string']} should have already been set up by export.inc so
-    // we can use it safely.
+    // Note: $item->{$schema['export']['export type string']} should have
+    // already been set up by export.inc so we can use it safely.
     switch ($form_state['values']['order']) {
       case 'disabled':
         $this->sorts[$name] = empty($item->disabled) . $name;
         break;
+
       case 'title':
         $this->sorts[$name] = $item->{$this->plugin['export']['admin_title']};
         break;
+
       case 'name':
         $this->sorts[$name] = $name;
         break;
+
       case 'storage':
         $this->sorts[$name] = $item->{$schema['export']['export type string']} . $name;
         break;
@@ -53,7 +60,10 @@ class openlayers_projections_ui extends openlayers_objects_ui {
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
-    $ops = theme('links__ctools_dropbutton', array('links' => $operations, 'attributes' => array('class' => array('links', 'inline'))));
+    $ops = theme('links__ctools_dropbutton', array(
+      'links' => $operations,
+      'attributes' => array('class' => array('links', 'inline')),
+    ));
 
     $this->rows[$name]['data'][] = array('data' => $ops, 'class' => array('ctools-export-ui-operations'));
 
@@ -69,7 +79,7 @@ class openlayers_projections_ui extends openlayers_objects_ui {
    * If you've added columns via list_build_row() but are still using a
    * table, override this method to set up the table header.
    */
-  function list_table_header() {
+  public function list_table_header() {
     $header = array();
     if (!empty($this->plugin['export']['admin_title'])) {
       $header[] = array('data' => t('Name'), 'class' => array('ctools-export-ui-title'));

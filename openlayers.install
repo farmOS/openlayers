@@ -1,13 +1,18 @@
 <?php
+/**
+ * @file
+ * Openlayers module - installation procedure.
+ */
+
 
 /**
  * Implements hook_uninstall().
  */
 function openlayers_uninstall() {
-  // Get module variables
+  // Get module variables.
   global $conf;
   foreach (array_keys($conf) as $key) {
-    // Find variables that have the module prefix
+    // Find variables that have the module prefix.
     if (strpos($key, 'openlayers_') === 0) {
       variable_del($key);
     }
@@ -19,7 +24,7 @@ function openlayers_uninstall() {
  */
 function openlayers_schema() {
   $schema = array();
-  // Maps table (ctools extras)
+  // Maps table (ctools extras).
   $schema['openlayers_maps'] = array(
     'description' => 'Storage for User defined OpenLayers maps.',
     'export' => array(
@@ -73,7 +78,7 @@ function openlayers_schema() {
       'machine_name' => array('machine_name'),
     ),
   );
-  // table (ctools extras)
+  // Layers table (ctools extras).
   $schema['openlayers_layers'] = array(
     'description' => 'Storage for user defined OpenLayers layers.',
     'export' => array(
@@ -129,7 +134,7 @@ function openlayers_schema() {
       'machine_name' => array('machine_name'),
     ),
   );
-  // table (ctools extras)
+  // Sources table (ctools extras).
   $schema['openlayers_sources'] = array(
     'description' => 'Storage for user defined OpenLayers sources.',
     'export' => array(
@@ -184,6 +189,7 @@ function openlayers_schema() {
       'machine_name' => array('machine_name'),
     ),
   );
+  // Controls table.
   $schema['openlayers_controls'] = array(
     'description' => 'Storage for user defined OpenLayers controls.',
     'export' => array(
@@ -236,160 +242,164 @@ function openlayers_schema() {
     'unique keys' => array(
       'machine_name' => array('machine_name'),
     ),
-    $schema['openlayers_interactions'] = array(
-      'description' => 'Storage for user defined OpenLayers interactions.',
-      'export' => array(
-        'admin_title' => 'machine_name',
-        'key' => 'machine_name',
-        'key name' => 'Machine name',
-        'primary key' => 'machine_name',
-        'identifier' => 'interaction',
-        'default hook' => 'default_interactions',
-        'api' => array(
-          'owner' => 'openlayers',
-          'api' => 'default_interactions',
-          'minimum_version' => 1,
-          'current_version' => 1,
-        ),
-      ),
-      'fields' => array(
-        'machine_name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Interaction system name.',
-        ),
-        'name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Interaction name.',
-        ),
-        'description' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Interaction description.',
-        ),
-        'class' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Interaction class.',
-        ),
-        'options' => array(
-          'type' => 'text',
-          'not null' => FALSE,
-          'description' => 'Interaction options serialized.',
-          'serialize' => TRUE,
-        ),
-      ),
-      'primary key' => array('machine_name'),
-      'unique keys' => array(
-        'machine_name' => array('machine_name'),
-      ),
-    ),
-    $schema['openlayers_components'] = array(
-      'description' => 'Storage for user defined OpenLayers components.',
-      'export' => array(
-        'admin_title' => 'machine_name',
-        'key' => 'machine_name',
-        'key name' => 'Machine name',
-        'primary key' => 'machine_name',
-        'identifier' => 'component',
-        'default hook' => 'default_components',
-        'api' => array(
-          'owner' => 'openlayers',
-          'api' => 'default_components',
-          'minimum_version' => 1,
-          'current_version' => 1,
-        ),
-      ),
-      'fields' => array(
-        'machine_name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Component system name.',
-        ),
-        'name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Component name.',
-        ),
-        'description' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Component description.',
-        ),
-        'class' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Component class.',
-        ),
-        'options' => array(
-          'type' => 'text',
-          'not null' => FALSE,
-          'description' => 'Component options serialized.',
-          'serialize' => TRUE,
-        ),
-      ),
-      'primary key' => array('machine_name'),
-      'unique keys' => array(
-        'machine_name' => array('machine_name'),
-      ),
-    ),
-    $schema['openlayers_projections'] = array(
-      'description' => 'Storage for user defined OpenLayers projections.',
-      'export' => array(
-        'admin_title' => 'machine_name',
-        'key' => 'machine_name',
-        'key name' => 'Machine name',
-        'primary key' => 'machine_name',
-        'identifier' => 'projection',
-        'default hook' => 'default_projections',
-        'api' => array(
-          'owner' => 'openlayers',
-          'api' => 'default_projections',
-          'minimum_version' => 1,
-          'current_version' => 1,
-        ),
-      ),
-      'fields' => array(
-        'machine_name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Projection system name.',
-        ),
-        'name' => array(
-          'type' => 'varchar',
-          'length' => '255',
-          'not null' => TRUE,
-          'default' => '',
-          'description' => 'Projection name.',
-        ),
-        'description' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Projection description.'
-        ),
-        'definition' => array(
-          'type' => 'text',
-          'not null' => TRUE,
-          'description' => 'Projection options definition.'
-        ),
-      ),
-      'primary key' => array('machine_name'),
-      'unique keys' => array(
-        'machine_name' => array('machine_name'),
-      ),
-    )
   );
+  // Interactions table.
+  $schema['openlayers_interactions'] = array(
+    'description' => 'Storage for user defined OpenLayers interactions.',
+    'export' => array(
+      'admin_title' => 'machine_name',
+      'key' => 'machine_name',
+      'key name' => 'Machine name',
+      'primary key' => 'machine_name',
+      'identifier' => 'interaction',
+      'default hook' => 'default_interactions',
+      'api' => array(
+        'owner' => 'openlayers',
+        'api' => 'default_interactions',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Interaction system name.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Interaction name.',
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Interaction description.',
+      ),
+      'class' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Interaction class.',
+      ),
+      'options' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Interaction options serialized.',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('machine_name'),
+    'unique keys' => array(
+      'machine_name' => array('machine_name'),
+    ),
+  );
+  // Components table.
+  $schema['openlayers_components'] = array(
+    'description' => 'Storage for user defined OpenLayers components.',
+    'export' => array(
+      'admin_title' => 'machine_name',
+      'key' => 'machine_name',
+      'key name' => 'Machine name',
+      'primary key' => 'machine_name',
+      'identifier' => 'component',
+      'default hook' => 'default_components',
+      'api' => array(
+        'owner' => 'openlayers',
+        'api' => 'default_components',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Component system name.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Component name.',
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Component description.',
+      ),
+      'class' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Component class.',
+      ),
+      'options' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'Component options serialized.',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('machine_name'),
+    'unique keys' => array(
+      'machine_name' => array('machine_name'),
+    ),
+  );
+  // Projections table.
+  $schema['openlayers_projections'] = array(
+    'description' => 'Storage for user defined OpenLayers projections.',
+    'export' => array(
+      'admin_title' => 'machine_name',
+      'key' => 'machine_name',
+      'key name' => 'Machine name',
+      'primary key' => 'machine_name',
+      'identifier' => 'projection',
+      'default hook' => 'default_projections',
+      'api' => array(
+        'owner' => 'openlayers',
+        'api' => 'default_projections',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'machine_name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Projection system name.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Projection name.',
+      ),
+      'description' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Projection description.',
+      ),
+      'definition' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'description' => 'Projection options definition.',
+      ),
+    ),
+    'primary key' => array('machine_name'),
+    'unique keys' => array(
+      'machine_name' => array('machine_name'),
+    ),
+  );
+  // Styles table.
   $schema['openlayers_styles'] = array(
     'description' => 'Storage for user defined OpenLayers styles.',
     'export' => array(
@@ -446,23 +456,28 @@ function openlayers_schema() {
   return $schema;
 }
 
+/**
+ * Implements hook__requirements().
+ */
 function openlayers_requirements($phase) {
   $requirements = array();
+  $t = get_t();
 
   if ($phase != 'install') {
     $ol3 = libraries_detect('openlayers3');
 
     if ($ol3) {
       $requirements['openlayers3'] = array(
-        'title' => 'OpenLayers library installed',
+        'title' => $t('OpenLayers library installed'),
         'severity' => REQUIREMENT_OK,
-        'value' => t('OpenLayers %version library installed at %path', array('%path' => $ol3['library path'], '%version' => $ol3['version'])),
+        'value' => $t('OpenLayers %version library installed at %path', array('%path' => $ol3['library path'], '%version' => $ol3['version'])),
       );
-    } else {
+    }
+    else {
       $requirements['openlayers3'] = array(
-        'title' => t('OpenLayers'),
+        'title' => $t('OpenLayers'),
         'severity' => REQUIREMENT_ERROR,
-        'value' => t('OpenLayers library was not found.'),
+        'value' => $t('OpenLayers library was not found.'),
       );
     }
   }

@@ -1,7 +1,11 @@
 <?php
 /**
- * CTools Export UI required function for plugin definition
- * See function ctools_plugin_load_includes() in the module ctools.
+ * @file
+ * CTools Export UI plugin definition for projections.
+ */
+
+/**
+ * CTools Export UI plugin definition.
  */
 function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
   return array(
@@ -16,7 +20,7 @@ function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_projections_ui',
-      'parent' => 'ctools_export_ui'
+      'parent' => 'ctools_export_ui',
     ),
 
     'export' => array(
@@ -31,9 +35,9 @@ function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_projection_form_start'
+          'form id' => 'openlayers_projection_form_start',
         ),
-      )
+      ),
     ),
 
     'title singular' => t('projection'),
@@ -48,8 +52,8 @@ function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
         ),
         'delete' => array(
           'success' => t('Projection was deleted.'),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
@@ -63,7 +67,7 @@ function openlayers_projection_form_start($form, &$form_state) {
     '#type' => 'textarea',
     '#title' => t('Projection definition'),
     '#rows' => '10',
-    '#default_value' => isset($form_state['item']->definition) ? $form_state['item']->definition : ''
+    '#default_value' => isset($form_state['item']->definition) ? $form_state['item']->definition : '',
   );
 
   return $form;

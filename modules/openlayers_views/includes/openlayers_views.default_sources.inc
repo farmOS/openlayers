@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Default sources from views.
+ */
 
+/**
+ * Implements hook_default_sources().
+ */
 function openlayers_views_default_sources() {
   $export = array();
 

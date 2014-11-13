@@ -1,17 +1,28 @@
 <?php
+/**
+ * @file
+ * Style handler that provides vector features.
+ */
 
+/**
+ * Class openlayers_views_plugin_style_source_vector.
+ */
 class openlayers_views_plugin_style_source_vector extends views_plugin_style {
 
-  function render() {
+  /**
+   * {@inheritdoc}
+   */
+  public function render() {
     $grouped_results = $this->render_grouping($this->view->result, $this->options['grouping']);
     $data = $this->map_features($grouped_results);
 
-    // If we are not in preview, just return the data
+    // If we are not in preview, just return the data.
     if (empty($this->view->live_preview)) {
       return $data;
     }
     else {
-      // If we are in preview mode, dump out some useful information about this data layer
+      // If we are in preview mode, dump out some useful information about this
+      // data layer.
       $output = "You can use the following parameters in your styles as dynamic values";
       $output .= "\n------------\n";
       if (!empty($data)) {
@@ -30,32 +41,27 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
   }
 
   /**
-   * Set default options
-   *
-   * Overrides views_plugin_style->option_definition
+   * {@inheritdoc}
    */
-  function option_definition() {
+  public function option_definition() {
     $options = parent::option_definition();
     $options['data_source'] = array('default' => 'openlayers_wkt');
     return $options;
   }
 
   /**
-   * Options form
-   *
-   * Overrides views_plugin_style->options_form
+   * {@inheritdoc}
    */
-  function options_form(&$form, &$form_state) {
+  public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
-    // Get list of fields in this view & flag available geodata fields
+    // Get list of fields in this view & flag available geodata fields.
     $handlers = $this->display->handler->get_handlers('field');
 
-    // Check for any fields, as the view needs them
+    // Check for any fields, as the view needs them.
     if (empty($handlers)) {
       $form['error_markup'] = array(
-        '#value' => t('You need to enable at least one field before you can '
-          . 'configure your field settings'),
+        '#value' => t('You need to enable at least one field before you can configure your field settings'),
         '#prefix' => '<div class="error form-item description">',
         '#suffix' => '</div>',
       );
@@ -92,12 +98,11 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
     $form['data_source']['value'] = array(
       '#type' => 'select',
       '#title' => t('Map Data Sources'),
-      '#description' => t('Choose which sources of data that the map will '
-        . 'provide features for.'),
+      '#description' => t('Choose which sources of data that the map will provide features for.'),
       '#options' => array(
         'other_latlon' => t('Lat/Lon Pair'),
         'other_boundingbox' => t('Bounding Box'),
-        'wkt' => t('WKT')
+        'wkt' => t('WKT'),
       ),
       '#default_value' => $this->options['data_source']['value'],
     );
@@ -105,20 +110,18 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       $form['data_source']['other_lat'] = array(
         '#type' => 'select',
         '#title' => t('Latitude Field'),
-        '#description' => t('Choose a field for Latitude.  This should be a '
-          . 'field that is a decimal or float value.'),
+        '#description' => t('Choose a field for Latitude.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_lat'],
-        '#states' => $this->datasource_dependent('other_latlon')
+        '#states' => $this->datasource_dependent('other_latlon'),
       );
       $form['data_source']['other_lon'] = array(
         '#type' => 'select',
         '#title' => t('Longitude Field'),
-        '#description' => t('Choose a field for Longitude.  This should be a '
-          . 'field that is a decimal or float value.'),
+        '#description' => t('Choose a field for Longitude.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_lon'],
-        '#states' => $this->datasource_dependent('other_latlon')
+        '#states' => $this->datasource_dependent('other_latlon'),
       );
 
       $form['data_source']['wkt'] = array(
@@ -127,51 +130,46 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
         '#description' => t('Choose the OpenLayers WKT field.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['wkt'],
-        '#states' => $this->datasource_dependent('wkt')
+        '#states' => $this->datasource_dependent('wkt'),
       );
 
       $form['data_source']['other_top'] = array(
         '#type' => 'select',
         '#title' => t('Top Field'),
-        '#description' => t('Choose a field for Top.  This should be a '
-          . 'field that is a decimal or float value.'),
+        '#description' => t('Choose a field for Top.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_top'],
-        '#states' => $this->datasource_dependent('other_boundingbox')
+        '#states' => $this->datasource_dependent('other_boundingbox'),
       );
       $form['data_source']['other_right'] = array(
         '#type' => 'select',
         '#title' => t('Right Field'),
-        '#description' => t('Choose a field for Right.  This should be a field '
-          . 'that is a decimal or float value.'),
+        '#description' => t('Choose a field for Right.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_right'],
-        '#states' => $this->datasource_dependent('other_boundingbox')
+        '#states' => $this->datasource_dependent('other_boundingbox'),
       );
       $form['data_source']['other_bottom'] = array(
         '#type' => 'select',
         '#title' => t('Bottom Field'),
-        '#description' => t('Choose a field for Bottom.  This should be a '
-          . 'field that is a decimal or float value.'),
+        '#description' => t('Choose a field for Bottom.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_bottom'],
-        '#states' => $this->datasource_dependent('other_boundingbox')
+        '#states' => $this->datasource_dependent('other_boundingbox'),
       );
       $form['data_source']['other_left'] = array(
         '#type' => 'select',
         '#title' => t('Left Field'),
-        '#description' => t('Choose a field for Left.  This should be a field ' .
-          'that is a decimal or float value.'),
+        '#description' => t('Choose a field for Left.  This should be a field that is a decimal or float value.'),
         '#options' => $fields,
         '#default_value' => $this->options['data_source']['other_left'],
-        '#states' => $this->datasource_dependent('other_boundingbox')
+        '#states' => $this->datasource_dependent('other_boundingbox'),
       );
     }
     $form['data_source']['name_field'] = array(
       '#type' => 'select',
       '#title' => t('Title Field'),
-      '#description' => t('Choose the field which will appear as a title on ' .
-        'tooltips.'),
+      '#description' => t('Choose the field which will appear as a title on tooltips.'),
       '#options' => array_merge(array('' => ''), $fields),
       '#default_value' => $this->options['data_source']['name_field'],
     );
@@ -181,7 +179,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       '#row' => '<' . t('entire row') . '>',
     ), $fields);
 
-    // Description field
+    // Description field.
     $form['data_source']['description_field'] = array(
       '#type' => 'select',
       '#title' => t('Description Content'),
@@ -192,12 +190,11 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       '#default_value' => $this->options['data_source']['description_field'],
     );
 
-    // A simple way to display attributes and styling
+    // A simple way to display attributes and styling.
     $form['attributes'] = array(
       '#type' => 'fieldset',
       '#title' => t('Attributes and Styling'),
-      '#description' => t('Attributes are field data attached to each '
-        . 'feature.  This can be used with styling to create Variable styling.'),
+      '#description' => t('Attributes are field data attached to each feature.  This can be used with styling to create Variable styling.'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
     );
@@ -230,18 +227,19 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
         . 'of the Javascript included in your pages.'
         . 'Please note that this does not apply to Grouped Displays.',
         array(
-          '%syntax' => '${field_name}'
-        ))
+          '%syntax' => '${field_name}',
+        )),
     );
   }
 
 
   /**
-   * @param $records ...
+   *
+   * @param array $sets
    *
    * openlayers_views_style_data specific
    */
-  function map_features($sets = array()) {
+  public function map_features($sets = array()) {
     $features = $excluded_fields = array();
     $handlers = $this->display->handler->get_handlers('field');
 
@@ -261,7 +259,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
         // wrapping, class customizations and label.
         foreach ($handlers as $hid => $handler) {
           $field_id = $handler->options['id'];
-          // Exclude all the field from rendering
+          // Exclude all the field from rendering.
           foreach ($this->view->field as $field) {
             $field->options['exclude'] = TRUE;
           }
@@ -287,7 +285,8 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
           // Handle rendering the whole record.
           if ($this->options['data_source']['description_field'] === '#row') {
             $attributes['description'] = trim($this->row_plugin->render($record));
-          } else {
+          }
+          else {
             if (isset($attributes[$this->options['data_source']['description_field']])) {
               $attributes['description'] = $attributes[$this->options['data_source']['description_field']];
             }
@@ -303,6 +302,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
               $handler = $handlers[$this->options['data_source']['wkt']];
               $wkt = $handler->allow_advanced_render() ? $handler->advanced_render($record) : $handler->render($record);
               break;
+
             case 'other_latlon':
               $handler = $handlers[$this->options['data_source']['other_lon']];
               $other_lon = $handler->allow_advanced_render() ? $handler->advanced_render($record) : $handler->render($record);
@@ -316,7 +316,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
         // Only render features that has been enabled in the configuration
         // of the display.
         if (isset($this->options['attributes']['display'])) {
-          foreach($this->options['attributes']['display'] as $fid => $value) {
+          foreach ($this->options['attributes']['display'] as $fid => $value) {
             if ($this->options['attributes']['display'][$fid] === 0) {
               unset($attributes[$fid]);
             }
@@ -379,19 +379,18 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
    *
    * @see openlayers_views_plugin_style_source_vector::minify_data()
    */
-  public function  minify_remove_html_comment($string) {
-    return (0 === strpos($string[1], '[') || false !== strpos($string[1], '<!['))
+  public function minify_remove_html_comment($string) {
+    return (0 === strpos($string[1], '[') || FALSE !== strpos($string[1], '<!['))
       ? $string[0]
       : '';
   }
 
   /**
-   * Basically a macro because
-   * #state is rather verbose
+   * Basically a macro because #state is rather verbose.
    *
-   * openlayers_views_style_data specific
+   * openlayers_views_style_data specific.
    */
-  function datasource_dependent($type) {
+  public function datasource_dependent($type) {
     return array('visible' => array('#edit-style-options-data-source-value' => array('value' => $type)));
   }
 

@@ -1,17 +1,30 @@
 <?php
+/**
+ * @file
+ * Component: Graticule.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__component__graticule_openlayers_component() {
   return array(
     'handler' => array(
       'class' => 'openlayers__component__graticule',
       'file' => 'openlayers__component__graticule.inc',
-    )
+    ),
   );
 }
 
+/**
+ * Class openlayers__component__graticule.
+ */
 class openlayers__component__graticule extends openlayers_component {
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $form['options']['rgba'] = array(
       '#type' => 'textfield',
       '#title' => t('RGBA'),

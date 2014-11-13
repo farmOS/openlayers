@@ -1,29 +1,43 @@
 <?php
+/**
+ * @file
+ * Layer: JS.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_openlayers__layer__js_openlayers_layer() {
   return array(
     'handler' => array(
       'class' => 'openlayers__layer__js',
       'file' => 'openlayers__layer__js.inc',
-    )
+    ),
   );
 }
 
+/**
+ * Class openlayers__layer__js.
+ */
 class openlayers__layer__js extends openlayers_layer {
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
     $attached = array();
 
     if (module_exists('ace_editor')) {
       $attached = array(
         'library' => array(
-          array('ace_editor', 'ace-editor')
+          array('ace_editor', 'ace-editor'),
         ),
         'js' => array(
-          drupal_get_path('module', 'openlayers') . '/js/editor.js'
-        )
+          drupal_get_path('module', 'openlayers') . '/js/editor.js',
+        ),
       );
-    } else {
+    }
+    else {
       drupal_set_message(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
     }
 
@@ -34,9 +48,9 @@ class openlayers__layer__js extends openlayers_layer {
       '#rows' => 15,
       '#default_value' => $this->getOption('javascript'),
       '#attributes' => array(
-        'data-editor' => 'javascript'
+        'data-editor' => 'javascript',
       ),
-      '#attached' => $attached
+      '#attached' => $attached,
     );
   }
 

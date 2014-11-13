@@ -1,20 +1,33 @@
 <?php
+/**
+ * @file
+ * Component: Geofield.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_examples_openlayers_examples__component__geofield_openlayers_component() {
   return array(
     'handler' => array(
       'class' => 'openlayers_examples__component__geofield',
       'file' => 'openlayers_examples__component__geofield.inc',
-    )
+    ),
   );
 }
 
+/**
+ * Class openlayers_examples__component__geofield.
+ */
 class openlayers_examples__component__geofield extends openlayers_component {
 
-  function alterBuild(&$build, $map) {
+  /**
+   * {@inheritdoc}
+   */
+  public function alterBuild(&$build, $map) {
     $build['component'] = array(
       '#type' => 'fieldset',
-      '#title' => 'Example Geofield component'
+      '#title' => 'Example Geofield component',
     );
 
     $build['component']['actionFeature'] = array(
@@ -22,35 +35,44 @@ class openlayers_examples__component__geofield extends openlayers_component {
       '#title' => 'Type of interaction',
       '#options' => array('draw' => 'Draw', 'modify' => 'Modify'),
       '#attributes' => array(
-        'id' => 'actionFeature'
-      )
+        'id' => 'actionFeature',
+      ),
     );
 
     $build['component']['dataType'] = array(
       '#type' => 'select',
       '#title' => 'Data type',
-      '#options' => array('GeoJSON' => 'GeoJSON', 'KML' => 'KML', 'GPX' => 'GPX', 'WKT' => 'WKT'),
+      '#options' => array(
+        'GeoJSON' => 'GeoJSON',
+        'KML' => 'KML',
+        'GPX' => 'GPX',
+        'WKT' => 'WKT',
+      ),
       '#attributes' => array(
-        'id' => 'dataType'
-      )
+        'id' => 'dataType',
+      ),
     );
 
     $build['component']['typeOfFeature'] = array(
       '#type' => 'select',
       '#title' => 'Geometry type',
-      '#options' => array('Point' => 'Point', 'LineString' => 'LineString', 'Polygon' => 'Polygon'),
+      '#options' => array(
+        'Point' => 'Point',
+        'LineString' => 'LineString',
+        'Polygon' => 'Polygon',
+      ),
       '#attributes' => array(
-        'id' => 'typeOfFeature'
-      )
+        'id' => 'typeOfFeature',
+      ),
     );
 
     $build['component']['data'] = array(
       '#type' => 'textarea',
       '#title' => 'Data',
       '#attributes' => array(
-        'id' => 'data'
+        'id' => 'data',
       ),
-      '#value' => ''
+      '#value' => '',
     );
 
     $build['component']['clearmap'] = array(

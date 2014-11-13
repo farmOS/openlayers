@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Map: Views.
+ */
 
+/**
+ * Plugin definition.
+ */
 function openlayers_views_openlayers__map__views_openlayers_map() {
   return array(
     'handler' => array(
@@ -9,6 +16,9 @@ function openlayers_views_openlayers__map__views_openlayers_map() {
   );
 }
 
+/**
+ * Class openlayers__map__views.
+ */
 class openlayers__map__views extends openlayers__map__map {
 
   /**
@@ -71,7 +81,10 @@ class openlayers__map__views extends openlayers__map__map {
     return $sources;
   }
 
-  function options_form(&$form, &$form_state) {
+  /**
+   * {@inheritdoc}
+   */
+  public function options_form(&$form, &$form_state) {
 
     $options = array();
     $views = openalyers_views_get_views('openlayers_map_views');
