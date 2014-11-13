@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
+function openlayers_ui_openlayers_layers_ui_openlayers_layers_ui() {
   return array(
     'schema' => 'openlayers_layers',
     'access' => 'administer openlayers',
@@ -20,7 +20,7 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_layers_ui',
-      'parent' => 'ctools_export_ui',
+      'parent' => 'openlayers_layers_ui',
     ),
 
     'use wizard' => TRUE,
@@ -45,6 +45,7 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
           'form id' => 'openlayers_layer_form_options',
         ),
       ),
+      'wrapper' => 'openlayers_objects_ui_form_wrapper',
     ),
 
     'export' => array(
@@ -71,7 +72,7 @@ function openlayers_ui_openlayers_layers_ui_ctools_export_ui() {
 }
 
 function openlayers_layer_form_start($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_layers_ui();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -96,13 +97,13 @@ function openlayers_layer_form_start($form, &$form_state) {
 }
 
 function openlayers_layer_form_start_validate($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_layers_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_layer_form_start_submit($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_layers_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 

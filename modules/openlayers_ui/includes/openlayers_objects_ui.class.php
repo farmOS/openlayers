@@ -114,4 +114,47 @@ class openlayers_objects_ui extends ctools_export_ui {
       $this->rows[$name]['title'] = $item->{$this->plugin['export']['admin_description']};
     }
   }
+
+  /**
+   * Implements ctools_export_ui::edit_execute_form().
+   *
+   * This is hacky, but since CTools Export UI uses drupal_goto() we have to
+   * effectively change the plugin to modify the redirect path dynamically.
+   */
+  public function edit_execute_form(&$form_state) {
+    $output = parent::edit_execute_form($form_state);
+    if (!empty($form_state['executed'])) {
+      if ($form_state['clicked_button']['#name'] == 'saveandedit') {
+        // We always want to redirect back to this page when adding an item,
+        // but we want to preserve the destination so we can be redirected back
+        // to where we came from after clicking "Save".
+        $options = array();
+        if (!empty($_GET['destination'])) {
+          $options['query']['destination'] = $_GET['destination'];
+          unset($_GET['destination']);
+        }
+
+        // Sets redirect path and options.
+        $op = $form_state['op'];
+        $path = ('add' != $op) ? current_path() : 'admin/structure/openlayers/maps/list/' . $form_state['item']->machine_name . '/edit/start';
+        $this->plugin['redirect'][$op] = array($path, $options);
+      }
+    }
+    return $output;
+  }
+}
+
+/**
+ * Wizard wrapper to add Save & edit button.
+ */
+function openlayers_objects_ui_form_wrapper($form, $form_state) {
+  $form['buttons']['saveandedit'] = array(
+    '#name' => 'saveandedit',
+    '#type' => 'submit',
+    '#value' => t('Save & edit'),
+    '#wizard type' => 'finish',
+    '#weight' => 1,
+  );
+  $form['buttons']['cancel']['#weight'] = 20;
+  return $form;
 }

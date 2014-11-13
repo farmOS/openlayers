@@ -1,9 +1,13 @@
 <?php
 /**
- * CTools Export UI required function for plugin definition
- * See function ctools_plugin_load_includes() in the module ctools.
+ * @file
+ * CTools Export UI plugin definition for interactions.
  */
-function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
+
+/**
+ * CTools Export UI plugin definition.
+ */
+function openlayers_ui_openlayers_interactions_ui_openlayers_interactions_ui() {
   return array(
     'schema' => 'openlayers_interactions',
     'access' => 'administer openlayers',
@@ -16,7 +20,7 @@ function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
 
     'handler' => array(
       'class' => 'openlayers_interactions_ui',
-      'parent' => 'ctools_export_ui'
+      'parent' => 'openlayers_interactions_ui',
     ),
 
     'export' => array(
@@ -33,15 +37,16 @@ function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_interaction_form_start'
+          'form id' => 'openlayers_interaction_form_start',
         ),
         'type' => array(
-          'form id' => 'openlayers_interaction_form_type'
+          'form id' => 'openlayers_interaction_form_type',
         ),
         'options' => array(
-          'form id' => 'openlayers_interaction_form_options'
+          'form id' => 'openlayers_interaction_form_options',
         ),
-      )
+      ),
+      'wrapper' => 'openlayers_objects_ui_form_wrapper',
     ),
 
     'title singular' => t('interaction'),
@@ -56,22 +61,24 @@ function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
         ),
         'delete' => array(
           'success' => t('Interaction was deleted.'),
-        )
-      )
+        ),
+      ),
     ),
   );
 }
 
 function openlayers_interaction_form_start($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_interactions_ui();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array('' => 'Dont attach');
-  foreach($maps as $machine_name => $data) {
+  foreach ($maps as $machine_name => $data) {
     $map = openlayers_object_load('map', $machine_name);
-    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) continue;
+    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
+      continue;
+    }
     $options[$machine_name] = $data->name;
   }
 
@@ -79,20 +86,20 @@ function openlayers_interaction_form_start($form, &$form_state) {
     '#type' => 'select',
     '#title' => 'Add this to a map ?',
     '#description' => 'Select the map to add this object to.',
-    '#options' => $options
+    '#options' => $options,
   );
 
   return $form;
 }
 
 function openlayers_interaction_form_start_validate($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_interactions_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_interaction_form_start_submit($form, &$form_state) {
-  $class = new ctools_export_ui();
+  $class = new openlayers_interactions_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 
@@ -113,10 +120,10 @@ function openlayers_interaction_form_type($form, &$form_state) {
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Interaction Type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class: '',
+    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of interaction.'),
     '#options' => $options,
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   return $form;
