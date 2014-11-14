@@ -70,32 +70,6 @@ class openlayers__source__googlemaps extends openlayers_source {
    */
   public function alterBuild(&$build, $map) {
     $map_id = $map->getId();
-
-    $google_maps_script = '//maps.google.com/maps/api/js?v=3&language=' . $GLOBALS['language']->language . '&';
-    $google_maps_script .= 'sensor=' . ($this->getOption('sensor', FALSE) ? 'false' : 'true') . '&';
-    if (($key = $this->getOption('key', ''))) {
-      $google_maps_script .= 'key=' . $key . '&';
-    }
-    if (($client = $this->getOption('client', ''))) {
-      $google_maps_script .= 'client=' . $client . '&';
-    }
-    if (($channel = $this->getOption('channel', ''))) {
-      $google_maps_script .= 'channel=' . $channel . '&';
-    }
-
-
-    // If this is an ajax call use async handling.
-    if ($this->isAsynchronous()) {
-      $google_maps_script .= 'callback=Drupal.openlayers.asyncIsReadyCallbacks.' . preg_replace('/[^0-9a-z]/i', '_', $map_id) . '&';
-    }
-
-    $attached['js'][$google_maps_script] = array(
-      'data' => $google_maps_script,
-      'type' => 'external',
-      'group' => openlayers_config::JS_GROUP,
-      'weight' => (openlayers_config::JS_WEIGHT - 1),
-    );
-
     $gmap_id = 'gmap-' . $map_id;
     $build['gmap'] = array(
       '#theme' => 'html_tag',
@@ -103,10 +77,9 @@ class openlayers__source__googlemaps extends openlayers_source {
       '#value' => '',
       '#attributes' => array(
         'id' => $gmap_id,
-        'class' => array('gmap-map'),
+        'class' => array('openlayers', 'gmap-map'),
         'style' => 'height: 100%; width: 100%;',
       ),
-      '#attached' => $attached,
     );
   }
 

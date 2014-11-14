@@ -10,7 +10,7 @@
        // Create dynamic callback functions for asynchronous maps.
       $('.openlayers-map.asynchronous').each(function(){
         var map_id = $(this).attr('id');
-        if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
+        if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
           Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function() {
             Drupal.openlayers.asyncIsReady(map_id);
           }
@@ -110,7 +110,7 @@
     // is replaced by an underscore (_).
     asyncIsReadyCallbacks: {},
     asyncIsReady: function (map_id) {
-      if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
+      if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
         Drupal.settings.openlayers.maps[map_id].map.async--;
         if (!Drupal.settings.openlayers.maps[map_id].map.async) {
           $('#' + map_id).once('openlayers-map', function() {
