@@ -22,3 +22,5 @@ files[] = includes/openlayers.map.inc
 files[] = includes/openlayers.layer.inc
 files[] = includes/openlayers.source.inc
 files[] = includes/openlayers.control.inc
+
+registry_autoload[] = PSR-4

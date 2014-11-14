@@ -4,25 +4,19 @@
  * Openlayers module.
  */
 
-include 'includes/Classes/openlayers.config.inc';
-include 'includes/Interfaces/openlayers.object.interface.inc';
-include 'includes/Interfaces/openlayers.map.interface.inc';
-include 'includes/Interfaces/openlayers.layer.interface.inc';
-include 'includes/Interfaces/openlayers.style.interface.inc';
-include 'includes/Interfaces/openlayers.source.interface.inc';
-include 'includes/Interfaces/openlayers.control.interface.inc';
-include 'includes/Interfaces/openlayers.interaction.interface.inc';
-include 'includes/Interfaces/openlayers.component.interface.inc';
-include 'includes/Classes/openlayers.object.inc';
-include 'includes/Classes/openlayers.error.inc';
-include 'includes/Classes/openlayers.component.inc';
-include 'includes/Classes/openlayers.interaction.inc';
-include 'includes/Classes/openlayers.map.inc';
-include 'includes/Classes/openlayers.control.inc';
-include 'includes/Classes/openlayers.style.inc';
-include 'includes/Classes/openlayers.layer.inc';
-include 'includes/Classes/openlayers.source.inc';
 include 'includes/openlayers.helpers.inc';
+
+
+function openlayers_init() {
+  ctools_include('plugins');
+
+  //$all = ctools_get_plugins('openlayers', 'component');
+
+  //$test = new Drupal\openlayers\component\autopopup();
+
+  //dpm($all);
+}
+
 
 /**
  * Implements hook_ctools_plugin_api().
@@ -39,7 +33,7 @@ function openlayers_ctools_plugin_api($module, $api) {
  * Implements hook_ctools_plugin_directory().
  */
 function openlayers_ctools_plugin_directory($module, $plugin) {
-  return 'plugins/openlayers/' . $plugin;
+  return 'src/ol/' . $plugin;
 }
 
 /**
@@ -104,7 +98,7 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
     );
   }
   else {
-    $object = new openlayers_error();
+    $object = new Drupal\openlayers\Error();
     $object->type = $object_type;
     $object->class = $object_class;
   }
@@ -320,7 +314,7 @@ function openlayers_object_types() {
  * @return string
  *   The markup.
  */
-function openlayers_render_map(openlayers_map_interface $map) {
+function openlayers_render_map(\Drupal\openlayers\MapInterface $map) {
   $build = openlayers_render_build_map($map);
   return render($build);
 }
@@ -351,7 +345,7 @@ function openlayers_libraries_info() {
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 0,
-            'group' => openlayers_config::JS_GROUP,
+            'group' => \Drupal\openlayers\Config::JS_GROUP,
           ),
         ),
         'css' => array(
@@ -375,7 +369,7 @@ function openlayers_libraries_info() {
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 0,
-                'group' => openlayers_config::JS_GROUP,
+                'group' => \Drupal\openlayers\Config::JS_GROUP,
               ),
               'js/debug.js' => array('type' => 'file'),
             ),
