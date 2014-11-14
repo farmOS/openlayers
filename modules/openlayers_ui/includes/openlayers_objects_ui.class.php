@@ -136,7 +136,7 @@ class openlayers_objects_ui extends ctools_export_ui {
 
         // Sets redirect path and options.
         $op = $form_state['op'];
-        $path = ('add' != $op) ? current_path() : 'admin/structure/openlayers/maps/list/' . $form_state['item']->machine_name . '/edit/start';
+        $path = ('add' != $op) ? current_path() : 'admin/structure/openlayers/' . $this->plugin['menu']['menu item'] . '/list/' . $form_state['item']->machine_name . '/edit/start';
         $this->plugin['redirect'][$op] = array($path, $options);
       }
     }
