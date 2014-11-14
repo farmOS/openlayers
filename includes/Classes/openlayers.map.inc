@@ -185,7 +185,7 @@ class openlayers_map extends openlayers_object implements openlayers_map_interfa
   public function getJSObjects() {
     $objects = $this->getObjects();
 
-    foreach (array('layer', 'source', 'control', 'interaction', 'component') as $type) {
+    foreach (openlayers_object_types() as $type) {
       foreach ($objects[$type] as $index => $object) {
         $objects[$type][$index] = (array) $object->toJSArray();
       }
