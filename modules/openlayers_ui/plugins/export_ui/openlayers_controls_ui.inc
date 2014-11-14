@@ -105,7 +105,7 @@ function openlayers_control_form_start_submit($form, &$form_state) {
 
   if ($form_state['values']['attachToMap']) {
     $map = ctools_export_crud_load('openlayers_maps', $form_state['values']['attachToMap']);
-    $map->options['interactions'][] = $form_state['item']->machine_name;
+    $map->options['controls'][] = $form_state['item']->machine_name;
     ctools_export_crud_save('openlayers_maps', $map);
   }
 }
