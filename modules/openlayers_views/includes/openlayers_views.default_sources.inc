@@ -40,7 +40,7 @@ function openlayers_views_default_sources_alter(&$sources) {
     // Check if the configuration for this source was already defined or if it
     // has been modified. If so don't add it, to keep the source exportable.
     $custom_version = ctools_export_crud_load('openlayers_sources', $machine_name);
-    if (!isset($maps[$machine_name]) && empty($custom_version)) {
+    if (!isset($sources[$machine_name]) && empty($custom_version)) {
       $ol_source = new stdClass();
       $ol_source->api_version = 1;
       $ol_source->machine_name = $machine_name;

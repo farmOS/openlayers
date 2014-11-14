@@ -15,7 +15,7 @@ function openlayers_views_default_layers_alter(&$layers) {
     // Check if the configuration for this layer was already defined or if it
     // has been modified. If so don't add it, to keep the layer exportable.
     $custom_version = ctools_export_crud_load('openlayers_layers', $machine_name);
-    if (!isset($maps[$machine_name]) && empty($custom_version)) {
+    if (!isset($layers[$machine_name]) && empty($custom_version)) {
       $ol_layer = new stdClass();
       $ol_layer->api_version = 1;
       $ol_layer->machine_name = $machine_name;
