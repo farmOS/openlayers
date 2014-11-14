@@ -67,7 +67,7 @@ function openalyers_views_get_views($style_type = NULL, $reset = FALSE) {
             $display,
           );
         }
-        if ($view->display_handler->get_option('style_plugin') == 'openlayers_map_views') {
+        if ($view->display_handler->get_option('style_plugin') == 'openlayers_map_views' && $display != 'default') {
           $cache['openlayers_map_views'][] = array(
             $view->name,
             $display,
