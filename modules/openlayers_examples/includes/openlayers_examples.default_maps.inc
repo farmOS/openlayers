@@ -10,14 +10,14 @@
 function openlayers_examples_default_maps() {
   $export = array();
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'openlayers_examples_map_earthquake';
-  $map->name = '2012 Earthquakes map, tooltips and popups.';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_earthquake';
+  $ol_map->name = '2012 Earthquakes map, tooltips and popups.';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -48,16 +48,16 @@ function openlayers_examples_default_maps() {
       2 => 'openlayers_examples_tooltip_earthquakes',
     ),
   );
-  $export['openlayers_examples_map_earthquake'] = $map;
+  $export['openlayers_examples_map_earthquake'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_openstreetmap_geofield';
-  $map->name = 'OpenStreetMap with features';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_openstreetmap_geofield';
+  $ol_map->name = 'OpenStreetMap with features';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -83,16 +83,16 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_examples_geofield',
     ),
   );
-  $export['map_openstreetmap_geofield'] = $map;
+  $export['map_openstreetmap_geofield'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapbox_example1';
-  $map->name = 'Mapbox example 1';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapbox_example1';
+  $ol_map->name = 'Mapbox example 1';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -115,16 +115,16 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapbox_example1'] = $map;
+  $export['map_mapbox_example1'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapbox_example2';
-  $map->name = 'Mapbox example 2';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapbox_example2';
+  $ol_map->name = 'Mapbox example 2';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -147,16 +147,16 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapbox_example2'] = $map;
+  $export['map_mapbox_example2'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapbox_example3';
-  $map->name = 'Mapbox example 3';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapbox_example3';
+  $ol_map->name = 'Mapbox example 3';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -179,16 +179,16 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapbox_example3'] = $map;
+  $export['map_mapbox_example3'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_geojson_cities';
-  $map->name = 'Map GeoJSON Cities';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_geojson_cities';
+  $ol_map->name = 'Map GeoJSON Cities';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -212,16 +212,16 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_geojson_cities'] = $map;
+  $export['map_geojson_cities'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_geojson_cities_heatmap';
-  $map->name = 'Map GeoJSON Cities Heatmap';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_geojson_cities_heatmap';
+  $ol_map->name = 'Map GeoJSON Cities Heatmap';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -245,16 +245,16 @@ function openlayers_examples_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_geojson_cities_heatmap'] = $map;
+  $export['map_geojson_cities_heatmap'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_geolocation';
-  $map->name = 'Map geolocation';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_geolocation';
+  $ol_map->name = 'Map geolocation';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -280,16 +280,16 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_examples_geolocation',
     ),
   );
-  $export['map_geolocation'] = $map;
+  $export['map_geolocation'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'openlayers_examples_mapquest_sat_geojson_views';
-  $map->name = 'MapQuest Satellite with features from Views GeoJSON';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_mapquest_sat_geojson_views';
+  $ol_map->name = 'MapQuest Satellite with features from Views GeoJSON';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -315,16 +315,16 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_examples_zoom_to_source',
     ),
   );
-  $export['openlayers_examples_mapquest_sat_geojson_views'] = $map;
+  $export['openlayers_examples_mapquest_sat_geojson_views'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'openlayers_examples_cluster';
-  $map->name = 'Map with cluster';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_cluster';
+  $ol_map->name = 'Map with cluster';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -358,16 +358,16 @@ function openlayers_examples_default_maps() {
     ),
     'components' => array(),
   );
-  $export['openlayers_examples_cluster'] = $map;
+  $export['openlayers_examples_cluster'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'openlayers_examples_map_popup_overlay';
-  $map->name = 'Map with simple popup overlay and autozoom.';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_popup_overlay';
+  $ol_map->name = 'Map with simple popup overlay and autozoom.';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -404,16 +404,16 @@ function openlayers_examples_default_maps() {
       1 => 'openlayers_examples_zoom_to_source',
     ),
   );
-  $export['openlayers_examples_map_popup_overlay'] = $map;
+  $export['openlayers_examples_map_popup_overlay'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'openlayers_examples_blocklayerswitcher';
-  $map->name = 'Map with block layer switcher';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_blocklayerswitcher';
+  $ol_map->name = 'Map with block layer switcher';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -464,7 +464,7 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_examples_component_blocklayerswitcher',
     ),
   );
-  $export['openlayers_examples_blocklayerswitcher'] = $map;
+  $export['openlayers_examples_blocklayerswitcher'] = $ol_map;
 
   return $export;
 }

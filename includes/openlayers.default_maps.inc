@@ -10,13 +10,13 @@
 function openlayers_default_maps() {
   $export = array();
 
-  $map = new stdClass();
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapbox_natural_earth_hypso_bathy';
-  $map->name = 'MapBox Natural Earth Hypso Bathy';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapbox_natural_earth_hypso_bathy';
+  $ol_map->name = 'MapBox Natural Earth Hypso Bathy';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -46,15 +46,15 @@ function openlayers_default_maps() {
       3 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapbox_natural_earth_hypso_bathy'] = $map;
+  $export['map_mapbox_natural_earth_hypso_bathy'] = $ol_map;
 
-  $map = new stdClass();
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapbox_geography_class';
-  $map->name = 'MapBox Geography Class';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapbox_geography_class';
+  $ol_map->name = 'MapBox Geography Class';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -84,15 +84,15 @@ function openlayers_default_maps() {
       3 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapbox_geography_class'] = $map;
+  $export['map_mapbox_geography_class'] = $ol_map;
 
-  $map = new stdClass();
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapquest_openstreetmap';
-  $map->name = 'MapQuest OpenStreetMap';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapquest_openstreetmap';
+  $ol_map->name = 'MapQuest OpenStreetMap';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -123,16 +123,16 @@ function openlayers_default_maps() {
       4 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapquest_openstreetmap'] = $map;
+  $export['map_mapquest_openstreetmap'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapquest_hybrid';
-  $map->name = 'MapQuest Hybrid';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapquest_hybrid';
+  $ol_map->name = 'MapQuest Hybrid';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -161,15 +161,15 @@ function openlayers_default_maps() {
       3 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapquest_hybrid'] = $map;
+  $export['map_mapquest_hybrid'] = $ol_map;
 
-  $map = new stdClass();
-  $map->api_version = 1;
-  $map->machine_name = 'map_mapquest_satellite';
-  $map->name = 'MapQuest Satellite';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_mapquest_satellite';
+  $ol_map->name = 'MapQuest Satellite';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -196,16 +196,16 @@ function openlayers_default_maps() {
       3 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_mapquest_satellite'] = $map;
+  $export['map_mapquest_satellite'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_openstreetmap';
-  $map->name = 'OpenStreetMap';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_openstreetmap';
+  $ol_map->name = 'OpenStreetMap';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -228,16 +228,16 @@ function openlayers_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_openstreetmap'] = $map;
+  $export['map_openstreetmap'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_opencyclemap';
-  $map->name = 'OpenCycleMap';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_opencyclemap';
+  $ol_map->name = 'OpenCycleMap';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -266,16 +266,16 @@ function openlayers_default_maps() {
     ),
     'components' => array(),
   );
-  $export['map_opencyclemap'] = $map;
+  $export['map_opencyclemap'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_openstreetmap_tiledebug';
-  $map->name = 'OpenStreetMap with tile debug.';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_openstreetmap_tiledebug';
+  $ol_map->name = 'OpenStreetMap with tile debug.';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -299,16 +299,16 @@ function openlayers_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_openstreetmap_tiledebug'] = $map;
+  $export['map_openstreetmap_tiledebug'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_stamen';
-  $map->name = 'Stamen map';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_stamen';
+  $ol_map->name = 'Stamen map';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -334,16 +334,16 @@ function openlayers_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_stamen'] = $map;
+  $export['map_stamen'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
-  $map->api_version = 1;
-  $map->machine_name = 'map_esri';
-  $map->name = 'ESRI map';
-  $map->description = '';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_esri';
+  $ol_map->name = 'ESRI map';
+  $ol_map->description = '';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
     'contextualLinks' => 1,
@@ -368,16 +368,16 @@ function openlayers_default_maps() {
       2 => 'interaction_mousewheelzoom',
     ),
   );
-  $export['map_esri'] = $map;
+  $export['map_esri'] = $ol_map;
 
-  $map = new stdClass();
-  $map->disabled = TRUE;
-  $map->api_version = 1;
-  $map->machine_name = 'map_view_edit_form';
-  $map->name = 'Map view edit form';
-  $map->description = 'Map used in the the map edit form to get center, zoom';
-  $map->class = 'openlayers__map__map';
-  $map->options = array(
+  $ol_map = new stdClass();
+  $ol_map->disabled = TRUE;
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'map_view_edit_form';
+  $ol_map->name = 'Map view edit form';
+  $ol_map->description = 'Map used in the the map edit form to get center, zoom';
+  $ol_map->class = 'openlayers__map__map';
+  $ol_map->options = array(
     'width' => 'auto',
     'height' => '400px',
     'view' => array(
@@ -409,7 +409,7 @@ function openlayers_default_maps() {
       1 => 'map_edit_form_setcenter',
     ),
   );
-  $export['map_view_edit_form'] = $map;
+  $export['map_view_edit_form'] = $ol_map;
 
   return $export;
 }

@@ -16,16 +16,16 @@ function openlayers_views_default_layers_alter(&$layers) {
     // has been modified. If so don't add it, to keep the layer exportable.
     $custom_version = ctools_export_crud_load('openlayers_layers', $machine_name);
     if (!isset($maps[$machine_name]) && empty($custom_version)) {
-      $layer = new stdClass();
-      $layer->api_version = 1;
-      $layer->machine_name = $machine_name;
-      $layer->name = 'Views Map:' . $view_name . ':' . $display;
-      $layer->description = t('Layer for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
-      $layer->class = 'openlayers__layer__vector';
-      $layer->options = array(
+      $ol_layer = new stdClass();
+      $ol_layer->api_version = 1;
+      $ol_layer->machine_name = $machine_name;
+      $ol_layer->name = 'Views Map:' . $view_name . ':' . $display;
+      $ol_layer->description = t('Layer for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
+      $ol_layer->class = 'openlayers__layer__vector';
+      $ol_layer->options = array(
         'source' => 'source_map_views_' . $view_name . '_' . $display,
       );
-      $layers[$layer->machine_name] = $layer;
+      $layers[$ol_layer->machine_name] = $ol_layer;
     }
   }
 }

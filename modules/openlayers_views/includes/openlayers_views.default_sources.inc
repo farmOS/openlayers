@@ -19,16 +19,16 @@ function openlayers_views_default_sources_alter(&$sources) {
       if ($view = views_get_view($view_name)) {
         $view->set_display($display);
 
-        $source = new stdClass();
-        $source->api_version = 1;
-        $source->machine_name = $machine_name;
-        $source->name = 'Views Source: ' . $view->name . '_' . $display;
-        $source->description = '';
-        $source->class = 'openlayers__source__vector';
-        $source->options = array(
+        $ol_source = new stdClass();
+        $ol_source->api_version = 1;
+        $ol_source->machine_name = $machine_name;
+        $ol_source->name = 'Views Source: ' . $view->name . '_' . $display;
+        $ol_source->description = '';
+        $ol_source->class = 'openlayers__source__vector';
+        $ol_source->options = array(
           'url' => url($view->display_handler->get_url(), array('absolute' => TRUE)),
         );
-        $sources[$source->machine_name] = $source;
+        $sources[$ol_source->machine_name] = $ol_source;
       }
     }
   }
@@ -41,14 +41,14 @@ function openlayers_views_default_sources_alter(&$sources) {
     // has been modified. If so don't add it, to keep the source exportable.
     $custom_version = ctools_export_crud_load('openlayers_sources', $machine_name);
     if (!isset($maps[$machine_name]) && empty($custom_version)) {
-      $source = new stdClass();
-      $source->api_version = 1;
-      $source->machine_name = $machine_name;
-      $source->name = 'Views Map: ' . $view_name . ':' . $display;
-      $source->description = t('Source for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
-      $source->class = 'openlayers__source__vector';
-      $source->options = array();
-      $sources[$source->machine_name] = $source;
+      $ol_source = new stdClass();
+      $ol_source->api_version = 1;
+      $ol_source->machine_name = $machine_name;
+      $ol_source->name = 'Views Map: ' . $view_name . ':' . $display;
+      $ol_source->description = t('Source for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
+      $ol_source->class = 'openlayers__source__vector';
+      $ol_source->options = array();
+      $sources[$ol_source->machine_name] = $ol_source;
     }
   }
 }

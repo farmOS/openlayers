@@ -10,155 +10,155 @@
 function openlayers_default_layers() {
   $export = array();
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapquest_osm';
-  $layer->name = 'MapQuest OpenStreetMap';
-  $layer->description = 'Layer MapQuest OpenStreetMap description';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapquest_osm';
+  $ol_layer->name = 'MapQuest OpenStreetMap';
+  $ol_layer->description = 'Layer MapQuest OpenStreetMap description';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapquest_osm',
   );
-  $export['layer_tile_mapquest_osm'] = $layer;
+  $export['layer_tile_mapquest_osm'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapquest_sat';
-  $layer->name = 'MapQuest Satellite';
-  $layer->description = 'Layer MapQuest Satellite description';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapquest_sat';
+  $ol_layer->name = 'MapQuest Satellite';
+  $ol_layer->description = 'Layer MapQuest Satellite description';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapquest_sat',
   );
-  $export['layer_tile_mapquest_sat'] = $layer;
+  $export['layer_tile_mapquest_sat'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapquest_hyb';
-  $layer->name = 'MapQuest Hybrid';
-  $layer->description = 'Layer MapQuest Hybrid description';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapquest_hyb';
+  $ol_layer->name = 'MapQuest Hybrid';
+  $ol_layer->description = 'Layer MapQuest Hybrid description';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapquest_hyb',
   );
-  $export['layer_tile_mapquest_hyb'] = $layer;
+  $export['layer_tile_mapquest_hyb'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapbox_geography_class';
-  $layer->name = 'MapBox Geography Class';
-  $layer->description = 'Layer MapBox Geography Class description';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapbox_geography_class';
+  $ol_layer->name = 'MapBox Geography Class';
+  $ol_layer->description = 'Layer MapBox Geography Class description';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapbox_geography_class',
   );
-  $export['layer_tile_mapbox_geography_class'] = $layer;
+  $export['layer_tile_mapbox_geography_class'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapbox_natural_earth_hypso_bathy';
-  $layer->name = 'MapBox Natural Earth Hypso Bathy';
-  $layer->description = 'Layer MapBox Natural Earth Hypso Bathy description';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapbox_natural_earth_hypso_bathy';
+  $ol_layer->name = 'MapBox Natural Earth Hypso Bathy';
+  $ol_layer->description = 'Layer MapBox Natural Earth Hypso Bathy description';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapbox_natural_earth_hypso_bathy',
   );
-  $export['layer_tile_mapbox_natural_earth_hypso_bathy'] = $layer;
+  $export['layer_tile_mapbox_natural_earth_hypso_bathy'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_image';
-  $layer->name = 'Drupal logo layer image';
-  $layer->description = 'Layer image description';
-  $layer->class = 'openlayers__layer__image';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_image';
+  $ol_layer->name = 'Drupal logo layer image';
+  $ol_layer->description = 'Layer image description';
+  $ol_layer->class = 'openlayers__layer__image';
+  $ol_layer->options = array(
     'source' => 'source_imagestatic',
   );
-  $export['layer_image'] = $layer;
+  $export['layer_image'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_openstreetmap';
-  $layer->name = 'OpenStreetMap';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_openstreetmap';
+  $ol_layer->name = 'OpenStreetMap';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_osm',
   );
-  $export['layer_tile_openstreetmap'] = $layer;
+  $export['layer_tile_openstreetmap'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_opencyclemap';
-  $layer->name = 'OpenCycleMap';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_opencyclemap';
+  $ol_layer->name = 'OpenCycleMap';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_osm_opencyclemap',
   );
-  $export['layer_tile_opencyclemap'] = $layer;
+  $export['layer_tile_opencyclemap'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_tiledebug';
-  $layer->name = 'Tile Debug';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_tiledebug';
+  $ol_layer->name = 'Tile Debug';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_tiledebug',
   );
-  $export['layer_tile_tiledebug'] = $layer;
+  $export['layer_tile_tiledebug'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_stamen_terrain_labels';
-  $layer->name = 'Stamen terrain labels';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_stamen_terrain_labels';
+  $ol_layer->name = 'Stamen terrain labels';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_stamen1',
   );
-  $export['layer_tile_stamen_terrain_labels'] = $layer;
+  $export['layer_tile_stamen_terrain_labels'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_stamen_watercolor';
-  $layer->name = 'Stamen watercolor';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_stamen_watercolor';
+  $ol_layer->name = 'Stamen watercolor';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_stamen2',
   );
-  $export['layer_tile_stamen_watercolor'] = $layer;
+  $export['layer_tile_stamen_watercolor'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_stamen_toner';
-  $layer->name = 'Stamen toner';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_stamen_toner';
+  $ol_layer->name = 'Stamen toner';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_stamen3',
   );
-  $export['layer_tile_stamen_toner'] = $layer;
+  $export['layer_tile_stamen_toner'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_esri';
-  $layer->name = 'ESRI';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_esri';
+  $ol_layer->name = 'ESRI';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_esri',
   );
-  $export['layer_tile_esri'] = $layer;
+  $export['layer_tile_esri'] = $ol_layer;
 
   return $export;
 }

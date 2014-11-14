@@ -15,14 +15,14 @@ function openlayers_views_default_maps_alter(&$maps) {
     // Check if the configuration for this map was already defined or if it has
     // been modified. If so don't add it, to keep the map exportable.
     $custom_version = ctools_export_crud_load('openlayers_maps', $machine_name);
-    if (!isset($maps[$machine_name]) && empty($custom_version)) {
-      $map = new stdClass();
-      $map->api_version = 1;
-      $map->machine_name = $machine_name;
-      $map->name = 'Views Map: ' . $view_name . ':' . $display;
-      $map->description = t('Map from !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
-      $map->class = 'openlayers__map__views';
-      $map->options = array(
+    if (!isset($ol_maps[$machine_name]) && empty($custom_version)) {
+      $ol_map = new stdClass();
+      $ol_map->api_version = 1;
+      $ol_map->machine_name = $machine_name;
+      $ol_map->name = 'Views Map: ' . $view_name . ':' . $display;
+      $ol_map->description = t('Map from !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
+      $ol_map->class = 'openlayers__map__views';
+      $ol_map->options = array(
         'views_display' => $view_name . ':' . $display,
         'view' => array(
           'center' => array(
@@ -41,7 +41,7 @@ function openlayers_views_default_maps_alter(&$maps) {
           'layer_map_views_' . $view_name . '_' . $display,
         ),
       );
-      $maps[$map->machine_name] = $map;
+      $maps[$ol_map->machine_name] = $ol_map;
     }
   }
 }

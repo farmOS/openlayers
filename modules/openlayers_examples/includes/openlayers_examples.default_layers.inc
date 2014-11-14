@@ -10,119 +10,119 @@
 function openlayers_examples_default_layers() {
   $export = array();
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapbox_example1';
-  $layer->name = 'MapBox example 1';
-  $layer->description = 'Layer MapBox example 1';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapbox_example1';
+  $ol_layer->name = 'MapBox example 1';
+  $ol_layer->description = 'Layer MapBox example 1';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapbox_example1',
   );
-  $export['layer_tile_mapbox_example1'] = $layer;
+  $export['layer_tile_mapbox_example1'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapbox_example2';
-  $layer->name = 'MapBox example 2';
-  $layer->description = 'Layer MapBox example 2';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapbox_example2';
+  $ol_layer->name = 'MapBox example 2';
+  $ol_layer->description = 'Layer MapBox example 2';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapbox_example2',
   );
-  $export['layer_tile_mapbox_example2'] = $layer;
+  $export['layer_tile_mapbox_example2'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_tile_mapbox_example3';
-  $layer->name = 'MapBox example 2';
-  $layer->description = 'Layer MapBox example 3';
-  $layer->class = 'openlayers__layer__tile';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_tile_mapbox_example3';
+  $ol_layer->name = 'MapBox example 2';
+  $ol_layer->description = 'Layer MapBox example 3';
+  $ol_layer->class = 'openlayers__layer__tile';
+  $ol_layer->options = array(
     'source' => 'source_mapbox_example3',
   );
-  $export['layer_tile_mapbox_example3'] = $layer;
+  $export['layer_tile_mapbox_example3'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_vector_geojson_cities';
-  $layer->name = 'GeoJSON Cities';
-  $layer->description = 'GeoJSON Cities';
-  $layer->class = 'openlayers__layer__vector';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_vector_geojson_cities';
+  $ol_layer->name = 'GeoJSON Cities';
+  $ol_layer->description = 'GeoJSON Cities';
+  $ol_layer->class = 'openlayers__layer__vector';
+  $ol_layer->options = array(
     'source' => 'source_geojson_cities',
   );
-  $export['layer_vector_geojson_cities'] = $layer;
+  $export['layer_vector_geojson_cities'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_vector_geojson_cities_heatmap';
-  $layer->name = 'GeoJSON Cities heatmap';
-  $layer->description = 'GeoJSON Cities Heatmap';
-  $layer->class = 'openlayers__layer__heatmap';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_vector_geojson_cities_heatmap';
+  $ol_layer->name = 'GeoJSON Cities heatmap';
+  $ol_layer->description = 'GeoJSON Cities Heatmap';
+  $ol_layer->class = 'openlayers__layer__heatmap';
+  $ol_layer->options = array(
     'source' => 'source_geojson_cities',
   );
-  $export['layer_vector_geojson_cities_heatmap'] = $layer;
+  $export['layer_vector_geojson_cities_heatmap'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_vector_kml_earthquakes';
-  $layer->name = 'Earthquakes 2012';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__vector';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_vector_kml_earthquakes';
+  $ol_layer->name = 'Earthquakes 2012';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__vector';
+  $ol_layer->options = array(
     'source' => 'source_kml_earthquakes',
   );
-  $export['layer_vector_kml_earthquakes'] = $layer;
+  $export['layer_vector_kml_earthquakes'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_vector_kml_earthquakes_heatmap';
-  $layer->name = 'Earthquakes 2012 Heatmap';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__heatmap';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_vector_kml_earthquakes_heatmap';
+  $ol_layer->name = 'Earthquakes 2012 Heatmap';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__heatmap';
+  $ol_layer->options = array(
     'source' => 'source_kml_earthquakes',
   );
-  $export['layer_vector_kml_earthquakes_heatmap'] = $layer;
+  $export['layer_vector_kml_earthquakes_heatmap'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'openlayers_examples_views_geojson';
-  $layer->name = 'Layer with source from Views GeoJSON';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__vector';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_views_geojson';
+  $ol_layer->name = 'Layer with source from Views GeoJSON';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__vector';
+  $ol_layer->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_1',
   );
-  $export['openlayers_examples_views_geojson'] = $layer;
+  $export['openlayers_examples_views_geojson'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'layer_cluster_cities';
-  $layer->name = 'Layer cluster cities';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__vector';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'layer_cluster_cities';
+  $ol_layer->name = 'Layer cluster cities';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__vector';
+  $ol_layer->options = array(
     'source' => 'source_cluster_cities',
   );
-  $export['layer_cluster_cities'] = $layer;
+  $export['layer_cluster_cities'] = $ol_layer;
 
-  $layer = new stdClass();
-  $layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
-  $layer->api_version = 1;
-  $layer->machine_name = 'openlayers_examples_views_geojson_popup';
-  $layer->name = 'Layer with source from Views GeoJSON for popup';
-  $layer->description = '';
-  $layer->class = 'openlayers__layer__vector';
-  $layer->options = array(
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_views_geojson_popup';
+  $ol_layer->name = 'Layer with source from Views GeoJSON for popup';
+  $ol_layer->description = '';
+  $ol_layer->class = 'openlayers__layer__vector';
+  $ol_layer->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'style' => 'openlayers_examples_blue_marker',
   );
-  $export['openlayers_examples_views_geojson_popup'] = $layer;
+  $export['openlayers_examples_views_geojson_popup'] = $ol_layer;
 
   return $export;
 }

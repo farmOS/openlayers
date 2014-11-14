@@ -10,14 +10,14 @@
 function openlayers_examples_default_styles() {
   $export = array();
 
-  $style = new stdClass();
-  $style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
-  $style->api_version = 1;
-  $style->machine_name = 'openlayers_examples_blue_marker';
-  $style->name = 'OpenLayers blue marker';
-  $style->description = '';
-  $style->class = 'openlayers__style__js';
-  $style->options = array(
+  $ol_style = new stdClass();
+  $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_examples_blue_marker';
+  $ol_style->name = 'OpenLayers blue marker';
+  $ol_style->description = '';
+  $ol_style->class = 'openlayers__style__js';
+  $ol_style->options = array(
     'javascript' => 'var style = new ol.style.Style({
                         image: new ol.style.Icon(({
                             scale: 1,
@@ -28,7 +28,7 @@ function openlayers_examples_default_styles() {
                         }))
                     });',
   );
-  $export['openlayers_examples_blue_marker'] = $style;
+  $export['openlayers_examples_blue_marker'] = $ol_style;
 
   return $export;
 }

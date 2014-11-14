@@ -10,23 +10,23 @@
 function openlayers_default_styles() {
   $export = array();
 
-  $style = new stdClass();
-  $style->api_version = 1;
-  $style->machine_name = 'openlayers_style_default';
-  $style->name = 'OpenLayers default style';
-  $style->description = '';
-  $style->class = 'openlayers__style__style';
-  $style->options = array();
-  $export['openlayers_style_default'] = $style;
+  $ol_style = new stdClass();
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_style_default';
+  $ol_style->name = 'OpenLayers default style';
+  $ol_style->description = '';
+  $ol_style->class = 'openlayers__style__style';
+  $ol_style->options = array();
+  $export['openlayers_style_default'] = $ol_style;
 
-  $style = new stdClass();
-  $style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
-  $style->api_version = 1;
-  $style->machine_name = 'openlayers_green_style';
-  $style->name = 'OpenLayers green style';
-  $style->description = '';
-  $style->class = 'openlayers__style__js';
-  $style->options = array(
+  $ol_style = new stdClass();
+  $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_green_style';
+  $ol_style->name = 'OpenLayers green style';
+  $ol_style->description = '';
+  $ol_style->class = 'openlayers__style__js';
+  $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(0, 255, 0, 0.7)\'
  });
@@ -46,16 +46,16 @@ function openlayers_default_styles() {
    })
  ];',
   );
-  $export['openlayers_green_style'] = $style;
+  $export['openlayers_green_style'] = $ol_style;
 
-  $style = new stdClass();
-  $style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
-  $style->api_version = 1;
-  $style->machine_name = 'openlayers_red_style';
-  $style->name = 'OpenLayers red style';
-  $style->description = '';
-  $style->class = 'openlayers__style__js';
-  $style->options = array(
+  $ol_style = new stdClass();
+  $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_red_style';
+  $ol_style->name = 'OpenLayers red style';
+  $ol_style->description = '';
+  $ol_style->class = 'openlayers__style__js';
+  $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(255, 0, 0, 0.7)\'
  });
@@ -75,16 +75,16 @@ function openlayers_default_styles() {
    })
  ];',
   );
-  $export['openlayers_red_style'] = $style;
+  $export['openlayers_red_style'] = $ol_style;
 
-  $style = new stdClass();
-  $style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
-  $style->api_version = 1;
-  $style->machine_name = 'openlayers_blue_style';
-  $style->name = 'OpenLayers blue style';
-  $style->description = '';
-  $style->class = 'openlayers__style__js';
-  $style->options = array(
+  $ol_style = new stdClass();
+  $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_blue_style';
+  $ol_style->name = 'OpenLayers blue style';
+  $ol_style->description = '';
+  $ol_style->class = 'openlayers__style__js';
+  $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(0, 0, 255, 0.7)\'
  });
@@ -104,7 +104,7 @@ function openlayers_default_styles() {
    })
  ];',
   );
-  $export['openlayers_blue_style'] = $style;
+  $export['openlayers_blue_style'] = $ol_style;
 
   return $export;
 }

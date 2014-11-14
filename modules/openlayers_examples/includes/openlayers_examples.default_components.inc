@@ -10,39 +10,39 @@
 function openlayers_examples_default_components() {
   $export = array();
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_geofield';
-  $component->name = 'OpenLayers Example geofield';
-  $component->description = '';
-  $component->class = 'openlayers_examples__component__geofield';
-  $component->options = '';
-  $export['openlayers_examples_geofield'] = $component;
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_geofield';
+  $ol_component->name = 'OpenLayers Example geofield';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers_examples__component__geofield';
+  $ol_component->options = '';
+  $export['openlayers_examples_geofield'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_ajax_values';
-  $component->name = 'openlayers_examples_ajax_values';
-  $component->description = '';
-  $component->class = 'openlayers__component__setvalues';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_ajax_values';
+  $ol_component->name = 'openlayers_examples_ajax_values';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__setvalues';
+  $ol_component->options = array(
     'latitude' => 'lat',
     'longitude' => 'lon',
     'rotation' => 'rot',
     'zoom' => 'zoom',
   );
-  $export['openlayers_examples_ajax_values'] = $component;
+  $export['openlayers_examples_ajax_values'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_geolocation';
-  $component->name = 'Geolocation example';
-  $component->description = '';
-  $component->class = 'openlayers_examples__component__geolocation';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_geolocation';
+  $ol_component->name = 'Geolocation example';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers_examples__component__geolocation';
+  $ol_component->options = array(
     'checkboxID' => 'trackPosition',
     'positionAccuracyID' => 'positionAccuracy',
     'altitudeID' => 'altitude',
@@ -50,30 +50,30 @@ function openlayers_examples_default_components() {
     'headingID' => 'heading',
     'speedID' => 'speed',
   );
-  $export['openlayers_examples_geolocation'] = $component;
+  $export['openlayers_examples_geolocation'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_graticule';
-  $component->name = 'Graticule example';
-  $component->description = '';
-  $component->class = 'openlayers__component__graticule';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_graticule';
+  $ol_component->name = 'Graticule example';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__graticule';
+  $ol_component->options = array(
     'rgba' => '0, 0, 0, 0.2',
     'width' => '2',
     'lineDash' => '0.5, 4',
   );
-  $export['openlayers_examples_graticule'] = $component;
+  $export['openlayers_examples_graticule'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_zoom_to_source';
-  $component->name = 'Zoom To Source Examples';
-  $component->description = '';
-  $component->class = 'openlayers__component__zoomtosource';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_zoom_to_source';
+  $ol_component->name = 'Zoom To Source Examples';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__zoomtosource';
+  $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'animations' => array(
       'pan' => '500',
@@ -82,16 +82,16 @@ function openlayers_examples_default_components() {
     'zoom' => 'auto',
     'enableAnimations' => 1,
   );
-  $export['openlayers_examples_zoom_to_source'] = $component;
+  $export['openlayers_examples_zoom_to_source'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_autopopup';
-  $component->name = 'OpenLayers Examples Autopopup';
-  $component->description = '';
-  $component->class = 'openlayers__component__autopopup';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_autopopup';
+  $ol_component->name = 'OpenLayers Examples Autopopup';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__autopopup';
+  $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'zoom' => 'auto',
     'enableAnimations' => 1,
@@ -101,41 +101,41 @@ function openlayers_examples_default_components() {
     ),
     'positioning' => 'top-right',
   );
-  $export['openlayers_examples_autopopup'] = $component;
+  $export['openlayers_examples_autopopup'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_tooltip_earthquakes';
-  $component->name = 'Earthquakes tooltip';
-  $component->description = '';
-  $component->class = 'openlayers__component__tooltip';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_tooltip_earthquakes';
+  $ol_component->name = 'Earthquakes tooltip';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__tooltip';
+  $ol_component->options = array(
     'layer' => 'layer_vector_kml_earthquakes_heatmap',
     'positioning' => 'top-right',
   );
-  $export['openlayers_examples_tooltip_earthquakes'] = $component;
+  $export['openlayers_examples_tooltip_earthquakes'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_simple_popup';
-  $component->name = 'Simple popup';
-  $component->description = '';
-  $component->class = 'openlayers__component__popup';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_simple_popup';
+  $ol_component->name = 'Simple popup';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__popup';
+  $ol_component->options = array(
     'layer' => 'openlayers_examples_views_geojson_popup',
   );
-  $export['openlayers_examples_simple_popup'] = $component;
+  $export['openlayers_examples_simple_popup'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_earthquake_style';
-  $component->name = 'Earthquake style';
-  $component->description = '';
-  $component->class = 'openlayers__component__js';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_earthquake_style';
+  $ol_component->name = 'Earthquake style';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__js';
+  $ol_component->options = array(
     'javascript' => 'var map = data.map;
 
 var styleCache = {};
@@ -172,29 +172,29 @@ map.getLayers().forEach(function(layer){
    }
 });',
   );
-  $export['openlayers_examples_earthquake_style'] = $component;
+  $export['openlayers_examples_earthquake_style'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_simple_popup_earthquakes';
-  $component->name = 'Earthquakes popup';
-  $component->description = '';
-  $component->class = 'openlayers__component__popup';
-  $component->options = array(
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_simple_popup_earthquakes';
+  $ol_component->name = 'Earthquakes popup';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers__component__popup';
+  $ol_component->options = array(
     'layer' => 'layer_vector_kml_earthquakes_heatmap',
     'positioning' => 'top-right',
   );
-  $export['openlayers_examples_simple_popup_earthquakes'] = $component;
+  $export['openlayers_examples_simple_popup_earthquakes'] = $ol_component;
 
-  $component = new stdClass();
-  $component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $component->api_version = 1;
-  $component->machine_name = 'openlayers_examples_component_blocklayerswitcher';
-  $component->name = 'Block Layer Switcher';
-  $component->description = '';
-  $component->class = 'openlayers_examples__component__blocklayerswitcher';
-  $export['openlayers_examples_component_blocklayerswitcher'] = $component;
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_blocklayerswitcher';
+  $ol_component->name = 'Block Layer Switcher';
+  $ol_component->description = '';
+  $ol_component->class = 'openlayers_examples__component__blocklayerswitcher';
+  $export['openlayers_examples_component_blocklayerswitcher'] = $ol_component;
 
   return $export;
 }
