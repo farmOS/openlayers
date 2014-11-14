@@ -86,15 +86,6 @@ class openlayers__source__googlemaps extends openlayers_source {
   /**
    * {@inheritdoc}
    */
-  public function attached() {
-
-
-    return parent::attached();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function isAsynchronous() {
     return TRUE;
   }
