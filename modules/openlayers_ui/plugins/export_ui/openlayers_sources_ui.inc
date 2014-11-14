@@ -166,7 +166,9 @@ function openlayers_source_form_options_validate($form, &$form_state) {
 }
 
 function openlayers_source_form_options_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
+  if (!empty($form_state['values']['options'])) {
+    $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
   $source = openlayers_object_load('source', $form_state['item']);
   $source->options_form_submit($form, $form_state);
 }
