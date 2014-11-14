@@ -96,6 +96,6 @@ class openlayers__source__googlemaps extends openlayers_source {
    * {@inheritdoc}
    */
   public function isAsynchronous() {
-    return current_path() == 'system/ajax';
+    return TRUE;
   }
 }
