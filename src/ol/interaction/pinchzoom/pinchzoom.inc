@@ -7,10 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_pinchzoom_openlayers_interaction() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\pinchzoom',
-    ),
-  );
-}
+  ));

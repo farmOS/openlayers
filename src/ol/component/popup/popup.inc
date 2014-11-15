@@ -7,10 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_popup_openlayers_component() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\component\\popup',
-    ),
-  );
-}
+  ));

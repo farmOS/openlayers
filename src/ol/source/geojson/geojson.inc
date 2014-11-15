@@ -7,10 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_geojson_openlayers_source() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\geojson',
-    ),
-  );
-}
+  ));

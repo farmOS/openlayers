@@ -1,9 +1,5 @@
 <?php
 
-function openlayers_dragpan_openlayers_interaction() {
-  return array(
-    'handler' => array(
-      'class' => '\\Drupal\\openlayers\\interaction\\draganddrop',
-    )
-  );
-}
+$plugin = array('handler' => array(
+      'class' => '\\Drupal\\openlayers\\interaction\\dragpan',
+  ));

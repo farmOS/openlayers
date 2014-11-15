@@ -90,8 +90,6 @@ function openlayers_ctools_plugin_type() {
 function openlayers_object_factory_create($object_type, $object_class, $export = NULL) {
   ctools_include('plugins');
 
-  $object_class = ctools_plugin_load_class('openlayers', $object_type, $object_class, 'handler');
-
   if (isset($object_class)) {
     $object = call_user_func(array(
         new ReflectionClass($object_class), 'newInstance')

@@ -7,10 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_stamen_openlayers_source() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\stamen',
-    ),
-  );
-}
+  ));

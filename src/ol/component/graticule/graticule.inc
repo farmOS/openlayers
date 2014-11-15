@@ -7,10 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_graticule_openlayers_component() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\component\\graticule',
-    ),
-  );
-}
+  ));

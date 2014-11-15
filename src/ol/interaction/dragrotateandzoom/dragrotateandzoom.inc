@@ -1,9 +1,5 @@
 <?php
 
-function openlayers_dragrotateandzoom_openlayers_interaction() {
-  return array(
-    'handler' => array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\dragrotateandzoom',
-    )
-  );
-}
+  ));
