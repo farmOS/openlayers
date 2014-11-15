@@ -43,31 +43,31 @@ function openlayers_ctools_plugin_type() {
   return array(
     'map' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'layer' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'style' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'source' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'control' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'interaction' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
     'component' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'classes' => array('handler'),
     ),
   );
 }

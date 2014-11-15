@@ -7,8 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_bootstrapjsAlert_openlayers_component() {
-  return array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\component\\bootstrapjsAlert',
-  );
-}
+  ));

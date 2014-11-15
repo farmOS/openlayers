@@ -7,8 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_zoomslider_openlayers_control() {
-  return array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\control\\zoomslider',
-  );
-}
+  ));

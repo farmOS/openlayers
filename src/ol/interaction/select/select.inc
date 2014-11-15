@@ -7,8 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_select_openlayers_interaction() {
-  return array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\select',
-  );
-}
+  ));

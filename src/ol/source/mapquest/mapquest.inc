@@ -7,8 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_mapquest_openlayers_source() {
-  return array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\mapquest',
-  );
-}
+  ));

@@ -7,9 +7,6 @@
 /**
  * Plugin definition.
  */
-function openlayers_vector_openlayers_layer() {
-  return array(
+$plugin = array('handler' => array(
       'class' => '\\Drupal\\openlayers\\layer\\vector',
-  );
-}
-
+  ));
