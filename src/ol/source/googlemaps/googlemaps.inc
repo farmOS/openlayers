@@ -12,6 +12,10 @@
  * @return array
  *   The plugin data.
  */
-$plugin = array('handler' => array(
+function openlayers_googlemaps_openlayers_source() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\googlemaps',
-  ));
+    ),
+  );
+}

@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_tiledebug_openlayers_source() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\tiledebug',
-  ));
+    ),
+  );
+}

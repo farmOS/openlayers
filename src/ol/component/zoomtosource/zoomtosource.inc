@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_zoomtosource_openlayers_component() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\component\\zoomtosource',
-  ));
+    ),
+  );
+}

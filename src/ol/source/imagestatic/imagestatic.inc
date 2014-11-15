@@ -1,5 +1,9 @@
 <?php
 
-$plugin = array('handler' => array(
+function openlayers_imagestatic_openlayers_source() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\imagestatic',
-  ));
+    )
+  );
+}

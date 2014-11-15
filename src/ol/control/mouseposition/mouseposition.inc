@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_mouseposition_openlayers_control() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\control\\mouseposition',
-  ));
+    ),
+  );
+}

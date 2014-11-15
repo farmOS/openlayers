@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_inlineJS_openlayers_style() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\style\\inlineJS',
-  ));
+    ),
+  );
+}

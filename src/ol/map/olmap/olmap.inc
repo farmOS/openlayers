@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_olmap_openlayers_map() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\map\\olmap',
-  ));
+    ),
+  );
+}

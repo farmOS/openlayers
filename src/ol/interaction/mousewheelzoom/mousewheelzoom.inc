@@ -7,6 +7,10 @@
 /**
  * Plugin definition.
  */
-$plugin = array('handler' => array(
+function openlayers_openlayers__interaction__mousewheelzoom_openlayers_interaction() {
+  return array(
+    'handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\mousewheelzoom',
-  ));
+    ),
+  );
+}
