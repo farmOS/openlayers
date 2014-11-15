@@ -1,9 +1,9 @@
 <?php
 
-function openlayers_openlayers__interaction__dragbox_openlayers_interaction() {
+function openlayers_dragbox_openlayers_interaction() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\interaction\\draganddrop',
+      'class' => '\\Drupal\\openlayers\\interaction\\dragbox',
     )
   );
 }
