@@ -119,7 +119,7 @@ function openlayers_layer_form_type($form, &$form_state) {
 
   $options = array('' => t('<Choose the layer type>'));
   foreach ($layers as $class => $plugin) {
-    $options[$class] = $class;
+    $options[$plugin['handler']['class']] = $class;
   }
 
   $form['class'] = array(

@@ -10,5 +10,7 @@ namespace Drupal\openlayers;
  * Class openlayers_control.
  */
 abstract class Control extends Object implements ControlInterface {
-
+  public function getType() {
+    return 'control';
+  }
 }

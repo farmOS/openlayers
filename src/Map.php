@@ -218,4 +218,8 @@ class Map extends Object implements MapInterface {
 
     return $this->attached;
   }
+
+  public function getType() {
+    return 'map';
+  }
 }
