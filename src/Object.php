@@ -64,6 +64,14 @@ abstract class Object implements ObjectInterface {
     );
   }
 
+  function parse_classname() {
+    $name = get_class($this);
+    return array(
+      'namespace' => array_slice(explode('\\', $name), 0, -1),
+      'classname' => join('', array_slice(explode('\\', $name), -1)),
+    );
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -80,8 +88,9 @@ abstract class Object implements ObjectInterface {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
 
+    $class_info = $this->parse_classname();
     $this->class = get_class($this);
-    $this->plugin = ctools_get_plugins('openlayers', $this->getType(), get_class($this));
+    $this->plugin = ctools_get_plugins('openlayers', $this->getType(), $class_info['classname']);
 
     // We need to ensure the object has a proper machine name.
     if (empty($this->machine_name)) {
@@ -117,17 +126,6 @@ abstract class Object implements ObjectInterface {
    *   The map object this build is related to.
    */
   public function alterBuild(&$build, $map) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getType() {
-    list($module, $type) = explode('__', get_class($this));
-    if (isset($type)) {
-      return $type;
-    }
-    return FALSE;
-  }
 
   /**
    * {@inheritdoc}
@@ -236,24 +234,27 @@ abstract class Object implements ObjectInterface {
    */
   public function attached() {
     if ($plugin = $this->getPlugin()) {
-      // Attach JS / CSS files named like the class automatically.
-      $file = $plugin['path'] . '/' . get_class($this) . '.js';
-      if (file_exists($file)) {
-        $this->attached['js'][$file] = array(
-          'data' => $file,
-          'type' => 'file',
-          'group' => openlayers_config::JS_GROUP,
-          'weight' => openlayers_config::JS_WEIGHT,
-        );
+      $jsdir = $plugin['path'] . '/js';
+      $cssdir = $plugin['path'] . '/js';
+      if (file_exists($jsdir)) {
+        foreach(file_scan_directory($jsdir, '/.*\.js$/') as $file) {
+          $this->attached['js'][$file->uri] = array(
+            'data' => $file->uri,
+            'type' => 'file',
+            'group' => Config::JS_GROUP,
+            'weight' => Config::JS_WEIGHT,
+          );
+        }
       }
-      $file = $plugin['path'] . '/' . get_class($this) . '.css';
-      if (file_exists($file)) {
-        $this->attached['css'][$file] = array(
-          'data' => $file,
-          'type' => 'file',
-          'group' => openlayers_config::JS_GROUP,
-          'weight' => openlayers_config::JS_WEIGHT,
-        );
+      if (file_exists($cssdir)) {
+        foreach(file_scan_directory($cssdir, '/.*\.css$/') as $file) {
+          $this->attached['css'][$file->uri] = array(
+            'data' => $file->uri,
+            'type' => 'file',
+            'group' => Config::JS_GROUP,
+            'weight' => Config::JS_WEIGHT,
+          );
+        }
       }
     }
 
