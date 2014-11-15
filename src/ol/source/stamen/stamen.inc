@@ -9,8 +9,6 @@
  */
 function openlayers_stamen_openlayers_source() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\stamen',
-    ),
   );
 }

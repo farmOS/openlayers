@@ -43,31 +43,31 @@ function openlayers_ctools_plugin_type() {
   return array(
     'map' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'layer' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'style' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'source' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'control' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'interaction' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'component' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
   );
 }
@@ -89,8 +89,6 @@ function openlayers_ctools_plugin_type() {
  */
 function openlayers_object_factory_create($object_type, $object_class, $export = NULL) {
   ctools_include('plugins');
-
-  $object_class = ctools_plugin_load_class('openlayers', $object_type, $object_class, 'handler');
 
   if (isset($object_class)) {
     $object = call_user_func(array(

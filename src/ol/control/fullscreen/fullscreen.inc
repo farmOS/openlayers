@@ -9,8 +9,6 @@
  */
 function openlayers_fullscreen_openlayers_control() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\control\\fullscreen',
-    ),
   );
 }

@@ -108,7 +108,7 @@ function openlayers_map_form_start_submit($form, &$form_state) {
 
 function openlayers_map_form_settings($form, &$form_state) {
   if (!isset($form_state['item']->class)) {
-    $form_state['item']->class = 'openlayers__map__map';
+    $form_state['item']->class = '\Drupal\openlayers\map\olmap';
   }
   $map = openlayers_object_load('map', $form_state['item']);
   $map->options_form($form, $form_state);

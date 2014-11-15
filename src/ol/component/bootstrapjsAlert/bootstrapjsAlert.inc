@@ -9,8 +9,6 @@
  */
 function openlayers_bootstrapjsAlert_openlayers_component() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\component\\bootstrapjsAlert',
-    ),
   );
 }

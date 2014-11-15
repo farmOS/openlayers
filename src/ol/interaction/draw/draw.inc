@@ -9,8 +9,6 @@
  */
 function openlayers_draw_openlayers_interaction() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\draw',
-    ),
   );
 }

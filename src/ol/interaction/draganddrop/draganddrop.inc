@@ -2,8 +2,6 @@
 
 function openlayers_draganddrop_openlayers_interaction() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\interaction\\draganddrop',
-    )
   );
 }

@@ -9,8 +9,6 @@
  */
 function openlayers_autopopup_openlayers_component() {
   return array(
-    'handler' => array(
-      'class' => '\\Drupal\\openlayers\\component\\autopopup',
-    ),
+    'class' => '\\Drupal\\openlayers\\component\\autopopup',
   );
 }

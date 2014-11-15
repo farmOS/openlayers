@@ -9,8 +9,6 @@
  */
 function openlayers_mapquest_openlayers_source() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\source\\mapquest',
-    ),
   );
 }
