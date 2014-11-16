@@ -6,18 +6,6 @@
 
 include 'includes/openlayers.helpers.inc';
 
-
-function openlayers_init() {
-  ctools_include('plugins');
-
-  //$all = ctools_get_plugins('openlayers', 'component');
-
-  //$test = new Drupal\openlayers\component\autopopup();
-
-  //dpm($all);
-}
-
-
 /**
  * Implements hook_ctools_plugin_api().
  */

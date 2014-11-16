@@ -111,10 +111,10 @@ function openlayers_interaction_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_interaction_form_type($form, &$form_state) {
-  $layers = ctools_get_plugins('openlayers', 'interaction');
+  $interactions = ctools_get_plugins('openlayers', 'interaction');
   $options = array('' => t('<Choose the interaction type>'));
-  foreach ($layers as $class => $plugin) {
-    $options[$class] = $class;
+  foreach ($interactions as $class => $plugin) {
+    $options[$plugin['handler']['class']] = $class;
   }
 
   $form['class'] = array(
