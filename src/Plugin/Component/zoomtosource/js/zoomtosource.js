@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__zoomtosource = function(data) {
+Drupal.openlayers.component__zoomtosource = function(data) {
   var map = data.map;
 
   map.getLayers().forEach(function(layer) {
