@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__setvalues = function(data) {
+Drupal.openlayers.component__setvalues = function(data) {
 
   data.map.on('moveend', function(evt){
     var selector = '#' + data.options.latitude;

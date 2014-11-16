@@ -283,4 +283,10 @@ abstract class Object implements ObjectInterface {
     return json_decode(json_encode($this), TRUE);
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function isAsynchronous() {
+    return FALSE;
+  }
 }

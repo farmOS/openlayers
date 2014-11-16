@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__bootstrapjs_popup = function(data) {
+Drupal.openlayers.component__bootstrapjs_popup = function(data) {
 
   jQuery("body").append("<div id='popup'></div>");
 

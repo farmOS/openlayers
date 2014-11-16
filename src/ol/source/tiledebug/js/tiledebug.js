@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__tiledebug = function(data) {
+Drupal.openlayers.source__tiledebug = function(data) {
   var options = {
     tileGrid: new ol.tilegrid.XYZ({maxZoom: data.options.maxZoom}),
     // todo: handle projection stuff

@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__geojson = function(data) {
+Drupal.openlayers.source__geojson = function(data) {
   data.options.projection = 'EPSG:3857';
 
   //// If GeoJSON data is provided with the layer, use that.  Otherwise

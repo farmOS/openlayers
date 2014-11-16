@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__vector = function(data) {
+Drupal.openlayers.source__vector = function(data) {
 
   var options = {
     features: []

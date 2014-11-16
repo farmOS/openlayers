@@ -190,7 +190,7 @@ function openlayers_render_build_map(\Drupal\openlayers\MapInterface $map) {
   $asynchronous = 0;
   foreach (openlayers_object_types() as $type) {
     foreach ($objects[$type] as $object) {
-      //$asynchronous += (int) $object->isAsynchronous();
+      $asynchronous += (int) $object->isAsynchronous();
     }
   }
   // If this is asynchronous flag it as such.
@@ -342,7 +342,7 @@ function openlayers_libraries_info() {
         'js' => array(
           'js/openlayers.js' => array(
             'type' => 'file',
-            'weight' => 0,
+            'weight' => 1,
             'group' => \Drupal\openlayers\Config::JS_GROUP,
           ),
         ),
@@ -366,7 +366,7 @@ function openlayers_libraries_info() {
             'js' => array(
               'js/openlayers.js' => array(
                 'type' => 'file',
-                'weight' => 0,
+                'weight' => 1,
                 'group' => \Drupal\openlayers\Config::JS_GROUP,
               ),
               'js/debug.js' => array('type' => 'file'),

@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__popup = function(data) {
+Drupal.openlayers.component__popup = function(data) {
   var map = data.map;
 
   var container = jQuery('<div/>', {

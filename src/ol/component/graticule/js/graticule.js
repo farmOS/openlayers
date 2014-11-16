@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__graticule = function(data) {
+Drupal.openlayers.component__graticule = function(data) {
 
   var graticule = new ol.Graticule({
     strokeStyle: new ol.style.Stroke({

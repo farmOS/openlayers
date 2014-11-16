@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__imagestatic = function(data) {
+Drupal.openlayers.source__imagestatic = function(data) {
   var pixelProjection = new ol.proj.Projection({
     code: 'pixel',
     units: 'pixels',

@@ -136,4 +136,15 @@ interface ObjectInterface {
    *   The array representation of this object.
    */
   public function toJSArray();
+
+  /**
+   * Whether or not this object has to be processed asynchronously.
+   *
+   * If true the map this object relates to won't be processes right away by
+   * Drupals behaviour attach.
+   *
+   * @return bool
+   *   Whether or not this object has to be processed asynchronously.
+   */
+  public function isAsynchronous();
 }

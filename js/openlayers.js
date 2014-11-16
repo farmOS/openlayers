@@ -2,6 +2,14 @@
   Drupal.behaviors.openlayers = {
     attach: function(context, settings) {
 
+      Drupal.openlayers.map = Drupal.openlayers.map || {};
+      Drupal.openlayers.layer = Drupal.openlayers.layer || {};
+      Drupal.openlayers.source = Drupal.openlayers.source || {};
+      Drupal.openlayers.style = Drupal.openlayers.style || {};
+      Drupal.openlayers.control = Drupal.openlayers.control || {};
+      Drupal.openlayers.interaction = Drupal.openlayers.interaction || {};
+      Drupal.openlayers.component = Drupal.openlayers.component || {};
+
       $('.openlayers-map:not(.asynchronous)').once('openlayers-map', function() {
         var map_id = $(this).attr('id');
         Drupal.openlayers.processMap(map_id, context);
@@ -141,7 +149,9 @@
       var object;
       if (!(data.machine_name in cache[type])) {
         // TODO: Check why layers and maps doesnt cache.
-        var object = Drupal.openlayers[data['class']]({'options': data.options, 'map': map, 'context': context, 'cache': cache});
+        var fct = data['class'].replace(/\\/g, "__").split('__').slice(-2).join('__');
+        console.log(fct);
+        var object = Drupal.openlayers[fct]({'options': data.options, 'map': map, 'context': context, 'cache': cache});
         if (typeof object === 'object') {
           object.machine_name = data.machine_name;
         }

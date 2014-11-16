@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__cluster = function(data) {
+Drupal.openlayers.source__cluster = function(data) {
 
   for (source in data.cache.sources) {
     if (source === data.options.source) {

@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__interaction__draw = function(data) {
+Drupal.openlayers.interaction__draw = function(data) {
 
   var featureOverlay = new ol.FeatureOverlay({
     style: new ol.style.Style({

@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__map__map = function(data) {
+Drupal.openlayers.map__olmap = function(data){
   var projection = ol.proj.get('EPSG:3857');
 
   var options = data.options;

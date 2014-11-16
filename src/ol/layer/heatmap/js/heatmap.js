@@ -1,3 +1,3 @@
-Drupal.openlayers.openlayers__layer__heatmap = function(data) {
+Drupal.openlayers.layer__heatmap = function(data) {
   return new ol.layer.Heatmap(data.options);
 };

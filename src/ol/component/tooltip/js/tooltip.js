@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__component__tooltip = function(data) {
+Drupal.openlayers.component__tooltip = function(data) {
   var map = data.map;
 
   var container = jQuery('<div/>', {

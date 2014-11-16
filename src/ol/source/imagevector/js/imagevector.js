@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers__source__imagevector = function(data) {
+Drupal.openlayers.source__imagevector = function(data) {
 
   for (source in data.cache.sources) {
     if (source === data.options.source) {
