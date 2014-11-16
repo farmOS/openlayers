@@ -10,5 +10,14 @@
 function openlayers_default_styles() {
   $export = array();
 
+  $ol_style = new stdClass();
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_style_default';
+  $ol_style->name = 'OpenLayers default style';
+  $ol_style->description = '';
+  $ol_style->class = '\\Drupal\\openlayers\\Style\\olstyle';
+  $ol_style->options = array();
+  $export['openlayers_style_default'] = $ol_style;
+
   return $export;
 }

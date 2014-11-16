@@ -31,15 +31,6 @@ function openlayers_examples_default_styles() {
   $export['openlayers_examples_blue_marker'] = $ol_style;
 
   $ol_style = new stdClass();
-  $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_style_default';
-  $ol_style->name = 'OpenLayers default style';
-  $ol_style->description = '';
-  $ol_style->class = '\\Drupal\\openlayers\\Style\\olstyle';
-  $ol_style->options = array();
-  $export['openlayers_style_default'] = $ol_style;
-
-  $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_green_style';
