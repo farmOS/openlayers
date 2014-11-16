@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers_examples__component__geofield = function (data) {
+Drupal.openlayers.component__geofield = function (data) {
   var map = data.map;
 
 // create a vector layer used for editing
