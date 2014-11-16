@@ -72,4 +72,7 @@ class Error extends Object {
     return array();
   }
 
+  function getType() {
+    return 'Error';
+  }
 }
