@@ -15,7 +15,7 @@ function openlayers_default_layers() {
   $ol_layer->machine_name = 'layer_tile_mapquest_osm';
   $ol_layer->name = 'MapQuest OpenStreetMap';
   $ol_layer->description = 'Layer MapQuest OpenStreetMap description';
-  $ol_layer->class = '\\Drupal\\openlayers\\layer\\tile';
+  $ol_layer->class = '\\Drupal\\openlayers\\Layer\\tile';
   $ol_layer->options = array(
     'source' => 'source_mapquest_osm',
   );

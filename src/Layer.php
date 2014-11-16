@@ -33,6 +33,6 @@ abstract class Layer extends Object implements LayerInterface {
     }
   }
   public function getType() {
-    return 'layer';
+    return 'Layer';
   }
 }

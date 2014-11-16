@@ -11,6 +11,6 @@ namespace Drupal\openlayers;
  */
 abstract class Interaction extends Object implements InteractionInterface {
   public function getType() {
-    return 'interaction';
+    return 'Interaction';
   }
 }

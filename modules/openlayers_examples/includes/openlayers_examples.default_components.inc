@@ -16,7 +16,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_geofield';
   $ol_component->name = 'OpenLayers Example geofield';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\geofield';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\geofield';
   $ol_component->options = '';
   $export['openlayers_examples_geofield'] = $ol_component;
 
@@ -26,7 +26,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_ajax_values';
   $ol_component->name = 'openlayers_examples_ajax_values';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\setvalues';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\setvalues';
   $ol_component->options = array(
     'latitude' => 'lat',
     'longitude' => 'lon',
@@ -41,7 +41,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_geolocation';
   $ol_component->name = 'Geolocation example';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\geolocation';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\geolocation';
   $ol_component->options = array(
     'checkboxID' => 'trackPosition',
     'positionAccuracyID' => 'positionAccuracy',
@@ -58,7 +58,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_graticule';
   $ol_component->name = 'Graticule example';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\graticule';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\graticule';
   $ol_component->options = array(
     'rgba' => '0, 0, 0, 0.2',
     'width' => '2',
@@ -72,7 +72,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_zoom_to_source';
   $ol_component->name = 'Zoom To Source Examples';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\zoomtosource';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\zoomtosource';
   $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'animations' => array(
@@ -90,7 +90,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_autopopup';
   $ol_component->name = 'OpenLayers Examples Autopopup';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\autopopup';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\autopopup';
   $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'zoom' => 'auto',
@@ -109,7 +109,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_tooltip_earthquakes';
   $ol_component->name = 'Earthquakes tooltip';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\tooltip';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\tooltip';
   $ol_component->options = array(
     'layer' => 'layer_vector_kml_earthquakes_heatmap',
     'positioning' => 'top-right',
@@ -122,7 +122,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_simple_popup';
   $ol_component->name = 'Simple popup';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\popup';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\popup';
   $ol_component->options = array(
     'layer' => 'openlayers_examples_views_geojson_popup',
   );
@@ -134,7 +134,7 @@ function openlayers_examples_default_components() {
   $ol_component->machine_name = 'openlayers_examples_earthquake_style';
   $ol_component->name = 'Earthquake style';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\inlineJS';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\inlineJS';
   $ol_component->options = array(
     'javascript' => 'var map = data.map;
 
@@ -180,7 +180,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_simple_popup_earthquakes';
   $ol_component->name = 'Earthquakes popup';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\popup';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\popup';
   $ol_component->options = array(
     'layer' => 'layer_vector_kml_earthquakes_heatmap',
     'positioning' => 'top-right',
@@ -193,7 +193,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_blocklayerswitcher';
   $ol_component->name = 'Block Layer Switcher';
   $ol_component->description = '';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\blocklayerswitcher';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\blocklayerswitcher';
   $export['openlayers_examples_component_blocklayerswitcher'] = $ol_component;
 
   $ol_component = new stdClass();
@@ -201,7 +201,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'component_bootstrapjs_popup';
   $ol_component->name = 'Bootstrap JS popup';
   $ol_component->description = 'Bootstrap JS popup component is a component who allows you to display popup when clicking on a feature. It requires the bootstrapjs module to work.';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\bootstrapjsPopup';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\bootstrapjsPopup';
   $ol_component->options = array();
   $export['component_bootstrapjs_popup'] = $ol_component;
 
@@ -210,7 +210,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'component_bootstrapjs_alert';
   $ol_component->name = 'Bootstrap JS alert';
   $ol_component->description = 'Display an alert on the top of the map.';
-  $ol_component->class = '\\Drupal\\openlayers\\component\\bootstrapjsAlert';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\bootstrapjsAlert';
   $ol_component->options = array(
     'message' => '<strong>Success !</strong>The map has been loaded.',
   );

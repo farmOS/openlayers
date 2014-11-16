@@ -11,6 +11,6 @@ namespace Drupal\openlayers;
  */
 abstract class Component extends Object implements ComponentInterface {
   public function getType() {
-    return 'component';
+    return 'Component';
   }
 }

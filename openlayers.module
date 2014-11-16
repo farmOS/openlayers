@@ -21,7 +21,7 @@ function openlayers_ctools_plugin_api($module, $api) {
  * Implements hook_ctools_plugin_directory().
  */
 function openlayers_ctools_plugin_directory($module, $plugin) {
-  return 'src/ol/' . $plugin;
+  return 'src/Plugin/' . $plugin;
 }
 
 /**
@@ -29,31 +29,31 @@ function openlayers_ctools_plugin_directory($module, $plugin) {
  */
 function openlayers_ctools_plugin_type() {
   return array(
-    'map' => array(
+    'Map' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'layer' => array(
+    'Layer' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'style' => array(
+    'Style' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'source' => array(
+    'Source' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'control' => array(
+    'Control' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'interaction' => array(
+    'Interaction' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),
-    'component' => array(
+    'Component' => array(
       'use hooks' => FALSE,
       'classes' => array('handler'),
     ),

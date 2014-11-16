@@ -220,6 +220,6 @@ class Map extends Object implements MapInterface {
   }
 
   public function getType() {
-    return 'map';
+    return 'Map';
   }
 }

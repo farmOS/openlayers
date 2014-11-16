@@ -149,8 +149,7 @@
       var object;
       if (!(data.machine_name in cache[type])) {
         // TODO: Check why layers and maps doesnt cache.
-        var fct = data['class'].replace(/\\/g, "__").split('__').slice(-2).join('__');
-        console.log(fct);
+        var fct = data['class'].replace(/\\/g, "__").split('__').slice(-2).join('__').toLowerCase();
         var object = Drupal.openlayers[fct]({'options': data.options, 'map': map, 'context': context, 'cache': cache});
         if (typeof object === 'object') {
           object.machine_name = data.machine_name;

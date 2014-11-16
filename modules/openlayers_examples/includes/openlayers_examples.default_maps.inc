@@ -16,7 +16,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_map_earthquake';
   $ol_map->name = '2012 Earthquakes map, tooltips and popups.';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -56,7 +56,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_openstreetmap_geofield';
   $ol_map->name = 'OpenStreetMap with features';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -91,7 +91,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapbox_example1';
   $ol_map->name = 'Mapbox example 1';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -123,7 +123,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapbox_example2';
   $ol_map->name = 'Mapbox example 2';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -155,7 +155,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapbox_example3';
   $ol_map->name = 'Mapbox example 3';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -187,7 +187,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_geojson_cities';
   $ol_map->name = 'Map GeoJSON Cities';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -220,7 +220,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_geojson_cities_heatmap';
   $ol_map->name = 'Map GeoJSON Cities Heatmap';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -253,7 +253,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_geolocation';
   $ol_map->name = 'Map geolocation';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -288,7 +288,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_mapquest_sat_geojson_views';
   $ol_map->name = 'MapQuest Satellite with features from Views GeoJSON';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -323,7 +323,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_cluster';
   $ol_map->name = 'Map with cluster';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -366,7 +366,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_map_popup_overlay';
   $ol_map->name = 'Map with simple popup overlay and autozoom.';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -412,7 +412,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_blocklayerswitcher';
   $ol_map->name = 'Map with block layer switcher';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -471,7 +471,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapbox_natural_earth_hypso_bathy';
   $ol_map->name = 'MapBox Natural Earth Hypso Bathy';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -509,7 +509,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapbox_geography_class';
   $ol_map->name = 'MapBox Geography Class';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -547,7 +547,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapquest_openstreetmap';
   $ol_map->name = 'MapQuest OpenStreetMap';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -587,7 +587,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapquest_hybrid';
   $ol_map->name = 'MapQuest Hybrid';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -624,7 +624,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_mapquest_satellite';
   $ol_map->name = 'MapQuest Satellite';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -660,7 +660,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_openstreetmap';
   $ol_map->name = 'OpenStreetMap';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -692,7 +692,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_opencyclemap';
   $ol_map->name = 'OpenCycleMap';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -730,7 +730,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_openstreetmap_tiledebug';
   $ol_map->name = 'OpenStreetMap with tile debug.';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -763,7 +763,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_stamen';
   $ol_map->name = 'Stamen map';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -798,7 +798,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'map_esri';
   $ol_map->name = 'ESRI map';
   $ol_map->description = '';
-  $ol_map->class = '\\Drupal\\openlayers\\map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',

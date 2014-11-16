@@ -11,6 +11,6 @@ namespace Drupal\openlayers;
  */
 abstract class Source extends Object implements SourceInterface {
   public function getType() {
-    return 'source';
+    return 'Source';
   }
 }
