@@ -1,4 +1,4 @@
-Drupal.openlayers.openlayers_examples__component__geolocation = function (data) {
+Drupal.openlayers.component__geolocation = function (data) {
   var map = data.map;
 
   var geolocation = new ol.Geolocation({
