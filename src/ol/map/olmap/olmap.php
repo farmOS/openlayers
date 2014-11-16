@@ -61,7 +61,6 @@ class olmap extends Map {
       '#tree' => TRUE,
     );
 
-    /*
     if ($this->machine_name != Config::EDIT_VIEW_MAP) {
       $map = openlayers_object_load('map', Config::EDIT_VIEW_MAP);
       if ($view = $this->getOption('view')) {
@@ -74,7 +73,6 @@ class olmap extends Map {
         '#map' => $map,
       );
     }
-    */
 
     $form['options']['view']['center'] = array(
       '#tree' => TRUE,

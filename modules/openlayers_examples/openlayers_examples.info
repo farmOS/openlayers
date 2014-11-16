@@ -1,0 +1,7 @@
+name = OpenLayers Examples
+description = OpenLayers Examples
+core = 7.x
+dependencies[] = openlayers
+dependencies[] = views_geojson
+
+registry_autoload[] = PSR-4

@@ -30,7 +30,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     $map = $form_state['values']['openlayers_default_map'];
   }
 
-  /*
+
   $form['openlayers_default_map'] = array(
     '#type' => 'select',
     '#title' => t('OpenLayers maps'),
@@ -51,7 +51,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#type' => 'openlayers',
     '#map' => $map,
   );
-  */
 
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
