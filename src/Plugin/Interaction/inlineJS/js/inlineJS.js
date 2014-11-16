@@ -1,4 +1,4 @@
-Drupal.openlayers.interaction__js = function(data) {
+Drupal.openlayers.interaction__inlinejs = function(data) {
 
   eval(data.options.javascript);
 

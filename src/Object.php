@@ -235,7 +235,7 @@ abstract class Object implements ObjectInterface {
   public function attached() {
     if ($plugin = $this->getPlugin()) {
       $jsdir = $plugin['path'] . '/js';
-      $cssdir = $plugin['path'] . '/js';
+      $cssdir = $plugin['path'] . '/css';
       if (file_exists($jsdir)) {
         foreach(file_scan_directory($jsdir, '/.*\.js$/') as $file) {
           $this->attached['js'][$file->uri] = array(

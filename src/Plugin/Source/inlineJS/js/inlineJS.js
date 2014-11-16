@@ -1,4 +1,4 @@
-Drupal.openlayers.source__js = function(data) {
+Drupal.openlayers.source__inlinejs = function(data) {
 
   eval(data.options.javascript);
 
