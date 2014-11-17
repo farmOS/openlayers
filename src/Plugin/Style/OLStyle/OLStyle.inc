@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_olstyle_openlayers_style() {
+function openlayers_OLStyle_openlayers_style() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Style\\olstyle',
+      'class' => '\\Drupal\\openlayers\\Style\\OLStyle',
     ),
   );
 }

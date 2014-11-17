@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Style;
 use Drupal\openlayers\Style;
 
 /**
- * Class openlayers__style__js.
+ * Class InlineJS.
  */
-class inlineJS extends Style {
+class InlineJS extends Style {
 
   /**
    * {@inheritdoc}

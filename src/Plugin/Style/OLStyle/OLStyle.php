@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Style;
 use Drupal\openlayers\Style;
 
 /**
- * Class openlayers__style__style.
+ * Class OLStyle.
  */
-class olstyle extends Style {
+class OLStyle extends Style {
 
 }
