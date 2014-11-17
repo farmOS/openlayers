@@ -1,4 +1,4 @@
-Drupal.openlayers.style__style = function(data) {
+Drupal.openlayers.style__olstyle = function(data) {
   var fill = new ol.style.Fill({
     color: 'rgba(255,255,255,0.4)'
   });
