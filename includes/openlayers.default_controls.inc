@@ -62,7 +62,7 @@ function openlayers_default_controls() {
   $ol_control->machine_name = 'control_zoom';
   $ol_control->name = 'Zoom';
   $ol_control->description = 'Zoom control description';
-  $ol_control->class = '\\Drupal\\openlayers\\Control\\zoom';
+  $ol_control->class = '\\Drupal\\openlayers\\Control\\Zoom';
   $ol_control->options = array();
   $export['control_zoom'] = $ol_control;
 
