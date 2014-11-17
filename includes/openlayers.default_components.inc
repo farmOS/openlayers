@@ -35,13 +35,12 @@ function openlayers_default_components() {
   $ol_component->class = '\\Drupal\\openlayers\\Component\\inlineJS';
   $ol_component->options = array(
     'javascript' => 'data.map.on(\'click\', function(evt){
-  var coordinate = evt.coordinate;
   var pan = ol.animation.pan({
     duration: 2000,
     source: (data.map.getView().getCenter())
   });
   data.map.beforeRender(pan);
-  data.map.getView().setCenter(coordinate);
+  data.map.getView().setCenter(evt.coordinate);
 });',
   );
   $export['map_edit_form_setcenter'] = $ol_component;
