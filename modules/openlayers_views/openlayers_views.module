@@ -19,7 +19,7 @@ function openlayers_views_views_api() {
  */
 function openlayers_views_ctools_plugin_directory($module, $plugin) {
   if ($module == 'openlayers' && !empty($plugin)) {
-    return 'plugins/' . $plugin;
+    return 'src/Plugin/' . $plugin;
   }
 }
 
