@@ -507,3 +507,24 @@ function openlayers_source_options($empty_option = TRUE) {
   }
   return $options;
 }
+
+/**
+ * Returns an array with available layer options.
+ *
+ * @param bool $empty_option
+ *   If disabled no empty option is added.
+ *
+ * @return array
+ *   Array with layer options.
+ */
+function openlayers_layer_options($empty_option = TRUE) {
+  $layers = ctools_export_crud_load_all('openlayers_layers');
+  $options = array();
+  if ($empty_option) {
+    $options[''] = t('<Choose the layer>');
+  }
+  foreach ($layers as $machine_name => $data) {
+    $options[$machine_name] = $data->name;
+  }
+  return $options;
+}
