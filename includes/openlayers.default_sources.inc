@@ -16,7 +16,7 @@ function openlayers_default_sources() {
   $ol_source->machine_name = 'source_mapquest_osm';
   $ol_source->name = 'MapQuest OpenStreetMap';
   $ol_source->description = 'Source MapQuest OpenStreetMap description';
-  $ol_source->class = '\\Drupal\\openlayers\\Source\\mapquest';
+  $ol_source->class = '\\Drupal\\openlayers\\Source\\MapQuest';
   $ol_source->options = array(
     'layer' => 'osm',
   );
