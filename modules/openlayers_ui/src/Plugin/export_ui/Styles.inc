@@ -87,7 +87,7 @@ function openlayers_style_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_style_form_type($form, &$form_state) {
-  $styles = ctools_get_plugins('openlayers', 'style');
+  $styles = ctools_get_plugins('openlayers', 'Style');
   $options = array('' => t('<Choose the style type>'));
   foreach ($styles as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;

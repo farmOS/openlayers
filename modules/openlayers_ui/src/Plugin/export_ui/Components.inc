@@ -110,7 +110,7 @@ function openlayers_component_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_component_form_type($form, &$form_state) {
-  $components = ctools_get_plugins('openlayers', 'component');
+  $components = ctools_get_plugins('openlayers', 'Component');
   $options = array('' => t('<Choose the component type>'));
   foreach ($components as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;

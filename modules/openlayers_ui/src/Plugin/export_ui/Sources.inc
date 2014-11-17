@@ -110,7 +110,7 @@ function openlayers_source_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_source_form_type($form, &$form_state) {
-  $sources = ctools_get_plugins('openlayers', 'source');
+  $sources = ctools_get_plugins('openlayers', 'Source');
   $options = array('' => t('<Choose the source type>'));
   foreach ($sources as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;

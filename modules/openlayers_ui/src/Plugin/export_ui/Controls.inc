@@ -110,7 +110,7 @@ function openlayers_control_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_control_form_type($form, &$form_state) {
-  $controls = ctools_get_plugins('openlayers', 'control');
+  $controls = ctools_get_plugins('openlayers', 'Control');
   $options = array('' => t('<Choose the control type>'));
   foreach ($controls as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;

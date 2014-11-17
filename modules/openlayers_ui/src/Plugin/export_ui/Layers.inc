@@ -114,7 +114,7 @@ function openlayers_layer_form_start_submit($form, &$form_state) {
 }
 
 function openlayers_layer_form_type($form, &$form_state) {
-  $layers = ctools_get_plugins('openlayers', 'layer');
+  $layers = ctools_get_plugins('openlayers', 'Layer');
   $options = array('' => t('<Choose the layer type>'));
   foreach ($layers as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;
