@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Layer;
 use Drupal\openlayers\Layer;
 
 /**
- * Class openlayers__layer__heatmap.
+ * Class Heatmap.
  */
-class heatmap extends Layer {
+class Heatmap extends Layer {
 
   /**
    * {@inheritdoc}

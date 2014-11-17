@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Layer;
 use Drupal\openlayers\Layer;
 
 /**
- * Class openlayers__layer__tile.
+ * Class Tile.
  */
-class tile extends Layer {
+class Tile extends Layer {
 
   /**
    * {@inheritdoc}

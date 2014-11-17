@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_heatmap_openlayers_layer() {
+function openlayers_Heatmap_openlayers_layer() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Layer\\heatmap',
+      'class' => '\\Drupal\\openlayers\\Layer\\Heatmap',
     ),
   );
 }

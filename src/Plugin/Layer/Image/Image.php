@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Layer;
 use Drupal\openlayers\Layer;
 
 /**
- * Class openlayers__layer__image.
+ * Class Image.
  */
-class image extends Layer {
+class Image extends Layer {
 
 }

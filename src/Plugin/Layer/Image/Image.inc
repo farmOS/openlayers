@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_image_openlayers_layer() {
+function openlayers_Image_openlayers_layer() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Layer\\image',
+      'class' => '\\Drupal\\openlayers\\Layer\\Image',
     ),
   );
 }

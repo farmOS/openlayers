@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Layer;
 use Drupal\openlayers\Layer;
 
 /**
- * Class openlayers__layer__vector.
+ * Class Vector.
  */
-class vector extends Layer {
+class Vector extends Layer {
 
 }

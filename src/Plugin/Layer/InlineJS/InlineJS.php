@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Layer;
 use Drupal\openlayers\Layer;
 
 /**
- * Class openlayers__layer__js.
+ * Class InlineJS.
  */
-class inlineJS extends Layer {
+class InlineJS extends Layer {
 
   /**
    * {@inheritdoc}
