@@ -131,7 +131,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 function openlayers_map_form_settings_submit($form, &$form_state) {
   // todo: fix.
   if (empty($form_state['item']->class)) {
-    $form_state['item']->class = 'openlayers__map__map';
+    $form_state['item']->class = '\\Drupal\\openlayers\\Map\\olmap';
   }
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
 
