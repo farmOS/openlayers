@@ -16,7 +16,7 @@ function openlayers_default_maps() {
   $ol_map->machine_name = 'map_view_edit_form';
   $ol_map->name = 'Map view edit form';
   $ol_map->description = 'Map used in the the map edit form to get center, zoom';
-  $ol_map->class = '\\Drupal\\openlayers\\Map\\olmap';
+  $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '400px',

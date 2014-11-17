@@ -9,9 +9,9 @@ use Drupal\openlayers\Config;
 use Drupal\openlayers\Map;
 
 /**
- * Class openlayers__map__map.
+ * Class OLMap.
  */
-class olmap extends Map {
+class OLMap extends Map {
 
   /**
    * {@inheritdoc}

@@ -11,7 +11,7 @@ use Drupal\openlayers\Map;
 /**
  * Class openlayers__map__views.
  */
-class views extends olmap {
+class views extends OLMap {
 
   /**
    * The features to use as initial source.
