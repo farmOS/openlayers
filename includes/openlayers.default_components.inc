@@ -16,7 +16,7 @@ function openlayers_default_components() {
   $ol_component->machine_name = 'map_edit_form_values';
   $ol_component->name = 'Map edit form values';
   $ol_component->description = 'Provides values for the center, rotation and zoom in the map edit form.';
-  $ol_component->class = '\\Drupal\\openlayers\\Component\\setvalues';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\SetValues';
   $ol_component->options = array(
     'latitude' => 'edit-options-view-center-lat',
     'longitude' => 'edit-options-view-center-lon',
@@ -32,7 +32,7 @@ function openlayers_default_components() {
   $ol_component->machine_name = 'map_edit_form_setcenter';
   $ol_component->name = 'Map center on mouse click';
   $ol_component->description = 'Upon clicking, center the map at the mouse position.';
-  $ol_component->class = '\\Drupal\\openlayers\\Component\\inlineJS';
+  $ol_component->class = '\\Drupal\\openlayers\\Component\\InlineJS';
   $ol_component->options = array(
     'javascript' => 'data.map.on(\'click\', function(evt){
   var pan = ol.animation.pan({
