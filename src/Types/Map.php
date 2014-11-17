@@ -16,6 +16,22 @@ class Map extends Object implements MapInterface {
    */
   protected $id;
 
+
+  /**
+   * Stores the objects related to this map.
+   *
+   * @see Map::getLayers()
+   * @see Map::getSources()
+   * @see Map::getStyles()
+   * @see Map::getControls()
+   * @see Map::getInteractions()
+   * @see Map::getComponents()
+   * @see Map::getObjects()
+   *
+   * @var array
+   */
+  protected $objects = array();
+
   /**
    * {@inheritdoc}
    */
@@ -41,84 +57,96 @@ class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function getLayers() {
-    $result = array();
-    foreach ($this->getOption('layers', array()) as $layer) {
-      $result[] = clone openlayers_object_load('layer', $layer);
-    }
-    return $result;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getSources() {
-    $sources = array();
-    foreach ($this->getOption('sources', array()) as $index => $source) {
-      $sources[$source] = openlayers_object_load('source', $source);
-    }
-
-    // Add sources required / defined by the assigned layers.
-    foreach ($this->getLayers() as $index => $layer) {
-      if ($source = $layer->getSource()) {
-        $sources[$source->machine_name] = $source;
+  public function getLayers($reset = FALSE) {
+    if (!isset($this->objects['layer']) || $reset) {
+      $this->objects['layer'] = array();
+      foreach ($this->getOption('layers', array()) as $layer) {
+        $this->objects['layer'][] = clone openlayers_object_load('layer', $layer);
       }
     }
-
-    // We set the machine name as key of the sources to avoid duplicated
-    // listing. But we return an array without associative keys.
-    return array_values($sources);
+    return $this->objects['layer'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getStyles() {
-    $styles = array();
-    foreach ($this->getOption('styles', array()) as $source) {
-      $styles[] = openlayers_object_load('style', $source);
-    }
+  public function getSources($reset = FALSE) {
+    if (!isset($this->objects['source']) || $reset) {
+      $this->objects['source'] = array();
+      foreach ($this->getOption('sources', array()) as $index => $source) {
+        $this->objects['source'][$source] = openlayers_object_load('source', $source);
+      }
 
-    foreach ($this->getLayers() as $layer) {
-      if ($style = $layer->getStyle()) {
-        $styles[] = $style;
+      // Add sources required / defined by the assigned layers.
+      foreach ($this->getLayers() as $index => $layer) {
+        if ($source = $layer->getSource()) {
+          $this->objects['source'][$source->machine_name] = $source;
+        }
+      }
+
+      // We set the machine name as key of the sources to avoid duplicated
+      // listing. But we return an array without associative keys.
+      $this->objects['source'] = array_values($this->objects['source']);
+    }
+    return $this->objects['source'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getStyles($reset = FALSE) {
+    if (!isset($this->objects['style']) || $reset) {
+      $this->objects['style'] = array();
+      foreach ($this->getOption('styles', array()) as $source) {
+        $this->objects['style'][] = openlayers_object_load('style', $source);
+      }
+
+      foreach ($this->getLayers() as $layer) {
+        if ($style = $layer->getStyle()) {
+          $this->objects['style'][] = $style;
+        }
       }
     }
-
-    return $styles;
+    return $this->objects['style'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getControls() {
-    $result = array();
-    foreach ($this->getOption('controls', array()) as $control) {
-      $result[] = clone openlayers_object_load('control', $control);
+  public function getControls($reset = FALSE) {
+    if (!isset($this->objects['control']) || $reset) {
+      $this->objects['control'] = array();
+      foreach ($this->getOption('controls', array()) as $control) {
+        $this->objects['control'][] = clone openlayers_object_load('control', $control);
+      }
     }
-    return $result;
+    return $this->objects['control'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getInteractions() {
-    $result = array();
-    foreach ($this->getOption('interactions', array()) as $interaction) {
-      $result[] = clone openlayers_object_load('interaction', $interaction);
+  public function getInteractions($reset = FALSE) {
+    if (!isset($this->objects['interaction']) || $reset) {
+      $this->objects['interaction'] = array();
+      foreach ($this->getOption('interactions', array()) as $interaction) {
+        $this->objects['interaction'][] = clone openlayers_object_load('interaction', $interaction);
+      }
     }
-    return $result;
+    return $this->objects['interaction'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getComponents() {
-    $result = array();
-    foreach ($this->getOption('components', array()) as $component) {
-      $result[] = clone openlayers_object_load('component', $component);
+  public function getComponents($reset = FALSE) {
+    if (!isset($this->objects['component']) || $reset) {
+      $this->objects['component'] = array();
+      foreach ($this->getOption('components', array()) as $component) {
+        $this->objects['component'][] = clone openlayers_object_load('component', $component);
+      }
     }
-    return $result;
+    return $this->objects['component'];
   }
 
   /**
@@ -126,59 +154,39 @@ class Map extends Object implements MapInterface {
    */
   public function develop() {
     if ($layers = $this->getLayers()) {
-      $this->options['layers'] = array();
-      foreach ($layers as $data) {
-        $object = clone openlayers_object_load('layer', $data);
-        $this->options['layers'][] = $object;
-      }
+      $this->options['layers'] = $layers;
     }
     if ($controls = $this->getControls()) {
-      $this->options['controls'] = array();
-      foreach ($controls as $data) {
-        $object = clone openlayers_object_load('control', $data);
-        $this->options['controls'][] = $object;
-      }
+      $this->options['controls'] = $controls;
     }
     if ($interactions = $this->getInteractions()) {
-      $this->options['interactions'] = array();
-      foreach ($interactions as $index => $data) {
-        $object = clone openlayers_object_load('interaction', $data);
-        $this->options['interactions'][] = $object;
-      }
+      $this->options['interactions'] = $interactions;
     }
     if ($components = $this->getComponents()) {
-      $this->options['components'] = array();
-      foreach ($components as $index => $data) {
-        $object = clone openlayers_object_load('component', $data);
-        $this->options['components'][] = $object;
-      }
+      $this->options['components'] = $components;
     }
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getObjects() {
-    $objects = array();
-    $objects['layer'] = $this->getLayers();
-    $objects['style'] = $this->getStyles();
-    $objects['source'] = $this->getSources();
-    $objects['control'] = $this->getControls();
-    $objects['interaction'] = $this->getInteractions();
-    $objects['component'] = $this->getComponents();
+  public function &getObjects($reset = FALSE) {
+    $this->getLayers($reset);
+    $this->getStyles($reset);
+    $this->getSources($reset);
+    $this->getControls($reset);
+    $this->getInteractions($reset);
+    $this->getComponents($reset);
 
-    $objects = unserialize(serialize($objects));
-
-    foreach ($objects['layer'] as $index => $layer) {
+    foreach ($this->objects['layer'] as $index => $layer) {
       if ($source = $layer->getSource()) {
-        $objects['layer'][$index]->options['source'] = $source->machine_name;
+        $this->objects['layer'][$index]->options['source'] = $source->machine_name;
       }
       if ($style = $layer->getStyle()) {
-        $objects['layer'][$index]->options['style'] = $style->machine_name;
+        $this->objects['layer'][$index]->options['style'] = $style->machine_name;
       }
     }
-
-    return $objects;
+    return $this->objects;
   }
 
   /**
@@ -197,6 +205,7 @@ class Map extends Object implements MapInterface {
 
     $objects = array_map_recursive('_floatval_if_numeric', $objects);
     $objects = removeEmptyElements($objects);
+    $objects = unserialize(serialize($objects));
 
     return $objects;
   }

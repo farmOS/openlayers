@@ -25,7 +25,7 @@ interface MapInterface {
    *   Associative array of objects assigned to this map. Keyed by the type of
    *   the objects.
    */
-  public function getObjects();
+  public function &getObjects();
 
   /**
    * Returns an JS compatible array of objects assigned to this map.
