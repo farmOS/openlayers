@@ -162,7 +162,7 @@ function openlayers_render_build_map(\Drupal\openlayers\MapInterface $map) {
   drupal_alter('openlayers_map_preprocess', $map);
 
   $objects = $map->getObjects();
-  $attached = $map->attached();
+  $attached = $map->attached($map);
   $objects['map'] = $map;
 
   drupal_alter('openlayers_map', $map);

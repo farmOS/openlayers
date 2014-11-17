@@ -114,10 +114,13 @@ interface ObjectInterface {
   /**
    * Returns a list of attachments for building the render array.
    *
+   * @param \Drupal\openlayers\ObjectInterface $context
+   *   The object the attachments are attached to.
+   *
    * @return array
    *   The attachments to add.
    */
-  public function attached();
+  public function attached(\Drupal\openlayers\ObjectInterface $context);
 
   /**
    * Defines dependencies.

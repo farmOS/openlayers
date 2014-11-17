@@ -232,7 +232,7 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function attached() {
+  public function attached(\Drupal\openlayers\ObjectInterface $context) {
     if ($plugin = $this->getPlugin()) {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';

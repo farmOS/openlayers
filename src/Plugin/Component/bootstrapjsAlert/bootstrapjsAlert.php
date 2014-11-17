@@ -15,8 +15,8 @@ class bootstrapjsAlert extends Component {
   /**
    * {@inheritdoc}
    */
-  public function attached() {
-    $attached = parent::attached();
+  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+    $attached = parent::attached($context);
     $attached['libraries_load'][] = array('bootstrapjs');
     return $attached;
   }

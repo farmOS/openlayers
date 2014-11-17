@@ -112,8 +112,8 @@ class olmap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function attached() {
-    $attached = parent::attached();
+  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+    $attached = parent::attached($context);
     // TODO: OpenLayers settings form by default to debug mode.
     $variant = Config::LIBRARY_VARIANT;
     $attached['libraries_load'][] = array('openlayers3', $variant);

@@ -204,14 +204,14 @@ class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function attached() {
-    $this->attached = parent::attached();
+  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+    $this->attached = parent::attached($context);
     $objects = $this->getObjects();
 
     foreach ($objects as $type => $list) {
       if ($list != FALSE) {
         foreach ($list as $index => $data) {
-          $this->attached = drupal_array_merge_deep($this->attached, $data->attached());
+          $this->attached = drupal_array_merge_deep($this->attached, $data->attached($context));
         }
       }
     }
