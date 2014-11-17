@@ -34,6 +34,8 @@ interface ObjectInterface {
    * @return string|FALSE
    *   The object type or FALSE on failure.
    */
+  // @todo: Shouldn't we automatically compute this based on the fully qualified class name ?
+  // ex: \Drupal\openlayers\Control\MousePosition => Control
   public function getType();
 
   /**
