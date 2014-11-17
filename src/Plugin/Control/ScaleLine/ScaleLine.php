@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__scaleline.
+ * Class ScaleLine.
  */
-class scaleline extends Control {
+class ScaleLine extends Control {
 
 }

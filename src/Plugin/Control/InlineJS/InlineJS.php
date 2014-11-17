@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__js.
+ * Class InlineJS.
  */
-class inlineJS extends Control {
+class InlineJS extends Control {
 
   /**
    * {@inheritdoc}

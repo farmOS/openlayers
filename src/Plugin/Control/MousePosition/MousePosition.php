@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__mouseposition.
+ * Class MousePosition.
  */
-class mouseposition extends Control {
+class MousePosition extends Control {
 
   /**
    * {@inheritdoc}

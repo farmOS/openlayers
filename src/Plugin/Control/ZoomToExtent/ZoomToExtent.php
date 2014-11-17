@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__zoomtoextent.
+ * Class ZoomToExtent.
  */
-class zoomtoextent extends Control {
+class ZoomToExtent extends Control {
 
 }

@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__fullscreen.
+ * Class FullScreen.
  */
-class fullscreen extends Control {
+class FullScreen extends Control {
 
 
 }

@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_zoomtoextent_openlayers_control() {
+function openlayers_ZoomToExtent_openlayers_control() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Control\\zoomtoextent',
+      'class' => '\\Drupal\\openlayers\\Control\\ZoomToExtent',
     ),
   );
 }

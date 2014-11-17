@@ -8,9 +8,9 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__attribution.
+ * Class Attribution.
  */
-class attribution extends Control {
+class Attribution extends Control {
 
   /**
    * {@inheritdoc}

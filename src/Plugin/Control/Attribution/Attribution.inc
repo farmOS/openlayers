@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_attribution_openlayers_control() {
+function openlayers_Attribution_openlayers_control() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Control\\attribution',
+      'class' => '\\Drupal\\openlayers\\Control\\Attribution',
     ),
   );
 }

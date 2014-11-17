@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_rotate_openlayers_control() {
+function openlayers_Rotate_openlayers_control() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Control\\rotate',
+      'class' => '\\Drupal\\openlayers\\Control\\Rotate',
     ),
   );
 }

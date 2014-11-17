@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__rotate.
+ * Class Rotate.
  */
-class rotate extends Control {
+class Rotate extends Control {
 
 }

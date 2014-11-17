@@ -7,10 +7,10 @@
 /**
  * Plugin definition.
  */
-function openlayers_inlineJS_openlayers_control() {
+function openlayers_InlineJS_openlayers_control() {
   return array(
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\Control\\inlineJS',
+      'class' => '\\Drupal\\openlayers\\Control\\InlineJS',
     ),
   );
 }

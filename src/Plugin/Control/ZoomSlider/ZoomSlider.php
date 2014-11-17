@@ -8,8 +8,8 @@ namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Control;
 
 /**
- * Class openlayers__control__zoomslider.
+ * Class ZoomSlider.
  */
-class zoomslider extends Control {
+class ZoomSlider extends Control {
 
 }
