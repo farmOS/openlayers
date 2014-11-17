@@ -71,7 +71,7 @@ function openlayers_ui_Layers_ctools_export_ui() {
 }
 
 function openlayers_layer_form_start($form, &$form_state) {
-  $class = new openlayers_layers_ui();
+  $class = new \Drupal\openlayers\UI\Layers();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -96,13 +96,13 @@ function openlayers_layer_form_start($form, &$form_state) {
 }
 
 function openlayers_layer_form_start_validate($form, &$form_state) {
-  $class = new openlayers_layers_ui();
+  $class = new \Drupal\openlayers\UI\Layers();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_layer_form_start_submit($form, &$form_state) {
-  $class = new openlayers_layers_ui();
+  $class = new \Drupal\openlayers\UI\Layers();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 

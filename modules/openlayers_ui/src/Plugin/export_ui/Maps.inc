@@ -87,20 +87,20 @@ function openlayers_ui_Maps_ctools_export_ui() {
 }
 
 function openlayers_map_form_start($form, &$form_state) {
-  $class = new openlayers_maps_ui();
+  $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
   return $form;
 }
 
 function openlayers_map_form_start_validate($form, &$form_state) {
-  $class = new openlayers_maps_ui();
+  $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_map_form_start_submit($form, &$form_state) {
-  $class = new openlayers_maps_ui();
+  $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }
@@ -119,7 +119,7 @@ function openlayers_map_form_settings($form, &$form_state) {
 function openlayers_map_form_settings_validate($form, &$form_state) {
   $item = $form_state['item'];
   if (empty($item->class)) {
-    $item->class = 'openlayers__map__map';
+    $item->class = '\Drupal\openlayers\map\olmap';
   }
   $item->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
 

@@ -67,7 +67,7 @@ function openlayers_ui_Components_ctools_export_ui() {
 }
 
 function openlayers_component_form_start($form, &$form_state) {
-  $class = new openlayers_components_ui();
+  $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -92,13 +92,13 @@ function openlayers_component_form_start($form, &$form_state) {
 }
 
 function openlayers_component_form_start_validate($form, &$form_state) {
-  $class = new openlayers_components_ui();
+  $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_component_form_start_submit($form, &$form_state) {
-  $class = new openlayers_components_ui();
+  $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 

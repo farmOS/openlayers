@@ -67,7 +67,7 @@ function openlayers_ui_Styles_ctools_export_ui() {
 }
 
 function openlayers_style_form_start($form, &$form_state) {
-  $class = new openlayers_styles_ui();
+  $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -75,13 +75,13 @@ function openlayers_style_form_start($form, &$form_state) {
 }
 
 function openlayers_style_form_start_validate($form, &$form_state) {
-  $class = new openlayers_styles_ui();
+  $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_style_form_start_submit($form, &$form_state) {
-  $class = new openlayers_styles_ui();
+  $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }

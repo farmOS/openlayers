@@ -67,7 +67,7 @@ function openlayers_ui_Interactions_ctools_export_ui() {
 }
 
 function openlayers_interaction_form_start($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+  $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -92,13 +92,13 @@ function openlayers_interaction_form_start($form, &$form_state) {
 }
 
 function openlayers_interaction_form_start_validate($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+  $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
 function openlayers_interaction_form_start_submit($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+  $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 
