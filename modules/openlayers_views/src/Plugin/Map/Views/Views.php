@@ -9,9 +9,9 @@ use Drupal\openlayers\Config;
 use Drupal\openlayers\Map;
 
 /**
- * Class openlayers__map__views.
+ * Class Views.
  */
-class views extends OLMap {
+class Views extends OLMap {
 
   /**
    * The features to use as initial source.
