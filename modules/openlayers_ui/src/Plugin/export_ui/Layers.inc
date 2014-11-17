@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_LayersUI_ctools_export_ui() {
+function openlayers_ui_Layers_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_layers',
     'access' => 'administer openlayers',

@@ -9,7 +9,7 @@ namespace Drupal\openlayers\UI;
 /**
  * Class openlayers_components_ui.
  */
-class MapsUI extends \ObjectsUI {
+class Maps extends \ObjectsUI {
 
   /**
    * {@inheritdoc}

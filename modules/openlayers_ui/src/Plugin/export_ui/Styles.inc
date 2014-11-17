@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_StylesUI_ctools_export_ui() {
+function openlayers_ui_Styles_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_styles',
     'access' => 'administer styles',

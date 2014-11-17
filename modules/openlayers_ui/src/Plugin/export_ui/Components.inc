@@ -1,25 +1,25 @@
 <?php
 /**
  * @file
- * CTools Export UI plugin definition for interactions.
+ * CTools Export UI plugin definition for components.
  */
 
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_InteractionsUI_ctools_export_ui() {
+function openlayers_ui_Components_ctools_export_ui() {
   return array(
-    'schema' => 'openlayers_interactions',
+    'schema' => 'openlayers_components',
     'access' => 'administer openlayers',
     'menu' => array(
       'menu prefix' => 'admin/structure/openlayers',
-      'menu item' => 'interactions',
-      'menu title' => 'Interactions',
-      'menu description' => 'Administer OpenLayers interactions.',
+      'menu item' => 'components',
+      'menu title' => 'Components',
+      'menu description' => 'Administer OpenLayers components.',
     ),
 
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\UI\\Interactions',
+      'class' => '\\Drupal\\openlayers\\UI\\Components',
     ),
 
     'export' => array(
@@ -31,43 +31,43 @@ function openlayers_ui_InteractionsUI_ctools_export_ui() {
     'form info' => array(
       'order' => array(
         'start' => t('Administrative settings'),
-        'type' => t('Interaction type'),
-        'options' => t('Interaction type options'),
+        'type' => t('Component type'),
+        'options' => t('Component type options'),
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_interaction_form_start',
+          'form id' => 'openlayers_component_form_start',
         ),
         'type' => array(
-          'form id' => 'openlayers_interaction_form_type',
+          'form id' => 'openlayers_component_form_type',
         ),
         'options' => array(
-          'form id' => 'openlayers_interaction_form_options',
+          'form id' => 'openlayers_component_form_options',
         ),
       ),
       'wrapper' => 'openlayers_objects_ui_form_wrapper',
     ),
 
-    'title singular' => t('interaction'),
-    'title plural' => t('interactions'),
-    'title singular proper' => t('OpenLayers interaction preset'),
-    'title plural proper' => t('OpenLayers interaction presets'),
+    'title singular' => t('component'),
+    'title plural' => t('components'),
+    'title singular proper' => t('OpenLayers component preset'),
+    'title plural proper' => t('OpenLayers component presets'),
 
     'strings' => array(
       'confirmation' => array(
         'add' => array(
-          'success' => t('Interaction saved.'),
+          'success' => t('Component saved.'),
         ),
         'delete' => array(
-          'success' => t('Interaction was deleted.'),
+          'success' => t('Component was deleted.'),
         ),
       ),
     ),
   );
 }
 
-function openlayers_interaction_form_start($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+function openlayers_component_form_start($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -91,36 +91,36 @@ function openlayers_interaction_form_start($form, &$form_state) {
   return $form;
 }
 
-function openlayers_interaction_form_start_validate($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+function openlayers_component_form_start_validate($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
-function openlayers_interaction_form_start_submit($form, &$form_state) {
-  $class = new openlayers_interactions_ui();
+function openlayers_component_form_start_submit($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 
   if ($form_state['values']['attachToMap']) {
     $map = ctools_export_crud_load('openlayers_maps', $form_state['values']['attachToMap']);
-    $map->options['interactions'][] = $form_state['item']->machine_name;
+    $map->options['components'][] = $form_state['item']->machine_name;
     ctools_export_crud_save('openlayers_maps', $map);
   }
 }
 
-function openlayers_interaction_form_type($form, &$form_state) {
-  $interactions = ctools_get_plugins('openlayers', 'interaction');
-  $options = array('' => t('<Choose the interaction type>'));
-  foreach ($interactions as $class => $plugin) {
+function openlayers_component_form_type($form, &$form_state) {
+  $components = ctools_get_plugins('openlayers', 'component');
+  $options = array('' => t('<Choose the component type>'));
+  foreach ($components as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;
   }
 
   $form['class'] = array(
     '#type' => 'select',
-    '#title' => t('Interaction Type'),
+    '#title' => t('Component Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
-    '#description' => t('Select the type of interaction.'),
+    '#description' => t('Select the type of component.'),
     '#options' => $options,
     '#required' => TRUE,
   );
@@ -128,25 +128,23 @@ function openlayers_interaction_form_type($form, &$form_state) {
   return $form;
 }
 
-function openlayers_interaction_form_type_submit($form, &$form_state) {
+function openlayers_component_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
-function openlayers_interaction_form_options($form, &$form_state) {
-  $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form($form, $form_state);
+function openlayers_component_form_options($form, &$form_state) {
+  $control = openlayers_object_load('component', $form_state['item']);
+  $control->options_form($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
-function openlayers_interaction_form_options_validate($form, &$form_state) {
-  $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form_validate($form, $form_state);
+function openlayers_component_form_options_validate($form, &$form_state) {
+  $control = openlayers_object_load('component', $form_state['item']);
+  $control->options_form_validate($form, $form_state);
 }
 
-function openlayers_interaction_form_options_submit($form, &$form_state) {
+function openlayers_component_form_options_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
-  $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form_submit($form, $form_state);
 }

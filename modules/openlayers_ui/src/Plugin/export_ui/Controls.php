@@ -2,7 +2,7 @@
 
 namespace Drupal\openlayers\UI;
 
-class InteractionsUI extends \ObjectsUI {
+class Controls extends \ObjectsUI {
 
   /**
    * Entry point of hook_menu().
@@ -12,8 +12,8 @@ class InteractionsUI extends \ObjectsUI {
    */
   function hook_menu(&$items) {
     parent::hook_menu($items);
-    $items['admin/structure/openlayers/interactions']['type'] = MENU_LOCAL_TASK;
-    $items['admin/structure/openlayers/interactions']['weight'] = 2;
+    $items['admin/structure/openlayers/controls']['type'] = MENU_LOCAL_TASK;
+    $items['admin/structure/openlayers/controls']['weight'] = 1;
   }
 
 }

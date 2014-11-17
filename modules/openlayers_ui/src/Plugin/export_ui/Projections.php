@@ -9,7 +9,7 @@ namespace Drupal\openlayers\UI;
 /**
  * Class openlayers_components_ui.
  */
-class ProjectionsUI extends \ObjectsUI {
+class Projections extends \ObjectsUI {
 
   /**
    * {@inheritdoc}
