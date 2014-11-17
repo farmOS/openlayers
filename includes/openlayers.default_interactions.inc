@@ -12,34 +12,34 @@ function openlayers_default_interactions() {
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_doubleclickzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_doubleclickzoom';
   $ol_interaction->name = 'DoubleClickZoom';
   $ol_interaction->description = 'DoubleClickZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DoubleClickZoom';
   $ol_interaction->options = array();
-  $export['interaction_doubleclickzoom'] = $ol_interaction;
+  $export['openlayers_interaction_doubleclickzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_draganddrop';
+  $ol_interaction->machine_name = 'openlayers_interaction_draganddrop';
   $ol_interaction->name = 'DragAndDrop';
   $ol_interaction->description = 'DragAndDrop interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragAndDrop';
   $ol_interaction->options = array();
-  $export['interaction_draganddrop'] = $ol_interaction;
+  $export['openlayers_interaction_draganddrop'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_dragbox';
+  $ol_interaction->machine_name = 'openlayers_interaction_dragbox';
   $ol_interaction->name = 'DragBox';
   $ol_interaction->description = 'DragBox interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragBox';
   $ol_interaction->options = array();
-  $export['interaction_dragbox'] = $ol_interaction;
+  $export['openlayers_interaction_dragbox'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_dragpan';
+  $ol_interaction->machine_name = 'openlayers_interaction_dragpan';
   $ol_interaction->name = 'DragPan';
   $ol_interaction->description = 'DragPan interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragPan';
@@ -48,115 +48,115 @@ function openlayers_default_interactions() {
     'minVelocity' => 0.05,
     'delay' => 100,
   );
-  $export['interaction_dragpan'] = $ol_interaction;
+  $export['openlayers_interaction_dragpan'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_dragrotate';
+  $ol_interaction->machine_name = 'openlayers_interaction_dragrotate';
   $ol_interaction->name = 'DragRotate';
   $ol_interaction->description = 'DragRotate interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragRotate';
   $ol_interaction->options = array();
-  $export['interaction_dragrotate'] = $ol_interaction;
+  $export['openlayers_interaction_dragrotate'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_dragrotateandzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_dragrotateandzoom';
   $ol_interaction->name = 'DragRotateAndZoom';
   $ol_interaction->description = 'DragRotateAndZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragRotateAndZoom';
   $ol_interaction->options = array();
-  $export['interaction_dragrotateandzoom'] = $ol_interaction;
+  $export['openlayers_interaction_dragrotateandzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_dragzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_dragzoom';
   $ol_interaction->name = 'DragZoom';
   $ol_interaction->description = 'DragZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\DragZoom';
   $ol_interaction->options = array();
-  $export['interaction_dragzoom'] = $ol_interaction;
+  $export['openlayers_interaction_dragzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_draw';
+  $ol_interaction->machine_name = 'openlayers_interaction_draw';
   $ol_interaction->name = 'Draw';
   $ol_interaction->description = 'Draw interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\Draw';
   $ol_interaction->options = array();
-  $export['interaction_draw'] = $ol_interaction;
+  $export['openlayers_interaction_draw'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_keyboardpan';
+  $ol_interaction->machine_name = 'openlayers_interaction_keyboardpan';
   $ol_interaction->name = 'KeyboardPan';
   $ol_interaction->description = 'KeyboardPan interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\KeyboardPan';
   $ol_interaction->options = array();
-  $export['interaction_keyboardpan'] = $ol_interaction;
+  $export['openlayers_interaction_keyboardpan'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_keyboardzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_keyboardzoom';
   $ol_interaction->name = 'KeyboardZoom';
   $ol_interaction->description = 'KeyboardZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\KeyboardZoom';
   $ol_interaction->options = array();
-  $export['interaction_keyboardzoom'] = $ol_interaction;
+  $export['openlayers_interaction_keyboardzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_modify';
+  $ol_interaction->machine_name = 'openlayers_interaction_modify';
   $ol_interaction->name = 'Modify';
   $ol_interaction->description = 'Modify interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\Modify';
   $ol_interaction->options = array();
-  $export['interaction_modify'] = $ol_interaction;
+  $export['openlayers_interaction_modify'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_mousewheelzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_mousewheelzoom';
   $ol_interaction->name = 'MouseWheelZoom';
   $ol_interaction->description = 'MouseWheelZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\MouseWheelZoom';
   $ol_interaction->options = array();
-  $export['interaction_mousewheelzoom'] = $ol_interaction;
+  $export['openlayers_interaction_mousewheelzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_pinchrotate';
+  $ol_interaction->machine_name = 'openlayers_interaction_pinchrotate';
   $ol_interaction->name = 'PinchRotate';
   $ol_interaction->description = 'PinchRotate interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\PinchRotate';
   $ol_interaction->options = array();
-  $export['interaction_pinchrotate'] = $ol_interaction;
+  $export['openlayers_interaction_pinchrotate'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_pinchzoom';
+  $ol_interaction->machine_name = 'openlayers_interaction_pinchzoom';
   $ol_interaction->name = 'PinchZoom';
   $ol_interaction->description = 'PinchZoom interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\Pinchzoom';
   $ol_interaction->options = array();
-  $export['interaction_pinchzoom'] = $ol_interaction;
+  $export['openlayers_interaction_pinchzoom'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_pointer';
+  $ol_interaction->machine_name = 'openlayers_interaction_pointer';
   $ol_interaction->name = 'Pointer';
   $ol_interaction->description = 'Pointer interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\Pointer';
   $ol_interaction->options = array();
-  $export['interaction_pointer'] = $ol_interaction;
+  $export['openlayers_interaction_pointer'] = $ol_interaction;
 
   $ol_interaction = new stdClass();
   $ol_interaction->api_version = 1;
-  $ol_interaction->machine_name = 'interaction_select';
+  $ol_interaction->machine_name = 'openlayers_interaction_select';
   $ol_interaction->name = 'Select';
   $ol_interaction->description = 'Select interaction description';
   $ol_interaction->class = '\\Drupal\openlayers\\Interaction\\Select';
   $ol_interaction->options = array();
-  $export['interaction_select'] = $ol_interaction;
+  $export['openlayers_interaction_select'] = $ol_interaction;
 
   return $export;
 }

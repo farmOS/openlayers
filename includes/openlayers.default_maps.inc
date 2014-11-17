@@ -13,7 +13,7 @@ function openlayers_default_maps() {
   $ol_map = new stdClass();
   $ol_map->disabled = TRUE;
   $ol_map->api_version = 1;
-  $ol_map->machine_name = 'map_view_edit_form';
+  $ol_map->machine_name = 'openlayers_map_view_edit_form';
   $ol_map->name = 'Map view edit form';
   $ol_map->description = 'Map used in the the map edit form to get center, zoom';
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
@@ -31,25 +31,25 @@ function openlayers_default_maps() {
     'contextualLinks' => 0,
     'provideBlock' => 0,
     'layers' => array(
-      0 => 'layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_mapquest_osm',
     ),
     'controls' => array(
-      0 => 'control_rotate',
-      1 => 'control_zoom',
-      2 => 'control_zoomslider',
-      3 => 'control_zoomtoextent',
+      0 => 'openlayers_control_rotate',
+      1 => 'openlayers_control_zoom',
+      2 => 'openlayers_control_zoomslider',
+      3 => 'openlayers_control_zoomtoextent',
     ),
     'interactions' => array(
-      0 => 'interaction_dragpan',
-      1 => 'interaction_dragrotate',
-      2 => 'interaction_mousewheelzoom',
+      0 => 'openlayers_interaction_dragpan',
+      1 => 'openlayers_interaction_dragrotate',
+      2 => 'openlayers_interaction_mousewheelzoom',
     ),
     'components' => array(
-      0 => 'map_edit_form_values',
-      1 => 'map_edit_form_setcenter',
+      0 => 'openlayers_examples_component_map_edit_form_values',
+      1 => 'openlayers_examples_component_map_edit_form_setcenter',
     ),
   );
-  $export['map_view_edit_form'] = $ol_map;
+  $export['openlayers_map_view_edit_form'] = $ol_map;
 
   return $export;
 }

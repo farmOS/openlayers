@@ -13,7 +13,7 @@ function openlayers_examples_default_styles() {
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_examples_blue_marker';
+  $ol_style->machine_name = 'openlayers_examples_style_blue_marker';
   $ol_style->name = 'OpenLayers blue marker';
   $ol_style->description = '';
   $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
@@ -28,12 +28,12 @@ function openlayers_examples_default_styles() {
                         }))
                     });',
   );
-  $export['openlayers_examples_blue_marker'] = $ol_style;
+  $export['openlayers_examples_style_blue_marker'] = $ol_style;
 
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_green_style';
+  $ol_style->machine_name = 'openlayers_examples_style_green';
   $ol_style->name = 'OpenLayers green style';
   $ol_style->description = '';
   $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
@@ -57,12 +57,12 @@ function openlayers_examples_default_styles() {
    })
  ];',
   );
-  $export['openlayers_green_style'] = $ol_style;
+  $export['openlayers_examples_style_green'] = $ol_style;
 
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_red_style';
+  $ol_style->machine_name = 'openlayers_examples_style_red';
   $ol_style->name = 'OpenLayers red style';
   $ol_style->description = '';
   $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
@@ -86,12 +86,12 @@ function openlayers_examples_default_styles() {
    })
  ];',
   );
-  $export['openlayers_red_style'] = $ol_style;
+  $export['openlayers_examples_style_red'] = $ol_style;
 
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_blue_style';
+  $ol_style->machine_name = 'openlayers_examples_style_blue';
   $ol_style->name = 'OpenLayers blue style';
   $ol_style->description = '';
   $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
@@ -115,7 +115,7 @@ function openlayers_examples_default_styles() {
    })
  ];',
   );
-  $export['openlayers_blue_style'] = $ol_style;
+  $export['openlayers_examples_style_blue'] = $ol_style;
 
   return $export;
 }

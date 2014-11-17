@@ -12,14 +12,14 @@ function openlayers_default_layers() {
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'layer_tile_mapquest_osm';
+  $ol_layer->machine_name = 'openlayers_layer_tile_mapquest_osm';
   $ol_layer->name = 'MapQuest OpenStreetMap';
   $ol_layer->description = 'Layer MapQuest OpenStreetMap description';
   $ol_layer->class = '\\Drupal\\openlayers\\Layer\\Tile';
   $ol_layer->options = array(
-    'source' => 'source_mapquest_osm',
+    'source' => 'openlayers_source_mapquest_osm',
   );
-  $export['layer_tile_mapquest_osm'] = $ol_layer;
+  $export['openlayers_layer_tile_mapquest_osm'] = $ol_layer;
 
   return $export;
 }
