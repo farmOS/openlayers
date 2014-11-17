@@ -187,7 +187,7 @@ class Map extends Object implements MapInterface {
   public function getJSObjects() {
     $objects = $this->getObjects();
 
-    foreach (array('layer', 'source', 'control', 'interaction', 'component') as $type) {
+    foreach (openlayers_object_types() as $type) {
       foreach ($objects[$type] as $index => $object) {
         $objects[$type][$index] = (array) $object->toJSArray();
       }
