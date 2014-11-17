@@ -1,6 +1,8 @@
 <?php
 
-class openlayers_interactions_ui extends openlayers_objects_ui {
+namespace Drupal\openlayers\UI;
+
+class InteractionsUI extends \ObjectsUI {
 
   /**
    * Entry point of hook_menu().

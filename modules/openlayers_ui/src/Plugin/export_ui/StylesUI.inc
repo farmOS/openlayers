@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
+function openlayers_ui_StylesUI_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_styles',
     'access' => 'administer styles',
@@ -19,8 +19,7 @@ function openlayers_ui_openlayers_styles_ui_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => 'openlayers_styles_ui',
-      'parent' => 'openlayers_styles_ui',
+      'class' => '\\Drupal\\openlayers\\UI\\Styles',
     ),
 
     'export' => array(

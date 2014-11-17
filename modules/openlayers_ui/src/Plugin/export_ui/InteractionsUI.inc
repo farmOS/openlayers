@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
+function openlayers_ui_InteractionsUI_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_interactions',
     'access' => 'administer openlayers',
@@ -19,8 +19,7 @@ function openlayers_ui_openlayers_interactions_ui_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => 'openlayers_interactions_ui',
-      'parent' => 'openlayers_interactions_ui',
+      'class' => '\\Drupal\\openlayers\\UI\\Interactions',
     ),
 
     'export' => array(

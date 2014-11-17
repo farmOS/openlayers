@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
+function openlayers_ui_ProjectionsUI_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_projections',
     'access' => 'administer projections',
@@ -19,8 +19,7 @@ function openlayers_ui_openlayers_projections_ui_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => 'openlayers_projections_ui',
-      'parent' => 'openlayers_projections_ui',
+      'class' => '\\Drupal\\openlayers\\UI\\Projections',
     ),
 
     'export' => array(
