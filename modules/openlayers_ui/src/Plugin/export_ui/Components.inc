@@ -1,26 +1,25 @@
 <?php
 /**
  * @file
- * CTools Export UI plugin definition for controls.
+ * CTools Export UI plugin definition for components.
  */
 
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_openlayers_controls_ui_ctools_export_ui() {
+function openlayers_ui_Components_ctools_export_ui() {
   return array(
-    'schema' => 'openlayers_controls',
+    'schema' => 'openlayers_components',
     'access' => 'administer openlayers',
     'menu' => array(
       'menu prefix' => 'admin/structure/openlayers',
-      'menu item' => 'controls',
-      'menu title' => 'Controls',
-      'menu description' => 'Administer OpenLayers controls.',
+      'menu item' => 'components',
+      'menu title' => 'Components',
+      'menu description' => 'Administer OpenLayers components.',
     ),
 
     'handler' => array(
-      'class' => 'openlayers_controls_ui',
-      'parent' => 'openlayers_controls_ui',
+      'class' => '\\Drupal\\openlayers\\UI\\Components',
     ),
 
     'export' => array(
@@ -32,43 +31,43 @@ function openlayers_ui_openlayers_controls_ui_ctools_export_ui() {
     'form info' => array(
       'order' => array(
         'start' => t('Administrative settings'),
-        'type' => t('Control type'),
-        'options' => t('Control type options'),
+        'type' => t('Component type'),
+        'options' => t('Component type options'),
       ),
       'forms' => array(
         'start' => array(
-          'form id' => 'openlayers_control_form_start',
+          'form id' => 'openlayers_component_form_start',
         ),
         'type' => array(
-          'form id' => 'openlayers_control_form_type',
+          'form id' => 'openlayers_component_form_type',
         ),
         'options' => array(
-          'form id' => 'openlayers_control_form_options',
+          'form id' => 'openlayers_component_form_options',
         ),
       ),
       'wrapper' => 'openlayers_objects_ui_form_wrapper',
     ),
 
-    'title singular' => t('control'),
-    'title plural' => t('controls'),
-    'title singular proper' => t('OpenLayers control preset'),
-    'title plural proper' => t('OpenLayers control presets'),
+    'title singular' => t('component'),
+    'title plural' => t('components'),
+    'title singular proper' => t('OpenLayers component preset'),
+    'title plural proper' => t('OpenLayers component presets'),
 
     'strings' => array(
       'confirmation' => array(
         'add' => array(
-          'success' => t('Control saved.'),
+          'success' => t('Component saved.'),
         ),
         'delete' => array(
-          'success' => t('Control was deleted.'),
+          'success' => t('Component was deleted.'),
         ),
       ),
     ),
   );
 }
 
-function openlayers_control_form_start($form, &$form_state) {
-  $class = new openlayers_controls_ui();
+function openlayers_component_form_start($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -92,36 +91,36 @@ function openlayers_control_form_start($form, &$form_state) {
   return $form;
 }
 
-function openlayers_control_form_start_validate($form, &$form_state) {
-  $class = new openlayers_controls_ui();
+function openlayers_component_form_start_validate($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
-function openlayers_control_form_start_submit($form, &$form_state) {
-  $class = new openlayers_controls_ui();
+function openlayers_component_form_start_submit($form, &$form_state) {
+  $class = new openlayers_components_ui();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 
   if ($form_state['values']['attachToMap']) {
     $map = ctools_export_crud_load('openlayers_maps', $form_state['values']['attachToMap']);
-    $map->options['controls'][] = $form_state['item']->machine_name;
+    $map->options['components'][] = $form_state['item']->machine_name;
     ctools_export_crud_save('openlayers_maps', $map);
   }
 }
 
-function openlayers_control_form_type($form, &$form_state) {
-  $controls = ctools_get_plugins('openlayers', 'control');
-  $options = array('' => t('<Choose the control type>'));
-  foreach ($controls as $class => $plugin) {
+function openlayers_component_form_type($form, &$form_state) {
+  $components = ctools_get_plugins('openlayers', 'component');
+  $options = array('' => t('<Choose the component type>'));
+  foreach ($components as $class => $plugin) {
     $options[$plugin['handler']['class']] = $class;
   }
 
   $form['class'] = array(
     '#type' => 'select',
-    '#title' => t('Control Type'),
+    '#title' => t('Component Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
-    '#description' => t('Select the type of control.'),
+    '#description' => t('Select the type of component.'),
     '#options' => $options,
     '#required' => TRUE,
   );
@@ -129,25 +128,23 @@ function openlayers_control_form_type($form, &$form_state) {
   return $form;
 }
 
-function openlayers_control_form_type_submit($form, &$form_state) {
+function openlayers_component_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
-function openlayers_control_form_options($form, &$form_state) {
-  $control = openlayers_object_load('control', $form_state['item']);
+function openlayers_component_form_options($form, &$form_state) {
+  $control = openlayers_object_load('component', $form_state['item']);
   $control->options_form($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
-function openlayers_control_form_options_validate($form, &$form_state) {
-  $control = openlayers_object_load('control', $form_state['item']);
+function openlayers_component_form_options_validate($form, &$form_state) {
+  $control = openlayers_object_load('component', $form_state['item']);
   $control->options_form_validate($form, $form_state);
 }
 
-function openlayers_control_form_options_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
-  $control = openlayers_object_load('control', $form_state['item']);
-  $control->options_form_submit($form, $form_state);
+function openlayers_component_form_options_submit($form, &$form_state) {
+  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
 }

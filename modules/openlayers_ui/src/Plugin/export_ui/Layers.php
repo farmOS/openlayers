@@ -4,10 +4,12 @@
  * Class openlayers_layers_ui.
  */
 
+namespace Drupal\openlayers\UI;
+
 /**
  * Class openlayers_layers_ui.
  */
-class openlayers_layers_ui extends openlayers_objects_ui {
+class Layers extends \ObjectsUI {
 
   /**
    * {@inheritdoc}

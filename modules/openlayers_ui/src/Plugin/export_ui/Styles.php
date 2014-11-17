@@ -4,18 +4,20 @@
  * Class openlayers_components_ui.
  */
 
+namespace Drupal\openlayers\UI;
+
 /**
  * Class openlayers_components_ui.
  */
-class openlayers_sources_ui extends openlayers_objects_ui {
+class Styles extends \ObjectsUI {
 
   /**
    * {@inheritdoc}
    */
   public function hook_menu(&$items) {
     parent::hook_menu($items);
-    $items['admin/structure/openlayers/sources']['type'] = MENU_LOCAL_TASK;
-    $items['admin/structure/openlayers/sources']['weight'] = -1;
+    $items['admin/structure/openlayers/styles']['type'] = MENU_LOCAL_TASK;
+    $items['admin/structure/openlayers/styles']['weight'] = -6;
   }
 
 }

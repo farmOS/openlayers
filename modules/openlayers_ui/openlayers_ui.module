@@ -32,8 +32,6 @@ function openlayers_ui_menu() {
 /**
  * Implements hook_ctools_plugin_directory().
  */
-function openlayers_ui_ctools_plugin_directory($module, $type) {
-  if ($type == 'export_ui') {
-    return 'plugins/export_ui';
-  }
+function openlayers_ui_ctools_plugin_directory($module, $plugin) {
+  return 'src/Plugin/' . $plugin;
 }
