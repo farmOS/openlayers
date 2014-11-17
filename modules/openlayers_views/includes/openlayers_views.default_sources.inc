@@ -15,7 +15,7 @@ function openlayers_views_default_sources_alter(&$sources) {
     // Check if the configuration for this source was already defined or if it
     // has been modified. If so don't add it, to keep the source exportable.
     $custom_version = ctools_export_crud_load('openlayers_sources', $machine_name);
-    if (!isset($maps[$machine_name]) && empty($custom_version)) {
+    if (!isset($sources[$machine_name]) && empty($custom_version)) {
       if ($view = views_get_view($view_name)) {
         $view->set_display($display);
 
