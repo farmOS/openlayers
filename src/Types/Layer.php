@@ -32,9 +32,6 @@ abstract class Layer extends Object implements LayerInterface {
       $this->setOption('source', $data);
     }
   }
-  public function getType() {
-    return 'Layer';
-  }
 
   public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     if ($source = $this->getSource()) {

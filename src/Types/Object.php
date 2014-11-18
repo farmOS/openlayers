@@ -285,4 +285,9 @@ abstract class Object implements ObjectInterface {
   public function isAsynchronous() {
     return FALSE;
   }
+
+  public function getType() {
+    $class = explode('\\', get_class($this));
+    return $class[2];
+  }
 }

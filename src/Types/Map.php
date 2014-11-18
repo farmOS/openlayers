@@ -228,10 +228,6 @@ class Map extends Object implements MapInterface {
     return $this->attached;
   }
 
-  public function getType() {
-    return 'Map';
-  }
-
   public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     parent::preBuild($build, $context);
 
