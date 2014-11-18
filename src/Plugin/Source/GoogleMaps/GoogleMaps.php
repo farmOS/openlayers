@@ -56,7 +56,7 @@ class GoogleMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function alterBuild(&$build, $map) {
+  public function alterBuildArray(&$build, $map) {
     $map_id = $map->getId();
     $gmap_id = 'gmap-' . $map_id;
     $build['gmap'] = array(

@@ -47,7 +47,7 @@ class Geolocation extends Component {
   /**
    * {@inheritdoc}
    */
-  public function alterBuild(&$build, $map) {
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     $build['component'] = array(
       '#type' => 'fieldset',
       '#title' => 'Example Geolocation component',

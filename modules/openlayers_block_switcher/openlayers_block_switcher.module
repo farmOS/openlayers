@@ -118,7 +118,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
 
   $form['map'] = array(
     '#type'    => 'hidden',
-    '#value' => $map->machine_name,
+    '#value' => $map->getOption('target'),
   );
 
   $form['#attached']['css'] = array();

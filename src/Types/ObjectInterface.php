@@ -152,4 +152,8 @@ interface ObjectInterface {
    *   Whether or not this object has to be processed asynchronously.
    */
   public function isAsynchronous();
+
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null);
+
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null);
 }

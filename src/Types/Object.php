@@ -117,15 +117,11 @@ abstract class Object implements ObjectInterface {
    */
   public function options_form_submit($form, &$form_state) {}
 
-  /**
-   * Allows to alter the build of a object.
-   *
-   * @param array $build
-   *   The build array by reference.
-   * @param openlayers_map_interface $map
-   *   The map object this build is related to.
-   */
-  public function alterBuild(&$build, $map) {}
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {}
+
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {}
+
+  public function build() {}
 
   /**
    * {@inheritdoc}

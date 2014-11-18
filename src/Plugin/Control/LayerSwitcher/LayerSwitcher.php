@@ -33,7 +33,7 @@ class LayerSwitcher extends Control {
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {
     $map_id = $context->getId();
     $layers = $this->getOption('layers', array());
     $items = array();
@@ -60,8 +60,6 @@ class LayerSwitcher extends Control {
       ),
     );
     $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="layerswitcher">' . drupal_render($layerswitcher) . '</div>');
-
-    return parent::attached($context);
   }
 
   /**

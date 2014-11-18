@@ -3,10 +3,10 @@
     attach: function(context, settings) {
 
       $(".form-item-overlays input[type='checkbox']").on('change', function(e) {
-        var machine_name = $(this).closest('form').find("input[name='map']").val();
+        var target = $(this).closest('form').find("input[name='map']").val();
         var data = $('body').data('openlayers');
         for (map in data.objects.maps) {
-          if (data.objects.maps[map].machine_name == machine_name) {
+          if (data.objects.maps[map].target == target) {
             var map = data.objects.maps[map];
             var layers = map.getLayers();
             var target = $(e.target);

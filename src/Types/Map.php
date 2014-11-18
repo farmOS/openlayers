@@ -231,4 +231,149 @@ class Map extends Object implements MapInterface {
   public function getType() {
     return 'Map';
   }
+
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+    parent::preBuild($build, $context);
+
+    foreach(openlayers_object_types() as $type) {
+      if (isset($this->objects[$type])) {
+        foreach($this->objects[$type] as $object) {
+          $object->preBuild($build, $this);
+          drupal_alter('openlayers_object_preprocess', $object, $this);
+        }
+      }
+    }
+    drupal_alter('openlayers_object_preprocess', $this);
+  }
+
+
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {
+    parent::postBuild($build, $context);
+
+    foreach(openlayers_object_types() as $type) {
+      if (isset($this->objects[$type])) {
+        foreach($this->objects[$type] as $object) {
+          $object->postBuild($build, $context);
+          drupal_alter('openlayers_object_postprocess', $object, $build);
+        }
+      }
+    }
+    drupal_alter('openlayers_object_postprocess', $this, $build);
+  }
+
+  public function build() {
+    $map = $this;
+    $build = array();
+
+    $map->preBuild($build, $map);
+
+    dpm($map);
+
+    $attached = $map->attached($map);
+    $objects = $map->getObjects();
+    $objects['map'] = $map;
+
+    $setting = array(
+      'openlayers' => array(
+        'maps' => array(
+          $map->getId() => $map->getJSObjects(),
+        ),
+      ),
+    );
+
+    $asynchronous = 0;
+    foreach (openlayers_object_types() as $type) {
+      foreach ($objects[$type] as $object) {
+        $asynchronous += (int) $object->isAsynchronous();
+      }
+    }
+    // If this is asynchronous flag it as such.
+    if ($asynchronous) {
+      $setting['openlayers']['maps'][$map->getId()]['map']['async'] = $asynchronous;
+    }
+
+    $attached['js'][] = array(
+      'data' => $setting,
+      'type' => 'setting',
+    );
+
+    $current_path = current_path();
+    if ('system/ajax' == $current_path) {
+      $current_path = $_SESSION['current_path'];
+    }
+
+    $links = array(
+      'openlayers' => array(
+        'title' => 'Edit this map',
+        'href' => 'admin/structure/openlayers/maps/list/' . $map->machine_name . '/edit',
+        'query' => array(
+          'destination' => $current_path,
+        ),
+      ),
+    );
+
+    $styles = array(
+      'width' => $map->getOption('width'),
+      'height' => $map->getOption('height'),
+    );
+
+    $css_styles = '';
+    foreach ($styles as $property => $value) {
+      $css_styles .= $property . ':' . $value . ';';
+    }
+
+    $build = array(
+      '#type' => 'container',
+      'contextual_links' => array(
+        '#prefix' => '<div class="contextual-links-wrapper">',
+        '#suffix' => '</div>',
+        '#theme' => 'links__contextual',
+        '#links' => $links,
+        '#attributes' => array('class' => array('contextual-links')),
+        '#attached' => array(
+          'library' => array(array('contextual', 'contextual-links')),
+        ),
+      ),
+      '#attributes' => array(
+        'id' => 'openlayers-container-' . $map->getId(),
+        'style' => $css_styles,
+        'class' => array(
+          'contextual-links-region',
+          'openlayers-container',
+        ),
+      ),
+      'map' => array(
+        '#theme' => 'html_tag',
+        '#tag' => 'div',
+        '#value' => '',
+        '#attributes' => array(
+          'id' => $map->getId(),
+          'class' => array(
+            'openlayers-map',
+            $map->machine_name,
+          ),
+        ),
+        '#attached' => array(
+          'library' => $attached['library'],
+          'libraries_load' => $attached['libraries_load'],
+          'js' => $attached['js'],
+          'css' => $attached['css'],
+        ),
+      ),
+    );
+
+    // If this is an asynchronous map flag it as such.
+    if ($asynchronous) {
+      $build['map']['#attributes']['class'][] = 'asynchronous';
+    }
+
+    if ($map->getOption('contextualLinks') == FALSE) {
+      unset($build['contextual_links']);
+    }
+
+    $map->postBuild($build, $map);
+
+    return $build;
+  }
+
 }

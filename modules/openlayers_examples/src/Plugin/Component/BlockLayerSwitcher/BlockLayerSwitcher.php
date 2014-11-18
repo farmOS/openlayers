@@ -15,7 +15,7 @@ class BlockLayerSwitcher extends Component {
   /**
    * {@inheritdoc}
    */
-  public function alterBuild(&$build, $map) {
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     $build['component'] = array(
       '#type' => 'fieldset',
       '#title' => 'Layer Switcher',
@@ -23,7 +23,7 @@ class BlockLayerSwitcher extends Component {
       '#collapsed' => TRUE,
     );
 
-    $build['component']['block'] = drupal_get_form('olebs_blockswitcher_form', $map);
+    $build['component']['block'] = drupal_get_form('olebs_blockswitcher_form', $context);
 
     $build['map']['#attributes']['style'] = $build['#attributes']['style'];
     unset($build['#attributes']['style']);

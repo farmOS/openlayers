@@ -16,6 +16,7 @@ Drupal.openlayers.map__olmap = function(data){
 
   var map = new ol.Map(options);
   map.machine_name = data.machine_name;
+  map.target = data.options.target;
 
   return map;
 };

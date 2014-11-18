@@ -35,4 +35,20 @@ abstract class Layer extends Object implements LayerInterface {
   public function getType() {
     return 'Layer';
   }
+
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+    if ($source = $this->getSource()) {
+      $source->preBuild($build, $context);
+      drupal_alter('openlayers_object_preprocess', $source, $build);
+      $this->setOption('source', $source);
+    }
+  }
+
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+    if ($source = $this->getSource()) {
+      $source->postBuild($build, $context);
+      drupal_alter('openlayers_object_postprocess', $source, $build);
+      $this->setOption('source', $source);
+    }
+  }
 }
