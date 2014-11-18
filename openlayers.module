@@ -208,8 +208,21 @@ function openlayers_libraries_info() {
     ),
     'files' => array(
       'js' => array(
-        'closure-library/closure/goog/base.js',
-        'build/ol-deps.js', 'build/ol.js',
+        'closure-library/closure/goog/base.js' => array(
+          'type' => 'file',
+          'weight' => 0,
+          'group' => \Drupal\openlayers\Config::JS_GROUP,
+        ),
+        'build/ol-deps.js' => array(
+          'type' => 'file',
+          'weight' => 10,
+          'group' => \Drupal\openlayers\Config::JS_GROUP,
+        ),
+        'build/ol.js' => array(
+          'type' => 'file',
+          'weight' => 20,
+          'group' => \Drupal\openlayers\Config::JS_GROUP,
+        ),
       ),
       'css' => array('css/ol.css'),
     ),
@@ -218,7 +231,7 @@ function openlayers_libraries_info() {
         'js' => array(
           'js/openlayers.js' => array(
             'type' => 'file',
-            'weight' => 1,
+            'weight' => 30,
             'group' => \Drupal\openlayers\Config::JS_GROUP,
           ),
         ),
@@ -231,9 +244,21 @@ function openlayers_libraries_info() {
       'debug' => array(
         'files' => array(
           'js' => array(
-            'closure-library/closure/goog/base.js',
-            'build/ol-deps.js',
-            'build/ol-debug.js',
+            'closure-library/closure/goog/base.js' => array(
+              'type' => 'file',
+              'weight' => 0,
+              'group' => \Drupal\openlayers\Config::JS_GROUP,
+            ),
+            'build/ol-deps.js' => array(
+              'type' => 'file',
+              'weight' => 10,
+              'group' => \Drupal\openlayers\Config::JS_GROUP,
+            ),
+            'build/ol-debug.js' => array(
+              'type' => 'file',
+              'weight' => 20,
+              'group' => \Drupal\openlayers\Config::JS_GROUP,
+            ),
           ),
           'css' => array('css/ol.css'),
         ),
@@ -242,12 +267,20 @@ function openlayers_libraries_info() {
             'js' => array(
               'js/openlayers.js' => array(
                 'type' => 'file',
-                'weight' => 1,
+                'weight' => 30,
                 'group' => \Drupal\openlayers\Config::JS_GROUP,
               ),
-              'js/debug.js' => array('type' => 'file'),
+              'js/debug.js' => array(
+                'type' => 'file',
+                'weight' => 40,
+                'group' => \Drupal\openlayers\Config::JS_GROUP,
+              ),
             ),
-            'css' => array('css/openlayers.css' => array('weight' => 10)),
+            'css' => array(
+              'css/openlayers.css' => array(
+                'weight' => 10
+              )
+            ),
           ),
         ),
       ),
