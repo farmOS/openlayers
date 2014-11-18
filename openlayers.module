@@ -231,7 +231,7 @@ function openlayers_libraries_info() {
         'js' => array(
           'js/openlayers.js' => array(
             'type' => 'file',
-            'weight' => 30,
+            'weight' => 8,
             'group' => \Drupal\openlayers\Config::JS_GROUP,
           ),
         ),
@@ -267,12 +267,12 @@ function openlayers_libraries_info() {
             'js' => array(
               'js/openlayers.js' => array(
                 'type' => 'file',
-                'weight' => 30,
+                'weight' => 8,
                 'group' => \Drupal\openlayers\Config::JS_GROUP,
               ),
               'js/debug.js' => array(
                 'type' => 'file',
-                'weight' => 40,
+                'weight' => 7,
                 'group' => \Drupal\openlayers\Config::JS_GROUP,
               ),
             ),
