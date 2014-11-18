@@ -320,7 +320,7 @@ class Map extends Object implements MapInterface {
       $css_styles .= $property . ':' . $value . ';';
     }
 
-    $build = array(
+    $build += array(
       '#type' => 'container',
       'contextual_links' => array(
         '#prefix' => '<div class="contextual-links-wrapper">',
