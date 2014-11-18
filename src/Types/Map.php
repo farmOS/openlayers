@@ -267,8 +267,6 @@ class Map extends Object implements MapInterface {
 
     $map->preBuild($build, $map);
 
-    dpm($map);
-
     $attached = $map->attached($map);
     $objects = $map->getObjects();
     $objects['map'] = $map;

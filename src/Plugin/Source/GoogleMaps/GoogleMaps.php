@@ -7,6 +7,7 @@
  */
 
 namespace Drupal\openlayers\Source;
+use Drupal\openlayers\ObjectInterface;
 use Drupal\openlayers\Source;
 
 /**
@@ -56,7 +57,7 @@ class GoogleMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function alterBuildArray(&$build, $map) {
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $map = null) {
     $map_id = $map->getId();
     $gmap_id = 'gmap-' . $map_id;
     $build['gmap'] = array(
