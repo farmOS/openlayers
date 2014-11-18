@@ -215,12 +215,12 @@ function openlayers_libraries_info() {
         ),
         'build/ol-deps.js' => array(
           'type' => 'file',
-          'weight' => 10,
+          'weight' => 3,
           'group' => \Drupal\openlayers\Config::JS_GROUP,
         ),
         'build/ol.js' => array(
           'type' => 'file',
-          'weight' => 20,
+          'weight' => 6,
           'group' => \Drupal\openlayers\Config::JS_GROUP,
         ),
       ),
@@ -251,12 +251,12 @@ function openlayers_libraries_info() {
             ),
             'build/ol-deps.js' => array(
               'type' => 'file',
-              'weight' => 10,
+              'weight' => 3,
               'group' => \Drupal\openlayers\Config::JS_GROUP,
             ),
             'build/ol-debug.js' => array(
               'type' => 'file',
-              'weight' => 20,
+              'weight' => 6,
               'group' => \Drupal\openlayers\Config::JS_GROUP,
             ),
           ),
