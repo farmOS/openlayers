@@ -106,7 +106,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       ),
       '#default_value' => $this->options['data_source']['value'],
     );
-    if (count($fields > 0)) {
+    if (count($fields) > 0) {
       $form['data_source']['other_lat'] = array(
         '#type' => 'select',
         '#title' => t('Latitude Field'),
