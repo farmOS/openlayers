@@ -78,7 +78,7 @@ function openlayers_ctools_plugin_type() {
 function openlayers_object_factory_create($object_type, $object_class, $export = NULL) {
   ctools_include('plugins');
 
-  if (isset($object_class) && $object_class != 'undefined') {
+  if (isset($object_class) && class_exists($object_class)) {
     $object = new $object_class();
   }
   else {
