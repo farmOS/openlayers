@@ -94,7 +94,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   $options_overlays = array();
 
   if (!is_object($map)) {
-    return;
+    return FALSE;
   }
 
   if ($layers = $map->getOption('layers')) {
