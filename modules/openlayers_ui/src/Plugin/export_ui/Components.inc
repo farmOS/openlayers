@@ -66,6 +66,9 @@ function openlayers_ui_Components_ctools_export_ui() {
   );
 }
 
+/**
+ * Component base config form handler.
+ */
 function openlayers_component_form_start($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
@@ -91,12 +94,18 @@ function openlayers_component_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Component base config form validation handler.
+ */
 function openlayers_component_form_start_validate($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Component base config form submit handler.
+ */
 function openlayers_component_form_start_submit($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Components();
   $class->init($form_state['plugin']);
@@ -109,6 +118,9 @@ function openlayers_component_form_start_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Component type config form handler.
+ */
 function openlayers_component_form_type($form, &$form_state) {
   $components = ctools_get_plugins('openlayers', 'Component');
   $options = array('' => t('<Choose the component type>'));
@@ -128,23 +140,35 @@ function openlayers_component_form_type($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Component type config form submit handler.
+ */
 function openlayers_component_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
+/**
+ * Component options form handler.
+ */
 function openlayers_component_form_options($form, &$form_state) {
   $control = openlayers_object_load('component', $form_state['item']);
-  $control->options_form($form, $form_state);
+  $control->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Component options form validation handler.
+ */
 function openlayers_component_form_options_validate($form, &$form_state) {
   $control = openlayers_object_load('component', $form_state['item']);
-  $control->options_form_validate($form, $form_state);
+  $control->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Component options form submit handler.
+ */
 function openlayers_component_form_options_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
 }

@@ -66,6 +66,9 @@ function openlayers_ui_Controls_ctools_export_ui() {
   );
 }
 
+/**
+ * Control base config form handler.
+ */
 function openlayers_control_form_start($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Controls();
   $class->init($form_state['plugin']);
@@ -91,12 +94,18 @@ function openlayers_control_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Control base config form validation handler.
+ */
 function openlayers_control_form_start_validate($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Controls();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Control base config form submit handler.
+ */
 function openlayers_control_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Controls();
   $class->init($form_state['plugin']);
@@ -109,6 +118,9 @@ function openlayers_control_form_start_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Control type config form handler.
+ */
 function openlayers_control_form_type($form, &$form_state) {
   $controls = ctools_get_plugins('openlayers', 'Control');
   $options = array('' => t('<Choose the control type>'));
@@ -128,25 +140,37 @@ function openlayers_control_form_type($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Control type config form submit handler.
+ */
 function openlayers_control_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
+/**
+ * Control options config form handler.
+ */
 function openlayers_control_form_options($form, &$form_state) {
   $control = openlayers_object_load('control', $form_state['item']);
-  $control->options_form($form, $form_state);
+  $control->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Control options config form validation handler.
+ */
 function openlayers_control_form_options_validate($form, &$form_state) {
   $control = openlayers_object_load('control', $form_state['item']);
-  $control->options_form_validate($form, $form_state);
+  $control->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Control options config form submit handler.
+ */
 function openlayers_control_form_options_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
   $control = openlayers_object_load('control', $form_state['item']);
-  $control->options_form_submit($form, $form_state);
+  $control->optionsFormSubmit($form, $form_state);
 }

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Component: Geolocation.
+ */
 
 namespace Drupal\openlayers\Component;
 use Drupal\openlayers\Component;
@@ -11,7 +15,7 @@ class Geolocation extends Component {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['checkboxID'] = array(
       '#type' => 'textfield',
       '#title' => t('Checkbox HTML ID'),

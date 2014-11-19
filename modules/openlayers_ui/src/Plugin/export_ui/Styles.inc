@@ -66,6 +66,9 @@ function openlayers_ui_Styles_ctools_export_ui() {
   );
 }
 
+/**
+ * Style base config form handler.
+ */
 function openlayers_style_form_start($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
@@ -74,18 +77,27 @@ function openlayers_style_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Style base config form validation handler.
+ */
 function openlayers_style_form_start_validate($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Style base config form submit handler.
+ */
 function openlayers_style_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Styles();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }
 
+/**
+ * Style type config form handler.
+ */
 function openlayers_style_form_type($form, &$form_state) {
   $styles = ctools_get_plugins('openlayers', 'Style');
   $options = array('' => t('<Choose the style type>'));
@@ -105,6 +117,9 @@ function openlayers_style_form_type($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Style type config form submit handler.
+ */
 function openlayers_style_form_type_submit($form, &$form_state) {
   if (!empty($form_state['values']['options'])) {
     $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
@@ -113,21 +128,30 @@ function openlayers_style_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
+/**
+ * Style options config form handler.
+ */
 function openlayers_style_form_options($form, &$form_state) {
   $style = openlayers_object_load('style', $form_state['item']);
-  $style->options_form($form, $form_state);
+  $style->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Style options config form validation handler.
+ */
 function openlayers_style_form_options_validate($form, &$form_state) {
   $style = openlayers_object_load('style', $form_state['item']);
-  $style->options_form_validate($form, $form_state);
+  $style->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Style options config form submit handler.
+ */
 function openlayers_style_form_options_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
   $style = openlayers_object_load('style', $form_state['item']);
-  $style->options_form_submit($form, $form_state);
+  $style->optionsFormSubmit($form, $form_state);
 }

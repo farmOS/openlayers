@@ -14,4 +14,3 @@ function openlayers_Vector_openlayers_layer() {
     ),
   );
 }
-

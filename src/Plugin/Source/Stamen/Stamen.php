@@ -12,7 +12,7 @@ class Stamen extends Source {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['layer'] = array(
       '#title' => t('Source type'),
       '#type' => 'select',

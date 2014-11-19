@@ -58,6 +58,9 @@ function openlayers_ui_Projections_ctools_export_ui() {
   );
 }
 
+/**
+ * Projection base config form handler.
+ */
 function openlayers_projection_form_start($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Projections();
   $class->init($form_state['plugin']);
@@ -73,12 +76,18 @@ function openlayers_projection_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Projection base config form validation handler.
+ */
 function openlayers_projection_form_start_validate($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Projections();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Projection base config form submit handler.
+ */
 function openlayers_projection_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Projections();
   $class->init($form_state['plugin']);

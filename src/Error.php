@@ -8,25 +8,40 @@ namespace Drupal\openlayers;
 
 /**
  * Class openlayers_config.
+ *
+ * Dummy class to avoid breaking the whole processing if a plugin class is
+ * missing.
  */
 class Error extends Object {
 
-  public $error_message;
+  /**
+   * @var string
+   */
+  public $errorMessage;
 
-  function __construct() {
-    foreach ($this->default_properties() as $property => $value) {
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct() {
+    foreach ($this->defaultProperties() as $property => $value) {
       $this->{$property} = $value;
     }
   }
 
-  function default_properties() {
-    $properties = parent::default_properties();
-    $properties['error_message'] = 'Error while loading object @machine_name having class @class.';
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultProperties() {
+    $properties = parent::defaultProperties();
+    $properties['errorMessage'] = 'Error while loading object @machine_name having class @class.';
     return $properties;
   }
 
-  function init(array $data) {
-    foreach ($this->default_properties() as $property => $value) {
+  /**
+   * {@inheritdoc}
+   */
+  public function init(array $data) {
+    foreach ($this->defaultProperties() as $property => $value) {
       if (isset($data[$property])) {
         $this->{$property} = $data[$property];
       }
@@ -40,39 +55,67 @@ class Error extends Object {
     drupal_set_message($this->getMessage(), 'error', FALSE);
   }
 
-  function getMessage() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getMessage() {
     $machine_name = isset($this->machine_name) ? $this->machine_name : 'undefined';
     $class = isset($this->class) ? $this->class : 'undefined';
     $type = isset($this->type) ? $this->type : 'undefined';
 
-    return t($this->error_message, array('@machine_name' => $machine_name, '@class' => $class, '@type' => $type));
+    return t($this->errorMessage, array(
+      '@machine_name' => $machine_name,
+      '@class' => $class,
+      '@type' => $type,
+    ));
   }
 
-  function getSource() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getSource() {
     return array();
   }
 
-  function getSources() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getSources() {
     return array();
   }
 
-  function getLayers() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getLayers() {
     return array();
   }
 
-  function getControls() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getControls() {
     return array();
   }
 
-  function getInteractions() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getInteractions() {
     return array();
   }
 
-  function getComponents() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getComponents() {
     return array();
   }
 
-  function getType() {
+  /**
+   * {@inheritdoc}
+   */
+  public function getType() {
     return 'Error';
   }
 }

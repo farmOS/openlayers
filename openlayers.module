@@ -278,8 +278,8 @@ function openlayers_libraries_info() {
             ),
             'css' => array(
               'css/openlayers.css' => array(
-                'weight' => 10
-              )
+                'weight' => 10,
+              ),
             ),
           ),
         ),

@@ -10,6 +10,5 @@
 function openlayers_examples_default_interactions() {
   $export = array();
 
-
   return $export;
 }

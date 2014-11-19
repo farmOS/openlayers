@@ -14,7 +14,7 @@ class SetValues extends Component {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['latitude'] = array(
       '#type' => 'textfield',
       '#title' => t('Latitude'),

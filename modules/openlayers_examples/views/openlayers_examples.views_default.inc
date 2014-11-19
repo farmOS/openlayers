@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Example views.
+ */
 
+/**
+ * Implements hook_views_default_views().
+ */
 function openlayers_examples_views_default_views() {
   $views = array();
 

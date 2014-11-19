@@ -18,7 +18,7 @@ class GoogleMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $layer_types = array(
       'ROADMAP',
       'SATELLITE',
@@ -57,7 +57,7 @@ class GoogleMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $map = null) {
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $map = NULL) {
     $map_id = $map->getId();
     $gmap_id = 'gmap-' . $map_id;
     $build['gmap'] = array(

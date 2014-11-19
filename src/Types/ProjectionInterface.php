@@ -9,4 +9,6 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_projection_interface.
  */
-interface ProjectionInterface {}
+interface ProjectionInterface {
+
+}

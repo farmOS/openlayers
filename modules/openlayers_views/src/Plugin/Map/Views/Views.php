@@ -76,7 +76,7 @@ class Views extends OLMap {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
 
     $options = array();
     $views = openalyers_views_get_views('openlayers_map_views');
@@ -92,6 +92,6 @@ class Views extends OLMap {
       '#options' => $options,
       '#default_value' => $this->getOption('views_display'),
     );
-    parent::options_form($form, $form_state);
+    parent::optionsForm($form, $form_state);
   }
 }

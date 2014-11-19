@@ -86,6 +86,9 @@ function openlayers_ui_Maps_ctools_export_ui() {
   );
 }
 
+/**
+ * Map base config form handler.
+ */
 function openlayers_map_form_start($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
@@ -93,29 +96,41 @@ function openlayers_map_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map base config form validation handler.
+ */
 function openlayers_map_form_start_validate($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Map base config form submit handler.
+ */
 function openlayers_map_form_start_submit($form, &$form_state) {
   $class = new Drupal\openlayers\UI\Maps();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }
 
+/**
+ * Map settings config form handler.
+ */
 function openlayers_map_form_settings($form, &$form_state) {
   if (!isset($form_state['item']->class)) {
     $form_state['item']->class = '\Drupal\openlayers\map\OLMap';
   }
   $map = openlayers_object_load('map', $form_state['item']);
-  $map->options_form($form, $form_state);
+  $map->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Map settings config form validation handler.
+ */
 function openlayers_map_form_settings_validate($form, &$form_state) {
   $item = $form_state['item'];
   if (empty($item->class)) {
@@ -124,9 +139,12 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
   $item->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
 
   $map = openlayers_object_load('map', $item);
-  $map->options_form_validate($form, $form_state);
+  $map->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Map settings config form submit handler.
+ */
 function openlayers_map_form_settings_submit($form, &$form_state) {
   // todo: fix.
   if (empty($form_state['item']->class)) {
@@ -135,9 +153,12 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
 
   $map = openlayers_object_load('map', $form_state['item']);
-  $map->options_form_submit($form, $form_state);
+  $map->optionsFormSubmit($form, $form_state);
 }
 
+/**
+ * Map layers config form handler.
+ */
 function openlayers_map_form_layers($form, &$form_state) {
   $all_layers = ctools_export_crud_load_all('openlayers_layers');
   $map = openlayers_object_load('map', $form_state['item']);
@@ -349,6 +370,9 @@ function openlayers_map_form_layers($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map layers config form submit handler.
+ */
 function openlayers_map_form_layers_submit($form, &$form_state) {
   $layers = $form_state['values']['layers'];
 
@@ -376,6 +400,9 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   $form_state['item']->options['sources'] = array_values($sources_enabled);
 }
 
+/**
+ * Map controls config form handler.
+ */
 function openlayers_map_form_controls($form, &$form_state) {
   $all_controls = ctools_export_crud_load_all('openlayers_controls');
 
@@ -430,10 +457,16 @@ function openlayers_map_form_controls($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map controls config form submit handler.
+ */
 function openlayers_map_form_controls_submit($form, &$form_state) {
   $form_state['item']->options['controls'] = array_filter(array_values($form_state['values']['options']['controls']));
 }
 
+/**
+ * Map interactions config form handler.
+ */
 function openlayers_map_form_interactions($form, &$form_state) {
   $all_interactions = ctools_export_crud_load_all('openlayers_interactions');
 
@@ -482,11 +515,17 @@ function openlayers_map_form_interactions($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map interactions config form submit handler.
+ */
 function openlayers_map_form_interactions_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive($form_state['item']->options, $form_state['values']['options']);
   $form_state['item']->options['interactions'] = array_filter(array_values($form_state['values']['options']['interactions']));
 }
 
+/**
+ * Map components config form handler.
+ */
 function openlayers_map_form_components($form, &$form_state) {
   $all_components = ctools_export_crud_load_all('openlayers_components');
 
@@ -535,19 +574,31 @@ function openlayers_map_form_components($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map components config form submit handler.
+ */
 function openlayers_map_form_components_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive($form_state['item']->options, $form_state['values']['options']);
   $form_state['item']->options['components'] = array_filter(array_values($form_state['values']['options']['components']));
 }
 
+/**
+ * Map styles config form handler.
+ */
 function openlayers_map_form_styles($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Map styles config form submit handler.
+ */
 function openlayers_map_form_styles_submit($form, &$form_state) {
 //  $form_state['item']->options = $form_state['item']->options, (array) $form_state['values']['options']);
 }
 
+/**
+ * Map preview form handler.
+ */
 function openlayers_map_form_preview($form, &$form_state) {
   $map = openlayers_object_load('map', $form_state['item']);
   $map->setOption('contextualLinks', FALSE);
@@ -558,10 +609,17 @@ function openlayers_map_form_preview($form, &$form_state) {
 
   return $form;
 }
+
+/**
+ * Map preview config form submit handler.
+ */
 function openlayers_map_form_preview_submit($form, &$form_state) {
 
 }
 
+/**
+ * Helper function to sort an array by item weight.
+ */
 function _openlayers_maps_sort_by_weight($a, $b) {
   if (isset($a['weight']) && isset($b['weight'])) {
     return $a['weight'] < $b['weight'] ? -1 : 1;

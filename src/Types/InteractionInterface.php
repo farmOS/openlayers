@@ -9,4 +9,6 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_interaction_interface.
  */
-interface InteractionInterface {}
+interface InteractionInterface {
+
+}

@@ -15,7 +15,7 @@ class ZoomToSource extends Component {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['source'] = array(
       '#type' => 'select',
       '#title' => t('Source'),

@@ -15,16 +15,16 @@ class GeoJSON extends Source {
   /**
    * {@inheritdoc}
    */
-  public function default_properties() {
-    $default_properties = parent::default_properties();
-    $default_properties['options']['paramForwarding'] = TRUE;
-    return $default_properties;
+  public function defaultProperties() {
+    $defaultProperties = parent::defaultProperties();
+    $defaultProperties['options']['paramForwarding'] = TRUE;
+    return $defaultProperties;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['url'] = array(
       '#title' => t('URL'),
       '#type' => 'textfield',

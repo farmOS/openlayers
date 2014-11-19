@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Interaction: JS.
+ * Interaction: InlineJS.
  */
 
 /**

@@ -16,7 +16,7 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('Size of the map'),

@@ -15,7 +15,7 @@ class InlineJS extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $attached = array();
 
     if (module_exists('ace_editor')) {

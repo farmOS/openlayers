@@ -66,6 +66,9 @@ function openlayers_ui_Interactions_ctools_export_ui() {
   );
 }
 
+/**
+ * Interaction base config form handler.
+ */
 function openlayers_interaction_form_start($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
@@ -91,12 +94,18 @@ function openlayers_interaction_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Interaction base config form validation handler.
+ */
 function openlayers_interaction_form_start_validate($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Interaction base config form submit handler.
+ */
 function openlayers_interaction_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Interactions();
   $class->init($form_state['plugin']);
@@ -109,6 +118,9 @@ function openlayers_interaction_form_start_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Interaction type config form handler.
+ */
 function openlayers_interaction_form_type($form, &$form_state) {
   $interactions = ctools_get_plugins('openlayers', 'Interaction');
   $options = array('' => t('<Choose the interaction type>'));
@@ -128,25 +140,37 @@ function openlayers_interaction_form_type($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Interaction type config form submit handler.
+ */
 function openlayers_interaction_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
+/**
+ * Interaction options config form handler.
+ */
 function openlayers_interaction_form_options($form, &$form_state) {
   $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form($form, $form_state);
+  $interaction->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Interaction options config form validation handler.
+ */
 function openlayers_interaction_form_options_validate($form, &$form_state) {
   $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form_validate($form, $form_state);
+  $interaction->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Interaction options config form submit handler.
+ */
 function openlayers_interaction_form_options_submit($form, &$form_state) {
   $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
   $interaction = openlayers_object_load('interaction', $form_state['item']);
-  $interaction->options_form_submit($form, $form_state);
+  $interaction->optionsFormSubmit($form, $form_state);
 }

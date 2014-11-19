@@ -15,7 +15,7 @@ class TileDebug extends Source {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['maxZoom'] = array(
       '#title' => t('Maxzoom'),
       '#type' => 'textfield',

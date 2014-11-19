@@ -199,8 +199,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       '#collapsed' => TRUE,
     );
     $variable_fields = array();
-    foreach ($this->view->display_handler->get_handlers('field') as
-             $field => $handler) {
+    foreach ($this->view->display_handler->get_handlers('field') as $field => $handler) {
       $variable_fields[$field] = '${' . $field . '}';
     }
     if (!empty($this->options['data_source']['name_field'])) {

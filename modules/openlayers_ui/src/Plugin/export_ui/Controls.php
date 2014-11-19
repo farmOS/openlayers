@@ -1,16 +1,21 @@
 <?php
+/**
+ * @file
+ * Class Controls.
+ */
 
 namespace Drupal\openlayers\UI;
 
+/**
+ * Class Controls.
+ * @package Drupal\openlayers\UI
+ */
 class Controls extends \ObjectsUI {
 
   /**
-   * Entry point of hook_menu().
-   *
-   * Child implementations that need to add or modify menu items should
-   * probably call parent::hook_menu($items) and then modify as needed.
+   * {@inheritdoc}
    */
-  function hook_menu(&$items) {
+  public function hook_menu(&$items) {
     parent::hook_menu($items);
     $items['admin/structure/openlayers/controls']['type'] = MENU_LOCAL_TASK;
     $items['admin/structure/openlayers/controls']['weight'] = 1;

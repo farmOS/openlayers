@@ -16,7 +16,7 @@ interface ObjectInterface {
    * @return array
    *   The default properties for this class.
    */
-  public function default_properties();
+  public function defaultProperties();
 
   /**
    * Initializes the object.
@@ -29,13 +29,15 @@ interface ObjectInterface {
   /**
    * The type of this object.
    *
+   * @todo: Shouldn't we automatically compute this based on the fully qualified
+   * class name ?
+   * ex: \Drupal\openlayers\Control\MousePosition => Control
+   *
    * @see openlayers_object_types()
    *
    * @return string|FALSE
    *   The object type or FALSE on failure.
    */
-  // @todo: Shouldn't we automatically compute this based on the fully qualified class name ?
-  // ex: \Drupal\openlayers\Control\MousePosition => Control
   public function getType();
 
   /**
@@ -91,7 +93,7 @@ interface ObjectInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function options_form(&$form, &$form_state);
+  public function optionsForm(&$form, &$form_state);
 
   /**
    * Validation callback for the options form.
@@ -101,7 +103,7 @@ interface ObjectInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function options_form_validate($form, &$form_state);
+  public function optionsFormValidate($form, &$form_state);
 
   /**
    * Submit callback for the options form.
@@ -111,7 +113,7 @@ interface ObjectInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function options_form_submit($form, &$form_state);
+  public function optionsFormSubmit($form, &$form_state);
 
   /**
    * Returns a list of attachments for building the render array.
@@ -153,7 +155,27 @@ interface ObjectInterface {
    */
   public function isAsynchronous();
 
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null);
+  /**
+   * Invoked before an objects render array is built.
+   *
+   * Mostly invoked by the map object.
+   *
+   * @param array $build
+   *   The array with the build information.
+   * @param \Drupal\openlayers\ObjectInterface $context
+   *   The context of the build. Mostly the map object.
+   */
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL);
 
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null);
+  /**
+   * Invoked after an objects render array is built.
+   *
+   * Mostly invoked by the map object.
+   *
+   * @param array $build
+   *   The array with the build information.
+   * @param \Drupal\openlayers\ObjectInterface $context
+   *   The context of the build. Mostly the map object.
+   */
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL);
 }

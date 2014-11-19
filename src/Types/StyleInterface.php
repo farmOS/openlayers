@@ -9,4 +9,5 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_style_interface.
  */
-interface StyleInterface {}
+interface StyleInterface {
+}

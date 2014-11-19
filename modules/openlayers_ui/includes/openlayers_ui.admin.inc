@@ -30,7 +30,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     $map = $form_state['values']['openlayers_default_map'];
   }
 
-
   $form['openlayers_default_map'] = array(
     '#type' => 'select',
     '#title' => t('OpenLayers maps'),

@@ -66,6 +66,9 @@ function openlayers_ui_Sources_ctools_export_ui() {
   );
 }
 
+/**
+ * Source base config form handler.
+ */
 function openlayers_source_form_start($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Sources();
   $class->init($form_state['plugin']);
@@ -91,12 +94,18 @@ function openlayers_source_form_start($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Source base config form validation handler.
+ */
 function openlayers_source_form_start_validate($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Sources();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
 
+/**
+ * Source base config form submit handler.
+ */
 function openlayers_source_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\Sources();
   $class->init($form_state['plugin']);
@@ -109,6 +118,9 @@ function openlayers_source_form_start_submit($form, &$form_state) {
   }
 }
 
+/**
+ * Source type config form handler.
+ */
 function openlayers_source_form_type($form, &$form_state) {
   $sources = ctools_get_plugins('openlayers', 'Source');
   $options = array('' => t('<Choose the source type>'));
@@ -139,6 +151,9 @@ function openlayers_source_form_type($form, &$form_state) {
   return $form;
 }
 
+/**
+ * Source type config form submit handler.
+ */
 function openlayers_source_form_type_submit($form, &$form_state) {
   if (!empty($form_state['values']['options'])) {
     $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
@@ -151,23 +166,32 @@ function openlayers_source_form_type_submit($form, &$form_state) {
   $form_state['item']->class = $form_state['values']['class'];
 }
 
+/**
+ * Source options config form handler.
+ */
 function openlayers_source_form_options($form, &$form_state) {
   $source = openlayers_object_load('source', $form_state['item']);
-  $source->options_form($form, $form_state);
+  $source->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
 }
 
+/**
+ * Source options config form validation handler.
+ */
 function openlayers_source_form_options_validate($form, &$form_state) {
   $source = openlayers_object_load('source', $form_state['item']);
-  $source->options_form_validate($form, $form_state);
+  $source->optionsFormValidate($form, $form_state);
 }
 
+/**
+ * Source options config form submit handler.
+ */
 function openlayers_source_form_options_submit($form, &$form_state) {
   if (!empty($form_state['values']['options'])) {
     $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
   $source = openlayers_object_load('source', $form_state['item']);
-  $source->options_form_submit($form, $form_state);
+  $source->optionsFormSubmit($form, $form_state);
 }

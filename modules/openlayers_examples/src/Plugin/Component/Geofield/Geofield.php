@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Component: Geofield
+ */
 
 namespace Drupal\openlayers\Component;
 use Drupal\openlayers\Component;

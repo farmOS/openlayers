@@ -15,7 +15,7 @@ class MousePosition extends Control {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['target'] = array(
       '#type' => 'textfield',
       '#title' => t('ID of the element.'),

@@ -1,10 +1,22 @@
 <?php
+/**
+ * @file
+ * Interaction: DragPan.
+ */
 
 namespace Drupal\openlayers\Interaction;
 use Drupal\openlayers\Interaction;
 
+/***
+ * Class DragPan
+ * @package Drupal\openlayers\Interaction
+ */
 class DragPan extends Interaction {
-  function options_form(&$form, &$form_state) {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['decay'] = array(
       '#type' => 'textfield',
       '#title' => t('Decay'),

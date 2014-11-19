@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Control: Attribution.
+ * Interaction: DoubleClickZoom.
  */
 
 /**

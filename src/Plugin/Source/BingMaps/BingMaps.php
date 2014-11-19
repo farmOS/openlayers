@@ -15,7 +15,7 @@ class BingMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $layer_types = array(
       'Road',
       'Aerial',

@@ -9,4 +9,6 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_control_interface.
  */
-interface ControlInterface {}
+interface ControlInterface {
+
+}

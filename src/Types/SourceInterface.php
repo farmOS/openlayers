@@ -9,4 +9,6 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_source_interface.
  */
-interface SourceInterface {}
+interface SourceInterface {
+
+}

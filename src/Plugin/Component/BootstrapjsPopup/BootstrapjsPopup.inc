@@ -14,4 +14,3 @@ function openlayers_BootstrapjsPopup_openlayers_component() {
     ),
   );
 }
-

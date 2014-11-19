@@ -15,7 +15,7 @@ class Graticule extends Component {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['rgba'] = array(
       '#type' => 'textfield',
       '#title' => t('RGBA'),

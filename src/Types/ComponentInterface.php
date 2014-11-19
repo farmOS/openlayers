@@ -9,4 +9,6 @@ namespace Drupal\openlayers;
 /**
  * Interface openlayers_component_interface.
  */
-interface ComponentInterface {}
+interface ComponentInterface {
+
+}

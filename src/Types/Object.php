@@ -55,7 +55,7 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function default_properties() {
+  public function defaultProperties() {
     return array(
       'machine_name' => '',
       'name' => '',
@@ -64,11 +64,17 @@ abstract class Object implements ObjectInterface {
     );
   }
 
-  function parse_classname() {
+  /**
+   * Parses a classname into class and namespace parts.
+   *
+   * @return array
+   *   Array with namespace and classname.
+   */
+  public function parseClassname() {
     $name = get_class($this);
     return array(
       'namespace' => array_slice(explode('\\', $name), 0, -1),
-      'classname' => join('', array_slice(explode('\\', $name), -1)),
+      'classname' => implode('', array_slice(explode('\\', $name), -1)),
     );
   }
 
@@ -77,7 +83,7 @@ abstract class Object implements ObjectInterface {
    */
   public function init(array $data) {
     // Mash the provided configuration with the defaults.
-    foreach ($this->default_properties() as $property => $value) {
+    foreach ($this->defaultProperties() as $property => $value) {
       if (isset($data[$property])) {
         $this->{$property} = $data[$property];
       }
@@ -88,7 +94,7 @@ abstract class Object implements ObjectInterface {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
 
-    $class_info = $this->parse_classname();
+    $class_info = $this->parseClassname();
     $this->class = get_class($this);
     $this->plugin = ctools_get_plugins('openlayers', $this->getType(), $class_info['classname']);
 
@@ -103,30 +109,51 @@ abstract class Object implements ObjectInterface {
    *
    * @TODO What is this return? If it is the form, why is form by reference?
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     return array();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function options_form_validate($form, &$form_state) {}
+  public function optionsFormValidate($form, &$form_state) {
+
+  }
 
   /**
    * {@inheritdoc}
    */
-  public function options_form_submit($form, &$form_state) {}
+  public function optionsFormSubmit($form, &$form_state) {
 
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {}
-
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {}
-
-  public function build() {}
+  }
 
   /**
    * {@inheritdoc}
    */
-  public function develop() {}
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function build() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function develop() {
+
+  }
 
   /**
    * {@inheritdoc}
@@ -233,7 +260,7 @@ abstract class Object implements ObjectInterface {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';
       if (file_exists($jsdir)) {
-        foreach(file_scan_directory($jsdir, '/.*\.js$/') as $file) {
+        foreach (file_scan_directory($jsdir, '/.*\.js$/') as $file) {
           $this->attached['js'][$file->uri] = array(
             'data' => $file->uri,
             'type' => 'file',
@@ -243,7 +270,7 @@ abstract class Object implements ObjectInterface {
         }
       }
       if (file_exists($cssdir)) {
-        foreach(file_scan_directory($cssdir, '/.*\.css$/') as $file) {
+        foreach (file_scan_directory($cssdir, '/.*\.css$/') as $file) {
           $this->attached['css'][$file->uri] = array(
             'data' => $file->uri,
             'type' => 'file',
@@ -286,6 +313,9 @@ abstract class Object implements ObjectInterface {
     return FALSE;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getType() {
     $class = explode('\\', get_class($this));
     return $class[2];

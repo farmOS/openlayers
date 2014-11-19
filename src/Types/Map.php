@@ -228,12 +228,15 @@ class Map extends Object implements MapInterface {
     return $this->attached;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     parent::preBuild($build, $context);
 
-    foreach(openlayers_object_types() as $type) {
+    foreach (openlayers_object_types() as $type) {
       if (isset($this->objects[$type])) {
-        foreach($this->objects[$type] as $object) {
+        foreach ($this->objects[$type] as $object) {
           $object->preBuild($build, $this);
           drupal_alter('openlayers_object_preprocess', $object, $this);
         }
@@ -243,12 +246,15 @@ class Map extends Object implements MapInterface {
   }
 
 
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {
+  /**
+   * {@inheritdoc}
+   */
+  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     parent::postBuild($build, $context);
 
-    foreach(openlayers_object_types() as $type) {
+    foreach (openlayers_object_types() as $type) {
       if (isset($this->objects[$type])) {
-        foreach($this->objects[$type] as $object) {
+        foreach ($this->objects[$type] as $object) {
           $object->postBuild($build, $context);
           drupal_alter('openlayers_object_postprocess', $object, $build);
         }
@@ -257,6 +263,9 @@ class Map extends Object implements MapInterface {
     drupal_alter('openlayers_object_postprocess', $this, $build);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
     $map = $this;
     $build = array();

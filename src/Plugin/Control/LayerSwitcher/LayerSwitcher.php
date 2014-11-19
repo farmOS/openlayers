@@ -19,7 +19,7 @@ class LayerSwitcher extends Control {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['layers'] = array(
       '#type' => 'select',
       '#title' => t('Layers'),
@@ -29,11 +29,10 @@ class LayerSwitcher extends Control {
     );
   }
 
-
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = null) {
+  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
     $map_id = $context->getId();
     $layers = $this->getOption('layers', array());
     $items = array();
@@ -61,14 +60,4 @@ class LayerSwitcher extends Control {
     );
     $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="layerswitcher">' . drupal_render($layerswitcher) . '</div>');
   }
-
-  /**
-   * <div id="toolbox">
-  <ul id="layerswitcher">
-  <li><label><input type="radio" name="layer" value="0" checked> MapQuest Satellite</label></li>
-  <li><label><input type="radio" name="layer" value="1"> MapQuest Hybrid</label></li>
-  <li><label><input type="radio" name="layer" value="2"> MapQuest OSM</label></li>
-  <li><label><input type="radio" name="layer" value="3"> OSM</label></li>
-  </ul>
-   */
 }

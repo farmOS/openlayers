@@ -15,7 +15,7 @@ class Tile extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $form['options']['url'] = array(
       '#type' => 'textarea',
       '#title' => t('Base URL (template)'),

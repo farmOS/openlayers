@@ -10,6 +10,5 @@
 function openlayers_examples_default_controls() {
   $export = array();
 
-
   return $export;
 }

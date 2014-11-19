@@ -15,7 +15,7 @@ class Tooltip extends Component {
   /**
    * {@inheritdoc}
    */
-  public function options_form(&$form, &$form_state) {
+  public function optionsForm(&$form, &$form_state) {
     $layers = ctools_export_crud_load_all('openlayers_layers');
     $options = array('' => t('<Choose the layer>'));
     foreach ($layers as $machine_name => $data) {
