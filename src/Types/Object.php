@@ -5,7 +5,6 @@
  */
 
 namespace Drupal\openlayers\Types;
-use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
 
 /**
