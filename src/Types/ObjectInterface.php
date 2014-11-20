@@ -4,7 +4,7 @@
  * Interface openlayers_object_interface.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
 
 /**
  * Interface openlayers_object_interface.
@@ -118,13 +118,13 @@ interface ObjectInterface {
   /**
    * Returns a list of attachments for building the render array.
    *
-   * @param \Drupal\openlayers\ObjectInterface $context
+   * @param \Drupal\openlayers\Types\ObjectInterface $context
    *   The object the attachments are attached to.
    *
    * @return array
    *   The attachments to add.
    */
-  public function attached(\Drupal\openlayers\ObjectInterface $context);
+  public function attached(\Drupal\openlayers\Types\ObjectInterface $context);
 
   /**
    * Defines dependencies.
@@ -162,10 +162,10 @@ interface ObjectInterface {
    *
    * @param array $build
    *   The array with the build information.
-   * @param \Drupal\openlayers\ObjectInterface $context
+   * @param \Drupal\openlayers\Types\ObjectInterface $context
    *   The context of the build. Mostly the map object.
    */
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL);
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
 
   /**
    * Invoked after an objects render array is built.
@@ -174,8 +174,8 @@ interface ObjectInterface {
    *
    * @param array $build
    *   The array with the build information.
-   * @param \Drupal\openlayers\ObjectInterface $context
+   * @param \Drupal\openlayers\Types\ObjectInterface $context
    *   The context of the build. Mostly the map object.
    */
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL);
+  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
 }

@@ -603,9 +603,7 @@ function openlayers_map_form_preview($form, &$form_state) {
   $map = openlayers_object_load('map', $form_state['item']);
   $map->setOption('contextualLinks', FALSE);
 
-  $form['preview'] = array(
-    '#markup' => openlayers_render_map($map),
-  );
+  $form['preview'] = $map->build();
 
   return $form;
 }

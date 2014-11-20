@@ -4,7 +4,7 @@
  * Class openlayers_layer.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
 
 /**
  * Class openlayers_layer.
@@ -55,7 +55,7 @@ abstract class Layer extends Object implements LayerInterface {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     if ($source = $this->getSource()) {
       $source->preBuild($build, $context);
       drupal_alter('openlayers_object_preprocess', $source, $build);
@@ -66,7 +66,7 @@ abstract class Layer extends Object implements LayerInterface {
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     if ($source = $this->getSource()) {
       $source->postBuild($build, $context);
       drupal_alter('openlayers_object_postprocess', $source, $build);

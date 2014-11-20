@@ -4,7 +4,7 @@
  * Class openlayers_control.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
 
 /**
  * Class openlayers_control.

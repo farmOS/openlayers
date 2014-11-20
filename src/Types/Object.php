@@ -4,7 +4,9 @@
  * Class openlayers_object.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
+use Drupal\Component\Plugin\PluginBase;
+use Drupal\openlayers\Config;
 
 /**
  * Class openlayers_object.
@@ -130,14 +132,14 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
 
   }
 
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
 
   }
 
@@ -252,10 +254,12 @@ abstract class Object implements ObjectInterface {
     return $default_value;
   }
 
+
+
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
     if ($plugin = $this->getPlugin()) {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';

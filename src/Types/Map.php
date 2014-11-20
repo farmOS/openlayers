@@ -4,7 +4,7 @@
  * Class openlayers_map.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
 
 /**
  * Class openlayers_map.
@@ -213,7 +213,7 @@ class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\ObjectInterface $context) {
+  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
     $this->attached = parent::attached($context);
     $objects = $this->getObjects();
 
@@ -231,7 +231,7 @@ class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     parent::preBuild($build, $context);
 
     foreach (openlayers_object_types() as $type) {
@@ -249,7 +249,7 @@ class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\ObjectInterface $context = NULL) {
+  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     parent::postBuild($build, $context);
 
     foreach (openlayers_object_types() as $type) {

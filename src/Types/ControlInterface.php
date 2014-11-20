@@ -4,7 +4,7 @@
  * Interface openlayers_control_interface.
  */
 
-namespace Drupal\openlayers;
+namespace Drupal\openlayers\Types;
 
 /**
  * Interface openlayers_control_interface.
