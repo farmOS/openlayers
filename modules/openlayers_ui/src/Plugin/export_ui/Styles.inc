@@ -121,8 +121,8 @@ function openlayers_style_form_type($form, &$form_state) {
  * Style type config form submit handler.
  */
 function openlayers_style_form_type_submit($form, &$form_state) {
-  if (!empty($form_state['values']['options'])) {
-    $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
   $form_state['item']->class = $form_state['values']['class'];
@@ -151,7 +151,9 @@ function openlayers_style_form_options_validate($form, &$form_state) {
  * Style options config form submit handler.
  */
 function openlayers_style_form_options_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
   $style = openlayers_object_load('style', $form_state['item']);
   $style->optionsFormSubmit($form, $form_state);
 }

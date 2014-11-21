@@ -155,8 +155,8 @@ function openlayers_source_form_type($form, &$form_state) {
  * Source type config form submit handler.
  */
 function openlayers_source_form_type_submit($form, &$form_state) {
-  if (!empty($form_state['values']['options'])) {
-    $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
   if (empty($form_state['values']['options']['attributions'])) {
@@ -189,8 +189,8 @@ function openlayers_source_form_options_validate($form, &$form_state) {
  * Source options config form submit handler.
  */
 function openlayers_source_form_options_submit($form, &$form_state) {
-  if (!empty($form_state['values']['options'])) {
-    $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
   $source = openlayers_object_load('source', $form_state['item']);
   $source->optionsFormSubmit($form, $form_state);
