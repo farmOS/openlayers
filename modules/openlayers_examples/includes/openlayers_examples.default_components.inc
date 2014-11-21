@@ -124,7 +124,9 @@ function openlayers_examples_default_components() {
   $ol_component->description = '';
   $ol_component->class = '\\Drupal\\openlayers\\Component\\Popup';
   $ol_component->options = array(
-    'layer' => 'openlayers_examples_layer_views_geojson_popup',
+    'layers' => array(
+      'openlayers_examples_layer_views_geojson_popup' => 'openlayers_examples_layer_views_geojson_popup',
+    ),
   );
   $export['openlayers_examples_component_simple_popup'] = $ol_component;
 
@@ -182,7 +184,9 @@ map.getLayers().forEach(function(layer){
   $ol_component->description = '';
   $ol_component->class = '\\Drupal\\openlayers\\Component\\Popup';
   $ol_component->options = array(
-    'layer' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
+    'layer' => array(
+      'openlayers_examples_layer_vector_kml_earthquakes_heatmap' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
+    ),
     'positioning' => 'top-right',
   );
   $export['openlayers_examples_component_simple_popup_earthquakes'] = $ol_component;
