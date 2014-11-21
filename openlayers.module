@@ -84,7 +84,7 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
     $object = new $object_class();
   }
   else {
-    $object = new Drupal\openlayers\Error();
+    $object = new \Drupal\openlayers\Types\Error();
     $object->type = $object_type;
     $object->class = $object_class;
   }

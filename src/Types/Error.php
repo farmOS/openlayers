@@ -51,7 +51,7 @@ class Error extends Object {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
 
-    watchdog(Config::WATCHDOG_TYPE, $this->getMessage(), array(), WATCHDOG_ERROR);
+    watchdog(\Drupal\openlayers\Config::WATCHDOG_TYPE, $this->getMessage(), array(), WATCHDOG_ERROR);
     drupal_set_message($this->getMessage(), 'error', FALSE);
   }
 
