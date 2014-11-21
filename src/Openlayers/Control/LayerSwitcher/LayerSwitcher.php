@@ -45,16 +45,6 @@ class LayerSwitcher extends Control {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
-    // We have to set the item option for the layers since the automated save
-    // uses array_replace_recursive() which won't allow us to remove layers.
-    $form_state['item']->options['layers'] = (array) $form_state['values']['options']['layers'];
-    return parent::optionsFormSubmit($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     $map_id = $context->getId();
     $layers = $this->getOption('layers', array());
