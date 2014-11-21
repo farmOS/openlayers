@@ -270,6 +270,11 @@ class Map extends Object implements MapInterface {
     $map = $this;
     $build = array();
 
+    $current_path = current_path();
+    if ('system/ajax' == $current_path) {
+      $current_path = $_SESSION['current_path'];
+    }
+
     $map->preBuild($build, $map);
 
     $attached = $map->attached($map);
@@ -284,10 +289,37 @@ class Map extends Object implements MapInterface {
       ),
     );
 
+    $links = array(
+      'openlayers' => array(
+        'title' => 'Edit this map',
+        'href' => 'admin/structure/openlayers/maps/list/' . $map->machine_name . '/edit',
+        'query' => array(
+          'destination' => $current_path,
+        ),
+      ),
+    );
     $asynchronous = 0;
     foreach (openlayers_object_types() as $type) {
+      // Build contextual link title for this type.
+      $links[$type] = array(
+        'title' => '<strong>' . ucwords($type . 's') . '</strong>',
+        'html' => TRUE,
+      );
       foreach ($objects[$type] as $object) {
         $asynchronous += (int) $object->isAsynchronous();
+
+        // Build contextual link for this object.
+        $name = $object->get('name');
+        if (empty($name)) {
+          $name = $object->machine_name;
+        }
+        $links[$type . ':' . $object->machine_name] = array(
+          'title' => t('Edit @object_name', array('@object_name' => $name)),
+          'href' => 'admin/structure/openlayers/' . $type . 's/list/' . $object->machine_name . '/edit',
+          'query' => array(
+            'destination' => $current_path,
+          ),
+        );
       }
     }
     // If this is asynchronous flag it as such.
@@ -300,20 +332,6 @@ class Map extends Object implements MapInterface {
       'type' => 'setting',
     );
 
-    $current_path = current_path();
-    if ('system/ajax' == $current_path) {
-      $current_path = $_SESSION['current_path'];
-    }
-
-    $links = array(
-      'openlayers' => array(
-        'title' => 'Edit this map',
-        'href' => 'admin/structure/openlayers/maps/list/' . $map->machine_name . '/edit',
-        'query' => array(
-          'destination' => $current_path,
-        ),
-      ),
-    );
 
     $styles = array(
       'width' => $map->getOption('width'),
