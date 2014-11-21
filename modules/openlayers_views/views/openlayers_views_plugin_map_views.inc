@@ -49,7 +49,7 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
       // Inject the features so that the map handler doesn't execute the view
       // again.
       $this->map->setFeatures($this->features);
-      $output = openlayers_render_build_map($this->map);
+      $output = $this->map->build();
     }
     return $output;
   }
