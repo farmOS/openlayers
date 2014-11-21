@@ -20,6 +20,11 @@ class LayerSwitcher extends Control {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
+    $form['options']['label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title of the control'),
+      '#default_value' => $this->getOption('label', 'Layers'),
+    );
     $form['options']['layers'] = array(
       '#type' => 'select',
       '#title' => t('Layers'),
@@ -27,6 +32,24 @@ class LayerSwitcher extends Control {
       '#default_value' => $this->getOption('layers'),
       '#options' => openlayers_layer_options(FALSE),
     );
+    $form['options']['multiselect'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Allow selecting multiple layers'),
+      '#default_value' => $this->getOption('multiselect', FALSE),
+    );
+    // @TODO Add configuration to add labels for layers.
+    // @TODO Add configuration for initial visibility. (Adjust JS accordingly)
+    // @TODO Add configuration for ordering?
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsFormSubmit($form, &$form_state) {
+    // We have to set the item option for the layers since the automated save
+    // uses array_replace_recursive() which won't allow us to remove layers.
+    $form_state['item']->options['layers'] = (array) $form_state['values']['options']['layers'];
+    return parent::optionsFormSubmit($form, $form_state);
   }
 
   /**
@@ -38,21 +61,24 @@ class LayerSwitcher extends Control {
     $items = array();
     $map_layers = $context->getLayers();
 
+    $element_type = ($this->getOption('multiselect', FALSE)) ? 'checkbox' : 'radio';
+
     // Only handle layers available in the map and configured in the control.
     foreach ($map_layers as $i => $map_layer) {
       if (isset($layers[$map_layer->machine_name])) {
         $items[] = array(
-          'data' => '<label><input type="radio" name="layer" value="' . $map_layer->machine_name . '">' . $map_layer->machine_name . '</label>',
+          'data' => '<label><input type="' . $element_type . '" name="layer" value="' . $map_layer->machine_name . '">' . $map_layer->get('name') . '</label>',
           'id' => $map_id . '-' . $map_layer->machine_name,
           'class' => array(drupal_html_class($map_layer->machine_name)),
         );
       }
     }
 
+    // @TODO Do we need i18n integration?
     $layerswitcher = array(
       '#theme' => 'item_list',
       '#type' => 'ul',
-      '#title' => t('LayerSwitcher'),
+      '#title' => t($this->getOption('label', 'Layers')),
       '#items' => $items,
       '#attributes' => array(
         'id' => drupal_html_id($this->machine_name),
