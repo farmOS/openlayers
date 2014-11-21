@@ -33,31 +33,35 @@ function openlayers_ctools_plugin_type() {
   return array(
     'Map' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Layer' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Style' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Source' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Control' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Interaction' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
     ),
     'Component' => array(
       'use hooks' => FALSE,
-      'classes' => array('handler'),
+      'classes' => array('class'),
+    ),
+    'ServiceProvider' => array(
+      'cache' => FALSE,
+      'classes' => array('class'),
     ),
   );
 }
@@ -419,3 +423,19 @@ function openlayers_layer_options($empty_option = TRUE) {
   }
   return $options;
 }
+
+/**
+ *  Implements hook_init().
+ */
+function openlayers_init() {
+  Openlayers::init();
+
+  dpm(Openlayers::getOLObjects());
+
+  $component = OpenLayers::getComponent('Autopopup');
+
+  $component->init(array('options' => array('layers' => 'testlayer1', 'some option' => 'some value')));
+
+  dpm($component);
+
+  }

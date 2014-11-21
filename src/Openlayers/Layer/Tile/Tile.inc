@@ -9,8 +9,6 @@
  */
 function openlayers_Tile_openlayers_layer() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\Layer\\Tile',
-    ),
   );
 }

@@ -14,8 +14,6 @@
  */
 function openlayers_GoogleMaps_openlayers_source() {
   return array(
-    'handler' => array(
       'class' => '\\Drupal\\openlayers\\Source\\GoogleMaps',
-    ),
   );
 }
