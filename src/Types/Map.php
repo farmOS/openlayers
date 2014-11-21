@@ -300,12 +300,9 @@ class Map extends Object implements MapInterface {
     );
     $asynchronous = 0;
     foreach (openlayers_object_types() as $type) {
-      // Build contextual link title for this type.
-      $links[$type] = array(
-        'title' => '<strong>' . ucwords($type . 's') . '</strong>',
-        'html' => TRUE,
-      );
+      $object_links = array();
       foreach ($objects[$type] as $object) {
+        // Check if this object is asynchronous.
         $asynchronous += (int) $object->isAsynchronous();
 
         // Build contextual link for this object.
@@ -313,13 +310,22 @@ class Map extends Object implements MapInterface {
         if (empty($name)) {
           $name = $object->machine_name;
         }
-        $links[$type . ':' . $object->machine_name] = array(
+        $object_links[$type . ':' . $object->machine_name] = array(
           'title' => t('Edit @object_name', array('@object_name' => $name)),
           'href' => 'admin/structure/openlayers/' . $type . 's/list/' . $object->machine_name . '/edit',
           'query' => array(
             'destination' => $current_path,
           ),
         );
+      }
+
+      if (!empty($object_links)) {
+        // Build contextual link title for this type.
+        $links[$type] = array(
+          'title' => '<strong>' . ucwords($type . 's') . '</strong>',
+          'html' => TRUE,
+        );
+        $links += $object_links;
       }
     }
     // If this is asynchronous flag it as such.
