@@ -170,7 +170,9 @@ function openlayers_control_form_options_validate($form, &$form_state) {
  * Control options config form submit handler.
  */
 function openlayers_control_form_options_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
   $control = openlayers_object_load('control', $form_state['item']);
   $control->optionsFormSubmit($form, $form_state);
 }

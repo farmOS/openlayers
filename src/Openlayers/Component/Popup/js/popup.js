@@ -41,7 +41,7 @@ Drupal.openlayers.component__popup = function(data) {
 
   map.on('click', function(evt) {
     var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-      if (layer.machine_name == data.options.layer) {
+      if (goog.isDef(data.options.layers[layer.machine_name])) {
         return feature;
       }
     });

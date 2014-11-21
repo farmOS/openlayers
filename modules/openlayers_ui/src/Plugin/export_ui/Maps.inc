@@ -136,7 +136,9 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
   if (empty($item->class)) {
     $item->class = '\Drupal\openlayers\map\OLMap';
   }
-  $item->options = array_replace_recursive((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
 
   $map = openlayers_object_load('map', $item);
   $map->optionsFormValidate($form, $form_state);
@@ -150,7 +152,9 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
   if (empty($form_state['item']->class)) {
     $form_state['item']->class = '\\Drupal\\openlayers\\Map\\OLMap';
   }
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
 
   $map = openlayers_object_load('map', $form_state['item']);
   $map->optionsFormSubmit($form, $form_state);
@@ -519,7 +523,9 @@ function openlayers_map_form_interactions($form, &$form_state) {
  * Map interactions config form submit handler.
  */
 function openlayers_map_form_interactions_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive($form_state['item']->options, $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
   $form_state['item']->options['interactions'] = array_filter(array_values($form_state['values']['options']['interactions']));
 }
 
@@ -578,7 +584,9 @@ function openlayers_map_form_components($form, &$form_state) {
  * Map components config form submit handler.
  */
 function openlayers_map_form_components_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive($form_state['item']->options, $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
   $form_state['item']->options['components'] = array_filter(array_values($form_state['values']['options']['components']));
 }
 

@@ -151,8 +151,8 @@ function openlayers_component_form_type_submit($form, &$form_state) {
  * Component options form handler.
  */
 function openlayers_component_form_options($form, &$form_state) {
-  $control = openlayers_object_load('component', $form_state['item']);
-  $control->optionsForm($form, $form_state);
+  $component = openlayers_object_load('component', $form_state['item']);
+  $component->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
   return $form;
@@ -162,13 +162,17 @@ function openlayers_component_form_options($form, &$form_state) {
  * Component options form validation handler.
  */
 function openlayers_component_form_options_validate($form, &$form_state) {
-  $control = openlayers_object_load('component', $form_state['item']);
-  $control->optionsFormValidate($form, $form_state);
+  $component = openlayers_object_load('component', $form_state['item']);
+  $component->optionsFormValidate($form, $form_state);
 }
 
 /**
  * Component options form submit handler.
  */
 function openlayers_component_form_options_submit($form, &$form_state) {
-  $form_state['item']->options = array_replace_recursive((array) $form_state['item']->options, $form_state['values']['options']);
+  if (isset($form_state['values']['options'])) {
+    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  }
+  $component = openlayers_object_load('component', $form_state['item']);
+  $component->optionsFormSubmit($form, $form_state);
 }

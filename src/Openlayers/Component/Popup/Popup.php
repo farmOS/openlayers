@@ -16,19 +16,14 @@ class Popup extends Component {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
-    $layers = ctools_export_crud_load_all('openlayers_layers');
-    $options = array('' => t('<Choose the layer>'));
-    foreach ($layers as $machine_name => $data) {
-      $options[$machine_name] = $data->name;
-    }
-
-    $form['options']['layer'] = array(
+    $form['options']['layers'] = array(
       '#type' => 'select',
-      '#title' => t('Layer'),
-      '#default_value' => isset($form_state['item']->options['layer']) ? $form_state['item']->options['layer'] : '',
-      '#description' => t('Select the layer.'),
-      '#options' => $options,
+      '#title' => t('Layers'),
+      '#default_value' => isset($form_state['item']->options['layers']) ? $form_state['item']->options['layers'] : '',
+      '#description' => t('Select the layers.'),
+      '#options' => openlayers_layer_options(),
       '#required' => TRUE,
+      '#multiple' => TRUE,
     );
 
     $form['options']['positioning'] = array(
@@ -39,6 +34,23 @@ class Popup extends Component {
       '#options' => openlayers_positioning_options(),
       '#required' => TRUE,
     );
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    $layers = $this->getOption('layers', array());
+    $map_layers = $context->getLayers();
+    // Only handle layers available in the map and configured in the control.
+    // Ensures maximum performance on client side while having maximum
+    // configuration flexibility.
+    $frontend_layers = array();
+    foreach ($map_layers as $map_layer) {
+      if (isset($layers[$map_layer->machine_name])) {
+        $frontend_layers[$map_layer->machine_name] = $map_layer->machine_name;
+      }
+    }
+    $this->setOption('layers', $frontend_layers);
   }
 }
