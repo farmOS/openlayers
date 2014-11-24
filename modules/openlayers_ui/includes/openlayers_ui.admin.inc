@@ -25,7 +25,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     $options[$machine_name] = $data->name;
   }
 
-  $map = 'openlayers_examples_map_openstreetmap';
+  $map = 'openlayers_map_ui_default';
   if (isset($form_state['values']['openlayers_default_map'])) {
     $map = $form_state['values']['openlayers_default_map'];
   }
