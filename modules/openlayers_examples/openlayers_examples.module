@@ -117,7 +117,9 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
   );
 
-  $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "'/>";
+  $width = ( $map->getOption('width', 'auto') == 'auto' ) ? '100%' : $map->getOption('width', 'auto');
+  $height = $map->getOption('height', 'auto');
+  $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' widht='" . $width . "' height='" . $height . "'/>";
 
   $form['default_map']['openlayers_services'] = array(
     '#type' => 'fieldset',
