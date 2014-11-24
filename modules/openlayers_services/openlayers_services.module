@@ -1,0 +1,60 @@
+<?php
+
+include 'openlayers_services.helpers.inc';
+
+/**
+ *  Implements hook_ctools_plugin_api().
+ */
+function openlayers_services_ctools_plugin_api($owner, $api) {
+  if ($owner == 'services' && $api == 'services') {
+    return array('version' => 3);
+  }
+}
+
+/**
+ * Implements hook_services_resources().
+ */
+function openlayers_services_services_resources() {
+  return array(
+    'openlayers' => array(
+      'retrieve' => array(
+        'help' => 'Retrieves an OpenLayers map',
+        'file' => array(
+          'type' => 'inc',
+          'module' => 'openlayers_services',
+          'name' => 'openlayers_services.services',
+        ),
+        'callback' => '_openlayers_services_retrieve',
+        'access callback' => '_openlayers_services_access',
+        'access arguments' => array('view'),
+        'access arguments append' => TRUE,
+        'args' => array(
+          array(
+            'name' => 'name',
+            'type' => 'string',
+            'description' => 'The name of the map to get',
+            'source' => array('path' => '0'),
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function openlayers_services_theme($existing, $type, $theme, $path) {
+  return array(
+    'openlayers_iframe' => array(
+      'arguments' => array(
+        'map' => array(),
+        'js' => '',
+        'styles' => '',
+      ),
+      'template' => 'openlayers_iframe',
+      'path' => drupal_get_path('module', 'openlayers_services') . '/themes',
+    )
+  );
+}
