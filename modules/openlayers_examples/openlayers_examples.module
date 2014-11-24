@@ -81,6 +81,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   }
   $map = openlayers_object_load('map', $map);
   $map->clearOption('contextualLinks');
+  $map->setOption('provideIframe', TRUE);
   $map->setOption('height', '400px');
   $map->setOption('controls', array('openlayers_control_zoom', 'openlayers_control_rotate'), TRUE);
   $map->setOption(
@@ -109,12 +110,46 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
   }
 
-  $form['default_map'] = array(
+  $form['default_map']['map'] = array(
     '#prefix' => '<div id="default_map_ajax">',
-    '#suffix' => '</div>',
     '#type' => 'openlayers',
     '#map' => $map,
     '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
+  );
+
+  $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "'/>";
+
+  $form['default_map']['openlayers_services'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+    '#title' => 'Embed this map in an iframe'
+  );
+
+  $form['default_map']['openlayers_services'][$map->machine_name] = array(
+    '#type' => 'textarea',
+    '#rows' => 3,
+    '#description' => t('Copy paste this html code to embed this map in your content.'),
+    '#value' => $iframe,
+    '#size' => strlen($iframe),
+    '#disabled' => TRUE
+  );
+
+  $form['default_map']['permalink'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+    '#title' => 'Permanent link to this map'
+  );
+
+  $link = url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE));
+
+  $form['default_map']['permalink']['link'] = array(
+    '#suffix' => '</div>',
+    '#type' => 'textfield',
+    '#value' => $link,
+    '#size' => 128,
+    '#disabled' => TRUE
   );
 
   $form['lat'] = array(
