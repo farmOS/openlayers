@@ -6,7 +6,7 @@ function openlayers_services_default_services_endpoint() {
   $endpoint = new stdClass();
   $endpoint->disabled = FALSE; /* Edit this to true to make a default endpoint disabled initially */
   $endpoint->api_version = 3;
-  $endpoint->name = 'map';
+  $endpoint->name = 'openlayers_services_map';
   $endpoint->server = 'rest_server';
   $endpoint->path = 'map';
   $endpoint->authentication = array();
