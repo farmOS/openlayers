@@ -81,11 +81,15 @@ function openlayers_ctools_plugin_type() {
  *   Returns the instance of the requested object or an instance of
  *  openlayers_error on error.
  */
-function openlayers_object_factory_create($object_type, $object_class, $export = NULL) {
+function openlayers_object_factory_create($object_type, $object_class, $export = array()) {
   ctools_include('plugins');
 
   if (isset($object_class) && class_exists($object_class)) {
-    $object = new $object_class();
+
+    $object_class = explode('\\', $object_class);
+    $name = array_pop($object_class);
+
+    $object = Openlayers::getOLObject($object_type, $name);
   }
   else {
     $object = new \Drupal\openlayers\Types\Error();
@@ -429,13 +433,4 @@ function openlayers_layer_options($empty_option = TRUE) {
  */
 function openlayers_init() {
   Openlayers::init();
-
-  dpm(Openlayers::getOLObjects());
-
-  $component = OpenLayers::getComponent('Autopopup');
-
-  $component->init(array('options' => array('layers' => 'testlayer1', 'some option' => 'some value')));
-
-  dpm($component);
-
-  }
+}

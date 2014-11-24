@@ -97,6 +97,7 @@ abstract class Object implements ObjectInterface {
 
     $class_info = $this->parseClassname();
     $this->class = get_class($this);
+    ctools_include('plugins');
     $this->plugin = ctools_get_plugins('openlayers', $this->getType(), $class_info['classname']);
 
     // We need to ensure the object has a proper machine name.

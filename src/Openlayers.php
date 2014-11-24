@@ -101,8 +101,12 @@ class Openlayers {
    * @return \Drupal\openlayers\Types\Object|NULL
    *   The instantiated controller with the given type or NULL.
    */
-  public static function getComponent($type) {
-    return static::$container->get('openlayers.component')->createInstance($type);
+  public static function getComponent($machine_name, $export) {
+    return static::$container->get('openlayers.component')->createInstance($machine_name, $export);
+  }
+
+  public static function getOLObject($type, $machine_name) {
+    return static::$container->get('openlayers.' . drupal_strtolower($type))->createInstance($machine_name);
   }
 
   public static function getComponents() {
