@@ -22,6 +22,23 @@ function openlayers_examples_default_layers() {
   $export['openlayers_examples_layer_tile_mapbox_example1'] = $ol_layer;
 
   $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_googlemaps';
+  $ol_layer->name = 'Google Maps layer';
+  $ol_layer->description = '';
+  $ol_layer->class = '\\Drupal\\openlayers\\Layer\\Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_googlemaps',
+    'visible' => 1,
+    'style' => 'openlayers_style_default',
+    'url' => '',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+  );
+  $export['openlayers_examples_layer_googlemaps'] = $ol_layer;
+
+  $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_europa';
   $ol_layer->name = 'MapBox example 1';

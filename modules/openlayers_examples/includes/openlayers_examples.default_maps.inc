@@ -881,5 +881,42 @@ function openlayers_examples_default_maps() {
   );
   $export['openlayers_examples_map_esri'] = $ol_map;
 
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_googlemaps';
+  $ol_map->name = 'Google Maps';
+  $ol_map->description = '';
+  $ol_map->class = '\\Drupal\\openlayers\\map\\OLMap';
+  $ol_map->options = array(
+    'width' => 'auto',
+    'height' => '300px',
+    'contextualLinks' => 1,
+    'provideBlock' => 1,
+    'provideBlockLayerSwitcher' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => '0',
+        'lon' => '0',
+      ),
+      'rotation' => '0',
+      'zoom' => '2',
+      'minZoom' => '0',
+      'maxZoom' => '0',
+    ),
+    'layers' => array(
+      0 => 'openlayers_examples_layer_googlemaps',
+    ),
+    'controls' => array(
+      0 => 'openlayers_control_zoom',
+    ),
+    'interactions' => array(
+      0 => 'openlayers_interaction_doubleclickzoom',
+      1 => 'openlayers_interaction_dragpan',
+      2 => 'openlayers_interaction_mousewheelzoom',
+    ),
+  );
+  $export['openlayers_examples_map_googlemaps'] = $ol_map;
+
   return $export;
 }

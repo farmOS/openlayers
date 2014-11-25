@@ -23,6 +23,22 @@ function openlayers_examples_default_sources() {
   $export['openlayers_examples_source_mapbox_example1'] = $ol_source;
 
   $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_googlemaps';
+  $ol_source->name = 'Google Maps';
+  $ol_source->description = '';
+  $ol_source->class = '\\Drupal\\openlayers\\Source\\GoogleMaps';
+  $ol_source->options = array(
+    'key' => '',
+    'client' => '',
+    'channel' => '',
+    'mapTypeId' => 'ROADMAP',
+    'sensor' => 0,
+  );
+  $export['openlayers_examples_source_googlemaps'] = $ol_source;
+
+  $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_europa';
