@@ -84,7 +84,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   $map->clearOption('contextualLinks');
   $map->setOption('height', '400px');
 
-  $controls = $map->getOption('controls', array()) + array('openlayers_control_zoom', 'openlayers_control_rotate');
+  $controls = array_filter(array_merge($map->getOption('controls', array()), array('openlayers_control_zoom', 'openlayers_control_rotate')));
   $map->setOption('controls', $controls);
 
   $map->setOption(
@@ -97,7 +97,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     ),
     TRUE
   );
-  $components = $map->getOption('components', array()) + array('openlayers_examples_component_ajax_values');
+
+  $components = array_filter(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values')));
   $map->setOption('components', $components);
 
   if (isset($form_state['input']['zoom'])) {
