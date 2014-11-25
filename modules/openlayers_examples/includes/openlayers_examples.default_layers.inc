@@ -41,7 +41,7 @@ function openlayers_examples_default_layers() {
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_europa';
-  $ol_layer->name = 'MapBox example 1';
+  $ol_layer->name = 'EC Europa Openstreetmap';
   $ol_layer->description = 'Layer Europa OpenStreetMap';
   $ol_layer->class = '\\Drupal\\openlayers\\Layer\\Tile';
   $ol_layer->options = array(
