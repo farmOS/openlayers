@@ -674,8 +674,8 @@ function openlayers_examples_default_maps() {
   $ol_map = new stdClass();
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
-  $ol_map->machine_name = 'openlayers_examples_map_europa';
-  $ol_map->name = 'OpenStreetMap';
+  $ol_map->machine_name = 'openlayers_examples_map_ec_europa_osm';
+  $ol_map->name = 'EC Europa OpenStreetMap';
   $ol_map->description = '';
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
@@ -702,7 +702,7 @@ function openlayers_examples_default_maps() {
       2 => 'openlayers_interaction_mousewheelzoom',
     ),
   );
-  $export['openlayers_examples_map_europa'] = $ol_map;
+  $export['openlayers_examples_map_ec_europa_osm'] = $ol_map;
 
   $ol_map = new stdClass();
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
