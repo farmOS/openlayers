@@ -700,6 +700,7 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
       2 => 'openlayers_interaction_mousewheelzoom',
+      3 => 'openlayers_examples_simple_layer_switcher'
     ),
   );
   $export['openlayers_examples_map_ec_europa_osm'] = $ol_map;
