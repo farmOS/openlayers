@@ -894,6 +894,7 @@ function openlayers_examples_default_maps() {
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideBlockLayerSwitcher' => 0,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
