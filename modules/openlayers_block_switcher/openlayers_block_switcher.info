@@ -1,3 +1,6 @@
 name = OpenLayers Block Switcher
-description = OpenLayers Block Switcher
+description = OpenLayers Block Switcher provides a block layer switcher in a Drupal form.
 core = 7.x
+package = "OpenLayers"
+
+dependencies[] = openlayers

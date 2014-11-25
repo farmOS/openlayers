@@ -1,6 +1,8 @@
 name = OpenLayers Examples
-description = OpenLayers Examples
+description = OpenLayers Examples provides multiple examples of maps, layers, controls, components that you can use for your site.
 core = 7.x
+package = "OpenLayers"
+
 dependencies[] = openlayers
 dependencies[] = views_geojson
 

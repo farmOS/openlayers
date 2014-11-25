@@ -18,7 +18,9 @@ function openlayers_views_views_api() {
  * Implements hook_ctools_plugin_directory().
  */
 function openlayers_views_ctools_plugin_directory($module, $plugin) {
-  return 'src/Plugin/' . $plugin;
+  if ($module == 'openlayers') {
+    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin);
+  }
 }
 
 /**
