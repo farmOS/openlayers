@@ -193,10 +193,12 @@ class Map extends Object implements MapInterface {
    * {@inheritdoc}
    */
   public function getJSObjects() {
-    $objects = $this->getObjects();
+    $objects = unserialize(serialize($this->objects));
 
     foreach (openlayers_object_types() as $type) {
       foreach ($objects[$type] as $index => $object) {
+        unset($object->name);
+        unset($object->description);
         $objects[$type][$index] = (array) $object->toJSArray();
       }
     }
@@ -205,7 +207,6 @@ class Map extends Object implements MapInterface {
 
     $objects = array_map_recursive('_floatval_if_numeric', $objects);
     $objects = removeEmptyElements($objects);
-    $objects = unserialize(serialize($objects));
 
     return $objects;
   }
@@ -275,19 +276,26 @@ class Map extends Object implements MapInterface {
       $current_path = $_SESSION['current_path'];
     }
 
+    // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
+    // Get all attached files
     $attached = $map->attached($map);
-    $objects = $map->getObjects();
-    $objects['map'] = $map;
 
-    $setting = array(
-      'openlayers' => array(
-        'maps' => array(
-          $map->getId() => $map->getJSObjects(),
-        ),
-      ),
-    );
+    // Get all objects belonging to the map
+    $objects = $map->getObjects();
+
+    // Get all objects belonging to the map without name and description
+    // Optimized in size for Drupal javascript settings.
+    $jsobjects = $map->getJSObjects();
+
+    // Replace objects from map with lightweight objects.
+    foreach(openlayers_object_types() as $type) {
+      $map->clearOption('options', $type . 's');
+      if (isset($jsobjects[$type])) {
+        $map->setOption($type . 's', $jsobjects[$type]);
+      }
+    }
 
     $links = array(
       'openlayers' => array(
@@ -306,7 +314,7 @@ class Map extends Object implements MapInterface {
         $asynchronous += (int) $object->isAsynchronous();
 
         // Build contextual link for this object.
-        $name = $object->get('name');
+        $name = $object->name;
         if (empty($name)) {
           $name = $object->machine_name;
         }
@@ -334,10 +342,15 @@ class Map extends Object implements MapInterface {
     }
 
     $attached['js'][] = array(
-      'data' => $setting,
+      'data' => array(
+        'openlayers' => array(
+          'maps' => array(
+            $map->getId() => $jsobjects,
+          ),
+        ),
+      ),
       'type' => 'setting',
     );
-
 
     $styles = array(
       'width' => $map->getOption('width'),

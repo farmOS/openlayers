@@ -20,12 +20,12 @@ abstract class Object implements ObjectInterface {
   /**
    * @var string
    */
-  private $name;
+  public $name;
 
   /**
    * @var string
    */
-  private $description;
+  public $description;
 
   /**
    * @var string
