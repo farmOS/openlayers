@@ -201,6 +201,10 @@ class Map extends Object implements MapInterface {
         unset($object->description);
         $objects[$type][$index] = (array) $object->toJSArray();
       }
+      $this->clearOption('options', $type . 's');
+      if (isset($objects[$type])) {
+        $this->setOption($type . 's', $objects[$type]);
+      }
     }
 
     $objects['map'] = $this->toJSArray();
@@ -288,15 +292,6 @@ class Map extends Object implements MapInterface {
     // Get all objects belonging to the map without name and description
     // Optimized in size for Drupal javascript settings.
     $jsobjects = $map->getJSObjects();
-
-    // Replace objects from map with lightweight objects.
-    foreach(openlayers_object_types() as $type) {
-      $map->clearOption('options', $type . 's');
-      if (isset($jsobjects[$type])) {
-        $map->setOption($type . 's', $jsobjects[$type]);
-      }
-    }
-    $jsobjects['map'] = $map->toJSArray();
 
     $links = array(
       'openlayers' => array(
