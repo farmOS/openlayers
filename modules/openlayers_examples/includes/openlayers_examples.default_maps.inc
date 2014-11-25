@@ -695,12 +695,13 @@ function openlayers_examples_default_maps() {
     'layers' => array(
       0 => 'openlayers_examples_layer_europa',
     ),
-    'controls' => array(),
+    'controls' => array(
+      0 => 'openlayers_examples_control_simple_layer_switcher'
+    ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
-      2 => 'openlayers_interaction_mousewheelzoom',
-      3 => 'openlayers_examples_simple_layer_switcher'
+      2 => 'openlayers_interaction_mousewheelzoom'
     ),
   );
   $export['openlayers_examples_map_ec_europa_osm'] = $ol_map;

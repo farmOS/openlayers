@@ -13,7 +13,7 @@ function openlayers_examples_default_controls() {
   $ol_control = new stdClass();
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
-  $ol_control->machine_name = 'openlayers_examples_simple_layer_switcher';
+  $ol_control->machine_name = 'openlayers_examples_control_simple_layer_switcher';
   $ol_control->name = 'Openlayers Examples simple layer switcher';
   $ol_control->description = '';
   $ol_control->class = '\\Drupal\\openlayers\\Control\\LayerSwitcher';
@@ -25,7 +25,7 @@ function openlayers_examples_default_controls() {
     ),
     'multiselect' => 0,
   );
-  $export['openlayers_examples_simple_layer_switcher'] = $ol_control;
+  $export['openlayers_examples_control_simple_layer_switcher'] = $ol_control;
 
   return $export;
 }
