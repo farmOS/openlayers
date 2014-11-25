@@ -110,36 +110,30 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
   }
 
-  $form['default_map']['map'] = array(
+  $form['default_map'] = array(
     '#prefix' => '<div id="default_map_ajax">',
+    '#type' => 'fieldset',
+    '#collapsible' => FALSE,
+    '#collapsed' => FALSE,
+    '#title' => 'Map'
+  );
+
+  $form['default_map']['map'] = array(
+    '#weight' => 0,
     '#type' => 'openlayers',
     '#map' => $map,
     '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
   );
 
   if ((bool) $map->getOption('provideIframe', FALSE) == TRUE) {
-    $width = ( $map->getOption('width', 'auto') == 'auto' ) ? '100%' : $map->getOption('width', 'auto');
-    $height = $map->getOption('height', 'auto');
-    $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' widht='" . $width . "' height='" . $height . "'/>";
-
-    $form['default_map']['openlayers_services'] = array(
-      '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#collapsed' => FALSE,
-      '#title' => 'Embed this map in an iframe'
-    );
-
-    $form['default_map']['openlayers_services'][$map->machine_name] = array(
-      '#type' => 'textarea',
-      '#rows' => 3,
-      '#description' => t('Copy paste this html code to embed this map in your content.'),
-      '#value' => $iframe,
-      '#size' => strlen($iframe),
-      '#disabled' => TRUE
-    );
+    $form_state['item'] = $map;
+    openlayers_services_form_openlayers_map_form_preview_alter($form, $form_state);
+    $form['default_map']['openlayers_services'] = $form['openlayers_services'];
+    unset($form['openlayers_services']);
   }
 
   $form['default_map']['permalink'] = array(
+    '#weight' => 6,
     '#type' => 'fieldset',
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
