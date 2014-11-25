@@ -693,7 +693,8 @@ function openlayers_examples_default_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_examples_layer_europa',
+      0 => 'openlayers_examples_layer_openstreetmap',
+      1 => 'openlayers_examples_layer_europa',
     ),
     'controls' => array(
       0 => 'openlayers_examples_control_simple_layer_switcher'
