@@ -88,9 +88,15 @@ function openlayers_services_form_openlayers_map_form_preview_alter(&$form, &$fo
   foreach (services_endpoint_load_all() as $service) {
     if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
       $path = url($service->path . '/openlayers/' . $map->machine_name, array('absolute' => TRUE));
-      $iframe = "<iframe src='" . $path . "'/>";
+
+      $width = ( $map->getOption('width', 'auto') == 'auto' ) ? '100%' : $map->getOption('width', 'auto');
+      $height = $map->getOption('height', 'auto');
+      $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' widht='" . $width . "' height='" . $height . "'/>";
+
       $form['openlayers_services'][$map->machine_name] = array(
-        '#type' => 'textfield',
+        '#type' => 'textarea',
+        '#description' => t('Copy paste this html code to embed this map in your content.'),
+        '#rows' => 3,
         '#value' => $iframe,
         '#size' => strlen($iframe),
         '#disabled' => TRUE
