@@ -296,6 +296,7 @@ class Map extends Object implements MapInterface {
         $map->setOption($type . 's', $jsobjects[$type]);
       }
     }
+    $jsobjects['map'] = $map->toJSArray();
 
     $links = array(
       'openlayers' => array(
