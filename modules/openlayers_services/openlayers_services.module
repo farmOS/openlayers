@@ -97,7 +97,6 @@ function openlayers_services_form_openlayers_map_form_preview_alter(&$form, &$fo
         '#description' => t('Copy paste this html code to embed this map in your content.'),
         '#rows' => 3,
         '#value' => $iframe,
-        '#size' => strlen($iframe),
         '#disabled' => TRUE
       );
     }
