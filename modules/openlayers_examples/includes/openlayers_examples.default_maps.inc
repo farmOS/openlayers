@@ -19,7 +19,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -60,7 +60,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -96,7 +96,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -129,7 +129,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -162,7 +162,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -195,7 +195,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -229,7 +229,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -263,7 +263,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -299,7 +299,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -335,7 +335,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -379,7 +379,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -426,7 +426,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -486,7 +486,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -525,7 +525,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -564,7 +564,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -605,7 +605,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -643,7 +643,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -680,7 +680,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -716,7 +716,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -749,7 +749,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -788,7 +788,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -822,7 +822,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -858,7 +858,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\Map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideIframe' => 1,
@@ -893,7 +893,7 @@ function openlayers_examples_default_maps() {
   $ol_map->class = '\\Drupal\\openlayers\\map\\OLMap';
   $ol_map->options = array(
     'width' => 'auto',
-    'height' => '300px',
+    'height' => '400px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
     'provideBlockLayerSwitcher' => 0,
