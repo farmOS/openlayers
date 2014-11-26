@@ -35,6 +35,8 @@
     processMap: function(map_id, context) {
       if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
         var object = Drupal.settings.openlayers.maps[map_id];
+        object.map = object.map[0];
+
         $(document).trigger('openlayers.build_start', [{'type': 'objects', 'objects': object, 'context': context}]);
 
         var count = 1,

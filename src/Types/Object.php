@@ -43,6 +43,8 @@ abstract class Object implements ObjectInterface {
    */
   private $plugin = NULL;
 
+  protected $collection = NULL;
+
   /**
    * @var array
    */
@@ -103,6 +105,13 @@ abstract class Object implements ObjectInterface {
     if (empty($this->machine_name)) {
       $this->machine_name = drupal_html_id($this->getType() . '-' . time());
     }
+
+    $this->buildCollection();
+  }
+
+  public function buildCollection() {
+    $this->getCollection()->append($this);
+    return $this->getCollection();
   }
 
   /**
@@ -132,14 +141,24 @@ abstract class Object implements ObjectInterface {
    * {@inheritdoc}
    */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object === $this) continue;
+      $object->preBuild($build, $this);
+    }
 
+    drupal_alter('openlayers_object_preprocess', $this, $context);
   }
 
   /**
    * {@inheritdoc}
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object === $this) continue;
+      $object->postBuild($build, $context);
+    }
 
+    drupal_alter('openlayers_object_postprocess', $this, $context);
   }
 
   /**
@@ -258,7 +277,7 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
+  public function attached() {
     if ($plugin = $this->getPlugin()) {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';
@@ -314,5 +333,20 @@ abstract class Object implements ObjectInterface {
   public function getType() {
     $class = explode('\\', get_class($this));
     return $class[2];
+  }
+
+  public function getCollection() {
+    if (!($this->collection instanceof Collection)) {
+      $this->collection = new Collection();
+    }
+    return $this->collection;
+  }
+
+  public function getJS() {
+    return array(
+      'machine_name' => $this->machine_name,
+      'class' => $this->class,
+      'options' => $this->options
+    );
   }
 }

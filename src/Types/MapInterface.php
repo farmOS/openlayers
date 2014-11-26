@@ -19,24 +19,6 @@ interface MapInterface {
   public function getId();
 
   /**
-   * Returns an array of objects assigned to this map.
-   *
-   * @return array
-   *   Associative array of objects assigned to this map. Keyed by the type of
-   *   the objects.
-   */
-  public function &getObjects();
-
-  /**
-   * Returns an JS compatible array of objects assigned to this map.
-   *
-   * @return array
-   *   JS compatible array of objects assigned to this map. Keyed by the type of
-   *   the objects.
-   */
-  public function getJSObjects();
-
-  /**
    * Returns the layer objects assigned to this map.
    *
    * @return array

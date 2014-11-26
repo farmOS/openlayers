@@ -124,7 +124,7 @@ interface ObjectInterface {
    * @return array
    *   The attachments to add.
    */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context);
+  public function attached();
 
   /**
    * Defines dependencies.
