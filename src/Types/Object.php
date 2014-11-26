@@ -304,14 +304,6 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function toJSArray() {
-    // TODO: find a better solution here.
-    return json_decode(json_encode($this), TRUE);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function isAsynchronous() {
     return FALSE;
   }

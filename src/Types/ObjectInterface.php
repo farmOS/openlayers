@@ -137,14 +137,6 @@ interface ObjectInterface {
   public function dependencies();
 
   /**
-   * Returns the object as JS compatible array.
-   *
-   * @return array
-   *   The array representation of this object.
-   */
-  public function toJSArray();
-
-  /**
    * Whether or not this object has to be processed asynchronously.
    *
    * If true the map this object relates to won't be processes right away by

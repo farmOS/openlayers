@@ -197,9 +197,7 @@ class Map extends Object implements MapInterface {
 
     foreach (openlayers_object_types() as $type) {
       foreach ($objects[$type] as $index => $object) {
-        unset($object->name);
-        unset($object->description);
-        $objects[$type][$index] = (array) $object->toJSArray();
+        $objects[$type][$index] = (array) $object;
       }
       $this->clearOption('options', $type . 's');
       if (isset($objects[$type])) {
@@ -207,7 +205,7 @@ class Map extends Object implements MapInterface {
       }
     }
 
-    $objects['map'] = $this->toJSArray();
+    $objects['map'] = (array) $this;
 
     $objects = array_map_recursive('_floatval_if_numeric', $objects);
     $objects = removeEmptyElements($objects);

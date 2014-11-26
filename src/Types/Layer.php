@@ -19,26 +19,31 @@ abstract class Layer extends Object implements LayerInterface {
   protected $attached = array();
 
   /**
-   * {@inheritdoc}
+   * Returns the source of this layer.
+   *
+   * @return openlayers_source_interface|FALSE
+   *   The source assigned to this layer.
    */
   public function getSource() {
-    if ($source = $this->getOption('source')) {
-      return openlayers_object_load('source', $this->getOption('source'));
+    if ($source = $this->getOption('source', FALSE)) {
+      $this->objects['source'] = openlayers_object_load('source', $source);
+      return $this->objects['source'];
     }
     return FALSE;
   }
 
   /**
-   * Returns the source of this layer.
+   * Returns the style of this layer.
    *
    * @TODO Shouldn't this be part of the LayerInterface?
    *
    * @return openlayers_style_interface|FALSE
-   *   The source assigned to this layer.
+   *   The style assigned to this layer.
    */
   public function getStyle() {
-    if ($style = $this->getOption('style')) {
-      return openlayers_object_load('style', $this->getOption('style'));
+    if ($style = $this->getOption('style', FALSE)) {
+      $this->objects['style'] = openlayers_object_load('style', $style);
+      return $this->objects['style'];
     }
     return FALSE;
   }
