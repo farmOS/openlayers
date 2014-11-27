@@ -84,7 +84,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   $map->clearOption('contextualLinks');
   $map->setOption('height', '400px');
 
-  $controls = array_filter(array_merge($map->getOption('controls', array()), array('openlayers_control_zoom', 'openlayers_control_rotate')));
+  $controls = array_filter(array_merge($map->getOption('controls', array()), array('openlayers_control_zoom', 'openlayers_control_rotate', 'openlayers_control_fullscreen')));
   $map->setOption('controls', $controls);
 
   $map->setOption(
