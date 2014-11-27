@@ -171,13 +171,6 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function develop() {
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function clearOption($parents) {
     $ref = &$this->options;
 
@@ -225,21 +218,6 @@ abstract class Object implements ObjectInterface {
   }
 
   /**
-   * Getter allows access to any property no mather what scope it has.
-   *
-   * @TODO is this a good idea? Why not __get()?
-   *
-   * @param string $prop
-   *   Property to get.
-   *
-   * @return mixed
-   *   The value of the property.
-   */
-  public function get($prop) {
-    return $this->$prop;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getOption($parents, $default_value = NULL) {
@@ -271,8 +249,6 @@ abstract class Object implements ObjectInterface {
 
     return $default_value;
   }
-
-
 
   /**
    * {@inheritdoc}

@@ -12,5 +12,4 @@ use Drupal\openlayers\Types\Control;
  */
 class FullScreen extends Control {
 
-
 }
