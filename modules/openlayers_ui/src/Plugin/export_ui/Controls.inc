@@ -20,6 +20,7 @@ function openlayers_ui_Controls_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Controls',
+      'file' => 'Controls.php'
     ),
 
     'export' => array(
@@ -125,7 +126,7 @@ function openlayers_control_form_type($form, &$form_state) {
   $controls = ctools_get_plugins('openlayers', 'Control');
   $options = array('' => t('<Choose the control type>'));
   foreach ($controls as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

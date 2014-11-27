@@ -20,6 +20,7 @@ function openlayers_ui_Maps_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Maps',
+      'file' => 'Maps.php'
     ),
 
     'use wizard' => TRUE,

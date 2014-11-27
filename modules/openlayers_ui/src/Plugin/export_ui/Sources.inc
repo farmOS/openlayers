@@ -20,6 +20,7 @@ function openlayers_ui_Sources_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Sources',
+      'file' => 'Sources.php'
     ),
 
     'export' => array(
@@ -125,7 +126,7 @@ function openlayers_source_form_type($form, &$form_state) {
   $sources = ctools_get_plugins('openlayers', 'Source');
   $options = array('' => t('<Choose the source type>'));
   foreach ($sources as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

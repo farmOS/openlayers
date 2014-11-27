@@ -20,6 +20,7 @@ function openlayers_ui_Interactions_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Interactions',
+      'file' => 'Interactions.php'
     ),
 
     'export' => array(
@@ -125,7 +126,7 @@ function openlayers_interaction_form_type($form, &$form_state) {
   $interactions = ctools_get_plugins('openlayers', 'Interaction');
   $options = array('' => t('<Choose the interaction type>'));
   foreach ($interactions as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

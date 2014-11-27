@@ -20,6 +20,7 @@ function openlayers_ui_Layers_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Layers',
+      'file' => 'Layers.php'
     ),
 
     'use wizard' => TRUE,
@@ -129,7 +130,7 @@ function openlayers_layer_form_type($form, &$form_state) {
   $layers = ctools_get_plugins('openlayers', 'Layer');
   $options = array('' => t('<Choose the layer type>'));
   foreach ($layers as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

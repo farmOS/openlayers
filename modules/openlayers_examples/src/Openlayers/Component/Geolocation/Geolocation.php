@@ -7,6 +7,10 @@
 namespace Drupal\openlayers\Component;
 use Drupal\openlayers\Types\Component;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Component\\Geolocation',
+);
+
 /**
  * Class Geolocation.
  */

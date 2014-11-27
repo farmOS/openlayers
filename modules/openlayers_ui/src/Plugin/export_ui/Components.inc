@@ -20,6 +20,7 @@ function openlayers_ui_Components_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Components',
+      'file' => 'Components.php'
     ),
 
     'export' => array(
@@ -125,7 +126,7 @@ function openlayers_component_form_type($form, &$form_state) {
   $components = ctools_get_plugins('openlayers', 'Component');
   $options = array('' => t('<Choose the component type>'));
   foreach ($components as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

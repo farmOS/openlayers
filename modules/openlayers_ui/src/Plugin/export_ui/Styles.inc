@@ -20,6 +20,7 @@ function openlayers_ui_Styles_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Styles',
+      'file' => 'Styles.php'
     ),
 
     'export' => array(
@@ -102,7 +103,7 @@ function openlayers_style_form_type($form, &$form_state) {
   $styles = ctools_get_plugins('openlayers', 'Style');
   $options = array('' => t('<Choose the style type>'));
   foreach ($styles as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
+    $options[$plugin['class']] = $class;
   }
 
   $form['class'] = array(

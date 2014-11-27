@@ -8,6 +8,10 @@ namespace Drupal\openlayers\Map;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Map;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Map\\OLMap',
+);
+
 /**
  * Class OLMap.
  */
