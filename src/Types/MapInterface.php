@@ -64,28 +64,4 @@ interface MapInterface {
    * @return array
    */
   public function build();
-
-  /**
-   * Invoked before an objects render array is built.
-   *
-   * Mostly invoked by the map object.
-   *
-   * @param array $build
-   *   The array with the build information.
-   * @param \Drupal\openlayers\Types\ObjectInterface $context
-   *   The context of the build. Mostly the map object.
-   */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
-
-  /**
-   * Invoked after an objects render array is built.
-   *
-   * Mostly invoked by the map object.
-   *
-   * @param array $build
-   *   The array with the build information.
-   * @param \Drupal\openlayers\Types\ObjectInterface $context
-   *   The context of the build. Mostly the map object.
-   */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
   }
