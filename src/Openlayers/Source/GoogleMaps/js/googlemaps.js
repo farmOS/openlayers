@@ -1,4 +1,4 @@
-Drupal.openlayers.source__googlemaps = function(data) {
+Drupal.openlayers.openlayers_source_internal_googlemaps = function(data) {
 
   var olMapDiv = jQuery(data.map.getViewport()).parent();
   var gmapDiv = jQuery('#gmap-' + olMapDiv.attr('id'));
@@ -10,7 +10,7 @@ Drupal.openlayers.source__googlemaps = function(data) {
     disableDoubleClickZoom: true,
     scrollwheel: false,
     streetViewControl: false,
-    mapTypeId: google.maps.MapTypeId[data.options.mapTypeId] || 'roadmap'
+    mapTypeId: google.maps.MapTypeId[data.opt.mapTypeId] || 'roadmap'
   });
   gmapDiv.data('gmap', gmap);
 
@@ -34,7 +34,7 @@ Drupal.openlayers.source__googlemaps = function(data) {
 /**
  * Helper to access the gmap instance in a ol.Map.
  */
-Drupal.openlayers.source__googlemaps_get_map = function(map){
+Drupal.openlayers.openlayers_source_internal_googlemaps_get_map = function(map){
   var olMapDiv = jQuery(map.getViewport()).parent();
   return jQuery('#gmap-' + olMapDiv.attr('id')).data('gmap');
 };
@@ -45,19 +45,19 @@ Drupal.openlayers.source__googlemaps_get_map = function(map){
  * Attention: It's not possible to have maps with different key, channel or
  * client parameters.
  */
-Drupal.behaviors.source__googlemaps = {
+Drupal.behaviors.openlayers_source_internal_googlemaps = {
   scriptLoading: false,
   attach: function(context, settings) {
     if (typeof google === 'undefined') {
       // If a script is already loading bail out.
-      if (Drupal.behaviors.source__googlemaps.scriptLoading) {
+      if (Drupal.behaviors.openlayers_source_internal_googlemaps.scriptLoading) {
         return;
       }
-      Drupal.behaviors.source__googlemaps.scriptLoading = true;
+      Drupal.behaviors.openlayers_source_internal_googlemaps.scriptLoading = true;
 
       var params = {
         v: 3,
-        callback: 'Drupal.openlayers.source__googlemaps_initialize'
+        callback: 'Drupal.openlayers.openlayers_source_internal_googlemaps_initialize'
       };
 
       // Collect all google API settings.
@@ -66,17 +66,17 @@ Drupal.behaviors.source__googlemaps = {
 
         if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
           jQuery.each(Drupal.settings.openlayers.maps[map_id].source, function(i, source){
-            if (source.class == 'Drupal\openlayers\source\googlemaps') {
-              if (source.options.channel) {
-                params.channel = source.options.channel;
+            if (source.cb == 'openlayers_source_internal_googlemaps') {
+              if (source.opt.channel) {
+                params.channel = source.opt.channel;
               }
-              if (source.options.client) {
-                params.client = source.options.client;
+              if (source.opt.client) {
+                params.client = source.opt.client;
               }
-              if (source.options.key) {
-                params.key = source.options.key;
+              if (source.opt.key) {
+                params.key = source.opt.key;
               }
-              if (source.options.sensor) {
+              if (source.opt.sensor) {
                 params.sensor = 'true';
               }
             }
@@ -92,7 +92,7 @@ Drupal.behaviors.source__googlemaps = {
     }
     else {
       // Google API already available - initialize right away.
-      Drupal.openlayers.source__googlemaps_initialize();
+      Drupal.openlayers.openlayers_source_internal_googlemaps_initialize();
     }
   }
 };
@@ -100,7 +100,7 @@ Drupal.behaviors.source__googlemaps = {
 /**
  * Callback to initialize all google maps as soon as the gmap API is available.
  */
-Drupal.openlayers.source__googlemaps_initialize = function() {
+Drupal.openlayers.openlayers_source_internal_googlemaps_initialize = function() {
   jQuery('.openlayers.gmap-map').each(function() {
     var map_id = jQuery(this).attr('id').replace('gmap-', '');
     Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')]();

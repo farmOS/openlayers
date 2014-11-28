@@ -1,3 +1,3 @@
-Drupal.openlayers.source__mapquest = function(data) {
-  return new ol.source.MapQuest(data.options);
+Drupal.openlayers.openlayers_source_internal_mapquest = function(data) {
+  return new ol.source.MapQuest(data.opt);
 };

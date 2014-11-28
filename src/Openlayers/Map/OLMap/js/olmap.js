@@ -1,7 +1,7 @@
-Drupal.openlayers.map__olmap = function(data){
+Drupal.openlayers.openlayers_map_internal_olmap = function(data){
   var projection = ol.proj.get('EPSG:3857');
 
-  var options = data.options;
+  var options = data.opt;
 
   options.view = new ol.View({
     center: [options.view.center.lat, options.view.center.lon],
@@ -15,8 +15,8 @@ Drupal.openlayers.map__olmap = function(data){
   });
 
   var map = new ol.Map(options);
-  map.machine_name = data.machine_name;
-  map.target = data.options.target;
+  map.mn = data.mn;
+  map.target = data.opt.target;
 
   return map;
 };

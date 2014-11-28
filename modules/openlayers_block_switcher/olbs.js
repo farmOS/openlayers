@@ -11,7 +11,7 @@
             var layers = map.getLayers();
             var target = $(e.target);
             layers.forEach(function(layer){
-              if (layer.machine_name == target.val()) {
+              if (layer.mn == target.val()) {
                 if (target.prop('checked') == true) {
                   layer.setVisible(true);
                 } else {

@@ -1,3 +1,3 @@
-Drupal.openlayers.interaction__pinchrotate = function(data) {
-  return new ol.interaction.PinchRotate(data.options);
+Drupal.openlayers.openlayers_interaction_internal_pinchrotate = function(data) {
+  return new ol.interaction.PinchRotate(data.opt);
 };

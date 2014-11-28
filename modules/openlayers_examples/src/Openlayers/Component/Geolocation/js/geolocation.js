@@ -1,20 +1,20 @@
-Drupal.openlayers.component__geolocation = function (data) {
+Drupal.openlayers.openlayers_component_internal_geolocation = function (data) {
   var map = data.map;
 
   var geolocation = new ol.Geolocation({
     projection: map.getView().getProjection()
   });
 
-  var track = new ol.dom.Input(document.getElementById(data.options.checkboxID));
+  var track = new ol.dom.Input(document.getElementById(data.opt.checkboxID));
   track.bindTo('checked', geolocation, 'tracking');
 
 // update the HTML page when the position changes.
   geolocation.on('change', function(event) {
-    jQuery('#' + data.options.positionAccuracyID).val(geolocation.getAccuracy() + ' [m]');
-    jQuery('#' + data.options.altitudeID).val(geolocation.getAltitude() + ' [m]');
-    jQuery('#' + data.options.altitudeAccuracyID).val(geolocation.getAltitudeAccuracy() + ' [m]');
-    jQuery('#' + data.options.headingID).val(geolocation.getHeading() + ' [rad]');
-    jQuery('#' + data.options.speedID).val(geolocation.getSpeed() + ' [m/s]');
+    jQuery('#' + data.opt.positionAccuracyID).val(geolocation.getAccuracy() + ' [m]');
+    jQuery('#' + data.opt.altitudeID).val(geolocation.getAltitude() + ' [m]');
+    jQuery('#' + data.opt.altitudeAccuracyID).val(geolocation.getAltitudeAccuracy() + ' [m]');
+    jQuery('#' + data.opt.headingID).val(geolocation.getHeading() + ' [rad]');
+    jQuery('#' + data.opt.speedID).val(geolocation.getSpeed() + ' [m/s]');
 
     var pan = ol.animation.pan({
       duration: 2000,

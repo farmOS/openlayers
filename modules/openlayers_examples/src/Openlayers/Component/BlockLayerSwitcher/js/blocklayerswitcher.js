@@ -1,3 +1,3 @@
-Drupal.openlayers.component__blocklayerswitcher = function (data) {
+Drupal.openlayers.openlayers_component_internal_blocklayerswitcher = function (data) {
 
 };

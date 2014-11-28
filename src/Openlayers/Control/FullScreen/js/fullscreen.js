@@ -1,3 +1,3 @@
-Drupal.openlayers.control__fullscreen = function(data) {
-  return new ol.control.FullScreen(data.options);
+Drupal.openlayers.openlayers_control_internal_fullscreen = function(data) {
+  return new ol.control.FullScreen(data.opt);
 };

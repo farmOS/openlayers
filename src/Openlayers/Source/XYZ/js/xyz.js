@@ -1,3 +1,3 @@
-Drupal.openlayers.source__xyz = function(data) {
-  return new ol.source.XYZ(data.options);
+Drupal.openlayers.openlayers_source_internal_xyz = function(data) {
+  return new ol.source.XYZ(data.opt);
 };

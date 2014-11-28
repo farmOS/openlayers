@@ -33,9 +33,6 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_map',
       'default hook' => 'default_maps',
-      //'load all callback' => 'openlayers_maps_load_all',
-      //'load all' => 'openlayers_maps_load',
-      'object factory' => 'openlayers_maps_factory',
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_maps',
@@ -61,10 +58,10 @@ function openlayers_schema() {
         'type' => 'text',
         'not null' => TRUE,
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Map class.',
+        'description' => 'Map service.',
       ),
       'options' => array(
         'description' => 'The serialized map.',
@@ -88,9 +85,6 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_layer',
       'default hook' => 'default_layers',
-      //'load all callback' => 'openlayers_layers_load_all',
-      //'load all' => 'openlayers_layers_load',
-      'object factory' => 'openlayers_layers_factory',
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_layers',
@@ -103,29 +97,29 @@ function openlayers_schema() {
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
-        'description' => 'system name.',
+        'description' => 'Layer system name.',
       ),
       'name' => array(
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
         'default' => '',
-        'description' => 'name.',
+        'description' => 'Layer name.',
       ),
       'description' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'description.',
+        'description' => 'Layer description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'class.',
+        'description' => 'Layer service.',
       ),
       'options' => array(
         'type' => 'text',
         'not null' => FALSE,
-        'description' => 'options serialized.',
+        'description' => 'Layer options serialized.',
         'serialize' => TRUE,
       ),
     ),
@@ -144,8 +138,6 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_source',
       'default hook' => 'default_sources',
-      'load all callback' => 'openlayers_sources_load_all',
-      'object factory' => 'openlayers_sources_factory',
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_sources',
@@ -172,10 +164,10 @@ function openlayers_schema() {
         'not null' => TRUE,
         'description' => 'Source description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Source class.',
+        'description' => 'Service class.',
       ),
       'options' => array(
         'type' => 'text',
@@ -226,10 +218,10 @@ function openlayers_schema() {
         'not null' => TRUE,
         'description' => 'Control description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Control class.',
+        'description' => 'Control service.',
       ),
       'options' => array(
         'type' => 'text',
@@ -280,10 +272,10 @@ function openlayers_schema() {
         'not null' => TRUE,
         'description' => 'Interaction description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Interaction class.',
+        'description' => 'Interaction service.',
       ),
       'options' => array(
         'type' => 'text',
@@ -334,10 +326,10 @@ function openlayers_schema() {
         'not null' => TRUE,
         'description' => 'Component description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Component class.',
+        'description' => 'Component service.',
       ),
       'options' => array(
         'type' => 'text',
@@ -436,10 +428,10 @@ function openlayers_schema() {
         'not null' => TRUE,
         'description' => 'Style description.',
       ),
-      'class' => array(
+      'factory_service' => array(
         'type' => 'text',
         'not null' => TRUE,
-        'description' => 'Style class.',
+        'description' => 'Style service.',
       ),
       'options' => array(
         'type' => 'text',

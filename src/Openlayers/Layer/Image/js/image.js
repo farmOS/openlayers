@@ -1,3 +1,3 @@
-Drupal.openlayers.layer__image = function(data) {
-  return new ol.layer.Image(data.options);
+Drupal.openlayers.openlayers_layer_internal_image = function(data) {
+  return new ol.layer.Image(data.opt);
 };

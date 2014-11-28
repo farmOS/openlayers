@@ -1,9 +1,9 @@
-Drupal.openlayers.source__imagevector = function(data) {
+Drupal.openlayers.openlayers_source_internal_imagevector = function(data) {
 
   for (source in data.cache.sources) {
-    if (source === data.options.source) {
-      data.options.source = data.cache.sources[source];
-      return new ol.source.ImageVector(data.options);
+    if (source === data.opt.source) {
+      data.opt.source = data.cache.sources[source];
+      return new ol.source.ImageVector(data.opt);
     }
   }
 

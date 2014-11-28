@@ -35,3 +35,14 @@ function openlayers_ui_menu() {
 function openlayers_ui_ctools_plugin_directory($module, $plugin) {
   return 'src/Plugin/' . $plugin;
 }
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function openlayers_ui_ctools_plugin_api($module, $api) {
+  $path = drupal_get_path('module', 'openlayers_ui') . '/includes';
+  return array(
+    'version' => 1,
+    'path' => $path,
+  );
+}

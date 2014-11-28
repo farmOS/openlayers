@@ -99,7 +99,7 @@ class ObjectsUI extends ctools_export_ui {
       $this->rows[$name]['data'][] = array('data' => check_plain($item->{$this->plugin['export']['admin_title']}), 'class' => array('ctools-export-ui-title'));
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($item->class), 'class' => array('ctools-export-ui-class'));
+    $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'service' => array('ctools-export-ui-service'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(

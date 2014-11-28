@@ -1,4 +1,4 @@
-Drupal.openlayers.interaction__draw = function(data) {
+Drupal.openlayers.openlayers_interaction_internal_draw = function(data) {
 
   var featureOverlay = new ol.FeatureOverlay({
     style: new ol.style.Style({
@@ -19,13 +19,13 @@ Drupal.openlayers.interaction__draw = function(data) {
   });
   featureOverlay.setMap(data.map);
 
-  data.options.features = featureOverlay.getFeatures();
-  data.options.type = 'Point';
+  data.opt.features = featureOverlay.getFeatures();
+  data.opt.type = 'Point';
 
   data.map.on('moveend', function(evt){
     var WKT = new ol.format.WKT();
     console.log(WKT.writeFeatures(featureOverlay.getFeatures()));
   });
 
-  return new ol.interaction.Draw(data.options);
+  return new ol.interaction.Draw(data.opt);
 };

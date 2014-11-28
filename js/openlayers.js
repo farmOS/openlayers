@@ -35,7 +35,11 @@
     processMap: function(map_id, context) {
       if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
         var object = Drupal.settings.openlayers.maps[map_id];
+
+        console.log(object);
+
         $(document).trigger('openlayers.build_start', [{'type': 'objects', 'objects': object, 'context': context}]);
+
 
         var count = 1,
           layers = object.layer || [],
@@ -46,24 +50,24 @@
           components = object.component || [],
           objects = {sources: {}, controls: {}, interactions: {}, components: {}, styles: {}, layers: {}, maps: {}};
 
-        object.map.options.layers = [];
-        object.map.options.styles = [];
-        object.map.options.controls = [];
-        object.map.options.interactions = [];
-        object.map.options.components = [];
+        object.map.opt.layers = [];
+        object.map.opt.styles = [];
+        object.map.opt.controls = [];
+        object.map.opt.interactions = [];
+        object.map.opt.components = [];
 
         try {
           var map = Drupal.openlayers.getObject(context, 'maps', object.map, null, count);
-          objects.maps[map.machine_name] = map;
+          objects.maps[map.mn] = map;
 
           count = sources.length;
           sources.map(function(data) {
-            if (data.options !== undefined && data.options.attributions !== undefined) {
-              data.options.attributions = [new ol.Attribution({
-                'html': data.options.attributions
+            if (data.opt !== undefined && data.opt.attributions !== undefined) {
+              data.opt.attributions = [new ol.Attribution({
+                'html': data.opt.attributions
               })];
             }
-            objects.sources[data.machine_name] = Drupal.openlayers.getObject(context, 'sources', data, map, count--);
+            objects.sources[data.mn] = Drupal.openlayers.getObject(context, 'sources', data, map, count--);
           });
 
           count = controls.length;
@@ -73,28 +77,28 @@
 
           count = interactions.length;
           interactions.map(function(data) {
-            objects.interactions[data.machine_name] = Drupal.openlayers.getObject(context, 'interactions', data, map, count--);
-            map.addInteraction(objects.interactions[data.machine_name]);
+            objects.interactions[data.mn] = Drupal.openlayers.getObject(context, 'interactions', data, map, count--);
+            map.addInteraction(objects.interactions[data.mn]);
           });
 
           count = styles.length;
           styles.map(function(data) {
-            objects.styles[data.machine_name] = Drupal.openlayers.getObject(context, 'styles', data, map, count--);
+            objects.styles[data.mn] = Drupal.openlayers.getObject(context, 'styles', data, map, count--);
           });
 
           count = layers.length;
           layers.map(function(data) {
-            data.options.source = objects.sources[data.options.source];
-            if ((data.options.style !== undefined) && (objects.styles[data.options.style] !== undefined)) {
-              data.options.style = objects.styles[data.options.style];
+            data.opt.source = objects.sources[data.opt.source];
+            if ((data.opt.style !== undefined) && (objects.styles[data.opt.style] !== undefined)) {
+              data.opt.style = objects.styles[data.opt.style];
             }
-            objects.layers[data.machine_name] = Drupal.openlayers.getObject(context, 'layers', data, map, count--);
-            map.addLayer(objects.layers[data.machine_name]);
+            objects.layers[data.mn] = Drupal.openlayers.getObject(context, 'layers', data, map, count--);
+            map.addLayer(objects.layers[data.mn]);
           });
 
           count = components.length;
           components.map(function(data) {
-            objects.components[data.machine_name] = Drupal.openlayers.getObject(context, 'components', data, map, count--);
+            objects.components[data.mn] = Drupal.openlayers.getObject(context, 'components', data, map, count--);
           });
 
           // Attach data to map DOM object
@@ -145,29 +149,27 @@
 
       cache = $.extend({}, cache.objects, cache);
 
-      $(document).trigger('openlayers.object_pre_alter', [{'type': type, 'machine_name': data.machine_name, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
-      var object;
-      if (!(data.machine_name in cache[type])) {
+      $(document).trigger('openlayers.object_pre_alter', [{'type': type, 'mn': data.mn, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
+      if (!(data.mn in cache[type])) {
         // TODO: Check why layers and maps doesnt cache.
-        var fct = data['class'].replace(/\\/g, "__").split('__').slice(-2).join('__').toLowerCase();
         try {
-          var object = Drupal.openlayers[fct]({
-            'options': data.options,
+          var object = Drupal.openlayers[data['cb']]({
+            'opt': data.opt,
             'map': map,
             'context': context,
             'cache': cache
           });
           if (typeof object === 'object') {
-            object.machine_name = data.machine_name;
+            object.mn = data.mn;
           }
         }
         catch (e) {
           // Log errors.
-          console.log('Drupal.openlayers.' + fct + ': ' + e.message);
+          console.log('Drupal.openlayers.' + data['cb'] + ': ' + e.message);
         }
-        cache[type][data.machine_name] = object;
+        cache[type][data.mn] = object;
       } else {
-        object = cache[type][data.machine_name];
+        object = cache[type][data.mn];
       }
 
       $(document).trigger('openlayers.object_post_alter', [{'type': type, 'object': object, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);

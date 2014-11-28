@@ -1,4 +1,4 @@
-Drupal.openlayers.component__autopopup = function(data) {
+Drupal.openlayers.openlayers_component_internal_autopopup = function(data) {
   var map = data.map;
 
   var container = jQuery('<div/>', {
@@ -33,14 +33,14 @@ Drupal.openlayers.component__autopopup = function(data) {
    */
   var overlay = new ol.Overlay({
     element: container,
-    positioning: data.options.positioning
+    positioning: data.opt.positioning
   });
 
   map.addOverlay(overlay);
 
   map.getLayers().forEach(function(layer) {
     var source = layer.getSource();
-    if (source.machine_name === data.options.source) {
+    if (source.mn === data.opt.source) {
       source.on('change', function(evt) {
         var feature = source.getFeatures()[0];
         var coordinates = feature.getGeometry().flatCoordinates;
@@ -52,15 +52,15 @@ Drupal.openlayers.component__autopopup = function(data) {
           content.innerHTML = '<div class="ol-popup-name">' + name + '</div><div class="ol-popup-description">' + description + '</div>';
           container.style.display = 'block';
 
-          if (data.options.enableAnimations == 1) {
-            var pan = ol.animation.pan({duration: data.options.animations.pan, source: map.getView().getCenter()});
-            var zoom = ol.animation.zoom({duration: data.options.animations.zoom, resolution: map.getView().getResolution()});
+          if (data.opt.enableAnimations == 1) {
+            var pan = ol.animation.pan({duration: data.opt.animations.pan, source: map.getView().getCenter()});
+            var zoom = ol.animation.zoom({duration: data.opt.animations.zoom, resolution: map.getView().getResolution()});
             map.beforeRender(pan, zoom);
           }
           var dataExtent = feature.getGeometry().getExtent();
           map.getView().fitExtent(dataExtent, map.getSize());
-          if (data.options.zoom != 'auto') {
-            map.getView().setZoom(data.options.zoom);
+          if (data.opt.zoom != 'auto') {
+            map.getView().setZoom(data.opt.zoom);
           } else {
             map.getView().setZoom(map.getView().getZoom() - 1);
           }

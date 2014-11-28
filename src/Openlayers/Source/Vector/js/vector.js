@@ -1,24 +1,24 @@
-Drupal.openlayers.source__vector = function(data) {
+Drupal.openlayers.openlayers_source_internal_vector = function(data) {
 
   var options = {
     features: []
   };
-  if (goog.isDef(data.options.features)) {
+  if (goog.isDef(data.opt.features)) {
     // Ensure the features are really an array.
-    if (!(data.options.features instanceof Array)) {
-      data.options.features = [{geometry: data.options.features}];
+    if (!(data.opt.features instanceof Array)) {
+      data.opt.features = [{geometry: data.opt.features}];
     }
     var format = new ol.format.WKT();
-    for (var i in data.options.features) {
-      if (data.options.features[i].wkt) {
+    for (var i in data.opt.features) {
+      if (data.opt.features[i].wkt) {
         try {
-          var data_projection = data.options.features[i].projection || 'EPSG:4326';
-          var feature = format.readFeature(data.options.features[i].wkt, {
+          var data_projection = data.opt.features[i].projection || 'EPSG:4326';
+          var feature = format.readFeature(data.opt.features[i].wkt, {
             dataProjection: data_projection,
             featureProjection: data.map.getView().getProjection()
           });
-          if (goog.isDef(data.options.features[i].attributes)) {
-            feature.setProperties(data.options.features[i].attributes);
+          if (goog.isDef(data.opt.features[i].attributes)) {
+            feature.setProperties(data.opt.features[i].attributes);
           }
           options.features.push(feature);
         }

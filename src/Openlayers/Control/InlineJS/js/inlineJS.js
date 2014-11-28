@@ -1,6 +1,6 @@
-Drupal.openlayers.control__inlinejs = function(data) {
+Drupal.openlayers.openlayers_control_internal_inlinejs = function(data) {
 
-  eval(data.options.javascript);
+  eval(data.opt.javascript);
 
   return control;
 };

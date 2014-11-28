@@ -16,7 +16,7 @@ function openlayers_examples_default_styles() {
   $ol_style->machine_name = 'openlayers_examples_style_blue_marker';
   $ol_style->name = 'OpenLayers blue marker';
   $ol_style->description = '';
-  $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
+  $ol_style->factory_service = 'openlayers.style.internal.InlineJS';
   $ol_style->options = array(
     'javascript' => 'var style = new ol.style.Style({
                         image: new ol.style.Icon(({
@@ -36,7 +36,7 @@ function openlayers_examples_default_styles() {
   $ol_style->machine_name = 'openlayers_examples_style_green';
   $ol_style->name = 'OpenLayers green style';
   $ol_style->description = '';
-  $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
+  $ol_style->factory_service = 'openlayers.style.internal.InlineJS';
   $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(0, 255, 0, 0.7)\'
@@ -65,7 +65,7 @@ function openlayers_examples_default_styles() {
   $ol_style->machine_name = 'openlayers_examples_style_red';
   $ol_style->name = 'OpenLayers red style';
   $ol_style->description = '';
-  $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
+  $ol_style->factory_service = 'openlayers.style.internal.InlineJS';
   $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(255, 0, 0, 0.7)\'
@@ -94,7 +94,7 @@ function openlayers_examples_default_styles() {
   $ol_style->machine_name = 'openlayers_examples_style_blue';
   $ol_style->name = 'OpenLayers blue style';
   $ol_style->description = '';
-  $ol_style->class = '\\Drupal\\openlayers\\Style\\InlineJS';
+  $ol_style->factory_service = 'openlayers.style.internal.InlineJS';
   $ol_style->options = array(
     'javascript' => 'var fill = new ol.style.Fill({
    color: \'rgba(0, 0, 255, 0.7)\'

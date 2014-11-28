@@ -97,9 +97,8 @@ abstract class Object implements ObjectInterface {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
 
-    $class_info = $this->parseClassname();
-    $this->class = get_class($this);
-    $this->plugin = ctools_get_plugins('openlayers', $this->getType(), $class_info['classname']);
+    $this->plugin = \Openlayers::getDefinition($data['factory_service']);
+    $this->factory_service = $data['factory_service'];
 
     // We need to ensure the object has a proper machine name.
     if (empty($this->machine_name)) {
@@ -319,10 +318,11 @@ abstract class Object implements ObjectInterface {
   }
 
   public function getJS() {
+    $cb = strtolower(str_replace('.', '_', $this->factory_service));
     return array(
-      'machine_name' => $this->machine_name,
-      'class' => $this->class,
-      'options' => $this->options
+      'mn' => $this->machine_name,
+      'cb' => $cb,
+      'opt' => $this->options
     );
   }
 }

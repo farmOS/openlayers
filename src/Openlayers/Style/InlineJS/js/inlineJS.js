@@ -1,6 +1,6 @@
-Drupal.openlayers.style__inlinejs = function(data) {
+Drupal.openlayers.openlayers_style_internal_inlinejs = function(data) {
 
-  eval(data.options.javascript);
+  eval(data.opt.javascript);
 
   return style;
 };

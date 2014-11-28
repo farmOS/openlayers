@@ -1,5 +1,5 @@
-Drupal.openlayers.component__inlinejs = function(data) {
+Drupal.openlayers.openlayers_component_internal_inlinejs = function(data) {
 
-  eval(data.options.javascript);
+  eval(data.opt.javascript);
 
 };

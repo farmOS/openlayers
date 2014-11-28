@@ -1,16 +1,16 @@
 (function($) {
   $(document).on('openlayers.build_start', function(event, objects) {
     console.time('Total building time');
-    console.groupCollapsed("********************* Starting building " + objects.objects.map.machine_name + " *********************");
+    console.groupCollapsed("********************* Starting building " + objects.objects.map.mn + " *********************");
   });
 
   var message;
   var type = null;
   $(document).on('openlayers.object_pre_alter', function(event, objects) {
-    if (!(objects.data.machine_name in objects.cache[objects.type])) {
-      message = " Computing " + objects.type + " " + objects.data.machine_name + "...";
+    if (!(objects.data.mn in objects.cache[objects.type])) {
+      message = " Computing " + objects.type + " " + objects.data.mn + "...";
     } else {
-      message = " Loading " + objects.type + " " + objects.data.machine_name + " from cache...";
+      message = " Loading " + objects.type + " " + objects.data.mn + " from cache...";
     }
 
     if (type == undefined || type != objects.type) {

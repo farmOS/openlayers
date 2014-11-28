@@ -1,4 +1,4 @@
-Drupal.openlayers.component__tooltip = function(data) {
+Drupal.openlayers.openlayers_component_internal_tooltip = function(data) {
   var map = data.map;
 
   var container = jQuery('<div/>', {
@@ -17,7 +17,7 @@ Drupal.openlayers.component__tooltip = function(data) {
    */
   var overlay = new ol.Overlay({
     element: container,
-    positioning: data.options.positioning
+    positioning: data.opt.positioning
   });
 
   map.addOverlay(overlay);
@@ -27,7 +27,7 @@ Drupal.openlayers.component__tooltip = function(data) {
     var coordinates = map.getEventCoordinate(evt.originalEvent);
 
     var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
-      if (layer.machine_name == data.options.layer) {
+      if (layer.mn == data.opt.layer) {
         return feature;
       }
     });

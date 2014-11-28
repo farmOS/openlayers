@@ -1,4 +1,4 @@
-Drupal.openlayers.component__popup = function(data) {
+Drupal.openlayers.openlayers_component_internal_popup = function(data) {
   var map = data.map;
 
   var container = jQuery('<div/>', {
@@ -34,14 +34,14 @@ Drupal.openlayers.component__popup = function(data) {
 
   var overlay = new ol.Overlay({
     element: container,
-    positioning: data.options.positioning
+    positioning: data.opt.positioning
   });
 
   map.addOverlay(overlay);
 
   map.on('click', function(evt) {
     var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-      if (goog.isDef(data.options.layers[layer.machine_name])) {
+      if (goog.isDef(data.opt.layers[layer.mn])) {
         return feature;
       }
     });

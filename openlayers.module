@@ -81,14 +81,7 @@ function openlayers_ctools_plugin_type() {
  *  openlayers_error on error.
  */
 function openlayers_object_factory_create($object_type, $object_class, $export = array()) {
-  ctools_include('plugins');
-
-  if (isset($object_class) && class_exists($object_class)) {
-
-    $object_class = explode('\\', $object_class);
-    $name = array_pop($object_class);
-
-    $object = Openlayers::getOLObject($object_type, $name);
+  if (isset($object_class) ) {
   }
   else {
     $object = new \Drupal\openlayers\Types\Error();
@@ -96,9 +89,7 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
     $object->class = $object_class;
   }
 
-  if ($export) {
-    $object->init((array) $export);
-  }
+
 
   return $object;
 }
@@ -129,8 +120,9 @@ function openlayers_object_load($object_type, $export) {
   if (is_string($export)) {
     $export = (array) ctools_export_crud_load('openlayers_' . $object_type . 's', $export);
   }
-  if (is_array($export) && isset($export['class'])) {
-    //$object = openlayers_object_factory_create($object_type, $export['class'], $export);
+  if (is_array($export) && isset($export['factory_service']) && Openlayers::hasService($export['factory_service'])) {
+    $object = Openlayers::service($export['factory_service']);
+    $object->init($export);
   }
 
   if (!is_object($object)) {
@@ -138,10 +130,14 @@ function openlayers_object_load($object_type, $export) {
     $export = array(
       'machine_name' => $args[1],
       'class' => 'undefined',
-      'type' => $object_type,
+      'type' => $object_type . ':' . $export['factory_service'],
       'error_message' => 'Unable to load @type object @machine_name.',
     );
-    return openlayers_object_factory_create($object_type, 'undefined', $export);
+    $object = new \Drupal\openlayers\Types\Error();
+    $object->type = $object_type;
+    $object->class = $object_type . ':' . $export['factory_service'];
+    $object->init($export);
+    return $object;
   }
 
   if (isset($export['disabled']) && ($export['disabled'] == 1 || $export['disabled'] == TRUE)) {
@@ -426,10 +422,28 @@ function openlayers_layer_options($empty_option = TRUE) {
  *  Implements hook_init().
  */
 function openlayers_init() {
-  $spm = Openlayers::init();
+  //ctools_include('export');
+
+  //$obj = ctools_export_crud_load('openlayers_maps', 'openlayers_map_view_edit_form');
 
   //$olObject = Openlayers::getOLObject('component', 'Autopopup');
-  //$olObject = Openlayers::service('openlayers.component')->createInstance('Autopopup');
+  //$olObject = Openlayers::service('openlayers.map')->createInstance('OLMap');
+  //$olObject->init(array('machine_name' => 'test-map'));
 
-  dpm(Openlayers::getContainer()->getDefinitions());
+  //$olObject = openlayers_object_load('map', 'openlayers_map_view_edit_form');
+
+  //dpm($olObject);
+  //$map = ctools_export_crud_load('openlayers_maps', 'openlayers_map_view_edit_form');
+
+  //$array_object = new ArrayObject($map);
+  //$export = $array_object->getArrayCopy();
+
+  //$map = Openlayers::service('openlayers.control.internal.MousePosition');
+//  $map->init($export);
+
+  //dpm($map);
+
+  //$def = Openlayers::getDefinition('openlayers.control.internal.MousePosition');
+  //dpm($def);
+
 }

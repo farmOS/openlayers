@@ -17,15 +17,14 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array();
   foreach ($maps as $machine_name => $data) {
-    $map = openlayers_object_load('map', $machine_name);
     // Todo: Rewrite properly and create a generic function to load all objects.
-    if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
+    if (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE)) {
       continue;
     }
-    $options[$machine_name] = $data->name;
+    $options[$data->machine_name] = $data->name;
   }
 
-  $map = 'openlayers_examples_map_openstreetmap';
+  $map = 'openlayers_map_ui_default';
   if (isset($form_state['values']['openlayers_default_map'])) {
     $map = $form_state['values']['openlayers_default_map'];
   }

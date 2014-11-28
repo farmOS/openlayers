@@ -87,6 +87,10 @@ class Openlayers extends Drupal {
     return static::$container->get($id);
   }
 
+  public static function getDefinition($pluginId) {
+    return static::$container->getDefinition($pluginId);
+  }
+
   public static function getOLObject($service, $plugin) {
     return static::$container->get('openlayers.' . strtolower($service))->createInstance($plugin);
   }
@@ -96,7 +100,6 @@ class Openlayers extends Drupal {
     $serviceBasename = 'openlayers.' . strtolower($plugin);
     foreach (Openlayers::service($serviceBasename)->getDefinitions() as $service => $data) {
       $options[$serviceBasename . '.' . $data['name']] = $data['name'];
-      //$options[$data['class']] = $data['name'];
     }
     return $options;
   }

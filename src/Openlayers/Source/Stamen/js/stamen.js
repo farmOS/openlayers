@@ -1,3 +1,3 @@
-Drupal.openlayers.source__stamen = function(data) {
-  return new ol.source.Stamen(data.options);
+Drupal.openlayers.openlayers_source_internal_stamen = function(data) {
+  return new ol.source.Stamen(data.opt);
 };

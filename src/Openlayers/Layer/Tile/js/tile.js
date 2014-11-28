@@ -1,3 +1,3 @@
-Drupal.openlayers.layer__tile = function(data) {
-  return new ol.layer.Tile(data.options);
+Drupal.openlayers.openlayers_layer_internal_tile = function(data) {
+  return new ol.layer.Tile(data.opt);
 };
