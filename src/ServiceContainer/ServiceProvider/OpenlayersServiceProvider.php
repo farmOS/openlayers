@@ -5,7 +5,7 @@
  * Contains \Drupal\openlayers\RenderCache\ServiceProvider\RenderCacheServiceProvider
  */
 
-namespace Drupal\openlayers\ServiceProvider;
+namespace Drupal\openlayers\ServiceContainer\ServiceProvider;
 
 use Drupal\service_container\DependencyInjection\ServiceProviderInterface;
 use Drupal\service_container\Plugin\Discovery\CToolsPluginDiscovery;

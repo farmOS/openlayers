@@ -5,7 +5,7 @@
  */
 
 use Drupal\service_container\DependencyInjection\CachedContainerBuilder;
-use Drupal\openlayers\DependencyInjection\OpenLayersPluginManager;
+use Drupal\service_container\DependencyInjection\ServiceProviderPluginManager;
 
 /**
  * Static Service Container wrapper.
@@ -36,7 +36,7 @@ class Openlayers extends Drupal {
       return TRUE;
     }
 
-    $service_provider_manager = new OpenLayersPluginManager();
+    $service_provider_manager = new ServiceProviderPluginManager();
     // This is an internal API, but we need the cache object.
     $cache = _cache_get_object('cache');
 
