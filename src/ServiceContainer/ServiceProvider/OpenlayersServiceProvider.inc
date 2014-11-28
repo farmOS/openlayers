@@ -1,5 +1,5 @@
 <?php
 
 $plugin = array(
-  'class' => "\\Drupal\\ServiceContainer\\ServiceProvider\\OpenlayersServiceProvider",
+  'class' => "\\Drupal\\openlayers\\ServiceContainer\\ServiceProvider\\OpenlayersServiceProvider",
 );
