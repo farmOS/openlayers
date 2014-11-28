@@ -74,7 +74,7 @@ class Collection {
   }
 
   public function merge(Collection $collection) {
-    foreach($collection->getObjects() as $type => $objects) {
+    foreach($collection->getObjects() as $objects) {
       foreach($objects as $object) {
         $this->append($object);
       }

@@ -20,7 +20,7 @@ class BootstrapjsAlert extends Component {
    * {@inheritdoc}
    */
   public function attached() {
-    $attached = parent::attached($context);
+    $attached = parent::attached();
     $attached['libraries_load'][] = array('bootstrapjs');
     return $attached;
   }

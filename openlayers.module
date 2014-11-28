@@ -121,7 +121,8 @@ function openlayers_object_load($object_type, $export) {
     $export = (array) ctools_export_crud_load('openlayers_' . $object_type . 's', $export);
   }
   if (is_array($export) && isset($export['factory_service']) && Openlayers::hasService($export['factory_service'])) {
-    $object = Openlayers::service($export['factory_service']);
+    $service = explode('.', $export['factory_service']);
+    $object = Openlayers::service($service[0] . '.' . $service[1])->createInstance($service[3]);
     $object->init($export);
   }
 
@@ -416,34 +417,4 @@ function openlayers_layer_options($empty_option = TRUE) {
     $options[$machine_name] = $data->name;
   }
   return $options;
-}
-
-/**
- *  Implements hook_init().
- */
-function openlayers_init() {
-  //ctools_include('export');
-
-  //$obj = ctools_export_crud_load('openlayers_maps', 'openlayers_map_view_edit_form');
-
-  //$olObject = Openlayers::getOLObject('component', 'Autopopup');
-  //$olObject = Openlayers::service('openlayers.map')->createInstance('OLMap');
-  //$olObject->init(array('machine_name' => 'test-map'));
-
-  //$olObject = openlayers_object_load('map', 'openlayers_map_view_edit_form');
-
-  //dpm($olObject);
-  //$map = ctools_export_crud_load('openlayers_maps', 'openlayers_map_view_edit_form');
-
-  //$array_object = new ArrayObject($map);
-  //$export = $array_object->getArrayCopy();
-
-  //$map = Openlayers::service('openlayers.control.internal.MousePosition');
-//  $map->init($export);
-
-  //dpm($map);
-
-  //$def = Openlayers::getDefinition('openlayers.control.internal.MousePosition');
-  //dpm($def);
-
 }

@@ -37,6 +37,8 @@ abstract class Object implements ObjectInterface {
    */
   public $options = array();
 
+  public $factory_service = NULL;
+
   /**
    * The plugin array.
    * @var array
@@ -64,20 +66,6 @@ abstract class Object implements ObjectInterface {
       'name' => '',
       'description' => '',
       'options' => array(),
-    );
-  }
-
-  /**
-   * Parses a classname into class and namespace parts.
-   *
-   * @return array
-   *   Array with namespace and classname.
-   */
-  public function parseClassname() {
-    $name = get_class($this);
-    return array(
-      'namespace' => array_slice(explode('\\', $name), 0, -1),
-      'classname' => implode('', array_slice(explode('\\', $name), -1)),
     );
   }
 

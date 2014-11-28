@@ -146,8 +146,7 @@ abstract class Map extends Object implements MapInterface {
     }
 
     $settings = $map->getCollection()->getJS();
-    $settings['map'] = $map->getJS();
-
+    $settings['map'] = $settings['map'][0];
     $settings = array(
       'data' => array(
         'openlayers' => array(

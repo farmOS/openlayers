@@ -184,7 +184,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.component.internal.Popup';
   $ol_component->options = array(
-    'layer' => array(
+    'layers' => array(
       'openlayers_examples_layer_vector_kml_earthquakes_heatmap' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
     ),
     'positioning' => 'top-right',
