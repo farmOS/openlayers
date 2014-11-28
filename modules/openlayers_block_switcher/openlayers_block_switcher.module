@@ -97,10 +97,9 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
     return FALSE;
   }
 
-  if ($layers = $map->getOption('layers')) {
+  if ($layers = $map->getLayers()) {
     foreach ($layers as $layer) {
-      $layer = openlayers_object_load('layer', $layer->machine_name);
-      $options_overlays[$layer->machine_name] = $layer->get('name');
+      $options_overlays[$layer->machine_name] = $layer->name;
       if ('1' == $layer->getOption('visible', 1)) {
         $default_value[] = $layer->machine_name;
       }
