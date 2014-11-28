@@ -34,11 +34,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Component',
-          'prefix' => 'openlayers.component.internal.')
-        ),
+          'prefix' => 'openlayers.component.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -49,11 +50,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Control',
-          'prefix' => 'openlayers.control.internal.')
-        ),
+          'prefix' => 'openlayers.control.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -64,11 +66,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Interaction',
-          'prefix' => 'openlayers.interaction.internal.')
-        ),
+          'prefix' => 'openlayers.interaction.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -79,11 +82,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Layer',
-          'prefix' => 'openlayers.layer.internal.')
-        ),
+          'prefix' => 'openlayers.layer.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -94,11 +98,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Map',
-          'prefix' => 'openlayers.map.internal.')
-        ),
+          'prefix' => 'openlayers.map.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -109,11 +114,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Source',
-          'prefix' => 'openlayers.source.internal.')
-        ),
+          'prefix' => 'openlayers.source.internal.'
+        )
       ),
     );
     // Plugin Managers
@@ -124,11 +130,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
         array('setContainer', array('@service_container')),
       ),
       'tags' => array(
-        array('ctools.plugin', array(
+        array(
+          'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Style',
-          'prefix' => 'openlayers.style.internal.')
-        ),
+          'prefix' => 'openlayers.style.internal.'
+        )
       ),
     );
 
@@ -141,22 +148,6 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
   /**
    * {@inheritdoc}
    */
-  public function alterContainerDefinition(&$container_definition) {
-    // Register ctools plugins as private services in the container.
-    foreach ($container_definition['tags']['ctools.plugin'] as $service => $tags) {
-      foreach ($tags as $tag) {
-        $discovery = new CToolsPluginDiscovery($tag['owner'], $tag['type']);
-        $definitions = $discovery->getDefinitions();
-        foreach ($definitions as $key => $definition) {
-          // Always pass the definition as the first argument.
-          $definition += array(
-            'arguments' => array(),
-          );
-          array_unshift($definition['arguments'], $definition);
-          $container_definition['services'][$tag['prefix'] . $key] = $definition + array('public' => FALSE);
-        }
-      }
-    }
-  }
+  public function alterContainerDefinition(&$container_definition) {}
 
 }
