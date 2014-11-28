@@ -49,11 +49,6 @@ interface ObjectInterface {
   public function getPlugin();
 
   /**
-   * @TODO was does this do?
-   */
-  public function develop();
-
-  /**
    * @TODO was does this?
    *
    * @param string|array $parents
@@ -118,13 +113,10 @@ interface ObjectInterface {
   /**
    * Returns a list of attachments for building the render array.
    *
-   * @param \Drupal\openlayers\Types\ObjectInterface $context
-   *   The object the attachments are attached to.
-   *
    * @return array
    *   The attachments to add.
    */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context);
+  public function attached();
 
   /**
    * Defines dependencies.
@@ -135,14 +127,6 @@ interface ObjectInterface {
    *   The dependencies.
    */
   public function dependencies();
-
-  /**
-   * Returns the object as JS compatible array.
-   *
-   * @return array
-   *   The array representation of this object.
-   */
-  public function toJSArray();
 
   /**
    * Whether or not this object has to be processed asynchronously.

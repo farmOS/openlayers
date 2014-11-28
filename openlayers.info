@@ -7,5 +7,6 @@ dependencies[] = ctools
 dependencies[] = file
 dependencies[] = image
 dependencies[] = registry_autoload
+dependencies[] = service_container
 
 registry_autoload[] = PSR-4

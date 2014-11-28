@@ -20,9 +20,12 @@ function openlayers_ctools_plugin_api($module, $api) {
 /**
  * Implements hook_ctools_plugin_directory().
  */
-function openlayers_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'openlayers') {
-    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin);
+function openlayers_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'openlayers') {
+    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
+  }
+  if ($owner == 'service_provider') {
+    return 'src/ServiceContainer/' . $plugin_type;
   }
 }
 
@@ -33,35 +36,31 @@ function openlayers_ctools_plugin_type() {
   return array(
     'Map' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Layer' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Style' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Source' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Control' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Interaction' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
     'Component' => array(
       'use hooks' => FALSE,
-      'classes' => array('class'),
-    ),
-    'ServiceProvider' => array(
-      'cache' => FALSE,
-      'classes' => array('class'),
+      'extension' => 'php'
     ),
   );
 }
@@ -113,13 +112,12 @@ function openlayers_object_factory_create($object_type, $object_class, $export =
  *   available object types.
  * @param array|string|object $export
  *   The exported object.
- * @param bool $develop
  *
  * @return mixed|openlayers_error
  *   Returns the instance of the requested object or an instance of
  *   openlayers_error on error.
  */
-function openlayers_object_load($object_type, $export, $develop = TRUE) {
+function openlayers_object_load($object_type, $export) {
   ctools_include('export');
 
   $object = NULL;
@@ -132,7 +130,7 @@ function openlayers_object_load($object_type, $export, $develop = TRUE) {
     $export = (array) ctools_export_crud_load('openlayers_' . $object_type . 's', $export);
   }
   if (is_array($export) && isset($export['class'])) {
-    $object = openlayers_object_factory_create($object_type, $export['class'], $export);
+    //$object = openlayers_object_factory_create($object_type, $export['class'], $export);
   }
 
   if (!is_object($object)) {
@@ -148,10 +146,6 @@ function openlayers_object_load($object_type, $export, $develop = TRUE) {
 
   if (isset($export['disabled']) && ($export['disabled'] == 1 || $export['disabled'] == TRUE)) {
     $object->disabled = 1;
-  }
-
-  if ($develop) {
-    $object->develop();
   }
 
   return $object;
@@ -432,9 +426,10 @@ function openlayers_layer_options($empty_option = TRUE) {
  *  Implements hook_init().
  */
 function openlayers_init() {
-  Openlayers::init();
+  $spm = Openlayers::init();
 
-  $olObject = Openlayers::getOLObject('component', 'Autopopup');
+  //$olObject = Openlayers::getOLObject('component', 'Autopopup');
+  //$olObject = Openlayers::service('openlayers.component')->createInstance('Autopopup');
 
-  dpm($olObject);
+  dpm(Openlayers::getContainer()->getDefinitions());
 }

@@ -8,6 +8,10 @@ namespace Drupal\openlayers\Map;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Map;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Map\\OLMap',
+);
+
 /**
  * Class OLMap.
  */
@@ -112,11 +116,11 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
-    $attached = parent::attached($context);
+  public function attached() {
+    $attached = parent::attached();
     // TODO: OpenLayers settings form by default to debug mode.
     $variant = Config::LIBRARY_VARIANT;
-    $attached['libraries_load'][] = array('openlayers3', $variant);
+    $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
     return $attached;
   }
 }

@@ -7,6 +7,10 @@
 namespace Drupal\openlayers\Interaction;
 use Drupal\openlayers\Types\Interaction;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Interaction\\DragPan',
+);
+
 /***
  * Class DragPan
  * @package Drupal\openlayers\Interaction

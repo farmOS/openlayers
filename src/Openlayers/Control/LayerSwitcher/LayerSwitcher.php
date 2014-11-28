@@ -9,6 +9,10 @@
 namespace Drupal\openlayers\Control;
 use Drupal\openlayers\Types\Control;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Control\\LayerSwitcher',
+);
+
 /**
  * Class LayerSwitcher
  *
@@ -57,7 +61,7 @@ class LayerSwitcher extends Control {
     foreach ($map_layers as $i => $map_layer) {
       if (isset($layers[$map_layer->machine_name])) {
         $items[] = array(
-          'data' => '<label><input type="' . $element_type . '" name="layer" value="' . $map_layer->machine_name . '">' . $map_layer->get('name') . '</label>',
+          'data' => '<label><input type="' . $element_type . '" name="layer" value="' . $map_layer->machine_name . '">' . $map_layer->name . '</label>',
           'id' => $map_id . '-' . $map_layer->machine_name,
           'class' => array(drupal_html_class($map_layer->machine_name)),
         );

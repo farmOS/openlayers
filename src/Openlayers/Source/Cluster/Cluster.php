@@ -7,6 +7,10 @@
 namespace Drupal\openlayers\Source;
 use Drupal\openlayers\Types\Source;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Source\\Cluster',
+);
+
 /**
  * Class Cluster.
  */

@@ -20,12 +20,12 @@ abstract class Object implements ObjectInterface {
   /**
    * @var string
    */
-  private $name;
+  public $name;
 
   /**
    * @var string
    */
-  private $description;
+  public $description;
 
   /**
    * @var string
@@ -42,6 +42,8 @@ abstract class Object implements ObjectInterface {
    * @var array
    */
   private $plugin = NULL;
+
+  protected $collection = NULL;
 
   /**
    * @var array
@@ -97,13 +99,19 @@ abstract class Object implements ObjectInterface {
 
     $class_info = $this->parseClassname();
     $this->class = get_class($this);
-    ctools_include('plugins');
     $this->plugin = ctools_get_plugins('openlayers', $this->getType(), $class_info['classname']);
 
     // We need to ensure the object has a proper machine name.
     if (empty($this->machine_name)) {
       $this->machine_name = drupal_html_id($this->getType() . '-' . time());
     }
+
+    $this->buildCollection();
+  }
+
+  public function buildCollection() {
+    $this->getCollection()->append($this);
+    return $this->getCollection();
   }
 
   /**
@@ -133,27 +141,30 @@ abstract class Object implements ObjectInterface {
    * {@inheritdoc}
    */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object === $this) continue;
+      $object->preBuild($build, $this);
+    }
 
+    drupal_alter('openlayers_object_preprocess', $this, $context);
   }
 
   /**
    * {@inheritdoc}
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object === $this) continue;
+      $object->postBuild($build, $context);
+    }
 
+    drupal_alter('openlayers_object_postprocess', $this, $context);
   }
 
   /**
    * {@inheritdoc}
    */
   public function build() {
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function develop() {
 
   }
 
@@ -207,21 +218,6 @@ abstract class Object implements ObjectInterface {
   }
 
   /**
-   * Getter allows access to any property no mather what scope it has.
-   *
-   * @TODO is this a good idea? Why not __get()?
-   *
-   * @param string $prop
-   *   Property to get.
-   *
-   * @return mixed
-   *   The value of the property.
-   */
-  public function get($prop) {
-    return $this->$prop;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getOption($parents, $default_value = NULL) {
@@ -254,12 +250,10 @@ abstract class Object implements ObjectInterface {
     return $default_value;
   }
 
-
-
   /**
    * {@inheritdoc}
    */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
+  public function attached() {
     if ($plugin = $this->getPlugin()) {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';
@@ -305,14 +299,6 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function toJSArray() {
-    // TODO: find a better solution here.
-    return json_decode(json_encode($this), TRUE);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function isAsynchronous() {
     return FALSE;
   }
@@ -323,5 +309,20 @@ abstract class Object implements ObjectInterface {
   public function getType() {
     $class = explode('\\', get_class($this));
     return $class[2];
+  }
+
+  public function getCollection() {
+    if (!($this->collection instanceof Collection)) {
+      $this->collection = new Collection();
+    }
+    return $this->collection;
+  }
+
+  public function getJS() {
+    return array(
+      'machine_name' => $this->machine_name,
+      'class' => $this->class,
+      'options' => $this->options
+    );
   }
 }

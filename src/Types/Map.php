@@ -9,28 +9,12 @@ namespace Drupal\openlayers\Types;
 /**
  * Class openlayers_map.
  */
-class Map extends Object implements MapInterface {
+abstract class Map extends Object implements MapInterface {
 
   /**
    * @var string
    */
   protected $id;
-
-
-  /**
-   * Stores the objects related to this map.
-   *
-   * @see Map::getLayers()
-   * @see Map::getSources()
-   * @see Map::getStyles()
-   * @see Map::getControls()
-   * @see Map::getInteractions()
-   * @see Map::getComponents()
-   * @see Map::getObjects()
-   *
-   * @var array
-   */
-  protected $objects = array();
 
   /**
    * {@inheritdoc}
@@ -41,16 +25,27 @@ class Map extends Object implements MapInterface {
     $this->setOption('target', $this->getId());
   }
 
+  public function buildCollection() {
+    parent::buildCollection();
+
+    foreach (array('source', 'layer', 'control', 'interaction', 'component', 'projection') as $type) {
+      foreach ($this->getOption($type . 's', array()) as $object) {
+        $this->getCollection()->merge(openlayers_object_load($type, $object)->getCollection());
+      }
+    }
+
+    return $this->getCollection();
+  }
+
   /**
    * {@inheritdoc}
    */
   public function getId() {
-    if (isset($this->id)) {
-      return $this->id;
+    if (!isset($this->id)) {
+      $css_map_name = drupal_clean_css_identifier($this->machine_name);
+      $this->id = drupal_html_id('openlayers-map-' . $css_map_name);
     }
 
-    $css_map_name = drupal_clean_css_identifier($this->machine_name);
-    $this->id = drupal_html_id('openlayers-map-' . $css_map_name);
     return $this->id;
   }
 
@@ -58,209 +53,42 @@ class Map extends Object implements MapInterface {
    * {@inheritdoc}
    */
   public function getLayers($reset = FALSE) {
-    if (!isset($this->objects['layer']) || $reset) {
-      $this->objects['layer'] = array();
-      foreach ($this->getOption('layers', array()) as $layer) {
-        $this->objects['layer'][] = clone openlayers_object_load('layer', $layer);
-      }
-    }
-    return $this->objects['layer'];
+    return array_values($this->getCollection()->getObjects('layer'));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getSources($reset = FALSE) {
-    if (!isset($this->objects['source']) || $reset) {
-      $this->objects['source'] = array();
-      foreach ($this->getOption('sources', array()) as $index => $source) {
-        $this->objects['source'][$source] = openlayers_object_load('source', $source);
-      }
-
-      // Add sources required / defined by the assigned layers.
-      foreach ($this->getLayers() as $index => $layer) {
-        if ($source = $layer->getSource()) {
-          $this->objects['source'][$source->machine_name] = $source;
-        }
-      }
-
-      // We set the machine name as key of the sources to avoid duplicated
-      // listing. But we return an array without associative keys.
-      $this->objects['source'] = array_values($this->objects['source']);
-    }
-    return $this->objects['source'];
+    return array_values($this->getCollection()->getObjects('source'));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getStyles($reset = FALSE) {
-    if (!isset($this->objects['style']) || $reset) {
-      $this->objects['style'] = array();
-      foreach ($this->getOption('styles', array()) as $source) {
-        $this->objects['style'][] = openlayers_object_load('style', $source);
-      }
-
-      foreach ($this->getLayers() as $layer) {
-        if ($style = $layer->getStyle()) {
-          $this->objects['style'][] = $style;
-        }
-      }
-    }
-    return $this->objects['style'];
+    return array_values($this->getCollection()->getObjects('style'));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getControls($reset = FALSE) {
-    if (!isset($this->objects['control']) || $reset) {
-      $this->objects['control'] = array();
-      foreach ($this->getOption('controls', array()) as $control) {
-        $this->objects['control'][] = clone openlayers_object_load('control', $control);
-      }
-    }
-    return $this->objects['control'];
+    return array_values($this->getCollection()->getObjects('control'));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getInteractions($reset = FALSE) {
-    if (!isset($this->objects['interaction']) || $reset) {
-      $this->objects['interaction'] = array();
-      foreach ($this->getOption('interactions', array()) as $interaction) {
-        $this->objects['interaction'][] = clone openlayers_object_load('interaction', $interaction);
-      }
-    }
-    return $this->objects['interaction'];
+    return array_values($this->getCollection()->getObjects('interaction'));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getComponents($reset = FALSE) {
-    if (!isset($this->objects['component']) || $reset) {
-      $this->objects['component'] = array();
-      foreach ($this->getOption('components', array()) as $component) {
-        $this->objects['component'][] = clone openlayers_object_load('component', $component);
-      }
-    }
-    return $this->objects['component'];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function develop() {
-    if ($layers = $this->getLayers()) {
-      $this->options['layers'] = $layers;
-    }
-    if ($controls = $this->getControls()) {
-      $this->options['controls'] = $controls;
-    }
-    if ($interactions = $this->getInteractions()) {
-      $this->options['interactions'] = $interactions;
-    }
-    if ($components = $this->getComponents()) {
-      $this->options['components'] = $components;
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function &getObjects($reset = FALSE) {
-    $this->getLayers($reset);
-    $this->getStyles($reset);
-    $this->getSources($reset);
-    $this->getControls($reset);
-    $this->getInteractions($reset);
-    $this->getComponents($reset);
-
-    foreach ($this->objects['layer'] as $index => $layer) {
-      if ($source = $layer->getSource()) {
-        $this->objects['layer'][$index]->options['source'] = $source->machine_name;
-      }
-      if ($style = $layer->getStyle()) {
-        $this->objects['layer'][$index]->options['style'] = $style->machine_name;
-      }
-    }
-    return $this->objects;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getJSObjects() {
-    $objects = $this->getObjects();
-
-    foreach (openlayers_object_types() as $type) {
-      foreach ($objects[$type] as $index => $object) {
-        $objects[$type][$index] = (array) $object->toJSArray();
-      }
-    }
-
-    $objects['map'] = $this->toJSArray();
-
-    $objects = array_map_recursive('_floatval_if_numeric', $objects);
-    $objects = removeEmptyElements($objects);
-    $objects = unserialize(serialize($objects));
-
-    return $objects;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function attached(\Drupal\openlayers\Types\ObjectInterface $context) {
-    $this->attached = parent::attached($context);
-    $objects = $this->getObjects();
-
-    foreach ($objects as $type => $list) {
-      if ($list != FALSE) {
-        foreach ($list as $index => $data) {
-          $this->attached = drupal_array_merge_deep($this->attached, $data->attached($context));
-        }
-      }
-    }
-
-    return $this->attached;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
-    parent::preBuild($build, $context);
-
-    foreach (openlayers_object_types() as $type) {
-      if (isset($this->objects[$type])) {
-        foreach ($this->objects[$type] as $object) {
-          $object->preBuild($build, $this);
-          drupal_alter('openlayers_object_preprocess', $object, $this);
-        }
-      }
-    }
-    drupal_alter('openlayers_object_preprocess', $this);
-  }
-
-
-  /**
-   * {@inheritdoc}
-   */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
-    parent::postBuild($build, $context);
-
-    foreach (openlayers_object_types() as $type) {
-      if (isset($this->objects[$type])) {
-        foreach ($this->objects[$type] as $object) {
-          $object->postBuild($build, $context);
-          drupal_alter('openlayers_object_postprocess', $object, $build);
-        }
-      }
-    }
-    drupal_alter('openlayers_object_postprocess', $this, $build);
+    return array_values($this->getCollection()->getObjects('interaction'));
   }
 
   /**
@@ -275,19 +103,8 @@ class Map extends Object implements MapInterface {
       $current_path = $_SESSION['current_path'];
     }
 
+    // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
-
-    $attached = $map->attached($map);
-    $objects = $map->getObjects();
-    $objects['map'] = $map;
-
-    $setting = array(
-      'openlayers' => array(
-        'maps' => array(
-          $map->getId() => $map->getJSObjects(),
-        ),
-      ),
-    );
 
     $links = array(
       'openlayers' => array(
@@ -299,45 +116,53 @@ class Map extends Object implements MapInterface {
       ),
     );
     $asynchronous = 0;
-    foreach (openlayers_object_types() as $type) {
+    foreach ($map->getCollection()->getFlatList() as $object) {
       $object_links = array();
-      foreach ($objects[$type] as $object) {
-        // Check if this object is asynchronous.
-        $asynchronous += (int) $object->isAsynchronous();
+      // Check if this object is asynchronous.
+      $asynchronous += (int) $object->isAsynchronous();
 
-        // Build contextual link for this object.
-        $name = $object->get('name');
-        if (empty($name)) {
-          $name = $object->machine_name;
-        }
-        $object_links[$type . ':' . $object->machine_name] = array(
-          'title' => t('Edit @object_name', array('@object_name' => $name)),
-          'href' => 'admin/structure/openlayers/' . $type . 's/list/' . $object->machine_name . '/edit',
-          'query' => array(
-            'destination' => $current_path,
-          ),
-        );
+      // Build contextual link for this object.
+      $name = $object->name;
+      if (empty($name)) {
+        $name = $object->machine_name;
       }
+
+      $object_links[$object->getType() . ':' . $object->machine_name] = array(
+        'title' => t('Edit @object_name', array('@object_name' => $name)),
+        'href' => 'admin/structure/openlayers/' . $object->getType() . 's/list/' . $object->machine_name . '/edit',
+        'query' => array(
+          'destination' => $current_path,
+        ),
+      );
 
       if (!empty($object_links)) {
         // Build contextual link title for this type.
-        $links[$type] = array(
-          'title' => '<strong>' . ucwords($type . 's') . '</strong>',
+        $links[$object->getType()] = array(
+          'title' => '<strong>' . ucwords($object->getType() . 's') . '</strong>',
           'html' => TRUE,
         );
         $links += $object_links;
       }
     }
-    // If this is asynchronous flag it as such.
-    if ($asynchronous) {
-      $setting['openlayers']['maps'][$map->getId()]['map']['async'] = $asynchronous;
-    }
 
-    $attached['js'][] = array(
-      'data' => $setting,
+    $settings = array(
+      'data' => array(
+        'openlayers' => array(
+          'maps' => array(
+            $map->getId() => $map->getCollection()->getJS(),
+          ),
+        ),
+      ),
       'type' => 'setting',
     );
 
+    // If this is asynchronous flag it as such.
+    if ($asynchronous) {
+      $settings['data']['openlayers']['maps'][$map->getId()]['map']['async'] = $asynchronous;
+    }
+
+    $attached = $map->getCollection()->getAttached();
+    $attached['js'][] = $settings;
 
     $styles = array(
       'width' => $map->getOption('width'),
@@ -375,17 +200,13 @@ class Map extends Object implements MapInterface {
         '#value' => '',
         '#attributes' => array(
           'id' => $map->getId(),
+          'style' => $css_styles,
           'class' => array(
             'openlayers-map',
             $map->machine_name,
           ),
         ),
-        '#attached' => array(
-          'library' => $attached['library'],
-          'libraries_load' => $attached['libraries_load'],
-          'js' => $attached['js'],
-          'css' => $attached['css'],
-        ),
+        '#attached' => $attached,
       ),
     );
 

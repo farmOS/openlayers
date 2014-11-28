@@ -20,6 +20,7 @@ function openlayers_ui_Styles_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Styles',
+      'file' => 'Styles.php'
     ),
 
     'export' => array(
@@ -99,12 +100,18 @@ function openlayers_style_form_start_submit($form, &$form_state) {
  * Style type config form handler.
  */
 function openlayers_style_form_type($form, &$form_state) {
+  $styles = ctools_get_plugins('openlayers', 'Style');
+  $options = array('' => t('<Choose the style type>'));
+  foreach ($styles as $class => $plugin) {
+    $options[$plugin['class']] = $class;
+  }
+
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Style type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of style.'),
-    '#options' => Openlayers::getOLObjectsOptions('style'),
+    '#options' => $options,
     '#required' => TRUE,
   );
 

@@ -11,66 +11,56 @@ namespace Drupal\openlayers\Types;
  */
 abstract class Layer extends Object implements LayerInterface {
 
-  /**
-   * Keeps track of what is attached.
-   *
-   * @var array
-   */
-  protected $attached = array();
+  public function buildCollection() {
+    parent::buildCollection();
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getSource() {
-    if ($source = $this->getOption('source')) {
-      return openlayers_object_load('source', $this->getOption('source'));
+    foreach (array('source', 'style') as $type) {
+      if ($data = $this->getOption($type, FALSE)) {
+        $this->getCollection()->merge(openlayers_object_load($type, $data)->getCollection());
+      }
     }
-    return FALSE;
+
+    return $this->getCollection();
   }
 
   /**
    * Returns the source of this layer.
    *
-   * @TODO Shouldn't this be part of the LayerInterface?
-   *
-   * @return openlayers_style_interface|FALSE
+   * @return openlayers_source_interface|FALSE
    *   The source assigned to this layer.
    */
+  public function getSource() {
+    $source = array_values($this->getCollection()->getObjects('source'));
+    return ($source[0] instanceof SourceInterface) ? $source[0] : FALSE;
+  }
+
+  /**
+   * Returns the style of this layer.
+   *
+   * @return openlayers_style_interface|FALSE
+   *   The style assigned to this layer.
+   */
   public function getStyle() {
-    if ($style = $this->getOption('style')) {
-      return openlayers_object_load('style', $this->getOption('style'));
-    }
-    return FALSE;
+    $style = array_values($this->getCollection()->getObjects('style'));
+    return ($style[0] instanceof StyleInterface) ? $style[0] : FALSE;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function develop() {
-    if ($data = $this->getSource()) {
-      $this->setOption('source', $data);
-    }
-  }
+  public function getJS() {
+    $options = $this->options;
 
-  /**
-   * {@inheritdoc}
-   */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     if ($source = $this->getSource()) {
-      $source->preBuild($build, $context);
-      drupal_alter('openlayers_object_preprocess', $source, $build);
-      $this->setOption('source', $source);
+      $options['source'] = $source->machine_name;
     }
+
+    if ($style = $this->getStyle()) {
+      $options['style'] = $style->machine_name;
+    }
+
+    return array(
+      'machine_name' => $this->machine_name,
+      'class' => $this->class,
+      'options' => $options
+    );
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
-    if ($source = $this->getSource()) {
-      $source->postBuild($build, $context);
-      drupal_alter('openlayers_object_postprocess', $source, $build);
-      $this->setOption('source', $source);
-    }
-  }
 }

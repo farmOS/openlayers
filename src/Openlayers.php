@@ -4,8 +4,8 @@
  * Contains Openlayers
  */
 
-use Drupal\openlayers\DependencyInjection\CachedContainerBuilder;
-use Drupal\openlayers\DependencyInjection\ServiceProviderPluginManager;
+use Drupal\service_container\DependencyInjection\CachedContainerBuilder;
+use Drupal\openlayers\DependencyInjection\OpenLayersPluginManager;
 
 /**
  * Static Service Container wrapper.
@@ -18,14 +18,7 @@ use Drupal\openlayers\DependencyInjection\ServiceProviderPluginManager;
  * code.
  *
  */
-class Openlayers {
-
-  /**
-   * The currently active container object.
-   *
-   * @var \Drupal\openlayers\DependencyInjection\ContainerInterface
-   */
-  protected static $container;
+class Openlayers extends Drupal {
 
   /**
    * Initializes the container.
@@ -37,14 +30,16 @@ class Openlayers {
    *   TRUE when the container was initialized, FALSE otherwise.
    */
   public static function init() {
+
     // If this is set already, just return.
     if (isset(static::$container)) {
       return TRUE;
     }
 
-    $service_provider_manager = new ServiceProviderPluginManager();
+    $service_provider_manager = new OpenLayersPluginManager();
     // This is an internal API, but we need the cache object.
     $cache = _cache_get_object('cache');
+
 
     $container_builder = new CachedContainerBuilder($service_provider_manager, $cache);
 
@@ -70,7 +65,7 @@ class Openlayers {
    * @deprecated This method is only useful for the testing environment. It
    * should not be used otherwise.
    *
-   * @return \Drupal\openlayers\DependencyInjection\ContainerInterface
+   * @return \Drupal\service_container\DependencyInjection\ContainerInterface
    */
   public static function getContainer() {
     return static::$container;
@@ -98,8 +93,10 @@ class Openlayers {
 
   public static function getOLObjectsOptions($plugin) {
     $options = array('' => t('<Choose the ' . $plugin . ' type>'));
-    foreach (Openlayers::service('openlayers.' . $plugin)->getDefinitions() as $service => $data) {
-      $options[$service] = $data['name'];
+    $serviceBasename = 'openlayers.' . strtolower($plugin);
+    foreach (Openlayers::service($serviceBasename)->getDefinitions() as $service => $data) {
+      $options[$serviceBasename . '.' . $data['name']] = $data['name'];
+      //$options[$data['class']] = $data['name'];
     }
     return $options;
   }

@@ -19,24 +19,6 @@ interface MapInterface {
   public function getId();
 
   /**
-   * Returns an array of objects assigned to this map.
-   *
-   * @return array
-   *   Associative array of objects assigned to this map. Keyed by the type of
-   *   the objects.
-   */
-  public function &getObjects();
-
-  /**
-   * Returns an JS compatible array of objects assigned to this map.
-   *
-   * @return array
-   *   JS compatible array of objects assigned to this map. Keyed by the type of
-   *   the objects.
-   */
-  public function getJSObjects();
-
-  /**
    * Returns the layer objects assigned to this map.
    *
    * @return array
@@ -82,28 +64,4 @@ interface MapInterface {
    * @return array
    */
   public function build();
-
-  /**
-   * Invoked before an objects render array is built.
-   *
-   * Mostly invoked by the map object.
-   *
-   * @param array $build
-   *   The array with the build information.
-   * @param \Drupal\openlayers\Types\ObjectInterface $context
-   *   The context of the build. Mostly the map object.
-   */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
-
-  /**
-   * Invoked after an objects render array is built.
-   *
-   * Mostly invoked by the map object.
-   *
-   * @param array $build
-   *   The array with the build information.
-   * @param \Drupal\openlayers\Types\ObjectInterface $context
-   *   The context of the build. Mostly the map object.
-   */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
   }

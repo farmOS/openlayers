@@ -7,8 +7,8 @@
 
 namespace Drupal\openlayers\ServiceProvider;
 
-use Drupal\openlayers\DependencyInjection\ServiceProviderInterface;
-use Drupal\openlayers\Plugin\Discovery\CToolsPluginDiscovery;
+use Drupal\service_container\DependencyInjection\ServiceProviderInterface;
+use Drupal\service_container\Plugin\Discovery\CToolsPluginDiscovery;
 
 /**
  * Provides openlayers service definitions.
@@ -23,12 +23,12 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     $parameters = array();
 
     $services['service_container'] = array(
-      'class' => '\Drupal\openlayers\DependencyInjection\Container',
+      'class' => '\Drupal\service_container\DependencyInjection\Container',
     );
 
     // Plugin Managers
     $services['openlayers.component'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.component.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -43,7 +43,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.control'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.control.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -58,7 +58,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.interaction'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.interaction.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -73,7 +73,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.layer'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.layer.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -88,7 +88,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.map'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.map.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -103,7 +103,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.source'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.source.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
@@ -118,7 +118,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
     );
     // Plugin Managers
     $services['openlayers.style'] = array(
-      'class' => '\Drupal\openlayers\Plugin\ContainerAwarePluginManager',
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.style.internal.'),
       'calls' => array(
         array('setContainer', array('@service_container')),
