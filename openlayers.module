@@ -433,4 +433,8 @@ function openlayers_layer_options($empty_option = TRUE) {
  */
 function openlayers_init() {
   Openlayers::init();
+
+  $olObject = Openlayers::getOLObject('component', 'Autopopup');
+
+  dpm($olObject);
 }

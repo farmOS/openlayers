@@ -126,18 +126,12 @@ function openlayers_layer_form_start_submit($form, &$form_state) {
  * Layer type config form handler.
  */
 function openlayers_layer_form_type($form, &$form_state) {
-  $layers = ctools_get_plugins('openlayers', 'Layer');
-  $options = array('' => t('<Choose the layer type>'));
-  foreach ($layers as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
-  }
-
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of layer.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('layer'),
     '#required' => TRUE,
   );
 

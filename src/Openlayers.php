@@ -92,47 +92,16 @@ class Openlayers {
     return static::$container->get($id);
   }
 
-  /**
-   * Returns an openlayers plugin.
-   *
-   * @param string $type
-   *   The type of the controller plugin, e.g. block, entity, ...
-   *
-   * @return \Drupal\openlayers\Types\Object|NULL
-   *   The instantiated controller with the given type or NULL.
-   */
-  public static function getComponent($machine_name, $export) {
-    return static::$container->get('openlayers.component')->createInstance($machine_name, $export);
+  public static function getOLObject($service, $plugin) {
+    return static::$container->get('openlayers.' . strtolower($service))->createInstance($plugin);
   }
 
-  public static function getOLObject($type, $machine_name) {
-    return static::$container->get('openlayers.' . drupal_strtolower($type))->createInstance($machine_name);
-  }
-
-  public static function getComponents() {
-    $objects = array();
-    foreach(static::$container->getDefinitions() as $id => $def) {
-      if (!isset($def['plugin module']) || !isset($def['plugin type'])) {
-        continue;
-      }
-      if ($def['plugin module'] == 'openlayers' && $def['plugin type'] == 'Component') {
-        $objects[$id] = $def;
-      }
+  public static function getOLObjectsOptions($plugin) {
+    $options = array('' => t('<Choose the ' . $plugin . ' type>'));
+    foreach (Openlayers::service('openlayers.' . $plugin)->getDefinitions() as $service => $data) {
+      $options[$service] = $data['name'];
     }
-    return $objects;
-  }
-
-  public static function getOLObjects() {
-    $objects = array();
-    foreach(static::$container->getDefinitions() as $id => $def) {
-      if (!isset($def['plugin module']) || !isset($def['plugin type'])) {
-        continue;
-      }
-      if ($def['plugin module'] == 'openlayers') {
-        $objects[$id] = $def;
-      }
-    }
-    return $objects;
+    return $options;
   }
 
 }

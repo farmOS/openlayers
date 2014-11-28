@@ -122,18 +122,12 @@ function openlayers_interaction_form_start_submit($form, &$form_state) {
  * Interaction type config form handler.
  */
 function openlayers_interaction_form_type($form, &$form_state) {
-  $interactions = ctools_get_plugins('openlayers', 'Interaction');
-  $options = array('' => t('<Choose the interaction type>'));
-  foreach ($interactions as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
-  }
-
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Interaction Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of interaction.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('interaction'),
     '#required' => TRUE,
   );
 

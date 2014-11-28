@@ -122,18 +122,12 @@ function openlayers_source_form_start_submit($form, &$form_state) {
  * Source type config form handler.
  */
 function openlayers_source_form_type($form, &$form_state) {
-  $sources = ctools_get_plugins('openlayers', 'Source');
-  $options = array('' => t('<Choose the source type>'));
-  foreach ($sources as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
-  }
-
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Source Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of source.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('source'),
     '#required' => TRUE,
   );
 

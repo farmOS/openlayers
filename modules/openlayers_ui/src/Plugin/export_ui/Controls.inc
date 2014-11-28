@@ -122,18 +122,12 @@ function openlayers_control_form_start_submit($form, &$form_state) {
  * Control type config form handler.
  */
 function openlayers_control_form_type($form, &$form_state) {
-  $controls = ctools_get_plugins('openlayers', 'Control');
-  $options = array('' => t('<Choose the control type>'));
-  foreach ($controls as $class => $plugin) {
-    $options[$plugin['handler']['class']] = $class;
-  }
-
   $form['class'] = array(
     '#type' => 'select',
     '#title' => t('Control Type'),
     '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
     '#description' => t('Select the type of control.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('control'),
     '#required' => TRUE,
   );
 
