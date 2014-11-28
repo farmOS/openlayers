@@ -5,12 +5,13 @@
  */
 
 namespace Drupal\openlayers\Types;
+use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
 
 /**
  * Class openlayers_object.
  */
-abstract class Object implements ObjectInterface {
+abstract class Object extends PluginBase implements ObjectInterface {
 
   /**
    * @var string
@@ -39,12 +40,6 @@ abstract class Object implements ObjectInterface {
 
   public $factory_service = NULL;
 
-  /**
-   * The plugin array.
-   * @var array
-   */
-  private $plugin = NULL;
-
   protected $collection = NULL;
 
   /**
@@ -62,11 +57,29 @@ abstract class Object implements ObjectInterface {
    */
   public function defaultProperties() {
     return array(
-      'machine_name' => '',
-      'name' => '',
-      'description' => '',
+      'machine_name' => NULL,
+      'name' => NULL,
+      'description' => NULL,
       'options' => array(),
+      'factory_service' => NULL
     );
+  }
+
+  /**
+   * Constructs a Drupal\Component\Plugin\PluginBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   */
+  public function __construct(array $configuration) {
+    // @todo This needs to be check in depth.
+    $this->pluginDefinition = $configuration;
+    $this->pluginId = strtolower($configuration['plugin module'] . '.' . $configuration['plugin type']) . '.' . 'internal.' . $configuration['name'];
+    $this->configuration = $configuration;
   }
 
   /**
@@ -84,9 +97,6 @@ abstract class Object implements ObjectInterface {
     if (isset($data['options'])) {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
-
-    $this->plugin = \Openlayers::getDefinition($data['factory_service']);
-    $this->factory_service = $data['factory_service'];
 
     // We need to ensure the object has a proper machine name.
     if (empty($this->machine_name)) {
@@ -241,7 +251,7 @@ abstract class Object implements ObjectInterface {
    * {@inheritdoc}
    */
   public function attached() {
-    if ($plugin = $this->getPlugin()) {
+    if ($plugin = $this->getConfiguration()) {
       $jsdir = $plugin['path'] . '/js';
       $cssdir = $plugin['path'] . '/css';
       if (file_exists($jsdir)) {
@@ -279,8 +289,8 @@ abstract class Object implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function getPlugin() {
-    return $this->plugin;
+  public function getConfiguration() {
+    return $this->pluginDefinition;
   }
 
   /**

@@ -46,7 +46,7 @@ interface ObjectInterface {
    * @return array
    *   The plugin definition.
    */
-  public function getPlugin();
+  public function getConfiguration();
 
   /**
    * @TODO was does this?
