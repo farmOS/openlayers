@@ -78,7 +78,7 @@ function openlayers_source_form_start($form, &$form_state) {
   $layers = ctools_export_crud_load_all('openlayers_layers');
   $options = array('' => 'Dont attach');
   foreach ($layers as $machine_name => $data) {
-    $layer = openlayers_object_load('layer', $machine_name);
+    $layer = openlayers_object_load('Layer', $machine_name);
     if (property_exists($layer, 'disabled') && ($layer->disabled == 1 || $layer->disabled == TRUE)) {
       continue;
     }
@@ -123,18 +123,12 @@ function openlayers_source_form_start_submit($form, &$form_state) {
  * Source type config form handler.
  */
 function openlayers_source_form_type($form, &$form_state) {
-  $sources = ctools_get_plugins('openlayers', 'Source');
-  $options = array('' => t('<Choose the source type>'));
-  foreach ($sources as $class => $plugin) {
-    $options[$plugin['class']] = $class;
-  }
-
-  $form['class'] = array(
+  $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Source Type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
+    '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of source.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('Source'),
     '#required' => TRUE,
   );
 
@@ -164,14 +158,14 @@ function openlayers_source_form_type_submit($form, &$form_state) {
     unset($form_state['item']->options['attributions']);
   }
 
-  $form_state['item']->class = $form_state['values']['class'];
+  $form_state['item']->factory_service = $form_state['values']['factory_service'];
 }
 
 /**
  * Source options config form handler.
  */
 function openlayers_source_form_options($form, &$form_state) {
-  $source = openlayers_object_load('source', $form_state['item']);
+  $source = openlayers_object_load('Source', $form_state['item']);
   $source->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -182,7 +176,7 @@ function openlayers_source_form_options($form, &$form_state) {
  * Source options config form validation handler.
  */
 function openlayers_source_form_options_validate($form, &$form_state) {
-  $source = openlayers_object_load('source', $form_state['item']);
+  $source = openlayers_object_load('Source', $form_state['item']);
   $source->optionsFormValidate($form, $form_state);
 }
 
@@ -193,6 +187,6 @@ function openlayers_source_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $source = openlayers_object_load('source', $form_state['item']);
+  $source = openlayers_object_load('Source', $form_state['item']);
   $source->optionsFormSubmit($form, $form_state);
 }

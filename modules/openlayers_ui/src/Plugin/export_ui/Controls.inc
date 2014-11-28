@@ -78,7 +78,7 @@ function openlayers_control_form_start($form, &$form_state) {
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array('' => 'Dont attach');
   foreach ($maps as $machine_name => $data) {
-    $map = openlayers_object_load('map', $machine_name);
+    $map = openlayers_object_load('Map', $machine_name);
     if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
       continue;
     }
@@ -123,18 +123,12 @@ function openlayers_control_form_start_submit($form, &$form_state) {
  * Control type config form handler.
  */
 function openlayers_control_form_type($form, &$form_state) {
-  $controls = ctools_get_plugins('openlayers', 'Control');
-  $options = array('' => t('<Choose the control type>'));
-  foreach ($controls as $class => $plugin) {
-    $options[$plugin['class']] = $class;
-  }
-
-  $form['class'] = array(
+  $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Control Type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
+    '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of control.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('Control'),
     '#required' => TRUE,
   );
 
@@ -145,14 +139,14 @@ function openlayers_control_form_type($form, &$form_state) {
  * Control type config form submit handler.
  */
 function openlayers_control_form_type_submit($form, &$form_state) {
-  $form_state['item']->class = $form_state['values']['class'];
+  $form_state['item']->factory_service = $form_state['values']['factory_service'];
 }
 
 /**
  * Control options config form handler.
  */
 function openlayers_control_form_options($form, &$form_state) {
-  $control = openlayers_object_load('control', $form_state['item']);
+  $control = openlayers_object_load('Control', $form_state['item']);
   $control->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -163,7 +157,7 @@ function openlayers_control_form_options($form, &$form_state) {
  * Control options config form validation handler.
  */
 function openlayers_control_form_options_validate($form, &$form_state) {
-  $control = openlayers_object_load('control', $form_state['item']);
+  $control = openlayers_object_load('Control', $form_state['item']);
   $control->optionsFormValidate($form, $form_state);
 }
 
@@ -174,6 +168,6 @@ function openlayers_control_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $control = openlayers_object_load('control', $form_state['item']);
+  $control = openlayers_object_load('Control', $form_state['item']);
   $control->optionsFormSubmit($form, $form_state);
 }

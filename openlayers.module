@@ -118,7 +118,7 @@ function openlayers_object_load($object_type, $export) {
     $export = $array_object->getArrayCopy();
   }
   if (is_string($export)) {
-    $export = (array) ctools_export_crud_load('openlayers_' . $object_type . 's', $export);
+    $export = (array) ctools_export_crud_load('openlayers_' . strtolower($object_type) . 's', $export);
   }
   if (is_array($export) && isset($export['factory_service']) && Openlayers::hasService($export['factory_service'])) {
     $service = explode('.', $export['factory_service']);
@@ -282,7 +282,7 @@ function openlayers_element_info() {
  * Renders the map and returns the markup in an renderable array.
  */
 function openlayers_element_process_callback($element, &$form_state) {
-  $map = openlayers_object_load('map', $element['#map']);
+  $map = openlayers_object_load('Map', $element['#map']);
   $element['map'] = $map->build();
 
   return $element;
@@ -297,7 +297,7 @@ function openlayers_block_info() {
   $blocks = array();
 
   foreach ($all_maps as $key => $map) {
-    $map = openlayers_object_load('map', $map->machine_name);
+    $map = openlayers_object_load('Map', $map->machine_name);
     if ($map->getOption('provideBlock', 1)) {
       $key = _openlayers_get_block_id($key);
       $blocks[$key]['info'] = t('OpenLayers block for %machine_name', array('%machine_name' => $map->machine_name));
@@ -315,7 +315,7 @@ function openlayers_block_view($delta = '') {
   $block = array();
   $delta = _openlayers_get_map_name($delta);
 
-  if ($map = openlayers_object_load('map', $delta)) {
+  if ($map = openlayers_object_load('Map', $delta)) {
     if ($map->getOption('provideBlock', 1)) {
       $block['subject'] = $map->machine_name;
       $block['content'] = $map->build();

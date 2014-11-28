@@ -66,7 +66,7 @@ class OLMap extends Map {
     );
 
     if ($this->machine_name != Config::EDIT_VIEW_MAP) {
-      $map = openlayers_object_load('map', Config::EDIT_VIEW_MAP);
+      $map = openlayers_object_load('Map', Config::EDIT_VIEW_MAP);
       if ($view = $this->getOption('view')) {
         $map->setOption('view', $view);
       }

@@ -119,10 +119,10 @@ function openlayers_map_form_start_submit($form, &$form_state) {
  * Map settings config form handler.
  */
 function openlayers_map_form_settings($form, &$form_state) {
-  if (!isset($form_state['item']->class)) {
-    $form_state['item']->class = '\Drupal\openlayers\map\OLMap';
+  if (!isset($form_state['item']->factory_service)) {
+    $form_state['item']->factory_service = '\Drupal\openlayers\map\OLMap';
   }
-  $map = openlayers_object_load('map', $form_state['item']);
+  $map = openlayers_object_load('Map', $form_state['item']);
   $map->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -134,14 +134,14 @@ function openlayers_map_form_settings($form, &$form_state) {
  */
 function openlayers_map_form_settings_validate($form, &$form_state) {
   $item = $form_state['item'];
-  if (empty($item->class)) {
-    $item->class = '\Drupal\openlayers\map\OLMap';
+  if (empty($item->factory_service)) {
+    $item->factory_service = '\Drupal\openlayers\map\OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  $map = openlayers_object_load('map', $item);
+  $map = openlayers_object_load('Map', $item);
   $map->optionsFormValidate($form, $form_state);
 }
 
@@ -150,14 +150,14 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
  */
 function openlayers_map_form_settings_submit($form, &$form_state) {
   // todo: fix.
-  if (empty($form_state['item']->class)) {
-    $form_state['item']->class = '\\Drupal\\openlayers\\Map\\OLMap';
+  if (empty($form_state['item']->factory_service)) {
+    $form_state['item']->factory_service = '\\Drupal\\openlayers\\Map\\OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  $map = openlayers_object_load('map', $form_state['item']);
+  $map = openlayers_object_load('Map', $form_state['item']);
   $map->optionsFormSubmit($form, $form_state);
 }
 
@@ -166,7 +166,7 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
  */
 function openlayers_map_form_layers($form, &$form_state) {
   $all_layers = ctools_export_crud_load_all('openlayers_layers');
-  $map = openlayers_object_load('map', $form_state['item']);
+  $map = openlayers_object_load('Map', $form_state['item']);
 
   $layers = array();
   foreach ($map->getLayers() as $index => $layer) {
@@ -187,7 +187,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       'name' => $layer->name,
       'machine_name' => $layer->machine_name,
       'description' => $layer->description,
-      'class' => $layer->class,
+      'class' => $layer->factory_service,
       'weight' => $i++,
       'enable' => isset($layer->enable) ? $layer->enable : 0,
       'default' => 1,
@@ -222,7 +222,7 @@ function openlayers_map_form_layers($form, &$form_state) {
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
-        check_plain($entry['class']),
+        check_plain($entry['factory_service']),
         l(t('Edit'), 'admin/structure/openlayers/layers/list/' . $entry['machine_name'] . '/edit/options',
           array(
             'query' => array(
@@ -270,7 +270,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   drupal_add_tabledrag('entry-order-layers', 'order', 'sibling', 'entry-order-weight');
 
   $all_sources = ctools_export_crud_load_all('openlayers_sources');
-  $map = openlayers_object_load('map', $form_state['item']);
+  $map = openlayers_object_load('Map', $form_state['item']);
 
   $sources = array();
   foreach ($map->getSources() as $index => $source) {
@@ -291,7 +291,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       'name' => $source->name,
       'machine_name' => $source->machine_name,
       'description' => $source->description,
-      'class' => $source->class,
+      'class' => $source->factory_service,
       'weight' => $i++,
       'enable' => isset($source->enable) ? $source->enable : 0,
       'default' => 1,
@@ -325,7 +325,7 @@ function openlayers_map_form_layers($form, &$form_state) {
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
-        check_plain($entry['class']),
+        check_plain($entry['factory_service']),
         l(t('Edit'), 'admin/structure/openlayers/sources/list/' . $entry['machine_name'] . '/edit/options',
           array(
             'query' => array(
@@ -609,7 +609,7 @@ function openlayers_map_form_styles_submit($form, &$form_state) {
  * Map preview form handler.
  */
 function openlayers_map_form_preview($form, &$form_state) {
-  $map = openlayers_object_load('map', $form_state['item']);
+  $map = openlayers_object_load('Map', $form_state['item']);
   $map->setOption('contextualLinks', FALSE);
 
   $form['preview'] = $map->build();

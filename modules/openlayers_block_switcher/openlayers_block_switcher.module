@@ -12,7 +12,7 @@ function openlayers_block_switcher_block_info() {
   $blocks = array();
 
   foreach ($maps as $key => $map) {
-    $map = openlayers_object_load('map', $map->machine_name);
+    $map = openlayers_object_load('Map', $map->machine_name);
     if ($map->getOption('provideBlockLayerSwitcher', 0)) {
       $blockid = _olebs_get_block_id($key);
       $blocks[$blockid]['info'] = t('OpenLayers layer switcher for %name', array('%name' => $map->get('name')));
@@ -27,7 +27,7 @@ function openlayers_block_switcher_block_info() {
  */
 function openlayers_block_switcher_block_view($delta = '') {
   $block = array();
-  $map = openlayers_object_load('map', _olebs_get_map_name($delta));
+  $map = openlayers_object_load('Map', _olebs_get_map_name($delta));
 
   $block['subject'] = $map->get('name');
   $form = drupal_get_form('olebs_blockswitcher_form', $map);

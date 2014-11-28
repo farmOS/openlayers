@@ -99,7 +99,7 @@ class Openlayers extends Drupal {
     $options = array('' => t('<Choose the ' . $plugin . ' type>'));
     $serviceBasename = 'openlayers.' . strtolower($plugin);
     foreach (Openlayers::service($serviceBasename)->getDefinitions() as $service => $data) {
-      $options[$serviceBasename . '.' . $data['name']] = $data['name'];
+      $options[$serviceBasename . '.internal.' . $data['name']] = $data['name'];
     }
     return $options;
   }

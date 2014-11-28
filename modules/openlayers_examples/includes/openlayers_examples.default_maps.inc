@@ -22,6 +22,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => 0,
@@ -62,6 +63,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -97,6 +99,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -129,6 +132,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -161,6 +165,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -193,6 +198,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -226,6 +232,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -259,6 +266,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -294,6 +302,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -329,6 +338,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -372,6 +382,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -418,6 +429,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -477,6 +489,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -515,6 +528,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -593,6 +607,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -630,6 +645,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -666,6 +682,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -698,6 +715,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -736,6 +754,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => '0',
@@ -769,6 +788,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => 0,
@@ -804,6 +824,7 @@ function openlayers_examples_default_maps() {
     'height' => '300px',
     'contextualLinks' => 1,
     'provideBlock' => 1,
+    'provideIframe' => 1,
     'view' => array(
       'center' => array(
         'lat' => 0,

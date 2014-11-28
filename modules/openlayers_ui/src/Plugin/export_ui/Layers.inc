@@ -82,7 +82,7 @@ function openlayers_layer_form_start($form, &$form_state) {
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array('' => 'Dont attach');
   foreach ($maps as $machine_name => $data) {
-    $map = openlayers_object_load('map', $machine_name);
+    $map = openlayers_object_load('Map', $machine_name);
     if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
       continue;
     }
@@ -127,18 +127,12 @@ function openlayers_layer_form_start_submit($form, &$form_state) {
  * Layer type config form handler.
  */
 function openlayers_layer_form_type($form, &$form_state) {
-  $layers = ctools_get_plugins('openlayers', 'Layer');
-  $options = array('' => t('<Choose the layer type>'));
-  foreach ($layers as $class => $plugin) {
-    $options[$plugin['class']] = $class;
-  }
-
-  $form['class'] = array(
+  $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
+    '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of layer.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('Layer'),
     '#required' => TRUE,
   );
 
@@ -175,7 +169,7 @@ function openlayers_layer_form_type($form, &$form_state) {
  * Layer type config form submit handler.
  */
 function openlayers_layer_form_type_submit($form, &$form_state) {
-  $form_state['item']->class = $form_state['values']['class'];
+  $form_state['item']->factory_service = $form_state['values']['factory_service'];
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
@@ -220,7 +214,7 @@ function openlayers_layer_form_style_submit($form, &$form_state) {
  * Layer options config form handler.
  */
 function openlayers_layer_form_options($form, &$form_state) {
-  $layer = openlayers_object_load('layer', $form_state['item']);
+  $layer = openlayers_object_load('Layer', $form_state['item']);
   $layer->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -231,7 +225,7 @@ function openlayers_layer_form_options($form, &$form_state) {
  * Layer options config form validation handler.
  */
 function openlayers_layer_form_options_validate($form, &$form_state) {
-  $layer = openlayers_object_load('layer', $form_state['item']);
+  $layer = openlayers_object_load('Layer', $form_state['item']);
   $layer->optionsFormValidate($form, $form_state);
 }
 
@@ -242,6 +236,6 @@ function openlayers_layer_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $layer = openlayers_object_load('layer', $form_state['item']);
+  $layer = openlayers_object_load('Layer', $form_state['item']);
   $layer->optionsFormSubmit($form, $form_state);
 }

@@ -48,7 +48,7 @@ class ObjectsUI extends ctools_export_ui {
     }
 
     $header[] = array('data' => t('Machine name'), 'class' => array('ctools-export-ui-name'));
-    $header[] = array('data' => t('Class'), 'class' => array('ctools-export-ui-class'));
+    $header[] = array('data' => t('Service'), 'class' => array('ctools-export-ui-service'));
     $header[] = array('data' => t('Storage'), 'class' => array('ctools-export-ui-storage'));
     $header[] = array('data' => t('Operations'), 'class' => array('ctools-export-ui-operations'));
 

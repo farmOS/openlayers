@@ -100,18 +100,12 @@ function openlayers_style_form_start_submit($form, &$form_state) {
  * Style type config form handler.
  */
 function openlayers_style_form_type($form, &$form_state) {
-  $styles = ctools_get_plugins('openlayers', 'Style');
-  $options = array('' => t('<Choose the style type>'));
-  foreach ($styles as $class => $plugin) {
-    $options[$plugin['class']] = $class;
-  }
-
-  $form['class'] = array(
+  $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Style type'),
-    '#default_value' => isset($form_state['item']->class) ? $form_state['item']->class : '',
+    '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of style.'),
-    '#options' => $options,
+    '#options' => Openlayers::getOLObjectsOptions('Style'),
     '#required' => TRUE,
   );
 
@@ -126,14 +120,14 @@ function openlayers_style_form_type_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  $form_state['item']->class = $form_state['values']['class'];
+  $form_state['item']->factory_service = $form_state['values']['factory_service'];
 }
 
 /**
  * Style options config form handler.
  */
 function openlayers_style_form_options($form, &$form_state) {
-  $style = openlayers_object_load('style', $form_state['item']);
+  $style = openlayers_object_load('Style', $form_state['item']);
   $style->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -144,7 +138,7 @@ function openlayers_style_form_options($form, &$form_state) {
  * Style options config form validation handler.
  */
 function openlayers_style_form_options_validate($form, &$form_state) {
-  $style = openlayers_object_load('style', $form_state['item']);
+  $style = openlayers_object_load('Style', $form_state['item']);
   $style->optionsFormValidate($form, $form_state);
 }
 
@@ -155,6 +149,6 @@ function openlayers_style_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $style = openlayers_object_load('style', $form_state['item']);
+  $style = openlayers_object_load('Style', $form_state['item']);
   $style->optionsFormSubmit($form, $form_state);
 }
