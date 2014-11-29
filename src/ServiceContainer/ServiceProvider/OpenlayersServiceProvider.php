@@ -26,7 +26,7 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
       'class' => '\Drupal\service_container\DependencyInjection\Container',
     );
 
-    // Plugin Managers
+    // Openlayers component plugins.
     $services['openlayers.component'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.component.internal.'),
@@ -38,11 +38,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Component',
-          'prefix' => 'openlayers.component.internal.'
-        )
+          'prefix' => 'openlayers.component.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers control plugins.
     $services['openlayers.control'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.control.internal.'),
@@ -54,11 +54,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Control',
-          'prefix' => 'openlayers.control.internal.'
-        )
+          'prefix' => 'openlayers.control.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers interaction plugins.
     $services['openlayers.interaction'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.interaction.internal.'),
@@ -70,11 +70,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Interaction',
-          'prefix' => 'openlayers.interaction.internal.'
-        )
+          'prefix' => 'openlayers.interaction.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers layer plugins.
     $services['openlayers.layer'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.layer.internal.'),
@@ -86,11 +86,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Layer',
-          'prefix' => 'openlayers.layer.internal.'
-        )
+          'prefix' => 'openlayers.layer.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers map plugins.
     $services['openlayers.map'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.map.internal.'),
@@ -102,11 +102,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Map',
-          'prefix' => 'openlayers.map.internal.'
-        )
+          'prefix' => 'openlayers.map.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers source plugins.
     $services['openlayers.source'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.source.internal.'),
@@ -118,11 +118,11 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Source',
-          'prefix' => 'openlayers.source.internal.'
-        )
+          'prefix' => 'openlayers.source.internal.',
+        ),
       ),
     );
-    // Plugin Managers
+    // Openlayers style plugins.
     $services['openlayers.style'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array('openlayers.style.internal.'),
@@ -134,8 +134,8 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
           'name' => 'ctools.plugin',
           'owner' => 'openlayers',
           'type' => 'Style',
-          'prefix' => 'openlayers.style.internal.'
-        )
+          'prefix' => 'openlayers.style.internal.',
+        ),
       ),
     );
 
