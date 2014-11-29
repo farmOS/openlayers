@@ -320,7 +320,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return array(
       'mn' => $this->machine_name,
       'cb' => $cb,
-      'opt' => $this->options
+      'opt' => $this->options,
     );
   }
 }

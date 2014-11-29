@@ -20,11 +20,11 @@ class Collection {
 
   public function getAttached() {
     $attached = array();
-    foreach($this->objects as $objects) {
-      foreach($objects as $object) {
+    foreach ($this->objects as $objects) {
+      foreach ($objects as $object) {
         $object_attached = $object->attached() + array('js' => array(), 'css' => array(), 'libraries_load' => array());
-        foreach(array('js', 'css', 'libraries_load') as $type) {
-          foreach($object_attached[$type] as $data) {
+        foreach (array('js', 'css', 'libraries_load') as $type) {
+          foreach ($object_attached[$type] as $data) {
             $attached[$type][] = $data;
           }
         }
@@ -36,8 +36,8 @@ class Collection {
   public function getJS() {
     $clone = clone $this;
     $settings = array();
-    foreach($clone->objects as $type => $objects) {
-      foreach($objects as $object) {
+    foreach ($clone->objects as $type => $objects) {
+      foreach ($objects as $object) {
         $settings[$type][] = $object->getJS();
       }
     }
@@ -49,7 +49,7 @@ class Collection {
   }
 
   public function getObjects($type = NULL) {
-    if ($type != null && isset($this->objects[$type])) {
+    if ($type != NULL && isset($this->objects[$type])) {
       return $this->objects[$type];
     }
     return $this->objects;
@@ -58,11 +58,12 @@ class Collection {
   public function getFlatList($type = NULL) {
     $list = array();
 
-    if ($type != null && isset($this->objects[$type])) {
+    if ($type != NULL && isset($this->objects[$type])) {
       foreach ($this->objects[$type] as $object) {
         $list[] = $object;
       }
-    } else {
+    }
+    else {
       foreach ($this->objects as $objects) {
         foreach ($objects as $object) {
           $list[] = $object;
@@ -75,7 +76,7 @@ class Collection {
 
   public function merge(Collection $collection) {
     foreach($collection->getObjects() as $objects) {
-      foreach($objects as $object) {
+      foreach ($objects as $object) {
         $this->append($object);
       }
     }
