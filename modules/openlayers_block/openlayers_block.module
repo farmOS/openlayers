@@ -48,6 +48,7 @@ function openlayers_block_block_view($delta = '') {
 function _openlayers_block_get_block_id($map_machine_name) {
   return substr(sha1($map_machine_name), 0, -32) . '_mapblock';
 }
+
 /**
  * Helper function return the map name according to the block delta.
  *
@@ -66,4 +67,16 @@ function _openlayers_block_get_map_name($delta) {
     }
   }
   return FALSE;
+}
+
+function openlayers_block_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
+  $map = openlayers_object_load('Map', $form_state['item']);
+
+  $form['options']['ui']['provideBlock'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Provide Drupal block for this map ?',
+    '#description' => t('Enable this to provide a Drupal block for this map.'),
+    '#default_value' => $map->getOption('provideBlock', FALSE),
+    '#parents' => array('options', 'provideBlock'),
+  );
 }
