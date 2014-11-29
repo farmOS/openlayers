@@ -8,6 +8,10 @@ namespace Drupal\openlayers\Map;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Map;
 
+$plugin = array(
+  'class' => '\\Drupal\\openlayers\\Map\\Views',
+);
+
 /**
  * Class Views.
  */
