@@ -36,31 +36,31 @@ function openlayers_ctools_plugin_type() {
   return array(
     'Map' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Layer' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Style' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Source' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Control' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Interaction' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
     'Component' => array(
       'use hooks' => FALSE,
-      'extension' => 'php'
+      'extension' => 'php',
     ),
   );
 }

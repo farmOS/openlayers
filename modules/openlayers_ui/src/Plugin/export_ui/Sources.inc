@@ -20,7 +20,7 @@ function openlayers_ui_Sources_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Sources',
-      'file' => 'Sources.php'
+      'file' => 'Sources.php',
     ),
 
     'export' => array(

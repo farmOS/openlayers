@@ -20,7 +20,7 @@ function openlayers_ui_Projections_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Projections',
-      'file' => 'Projections.php'
+      'file' => 'Projections.php',
     ),
 
     'export' => array(

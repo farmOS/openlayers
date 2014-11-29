@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Openlayers Contextual Links module.
+ */
 
 function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build, $context) {
   if (!($context instanceof Drupal\openlayers\Types\MapInterface)) {

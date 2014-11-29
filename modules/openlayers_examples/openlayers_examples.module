@@ -82,7 +82,11 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   $map->clearOption('contextualLinks');
   $map->setOption('height', '400px');
 
-  $controls = array_filter(array_merge($map->getOption('controls', array()), array('openlayers_control_zoom', 'openlayers_control_rotate', 'openlayers_control_fullscreen')));
+  $controls = array_filter(array_merge($map->getOption('controls', array()), array(
+    'openlayers_control_zoom',
+    'openlayers_control_rotate',
+    'openlayers_control_fullscreen',
+  )));
   $map->setOption('controls', $controls);
 
   $map->setOption(
@@ -117,7 +121,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#type' => 'fieldset',
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
-    '#title' => 'Map'
+    '#title' => 'Map',
   );
 
   $form['default_map']['map'] = array(
@@ -134,13 +138,13 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#collapsed' => FALSE,
-      '#title' => 'Embed this map in an iframe'
+      '#title' => 'Embed this map in an iframe',
     );
 
     foreach (services_endpoint_load_all() as $service) {
       if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
 
-        $width = ( $map->getOption('width', 'auto') == 'auto' ) ? '100%' : $map->getOption('width', 'auto');
+        $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
         $height = $map->getOption('height', 'auto');
         $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
 
@@ -149,7 +153,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
           '#description' => t('Copy paste this html code to embed this map in your content.'),
           '#rows' => 3,
           '#value' => $iframe,
-          '#disabled' => TRUE
+          '#disabled' => TRUE,
         );
       }
     }
@@ -161,7 +165,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#type' => 'fieldset',
     '#collapsible' => FALSE,
     '#collapsed' => FALSE,
-    '#title' => 'Permanent link to this map'
+    '#title' => 'Permanent link to this map',
   );
 
   $link = url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE));
@@ -171,7 +175,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#type' => 'textfield',
     '#value' => $link,
     '#size' => 128,
-    '#disabled' => TRUE
+    '#disabled' => TRUE,
   );
 
   $form['lat'] = array(

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Helper functions
+ */
 
 function _openlayers_services_retrieve($name) {
   $map = openlayers_object_load('Map', check_plain($name));
@@ -7,7 +11,11 @@ function _openlayers_services_retrieve($name) {
   $js = drupal_get_js();
   $styles = drupal_get_css();
 
-  return theme('openlayers_map_iframe', array('page'=>$render, 'scripts' => $js, 'styles' => $styles));
+  return theme('openlayers_map_iframe', array(
+    'page' => $render,
+    'scripts' => $js,
+    'styles' => $styles,
+  ));
 }
 
 function _openlayers_services_access($operation, $map) {

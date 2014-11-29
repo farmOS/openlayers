@@ -62,6 +62,7 @@ interface MapInterface {
    * Build render array of a map.
    *
    * @return array
+   *   The render array.
    */
   public function build();
-  }
+}

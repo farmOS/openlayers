@@ -50,6 +50,7 @@ interface ObjectInterface {
    * @TODO was does this?
    *
    * @param string|array $parents
+   *   @TODO Define how this has to look like if it is an array.
    */
   public function clearOption($parents);
 

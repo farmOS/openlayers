@@ -20,7 +20,7 @@ function openlayers_ui_Maps_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Maps',
-      'file' => 'Maps.php'
+      'file' => 'Maps.php',
     ),
 
     'use wizard' => TRUE,
@@ -602,7 +602,7 @@ function openlayers_map_form_styles($form, &$form_state) {
  * Map styles config form submit handler.
  */
 function openlayers_map_form_styles_submit($form, &$form_state) {
-//  $form_state['item']->options = $form_state['item']->options, (array) $form_state['values']['options']);
+  // $form_state['item']->options = $form_state['item']->options, (array) $form_state['values']['options']);
 }
 
 /**

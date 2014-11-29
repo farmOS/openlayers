@@ -11,6 +11,9 @@ namespace Drupal\openlayers\Types;
  */
 abstract class Layer extends Object implements LayerInterface {
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildCollection() {
     parent::buildCollection();
 
@@ -48,6 +51,9 @@ abstract class Layer extends Object implements LayerInterface {
     return ($style[0] instanceof StyleInterface) ? $style[0] : FALSE;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getJS() {
     $options = $this->options;
 

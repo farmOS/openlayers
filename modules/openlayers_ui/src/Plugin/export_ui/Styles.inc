@@ -20,7 +20,7 @@ function openlayers_ui_Styles_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Styles',
-      'file' => 'Styles.php'
+      'file' => 'Styles.php',
     ),
 
     'export' => array(

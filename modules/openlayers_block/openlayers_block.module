@@ -39,7 +39,7 @@ function openlayers_block_block_view($delta = '') {
 /**
  * Helper function that returns the blocks delta according to the map_name.
  *
- * @param string $map_name
+ * @param string $map_machine_name
  *   The name of the map.
  *
  * @return string

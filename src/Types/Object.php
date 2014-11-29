@@ -38,8 +38,14 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public $options = array();
 
+  /**
+   * @var string
+   */
   public $factory_service = NULL;
 
+  /**
+   * @var Collection
+   */
   protected $collection = NULL;
 
   /**
@@ -61,7 +67,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
       'name' => NULL,
       'description' => NULL,
       'options' => array(),
-      'factory_service' => NULL
+      'factory_service' => NULL,
     );
   }
 
@@ -70,10 +76,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
    */
   public function __construct(array $configuration) {
     // @todo This needs to be check in depth.
@@ -106,6 +108,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $this->buildCollection();
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildCollection() {
     $this->getCollection()->append($this);
     return $this->getCollection();
@@ -139,8 +144,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     foreach ($this->getCollection()->getFlatList() as $object) {
-      if ($object === $this) continue;
-      $object->preBuild($build, $this);
+      if ($object !== $this) {
+        $object->preBuild($build, $this);
+      }
     }
 
     drupal_alter('openlayers_object_preprocess', $build, $this);
@@ -151,8 +157,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     foreach ($this->getCollection()->getFlatList() as $object) {
-      if ($object === $this) continue;
-      $object->postBuild($build, $context);
+      if ($object !== $this) {
+        $object->postBuild($build, $context);
+      }
     }
 
     drupal_alter('openlayers_object_postprocess', $build, $this);
@@ -308,6 +315,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return $class[2];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getCollection() {
     if (!($this->collection instanceof Collection)) {
       $this->collection = new Collection();
@@ -315,6 +325,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return $this->collection;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getJS() {
     $cb = strtolower(str_replace('.', '_', $this->factory_service));
     return array(

@@ -20,7 +20,7 @@ function openlayers_ui_Interactions_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Interactions',
-      'file' => 'Interactions.php'
+      'file' => 'Interactions.php',
     ),
 
     'export' => array(

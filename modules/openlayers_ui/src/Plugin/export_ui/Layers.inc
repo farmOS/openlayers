@@ -20,7 +20,7 @@ function openlayers_ui_Layers_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Layers',
-      'file' => 'Layers.php'
+      'file' => 'Layers.php',
     ),
 
     'use wizard' => TRUE,

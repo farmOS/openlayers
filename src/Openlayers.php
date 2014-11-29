@@ -39,7 +39,6 @@ class Openlayers extends Drupal {
     // This is an internal API, but we need the cache object.
     $cache = _cache_get_object('cache');
 
-
     $container_builder = new CachedContainerBuilder($service_provider_manager, $cache);
 
     if ($container_builder->isCached()) {

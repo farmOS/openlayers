@@ -25,10 +25,21 @@ abstract class Map extends Object implements MapInterface {
     $this->setOption('target', $this->getId());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildCollection() {
     parent::buildCollection();
 
-    foreach (array('source', 'layer', 'control', 'interaction', 'component', 'projection') as $type) {
+    $ol_types = array(
+      'source',
+      'layer',
+      'control',
+      'interaction',
+      'component',
+      'projection',
+    );
+    foreach ($ol_types as $type) {
       foreach ($this->getOption($type . 's', array()) as $object) {
         // @TODO Throw proper exception if an object isn't available?
         if ($merge_object = openlayers_object_load($type, $object)) {

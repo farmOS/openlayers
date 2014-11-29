@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Provide default endpoint.
+ */
 
+/**
+ * Implements hook_default_services_endpoint().
+ */
 function openlayers_services_default_services_endpoint() {
   $export = array();
 

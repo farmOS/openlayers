@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Contains \Drupal\openlayers\RenderCache\ServiceProvider\RenderCacheServiceProvider

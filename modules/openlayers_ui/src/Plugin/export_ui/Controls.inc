@@ -20,7 +20,7 @@ function openlayers_ui_Controls_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Controls',
-      'file' => 'Controls.php'
+      'file' => 'Controls.php',
     ),
 
     'export' => array(

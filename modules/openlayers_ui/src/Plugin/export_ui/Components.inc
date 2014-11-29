@@ -20,7 +20,7 @@ function openlayers_ui_Components_ctools_export_ui() {
 
     'handler' => array(
       'class' => '\\Drupal\\openlayers\\UI\\Components',
-      'file' => 'Components.php'
+      'file' => 'Components.php',
     ),
 
     'export' => array(
