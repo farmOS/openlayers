@@ -3,7 +3,7 @@ Drupal.openlayers.openlayers_source_internal_vector = function(data) {
   var options = {
     features: []
   };
-  if (goog.isDef(data.opt.features)) {
+  if (goog.isDef(data.opt) && goog.isDef(data.opt.features)) {
     // Ensure the features are really an array.
     if (!(data.opt.features instanceof Array)) {
       data.opt.features = [{geometry: data.opt.features}];
