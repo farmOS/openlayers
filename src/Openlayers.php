@@ -16,7 +16,6 @@ use Drupal\service_container\DependencyInjection\ServiceProviderPluginManager;
  * class acts as a unified global accessor to arbitrary services within the
  * system in order to ease the transition from procedural code to injected OO
  * code.
- *
  */
 class Openlayers extends Drupal {
 
@@ -66,6 +65,7 @@ class Openlayers extends Drupal {
    * should not be used otherwise.
    *
    * @return \Drupal\service_container\DependencyInjection\ContainerInterface
+   *   The currently active container object.
    */
   public static function getContainer() {
     return static::$container;
@@ -80,6 +80,7 @@ class Openlayers extends Drupal {
    *
    * @param string $id
    *   The ID of the service to retrieve.
+   *
    * @return mixed
    *   The specified service.
    */
@@ -87,19 +88,42 @@ class Openlayers extends Drupal {
     return static::$container->get($id);
   }
 
-  public static function getDefinition($pluginId) {
-    return static::$container->getDefinition($pluginId);
+  /**
+   * Gets a plugin definition of currently active container object.
+   */
+  public static function getDefinition($plugin_id) {
+    return static::$container->getDefinition($plugin_id);
   }
 
+  /**
+   * Gets an instance of the currently active container object.
+   *
+   * @param string $service
+   *   The service to get an object from.
+   * @param array $plugin
+   *   The plugin definition.
+   *
+   * @return object
+   *   Openlayers object instance.
+   */
   public static function getOLObject($service, $plugin) {
     return static::$container->get('openlayers.' . strtolower($service))->createInstance($plugin);
   }
 
+  /**
+   * Gets a list of available plugin types.
+   *
+   * @param string $plugin
+   *   The plugin .
+   *
+   * @return array
+   *   Openlayers object instance.
+   */
   public static function getOLObjectsOptions($plugin) {
-    $options = array('' => t('<Choose the ' . $plugin . ' type>'));
-    $serviceBasename = 'openlayers.' . strtolower($plugin);
-    foreach (Openlayers::service($serviceBasename)->getDefinitions() as $service => $data) {
-      $options[$serviceBasename . '.internal.' . $data['name']] = $data['name'];
+    $options = array('' => t('<Choose the @plugin type>', array('@plugin' => $plugin)));
+    $service_basename = 'openlayers.' . strtolower($plugin);
+    foreach (Openlayers::service($service_basename)->getDefinitions() as $service => $data) {
+      $options[$service_basename . '.internal.' . $data['name']] = $data['name'];
     }
     return $options;
   }
