@@ -7,13 +7,12 @@
 
 namespace Drupal\openlayers\ServiceContainer\ServiceProvider;
 
-use Drupal\service_container\DependencyInjection\ServiceProviderInterface;
-use Drupal\service_container\Plugin\Discovery\CToolsPluginDiscovery;
+use Drupal\service_container\ServiceContainer\ServiceProvider\ServiceContainerServiceProvider;
 
 /**
  * Provides openlayers service definitions.
  */
-class OpenlayersServiceProvider implements ServiceProviderInterface {
+class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
 
   /**
    * {@inheritdoc}
@@ -26,116 +25,46 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
       'class' => '\Drupal\service_container\DependencyInjection\Container',
     );
 
-    // Plugin Managers
-    $services['openlayers.component'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.component.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
+    // Plugin Managers - filled out by alterDefinition() of service_container
+    // module.
+    // This needs to exist in an empty state.
+    $services['openlayers.map'] = array();
+    $services['openlayers.layer'] = array();
+    $services['openlayers.source'] = array();
+    $services['openlayers.control'] = array();
+    $services['openlayers.interaction'] = array();
+    $services['openlayers.style'] = array();
+    $services['openlayers.component'] = array();
+
+    // Syntax is: <service_name> => <plugin_manager_definition>
+    $parameters['service_container.plugin_managers']['ctools'] = array(
+      'openlayers.map' => array(
+        'owner' => 'openlayers',
+        'type' => 'Map',
       ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Component',
-          'prefix' => 'openlayers.component.internal.'
-        )
+      'openlayers.layer' => array(
+        'owner' => 'openlayers',
+        'type' => 'Layer',
       ),
-    );
-    // Plugin Managers
-    $services['openlayers.control'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.control.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
+      'openlayers.source' => array(
+        'owner' => 'openlayers',
+        'type' => 'Source',
       ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Control',
-          'prefix' => 'openlayers.control.internal.'
-        )
+      'openlayers.control' => array(
+        'owner' => 'openlayers',
+        'type' => 'Control',
       ),
-    );
-    // Plugin Managers
-    $services['openlayers.interaction'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.interaction.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
+      'openlayers.interaction' => array(
+        'owner' => 'openlayers',
+        'type' => 'Interaction',
       ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Interaction',
-          'prefix' => 'openlayers.interaction.internal.'
-        )
+      'openlayers.style' => array(
+        'owner' => 'openlayers',
+        'type' => 'Style',
       ),
-    );
-    // Plugin Managers
-    $services['openlayers.layer'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.layer.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
-      ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Layer',
-          'prefix' => 'openlayers.layer.internal.'
-        )
-      ),
-    );
-    // Plugin Managers
-    $services['openlayers.map'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.map.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
-      ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Map',
-          'prefix' => 'openlayers.map.internal.'
-        )
-      ),
-    );
-    // Plugin Managers
-    $services['openlayers.source'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.source.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
-      ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Source',
-          'prefix' => 'openlayers.source.internal.'
-        )
-      ),
-    );
-    // Plugin Managers
-    $services['openlayers.style'] = array(
-      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
-      'arguments' => array('openlayers.style.internal.'),
-      'calls' => array(
-        array('setContainer', array('@service_container')),
-      ),
-      'tags' => array(
-        array(
-          'name' => 'ctools.plugin',
-          'owner' => 'openlayers',
-          'type' => 'Style',
-          'prefix' => 'openlayers.style.internal.'
-        )
+      'openlayers.component' => array(
+        'owner' => 'openlayers',
+        'type' => 'Component',
       ),
     );
 
@@ -144,10 +73,4 @@ class OpenlayersServiceProvider implements ServiceProviderInterface {
       'services' => $services,
     );
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function alterContainerDefinition(&$container_definition) {}
-
 }
