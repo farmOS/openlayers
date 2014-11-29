@@ -23,6 +23,34 @@ function openlayers_examples_default_sources() {
   $export['openlayers_examples_source_mapbox_example1'] = $ol_source;
 
   $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_googlemaps';
+  $ol_source->name = 'Google Maps';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.GoogleMaps';
+  $ol_source->options = array(
+    'key' => '',
+    'client' => '',
+    'channel' => '',
+    'mapTypeId' => 'ROADMAP',
+    'sensor' => 0,
+  );
+  $export['openlayers_examples_source_googlemaps'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_europa';
+  $ol_source->name = 'EC Europa Webtools';
+  $ol_source->description = 'Source from European Commission webtools based on OSM, with some modifications.';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => 'http://webtools.ec.europa.eu/road-maps/tiles/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_europa'] = $ol_source;
+
+  $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_mapbox_example2';
@@ -112,15 +140,6 @@ function openlayers_examples_default_sources() {
   $ol_source->factory_service = 'openlayers.source.internal.BingMaps';
   $ol_source->options = array();
   $export['openlayers_examples_source_bingmaps'] = $ol_source;
-
-  $ol_source = new stdClass();
-  $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_googlemaps';
-  $ol_source->name = 'Google Maps';
-  $ol_source->description = 'Source Google description';
-  $ol_source->factory_service = 'openlayers.source.internal.GoogleMaps';
-  $ol_source->options = array();
-  $export['openlayers_examples_source_googlemaps'] = $ol_source;
 
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
