@@ -16,7 +16,10 @@ abstract class Layer extends Object implements LayerInterface {
 
     foreach (array('source', 'style') as $type) {
       if ($data = $this->getOption($type, FALSE)) {
-        $this->getCollection()->merge(openlayers_object_load($type, $data)->getCollection());
+        // @TODO Throw proper exception if an object isn't available?
+        if ($object = openlayers_object_load($type, $data)) {
+          $this->getCollection()->merge($object->getCollection());
+        }
       }
     }
 
@@ -59,7 +62,7 @@ abstract class Layer extends Object implements LayerInterface {
     return array(
       'mn' => $this->machine_name,
       'cb' => $cb,
-      'opt' => $options
+      'opt' => $options,
     );
   }
 

@@ -30,7 +30,10 @@ abstract class Map extends Object implements MapInterface {
 
     foreach (array('source', 'layer', 'control', 'interaction', 'component', 'projection') as $type) {
       foreach ($this->getOption($type . 's', array()) as $object) {
-        $this->getCollection()->merge(openlayers_object_load($type, $object)->getCollection());
+        // @TODO Throw proper exception if an object isn't available?
+        if ($merge_object = openlayers_object_load($type, $object)) {
+          $this->getCollection()->merge($merge_object->getCollection());
+        }
       }
     }
 
