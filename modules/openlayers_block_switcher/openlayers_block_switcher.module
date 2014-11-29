@@ -137,7 +137,7 @@ function openlayers_block_switcher_form_openlayers_map_form_settings_alter(&$for
     '#type' => 'checkbox',
     '#title' => 'Provide Drupal block layer switcher',
     '#description' => t('Enable this to enable a Drupal block to display a layer switcher.'),
-    '#default_value' => $this->getOption('provideBlockLayerSwitcher', FALSE),
+    '#default_value' => $map->getOption('provideBlockLayerSwitcher', FALSE),
     '#parents' => array('options', 'provideBlockLayerSwitcher'),
   );
 }
