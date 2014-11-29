@@ -80,6 +80,15 @@ class Views extends OLMap {
   /**
    * {@inheritdoc}
    */
+  public function buildCollection() {
+    parent::buildCollection();
+    $this->getSources();
+    return $this->getCollection();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function optionsForm(&$form, &$form_state) {
 
     $options = array();
