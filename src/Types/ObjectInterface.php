@@ -33,8 +33,6 @@ interface ObjectInterface {
    * class name ?
    * ex: \Drupal\openlayers\Control\MousePosition => Control
    *
-   * @see openlayers_object_types()
-   *
    * @return string|FALSE
    *   The object type or FALSE on failure.
    */

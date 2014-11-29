@@ -33,7 +33,7 @@ class Error extends Object {
    */
   public function defaultProperties() {
     $properties = parent::defaultProperties();
-    $properties['errorMessage'] = 'Error while loading object @machine_name having class @class.';
+    $properties['errorMessage'] = 'Error while loading object @machine_name having service @service.';
     return $properties;
   }
 
@@ -60,12 +60,12 @@ class Error extends Object {
    */
   public function getMessage() {
     $machine_name = isset($this->machine_name) ? $this->machine_name : 'undefined';
-    $class = isset($this->class) ? $this->class : 'undefined';
+    $service = isset($this->factory_service) ? $this->factory_service : 'undefined';
     $type = isset($this->type) ? $this->type : 'undefined';
 
     return t($this->errorMessage, array(
       '@machine_name' => $machine_name,
-      '@class' => $class,
+      '@service' => $service,
       '@type' => $type,
     ));
   }

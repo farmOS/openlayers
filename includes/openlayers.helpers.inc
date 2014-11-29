@@ -75,3 +75,65 @@ function removeEmptyElements($array) {
   }
   return $array;
 }
+
+/**
+ * Returns an array with positioning options.
+ *
+ * @return array
+ *   Array with positioning options.
+ */
+function openlayers_positioning_options() {
+  return array(
+    'bottom-left' => t('bottom-left'),
+    'bottom-center' => t('bottom-center'),
+    'bottom-right' => t('bottom-right'),
+    'center-left' => t('center-left'),
+    'center-center' => t('center-center'),
+    'center-right' => t('center-right'),
+    'top-left' => t('top-left'),
+    'top-center' => t('top-center'),
+    'top-right' => t('top-right'),
+  );
+}
+
+/**
+ * Returns an array with available source options.
+ *
+ * @param bool $empty_option
+ *   If disabled no empty option is added.
+ *
+ * @return array
+ *   Array with source options.
+ */
+function openlayers_source_options($empty_option = TRUE) {
+  $sources = ctools_export_crud_load_all('openlayers_sources');
+  $options = array();
+  if ($empty_option) {
+    $options[''] = t('<Choose the source>');
+  }
+  foreach ($sources as $machine_name => $data) {
+    $options[$machine_name] = $data->name;
+  }
+  return $options;
+}
+
+/**
+ * Returns an array with available layer options.
+ *
+ * @param bool $empty_option
+ *   If disabled no empty option is added.
+ *
+ * @return array
+ *   Array with layer options.
+ */
+function openlayers_layer_options($empty_option = TRUE) {
+  $layers = ctools_export_crud_load_all('openlayers_layers');
+  $options = array();
+  if ($empty_option) {
+    $options[''] = t('<Choose the layer>');
+  }
+  foreach ($layers as $machine_name => $data) {
+    $options[$machine_name] = $data->name;
+  }
+  return $options;
+}
