@@ -130,7 +130,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   return $form;
 }
 
-function openlayers_block_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
+function openlayers_block_switcher_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
   $map = openlayers_object_load('Map', $form_state['item']);
 
   $form['options']['ui']['provideBlockLayerSwitcher'] = array(
