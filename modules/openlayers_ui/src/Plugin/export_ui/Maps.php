@@ -26,12 +26,15 @@ class Maps extends \ObjectsUI {
    */
   public function delete_form_submit(&$form_state) {
     parent::delete_form_submit($form_state);
-    $delta = _openlayers_get_block_id($form_state['item']->machine_name);
 
-    db_delete('block')
-      ->condition('module', 'openlayers')
-      ->condition('delta', $delta)
-      ->execute();
+    if (\Drupal::service('module_handler')->moduleExists('openlayers_block')) {
+      $delta = _openlayers_block_get_block_id($form_state['item']->machine_name);
+
+      db_delete('block')
+        ->condition('module', 'openlayers')
+        ->condition('delta', $delta)
+        ->execute();
+    }
   }
 
 }
