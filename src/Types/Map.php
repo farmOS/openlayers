@@ -106,43 +106,10 @@ abstract class Map extends Object implements MapInterface {
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
-    $links = array(
-      'openlayers' => array(
-        'title' => 'Edit this map',
-        'href' => 'admin/structure/openlayers/maps/list/' . $map->machine_name . '/edit',
-        'query' => array(
-          'destination' => $current_path,
-        ),
-      ),
-    );
     $asynchronous = 0;
     foreach ($map->getCollection()->getFlatList() as $object) {
-      $object_links = array();
       // Check if this object is asynchronous.
       $asynchronous += (int) $object->isAsynchronous();
-
-      // Build contextual link for this object.
-      $name = $object->name;
-      if (empty($name)) {
-        $name = $object->machine_name;
-      }
-
-      $object_links[$object->getType() . ':' . $object->machine_name] = array(
-        'title' => t('Edit @object_name', array('@object_name' => $name)),
-        'href' => 'admin/structure/openlayers/' . $object->getType() . 's/list/' . $object->machine_name . '/edit',
-        'query' => array(
-          'destination' => $current_path,
-        ),
-      );
-
-      if (!empty($object_links)) {
-        // Build contextual link title for this type.
-        $links[$object->getType()] = array(
-          'title' => '<strong>' . ucwords($object->getType() . 's') . '</strong>',
-          'html' => TRUE,
-        );
-        $links += $object_links;
-      }
     }
 
     $settings = $map->getCollection()->getJS();
@@ -178,16 +145,6 @@ abstract class Map extends Object implements MapInterface {
 
     $build += array(
       '#type' => 'container',
-      'contextual_links' => array(
-        '#prefix' => '<div class="contextual-links-wrapper">',
-        '#suffix' => '</div>',
-        '#theme' => 'links__contextual',
-        '#links' => $links,
-        '#attributes' => array('class' => array('contextual-links')),
-        '#attached' => array(
-          'library' => array(array('contextual', 'contextual-links')),
-        ),
-      ),
       '#attributes' => array(
         'id' => 'openlayers-container-' . $map->getId(),
         'style' => $css_styles,
@@ -215,10 +172,6 @@ abstract class Map extends Object implements MapInterface {
     // If this is an asynchronous map flag it as such.
     if ($asynchronous) {
       $build['map']['#attributes']['class'][] = 'asynchronous';
-    }
-
-    if ($map->getOption('contextualLinks') == FALSE) {
-      unset($build['contextual_links']);
     }
 
     $map->postBuild($build, $map);

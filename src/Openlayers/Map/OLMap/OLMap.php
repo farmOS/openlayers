@@ -36,13 +36,6 @@ class OLMap extends Map {
         '#default_value' => $this->getOption('height', '300px'),
         '#parents' => array('options', 'height'),
       ),
-      'contextualLinks' => array(
-        '#type' => 'checkbox',
-        '#title' => 'Contextual links',
-        '#description' => t('Enable contextual links on the map.'),
-        '#default_value' => $this->getOption('contextualLinks', TRUE),
-        '#parents' => array('options', 'contextualLinks'),
-      ),
     );
 
     $form['options']['view'] = array(

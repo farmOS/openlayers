@@ -143,7 +143,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $object->preBuild($build, $this);
     }
 
-    drupal_alter('openlayers_object_preprocess', $this, $context);
+    drupal_alter('openlayers_object_preprocess', $build, $this);
   }
 
   /**
@@ -155,7 +155,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $object->postBuild($build, $context);
     }
 
-    drupal_alter('openlayers_object_postprocess', $this, $context);
+    drupal_alter('openlayers_object_postprocess', $build, $this);
   }
 
   /**

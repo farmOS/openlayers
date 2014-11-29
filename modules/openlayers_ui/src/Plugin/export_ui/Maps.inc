@@ -610,8 +610,6 @@ function openlayers_map_form_styles_submit($form, &$form_state) {
  */
 function openlayers_map_form_preview($form, &$form_state) {
   $map = openlayers_object_load('Map', $form_state['item']);
-  $map->setOption('contextualLinks', FALSE);
-
   $form['preview'] = $map->build();
 
   return $form;
