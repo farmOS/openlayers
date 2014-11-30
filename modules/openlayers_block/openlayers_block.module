@@ -10,7 +10,8 @@ function openlayers_block_block_info() {
 
   foreach ($all_maps as $map) {
     $map = openlayers_object_load('Map', $map);
-    if ($map->getOption('provideBlock', 1)) {
+    // @todo: why does this fail when doing drush cc all ?
+    if ($map->getOption('provideBlock', FALSE)) {
       $key = _openlayers_block_get_block_id($map->machine_name);
       $blocks[$key]['info'] = t('OpenLayers block for @map_name', array('@map_name' => $map->name));
     }

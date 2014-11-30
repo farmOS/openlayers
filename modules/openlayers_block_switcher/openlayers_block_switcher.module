@@ -11,12 +11,9 @@ function openlayers_block_switcher_block_info() {
   $maps = _olebs_get_maps_with_blockswitcher();
   $blocks = array();
 
-  foreach ($maps as $key => $map) {
-    $map = openlayers_object_load('Map', $map->machine_name);
-    if ($map->getOption('provideBlockLayerSwitcher', 0)) {
-      $blockid = _olebs_get_block_id($key);
-      $blocks[$blockid]['info'] = t('OpenLayers layer switcher for %name', array('%name' => $map->get('name')));
-    }
+  foreach ($maps as $map) {
+    $blockid = _olebs_get_block_id($map->machine_name);
+    $blocks[$blockid]['info'] = t('OpenLayers layer switcher for @name', array('@name' => $map->name));
   }
 
   return $blocks;
@@ -29,7 +26,7 @@ function openlayers_block_switcher_block_view($delta = '') {
   $block = array();
   $map = openlayers_object_load('Map', _olebs_get_map_name($delta));
 
-  $block['subject'] = $map->get('name');
+  $block['subject'] = $map->name;
   $form = drupal_get_form('olebs_blockswitcher_form', $map);
   $block['content'] = drupal_render($form);
 
@@ -49,7 +46,14 @@ function _olebs_get_maps_with_blockswitcher() {
 
   if (!isset($maps)) {
     ctools_include('export');
-    $maps = ctools_export_crud_load_all('openlayers_maps');
+    $candidates = ctools_export_crud_load_all('openlayers_maps');
+    foreach($candidates as $map) {
+      // @todo: why does this fail when doing drush cc all ?
+      $map = openlayers_object_load('Map', $map);
+      if ($map->getOption('provideBlockLayerSwitcher', FALSE) == TRUE) {
+        $maps[] = $map;
+      }
+    }
   }
 
   return $maps;
