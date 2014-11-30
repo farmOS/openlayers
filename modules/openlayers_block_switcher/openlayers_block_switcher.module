@@ -97,16 +97,14 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   $default_value = array();
   $options_overlays = array();
 
-  if (!is_object($map)) {
+  if (!($map instanceof \Drupal\openlayers\Types\MapInterface)) {
     return FALSE;
   }
 
-  if ($layers = $map->getLayers()) {
-    foreach ($layers as $layer) {
-      $options_overlays[$layer->machine_name] = $layer->name;
-      if ('1' == $layer->getOption('visible', 1)) {
-        $default_value[] = $layer->machine_name;
-      }
+  foreach ($map->getLayers() as $layer) {
+    $options_overlays[$layer->machine_name] = $layer->name;
+    if ('1' == $layer->getOption('visible', 1)) {
+      $default_value[] = $layer->machine_name;
     }
   }
 

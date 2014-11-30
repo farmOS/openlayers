@@ -24,6 +24,14 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       'class' => '\Drupal\service_container\DependencyInjection\Container',
     );
 
+    $services['openlayers.error'] = array(
+      'class' => '\Drupal\openlayers\Types\Error',
+    );
+
+    $services['openlayers.collection'] = array(
+      'class' => '\Drupal\openlayers\Types\Collection',
+    );
+
     // Plugin Managers - filled out by alterDefinition() of service_container
     // module.
     // This needs to exist in an empty state.

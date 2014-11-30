@@ -33,7 +33,7 @@ class Error extends Object {
    */
   public function defaultProperties() {
     $properties = parent::defaultProperties();
-    $properties['errorMessage'] = 'Error while loading object @machine_name having service @service.';
+    $properties['errorMessage'] = 'Error while loading @type @machine_name having service @service.';
     return $properties;
   }
 
@@ -41,10 +41,8 @@ class Error extends Object {
    * {@inheritdoc}
    */
   public function init(array $data) {
-    foreach ($this->defaultProperties() as $property => $value) {
-      if (isset($data[$property])) {
-        $this->{$property} = $data[$property];
-      }
+    foreach ($data as $property => $value) {
+      $this->{$property} = $data[$property];
     }
 
     if (isset($data['options'])) {

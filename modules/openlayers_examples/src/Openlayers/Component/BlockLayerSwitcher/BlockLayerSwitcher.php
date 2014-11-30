@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers\Component;
 use Drupal\openlayers\Types\Component;
+use Drupal\openlayers\Types\MapInterface;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\BlockLayerSwitcher',
@@ -20,17 +21,19 @@ class BlockLayerSwitcher extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
-    $build['component'] = array(
-      '#type' => 'fieldset',
-      '#title' => 'Layer Switcher',
-      '#collapsible' => TRUE,
-      '#collapsed' => TRUE,
-    );
+    if ($context instanceof MapInterface) {
+      $build['component'] = array(
+        '#type' => 'fieldset',
+        '#title' => 'Layer Switcher',
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      );
 
-    $build['component']['block'] = drupal_get_form('olebs_blockswitcher_form', $context);
+      $build['component']['block'] = drupal_get_form('olebs_blockswitcher_form', $context);
 
-    $build['map']['#attributes']['style'] = $build['#attributes']['style'];
-    unset($build['#attributes']['style']);
+      $build['map']['#attributes']['style'] = $build['#attributes']['style'];
+      unset($build['#attributes']['style']);
+    }
   }
 
 }

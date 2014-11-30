@@ -319,8 +319,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getCollection() {
-    if (!($this->collection instanceof Collection)) {
-      $this->collection = new Collection();
+    if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
+      $this->collection = clone \Drupal::service('openlayers.collection');
     }
     return $this->collection;
   }

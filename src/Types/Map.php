@@ -188,7 +188,7 @@ abstract class Map extends Object implements MapInterface {
       $build['map']['#attributes']['class'][] = 'asynchronous';
     }
 
-    $map->postBuild($build, $map);
+    //$map->postBuild($build, $map);
 
     return $build;
   }
