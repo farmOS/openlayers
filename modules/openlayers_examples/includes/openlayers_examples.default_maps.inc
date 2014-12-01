@@ -889,7 +889,7 @@ function openlayers_examples_default_maps() {
   $ol_map->machine_name = 'openlayers_examples_map_googlemaps';
   $ol_map->name = 'Google Maps';
   $ol_map->description = '';
-  $ol_map->class = 'openlayers.map.internal.OLMap';
+  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '400px',
