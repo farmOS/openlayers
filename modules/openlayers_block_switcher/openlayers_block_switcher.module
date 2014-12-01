@@ -8,7 +8,7 @@
  * Implements hook_block_info().
  */
 function openlayers_block_switcher_block_info() {
-  $maps = _olebs_get_maps_with_blockswitcher();
+  $maps = (array) _olebs_get_maps_with_blockswitcher();
   $blocks = array();
 
   foreach ($maps as $map) {
@@ -48,7 +48,6 @@ function _olebs_get_maps_with_blockswitcher() {
     ctools_include('export');
     $candidates = ctools_export_crud_load_all('openlayers_maps');
     foreach($candidates as $map) {
-      // @todo: why does this fail when doing drush cc all ?
       $map = openlayers_object_load('Map', $map);
       if ($map->getOption('provideBlockLayerSwitcher', FALSE) == TRUE) {
         $maps[] = $map;
