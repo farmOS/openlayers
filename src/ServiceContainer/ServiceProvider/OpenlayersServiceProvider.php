@@ -32,48 +32,14 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       'class' => '\Drupal\openlayers\Types\Collection',
     );
 
-    // Plugin Managers - filled out by alterDefinition() of service_container
-    // module.
-    // This needs to exist in an empty state.
-    $services['openlayers.map'] = array();
-    $services['openlayers.layer'] = array();
-    $services['openlayers.source'] = array();
-    $services['openlayers.control'] = array();
-    $services['openlayers.interaction'] = array();
-    $services['openlayers.style'] = array();
-    $services['openlayers.component'] = array();
-
-    // Syntax is: <service_name> => <plugin_manager_definition>
-    $parameters['service_container.plugin_managers']['ctools'] = array(
-      'openlayers.map' => array(
+    foreach(openlayers_ctools_plugin_type() as $plugin => $data) {
+      $plugin = drupal_strtolower($plugin);
+      $services['openlayers.' . $plugin] = array();
+      $parameters['service_container.plugin_managers']['ctools']['openlayers.' . $plugin] = array(
         'owner' => 'openlayers',
-        'type' => 'Map',
-      ),
-      'openlayers.layer' => array(
-        'owner' => 'openlayers',
-        'type' => 'Layer',
-      ),
-      'openlayers.source' => array(
-        'owner' => 'openlayers',
-        'type' => 'Source',
-      ),
-      'openlayers.control' => array(
-        'owner' => 'openlayers',
-        'type' => 'Control',
-      ),
-      'openlayers.interaction' => array(
-        'owner' => 'openlayers',
-        'type' => 'Interaction',
-      ),
-      'openlayers.style' => array(
-        'owner' => 'openlayers',
-        'type' => 'Style',
-      ),
-      'openlayers.component' => array(
-        'owner' => 'openlayers',
-        'type' => 'Component',
-      ),
-    );
+        'type' => drupal_ucfirst($plugin)
+      );
+    }
 
     return array(
       'parameters' => $parameters,
