@@ -30,6 +30,7 @@ function openlayers_ui_default_maps() {
     ),
     'contextualLinks' => 0,
     'provideBlock' => 0,
+    'provideIframe' => 1,
     'layers' => array(
       0 => 'openlayers_layer_tile_mapquest_osm',
     ),
@@ -37,7 +38,7 @@ function openlayers_ui_default_maps() {
       0 => 'openlayers_control_rotate',
       1 => 'openlayers_control_zoom',
       2 => 'openlayers_control_zoomslider',
-      3 => 'openlayers_control_zoomtoextent',
+      3 => 'openlayers_control_fullscreen',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
