@@ -1,3 +1,6 @@
 name = OpenLayers Block Switcher
 description = OpenLayers Block Switcher
 core = 7.x
+package = "OpenLayers"
+
+dependencies[] = openlayers
