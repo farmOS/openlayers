@@ -103,7 +103,7 @@ function openlayers_object_load($object_type, $export) {
         'type' => $object_type,
         'errorMessage' => 'Service <em>@service</em> doesn\'t exists, unable to load @type @machine_name',
       );
-      $object = \Drupal::service('openlayers.error');
+      $object = \Drupal::service('openlayers.manager')->createInstance('error');
     }
   } else {
     $exportable += array(
@@ -111,7 +111,7 @@ function openlayers_object_load($object_type, $export) {
       'machine_name' => $export,
       'errorMessage' => 'Unable to load CTools exportable @type @machine_name.',
     );
-    $object = \Drupal::service('openlayers.error');
+    $object = \Drupal::service('openlayers.manager')->createInstance('error');
   }
 
   $object->init($exportable);

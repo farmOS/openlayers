@@ -320,7 +320,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getCollection() {
     if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
-      $this->collection = clone \Drupal::service('openlayers.collection');
+      $this->collection = \Drupal::service('openlayers.manager')->createInstance('collection');
     }
     return $this->collection;
   }

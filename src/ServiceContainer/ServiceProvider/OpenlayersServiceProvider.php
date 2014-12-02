@@ -24,13 +24,29 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       'class' => '\Drupal\service_container\DependencyInjection\Container',
     );
 
-    $services['openlayers.error'] = array(
+    $services['openlayers.manager'] = array(
+      'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
+      'arguments' => array(
+        'openlayers.manager.internal.'
+      ),
+      'calls' => array(
+        array(
+          'setContainer',
+          array(
+            '@service_container'
+          )
+        )
+      )
+    );
+
+    $services['openlayers.manager.internal.error'] = array(
       'class' => '\Drupal\openlayers\Types\Error',
     );
 
-    $services['openlayers.collection'] = array(
-      'class' => '\Drupal\openlayers\Types\Collection',
+    $services['openlayers.manager.internal.collection'] = array(
+      'class' => '\Drupal\openlayers\Types\Collection'
     );
+
 
     foreach(openlayers_ctools_plugin_type() as $plugin => $data) {
       $plugin = drupal_strtolower($plugin);
