@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_interaction_internal_keyboardzoom = function(data) {
-  return new ol.interaction.KeyboardZoom(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.interaction.internal.keyboardzoom',
+  init: function(data) {
+    return new ol.interaction.KeyboardZoom(data.opt);
+  }
+});

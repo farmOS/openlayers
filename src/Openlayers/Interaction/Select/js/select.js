@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_interaction_internal_select = function(data) {
-  return new ol.interaction.Select(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.interaction.internal.select',
+  init: function(data) {
+    return new ol.interaction.Select(data.opt);
+  }
+});

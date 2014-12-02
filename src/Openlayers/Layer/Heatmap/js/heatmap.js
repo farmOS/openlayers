@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_layer_internal_heatmap = function(data) {
-  return new ol.layer.Heatmap(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.layer.internal.heatmap',
+  init: function(data) {
+    return new ol.layer.Heatmap(data.opt);
+  }
+});

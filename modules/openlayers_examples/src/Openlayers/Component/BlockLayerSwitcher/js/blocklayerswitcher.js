@@ -1,3 +1,4 @@
-Drupal.openlayers.openlayers_component_internal_blocklayerswitcher = function (data) {
-
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.component.internal.blocklayerswitcher',
+  init: function(data) {}
+});

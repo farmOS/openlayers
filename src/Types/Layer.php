@@ -64,10 +64,10 @@ abstract class Layer extends Object implements LayerInterface {
     if ($style = $this->getStyle()) {
       $options['style'] = $style->machine_name;
     }
-    $cb = strtolower(str_replace('.', '_', $this->factory_service));
+
     return array(
       'mn' => $this->machine_name,
-      'cb' => $cb,
+      'fs' => strtolower($this->factory_service),
       'opt' => $options,
     );
   }

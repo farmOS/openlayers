@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_source_internal_mapquest = function(data) {
-  return new ol.source.MapQuest(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.source.internal.mapquest',
+  init: function(data) {
+    return new ol.source.MapQuest(data.opt);
+  }
+});

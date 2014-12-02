@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_control_internal_scaleline = function(data) {
-  return new ol.control.ScaleLine(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.control.internal.scaleline',
+  init: function(data) {
+    return new ol.control.ScaleLine(data.opt);
+  }
+});

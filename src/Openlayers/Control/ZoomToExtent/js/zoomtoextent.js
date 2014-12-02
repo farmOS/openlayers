@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_control_internal_zoomtoextent = function(data) {
-  return new ol.control.ZoomToExtent(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.control.internal.zoomtoextent',
+  init: function(data) {
+    return new ol.control.ZoomToExtent(data.opt);
+  }
+});

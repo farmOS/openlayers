@@ -24,6 +24,45 @@
    */
   Drupal.openlayers = {
 
+    pluginManager: {
+      _plugins: [],
+      register: function(plugin) {
+        if (!goog.isObject(plugin)) {
+          return false;
+        }
+
+        if (!plugin.hasOwnProperty('fs') || !plugin.hasOwnProperty('init')) {
+          return false;
+        }
+
+        this._plugins[plugin.fs.toLowerCase()] = plugin;
+      },
+      createInstance: function(factoryService, data) {
+        var factoryService = factoryService.toLowerCase();
+
+        if (!this.isRegistered(factoryService)) {
+          return false;
+        }
+
+        var obj = this._plugins[factoryService].init(data);
+
+        if (goog.isObject(obj)) {
+          obj.mn = data.data.mn;
+          return obj;
+        }
+
+        return false;
+      },
+      isRegistered: function(factoryService) {
+        var factoryService = factoryService.toLowerCase();
+
+        if (factoryService in this._plugins) {
+          return true;
+        }
+        return false;
+       }
+    },
+
     processMap: function(map_id, context) {
       if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         var object = Drupal.settings.openlayers.maps[map_id];
@@ -141,19 +180,19 @@
       var object = null;
       if (!goog.isDef(cache[type][data.mn])) {
         // TODO: Check why layers and maps doesnt cache.
-        if (goog.isFunction(Drupal.openlayers[data['cb']])) {
-          object = Drupal.openlayers[data['cb']]({
+        if (Drupal.openlayers.pluginManager.isRegistered(data['fs'])) {
+          object = Drupal.openlayers.pluginManager.createInstance(data['fs'], {
+            'data': data,
             'opt': data.opt,
             'map': map,
             'context': context,
-            'cache': cache
+            'cache': cache,
           });
           if (goog.isObject(object)) {
-            object.mn = data.mn;
             cache[type][data.mn] = object;
           }
         } else {
-          console.error('Callback Drupal.openlayers.' + data.cb + ' doesn\'t exist.');
+          console.error('Callback Drupal.openlayers.' + data.fs + ' doesn\'t exist.');
         }
 
       } else {

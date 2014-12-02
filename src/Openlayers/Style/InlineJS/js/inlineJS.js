@@ -1,6 +1,7 @@
-Drupal.openlayers.openlayers_style_internal_inlinejs = function(data) {
-
-  eval(data.opt.javascript);
-
-  return style;
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.style.internal.inlinejs',
+  init: function(data) {
+    eval(data.opt.javascript);
+    return style;
+  }
+});

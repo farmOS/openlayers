@@ -1,4 +1,6 @@
-Drupal.openlayers.openlayers_source_internal_stamen = function(data) {
-  console.log(data);
-  return new ol.source.Stamen(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.source.internal.stamen',
+  init: function(data) {
+    return new ol.source.Stamen(data.opt);
+  }
+});

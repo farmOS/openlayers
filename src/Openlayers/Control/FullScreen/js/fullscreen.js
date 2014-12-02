@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_control_internal_fullscreen = function(data) {
-  return new ol.control.FullScreen(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.control.internal.fullscreen',
+  init: function(data) {
+    return new ol.control.FullScreen(data.opt);
+  }
+});

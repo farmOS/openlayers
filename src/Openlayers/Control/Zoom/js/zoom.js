@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_control_internal_zoom = function(data) {
-  return new ol.control.Zoom(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.control.internal.zoom',
+  init: function(data) {
+    return new ol.control.Zoom(data.opt);
+  }
+});

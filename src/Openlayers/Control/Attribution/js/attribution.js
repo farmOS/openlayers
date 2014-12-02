@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_control_internal_attribution = function(data) {
-  return new ol.control.Attribution(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.control.internal.attribution',
+  init: function(data) {
+    return new ol.control.Attribution(data.opt);
+  }
+});

@@ -1,3 +1,6 @@
-Drupal.openlayers.openlayers_source_internal_bingmaps = function(data) {
-  return new ol.source.BingMaps(data.opt);
-};
+Drupal.openlayers.pluginManager.register({
+  fs: 'openlayers.source.internal.bingmaps',
+  init: function(data) {
+    return new ol.source.BingMaps(data.opt);
+  }
+});
