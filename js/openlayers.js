@@ -2,14 +2,6 @@
   Drupal.behaviors.openlayers = {
     attach: function(context, settings) {
 
-      Drupal.openlayers.map = Drupal.openlayers.map || {};
-      Drupal.openlayers.layer = Drupal.openlayers.layer || {};
-      Drupal.openlayers.source = Drupal.openlayers.source || {};
-      Drupal.openlayers.style = Drupal.openlayers.style || {};
-      Drupal.openlayers.control = Drupal.openlayers.control || {};
-      Drupal.openlayers.interaction = Drupal.openlayers.interaction || {};
-      Drupal.openlayers.component = Drupal.openlayers.component || {};
-
       $('.openlayers-map:not(.asynchronous)').once('openlayers-map', function() {
         var map_id = $(this).attr('id');
         Drupal.openlayers.processMap(map_id, context);
@@ -18,7 +10,7 @@
        // Create dynamic callback functions for asynchronous maps.
       $('.openlayers-map.asynchronous').each(function(){
         var map_id = $(this).attr('id');
-        if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
+        if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
           Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function() {
             Drupal.openlayers.asyncIsReady(map_id);
           }
@@ -33,7 +25,7 @@
   Drupal.openlayers = {
 
     processMap: function(map_id, context) {
-      if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
+      if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         var object = Drupal.settings.openlayers.maps[map_id];
         $(document).trigger('openlayers.build_start', [{'type': 'objects', 'objects': object, 'context': context}]);
 
@@ -58,7 +50,7 @@
 
           count = sources.length;
           sources.map(function(data) {
-            if (data.opt !== undefined && data.opt.attributions !== undefined) {
+            if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
               data.opt.attributions = [new ol.Attribution({
                 'html': data.opt.attributions
               })];
@@ -85,7 +77,7 @@
           count = layers.length;
           layers.map(function(data) {
             data.opt.source = objects.sources[data.opt.source];
-            if ((data.opt.style !== undefined) && (objects.styles[data.opt.style] !== undefined)) {
+            if (goog.isDef(data.opt.style) && goog.isDef(objects.styles[data.opt.style])) {
               data.opt.style = objects.styles[data.opt.style];
             }
             objects.layers[data.mn] = Drupal.openlayers.getObject(context, 'layers', data, map, count--);
@@ -102,7 +94,7 @@
           jQuery('body').data('openlayers', {'objects': objects});
 
         } catch (e) {
-          if (typeof console !== 'undefined') {
+          if (goog.isDef(console)) {
             Drupal.openlayers.console.log(e.message);
             Drupal.openlayers.console.log(e.stack);
           } else {
@@ -118,7 +110,7 @@
     // is replaced by an underscore (_).
     asyncIsReadyCallbacks: {},
     asyncIsReady: function (map_id) {
-      if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
+      if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         Drupal.settings.openlayers.maps[map_id].map.async--;
         if (!Drupal.settings.openlayers.maps[map_id].map.async) {
           $('#' + map_id).once('openlayers-map', function() {
@@ -131,7 +123,7 @@
     getObject: (function (context, type, data, map, count) {
       var cache = $('body').data('openlayers') || {};
 
-      if (typeof cache.objects !== 'undefined') {
+      if (goog.isDef(cache.objects)) {
         cache = cache.objects;
       } else {
         cache.sources = [];
@@ -146,24 +138,24 @@
       cache = $.extend({}, cache.objects, cache);
 
       $(document).trigger('openlayers.object_pre_alter', [{'type': type, 'mn': data.mn, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
-      if (!(data.mn in cache[type])) {
+      var object = null;
+      if (!goog.isDef(cache[type][data.mn])) {
         // TODO: Check why layers and maps doesnt cache.
-        try {
-          var object = Drupal.openlayers[data['cb']]({
+        if (goog.isFunction(Drupal.openlayers[data['cb']])) {
+          object = Drupal.openlayers[data['cb']]({
             'opt': data.opt,
             'map': map,
             'context': context,
             'cache': cache
           });
-          if (typeof object === 'object') {
+          if (goog.isObject(object)) {
             object.mn = data.mn;
+            cache[type][data.mn] = object;
           }
+        } else {
+          console.error('Callback Drupal.openlayers.' + data.cb + ' doesn\'t exist.');
         }
-        catch (e) {
-          // Log errors.
-          console.log('Drupal.openlayers.' + data['cb'] + ': ' + e.message);
-        }
-        cache[type][data.mn] = object;
+
       } else {
         object = cache[type][data.mn];
       }

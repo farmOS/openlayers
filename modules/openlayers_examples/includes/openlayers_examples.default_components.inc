@@ -169,7 +169,7 @@ var styleFunction = function(feature, resolution) {
 
 map.getLayers().forEach(function(layer){
    var source = layer.getSource();
-   if (source.machine_name == \'openlayers_examples_source_kml_earthquakes\') {
+   if (source.mn == \'openlayers_examples_source_kml_earthquakes\') {
        layer.setStyle(styleFunction);
    }
 });',

@@ -64,7 +64,7 @@ Drupal.behaviors.openlayers_source_internal_googlemaps = {
       jQuery('.openlayers.gmap-map').each(function(){
         var map_id = jQuery(this).attr('id').replace('gmap-', '');
 
-        if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
+        if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
           jQuery.each(Drupal.settings.openlayers.maps[map_id].source, function(i, source){
             if (source.cb == 'openlayers_source_internal_googlemaps') {
               if (source.opt.channel) {
