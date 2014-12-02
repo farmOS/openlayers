@@ -8,5 +8,6 @@ dependencies[] = file
 dependencies[] = image
 dependencies[] = registry_autoload
 dependencies[] = service_container
+dependencies[] = jquery_update
 
 registry_autoload[] = PSR-4
