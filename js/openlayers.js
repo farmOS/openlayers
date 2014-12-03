@@ -1,11 +1,13 @@
 goog.provide('Drupal.openlayers');
 
-Drupal.openlayers = (function() {
+Drupal.openlayers = (function($) {
+  "use strict";
+
   return {
     processMap: function(map_id, context) {
       if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         var object = Drupal.settings.openlayers.maps[map_id];
-        jQuery(document).trigger('openlayers.build_start', [{'type': 'objects', 'objects': object, 'context': context}]);
+        $(document).trigger('openlayers.build_start', [{'type': 'objects', 'objects': object, 'context': context}]);
 
         var count = 1,
           layers = object.layer || [],
@@ -68,16 +70,16 @@ Drupal.openlayers = (function() {
           });
 
           // Attach data to map DOM object
-          jQuery(document).trigger('openlayers.build_stop', [{'type': 'objects', 'objects': object, 'context': context}]);
-          jQuery('body').data('openlayers', {'objects': objects});
+          $(document).trigger('openlayers.build_stop', [{'type': 'objects', 'objects': object, 'context': context}]);
+          $('body').data('openlayers', {'objects': objects});
 
         } catch (e) {
           if (goog.isDef(console)) {
             Drupal.openlayers.console.log(e.message);
             Drupal.openlayers.console.log(e.stack);
           } else {
-            jQuery(this).text('Error during map rendering: ' + e.message);
-            jQuery(this).text('Stack: ' + e.stack);
+            $(this).text('Error during map rendering: ' + e.message);
+            $(this).text('Stack: ' + e.stack);
           }
         }
       }
@@ -91,7 +93,7 @@ Drupal.openlayers = (function() {
       if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         Drupal.settings.openlayers.maps[map_id].map.async--;
         if (!Drupal.settings.openlayers.maps[map_id].map.async) {
-          jQuery('#' + map_id).once('openlayers-map', function() {
+          $('#' + map_id).once('openlayers-map', function() {
             Drupal.openlayers.processMap(map_id, document);
           });
         }
@@ -99,7 +101,7 @@ Drupal.openlayers = (function() {
     },
 
     getObject: (function (context, type, data, map, count) {
-      var cache = jQuery('body').data('openlayers') || {};
+      var cache = $('body').data('openlayers') || {};
 
       if (goog.isDef(cache.objects)) {
         cache = cache.objects;
@@ -113,9 +115,9 @@ Drupal.openlayers = (function() {
         cache.maps = [];
       }
 
-      cache = jQuery.extend({}, cache.objects, cache);
+      cache = $.extend({}, cache.objects, cache);
 
-      jQuery(document).trigger('openlayers.object_pre_alter', [{'type': type, 'mn': data.mn, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
+      $(document).trigger('openlayers.object_pre_alter', [{'type': type, 'mn': data.mn, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
       var object = null;
       if (!goog.isDef(cache[type][data.mn])) {
         // TODO: Check why layers and maps doesnt cache.
@@ -138,41 +140,9 @@ Drupal.openlayers = (function() {
         object = cache[type][data.mn];
       }
 
-      jQuery(document).trigger('openlayers.object_post_alter', [{'type': type, 'object': object, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
-      jQuery('body').data('openlayers', {'objects': cache});
+      $(document).trigger('openlayers.object_post_alter', [{'type': type, 'object': object, 'data': data, 'map': map, 'cache': cache, 'context': context, 'count': count}]);
+      $('body').data('openlayers', {'objects': cache});
       return object;
     }),
-
-    /**
-     * Logging implementation that logs using the browser's logging API.
-     * Falls back to doing nothing in case no such API is available. Simulates
-     * the presece of Firebug's console API in Drupal.openlayers.console.
-     */
-    console: (function(){
-      var api = {};
-      var logger;
-      if (typeof(console)==="object" && typeof(console.log)==="function"){
-        logger = function(){
-          // Use console.log as fallback for missing parts of API if present.
-          console.log.apply(console, arguments);
-        };
-      } else {
-        logger = function (){
-          // Ignore call as no logging facility is available.
-        };
-      }
-      jQuery(["log", "debug", "info", "warn", "exception", "assert", "dir","dirxml", "trace", "group", "groupEnd", "groupCollapsed", "profile","profileEnd", "count", "clear", "time", "timeEnd", "timeStamp", "table","error"]).each(function(index, functionName){
-        if (typeof(console)!=="object" || typeof(console[functionName])!=="function"){
-          // Use fallback as browser does not provide implementation.
-          api[functionName] = logger;
-        } else {
-          api[functionName] = function(){
-            // Use browsers implementation.
-            console[functionName].apply(console, arguments);
-          };
-        }
-      });
-      return api;
-    })()
   };
-})();
+})(jQuery);

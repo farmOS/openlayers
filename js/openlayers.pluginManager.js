@@ -1,7 +1,8 @@
 goog.provide('Drupal.openlayers.pluginManager');
 
 // Plugin manager using module pattern.
-Drupal.openlayers.pluginManager = (function () {
+Drupal.openlayers.pluginManager = (function ($) {
+  "use strict";
 
   var plugins = [];
 
@@ -74,4 +75,4 @@ Drupal.openlayers.pluginManager = (function () {
       return false;
     }
   };
-})();
+})(jQuery);

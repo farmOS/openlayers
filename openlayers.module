@@ -240,9 +240,14 @@ function openlayers_libraries_info() {
                 'weight' => 12,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
-              'js/openlayers.debug.js' => array(
+              'js/openlayers.console.js' => array(
                 'type' => 'file',
                 'weight' => 14,
+                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+              ),
+              'js/openlayers.debug.js' => array(
+                'type' => 'file',
+                'weight' => 16,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
             ),

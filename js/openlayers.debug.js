@@ -1,11 +1,13 @@
 (function($) {
+  "use strict";
+  var message;
+  var type = null;
+
   $(document).on('openlayers.build_start', function(event, objects) {
     console.time('Total building time');
     console.groupCollapsed("********************* Starting building " + objects.objects.map.mn + " *********************");
   });
 
-  var message;
-  var type = null;
   $(document).on('openlayers.object_pre_alter', function(event, objects) {
     if (!(objects.data.mn in objects.cache[objects.type])) {
       message = " Computing " + objects.type + " " + objects.data.mn + "...";
@@ -19,7 +21,6 @@
     type = objects.type;
 
     console.time(message);
-
   });
 
   $(document).on('openlayers.object_post_alter', function(event, objects) {

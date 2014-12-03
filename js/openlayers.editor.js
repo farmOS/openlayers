@@ -1,32 +1,38 @@
-jQuery(document).ready(function ($) {
-  $('textarea[data-editor]').each(function () {
-    var textarea = $(this);
+(function ($) {
+  "use strict";
 
-    var mode = textarea.data('editor');
+  Drupal.behaviors.openlayers_editors = {
+    attach: function(context, settings) {
+      $('textarea[data-editor]').each(function () {
+        var textarea = $(this);
 
-    var editDiv = $('<div>', {
-      position: 'absolute',
-      width: textarea.width(),
-      height: textarea.height(),
-      'class': textarea.attr('class')
-    }).insertBefore(textarea);
+        var mode = textarea.data('editor');
 
-    textarea.css('visibility', 'hidden');
-    textarea.css('display', 'none');
+        var editDiv = $('<div>', {
+          position: 'absolute',
+          width: textarea.width(),
+          height: textarea.height(),
+          'class': textarea.attr('class')
+        }).insertBefore(textarea);
 
-    var editor = ace.edit(editDiv[0]);
-    editor.renderer.setShowGutter(true);
-    editor.renderer.setDisplayIndentGuides(true);
-    editor.renderer.setShowInvisibles(true);
-    editor.session.setUseSoftTabs(true);
-    editor.getSession().setValue(textarea.val());
-    editor.getSession().setMode("ace/mode/" + mode);
-    editor.setTheme("ace/theme/textmate");
+        textarea.css('visibility', 'hidden');
+        textarea.css('display', 'none');
 
-    // copy back to textarea on form submit...
-    textarea.closest('form').submit(function () {
-      textarea.val(editor.getSession().getValue());
-    })
+        var editor = ace.edit(editDiv[0]);
+        editor.renderer.setShowGutter(true);
+        editor.renderer.setDisplayIndentGuides(true);
+        editor.renderer.setShowInvisibles(true);
+        editor.session.setUseSoftTabs(true);
+        editor.getSession().setValue(textarea.val());
+        editor.getSession().setMode("ace/mode/" + mode);
+        editor.setTheme("ace/theme/textmate");
 
-  });
-});
+        // copy back to textarea on form submit...
+        textarea.closest('form').submit(function () {
+          textarea.val(editor.getSession().getValue());
+        })
+
+      });
+    }
+  }
+})(jQuery);

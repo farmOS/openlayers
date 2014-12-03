@@ -1,5 +1,9 @@
-(function($) {
-  Drupal.behaviors.openlayers = {
+goog.provide('Drupal.behaviors.openlayers');
+
+Drupal.behaviors.openlayers = (function($) {
+  "use strict";
+
+  return {
     attach: function (context, settings) {
       Drupal.openlayers.pluginManager.attach(context, settings);
 
@@ -21,5 +25,7 @@
     detach: function (context, settings) {
       Drupal.openlayers.pluginManager.detach(context, settings);
     }
-  };
+  }
 })(jQuery);
+
+
