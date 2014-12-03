@@ -266,8 +266,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
           $this->attached['js'][$file->uri] = array(
             'data' => $file->uri,
             'type' => 'file',
-            'group' => Config::JS_GROUP,
-            'weight' => Config::JS_WEIGHT,
+            'group' => Config::JS_CSS_GROUP,
+            'weight' => Config::JS_CSS_WEIGHT,
           );
         }
       }
@@ -276,8 +276,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
           $this->attached['css'][$file->uri] = array(
             'data' => $file->uri,
             'type' => 'file',
-            'group' => Config::JS_GROUP,
-            'weight' => Config::JS_WEIGHT,
+            'group' => Config::JS_CSS_GROUP,
+            'weight' => Config::JS_CSS_WEIGHT,
           );
         }
       }

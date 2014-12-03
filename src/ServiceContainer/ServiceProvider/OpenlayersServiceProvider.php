@@ -47,13 +47,12 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       'class' => '\Drupal\openlayers\Types\Collection'
     );
 
-
-    foreach(openlayers_ctools_plugin_type() as $plugin => $data) {
-      $plugin = drupal_strtolower($plugin);
-      $services['openlayers.' . $plugin] = array();
-      $parameters['service_container.plugin_managers']['ctools']['openlayers.' . $plugin] = array(
+    foreach(openlayers_ctools_plugin_type() as $plugin_type => $data) {
+      $plugin_type = drupal_strtolower($plugin_type);
+      $services['openlayers.' . $plugin_type] = array();
+      $parameters['service_container.plugin_managers']['ctools']['openlayers.' . $plugin_type] = array(
         'owner' => 'openlayers',
-        'type' => drupal_ucfirst($plugin)
+        'type' => drupal_ucfirst($plugin_type)
       );
     }
 

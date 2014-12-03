@@ -21,5 +21,7 @@ Drupal.openlayers.pluginManager.register({
     map.target = data.opt.target;
 
     return map;
-  }
+  },
+  attach: function(context, settings) {},
+  detach: function(context, settings) {}
 });
