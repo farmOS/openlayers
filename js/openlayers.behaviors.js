@@ -12,7 +12,7 @@ Drupal.behaviors.openlayers = (function($) {
       });
 
       // Create dynamic callback functions for asynchronous maps.
-      $('.openlayers-map.asynchronous').each(function () {
+      $('.openlayers-map.asynchronous').once('.openlayers-map.asynchronous', function () {
         var map_id = $(this).attr('id');
         if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
           Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function () {
