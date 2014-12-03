@@ -164,6 +164,11 @@ function openlayers_libraries_info() {
     'integration files' => array(
       'openlayers' => array(
         'js' => array(
+          'js/openlayers.behaviors.js' => array(
+            'type' => 'file',
+            'weight' => 6,
+            'group' => \Drupal\openlayers\Config::JS_GROUP,
+          ),
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 8,
@@ -207,6 +212,11 @@ function openlayers_libraries_info() {
         'integration files' => array(
           'openlayers' => array(
             'js' => array(
+              'js/openlayers.behaviors.js' => array(
+                'type' => 'file',
+                'weight' => 6,
+                'group' => \Drupal\openlayers\Config::JS_GROUP,
+              ),
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 8,
