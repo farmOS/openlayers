@@ -116,7 +116,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
   }
 
-  $form['#token'] = NULL;
+  $form['#token'] = FALSE;
 
   $form['form'] = array(
     '#prefix' => '<div id="default_map_ajax">',
