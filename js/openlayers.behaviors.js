@@ -1,31 +1,35 @@
 goog.provide('Drupal.behaviors.openlayers');
 
-Drupal.behaviors.openlayers = (function($) {
+(function($){
   "use strict";
 
-  return {
-    attach: function (context, settings) {
-      Drupal.openlayers.pluginManager.attach(context, settings);
+  Drupal.behaviors.openlayers = (function($) {
+    return {
+      attach: function (context, settings) {
+        Drupal.openlayers.pluginManager.attach(context, settings);
 
-      $('.openlayers-map:not(.asynchronous)').once('openlayers-map', function () {
-        var map_id = $(this).attr('id');
-        Drupal.openlayers.processMap(map_id, context);
-      });
+        $('.openlayers-map:not(.asynchronous)').once('openlayers-map', function () {
+          var map_id = $(this).attr('id');
+          Drupal.openlayers.processMap(map_id, context);
+        });
 
-      // Create dynamic callback functions for asynchronous maps.
-      $('.openlayers-map.asynchronous').each(function () {
-        var map_id = $(this).attr('id');
-        if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
-          Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function () {
-            Drupal.openlayers.asyncIsReady(map_id);
+        // Create dynamic callback functions for asynchronous maps.
+        $('.openlayers-map.asynchronous').each(function () {
+          var map_id = $(this).attr('id');
+          if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+            Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function () {
+              Drupal.openlayers.asyncIsReady(map_id);
+            }
           }
-        }
-      });
-    },
-    detach: function (context, settings) {
-      Drupal.openlayers.pluginManager.detach(context, settings);
+        });
+      },
+      detach: function (context, settings) {
+        Drupal.openlayers.pluginManager.detach(context, settings);
+      }
     }
-  }
+  })(jQuery);
+
 })(jQuery);
+
 
 
