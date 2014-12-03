@@ -150,6 +150,7 @@ abstract class Map extends Object implements MapInterface {
     $styles = array(
       'width' => $map->getOption('width'),
       'height' => $map->getOption('height'),
+      'overflow' => 'hidden'
     );
 
     $css_styles = '';
@@ -173,7 +174,6 @@ abstract class Map extends Object implements MapInterface {
         '#value' => '',
         '#attributes' => array(
           'id' => $map->getId(),
-          'style' => $css_styles,
           'class' => array(
             'openlayers-map',
             $map->machine_name,

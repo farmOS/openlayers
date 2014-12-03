@@ -118,15 +118,13 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
   $form['#token'] = NULL;
 
-  $form['default_map'] = array(
+  $form['form'] = array(
     '#prefix' => '<div id="default_map_ajax">',
-    '#type' => 'fieldset',
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
-    '#title' => 'Map',
+    '#suffix' => '</div>',
+    '#type' => 'markup',
   );
 
-  $form['default_map']['map'] = array(
+  $form['form']['map'] = array(
     '#weight' => 0,
     '#type' => 'openlayers',
     '#map' => $map,
@@ -136,7 +134,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   if ((bool) $map->getOption('provideIframe', FALSE) == TRUE) {
     $form_state['item'] = $map;
 
-    $form['default_map']['openlayers_services'] = array(
+    $form['form']['openlayers_services'] = array(
       '#type' => 'fieldset',
       '#collapsible' => FALSE,
       '#collapsed' => FALSE,
@@ -150,19 +148,17 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
         $height = $map->getOption('height', 'auto');
         $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
 
-        $form['default_map']['openlayers_services'][$map->machine_name] = array(
+        $form['form']['openlayers_services'][$map->machine_name] = array(
           '#type' => 'textarea',
           '#description' => t('Copy paste this html code to embed this map in your content.'),
           '#rows' => 3,
           '#value' => $iframe,
-          '#disabled' => TRUE,
         );
       }
     }
-
   }
 
-  $form['default_map']['permalink'] = array(
+  $form['form']['permalink'] = array(
     '#weight' => 6,
     '#type' => 'fieldset',
     '#collapsible' => FALSE,
@@ -170,14 +166,10 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#title' => 'Permanent link to this map',
   );
 
-  $link = url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE));
-
-  $form['default_map']['permalink']['link'] = array(
-    '#suffix' => '</div>',
+  $form['form']['permalink']['link'] = array(
     '#type' => 'textfield',
-    '#value' => $link,
+    '#value' => url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE)),
     '#size' => 128,
-    '#disabled' => TRUE,
   );
 
   $form['lat'] = array(
@@ -220,7 +212,7 @@ function _openlayers_examples_ajax_reload_default_map($form, &$form_state) {
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $_SESSION['current_path'] = $form_state['input']['current_path'];
 
-  return $form['default_map'];
+  return $form['form'];
 }
 
 /**

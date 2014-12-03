@@ -56,65 +56,58 @@ class Geolocation extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
-    $build['component'] = array(
-      '#type' => 'fieldset',
-      '#title' => 'Example Geolocation component',
+    $build = array(
+      'map' => $build,
+      'Geolocation' => array(
+        '#type' => 'fieldset',
+        '#title' => 'Example Geolocation component',
+        'info' => array(
+          '#markup' => '<div id="info"></div>',
+        ),
+        'trackPosition' => array(
+          '#type' => 'checkbox',
+          '#title' => 'Track position',
+          '#attributes' => array(
+            'id' => 'trackPosition',
+          ),
+        ),
+        'positionAccuracy' => array(
+          '#type' => 'textfield',
+          '#title' => 'Position accuracy',
+          '#attributes' => array(
+            'id' => 'positionAccuracy',
+          ),
+        ),
+        'altitude' => array(
+          '#type' => 'textfield',
+          '#title' => 'Altitude',
+          '#attributes' => array(
+            'id' => 'altitude',
+          ),
+        ),
+        'altitudeAccuracy' => array(
+          '#type' => 'textfield',
+          '#title' => 'Altitude accuracy',
+          '#attributes' => array(
+            'id' => 'altitudeAccuracy',
+          ),
+        ),
+        'heading' => array(
+          '#type' => 'textfield',
+          '#title' => 'Heading',
+          '#attributes' => array(
+            'id' => 'heading',
+          ),
+        ),
+        'speed' => array(
+          '#type' => 'textfield',
+          '#title' => 'Speed',
+          '#attributes' => array(
+            'id' => 'speed',
+          ),
+        )
+      )
     );
-
-    $build['component']['info'] = array(
-      '#markup' => '<div id="info"></div>',
-    );
-
-    $build['component']['trackPosition'] = array(
-      '#type' => 'checkbox',
-      '#title' => 'Track position',
-      '#attributes' => array(
-        'id' => 'trackPosition',
-      ),
-    );
-
-    $build['component']['positionAccuracy'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Position accuracy',
-      '#attributes' => array(
-        'id' => 'positionAccuracy',
-      ),
-    );
-
-    $build['component']['altitude'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Altitude',
-      '#attributes' => array(
-        'id' => 'altitude',
-      ),
-    );
-
-    $build['component']['altitudeAccuracy'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Altitude accuracy',
-      '#attributes' => array(
-        'id' => 'altitudeAccuracy',
-      ),
-    );
-
-    $build['component']['heading'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Heading',
-      '#attributes' => array(
-        'id' => 'heading',
-      ),
-    );
-
-    $build['component']['speed'] = array(
-      '#type' => 'textfield',
-      '#title' => 'Speed',
-      '#attributes' => array(
-        'id' => 'speed',
-      ),
-    );
-
-    $build['map']['#attributes']['style'] = $build['#attributes']['style'];
-    unset($build['#attributes']['style']);
   }
 
 }
