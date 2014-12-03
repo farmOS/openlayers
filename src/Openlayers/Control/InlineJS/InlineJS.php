@@ -28,7 +28,7 @@ class InlineJS extends Control {
           array('ace_editor', 'ace-editor'),
         ),
         'js' => array(
-          drupal_get_path('module', 'openlayers') . '/js/editor.js',
+          drupal_get_path('module', 'openlayers') . '/js/openlayers.editor.js',
         ),
       );
     }

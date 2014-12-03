@@ -29,7 +29,7 @@ class InlineJS extends Component {
           array('ace_editor', 'ace-editor'),
         ),
         'js' => array(
-          drupal_get_path('module', 'openlayers') . '/js/editor.js',
+          drupal_get_path('module', 'openlayers') . '/js/openlayers.editor.js',
         ),
       );
     }
