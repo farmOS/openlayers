@@ -1,7 +1,6 @@
-(function ($) {
+Drupal.behaviors.openlayers_editor = (function($){
   "use strict";
-
-  Drupal.behaviors.openlayers_editors = {
+  return {
     attach: function(context, settings) {
       $('textarea[data-editor]').each(function () {
         var textarea = $(this);
@@ -34,5 +33,5 @@
 
       });
     }
-  }
+  };
 })(jQuery);
