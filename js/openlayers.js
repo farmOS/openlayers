@@ -156,7 +156,7 @@ Drupal.openlayers = (function($){
             'opt': data.opt,
             'map': map,
             'context': context,
-            'cache': cache,
+            'cache': cache
           });
           if (goog.isObject(object)) {
             cache[type][data.mn] = object;
@@ -184,6 +184,6 @@ Drupal.openlayers = (function($){
       ]);
       $('body').data('openlayers', {'objects': cache});
       return object;
-    }),
+    })
   };
 })(jQuery);

@@ -63,11 +63,7 @@ Drupal.openlayers.pluginManager = (function($) {
     },
     isRegistered: function(factoryService) {
       var factoryService = factoryService.toLowerCase();
-
-      if (factoryService in plugins) {
-        return true;
-      }
-      return false;
+      return (factoryService in plugins);
     }
   };
 })(jQuery);
