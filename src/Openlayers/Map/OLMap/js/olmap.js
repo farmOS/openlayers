@@ -17,7 +17,6 @@ Drupal.openlayers.pluginManager.register({
     });
 
     var map = new ol.Map(options);
-    map.mn = data.mn;
     map.target = data.opt.target;
 
     return map;
