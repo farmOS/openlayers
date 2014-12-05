@@ -33,6 +33,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_map',
       'default hook' => 'default_maps',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_maps',
@@ -85,6 +86,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_layer',
       'default hook' => 'default_layers',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_layers',
@@ -138,6 +140,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_source',
       'default hook' => 'default_sources',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_sources',
@@ -191,6 +194,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_control',
       'default hook' => 'default_controls',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_controls',
@@ -245,6 +249,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_interaction',
       'default hook' => 'default_interactions',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_interactions',
@@ -299,6 +304,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_component',
       'default hook' => 'default_components',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_components',
@@ -353,6 +359,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_projection',
       'default hook' => 'default_projections',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_projections',
@@ -401,6 +408,7 @@ function openlayers_schema() {
       'primary key' => 'machine_name',
       'identifier' => 'ol_style',
       'default hook' => 'default_styles',
+      'cache defaults' => TRUE,
       'api' => array(
         'owner' => 'openlayers',
         'api' => 'default_styles',
