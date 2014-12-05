@@ -48,7 +48,7 @@ abstract class Layer extends Object implements LayerInterface {
    */
   public function getStyle() {
     $style = array_values($this->getCollection()->getObjects('style'));
-    return ($style[0] instanceof StyleInterface) ? $style[0] : FALSE;
+    return (isset($style[0]) && $style[0] instanceof StyleInterface) ? $style[0] : FALSE;
   }
 
   /**
