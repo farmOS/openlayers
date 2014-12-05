@@ -45,7 +45,6 @@ function openlayers_examples_menu() {
  * Form handler.
  */
 function openlayers_examples($form, &$form_state, $map_arg = NULL) {
-  ctools_include('plugins');
   ctools_include('export');
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array();
@@ -136,8 +135,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
     $form['form']['openlayers_services'] = array(
       '#type' => 'fieldset',
-      '#collapsible' => FALSE,
-      '#collapsed' => FALSE,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
       '#title' => 'Embed this map in an iframe',
     );
 
@@ -161,8 +160,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   $form['form']['permalink'] = array(
     '#weight' => 6,
     '#type' => 'fieldset',
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
     '#title' => 'Permanent link to this map',
   );
 

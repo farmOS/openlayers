@@ -120,7 +120,7 @@ function openlayers_map_form_start_submit($form, &$form_state) {
  */
 function openlayers_map_form_settings($form, &$form_state) {
   if (!isset($form_state['item']->factory_service)) {
-    $form_state['item']->factory_service = '\Drupal\openlayers\map\OLMap';
+    $form_state['item']->factory_service = 'openlayers.map.internal.OLMap';
   }
   $map = openlayers_object_load('Map', $form_state['item']);
   $map->optionsForm($form, $form_state);
@@ -135,7 +135,7 @@ function openlayers_map_form_settings($form, &$form_state) {
 function openlayers_map_form_settings_validate($form, &$form_state) {
   $item = $form_state['item'];
   if (empty($item->factory_service)) {
-    $item->factory_service = '\Drupal\openlayers\map\OLMap';
+    $item->factory_service = 'openlayers.map.internal.OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
@@ -151,7 +151,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 function openlayers_map_form_settings_submit($form, &$form_state) {
   // todo: fix.
   if (empty($form_state['item']->factory_service)) {
-    $form_state['item']->factory_service = '\\Drupal\\openlayers\\Map\\OLMap';
+    $form_state['item']->factory_service = 'openlayers.map.internal.OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
@@ -169,7 +169,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   $map = openlayers_object_load('Map', $form_state['item']);
 
   $layers = array();
-  foreach ($map->getLayers() as $index => $layer) {
+  foreach ($map->getLayers() as $layer) {
     if (isset($all_layers[$layer->machine_name])) {
       $layers[$layer->machine_name] = $all_layers[$layer->machine_name];
       $layers[$layer->machine_name]->enable = 1;
@@ -187,7 +187,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       'name' => $layer->name,
       'machine_name' => $layer->machine_name,
       'description' => $layer->description,
-      'class' => $layer->factory_service,
+      'factory_service' => $layer->factory_service,
       'weight' => $i++,
       'enable' => isset($layer->enable) ? $layer->enable : 0,
       'default' => 1,
@@ -260,7 +260,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       t('Name'),
       t('Machine name'),
       t('Description'),
-      t('Class'),
+      t('Factory service'),
       t('Operations'),
     ),
     '#rows' => $rows,
@@ -291,7 +291,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       'name' => $source->name,
       'machine_name' => $source->machine_name,
       'description' => $source->description,
-      'class' => $source->factory_service,
+      'factory_service' => $source->factory_service,
       'weight' => $i++,
       'enable' => isset($source->enable) ? $source->enable : 0,
       'default' => 1,

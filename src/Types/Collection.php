@@ -86,10 +86,15 @@ class Collection {
    *   List of objects of this collection or list of a specific type of objects.
    */
   public function getObjects($type = NULL) {
-    if ($type != NULL && isset($this->objects[$type])) {
+    if ($type == NULL) {
+      return $this->objects;
+    }
+
+    if (isset($this->objects[$type])) {
       return $this->objects[$type];
     }
-    return $this->objects;
+
+    return array();
   }
 
   /**
