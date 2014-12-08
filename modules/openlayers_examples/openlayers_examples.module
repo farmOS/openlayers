@@ -57,15 +57,23 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
   ksort($options);
 
-  $map = $map_arg;
-  if (($map == NULL) || (!isset($options[$map]))) {
-    $map = array_rand($options, 1);
+  if (isset($form_state['values']['openlayers_default_map'])) {
+    $maps = $form_state['values']['openlayers_default_map'];
+  } else {
+    $map = $map_arg;
+    if (($map == NULL) || (!isset($options[$map]))) {
+      $maps = array(array_rand($options, 1));
+    }
+    if ($map == 'all') {
+      $maps = array_keys($options);
+    }
   }
 
   $form['openlayers_default_map'] = array(
     '#type' => 'select',
+    '#multiple' => TRUE,
     '#options' => $options,
-    '#default_value' => $map,
+    '#default_value' => $maps,
     '#ajax' => array(
       'callback' => '_openlayers_examples_ajax_reload_default_map',
       'method' => 'replace',
@@ -73,47 +81,6 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
       'effect' => 'fade',
     ),
   );
-
-  if (isset($form_state['values']['openlayers_default_map'])) {
-    $map = $form_state['values']['openlayers_default_map'];
-  }
-  $map = openlayers_object_load('Map', $map);
-  $map->clearOption('contextualLinks');
-  $map->setOption('height', '400px');
-
-  $controls = array_filter(array_merge($map->getOption('controls', array()), array(
-    'openlayers_control_zoom',
-    'openlayers_control_rotate',
-    'openlayers_control_fullscreen',
-  )));
-  $map->setOption('controls', $controls);
-
-  $map->setOption(
-    'interactions',
-    array(
-      'openlayers_interaction_doubleclickzoom',
-      'openlayers_interaction_dragpan',
-      'openlayers_interaction_dragrotate',
-      'openlayers_interaction_mousewheelzoom',
-    ),
-    TRUE
-  );
-
-  $components = array_filter(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values')));
-  $map->setOption('components', $components);
-
-  if (isset($form_state['input']['zoom'])) {
-    $map->setOption(array('view', 'zoom'), $form_state['input']['zoom']);
-  }
-  if (isset($form_state['input']['rot'])) {
-    $map->setOption(array('view', 'rotation'), $form_state['input']['rot']);
-  }
-  if (isset($form_state['input']['lat'])) {
-    $map->setOption(array('view', 'center', 'lat'), $form_state['input']['lat']);
-  }
-  if (isset($form_state['input']['lon'])) {
-    $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
-  }
 
   $form['#token'] = FALSE;
 
@@ -123,53 +90,102 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#type' => 'markup',
   );
 
-  $form['form']['map'] = array(
-    '#weight' => 0,
-    '#type' => 'openlayers',
-    '#map' => $map,
-    '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
-  );
+  foreach ($maps as $map) {
+    $map = openlayers_object_load('Map', $map);
 
-  if ((bool) $map->getOption('provideIframe', FALSE) == TRUE) {
-    $form_state['item'] = $map;
+    $form['form'][$map->getId()] = array(
+      '#type' => 'fieldset',
+      '#title' => $map->name,
+      '#collapsible' => FALSE
+    );
 
-    $form['form']['openlayers_services'] = array(
+    $map->clearOption('contextualLinks');
+    $map->setOption('height', '400px');
+
+    $controls = array_filter(array_merge($map->getOption('controls', array()), array(
+      'openlayers_control_zoom',
+      'openlayers_control_rotate',
+      'openlayers_control_fullscreen',
+    )));
+    $map->setOption('controls', $controls);
+
+    $map->setOption(
+      'interactions',
+      array(
+        'openlayers_interaction_doubleclickzoom',
+        'openlayers_interaction_dragpan',
+        'openlayers_interaction_dragrotate',
+        'openlayers_interaction_mousewheelzoom',
+      ),
+      TRUE
+    );
+
+    $components = array_filter(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values')));
+    $map->setOption('components', $components);
+
+    if (isset($form_state['input']['zoom'])) {
+      $map->setOption(array('view', 'zoom'), $form_state['input']['zoom']);
+    }
+    if (isset($form_state['input']['rot'])) {
+      $map->setOption(array('view', 'rotation'), $form_state['input']['rot']);
+    }
+    if (isset($form_state['input']['lat'])) {
+      $map->setOption(array('view', 'center', 'lat'), $form_state['input']['lat']);
+    }
+    if (isset($form_state['input']['lon'])) {
+      $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
+    }
+
+    $form['form'][$map->getId()]['map'] = array(
+      '#weight' => 0,
+      '#type' => 'openlayers',
+      '#map' => $map,
+      '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
+    );
+
+    if ((bool) $map->getOption('provideIframe', FALSE) == TRUE) {
+      $form_state['item'] = $map;
+
+      $form['form'][$map->getId()]['openlayers_services'] = array(
+        '#type' => 'fieldset',
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        '#title' => 'Embed this map in an iframe',
+      );
+
+      foreach (services_endpoint_load_all() as $service) {
+        if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
+
+          $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
+          $height = $map->getOption('height', 'auto');
+          $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
+
+          $form['form'][$map->getId()]['openlayers_services'][$map->machine_name] = array(
+            '#type' => 'textarea',
+            '#description' => t('Copy paste this html code to embed this map in your content.'),
+            '#rows' => 3,
+            '#value' => $iframe,
+          );
+        }
+      }
+    }
+
+    $form['form'][$map->getId()]['permalink'] = array(
+      '#weight' => 6,
       '#type' => 'fieldset',
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-      '#title' => 'Embed this map in an iframe',
+      '#title' => 'Permanent link to this map',
     );
 
-    foreach (services_endpoint_load_all() as $service) {
-      if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
+    $form['form'][$map->getId()]['permalink']['link'] = array(
+      '#type' => 'textfield',
+      '#value' => url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE)),
+      '#size' => 128,
+    );
 
-        $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
-        $height = $map->getOption('height', 'auto');
-        $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
-
-        $form['form']['openlayers_services'][$map->machine_name] = array(
-          '#type' => 'textarea',
-          '#description' => t('Copy paste this html code to embed this map in your content.'),
-          '#rows' => 3,
-          '#value' => $iframe,
-        );
-      }
-    }
   }
 
-  $form['form']['permalink'] = array(
-    '#weight' => 6,
-    '#type' => 'fieldset',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    '#title' => 'Permanent link to this map',
-  );
-
-  $form['form']['permalink']['link'] = array(
-    '#type' => 'textfield',
-    '#value' => url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE)),
-    '#size' => 128,
-  );
 
   $form['lat'] = array(
     '#type' => 'hidden',

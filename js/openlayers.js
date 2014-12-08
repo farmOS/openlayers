@@ -55,7 +55,7 @@ Drupal.openlayers = (function($){
         settings.layer.map(function (data) {
           data.opt.source = Drupal.openlayers.cacheManager.get(data.opt.source);
           if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.cacheManager.isRegistered(data.opt.style))) {
-            data.opt.style = Drupal.openlayers.cacheManager.get(data.mn);
+            data.opt.style = Drupal.openlayers.cacheManager.get(data.opt.style);
           }
           Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObject(context, 'layers', data, map));
           map.addLayer(Drupal.openlayers.cacheManager.get(data.mn));
