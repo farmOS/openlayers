@@ -71,7 +71,7 @@ Drupal.openlayers = (function($){
         $(document).trigger('openlayers.build_stop', [
           {
             'type': 'objects',
-            'cache': drupal.openlayers.cacheManager
+            'cache': drupal.openlayers.cacheManager,
             'settings': settings,
             'context': context
           }
