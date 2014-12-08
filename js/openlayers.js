@@ -3,6 +3,7 @@ Drupal.openlayers = (function($){
   return {
     processMap: function (map_id, context) {
       var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
+
       $(document).trigger('openlayers.build_start', [
         {
           'type': 'objects',
@@ -10,16 +11,6 @@ Drupal.openlayers = (function($){
           'context': context
         }
       ]);
-
-      var objects = {
-          sources: {},
-          controls: {},
-          interactions: {},
-          components: {},
-          styles: {},
-          layers: {},
-          maps: {}
-        };
 
       try {
         $(document).trigger('openlayers.map_pre_alter', [{context: context, cache: Drupal.openlayers.cacheManager}]);
@@ -80,7 +71,8 @@ Drupal.openlayers = (function($){
         $(document).trigger('openlayers.build_stop', [
           {
             'type': 'objects',
-            'objects': settings,
+            'cache': drupal.openlayers.cacheManager
+            'settings': settings,
             'context': context
           }
         ]);
