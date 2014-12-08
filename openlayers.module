@@ -170,14 +170,19 @@ function openlayers_libraries_info() {
             'weight' => 8,
             'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
           ),
-          'js/openlayers.pluginManager.js' => array(
+          'js/openlayers.cacheManager.js' => array(
             'type' => 'file',
             'weight' => 10,
             'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
           ),
-          'js/openlayers.behaviors.js' => array(
+          'js/openlayers.pluginManager.js' => array(
             'type' => 'file',
             'weight' => 12,
+            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+          ),
+          'js/openlayers.behaviors.js' => array(
+            'type' => 'file',
+            'weight' => 14,
             'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
           ),
         ),
@@ -225,24 +230,29 @@ function openlayers_libraries_info() {
                 'weight' => 8,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
-              'js/openlayers.pluginManager.js' => array(
+              'js/openlayers.cacheManager.js' => array(
                 'type' => 'file',
                 'weight' => 10,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
-              'js/openlayers.behaviors.js' => array(
+              'js/openlayers.pluginManager.js' => array(
                 'type' => 'file',
                 'weight' => 12,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
-              'js/openlayers.console.js' => array(
+              'js/openlayers.behaviors.js' => array(
                 'type' => 'file',
                 'weight' => 14,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
-              'js/openlayers.debug.js' => array(
+              'js/openlayers.console.js' => array(
                 'type' => 'file',
                 'weight' => 16,
+                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+              ),
+              'js/openlayers.debug.js' => array(
+                'type' => 'file',
+                'weight' => 18,
                 'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
               ),
             ),
