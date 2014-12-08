@@ -4,10 +4,9 @@
 
       $(".form-item-overlays input[type='checkbox']").on('change', function(e) {
         var target = $(this).closest('form').find("input[name='map']").val();
-        var data = $('body').data('openlayers');
-        for (map in data.objects.maps) {
-          if (data.objects.maps[map].target == target) {
-            var map = data.objects.maps[map];
+        for (objectMachineName in Drupal.openlayers.cacheManager.getCache()) {
+          var map = Drupal.openlayers.cacheManager.get(objectMachineName);
+          if (map.target == target) {
             var layers = map.getLayers();
             var target = $(e.target);
             layers.forEach(function(layer){

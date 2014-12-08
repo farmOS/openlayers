@@ -2,7 +2,7 @@ Drupal.openlayers = (function($){
   "use strict";
   return {
     processMap: function (map_id, context) {
-      var settings = Drupal.settings.openlayers.maps[map_id];
+      var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
       $(document).trigger('openlayers.build_start', [
         {
           'type': 'objects',
@@ -11,13 +11,7 @@ Drupal.openlayers = (function($){
         }
       ]);
 
-      var layers = settings.layer || [],
-        styles = settings.style || [],
-        controls = settings.control || [],
-        interactions = settings.interaction || [],
-        sources = settings.source || [],
-        components = settings.component || [],
-        objects = {
+      var objects = {
           sources: {},
           controls: {},
           interactions: {},
@@ -29,13 +23,12 @@ Drupal.openlayers = (function($){
 
       try {
         $(document).trigger('openlayers.map_pre_alter', [{context: context, cache: Drupal.openlayers.cacheManager}]);
-        var map = Drupal.openlayers.getObjectFromCache(context, 'maps', settings.map, null);
-
+        var map = Drupal.openlayers.getObject(context, 'maps', settings.map, null);
+        Drupal.openlayers.cacheManager.set(map.mn, map);
         $(document).trigger('openlayers.map_post_alter', [{map: map, cache: Drupal.openlayers.cacheManager}]);
-        objects.maps[map.mn] = map;
 
-        $(document).trigger('openlayers.sources_pre_alter', [{sources: sources, cache: Drupal.openlayers.cacheManager}]);
-        sources.map(function (data) {
+        $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source, cache: Drupal.openlayers.cacheManager}]);
+        settings.source.map(function (data) {
           if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
             data.opt.attributions = [
               new ol.Attribution({
@@ -43,45 +36,46 @@ Drupal.openlayers = (function($){
               })
             ];
           }
-          objects.sources[data.mn] = Drupal.openlayers.getObjectFromCache(context, 'sources', data, map);
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObjectFromCache(context, 'sources', data, map));
         });
-        $(document).trigger('openlayers.sources_post_alter', [{sources: sources, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source, cache: Drupal.openlayers.cacheManager}]);
 
-        $(document).trigger('openlayers.controls_pre_alter', [{controls: controls, cache: Drupal.openlayers.cacheManager}]);
-        controls.map(function (data) {
-          map.addControl(Drupal.openlayers.getObjectFromCache(context, 'controls', data, map));
+        $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control, cache: Drupal.openlayers.cacheManager}]);
+        settings.control.map(function (data) {
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObject(context, 'controls', data, map));
+          map.addControl(Drupal.openlayers.cacheManager.get(data.mn));
         });
-        $(document).trigger('openlayers.controls_post_alter', [{controls: controls, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control, cache: Drupal.openlayers.cacheManager}]);
 
-        $(document).trigger('openlayers.interactions_pre_alter', [{interactions: interactions, cache: Drupal.openlayers.cacheManager}]);
-        interactions.map(function (data) {
-          objects.interactions[data.mn] = Drupal.openlayers.getObjectFromCache(context, 'interactions', data, map);
-          map.addInteraction(objects.interactions[data.mn]);
+        $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction, cache: Drupal.openlayers.cacheManager}]);
+        settings.interaction.map(function (data) {
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObjectFromCache(context, 'interactions', data, map));
+          map.addInteraction(Drupal.openlayers.cacheManager.get(data.mn));
         });
-        $(document).trigger('openlayers.interactions_post_alter', [{interactions: interactions, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction, cache: Drupal.openlayers.cacheManager}]);
 
-        $(document).trigger('openlayers.styles_pre_alter', [{styles: styles, cache: Drupal.openlayers.cacheManager}]);
-        styles.map(function (data) {
-          objects.styles[data.mn] = Drupal.openlayers.getObjectFromCache(context, 'styles', data, map);
+        $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style, cache: Drupal.openlayers.cacheManager}]);
+        settings.style.map(function (data) {
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObjectFromCache(context, 'styles', data, map));
         });
-        $(document).trigger('openlayers.styles_post_alter', [{styles: styles, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style, cache: Drupal.openlayers.cacheManager}]);
 
-        $(document).trigger('openlayers.layers_pre_alter', [{layers: layers, cache: Drupal.openlayers.cacheManager}]);
-        layers.map(function (data) {
-          data.opt.source = objects.sources[data.opt.source];
-          if (goog.isDef(data.opt.style) && goog.isDef(objects.styles[data.opt.style])) {
-            data.opt.style = objects.styles[data.opt.style];
+        $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer, cache: Drupal.openlayers.cacheManager}]);
+        settings.layer.map(function (data) {
+          data.opt.source = Drupal.openlayers.cacheManager.get(data.opt.source);
+          if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.cacheManager.isRegistered(data.opt.style))) {
+            data.opt.style = Drupal.openlayers.cacheManager.get(data.mn);
           }
-          objects.layers[data.mn] = Drupal.openlayers.getObject(context, 'layers', data, map);
-          map.addLayer(objects.layers[data.mn]);
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObject(context, 'layers', data, map));
+          map.addLayer(Drupal.openlayers.cacheManager.get(data.mn));
         });
-        $(document).trigger('openlayers.layers_post_alter', [{layers: layers, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer, cache: Drupal.openlayers.cacheManager}]);
 
-        $(document).trigger('openlayers.components_pre_alter', [{components: components, cache: Drupal.openlayers.cacheManager}]);
-        components.map(function (data) {
-          objects.components[data.mn] = Drupal.openlayers.getObjectFromCache(context, 'components', data, map);
+        $(document).trigger('openlayers.components_pre_alter', [{components: settings.component, cache: Drupal.openlayers.cacheManager}]);
+        settings.component.map(function (data) {
+          Drupal.openlayers.cacheManager.set(data.mn, Drupal.openlayers.getObjectFromCache(context, 'components', data, map));
         });
-        $(document).trigger('openlayers.components_post_alter', [{components: components, cache: Drupal.openlayers.cacheManager}]);
+        $(document).trigger('openlayers.components_post_alter', [{components: settings.component, cache: Drupal.openlayers.cacheManager}]);
 
         $(document).trigger('openlayers.build_stop', [
           {
@@ -90,8 +84,6 @@ Drupal.openlayers = (function($){
             'context': context
           }
         ]);
-        $('body').data('openlayers', {'objects': objects});
-
       } catch (e) {
         if (goog.isDef(console)) {
           Drupal.openlayers.console.log(e.message);
