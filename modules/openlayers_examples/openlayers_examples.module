@@ -82,7 +82,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     ),
   );
 
-  $form['#token'] = FALSE;
+  $form['#token'] = NULL;
 
   $form['form'] = array(
     '#prefix' => '<div id="default_map_ajax">',
