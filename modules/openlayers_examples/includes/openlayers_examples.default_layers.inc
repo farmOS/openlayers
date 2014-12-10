@@ -322,7 +322,7 @@ function openlayers_examples_default_layers() {
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
   $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_openweather_precipitation';
-  $ol_layer->name = 'OpenWeather Precipitation';
+  $ol_layer->name = 'OpenWeather Precipitation Quantity';
   $ol_layer->description = '';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
@@ -331,15 +331,32 @@ function openlayers_examples_default_layers() {
     'style' => 'openlayers_style_default',
     'zoomOffset' => '0',
     'wrapDateLine' => 0,
-    'opacity' => '0.5',
+    'opacity' => '0.4',
   );
   $export['openlayers_examples_layer_openweather_precipitation'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
   $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_precipitation_cls';
+  $ol_layer->name = 'OpenWeather Precipitation classic';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_precipitation_cls',
+    'visible' => 1,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_precipitation_cls'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_openweather_clouds';
-  $ol_layer->name = 'OpenWeather Clouds';
+  $ol_layer->name = 'OpenWeather Clouds cover';
   $ol_layer->description = '';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
@@ -355,8 +372,42 @@ function openlayers_examples_default_layers() {
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
   $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_clouds_cls';
+  $ol_layer->name = 'OpenWeather Clouds classic';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_clouds_cls',
+    'visible' => 1,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.5',
+  );
+  $export['openlayers_examples_layer_openweather_clouds_cls'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_pressure';
+  $ol_layer->name = 'OpenWeather Pressure';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_pressure',
+    'visible' => 1,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_pressure'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_openweather_pressure_cntr';
-  $ol_layer->name = 'OpenWeather Pressure Center';
+  $ol_layer->name = 'OpenWeather Pressure contour';
   $ol_layer->description = '';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
@@ -402,6 +453,23 @@ function openlayers_examples_default_layers() {
     'opacity' => '0.4',
   );
   $export['openlayers_examples_layer_openweather_rain'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_rain_cls';
+  $ol_layer->name = 'OpenWeather Rain classic';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_rain_cls',
+    'visible' => 0,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_rain_cls'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
