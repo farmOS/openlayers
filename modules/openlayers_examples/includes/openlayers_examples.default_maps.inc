@@ -1034,6 +1034,11 @@ function openlayers_examples_default_maps() {
       0 => 'openlayers_examples_layer_mapquest_sat',
       1 => 'openlayers_examples_layer_openweather_clouds',
       2 => 'openlayers_examples_layer_openweather_precipitation',
+      3 => 'openlayers_examples_layer_openweather_pressure_cntr',
+      4 => 'openlayers_examples_layer_openweather_temp',
+      5 => 'openlayers_examples_layer_openweather_rain',
+      6 => 'openlayers_examples_layer_openweather_snow',
+      7 => 'openlayers_examples_layer_openweather_wind',
     ),
     'controls' => array(
       0 => 'openlayers_examples_control_openweather_layer_switcher',

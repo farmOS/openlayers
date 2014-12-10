@@ -39,6 +39,11 @@ function openlayers_examples_default_controls() {
     'layers' => array(
       'openlayers_examples_layer_openweather_clouds' => 'openlayers_examples_layer_openweather_clouds',
       'openlayers_examples_layer_openweather_precipitation' => 'openlayers_examples_layer_openweather_precipitation',
+      'openlayers_examples_layer_openweather_pressure_cntr' => 'openlayers_examples_layer_openweather_pressure_cntr',
+      'openlayers_examples_layer_openweather_temp' => 'openlayers_examples_layer_openweather_temp',
+      'openlayers_examples_layer_openweather_rain' => 'openlayers_examples_layer_openweather_rain',
+      'openlayers_examples_layer_openweather_snow' => 'openlayers_examples_layer_openweather_snow',
+      'openlayers_examples_layer_openweather_wind' => 'openlayers_examples_layer_openweather_wind',
     ),
     'multiselect' => 1,
   );

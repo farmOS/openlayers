@@ -331,7 +331,7 @@ function openlayers_examples_default_layers() {
     'style' => 'openlayers_style_default',
     'zoomOffset' => '0',
     'wrapDateLine' => 0,
-    'opacity' => '0.7',
+    'opacity' => '0.5',
   );
   $export['openlayers_examples_layer_openweather_precipitation'] = $ol_layer;
 
@@ -348,9 +348,94 @@ function openlayers_examples_default_layers() {
     'style' => 'openlayers_style_default',
     'zoomOffset' => '0',
     'wrapDateLine' => 0,
-    'opacity' => '0.7',
+    'opacity' => '0.5',
   );
   $export['openlayers_examples_layer_openweather_clouds'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_pressure_cntr';
+  $ol_layer->name = 'OpenLayers Examples Layer OpenWeather Pressure Center';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_pressure_cntr',
+    'visible' => 1,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_pressure_cntr'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_temp';
+  $ol_layer->name = 'OpenLayers Examples Layer OpenWeather Temp';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_temp',
+    'visible' => 0,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_temp'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_rain';
+  $ol_layer->name = 'OpenLayers Examples Layer OpenWeather Rain';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_rain',
+    'visible' => 0,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_rain'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_snow';
+  $ol_layer->name = 'OpenLayers Examples Layer OpenWeather Snow';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_snow',
+    'visible' => 0,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_snow'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openweather_wind';
+  $ol_layer->name = 'OpenLayers Examples Layer OpenWeather Wind';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openweather_wind',
+    'visible' => 0,
+    'style' => 'openlayers_style_default',
+    'zoomOffset' => '0',
+    'wrapDateLine' => 0,
+    'opacity' => '0.4',
+  );
+  $export['openlayers_examples_layer_openweather_wind'] = $ol_layer;
 
   return $export;
 }
