@@ -455,5 +455,29 @@ var featureOverlay = new ol.FeatureOverlay({
   );
   $export['openlayers_examples_source_icon_sprite'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_precipitation';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Precipitation';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_precipitation'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_clouds';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Clouds';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_clouds'] = $ol_source;
+
   return $export;
 }
