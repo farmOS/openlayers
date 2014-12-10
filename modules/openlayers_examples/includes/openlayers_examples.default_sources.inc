@@ -261,5 +261,199 @@ function openlayers_examples_default_sources() {
   );
   $export['openlayers_examples_source_esri'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_atlas_webgl';
+  $ol_source->name = 'Openlayers Examples Source Atlas Webgl';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.InlineJS';
+  $ol_source->options = array(
+    'javascript' => 'var atlasManager = new ol.style.AtlasManager({
+  // we increase the initial size so that all symbols fit into
+  // a single atlas image
+  initialSize: 512
+});
+
+var symbolInfo = [{
+  opacity: 1.0,
+  scale: 1.0,
+  fillColor: \'rgba(255, 153, 0, 0.4)\',
+  strokeColor: \'rgba(255, 204, 0, 0.2)\'
+}, {
+  opacity: 0.75,
+  scale: 1.25,
+  fillColor: \'rgba(70, 80, 224, 0.4)\',
+  strokeColor: \'rgba(12, 21, 138, 0.2)\'
+}, {
+  opacity: 0.5,
+  scale: 1.5,
+  fillColor: \'rgba(66, 150, 79, 0.4)\',
+  strokeColor: \'rgba(20, 99, 32, 0.2)\'
+}, {
+  opacity: 1.0,
+  scale: 1.0,
+  fillColor: \'rgba(176, 61, 35, 0.4)\',
+  strokeColor: \'rgba(145, 43, 20, 0.2)\'
+}];
+
+var radiuses = [3, 6, 9, 15, 19, 25];
+var symbolCount = symbolInfo.length * radiuses.length * 2;
+var symbols = [];
+var i, j;
+for (i = 0; i < symbolInfo.length; ++i) {
+  var info = symbolInfo[i];
+  for (j = 0; j < radiuses.length; ++j) {
+    // circle symbol
+    symbols.push(new ol.style.Circle({
+      opacity: info.opacity,
+      scale: info.scale,
+      radius: radiuses[j],
+      fill: new ol.style.Fill({
+        color: info.fillColor
+      }),
+      stroke: new ol.style.Stroke({
+        color: info.strokeColor,
+        width: 1
+      }),
+      // by passing the atlas manager to the symbol,
+      // the symbol will be added to an atlas
+      atlasManager: atlasManager
+    }));
+
+    // star symbol
+    symbols.push(new ol.style.RegularShape({
+      points: 8,
+      opacity: info.opacity,
+      scale: info.scale,
+      radius: radiuses[j],
+      radius2: radiuses[j] * 0.7,
+      angle: 1.4,
+      fill: new ol.style.Fill({
+        color: info.fillColor
+      }),
+      stroke: new ol.style.Stroke({
+        color: info.strokeColor,
+        width: 1
+      }),
+      atlasManager: atlasManager
+    }));
+  }
+}
+
+var featureCount = 50000;
+var features = new Array(featureCount);
+var feature, geometry;
+var e = 25000000;
+for (i = 0; i < featureCount; ++i) {
+  geometry = new ol.geom.Point(
+      [2 * e * Math.random() - e, 2 * e * Math.random() - e]);
+  feature = new ol.Feature(geometry);
+  feature.setStyle(
+      new ol.style.Style({
+        image: symbols[i % symbolCount]
+      })
+  );
+  features[i] = feature;
+}
+
+var source = new ol.source.Vector({
+  features: features
+});',
+  );
+  $export['openlayers_examples_source_atlas_webgl'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_icon_sprite';
+  $ol_source->name = 'Openlayers Examples Source Icon Sprite';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.InlineJS';
+  $ol_source->options = array(
+    'javascript' => 'var iconInfo = [{
+  offset: [0, 0],
+  opacity: 1.0,
+  rotateWithView: true,
+  rotation: 0.0,
+  scale: 1.0,
+  size: [55, 55]
+}, {
+  offset: [110, 86],
+  opacity: 0.75,
+  rotateWithView: false,
+  rotation: Math.PI / 2.0,
+  scale: 1.25,
+  size: [55, 55]
+}, {
+  offset: [55, 0],
+  opacity: 0.5,
+  rotateWithView: true,
+  rotation: Math.PI / 3.0,
+  scale: 1.5,
+  size: [55, 86]
+}, {
+  offset: [212, 0],
+  opacity: 1.0,
+  rotateWithView: true,
+  rotation: 0.0,
+  scale: 1.0,
+  size: [44, 44]
+}];
+
+var i;
+
+var iconCount = iconInfo.length;
+var icons = new Array(iconCount);
+for (i = 0; i < iconCount; ++i) {
+  var info = iconInfo[i];
+  icons[i] = new ol.style.Icon({
+    offset: info.offset,
+    opacity: info.opacity,
+    rotateWithView: info.rotateWithView,
+    rotation: info.rotation,
+    scale: info.scale,
+    size: info.size,
+    src: \'/sites/all/modules/openlayers/modules/openlayers_examples/assets/Butterfly.png\'
+  });
+}
+
+var featureCount = 50000;
+var features = new Array(featureCount);
+var feature, geometry;
+var e = 25000000;
+for (i = 0; i < featureCount; ++i) {
+  geometry = new ol.geom.Point(
+      [2 * e * Math.random() - e, 2 * e * Math.random() - e]);
+  feature = new ol.Feature(geometry);
+  feature.setStyle(
+      new ol.style.Style({
+        image: icons[i % (iconCount - 1)]
+      })
+  );
+  features[i] = feature;
+}
+
+var source = new ol.source.Vector({
+  features: features
+});
+
+var overlayFeatures = [];
+for (i = 0; i < featureCount; i += 30) {
+  var clone = features[i].clone();
+  clone.setStyle(null);
+  overlayFeatures.push(clone);
+}
+
+var featureOverlay = new ol.FeatureOverlay({
+  map: data.map,
+  style: new ol.style.Style({
+    image: icons[iconCount - 1]
+  }),
+  features: overlayFeatures
+});',
+  );
+  $export['openlayers_examples_source_icon_sprite'] = $ol_source;
+
   return $export;
 }

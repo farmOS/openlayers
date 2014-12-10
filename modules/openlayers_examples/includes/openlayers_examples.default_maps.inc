@@ -921,5 +921,89 @@ function openlayers_examples_default_maps() {
   );
   $export['openlayers_examples_map_googlemaps'] = $ol_map;
 
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_atlas_webgl_map';
+  $ol_map->name = 'OpenLayers Examples Atlas WebGL Map';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->options = array(
+    'renderer' => 'webgl',
+    'width' => 'auto',
+    'height' => '300px',
+    'provideBlock' => 0,
+    'provideBlockLayerSwitcher' => 0,
+    'contextualLinks' => 0,
+    'provideIframe' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => '0',
+        'lon' => '0',
+      ),
+      'rotation' => '0',
+      'zoom' => '2',
+      'minZoom' => '0',
+      'maxZoom' => '0',
+    ),
+    'layers' => array(
+      0 => 'openlayers_examples_layer_atlas_webgl',
+    ),
+    'sources' => array(),
+    'controls' => array(
+      0 => 'openlayers_control_fullscreen',
+      1 => 'openlayers_control_rotate',
+      2 => 'openlayers_control_zoom',
+    ),
+    'interactions' => array(
+      0 => 'openlayers_interaction_doubleclickzoom',
+      1 => 'openlayers_interaction_dragpan',
+      2 => 'openlayers_interaction_dragrotateandzoom',
+      3 => 'openlayers_interaction_mousewheelzoom',
+    ),
+    'components' => array(),
+  );
+  $export['openlayers_examples_map_atlas_webgl'] = $ol_map;
+
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_icon_sprite';
+  $ol_map->name = 'OpenLayers Examples Map Icon Sprite';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->options = array(
+    'renderer' => 'webgl',
+    'width' => 'auto',
+    'height' => '300px',
+    'provideBlock' => 0,
+    'provideBlockLayerSwitcher' => 0,
+    'contextualLinks' => 0,
+    'provideIframe' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => '0',
+        'lon' => '0',
+      ),
+      'rotation' => '0',
+      'zoom' => '2',
+      'minZoom' => '0',
+      'maxZoom' => '0',
+    ),
+    'layers' => array(
+      0 => 'openlayers_examples_layer_icon_sprite',
+    ),
+    'sources' => array(),
+    'controls' => array(),
+    'interactions' => array(
+      0 => 'openlayers_interaction_doubleclickzoom',
+      1 => 'openlayers_interaction_dragpan',
+      2 => 'openlayers_interaction_dragrotateandzoom',
+      3 => 'openlayers_interaction_mousewheelzoom',
+    ),
+    'components' => array(),
+  );
+  $export['openlayers_examples_map_icon_sprite'] = $ol_map;
+
   return $export;
 }
