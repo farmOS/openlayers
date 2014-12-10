@@ -51,6 +51,18 @@ class GeoJSON extends Source {
         ),
       ),
     );
+    $form['options']['reloadOnZoomChange'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Reload features on zoom change.'),
+      '#description' => t('Reload the features if the zoom level of the map changes. Handy if you use a zoom aware backend clustering.'),
+      '#default_value' => $this->getOption('reloadOnZoomChange'),
+    );
+    $form['options']['reloadOnExtentChange'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Reload features on extent change'),
+      '#description' => t('Reload the features if the visible part of the map changes (e.g. by dragging the map).'),
+      '#default_value' => $this->getOption('reloadOnExtentChange'),
+    );
 
 //    //see http://dev.openlayers.org/docs/files/OpenLayers/Strategy/BBOX-js.html#OpenLayers.Strategy.BBOX.resFactor
 //    $form['options']['resFactor'] = array(

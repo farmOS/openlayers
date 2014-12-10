@@ -45,6 +45,18 @@ Drupal.openlayers.pluginManager.register({
           });
         };
         var vectorSource = new ol.source.ServerVector(data.opt);
+
+        if (goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
+          data.map.getView().on('change:center', function() {
+            vectorSource.clear();
+          });
+        }
+        if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange) {
+          data.map.getView().on('change:resolution', function() {
+            vectorSource.clear();
+          });
+        }
+
         return vectorSource;
       }
       //else {
