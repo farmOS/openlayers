@@ -463,7 +463,7 @@ var featureOverlay = new ol.FeatureOverlay({
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.source.internal.XYZ';
   $ol_source->options = array(
-    'url' => '//{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png',
+    'url' => '//www.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png',
   );
   $export['openlayers_examples_source_openweather_precipitation'] = $ol_source;
 
@@ -475,7 +475,7 @@ var featureOverlay = new ol.FeatureOverlay({
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.source.internal.XYZ';
   $ol_source->options = array(
-    'url' => '//{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
+    'url' => '//www.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
   );
   $export['openlayers_examples_source_openweather_clouds'] = $ol_source;
 
