@@ -31,32 +31,30 @@ Drupal.openlayers.pluginManager.register({
     gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv[0]);
 
     return new ol.source.Vector();
-  }
-});
+  },
 
-/**
- * Helper to access the gmap instance in a ol.Map.
- */
-Drupal.openlayers.openlayers_source_internal_googlemaps_get_map = function(map){
-  var olMapDiv = jQuery(map.getViewport()).parent();
-  return jQuery('#gmap-' + olMapDiv.attr('id')).data('gmap');
-};
+  /**
+   * Helper to access the gmap instance in a ol.Map.
+   */
+  getMap: function(map){
+    var olMapDiv = jQuery(map.getViewport()).parent();
+    return jQuery('#gmap-' + olMapDiv.attr('id')).data('gmap');
+  },
 
-/**
- * Attaches the gmap API by loading the script.
- * Evaluates all google maps sources and uses the most complex set of settings.
- * Attention: It's not possible to have maps with different key, channel or
- * client parameters.
- */
-Drupal.behaviors.openlayers_source_internal_googlemaps = {
+  /**
+   * Attaches the gmap API by loading the script.
+   * Evaluates all google maps sources and uses the most complex set of settings.
+   * Attention: It's not possible to have maps with different key, channel or
+   * client parameters.
+   */
   scriptLoading: false,
   attach: function(context, settings) {
     if (typeof google === 'undefined') {
       // If a script is already loading bail out.
-      if (Drupal.behaviors.openlayers_source_internal_googlemaps.scriptLoading) {
+      if (Drupal.openlayers.pluginManager.getPlugin('openlayers.source.internal.googlemaps').scriptLoading) {
         return;
       }
-      Drupal.behaviors.openlayers_source_internal_googlemaps.scriptLoading = true;
+      Drupal.openlayers.pluginManager.getPlugin('openlayers.source.internal.googlemaps').scriptLoading = true;
 
       var params = {
         v: 3,
@@ -98,7 +96,8 @@ Drupal.behaviors.openlayers_source_internal_googlemaps = {
       Drupal.openlayers.openlayers_source_internal_googlemaps_initialize();
     }
   }
-};
+});
+
 
 /**
  * Callback to initialize all google maps as soon as the gmap API is available.
