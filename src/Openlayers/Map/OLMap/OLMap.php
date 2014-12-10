@@ -57,8 +57,8 @@ class OLMap extends Map {
       '#tree' => TRUE,
     );
 
-    if ($this->machine_name != Config::EDIT_VIEW_MAP) {
-      $map = openlayers_object_load('Map', Config::EDIT_VIEW_MAP);
+    if ($this->machine_name != Config::get('openlayers.edit_view_map')) {
+      $map = openlayers_object_load('Map', Config::get('openlayers.edit_view_map'));
       if ($view = $this->getOption('view')) {
         $map->setOption('view', $view);
       }
@@ -111,7 +111,10 @@ class OLMap extends Map {
   public function attached() {
     $attached = parent::attached();
     // TODO: OpenLayers settings form by default to debug mode.
-    $variant = Config::LIBRARY_VARIANT;
+    $variant = NULL;
+    if (Config::get('openlayers.debug') == TRUE) {
+      $variant = 'debug';
+    };
     $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
     return $attached;
   }

@@ -12,7 +12,6 @@
  * @see system_settings_form()
  */
 function openlayers_ui_admin_settings($form, &$form_state) {
-  ctools_include('plugins');
   ctools_include('export');
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array();
@@ -24,15 +23,15 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     $options[$data->machine_name] = $data->name;
   }
 
-  $map = 'openlayers_map_ui_default';
+  $map = \Drupal\openlayers\Config::get('openlayers.default_ui_map');
   if (isset($form_state['values']['openlayers_default_map'])) {
     $map = $form_state['values']['openlayers_default_map'];
   }
 
+  // @todo: Is this setting really needed ?
   $form['openlayers_default_map'] = array(
     '#type' => 'select',
-    '#title' => t('OpenLayers maps'),
-    '#description' => t('This form is just a test, it just shows the AJAX possibility of the module.'),
+    '#title' => t('Default UI map'),
     '#options' => $options,
     '#default_value' => $map,
     '#ajax' => array(
@@ -43,19 +42,32 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     ),
   );
 
-  $form['default_map'] = array(
+  $form['default_ui_map'] = array(
     '#prefix' => '<div id="default_map_ajax">',
     '#suffix' => '</div>',
     '#type' => 'openlayers',
     '#map' => $map,
   );
 
+  $form['debug'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Debug mode'),
+    '#description' => t('Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn\'t fully work in IE yet.'),
+    '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
+  );
+
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $form['current_path'] = array('#type' => 'hidden', '#value' => current_path());
 
-  // Make a system setting form and return.
-  return system_settings_form($form);
+  $form['buttons'] = array(
+    'submit' => array(
+      '#type' => 'submit',
+      '#value' => 'Save configuration'
+    )
+  );
+
+  return $form;
 }
 
 /**
@@ -65,5 +77,11 @@ function _ajax_reload_default_map($form, &$form_state) {
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $_SESSION['current_path'] = $form_state['input']['current_path'];
-  return $form['default_map'];
+  return $form['default_ui_map'];
+}
+
+function openlayers_ui_admin_settings_submit($form, &$form_state) {
+  $values = $form_state['values'];
+  \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
+  drupal_set_message(t('The configuration options have been saved.'));
 }

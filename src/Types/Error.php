@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+use Drupal\Core\Logger\LoggerChannelInterface;
 
 /**
  * Class openlayers_config.
@@ -22,7 +23,9 @@ class Error extends Object {
   /**
    * {@inheritdoc}
    */
-  public function __construct() {
+  public function __construct(LoggerChannelInterface $logger_channel) {
+    $this->loggerChannel = $logger_channel;
+
     foreach ($this->defaultProperties() as $property => $value) {
       $this->{$property} = $value;
     }
@@ -49,7 +52,7 @@ class Error extends Object {
       $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
     }
 
-    watchdog(\Drupal\openlayers\Config::WATCHDOG_TYPE, $this->getMessage(), array(), WATCHDOG_ERROR);
+    $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
     drupal_set_message($this->getMessage(), 'error', FALSE);
   }
 

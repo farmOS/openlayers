@@ -12,7 +12,7 @@ function openlayers_ui_menu() {
 
   // Core OpenLayers settings pages.
   $items['admin/structure/openlayers'] = array(
-    'title' => 'OpenLayers',
+    'title' => 'Openlayers',
     'description' => 'Manage maps, layers, sources, controls, styles, and interactions.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openlayers_ui_admin_settings'),
@@ -22,6 +22,7 @@ function openlayers_ui_menu() {
   );
   $items['admin/structure/openlayers/settings'] = array(
     'title' => 'Settings',
+    'access arguments' => array('administer openlayers'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => 10,
   );
@@ -32,17 +33,16 @@ function openlayers_ui_menu() {
 /**
  * Implements hook_ctools_plugin_directory().
  */
-function openlayers_ui_ctools_plugin_directory($module, $plugin) {
-  return 'src/Plugin/' . $plugin;
+function openlayers_ui_ctools_plugin_directory($owner, $plugin_type) {
+  return 'src/Plugin/' . $plugin_type;
 }
 
 /**
  * Implements hook_ctools_plugin_api().
  */
 function openlayers_ui_ctools_plugin_api($module, $api) {
-  $path = drupal_get_path('module', 'openlayers_ui') . '/includes';
   return array(
     'version' => 1,
-    'path' => $path,
+    'path' => drupal_get_path('module', 'openlayers_ui') . '/includes'
   );
 }

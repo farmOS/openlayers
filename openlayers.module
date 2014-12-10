@@ -113,7 +113,6 @@ function openlayers_object_load($object_type, $export) {
     );
     $object = \Drupal::service('openlayers.manager')->createInstance('error');
   }
-
   $object->init($exportable);
 
   if (isset($exportable['disabled']) && ($exportable['disabled'] == 1 || $exportable['disabled'] == TRUE)) {
@@ -141,24 +140,24 @@ function openlayers_libraries_info() {
         'closure-library/closure/goog/base.js' => array(
           'type' => 'file',
           'weight' => 2,
-          'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+          'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
         ),
         'build/ol-deps.js' => array(
           'type' => 'file',
           'weight' => 4,
-          'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+          'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
         ),
         'build/ol.js' => array(
           'type' => 'file',
           'weight' => 6,
-          'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+          'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
         ),
       ),
       'css' => array(
         'css/ol.css' => array(
           'type' => 'file',
           'weight' => 4,
-          'group' => \Drupal\openlayers\Config::JS_CSS_GROUP
+          'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
         )
       ),
     ),
@@ -168,29 +167,29 @@ function openlayers_libraries_info() {
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 8,
-            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
           'js/openlayers.cacheManager.js' => array(
             'type' => 'file',
             'weight' => 10,
-            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
           'js/openlayers.pluginManager.js' => array(
             'type' => 'file',
             'weight' => 12,
-            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
           'js/openlayers.behaviors.js' => array(
             'type' => 'file',
             'weight' => 14,
-            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
         ),
         'css' => array(
           'css/openlayers.css' => array(
             'type' => 'file',
             'weight' => 4,
-            'group' => \Drupal\openlayers\Config::JS_CSS_GROUP
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
         ),
       ),
@@ -202,23 +201,23 @@ function openlayers_libraries_info() {
             'closure-library/closure/goog/base.js' => array(
               'type' => 'file',
               'weight' => 2,
-              'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+              'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
             'build/ol-deps.js' => array(
               'type' => 'file',
               'weight' => 4,
-              'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+              'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
             'build/ol-debug.js' => array(
               'type' => 'file',
               'weight' => 6,
-              'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+              'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
           ),
           'css' => array(
             'css/ol.css' => array(
               'type' => 'file',
-              'group' => \Drupal\openlayers\Config::JS_CSS_GROUP
+              'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             )
           ),
         ),
@@ -228,39 +227,39 @@ function openlayers_libraries_info() {
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 8,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.cacheManager.js' => array(
                 'type' => 'file',
                 'weight' => 10,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.pluginManager.js' => array(
                 'type' => 'file',
                 'weight' => 12,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.behaviors.js' => array(
                 'type' => 'file',
                 'weight' => 14,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.console.js' => array(
                 'type' => 'file',
                 'weight' => 16,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.debug.js' => array(
                 'type' => 'file',
                 'weight' => 18,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
             ),
             'css' => array(
               'css/openlayers.css' => array(
                 'type' => 'file',
                 'weight' => 4,
-                'group' => \Drupal\openlayers\Config::JS_CSS_GROUP
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
             ),
           ),
