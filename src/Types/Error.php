@@ -20,6 +20,8 @@ class Error extends Object {
    */
   public $errorMessage;
 
+  protected $loggerChannel;
+
   /**
    * {@inheritdoc}
    */
