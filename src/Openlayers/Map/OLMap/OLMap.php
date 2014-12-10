@@ -21,6 +21,19 @@ class OLMap extends Map {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
+    $form['options']['misc'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Miscellaneous options',
+    );
+    $form['options']['misc']['renderer'] = array(
+      '#type' => 'radios',
+      '#title' => 'Renderer',
+      '#description' => 'Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.',
+      '#options' => array('canvas' => 'Canvas', 'dom' => 'DOM', 'webgl' => 'WebGL'),
+      '#default_value' => $this->getOption('renderer', 'canvas'),
+      '#parents' => array('options', 'renderer')
+    );
+
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('Size of the map'),
