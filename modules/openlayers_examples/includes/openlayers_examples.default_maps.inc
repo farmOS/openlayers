@@ -1005,5 +1005,46 @@ function openlayers_examples_default_maps() {
   );
   $export['openlayers_examples_map_icon_sprite'] = $ol_map;
 
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_openweather';
+  $ol_map->name = 'OpenLayers Examples Map OpenWeather';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->options = array(
+    'renderer' => 'canvas',
+    'width' => 'auto',
+    'height' => '300px',
+    'provideBlock' => 0,
+    'provideBlockLayerSwitcher' => 0,
+    'contextualLinks' => 0,
+    'provideIframe' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => '0',
+        'lon' => '0',
+      ),
+      'rotation' => '0',
+      'zoom' => '2',
+      'minZoom' => '0',
+      'maxZoom' => '0',
+    ),
+    'layers' => array(
+      0 => 'openlayers_examples_layer_mapquest_sat',
+      1 => 'openlayers_examples_layer_openweather_clouds',
+      2 => 'openlayers_examples_layer_openweather_precipitation',
+      3 => 'openlayers_examples_layer_openweather_pressure_cntr',
+      4 => 'openlayers_examples_layer_openweather_temp',
+      5 => 'openlayers_examples_layer_openweather_rain',
+      6 => 'openlayers_examples_layer_openweather_snow',
+      7 => 'openlayers_examples_layer_openweather_wind',
+    ),
+    'controls' => array(
+      0 => 'openlayers_examples_control_openweather_layer_switcher',
+    ),
+  );
+  $export['openlayers_examples_map_openweather'] = $ol_map;
+
   return $export;
 }

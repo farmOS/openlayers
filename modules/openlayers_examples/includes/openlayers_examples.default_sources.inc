@@ -455,5 +455,89 @@ var featureOverlay = new ol.FeatureOverlay({
   );
   $export['openlayers_examples_source_icon_sprite'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_precipitation';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Precipitation';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_precipitation'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_clouds';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Clouds';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_clouds'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_pressure_cntr';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Pressure Center';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_pressure_cntr'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_temp';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Temp';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/temp/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_temp'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_rain';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Rain';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/rain/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_rain'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_snow';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Snow';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/snow/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_snow'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openweather_wind';
+  $ol_source->name = 'OpenLayers Examples Source OpenWeather Wind';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//www.tile.openweathermap.org/map/wind/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_openweather_wind'] = $ol_source;
+
   return $export;
 }

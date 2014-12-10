@@ -58,10 +58,18 @@ class LayerSwitcher extends Control {
     $element_type = ($this->getOption('multiselect', FALSE)) ? 'checkbox' : 'radio';
 
     // Only handle layers available in the map and configured in the control.
+    // @TODO: use Form API (with form_process_* and stuff)
     foreach ($map_layers as $i => $map_layer) {
       if (isset($layers[$map_layer->machine_name])) {
+        $checked = '';
+        if ($element_type == 'checkbox') {
+          if ($map_layer->getOption('visible', 1)) {
+            $checked = 'checked ';
+          }
+        }
+
         $items[] = array(
-          'data' => '<label><input type="' . $element_type . '" name="layer" value="' . $map_layer->machine_name . '">' . $map_layer->name . '</label>',
+          'data' => '<label><input type="' . $element_type . '" name="layer" ' . $checked . 'value="' . $map_layer->machine_name . '">' . $map_layer->name . '</label>',
           'id' => $map_id . '-' . $map_layer->machine_name,
           'class' => array(drupal_html_class($map_layer->machine_name)),
         );

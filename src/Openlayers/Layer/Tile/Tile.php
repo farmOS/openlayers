@@ -20,12 +20,11 @@ class Tile extends Layer {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
-    $form['options']['url'] = array(
-      '#type' => 'textarea',
-      '#title' => t('Base URL (template)'),
-      '#default_value' => $this->getOption('url') ? implode("\n", (array) $this->getOption('url')) : '',
-      '#maxlength' => 2083,
-      '#description' => t('This is the base URL template for the XYZ layer.  It should be something similar to <em>http://example.com/tiles/1.0.0/layer_name/${z}/${x}/${y}.png</em>.'),
+    $form['options']['opacity'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Opacity'),
+      '#default_value' => $this->getOption('opacity', 1),
+      '#description' => t(''),
     );
     $form['options']['zoomOffset'] = array(
       '#type' => 'select',
