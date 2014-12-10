@@ -63,6 +63,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map = $map_arg;
     if (($map == NULL) || (!isset($options[$map]))) {
       $maps = array(array_rand($options, 1));
+    } elseif (isset($options[$map])) {
+      $maps = array($map);
     }
     if ($map == 'all') {
       $maps = array_keys($options);
