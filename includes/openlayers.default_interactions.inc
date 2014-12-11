@@ -136,7 +136,7 @@ function openlayers_default_interactions() {
   $ol_interaction->machine_name = 'openlayers_interaction_pinchzoom';
   $ol_interaction->name = 'PinchZoom';
   $ol_interaction->description = 'PinchZoom interaction description';
-  $ol_interaction->factory_service = 'openlayers.interaction.internal.Pinchzoom';
+  $ol_interaction->factory_service = 'openlayers.interaction.internal.PinchZoom';
   $ol_interaction->options = array();
   $export['openlayers_interaction_pinchzoom'] = $ol_interaction;
 

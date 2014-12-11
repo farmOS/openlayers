@@ -286,6 +286,22 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return $this->attached;
   }
 
+  public function getParents() {
+    $maps = ctools_export_crud_load_all('openlayers_maps');
+    $parents = array();
+
+    foreach($maps as $map) {
+      $map = openlayers_object_load('map', $map);
+      foreach($map->getCollection()->getFlatList() as $object) {
+        if ($object->machine_name == $this->machine_name) {
+          $parents[$map->machine_name] = $map;
+        }
+      }
+    }
+
+    return $parents;
+  }
+
   /**
    * {@inheritdoc}
    */

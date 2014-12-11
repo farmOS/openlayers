@@ -49,6 +49,7 @@ class ObjectsUI extends ctools_export_ui {
 
     $header[] = array('data' => t('Machine name'), 'class' => array('ctools-export-ui-name'));
     $header[] = array('data' => t('Service'), 'class' => array('ctools-export-ui-service'));
+    $header[] = array('data' => t('Parents'), 'class' => array('ctools-export-ui-parents'));
     $header[] = array('data' => t('Storage'), 'class' => array('ctools-export-ui-storage'));
     $header[] = array('data' => t('Operations'), 'class' => array('ctools-export-ui-operations'));
 
@@ -66,6 +67,9 @@ class ObjectsUI extends ctools_export_ui {
     // Set up sorting.
     $name = $item->{$this->plugin['export']['key']};
     $schema = ctools_export_get_schema($this->plugin['schema']);
+
+    list($module, $plugin) = explode('.', $item->factory_service);
+    $object = openlayers_object_load($plugin, $item->machine_name);
 
     // Note: $item->{$schema['export']['export type string']} should have
     // already been set up by export.inc so we can use it safely.
@@ -99,7 +103,8 @@ class ObjectsUI extends ctools_export_ui {
       $this->rows[$name]['data'][] = array('data' => check_plain($item->{$this->plugin['export']['admin_title']}), 'class' => array('ctools-export-ui-title'));
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'service' => array('ctools-export-ui-service'));
+    $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
+    $this->rows[$name]['data'][] = array('data' => check_plain(count($object->getParents())), 'class' => array('ctools-export-ui-parents'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(
