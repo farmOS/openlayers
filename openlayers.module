@@ -137,12 +137,16 @@ function openlayers_libraries_info() {
     ),
     'files' => array(
       'js' => array(
-        'closure-library/closure/goog/base.js' => array(
-          'type' => 'file',
+        'goog_closure_no_deps' => array(
+          'type' => 'inline',
+          'data' => implode("\n", array(
+            'var CLOSURE_NO_DEPS = true;',
+          )),
           'weight' => 2,
           'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
+          'preprocess' => FALSE,
         ),
-        'build/ol-deps.js' => array(
+        'closure-library/closure/goog/base.js' => array(
           'type' => 'file',
           'weight' => 4,
           'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
