@@ -186,6 +186,17 @@ function openlayers_examples_default_layers() {
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_geography_class_utfgrid';
+  $ol_layer->name = 'MapBox Geography Class UTFGrid';
+  $ol_layer->description = 'Layer MapBox Geography Class UTFGrid description';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_geography_class_utfgrid',
+  );
+  $export['openlayers_examples_layer_mapbox_geography_class_utfgrid'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy';
   $ol_layer->name = 'MapBox Natural Earth Hypso Bathy';
   $ol_layer->description = 'Layer MapBox Natural Earth Hypso Bathy description';

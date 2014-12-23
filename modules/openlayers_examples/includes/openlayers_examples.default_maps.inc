@@ -539,6 +539,7 @@ function openlayers_examples_default_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_examples_layer_mapbox_geography_class',
+      1 => 'openlayers_examples_layer_mapbox_geography_class_utfgrid',
     ),
     'controls' => array(
       0 => 'openlayers_control_rotate',
@@ -553,6 +554,9 @@ function openlayers_examples_default_maps() {
       2 => 'openlayers_interaction_dragrotate',
       3 => 'openlayers_interaction_mousewheelzoom',
     ),
+    'components' => array(
+      0 => 'openlayers_examples_component_tileutfgrid'
+    )
   );
   $export['openlayers_examples_map_mapbox_geography_class'] = $ol_map;
 
