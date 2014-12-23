@@ -155,19 +155,21 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
         '#title' => 'Embed this map in an iframe',
       );
 
-      foreach (services_endpoint_load_all() as $service) {
-        if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
+      if (module_exists('services')) {
+        foreach (services_endpoint_load_all() as $service) {
+          if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
 
-          $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
-          $height = $map->getOption('height', 'auto');
-          $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
+            $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
+            $height = $map->getOption('height', 'auto');
+            $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
 
-          $form['form'][$map->getId()]['openlayers_services'][$map->machine_name] = array(
-            '#type' => 'textarea',
-            '#description' => t('Copy paste this html code to embed this map in your content.'),
-            '#rows' => 3,
-            '#value' => $iframe,
-          );
+            $form['form'][$map->getId()]['openlayers_services'][$map->machine_name] = array(
+              '#type' => 'textarea',
+              '#description' => t('Copy paste this html code to embed this map in your content.'),
+              '#rows' => 3,
+              '#value' => $iframe,
+            );
+          }
         }
       }
     }
