@@ -180,6 +180,18 @@ function openlayers_examples_default_sources() {
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_mapbox_geography_class_utfgrid';
+  $ol_source->name = 'MapBox Geography Class UTFgrid';
+  $ol_source->description = 'Source MapBox Geography Class UTFgrid description';
+  $ol_source->factory_service = 'openlayers.source.internal.TileUTFGrid';
+  $ol_source->options = array(
+    'url' => 'http://api.tiles.mapbox.com/v3/mapbox.geography-class.json',
+  );
+  $export['openlayers_examples_source_mapbox_geography_class_utfgrid'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_mapbox_natural_earth_hypso_bathy';
   $ol_source->name = 'MapBox Natural Earth Hypso Bathy';
   $ol_source->description = 'Source MapBox Natural Hearth Hypso Bathy description';
