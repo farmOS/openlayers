@@ -47,6 +47,7 @@ function openlayers_schema() {
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
+        'default' => '',
       ),
       'name' => array(
         'description' => 'The title of the map.',
@@ -99,6 +100,7 @@ function openlayers_schema() {
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
+        'default' => '',
         'description' => 'Layer system name.',
       ),
       'name' => array(
@@ -153,6 +155,7 @@ function openlayers_schema() {
         'type' => 'varchar',
         'length' => '255',
         'not null' => TRUE,
+        'default' => '',
         'description' => 'Source system name.',
       ),
       'name' => array(
@@ -483,4 +486,49 @@ function openlayers_requirements($phase) {
   }
 
   return $requirements;
+}
+
+/**
+ * Update to the 3.1.x version.
+ */
+function openlayers_update_7350() {
+
+  // Ensure update 7201 is done.
+  if (db_table_exists('openlayers_map_presets')) {
+    // Change table name.
+    db_rename_table('openlayers_map_presets', 'openlayers_maps');
+    // Set default map variable.
+    variable_set('openlayers_default_map', variable_get('openlayers_default_preset', 'default'));
+    variable_del('openlayers_default_preset');
+  }
+
+  $schema = openlayers_schema();
+  // Create missing tables.
+  foreach ($schema as $table => $table_schema) {
+    if (!db_table_exists($table)) {
+      db_create_table($table, $table_schema);
+    }
+  }
+  // Add the machine name column - and deal with the title column.
+  foreach ($schema as $table => $table_schema) {
+    if (isset($table_schema['fields']['machine_name']) && db_field_exists($table, 'name') && !db_field_exists($table, 'machine_name')) {
+      // Add field and index.
+      db_add_field($table, 'machine_name', $table_schema['fields']['machine_name'], array('machine_name' => array('machine_name')));
+      db_query('UPDATE {' . $table . '} SET machine_name = LOWER(name);');
+      db_drop_primary_key($table);
+      db_add_primary_key($table, array('machine_name'));
+      db_drop_index($table, 'name');
+
+      // If there's a title field this is the new content for name.
+      if (db_field_exists($table, 'title')) {
+        db_query('UPDATE {' . $table . '} SET name = title;');
+        db_drop_field($table, 'title');
+      }
+    }
+    // If there's a data field but none is defined in the schema drop it.
+    // @TODO This leads to data loss! Can we do anything better?
+    if (!isset($table_schema['data']['machine_name']) && db_field_exists($table, 'data')) {
+      db_drop_field($table, 'data');
+    }
+  }
 }
