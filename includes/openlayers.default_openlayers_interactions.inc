@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_interactions().
  */
-function openlayers_default_interactions() {
+function openlayers_default_openlayers_interactions() {
   $export = array();
 
   $ol_interaction = new stdClass();

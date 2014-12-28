@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_layers().
  */
-function openlayers_examples_default_layers() {
+function openlayers_examples_default_openlayers_layers() {
   $export = array();
 
   $ol_layer = new stdClass();

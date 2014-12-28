@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_controls().
  */
-function openlayers_examples_default_controls() {
+function openlayers_examples_default_openlayers_controls() {
   $export = array();
 
   $ol_control = new stdClass();

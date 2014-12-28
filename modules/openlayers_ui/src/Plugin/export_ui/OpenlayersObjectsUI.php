@@ -7,7 +7,7 @@
 /**
  * Class openlayers_objects_ui.
  */
-class ObjectsUI extends ctools_export_ui {
+abstract class OpenlayersObjectsUI extends ctools_export_ui {
 
   /**
    * Create the filter/sort form at the top of a list of exports.

@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_maps().
  */
-function openlayers_default_maps() {
+function openlayers_default_openlayers_maps() {
   $export = array();
 
   $ol_map = new stdClass();

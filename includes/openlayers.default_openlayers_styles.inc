@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_styles().
  */
-function openlayers_default_styles() {
+function openlayers_default_openlayers_styles() {
   $export = array();
 
   $ol_style = new stdClass();

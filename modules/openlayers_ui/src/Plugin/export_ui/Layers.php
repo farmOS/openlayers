@@ -9,7 +9,7 @@ namespace Drupal\openlayers\UI;
 /**
  * Class openlayers_layers_ui.
  */
-class Layers extends \ObjectsUI {
+class Layers extends \OpenlayersObjectsUI {
 
   /**
    * {@inheritdoc}

@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_sources().
  */
-function openlayers_examples_default_sources() {
+function openlayers_examples_default_openlayers_sources() {
   $export = array();
 
   $ol_source = new stdClass();

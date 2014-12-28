@@ -10,7 +10,7 @@ namespace Drupal\openlayers\UI;
  * Class Controls.
  * @package Drupal\openlayers\UI
  */
-class Controls extends \ObjectsUI {
+class Controls extends \OpenlayersObjectsUI {
 
   /**
    * {@inheritdoc}

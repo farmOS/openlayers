@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_components().
  */
-function openlayers_default_components() {
+function openlayers_default_openlayers_components() {
   $export = array();
 
   $ol_component = new stdClass();
