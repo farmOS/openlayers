@@ -102,7 +102,7 @@ abstract class Map extends Object implements MapInterface {
    * {@inheritdoc}
    */
   public function getComponents($reset = FALSE) {
-    return array_values($this->getCollection()->getObjects('interaction'));
+    return array_values($this->getCollection()->getObjects('component'));
   }
 
   /**
