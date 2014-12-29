@@ -66,6 +66,7 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $form = array();
 
   // Get preset options, filtered to those which have the GeoField component.
+  ctools_include('export');
   $maps = ctools_export_crud_load_all('openlayers_maps');
   $map_options = array();
   foreach ($maps as $machine_name => $data) {
@@ -216,7 +217,10 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     }
   }
 
-  $element += $map->build();
+  $map_build = $map->build();
+  if ($map_build) {
+    $element += $map_build;
+  }
   // Remove the #value key to ensure it's written by the form handler.
   unset($element['geom']['#value']);
 
