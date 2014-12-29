@@ -7,7 +7,7 @@
 /**
  * The OpenLayers library URI.
  */
-define('OPENLAYERS_DOWNLOAD_URI', 'https://github.com/openlayers/ol3/releases/download/v3.0.0/v3.0.0.zip');
+define('OPENLAYERS_DOWNLOAD_URI', 'https://github.com/openlayers/ol3/releases/download/v3.1.1/v3.1.1.zip');
 
 /**
  * Implements hook_drush_command().
