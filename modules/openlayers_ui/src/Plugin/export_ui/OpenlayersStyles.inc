@@ -71,7 +71,7 @@ function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
  * Style base config form handler.
  */
 function openlayers_style_form_start($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Styles();
+  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -82,7 +82,7 @@ function openlayers_style_form_start($form, &$form_state) {
  * Style base config form validation handler.
  */
 function openlayers_style_form_start_validate($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Styles();
+  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -91,7 +91,7 @@ function openlayers_style_form_start_validate($form, &$form_state) {
  * Style base config form submit handler.
  */
 function openlayers_style_form_start_submit($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Styles();
+  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }

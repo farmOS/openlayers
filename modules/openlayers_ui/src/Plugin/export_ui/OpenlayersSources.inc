@@ -71,7 +71,7 @@ function openlayers_ui_OpenlayersSources_ctools_export_ui() {
  * Source base config form handler.
  */
 function openlayers_source_form_start($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Sources();
+  $class = new \Drupal\openlayers\UI\OpenlayersSources();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -99,7 +99,7 @@ function openlayers_source_form_start($form, &$form_state) {
  * Source base config form validation handler.
  */
 function openlayers_source_form_start_validate($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Sources();
+  $class = new \Drupal\openlayers\UI\OpenlayersSources();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -108,7 +108,7 @@ function openlayers_source_form_start_validate($form, &$form_state) {
  * Source base config form submit handler.
  */
 function openlayers_source_form_start_submit($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Sources();
+  $class = new \Drupal\openlayers\UI\OpenlayersSources();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 

@@ -91,7 +91,7 @@ function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
  * Map base config form handler.
  */
 function openlayers_map_form_start($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\Maps();
+  $class = new Drupal\openlayers\UI\OpenlayersMaps();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
   return $form;
@@ -101,7 +101,7 @@ function openlayers_map_form_start($form, &$form_state) {
  * Map base config form validation handler.
  */
 function openlayers_map_form_start_validate($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\Maps();
+  $class = new Drupal\openlayers\UI\OpenlayersMaps();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -110,7 +110,7 @@ function openlayers_map_form_start_validate($form, &$form_state) {
  * Map base config form submit handler.
  */
 function openlayers_map_form_start_submit($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\Maps();
+  $class = new Drupal\openlayers\UI\OpenlayersMaps();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }

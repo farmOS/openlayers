@@ -71,7 +71,7 @@ function openlayers_ui_OpenlayersControls_ctools_export_ui() {
  * Control base config form handler.
  */
 function openlayers_control_form_start($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\Controls();
+  $class = new Drupal\openlayers\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -99,7 +99,7 @@ function openlayers_control_form_start($form, &$form_state) {
  * Control base config form validation handler.
  */
 function openlayers_control_form_start_validate($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Controls();
+  $class = new Drupal\openlayers\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -108,7 +108,7 @@ function openlayers_control_form_start_validate($form, &$form_state) {
  * Control base config form submit handler.
  */
 function openlayers_control_form_start_submit($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\Controls();
+  $class = new Drupal\openlayers\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 
