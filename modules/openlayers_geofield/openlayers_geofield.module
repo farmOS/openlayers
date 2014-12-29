@@ -224,7 +224,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   // Remove the #value key to ensure it's written by the form handler.
   unset($element['geom']['#value']);
 
-  $element['geom']['#required'] = isset($instance['required']);
+  $element['geom']['#required'] = isset($instance['required']) ? $instance['required'] : FALSE;
   $element['input_format']['#value'] = GEOFIELD_INPUT_WKT;
   $element['#data_storage'] = (!empty($settings['data_storage'])) ? $settings['data_storage'] : 'collection';
 

@@ -141,19 +141,16 @@ Drupal.openlayers.pluginManager.register({
       // add it to the map
       map.addInteraction(draw_interaction);
 
-      // create a unique id
-      // it is later needed to delete features
-      var id = uid();
       // when a new feature has been drawn...
       draw_interaction.on('drawend', function(event) {
         // Enforce feature limit.
-        if (data.opt.featureLimit && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
+        if (data.opt.featureLimit && data.opt.featureLimit != -1 && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
           alert(Drupal.t('You can add a maximum of !limit features. Please remove one before adding a new.', {'!limit': data.opt.featureLimit}));
           vector_layer.getSource().removeFeature(event.feature);
           return;
         }
         // give the feature this id
-        event.feature.setId(id());
+        event.feature.setId(goog.getUid(event));
         // save the changed data
         saveData();
       });
@@ -213,17 +210,6 @@ Drupal.openlayers.pluginManager.register({
         select_interaction.getFeatures().clear();
       }
       jQuery('.openlayers-geofield-data', geofieldWrapper).val('');
-    }
-
-// creates unique id's
-    function uid() {
-      var id = 0;
-      return function() {
-        if (arguments[0] === 0) {
-          id = 0;
-        }
-        return id++;
-      };
     }
 
   }
