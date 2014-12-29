@@ -1,40 +1,38 @@
 <?php
 /**
  * @file
- * Class openlayers_components_ui.
+ * Class openlayers_objects_ui.
  */
-
-namespace Drupal\openlayers\UI;
 
 /**
- * Class openlayers_components_ui.
+ * Class openlayers_objects_ui.
  */
-class Maps extends \OpenlayersObjectsUI {
+abstract class OpenlayersObjects extends ctools_export_ui {
 
   /**
-   * {@inheritdoc}
+   * Create the filter/sort form at the top of a list of exports.
+   *
+   * This handles the very default conditions, and most lists are expected
+   * to override this and call through to parent::list_form() in order to
+   * get the base form and then modify it as necessary to add search
+   * gadgets for custom fields.
    */
-  public function hook_menu(&$items) {
-    parent::hook_menu($items);
-    $items['admin/structure/openlayers/maps']['type'] = MENU_LOCAL_TASK;
-    $items['admin/structure/openlayers/maps']['context'] = MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE;
-    $items['admin/structure/openlayers/maps']['weight'] = -10;
-  }
+  public function list_form(&$form, &$form_state) {
+    parent::list_form($form, $form_state);
 
-  /**
-   * {@inheritdoc}
-   */
-  public function delete_form_submit(&$form_state) {
-    parent::delete_form_submit($form_state);
+    $form['top row'] += $form['bottom row'];
 
-    if (\Drupal::service('module_handler')->moduleExists('openlayers_block')) {
-      $delta = _openlayers_block_get_block_id($form_state['item']->machine_name);
+    $form['filters'] = array(
+      '#type' => 'fieldset',
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#title' => t('Filters'),
+    );
 
-      db_delete('block')
-        ->condition('module', 'openlayers')
-        ->condition('delta', $delta)
-        ->execute();
-    }
+    $form['filters']['top row'] = $form['top row'];
+
+    unset($form['bottom row']);
+    unset($form['top row']);
   }
 
   /**
@@ -51,6 +49,7 @@ class Maps extends \OpenlayersObjectsUI {
 
     $header[] = array('data' => t('Machine name'), 'class' => array('ctools-export-ui-name'));
     $header[] = array('data' => t('Service'), 'class' => array('ctools-export-ui-service'));
+    $header[] = array('data' => t('Parents'), 'class' => array('ctools-export-ui-parents'));
     $header[] = array('data' => t('Storage'), 'class' => array('ctools-export-ui-storage'));
     $header[] = array('data' => t('Operations'), 'class' => array('ctools-export-ui-operations'));
 
@@ -105,6 +104,7 @@ class Maps extends \OpenlayersObjectsUI {
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
+    $this->rows[$name]['data'][] = array('data' => check_plain(count($object->getParents())), 'class' => array('ctools-export-ui-parents'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(
@@ -120,4 +120,46 @@ class Maps extends \OpenlayersObjectsUI {
     }
   }
 
+  /**
+   * Implements ctools_export_ui::edit_execute_form().
+   *
+   * This is hacky, but since CTools Export UI uses drupal_goto() we have to
+   * effectively change the plugin to modify the redirect path dynamically.
+   */
+  public function edit_execute_form(&$form_state) {
+    $output = parent::edit_execute_form($form_state);
+    if (!empty($form_state['executed'])) {
+      if ($form_state['clicked_button']['#name'] == 'saveandedit') {
+        // We always want to redirect back to this page when adding an item,
+        // but we want to preserve the destination so we can be redirected back
+        // to where we came from after clicking "Save".
+        $options = array();
+        if (!empty($_GET['destination'])) {
+          $options['query']['destination'] = $_GET['destination'];
+          unset($_GET['destination']);
+        }
+
+        // Sets redirect path and options.
+        $op = $form_state['op'];
+        $path = ('add' != $op) ? current_path() : 'admin/structure/openlayers/' . $this->plugin['menu']['menu item'] . '/list/' . $form_state['item']->machine_name . '/edit/start';
+        $this->plugin['redirect'][$op] = array($path, $options);
+      }
+    }
+    return $output;
+  }
+}
+
+/**
+ * Wizard wrapper to add Save & edit button.
+ */
+function openlayers_objects_ui_form_wrapper($form, $form_state) {
+  $form['buttons']['saveandedit'] = array(
+    '#name' => 'saveandedit',
+    '#type' => 'submit',
+    '#value' => t('Save & edit'),
+    '#wizard type' => 'finish',
+    '#weight' => 1,
+  );
+  $form['buttons']['cancel']['#weight'] = 20;
+  return $form;
 }

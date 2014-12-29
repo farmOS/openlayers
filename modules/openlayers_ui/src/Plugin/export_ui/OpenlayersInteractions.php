@@ -10,7 +10,7 @@ namespace Drupal\openlayers\UI;
  * Class Interactions.
  * @package Drupal\openlayers\UI
  */
-class Interactions extends \OpenlayersObjectsUI {
+class OpenlayersInteractions extends \OpenlayersObjects {
 
   /**
    * {@inheritdoc}

@@ -9,15 +9,15 @@ namespace Drupal\openlayers\UI;
 /**
  * Class openlayers_components_ui.
  */
-class Styles extends \OpenlayersObjectsUI {
+class OpenlayersComponents extends \OpenlayersObjects {
 
   /**
    * {@inheritdoc}
    */
   public function hook_menu(&$items) {
     parent::hook_menu($items);
-    $items['admin/structure/openlayers/styles']['type'] = MENU_LOCAL_TASK;
-    $items['admin/structure/openlayers/styles']['weight'] = -6;
+    $items['admin/structure/openlayers/components']['type'] = MENU_LOCAL_TASK;
+    $items['admin/structure/openlayers/components']['weight'] = 3;
   }
 
 }

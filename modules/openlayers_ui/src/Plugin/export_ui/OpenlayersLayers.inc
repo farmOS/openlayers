@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_Layers_ctools_export_ui() {
+function openlayers_ui_OpenlayersLayers_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_layers',
     'access' => 'administer openlayers',
@@ -19,8 +19,8 @@ function openlayers_ui_Layers_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\UI\\Layers',
-      'file' => 'Layers.php',
+      'class' => '\\Drupal\\openlayers\\UI\\OpenlayersLayers',
+      'file' => 'OpenlayersLayers.php',
     ),
 
     'use wizard' => TRUE,

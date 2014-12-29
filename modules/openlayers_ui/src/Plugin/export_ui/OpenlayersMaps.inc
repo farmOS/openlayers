@@ -7,7 +7,7 @@
 /**
  * CTools Export UI plugin definition.
  */
-function openlayers_ui_Maps_ctools_export_ui() {
+function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_maps',
     'access' => 'administer openlayers',
@@ -19,8 +19,8 @@ function openlayers_ui_Maps_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\UI\\Maps',
-      'file' => 'Maps.php',
+      'class' => '\\Drupal\\openlayers\\UI\\OpenlayersMaps',
+      'file' => 'OpenlayersMaps.php',
     ),
 
     'use wizard' => TRUE,
