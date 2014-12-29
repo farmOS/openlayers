@@ -86,7 +86,7 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $form['openlayers_map'] = array(
     '#type' => 'select',
     '#title' => t('OpenLayers Map'),
-    '#default_value' => isset($settings['openlayers_map']) ? $settings['openlayers_map'] : 'geofield_widget_map',
+    '#default_value' => isset($settings['openlayers_map']) ? $settings['openlayers_map'] : 'openlayers_geofield_map_geofield',
     '#options' => $map_options,
     '#description' => t('Select which OpenLayers map you would like to use. Only maps which have the GeoField behavior may be selected. If your preferred map is not here, add the GeoField behavior to it first. The "Draw Features" bahavior is incompatible - presets with this behavior are not shown.'),
   );
@@ -168,7 +168,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   $wrapper_id = drupal_html_id($id_prefix . '-use-geocoder-wrapper');
 
   $settings_defaults = array(
-    'openlayers_map' => 'geofield_widget_map',
+    'openlayers_map' => 'openlayers_geofield_map_geofield',
     'data_storage' => 'single',
     'feature_types' => array(
       'point' => 'point',
@@ -179,7 +179,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   );
   $settings = array_merge($settings_defaults, $widget['settings']);
 
-  $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'geofield_widget_map';
+  $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield';
 
   /** @var \Drupal\openlayers\Map\OLMap $map */
   $map = openlayers_object_load('Map', $openlayers_map_id);
