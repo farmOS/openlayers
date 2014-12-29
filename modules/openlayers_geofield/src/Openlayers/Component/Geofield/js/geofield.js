@@ -2,10 +2,11 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.component.internal.geofield',
   init: function(data) {
     var map = data.map;
+    var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
-// create a vector layer used for editing
+    // create a vector layer used for editing.
     var vector_layer = new ol.layer.Vector({
-      name: 'my_vectorlayer',
+      name: 'drawing_vectorlayer',
       source: new ol.source.Vector(),
       style: new ol.style.Style({
         fill: new ol.style.Fill({
@@ -25,12 +26,24 @@ Drupal.openlayers.pluginManager.register({
     });
     map.addLayer(vector_layer);
 
+    // Add preset data if available.
+    if (goog.isDef(data.opt) && goog.isDef(data.opt.initialData) && data.opt.initialData) {
+      try {
+        var format = new ol.format[data.opt.initialDataType]();
+        var feature = format.readFeature(jQuery('.openlayers-geofield-data', geofieldWrapper).val());
+        feature.getGeometry().transform(data.opt.dataProjection, data.map.getView().getProjection());
+        vector_layer.getSource().addFeatures([feature]);
+      }
+      catch (e) {
+      }
+    }
+
 // make interactions global so they can later be removed
     var select_interaction,
       draw_interaction,
       modify_interaction;
 
-    var action_type = jQuery('#actionFeature');
+    var action_type = jQuery('.action-feature', geofieldWrapper);
     action_type.change(function(e) {
       if (this.value === 'draw') {
         addDrawInteraction();
@@ -40,14 +53,14 @@ Drupal.openlayers.pluginManager.register({
     });
 
     // get geometry type
-    var geom_type = jQuery('#typeOfFeature');
+    var geom_type = jQuery('.type-of-feature', geofieldWrapper);
     geom_type.change(function(e) {
       map.removeInteraction(draw_interaction);
       addDrawInteraction();
     });
 
     // get data type to save in
-    var data_type = jQuery('#dataType');
+    var data_type = jQuery('.data-type', geofieldWrapper);
     data_type.change(function(e) {
       clearMap();
       map.removeInteraction(draw_interaction);
@@ -63,7 +76,7 @@ Drupal.openlayers.pluginManager.register({
       select_interaction = new ol.interaction.Select({
         // make sure only the desired layer can be selected
         layers: function(vector_layer) {
-          return vector_layer.get('name') === 'my_vectorlayer';
+          return vector_layer.get('name') === 'drawing_vectorlayer';
         }
       });
       map.addInteraction(select_interaction);
@@ -79,17 +92,17 @@ Drupal.openlayers.pluginManager.register({
         // listen to pressing of delete key, then delete selected features
         jQuery(document).on('keyup', function (event) {
           if (event.keyCode == 46) {
-            // remove all selected features from select_interaction and my_vectorlayer
+            // remove all selected features from select_interaction and drawing_vectorlayer
             selected_features.forEach(function (selected_feature) {
               var selected_feature_id = selected_feature.getId();
               // remove from select_interaction
               selected_features.remove(selected_feature);
-              // features aus vectorlayer entfernen
+              // remove features from vectorlayer
               var vectorlayer_features = vector_layer.getSource().getFeatures();
               vectorlayer_features.forEach(function (source_feature) {
                 var source_feature_id = source_feature.getId();
                 if (source_feature_id === selected_feature_id) {
-                  // remove from my_vectorlayer
+                  // remove from drawing_vectorlayer
                   vector_layer.getSource().removeFeature(source_feature);
                   // save the changed data
                   saveData();
@@ -133,6 +146,12 @@ Drupal.openlayers.pluginManager.register({
       var id = uid();
       // when a new feature has been drawn...
       draw_interaction.on('drawend', function(event) {
+        // Enforce feature limit.
+        if (data.opt.featureLimit && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
+          alert(Drupal.t('You can add a maximum of !limit features. Please remove one before adding a new.', {'!limit': data.opt.featureLimit}));
+          vector_layer.getSource().removeFeature(event.feature);
+          return;
+        }
         // give the feature this id
         event.feature.setId(id());
         // save the changed data
@@ -155,30 +174,36 @@ Drupal.openlayers.pluginManager.register({
         datas;
       try {
         // convert the data of the vector_layer into the chosen format
-        datas = format.writeFeatures(vector_layer.getSource().getFeatures());
+        datas = format.writeFeatures(vector_layer.getSource().getFeatures(), {
+          dataProjection: data.opt.dataProjection,
+          featureProjection: data.map.getView().getProjection()
+        });
+
       } catch (e) {
         // at time of creation there is an error in the GPX format (18.7.2014)
-        jQuery('#data').val(e.name + ": " + e.message);
+        jQuery('.openlayers-geofield-data', geofieldWrapper).val(e.name + ": " + e.message);
         return;
       }
-
-      if (typeFormat === 'GeoJSON') {
-        // format is JSON
-        jQuery('#data').val(JSON.stringify(datas, null, 4));
-      }
-      if (typeFormat === 'GPX' || typeFormat === 'KML') {
-        // format is XML (GPX or KML)
-        var serializer = new XMLSerializer();
-        jQuery('#data').val(serializer.serializeToString(datas));
-      }
-      if (typeFormat === 'WKT') {
-        jQuery('#data').val(datas);
-      }
+      jQuery('.openlayers-geofield-data').val(datas);
+      // @TODO Doesn't look like the code below is needed anymore.
+      //if (typeFormat === 'GeoJSON') {
+      //  // format is JSON
+      //  jQuery('.openlayers-geofield-data', geofieldWrapper).val(JSON.stringify(datas, null, 4));
+      //}
+      //if (typeFormat === 'GPX' || typeFormat === 'KML') {
+      //  // format is XML (GPX or KML)
+      //  var serializer = new XMLSerializer();
+      //  jQuery('.openlayers-geofield-data', geofieldWrapper).val(serializer.serializeToString(datas));
+      //}
+      //if (typeFormat === 'WKT') {
+      //  jQuery('.openlayers-geofield-data').val(datas);
+      //}
     }
 
 // clear map when user clicks on 'Delete all features'
-    jQuery("#clearmap").click(function() {
+    jQuery('.clearmap', geofieldWrapper).click(function(e) {
       clearMap();
+      e.preventDefault();
     });
 
 // clears the map and the output of the data
@@ -187,7 +212,7 @@ Drupal.openlayers.pluginManager.register({
       if (select_interaction) {
         select_interaction.getFeatures().clear();
       }
-      jQuery('#data').val('');
+      jQuery('.openlayers-geofield-data', geofieldWrapper).val('');
     }
 
 // creates unique id's

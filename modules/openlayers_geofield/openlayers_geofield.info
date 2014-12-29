@@ -1,0 +1,9 @@
+name = OpenLayers Geofield
+description = OpenLayers Geofield integration
+core = 7.x
+package = "OpenLayers"
+
+dependencies[] = openlayers
+dependencies[] = geofield
+
+registry_autoload[] = PSR-4

@@ -13,16 +13,6 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component = new stdClass();
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
-  $ol_component->machine_name = 'openlayers_examples_component_geofield';
-  $ol_component->name = 'OpenLayers Example geofield';
-  $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.component.internal.Geofield';
-  $ol_component->options = '';
-  $export['openlayers_examples_component_geofield'] = $ol_component;
-
-  $ol_component = new stdClass();
-  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
-  $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_ajax_values';
   $ol_component->name = 'openlayers_examples_component_ajax_values';
   $ol_component->description = '';
