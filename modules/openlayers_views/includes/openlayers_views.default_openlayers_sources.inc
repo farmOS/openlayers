@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_sources_alter().
  */
-function openlayers_views_default_sources_alter(&$sources) {
+function openlayers_views_default_openlayers_sources_alter(&$sources) {
   $views = openalyers_views_get_views('openlayers_source_vector');
   foreach ($views as $view_settings) {
     list($view_name, $display) = $view_settings;

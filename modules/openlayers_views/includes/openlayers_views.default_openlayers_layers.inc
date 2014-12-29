@@ -7,7 +7,7 @@
 /**
  * Implements hook_default_layers_alter().
  */
-function openlayers_views_default_layers_alter(&$layers) {
+function openlayers_views_default_openlayers_layers_alter(&$layers) {
   $views = openalyers_views_get_views('openlayers_map_views');
   foreach ($views as $view_settings) {
     list($view_name, $display) = $view_settings;

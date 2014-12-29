@@ -30,7 +30,7 @@ function openlayers_default_openlayers_sources() {
  *
  * @todo: Move this to the views_geojson module.
  */
-function views_geojson_default_sources() {
+function views_geojson_default_openlayers_sources() {
   $sources = array();
   foreach (views_get_all_views() as $view) {
     foreach ($view->display as $display => $data) {
