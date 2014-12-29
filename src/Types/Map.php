@@ -150,7 +150,7 @@ abstract class Map extends Object implements MapInterface {
     $styles = array(
       'width' => $map->getOption('width'),
       'height' => $map->getOption('height'),
-      'overflow' => 'hidden'
+      'overflow' => 'hidden',
     );
 
     $css_styles = '';
