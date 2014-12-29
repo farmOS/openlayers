@@ -161,7 +161,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
             $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
             $height = $map->getOption('height', 'auto');
-            $iframe = "<iframe src='" . url('map/openlayers/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
+            $iframe = "<iframe src='" . url('openlayers/openlayers_map/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
 
             $form['form'][$map->getId()]['openlayers_services'][$map->machine_name] = array(
               '#type' => 'textarea',

@@ -15,7 +15,7 @@ function openlayers_services_default_services_endpoint() {
   $endpoint->api_version = 3;
   $endpoint->name = 'openlayers_services_map';
   $endpoint->server = 'rest_server';
-  $endpoint->path = 'map';
+  $endpoint->path = 'openlayers';
   $endpoint->authentication = array();
   $endpoint->server_settings = array(
     'formatters' => array(
@@ -37,7 +37,7 @@ function openlayers_services_default_services_endpoint() {
     ),
   );
   $endpoint->resources = array(
-    'openlayers' => array(
+    'openlayers_map' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -46,7 +46,7 @@ function openlayers_services_default_services_endpoint() {
     ),
   );
   $endpoint->debug = 0;
-  $export['map'] = $endpoint;
+  $export['openlayers_map'] = $endpoint;
 
   return $export;
 }

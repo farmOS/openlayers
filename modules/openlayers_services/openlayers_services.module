@@ -19,7 +19,7 @@ function openlayers_services_ctools_plugin_api($owner, $api) {
  */
 function openlayers_services_services_resources() {
   return array(
-    'openlayers' => array(
+    'openlayers_map' => array(
       'retrieve' => array(
         'help' => 'Retrieves an OpenLayers map',
         'file' => array(
