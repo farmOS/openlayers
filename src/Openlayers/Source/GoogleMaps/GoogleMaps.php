@@ -7,7 +7,6 @@
  */
 
 namespace Drupal\openlayers\Source;
-use Drupal\openlayers\ObjectInterface;
 use Drupal\openlayers\Types\Source;
 
 $plugin = array(
