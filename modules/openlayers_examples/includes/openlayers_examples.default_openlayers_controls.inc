@@ -20,8 +20,8 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(
-      'openlayers_examples_layer_europa' => 'openlayers_examples_layer_europa',
-      'openlayers_examples_layer_openstreetmap' => 'openlayers_examples_layer_openstreetmap',
+      'openlayers_examples_layer_openstreetmap_europa' => 'openlayers_examples_layer_openstreetmap_europa',
+      'openlayers_examples_layer_openstreetmap_mapnik' => 'openlayers_examples_layer_openstreetmap_mapnik',
     ),
     'multiselect' => 0,
   );
@@ -52,6 +52,58 @@ function openlayers_examples_default_openlayers_controls() {
     'multiselect' => 1,
   );
   $export['openlayers_examples_control_openweather_layer_switcher'] = $ol_control;
+
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_examples_esri_layer_switcher';
+  $ol_control->name = 'ESRI layer switcher';
+  $ol_control->description = '';
+  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->options = array(
+    'label' => 'Layers',
+    'layers' => array(
+      'openlayers_examples_layer_esri_delorme' => 'openlayers_examples_layer_esri_delorme',
+      'openlayers_examples_layer_esri_natgeoworldmap' => 'openlayers_examples_layer_esri_natgeoworldmap',
+      'openlayers_examples_layer_esri_oceanbasemap' => 'openlayers_examples_layer_esri_oceanbasemap',
+      'openlayers_examples_layer_esri_worldimagery' => 'openlayers_examples_layer_esri_worldimagery',
+      'openlayers_examples_layer_esri_worldshadedrelief' => 'openlayers_examples_layer_esri_worldshadedrelief',
+      'openlayers_examples_layer_esri_worldstreetmap' => 'openlayers_examples_layer_esri_worldstreetmap',
+      'openlayers_examples_layer_esri_worldterrainbase' => 'openlayers_examples_layer_esri_worldterrainbase',
+      'openlayers_examples_layer_esri_worldtopomap' => 'openlayers_examples_layer_esri_worldtopomap',
+    ),
+    'multiselect' => 0,
+  );
+  $export['openlayers_examples_esri_layer_switcher'] = $ol_control;
+
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_examples_osm_layer_switcher';
+  $ol_control->name = 'OSM layer switcher';
+  $ol_control->description = '';
+  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->options = array(
+    'label' => 'Layers',
+    'layers' => array(
+      'openlayers_examples_layer_openstreetmap_europa' => 'openlayers_examples_layer_openstreetmap_europa',
+      'openlayers_examples_layer_opencyclemap' => 'openlayers_examples_layer_opencyclemap',
+      'openlayers_examples_layer_opencyclemap_landscape' => 'openlayers_examples_layer_opencyclemap_landscape',
+      'openlayers_examples_layer_opencyclemap_outdoors' => 'openlayers_examples_layer_opencyclemap_outdoors',
+      'openlayers_examples_layer_opencyclemap_thunderforest' => 'openlayers_examples_layer_opencyclemap_thunderforest',
+      'openlayers_examples_layer_opencyclemap_transport' => 'openlayers_examples_layer_opencyclemap_transport',
+      'openlayers_examples_layer_openmapsurfer_adminb' => 'openlayers_examples_layer_openmapsurfer_adminb',
+      'openlayers_examples_layer_openmapsurfer_roads' => 'openlayers_examples_layer_openmapsurfer_roads',
+      'openlayers_examples_layer_openmapsurfer_roadsg' => 'openlayers_examples_layer_openmapsurfer_roadsg',
+      'openlayers_examples_layer_openstreetmap_bw' => 'openlayers_examples_layer_openstreetmap_bw',
+      'openlayers_examples_layer_openstreetmap_de' => 'openlayers_examples_layer_openstreetmap_de',
+      'openlayers_examples_layer_openstreetmap_hot' => 'openlayers_examples_layer_openstreetmap_hot',
+      'openlayers_examples_layer_openstreetmap_mapnik' => 'openlayers_examples_layer_openstreetmap_mapnik',
+      'openlayers_layer_tile_mapquest_osm' => 'openlayers_layer_tile_mapquest_osm',
+    ),
+    'multiselect' => 0,
+  );
+  $export['openlayers_examples_osm_layer_switcher'] = $ol_control;
 
   return $export;
 }

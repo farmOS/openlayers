@@ -39,14 +39,14 @@ function openlayers_examples_default_openlayers_layers() {
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_europa';
+  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap_europa';
   $ol_layer->name = 'EC Europa Openstreetmap';
   $ol_layer->description = 'Layer Europa OpenStreetMap';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_europa',
+    'source' => 'openlayers_examples_source_openstreetmap_europa',
   );
-  $export['openlayers_examples_layer_europa'] = $ol_layer;
+  $export['openlayers_examples_layer_openstreetmap_europa'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
@@ -220,14 +220,50 @@ function openlayers_examples_default_openlayers_layers() {
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
   $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap';
+  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap_mapnik';
   $ol_layer->name = 'OpenStreetMap';
   $ol_layer->description = '';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_openstreetmap',
+    'source' => 'openlayers_examples_source_openstreetmap_mapnik',
   );
-  $export['openlayers_examples_layer_openstreetmap'] = $ol_layer;
+  $export['openlayers_examples_layer_openstreetmap_mapnik'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap_bw';
+  $ol_layer->name = 'OpenStreetMap black and white';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openstreetmap_bw',
+  );
+  $export['openlayers_examples_layer_openstreetmap_bw'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap_de';
+  $ol_layer->name = 'OpenStreetMap DE';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openstreetmap_de',
+  );
+  $export['openlayers_examples_layer_openstreetmap_de'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openstreetmap_hot';
+  $ol_layer->name = 'OpenStreetMap Hot';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openstreetmap_hot',
+  );
+  $export['openlayers_examples_layer_openstreetmap_hot'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
@@ -240,6 +276,90 @@ function openlayers_examples_default_openlayers_layers() {
     'source' => 'openlayers_examples_source_opencyclemap',
   );
   $export['openlayers_examples_layer_opencyclemap'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_opencyclemap_transport';
+  $ol_layer->name = 'OpenCycleMap Transport';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_opencyclemap_transport',
+  );
+  $export['openlayers_examples_layer_opencyclemap_transport'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_opencyclemap_thunderforest';
+  $ol_layer->name = 'OpenCycleMap Thunderforest';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_opencyclemap_thunderforest',
+  );
+  $export['openlayers_examples_layer_opencyclemap_thunderforest'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_opencyclemap_landscape';
+  $ol_layer->name = 'OpenCycleMap Landscape';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_opencyclemap_landscape',
+  );
+  $export['openlayers_examples_layer_opencyclemap_landscape'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_opencyclemap_outdoors';
+  $ol_layer->name = 'OpenCycleMap Outdoors';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_opencyclemap_outdoors',
+  );
+  $export['openlayers_examples_layer_opencyclemap_outdoors'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openmapsurfer_roads';
+  $ol_layer->name = 'OpenMapSurfer Roads';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openmapsurfer_roads',
+  );
+  $export['openlayers_examples_layer_openmapsurfer_roads'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openmapsurfer_roadsg';
+  $ol_layer->name = 'OpenMapSurfer Roads grayscale';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openmapsurfer_roadsg',
+  );
+  $export['openlayers_examples_layer_openmapsurfer_roadsg'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_openmapsurfer_adminb';
+  $ol_layer->name = 'OpenMapSurfer admin borders';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_openmapsurfer_adminb',
+  );
+  $export['openlayers_examples_layer_openmapsurfer_adminb'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
@@ -292,14 +412,99 @@ function openlayers_examples_default_openlayers_layers() {
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
   $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_esri';
-  $ol_layer->name = 'ESRI';
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_worldtopomap';
+  $ol_layer->name = 'ESRI World Topo Map';
   $ol_layer->description = '';
   $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
   $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_esri',
+    'source' => 'openlayers_examples_source_esri_worldtopomap',
   );
-  $export['openlayers_examples_layer_esri'] = $ol_layer;
+  $export['openlayers_examples_layer_esri_worldtopomap'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_worldstreetmap';
+  $ol_layer->name = 'ESRI World Street Map';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_worldstreetmap',
+  );
+  $export['openlayers_examples_layer_esri_worldstreetmap'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_delorme';
+  $ol_layer->name = 'ESRI Delorme';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_delorme',
+  );
+  $export['openlayers_examples_layer_esri_delorme'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_worldimagery';
+  $ol_layer->name = 'ESRI World Imagery';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_worldimagery',
+  );
+  $export['openlayers_examples_layer_esri_worldimagery'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_worldterrainbase';
+  $ol_layer->name = 'ESRI World Terrain Base';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_worldterrainbase',
+  );
+  $export['openlayers_examples_layer_esri_worldterrainbase'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_worldshadedrelief';
+  $ol_layer->name = 'ESRI World Shaded Relief';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_worldshadedrelief',
+  );
+  $export['openlayers_examples_layer_esri_worldshadedrelief'] = $ol_layer;
+
+  //
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_oceanbasemap';
+  $ol_layer->name = 'ESRI Ocean Base Map';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_oceanbasemap',
+  );
+  $export['openlayers_examples_layer_esri_oceanbasemap'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_esri_natgeoworldmap';
+  $ol_layer->name = 'ESRI National Geographic World Map';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_esri_natgeoworldmap',
+  );
+  $export['openlayers_examples_layer_esri_natgeoworldmap'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */

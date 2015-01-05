@@ -41,14 +41,14 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_europa';
-  $ol_source->name = 'EC Europa Webtools';
+  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap_europa';
+  $ol_source->name = 'EC OpenStreetMap Europa Webtools';
   $ol_source->description = 'Source from European Commission webtools based on OSM, with some modifications.';
   $ol_source->factory_service = 'openlayers.source.internal.XYZ';
   $ol_source->options = array(
     'url' => 'http://webtools.ec.europa.eu/road-maps/tiles/{z}/{x}/{y}.png',
   );
-  $export['openlayers_examples_source_europa'] = $ol_source;
+  $export['openlayers_examples_source_openstreetmap_europa'] = $ol_source;
 
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
@@ -112,15 +112,6 @@ function openlayers_examples_default_openlayers_sources() {
   $export['openlayers_examples_source_cluster'] = $ol_source;
 
   $ol_source = new stdClass();
-  $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap';
-  $ol_source->name = 'OpenStreetMap';
-  $ol_source->description = 'Source OpenStreetMap description';
-  $ol_source->factory_service = 'openlayers.source.internal.OSM';
-  $ol_source->options = array();
-  $export['openlayers_examples_source_openstreetmap'] = $ol_source;
-
-  $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_opencyclemap';
@@ -128,9 +119,140 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'Source OpenCycleMap description';
   $ol_source->factory_service = 'openlayers.source.internal.OSM';
   $ol_source->options = array(
-    'url' => 'http://{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
+    'url' => '//{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
   );
   $export['openlayers_examples_source_opencyclemap'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap_mapnik';
+  $ol_source->name = 'OpenStreetMap Mapnik';
+  $ol_source->description = 'OpenStreetMap Mapnik source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openstreetmap_mapnik'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap_bw';
+  $ol_source->name = 'OpenStreetMap black and white';
+  $ol_source->description = 'OpenStreetMap black and white source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openstreetmap_bw'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap_de';
+  $ol_source->name = 'OpenStreetMap DE';
+  $ol_source->description = 'Source OpenStreetMap DE description';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openstreetmap_de'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openstreetmap_hot';
+  $ol_source->name = 'OpenStreetMap Hot';
+  $ol_source->description = 'OpenStreetMap Hot source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>'
+  );
+  $export['openlayers_examples_source_openstreetmap_hot'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_opencyclemap_thunderforest';
+  $ol_source->name = 'OpenCycleMap Thunderforest';
+  $ol_source->description = 'OpenCycleMap Thunderforest source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_opencyclemap_thunderforest'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_opencyclemap_transport';
+  $ol_source->name = 'OpenCycleMap Transport';
+  $ol_source->description = 'OpenCycleMap Transport source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_opencyclemap_transport'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_opencyclemap_landscape';
+  $ol_source->name = 'OpenCycleMap Landscape';
+  $ol_source->description = 'OpenCycleMap Landscape source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_opencyclemap_landscape'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_opencyclemap_outdoors';
+  $ol_source->name = 'OpenCycleMap Outdoors';
+  $ol_source->description = 'OpenCycleMap Outdoors source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png',
+    'attributions' => '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_opencyclemap_outdoors'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openmapsurfer_roads';
+  $ol_source->name = 'OpenMapSurfer Roads';
+  $ol_source->description = 'OpenMapSurfer Roads source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
+    'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openmapsurfer_roads'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openmapsurfer_roadsg';
+  $ol_source->name = 'OpenMapSurfer Roads grayscale';
+  $ol_source->description = 'OpenMapSurfer Roads grayscale source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}',
+    'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openmapsurfer_roadsg'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_openmapsurfer_adminb';
+  $ol_source->name = 'OpenMapSurfer admin borders';
+  $ol_source->description = 'OpenMapSurfer admin borders source';
+  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->options = array(
+    'url' => '//openmapsurfer.uni-hd.de/tiles/adminb/x={x}&y={y}&z={z}',
+    'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  );
+  $export['openlayers_examples_source_openmapsurfer_adminb'] = $ol_source;
 
   $ol_source = new stdClass();
   $ol_source->api_version = 1;
@@ -264,14 +386,106 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_esri';
-  $ol_source->name = 'ESRI';
-  $ol_source->description = '';
+  $ol_source->machine_name = 'openlayers_examples_source_esri_worldtopomap';
+  $ol_source->name = 'ESRI World Topo Map';
+  $ol_source->description = 'ESRI World Topo Map source';
   $ol_source->factory_service = 'openlayers.source.internal.XYZ';
   $ol_source->options = array(
-    'url' => 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
   );
-  $export['openlayers_examples_source_esri'] = $ol_source;
+  $export['openlayers_examples_source_esri_worldtopomap'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_worldstreetmap';
+  $ol_source->name = 'ESRI World Street Map';
+  $ol_source->description = 'ESRI World Street Map source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+  );
+  $export['openlayers_examples_source_esri_worldstreetmap'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_delorme';
+  $ol_source->name = 'ESRI Delorme';
+  $ol_source->description = 'ESRI Delorme source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+  );
+  $export['openlayers_examples_source_esri_delorme'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_worldimagery';
+  $ol_source->name = 'ESRI World Imagery';
+  $ol_source->description = 'ESRI World Imagery source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+  );
+  $export['openlayers_examples_source_esri_worldimagery'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_worldterrainbase';
+  $ol_source->name = 'ESRI Terrain Base';
+  $ol_source->description = 'ESRI Terrain Base source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS'
+  );
+  $export['openlayers_examples_source_esri_worldterrainbase'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_worldshadedrelief';
+  $ol_source->name = 'ESRI Shaded Relief Base';
+  $ol_source->description = 'ESRI Shaded Relief source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Source: Esri'
+  );
+  $export['openlayers_examples_source_esri_worldshadedrelief'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_oceanbasemap';
+  $ol_source->name = 'ESRI Ocean Basemap';
+  $ol_source->description = 'ESRI Ocean Basemap source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
+  );
+  $export['openlayers_examples_source_esri_oceanbasemap'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_esri_natgeoworldmap';
+  $ol_source->name = 'ESRI National Geographic World Map';
+  $ol_source->description = 'ESRI National Geographic World Map source';
+  $ol_source->factory_service = 'openlayers.source.internal.XYZ';
+  $ol_source->options = array(
+    'url' => '//server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}',
+    'attributions' => 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
+  );
+  $export['openlayers_examples_source_esri_natgeoworldmap'] = $ol_source;
 
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
