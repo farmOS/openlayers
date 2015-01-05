@@ -23,6 +23,61 @@ function openlayers_examples_default_openlayers_layers() {
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_tile_mapbox_example2';
+  $ol_layer->name = 'MapBox example 2';
+  $ol_layer->description = 'Layer MapBox example 2';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_example2',
+  );
+  $export['openlayers_examples_layer_tile_mapbox_example2'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_tile_mapbox_example3';
+  $ol_layer->name = 'MapBox example 2';
+  $ol_layer->description = 'Layer MapBox example 3';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_example3',
+  );
+  $export['openlayers_examples_layer_tile_mapbox_example3'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_geography_class';
+  $ol_layer->name = 'MapBox Geography Class';
+  $ol_layer->description = 'Layer MapBox Geography Class description';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_geography_class',
+  );
+  $export['openlayers_examples_layer_mapbox_geography_class'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_geography_class_utfgrid';
+  $ol_layer->name = 'MapBox Geography Class UTFGrid';
+  $ol_layer->description = 'Layer MapBox Geography Class UTFGrid description';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_geography_class_utfgrid',
+  );
+  $export['openlayers_examples_layer_mapbox_geography_class_utfgrid'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy';
+  $ol_layer->name = 'MapBox Natural Earth Hypso Bathy';
+  $ol_layer->description = 'Layer MapBox Natural Earth Hypso Bathy description';
+  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_mapbox_natural_earth_hypso_bathy',
+  );
+  $export['openlayers_examples_layer_mapbox_natural_earth_hypso_bathy'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_googlemaps';
   $ol_layer->name = 'Google Maps layer';
   $ol_layer->description = '';
@@ -47,28 +102,6 @@ function openlayers_examples_default_openlayers_layers() {
     'source' => 'openlayers_examples_source_openstreetmap_europa',
   );
   $export['openlayers_examples_layer_openstreetmap_europa'] = $ol_layer;
-
-  $ol_layer = new stdClass();
-  $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_tile_mapbox_example2';
-  $ol_layer->name = 'MapBox example 2';
-  $ol_layer->description = 'Layer MapBox example 2';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
-  $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_mapbox_example2',
-  );
-  $export['openlayers_examples_layer_tile_mapbox_example2'] = $ol_layer;
-
-  $ol_layer = new stdClass();
-  $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_tile_mapbox_example3';
-  $ol_layer->name = 'MapBox example 2';
-  $ol_layer->description = 'Layer MapBox example 3';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
-  $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_mapbox_example3',
-  );
-  $export['openlayers_examples_layer_tile_mapbox_example3'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
@@ -172,39 +205,6 @@ function openlayers_examples_default_openlayers_layers() {
     'source' => 'openlayers_examples_source_mapquest_hyb',
   );
   $export['openlayers_examples_layer_mapquest_hyb'] = $ol_layer;
-
-  $ol_layer = new stdClass();
-  $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_geography_class';
-  $ol_layer->name = 'MapBox Geography Class';
-  $ol_layer->description = 'Layer MapBox Geography Class description';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
-  $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_mapbox_geography_class',
-  );
-  $export['openlayers_examples_layer_mapbox_geography_class'] = $ol_layer;
-
-  $ol_layer = new stdClass();
-  $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_geography_class_utfgrid';
-  $ol_layer->name = 'MapBox Geography Class UTFGrid';
-  $ol_layer->description = 'Layer MapBox Geography Class UTFGrid description';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
-  $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_mapbox_geography_class_utfgrid',
-  );
-  $export['openlayers_examples_layer_mapbox_geography_class_utfgrid'] = $ol_layer;
-
-  $ol_layer = new stdClass();
-  $ol_layer->api_version = 1;
-  $ol_layer->machine_name = 'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy';
-  $ol_layer->name = 'MapBox Natural Earth Hypso Bathy';
-  $ol_layer->description = 'Layer MapBox Natural Earth Hypso Bathy description';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
-  $ol_layer->options = array(
-    'source' => 'openlayers_examples_source_mapbox_natural_earth_hypso_bathy',
-  );
-  $export['openlayers_examples_layer_mapbox_natural_earth_hypso_bathy'] = $ol_layer;
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;

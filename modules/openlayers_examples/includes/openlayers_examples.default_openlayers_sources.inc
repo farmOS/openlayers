@@ -23,6 +23,30 @@ function openlayers_examples_default_openlayers_sources() {
   $export['openlayers_examples_source_mapbox_example1'] = $ol_source;
 
   $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_mapbox_example2';
+  $ol_source->name = 'MapBox example 2';
+  $ol_source->description = 'Source MapBox example 2';
+  $ol_source->factory_service = 'openlayers.source.internal.TileJSON';
+  $ol_source->options = array(
+    'url' => 'http://api.tiles.mapbox.com/v3/examples.c7d2024a.jsonp',
+  );
+  $export['openlayers_examples_source_mapbox_example2'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_mapbox_example3';
+  $ol_source->name = 'MapBox example 3';
+  $ol_source->description = 'Source MapBox example 3, used by ft.com.';
+  $ol_source->factory_service = 'openlayers.source.internal.TileJSON';
+  $ol_source->options = array(
+    'url' => 'http://api.tiles.mapbox.com/v3/financialtimes.map-w7l4lfi8.jsonp',
+  );
+  $export['openlayers_examples_source_mapbox_example3'] = $ol_source;
+
+  $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
   $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_googlemaps';
@@ -49,30 +73,6 @@ function openlayers_examples_default_openlayers_sources() {
     'url' => 'http://webtools.ec.europa.eu/road-maps/tiles/{z}/{x}/{y}.png',
   );
   $export['openlayers_examples_source_openstreetmap_europa'] = $ol_source;
-
-  $ol_source = new stdClass();
-  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
-  $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_mapbox_example2';
-  $ol_source->name = 'MapBox example 2';
-  $ol_source->description = 'Source MapBox example 2';
-  $ol_source->factory_service = 'openlayers.source.internal.TileJSON';
-  $ol_source->options = array(
-    'url' => 'http://api.tiles.mapbox.com/v3/examples.c7d2024a.jsonp',
-  );
-  $export['openlayers_examples_source_mapbox_example2'] = $ol_source;
-
-  $ol_source = new stdClass();
-  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
-  $ol_source->api_version = 1;
-  $ol_source->machine_name = 'openlayers_examples_source_mapbox_example3';
-  $ol_source->name = 'MapBox example 3';
-  $ol_source->description = 'Source MapBox example 3, used by ft.com.';
-  $ol_source->factory_service = 'openlayers.source.internal.TileJSON';
-  $ol_source->options = array(
-    'url' => 'http://api.tiles.mapbox.com/v3/financialtimes.map-w7l4lfi8.jsonp',
-  );
-  $export['openlayers_examples_source_mapbox_example3'] = $ol_source;
 
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
