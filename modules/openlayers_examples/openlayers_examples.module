@@ -157,7 +157,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
       if (module_exists('services')) {
         foreach (services_endpoint_load_all() as $service) {
-          if (isset($service->resources['openlayers']['operations']['retrieve']['enabled']) && $service->resources['openlayers']['operations']['retrieve']['enabled'] == 1) {
+          if (isset($service->resources['openlayers_map']['operations']['retrieve']['enabled']) && $service->resources['openlayers_map']['operations']['retrieve']['enabled'] == 1) {
 
             $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
             $height = $map->getOption('height', 'auto');
