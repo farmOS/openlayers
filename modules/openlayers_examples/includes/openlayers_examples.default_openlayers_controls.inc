@@ -116,7 +116,6 @@ function openlayers_examples_default_openlayers_controls() {
     'label' => 'Layers',
     'layers' => array(
       'openlayers_examples_layer_mapbox_geography_class' => 'openlayers_examples_layer_mapbox_geography_class',
-      'openlayers_examples_layer_mapbox_geography_class_utfgrid' => 'openlayers_examples_layer_mapbox_geography_class_utfgrid',
       'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy' => 'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy',
       'openlayers_examples_layer_tile_mapbox_example1' => 'openlayers_examples_layer_tile_mapbox_example1',
       'openlayers_examples_layer_tile_mapbox_example2' => 'openlayers_examples_layer_tile_mapbox_example2',

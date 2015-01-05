@@ -921,7 +921,9 @@ function openlayers_examples_default_openlayers_maps() {
       2 => 'openlayers_interaction_dragrotate',
       3 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'components' => array(),
+    'components' => array(
+      0 => 'openlayers_examples_component_tileutfgrid'
+    ),
   );
   $export['openlayers_examples_map_mapbox'] = $ol_map;
 
