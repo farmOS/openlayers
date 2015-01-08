@@ -3,6 +3,7 @@ Drupal.openlayers = (function($){
   return {
     processMap: function (map_id, context) {
       var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
+      var map = false;
 
       $(document).trigger('openlayers.build_start', [
         {
@@ -14,7 +15,7 @@ Drupal.openlayers = (function($){
 
       try {
         $(document).trigger('openlayers.map_pre_alter', [{context: context, cache: Drupal.openlayers.cacheManager}]);
-        var map = Drupal.openlayers.getObject(context, 'maps', settings.map, null);
+        map = Drupal.openlayers.getObject(context, 'maps', settings.map, null);
         Drupal.openlayers.cacheManager.set(map.mn, map);
         $(document).trigger('openlayers.map_post_alter', [{map: map, cache: Drupal.openlayers.cacheManager}]);
 
@@ -86,6 +87,20 @@ Drupal.openlayers = (function($){
           $(this).text('Stack: ' + e.stack);
         }
       }
+      return map;
+    },
+
+    getMapById: function (map_id) {
+      if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+        var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
+        var map = Drupal.openlayers.getObjectFromCache(null, 'maps', settings.map, null);
+        // If map doesn't exist yet, try to initialize it.
+        if (!map) {
+          map = Drupal.openlayers.processMap(map_id);
+        }
+        return map;
+      }
+      return false;
     },
 
 // Holds dynamic created asyncIsReady callbacks for every map id.
