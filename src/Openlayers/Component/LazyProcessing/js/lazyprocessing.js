@@ -3,7 +3,3 @@ Drupal.openlayers.pluginManager.register({
   init: function(data) {
   }
 });
-
-Drupal.openlayers.LazyProcessing = function(map_id) {
-
-};

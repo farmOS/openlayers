@@ -22,10 +22,9 @@ class LazyProcessing extends Component {
     $form['documentation'] = array(
       '#type' => 'fieldset',
       '#title' => t('How to use'),
-      '#description' => t('If this component is attached to a map you need to start the map processing / display manually by executing following code from a custom javascript: <pre>Drupal.openlayers.asyncIsReady("[map_id]");</pre> '),
+      '#description' => t('If this component is attached to a map you need to start the map processing / display manually by executing following code from a custom javascript: <pre>Drupal.openlayers.asyncIsReady("[map_id]");</pre>'),
     );
   }
-
 
   /**
    * {@inheritdoc}
