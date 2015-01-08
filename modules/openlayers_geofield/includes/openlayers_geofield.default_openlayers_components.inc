@@ -41,5 +41,23 @@ function openlayers_geofield_default_openlayers_components() {
   );
   $export['openlayers_geofield_component_geofield'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_geofield_component_zoom_to_source';
+  $ol_component->name = 'OpenLayers Geofield Zoomt to Source';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.component.internal.ZoomToSource';
+  $ol_component->options = array(
+    'source' => 'geofield_field_formatter_source',
+    'animations' => array(
+      'pan' => '500',
+      'zoom' => '500',
+    ),
+    'zoom' => 'auto',
+    'enableAnimations' => 1,
+  );
+  $export['openlayers_geofield_component_zoom_to_source'] = $ol_component;
+
   return $export;
 }
