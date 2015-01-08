@@ -20,6 +20,9 @@ Drupal.openlayers.pluginManager.register({
             map.getView().setZoom(map.getView().getZoom() - 1);
           }
         }, source);
+
+        // Ensure the initial zoom to source is done.
+        source.changed();
       }
     });
   }
