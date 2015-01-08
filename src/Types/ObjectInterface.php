@@ -139,6 +139,19 @@ interface ObjectInterface {
   public function isAsynchronous();
 
   /**
+   * Whether or not this object can be cached in the frontend.
+   *
+   * If true the JS object created for this object is cached and re-used.
+   * Disable this for objects that might differ between instances of the same
+   * map. E.h. geofield where every map instance will get the features of the
+   * related geofield.
+   *
+   * @return bool
+   *   Whether or not this object can be cached in the frontend.
+   */
+  public function isCacheable();
+
+  /**
    * Invoked before an objects render array is built.
    *
    * Mostly invoked by the map object.

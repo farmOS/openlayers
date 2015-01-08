@@ -152,7 +152,7 @@ Drupal.openlayers = (function($){
     }),
     getObjectFromCache: (function (context, type, data, map) {
       var object = null;
-      if (!Drupal.openlayers.cacheManager.isRegistered(data.mn)) {
+       if ((goog.isDef(data.cacheable) && !data.cacheable) || !Drupal.openlayers.cacheManager.isRegistered(data.mn)) {
         object = this.getObject(context, type, data, map);
         Drupal.openlayers.cacheManager.set(data.mn, object);
       } else {
@@ -176,7 +176,8 @@ Drupal.openlayers = (function($){
             'cache': Drupal.openlayers.cacheManager,
             'context': context
           }
-        ]);      }
+        ]);
+      }
       return object;
     })
   };

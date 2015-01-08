@@ -69,6 +69,7 @@ abstract class Layer extends Object implements LayerInterface {
       'mn' => $this->machine_name,
       'fs' => strtolower($this->factory_service),
       'opt' => $options,
+      'cacheable' => $this->isCacheable(),
     );
   }
 
