@@ -51,7 +51,14 @@ Drupal.openlayers.pluginManager = (function($) {
       try {
         var obj = plugins[factoryService].init(data);
       } catch(e) {
-        // @todo: handler here.
+        if (goog.isDef(console)) {
+          Drupal.openlayers.console.log(e.message);
+          Drupal.openlayers.console.log(e.stack);
+        }
+        else {
+          $(this).text('Error during map rendering: ' + e.message);
+          $(this).text('Stack: ' + e.stack);
+        }
       }
 
       if (goog.isObject(obj)) {
