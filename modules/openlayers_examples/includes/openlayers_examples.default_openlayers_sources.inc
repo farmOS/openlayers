@@ -130,7 +130,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.source.internal.KML';
   $ol_source->options = array(
-    'url' => url(drupal_get_path('module', 'openlayers_examples') . '/assets/2012_Earthquakes_Mag5.kml', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/2012_Earthquakes_Mag5.kml', array('absolute' => TRUE)),
   );
   $export['openlayers_examples_source_kml_earthquakes'] = $ol_source;
 
@@ -331,7 +331,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'Source Image Static description';
   $ol_source->factory_service = 'openlayers.source.internal.ImageStatic';
   $ol_source->options = array(
-    'url' => url(drupal_get_path('module', 'openlayers') . '/images/druplicon.png', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers') . '/images/druplicon.png', array('absolute' => TRUE)),
   );
   $export['openlayers_examples_source_imagestatic'] = $ol_source;
 
