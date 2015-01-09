@@ -326,13 +326,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function isCacheable() {
-    return TRUE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getType() {
     $class = explode('\\', get_class($this));
     return $class[2];
@@ -356,7 +349,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
       'mn' => $this->machine_name,
       'fs' => strtolower($this->factory_service),
       'opt' => $this->options,
-      'cacheable' => $this->isCacheable(),
     );
   }
 }

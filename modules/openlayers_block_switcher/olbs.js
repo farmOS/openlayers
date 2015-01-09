@@ -3,23 +3,19 @@
     attach: function(context, settings) {
 
       $(".form-item-overlays input[type='checkbox']").on('change', function(e) {
-        var target = $(this).closest('form').find("input[name='map']").val();
-        for (objectMachineName in Drupal.openlayers.cacheManager.getCache()) {
-          var map = Drupal.openlayers.cacheManager.get(objectMachineName);
-          if (map.target == target) {
-            var layers = map.getLayers();
-            var target = $(e.target);
-            layers.forEach(function(layer){
-              if (layer.mn == target.val()) {
-                if (target.prop('checked') == true) {
-                  layer.setVisible(true);
-                } else {
-                  layer.setVisible(false);
-                }
-              }
-            });
+        var map_id = $(this).closest('form').find("input[name='map']").val();
+        var mapInstance = Drupal.openlayers.getMapById(map_id);
+        var layers = mapInstance.map.getLayers();
+        var target_layer = $(e.target);
+        layers.forEach(function(layer){
+          if (layer.mn == target_layer.val()) {
+            if (target_layer.prop('checked') == true) {
+              layer.setVisible(true);
+            } else {
+              layer.setVisible(false);
+            }
           }
-        }
+        });
       });
 
     }

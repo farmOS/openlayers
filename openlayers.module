@@ -98,14 +98,16 @@ function openlayers_object_load($object_type, $export) {
     if (Openlayers::hasService($exportable['factory_service'])) {
       $service = explode('.', $exportable['factory_service']);
       $object = \Drupal::service($service[0] . '.' . $service[1])->createInstance($service[3]);
-    } else {
+    }
+    else {
       $exportable += array(
         'type' => $object_type,
         'errorMessage' => 'Service <em>@service</em> doesn\'t exists, unable to load @type @machine_name',
       );
       $object = \Drupal::service('openlayers.manager')->createInstance('error');
     }
-  } else {
+  }
+  else {
     $exportable += array(
       'type' => $object_type,
       'machine_name' => $export,
@@ -162,7 +164,7 @@ function openlayers_libraries_info() {
           'type' => 'file',
           'weight' => 4,
           'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
-        )
+        ),
       ),
     ),
     'integration files' => array(
@@ -171,11 +173,6 @@ function openlayers_libraries_info() {
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 8,
-            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
-          ),
-          'js/openlayers.cacheManager.js' => array(
-            'type' => 'file',
-            'weight' => 10,
             'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
           ),
           'js/openlayers.pluginManager.js' => array(
@@ -222,7 +219,7 @@ function openlayers_libraries_info() {
             'css/ol.css' => array(
               'type' => 'file',
               'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
-            )
+            ),
           ),
         ),
         'integration files' => array(
@@ -231,11 +228,6 @@ function openlayers_libraries_info() {
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 8,
-                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
-              ),
-              'js/openlayers.cacheManager.js' => array(
-                'type' => 'file',
-                'weight' => 10,
                 'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
               ),
               'js/openlayers.pluginManager.js' => array(

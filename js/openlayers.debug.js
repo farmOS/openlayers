@@ -71,12 +71,7 @@
   });
 
   $(document).on('openlayers.object_pre_alter', function(event, objects) {
-    if (!Drupal.openlayers.cacheManager.isRegistered(objects.data.mn)) {
-      message = "Computing " + objects.type + " " + objects.data.mn + "...";
-    } else {
-      message = "Loading " + objects.type + " " + objects.data.mn + " from cache...";
-    }
-    console.groupCollapsed(message);
+    console.groupCollapsed("Loading " + objects.type + " " + objects.data.mn + '...');
     console.time('Time');
 
   });
@@ -87,7 +82,6 @@
 
   $(document).on('openlayers.build_stop', function(event, objects) {
     console.timeEnd('Total building time');
-    console.log('Cache has ' + Object.keys(Drupal.openlayers.cacheManager.getCache()).length + ' objects.');
     console.groupEnd();
   });
 })(jQuery);
