@@ -5,6 +5,7 @@ package = "OpenLayers"
 
 dependencies[] = openlayers
 dependencies[] = views_geojson
+dependencies[] = openlayers_block_switcher
 dependencies[] = openlayers_geofield
 
 registry_autoload[] = PSR-4
