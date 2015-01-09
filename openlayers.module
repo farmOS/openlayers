@@ -139,15 +139,6 @@ function openlayers_libraries_info() {
     ),
     'files' => array(
       'js' => array(
-        'goog_closure_no_deps' => array(
-          'type' => 'inline',
-          'data' => implode("\n", array(
-            'var CLOSURE_NO_DEPS = true;',
-          )),
-          'weight' => 2,
-          'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
-          'preprocess' => FALSE,
-        ),
         'closure-library/closure/goog/base.js' => array(
           'type' => 'file',
           'weight' => 4,
@@ -170,6 +161,11 @@ function openlayers_libraries_info() {
     'integration files' => array(
       'openlayers' => array(
         'js' => array(
+          'js/openlayers.goog.js' => array(
+            'type' => 'file',
+            'weight' => 2,
+            'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
+          ),
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 8,
@@ -201,17 +197,17 @@ function openlayers_libraries_info() {
           'js' => array(
             'closure-library/closure/goog/base.js' => array(
               'type' => 'file',
-              'weight' => 2,
+              'weight' => 4,
               'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
             'build/ol-deps.js' => array(
               'type' => 'file',
-              'weight' => 4,
+              'weight' => 6,
               'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
             'build/ol-debug.js' => array(
               'type' => 'file',
-              'weight' => 6,
+              'weight' => 8,
               'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
             ),
           ),
@@ -225,6 +221,11 @@ function openlayers_libraries_info() {
         'integration files' => array(
           'openlayers' => array(
             'js' => array(
+              'js/openlayers.goog.js' => array(
+                'type' => 'file',
+                'weight' => 2,
+                'group' => \Drupal\openlayers\Config::get('openlayers.js_css.group'),
+              ),
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 8,
