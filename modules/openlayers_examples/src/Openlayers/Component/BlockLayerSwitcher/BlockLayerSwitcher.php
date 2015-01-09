@@ -21,7 +21,6 @@ class BlockLayerSwitcher extends Component {
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     if ($context instanceof \Drupal\openlayers\Types\MapInterface) {
-      $wtf = drupal_get_form('olebs_blockswitcher_form', $context);
       $build = array(
         'map' => $build,
         'BlockLayerSwitcher' => array(
