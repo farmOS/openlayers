@@ -220,7 +220,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->options = array(
     'javascript' => 'var map = data.map;
 
-var gridSource = data.objects.get(\'openlayers_examples_source_mapbox_geography_class_utfgrid\');
+var gridSource = data.objects.sources[\'openlayers_examples_source_mapbox_geography_class_utfgrid\'];
 
 var element1 = jQuery(\'<div/>\', {
   id: \'country-info\',
