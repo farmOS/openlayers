@@ -93,12 +93,10 @@ Drupal.openlayers = (function($){
     getMapById: function (map_id) {
       if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
         var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
-        var map = Drupal.openlayers.getObjectFromCache(null, 'maps', settings.map, null);
-        // If map doesn't exist yet, try to initialize it.
-        if (!map) {
-          map = Drupal.openlayers.processMap(map_id);
+        // Just load map if it is ready.
+        if (Drupal.openlayers.cacheManager.isRegistered(settings.map.mn)) {
+          return Drupal.openlayers.getObjectFromCache(null, 'maps', settings.map, null);
         }
-        return map;
       }
       return false;
     },
