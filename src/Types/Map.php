@@ -202,6 +202,10 @@ abstract class Map extends Object implements MapInterface {
     unset($js['opt']['styles']);
     unset($js['opt']['interactions']);
     unset($js['opt']['components']);
+
+    // Add the id to the JS settings.
+    $js['map_id'] = $this->getId();
+
     return $js;
   }
 
