@@ -6,6 +6,11 @@ Drupal.openlayers = (function($){
       var settings = $.extend({}, {layer:[], style:[], control:[], interaction:[], source: [], projection:[], component:[]}, Drupal.settings.openlayers.maps[map_id]);
       var map = false;
 
+      // If already processed just return the instance.
+      if (goog.isDef(Drupal.openlayers.instances[map_id])) {
+        return Drupal.openlayers.instances[map_id].map;
+      }
+
       $(document).trigger('openlayers.build_start', [
         {
           'type': 'objects',
