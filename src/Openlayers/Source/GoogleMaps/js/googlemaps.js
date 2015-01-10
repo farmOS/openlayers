@@ -34,7 +34,7 @@ Drupal.openlayers.pluginManager.register({
     olMapDiv[0].parentNode.removeChild(olMapDiv[0]);
     gmap.controls[google.maps.ControlPosition.TOP_LEFT].push(olMapDiv[0]);
 
-    return new ol.source.Tile();
+    return new ol.source.Tile({});
   },
 
   /**
