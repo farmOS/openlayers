@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager.register({
 
     map.getLayers().forEach(function(layer) {
       var source = layer.getSource();
-      if (source.mn === data.opt.source) {
+      if (source && source.mn === data.opt.source) {
         source.on('change', function() {
           if (data.opt.enableAnimations == 1) {
             var pan = ol.animation.pan({duration: data.opt.animations.pan, source: map.getView().getCenter()});

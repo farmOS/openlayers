@@ -76,11 +76,13 @@ Drupal.openlayers = (function($){
 
         $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer}]);
         settings.layer.map(function (data) {
-          data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
+          // Clone the data to keep the settings as raw as possible.
+          var cloned_data = jQuery.extend(true, {}, data);
+          cloned_data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
           if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
-            data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
+            cloned_data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
           }
-          var layer = Drupal.openlayers.getObject(context, 'layers', data, map_id);
+          var layer = Drupal.openlayers.getObject(context, 'layers', cloned_data, map_id);
           if (layer) {
             map.addLayer(layer);
           }
