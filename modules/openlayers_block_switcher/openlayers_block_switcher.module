@@ -81,9 +81,9 @@ function _olebs_get_block_id($map_name) {
  *   The map name.
  */
 function _olebs_get_map_name($delta) {
-  foreach (_olebs_get_maps_with_blockswitcher() as $map_name => $map) {
-    if (_olebs_get_block_id($map_name) == $delta) {
-      return $map_name;
+  foreach (_olebs_get_maps_with_blockswitcher() as $map) {
+    if (_olebs_get_block_id($map->machine_name) == $delta) {
+      return $map->machine_name;
     }
   }
   return FALSE;
