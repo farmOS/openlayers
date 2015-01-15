@@ -114,11 +114,6 @@ abstract class Map extends Object implements MapInterface {
     $map = $this;
     $build = array();
 
-    $current_path = current_path();
-    if ('system/ajax' == $current_path) {
-      $current_path = $_SESSION['current_path'];
-    }
-
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
