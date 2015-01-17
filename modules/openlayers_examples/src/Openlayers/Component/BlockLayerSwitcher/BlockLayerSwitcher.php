@@ -21,6 +21,9 @@ class BlockLayerSwitcher extends Component {
    */
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     if ($context instanceof \Drupal\openlayers\Types\MapInterface) {
+      $olebs_blockswitcher_form = drupal_get_form('olebs_blockswitcher_form', $context);
+      // This can rely in the id of the map instead of the css class.
+      $olebs_blockswitcher_form['map']['#value'] = $context->getId();
       $build = array(
         'map' => $build,
         'BlockLayerSwitcher' => array(
@@ -28,7 +31,7 @@ class BlockLayerSwitcher extends Component {
           '#title' => 'Layer Switcher',
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
-          'form' => drupal_get_form('olebs_blockswitcher_form', $context),
+          'form' => $olebs_blockswitcher_form,
         ),
       );
     }

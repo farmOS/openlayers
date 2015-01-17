@@ -24,6 +24,7 @@ function openlayers_block_switcher_block_info() {
  */
 function openlayers_block_switcher_block_view($delta = '') {
   $block = array();
+  /** @var \Drupal\openlayers\Map\OLMap $map */
   $map = openlayers_object_load('Map', _olebs_get_map_name($delta));
 
   $block['subject'] = $map->name;
@@ -116,9 +117,10 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
     );
   }
 
+  // By default we can only rely on the machine name which is a css class.
   $form['map'] = array(
     '#type'    => 'hidden',
-    '#value' => $map->getOption('target'),
+    '#value' => $map->machine_name,
   );
 
   $form['#attached']['css'] = array();
