@@ -341,8 +341,18 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
     // Load the Geocoder widget settings.
     module_load_include('inc', 'geocoder', 'geocoder.widget');
     $new = geocoder_field_widget_settings_form($field, $instance);
-
     $new['geocoder_field']['#options'][$field['field_name']] = t('Add extra field');
+    // If there are no options available search by ourselves to ensure the text
+    // field type was taken in account.
+    if (empty($new['geocoder_handler']['#options'])) {
+      $supported_field_types = geocoder_supported_field_types();
+      if (isset($supported_field_types['text'])) {
+        $processors = geocoder_handler_info();
+        foreach ($supported_field_types['text'] as $handler) {
+          $new['geocoder_handler']['#options'][$handler] = $processors[$handler]['title'];
+        }
+      }
+    }
 
     // Show the geocoder fields only if geocoder is selected.
     openlayers_widget_add_states($new, ':input[name="instance[widget][settings][use_geocoder]"]');
