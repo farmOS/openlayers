@@ -4,10 +4,18 @@ Drupal.openlayers.pluginManager.register({
     var map = data.map;
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
+    // Select the related source or fallback to a generic one.
+    if (goog.isDef(data.opt.source) && goog.isDef(data.objects.sources[data.opt.source])) {
+      var source = data.objects.sources[data.opt.source];
+    }
+    else {
+      var source = new ol.source.Vector();
+    }
+
     // create a vector layer used for editing.
     var vector_layer = new ol.layer.Vector({
       name: 'drawing_vectorlayer',
-      source: new ol.source.Vector(),
+      source: source,
       style: new ol.style.Style({
         fill: new ol.style.Fill({
           color: 'rgba(255, 255, 255, 0.2)'
@@ -38,7 +46,7 @@ Drupal.openlayers.pluginManager.register({
       }
     }
 
-// make interactions global so they can later be removed
+    // make interactions global so they can later be removed
     var select_interaction,
       draw_interaction,
       modify_interaction;

@@ -33,6 +33,7 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_geofield_layer_openstreetmap',
+      1 => 'geofield_field_formatter_layer',
     ),
     'controls' => array(),
     'interactions' => array(
@@ -42,6 +43,10 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_geofield_component_geofield',
+    ),
+    'sources' => array(
+      0 => 'openlayers_geofield_source_openstreetmap',
+      1 => 'geofield_field_formatter_source',
     ),
   );
   $export['openlayers_geofield_map_geofield'] = $ol_map;

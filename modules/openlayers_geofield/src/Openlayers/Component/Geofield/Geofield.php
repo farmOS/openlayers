@@ -35,6 +35,7 @@ class Geofield extends Component {
       'inputFieldName' => 'geofield',
       'initialData' => '',
       'actionFeature' => array('draw' => 'draw', 'modify' => 'modify'),
+      'source' => NULL,
     );
     return $defaults;
   }
@@ -114,6 +115,20 @@ class Geofield extends Component {
       '#description' => t('Initial data to set. You can use any of the data types available as "Data type". Ensure the data have the same projection as defined in "Data projection".'),
       '#default_value' => $this->getOption('initialData'),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    // Auto-detect the source to use for the features.
+    if (empty($this->options['source'])) {
+      foreach ($context->getCollection()->getObjects('source') as $source) {
+        if ($source instanceof \Drupal\openlayers\Source\Geofield) {
+          $this->setOption('source', $source->machine_name);
+        }
+      }
+    }
   }
 
   /**
