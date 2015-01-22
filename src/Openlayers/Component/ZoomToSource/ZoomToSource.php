@@ -36,6 +36,17 @@ class ZoomToSource extends Component {
       '#description' => t('Integer or <em>auto</em>.'),
       '#required' => TRUE,
     );
+    $form['options']['max_zoom'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Max Zoom'),
+      '#default_value' => isset($form_state['item']->options['max_zoom']) ? $form_state['item']->options['max_zoom'] : 0,
+      '#description' => t('Define the max zoom for the autozoom. Disabled when <em>0</em>.'),
+      '#states' => array(
+        'visible' => array(
+          'input[name="options[zoom]"' => array('value' => 'auto'),
+        ),
+      ),
+    );
 
     $form['options']['enableAnimations'] = array(
       '#type' => 'checkbox',

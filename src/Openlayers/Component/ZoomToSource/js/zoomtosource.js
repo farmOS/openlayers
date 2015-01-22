@@ -17,7 +17,11 @@ Drupal.openlayers.pluginManager.register({
           if (data.opt.zoom != 'auto') {
             map.getView().setZoom(data.opt.zoom);
           } else {
-            map.getView().setZoom(map.getView().getZoom() - 1);
+            var zoom = map.getView().getZoom() - 1;
+            if (goog.isDef(data.opt.max_zoom) && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
+              zoom = data.opt.max_zoom;
+            }
+            map.getView().setZoom(zoom);
           }
         }, source);
 
