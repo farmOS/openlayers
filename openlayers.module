@@ -293,3 +293,45 @@ function openlayers_element_process_callback($element, &$form_state) {
 
   return $element;
 }
+
+/**
+ * If the PHP version is < 5.3.0 we need to create array_replace_recursive().
+ *
+ * See: http://php.net/manual/en/function.array-replace-recursive.php
+ */
+if (!function_exists('array_replace_recursive')) {
+  function array_replace_recursive($defaults, $old_values = array()) {
+    $new_values = array();
+    if (is_null($old_values)) {
+      $old_values = array();
+    }
+
+    foreach ($old_values as $key => $value) {
+      // If new_values does not have the key, assign the old_values value.
+      if (!array_key_exists($key, $new_values) || is_null($new_values[$key])) {
+        $new_values[$key] = $value;
+      }
+      else {
+        // If both are arrays, do the recursive process.
+        if (is_array($new_values[$key]) && is_array($value)) {
+          $new_values[$key] = array_replace_recursive($value, $new_values[$key]);
+        }
+      }
+    }
+
+    foreach ($defaults as $key => $value) {
+      // If new_values does not have the key, assign the defaults value.
+      if (!array_key_exists($key, $new_values) || is_null($new_values[$key])) {
+        $new_values[$key] = $value;
+      }
+      else {
+        // If both are arrays, do the recursive process.
+        if (is_array($new_values[$key]) && is_array($value)) {
+          $new_values[$key] = array_replace_recursive($value, $new_values[$key]);
+        }
+      }
+    }
+
+    return $new_values;
+  }
+}
