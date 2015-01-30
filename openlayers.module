@@ -296,42 +296,46 @@ function openlayers_element_process_callback($element, &$form_state) {
 
 /**
  * If the PHP version is < 5.3.0 we need to create array_replace_recursive().
- *
- * See: http://php.net/manual/en/function.array-replace-recursive.php
  */
 if (!function_exists('array_replace_recursive')) {
-  function array_replace_recursive($defaults, $old_values = array()) {
-    $new_values = array();
-    if (is_null($old_values)) {
-      $old_values = array();
-    }
+  /**
+   * Replaces elements from passed arrays into the first array recursively.
+   *
+   * @link http://php.net/manual/en/function.array-replace-recursive.php
+   *
+   * @param array $array
+   *   The array in which elements are replaced.
+   * @param array $array1
+   *   The array from which elements will be extracted.
+   *
+   * @return array|NULL
+   *   An array, or NULL if an error occurs.
+   */
+  function array_replace_recursive(array $array, array $array1) {
+    // Get array arguments.
+    $arrays = func_get_args();
 
-    foreach ($old_values as $key => $value) {
-      // If new_values does not have the key, assign the old_values value.
-      if (!array_key_exists($key, $new_values) || is_null($new_values[$key])) {
-        $new_values[$key] = $value;
-      }
-      else {
-        // If both are arrays, do the recursive process.
-        if (is_array($new_values[$key]) && is_array($value)) {
-          $new_values[$key] = array_replace_recursive($value, $new_values[$key]);
+    // Define the original array.
+    $original = array_shift($arrays);
+
+    // Loop through arrays.
+    foreach ($arrays as $array) {
+      // Loop through array key/value pairs.
+      foreach ($array as $key => $value) {
+        // Value is an array.
+        if (is_array($value)) {
+          // Traverse the array; replace or add result to original array.
+          $original[$key] = array_replace_recursive($original[$key], $array[$key]);
+        }
+        // Value is not an array.
+        else {
+          // Replace or add current value to original array.
+          $original[$key] = $value;
         }
       }
     }
 
-    foreach ($defaults as $key => $value) {
-      // If new_values does not have the key, assign the defaults value.
-      if (!array_key_exists($key, $new_values) || is_null($new_values[$key])) {
-        $new_values[$key] = $value;
-      }
-      else {
-        // If both are arrays, do the recursive process.
-        if (is_array($new_values[$key]) && is_array($value)) {
-          $new_values[$key] = array_replace_recursive($value, $new_values[$key]);
-        }
-      }
-    }
-
-    return $new_values;
+    // Return the joined array.
+    return $original;
   }
 }
