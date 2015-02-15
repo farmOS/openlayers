@@ -173,6 +173,7 @@ class Geofield extends Component {
       else {
         // Set initial data to NULL if the data couldn't be evaluated.
         $this->options['initialData'] = NULL;
+        $this->options['initialDataType'] = key($this->options['dataType']);
       }
     }
     return parent::getJS();

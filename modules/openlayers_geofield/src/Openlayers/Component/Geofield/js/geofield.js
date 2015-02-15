@@ -35,7 +35,7 @@ Drupal.openlayers.pluginManager.register({
     map.addLayer(vector_layer);
 
     // Add preset data if available.
-    if (goog.isDef(data.opt) && goog.isDef(data.opt.initialData) && data.opt.initialData) {
+    if (jQuery('.openlayers-geofield-data', geofieldWrapper).val()) {
       try {
         var format = new ol.format[data.opt.initialDataType]();
         var feature = format.readFeature(jQuery('.openlayers-geofield-data', geofieldWrapper).val());
@@ -222,3 +222,16 @@ Drupal.openlayers.pluginManager.register({
 
   }
 });
+
+/** Ensures the  map is fully rebuilt on ajax request - e.g. geocoder. */
+Drupal.behaviors.openlayersGeofieldWidget = (function($) {
+  "use strict";
+  return {
+    detach: function (context, settings) {
+      $('.openlayers-map').removeOnce('openlayers-map', function () {
+        var map_id = $(this).attr('id');
+        delete Drupal.openlayers.instances[map_id];
+      });
+    }
+  }
+})(jQuery);
