@@ -548,7 +548,9 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
 
   // Set the widget value based on geocoding results.
   $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
-  $values = drupal_array_get_nested_value($form_state['values'], array_slice($button['#array_parents'], 0, -2));
+  $geocoder_field = $field_state['instance']['widget']['settings']['geocoder_field'];
+  $geocoder_field_parents = array_merge(array_slice($button['#array_parents'], 0, -4), array($geocoder_field, $langcode));
+  $values = drupal_array_get_nested_value($form_state['values'], $geocoder_field_parents);
   if ($field_value = geocoder_widget_get_field_value($element['#entity_type'], $field_state['instance'], NULL, $values)) {
     geophp_load();
     $geometry = geoPHP::load($field_value[$langcode][$delta]['geom']);
@@ -557,7 +559,7 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
     $field_value[$langcode][$delta]['input_format'] = 'wkt';
     // Override the field's value in the 'input' array to substitute the new
     // field value for the one that was submitted.
-    drupal_array_set_nested_value($form_state, array_merge(array('values'), array_slice($button['#array_parents'], 0, -3)), $field_value);
+    drupal_array_set_nested_value($form_state, array_merge(array('values'), array_slice($geocoder_field_parents, 0, -1)), $field_value);
   }
 }
 
