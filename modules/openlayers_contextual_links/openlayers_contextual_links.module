@@ -5,6 +5,10 @@
  */
 
 function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build, $context) {
+  if (!user_access('administer openlayers')) {
+    return FALSE;
+  }
+
   if (!($context instanceof Drupal\openlayers\Types\MapInterface)) {
     return FALSE;
   }

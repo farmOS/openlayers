@@ -125,6 +125,18 @@ function openlayers_object_load($object_type, $export) {
 }
 
 /**
+ * Implements hook_permission().
+ */
+function openlayers_permission() {
+  return array(
+    'administer openlayers' => array(
+      'title' => t('Administer OpenLayers'),
+      'description' => t('Configure OpenLayers settings, styles, maps, and layers.'),
+    ),
+  );
+}
+
+/**
  * Implements hook_libraries_info().
  */
 function openlayers_libraries_info() {
