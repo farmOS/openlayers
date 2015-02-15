@@ -170,6 +170,10 @@ class Geofield extends Component {
         $this->options['initialData'] = $combined_geom->out(strtolower(key($this->options['dataType'])));
         $this->options['initialDataType'] = key($this->options['dataType']);
       }
+      else {
+        // Set initial data to NULL if the data couldn't be evaluated.
+        $this->options['initialData'] = NULL;
+      }
     }
     return parent::getJS();
   }
