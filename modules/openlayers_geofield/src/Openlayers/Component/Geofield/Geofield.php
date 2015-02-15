@@ -141,13 +141,14 @@ class Geofield extends Component {
     $this->options['actionFeature'] = array_filter($this->options['actionFeature']);
 
     // Process initial data. Ensure it's WKT.
-    if (!empty($this->options['initialData'])) {
+    if (isset($this->options['initialData'])) {
 
       // Process strings and arrays likewise.
       geophp_load();
       if (!is_array($this->options['initialData'])) {
         $this->options['initialData'] = array($this->options['initialData']);
       }
+      $geoms = array();
       foreach ($this->options['initialData'] as $delta => $item) {
         if (is_array($item) && array_key_exists('geom', $item)) {
           $geoms[] = geoPHP::load($item['geom']);
