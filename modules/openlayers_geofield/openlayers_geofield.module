@@ -321,6 +321,12 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
     '#description' => t('Can you edit and delete shapes.'),
     '#default_value' => isset($settings['allow_edit']) ? $settings['allow_edit'] : 1,
   );
+  $form['showInputField'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show input field'),
+    '#description' => t('Shows the data in a textarea.'),
+    '#default_value' => !empty($settings['showInputField']),
+  );
 
   // Add optional Geocoder support.
   $use_geocoder = isset($settings['use_geocoder']) ? $settings['use_geocoder'] : 0;
@@ -428,6 +434,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
       $component->setOption('initialData', $items);
       $component->setOption('featureLimit', $field['cardinality']);
       $component->setOption('inputFieldName', 'geom');
+      $component->setOption('showInputField', !empty($settings['showInputField']));
     }
   }
 
@@ -511,7 +518,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
         'wrapper' => $wrapper_id,
         'effect' => 'fade',
       ),
-      '#submit' => array('openlayers_use_geocoder_submit'),
+      '#submit' => array('openlayers_openlayers_use_geocoder_submit'),
     );
   }
 
@@ -524,6 +531,34 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   $full_element['#element_validate'][] = 'openlayers_geofield_widget_element_validate';
 
   return $full_element;
+}
+
+/**
+ * Submit handler for the geocoder integration.
+ */
+function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
+  $button = $form_state['triggering_element'];
+
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $delta = $element['#delta'];
+  $parents = $element['#field_parents'];
+
+  // Set the widget value based on geocoding results.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  $values = drupal_array_get_nested_value($form_state['values'], array_slice($button['#array_parents'], 0, -2));
+  if ($field_value = geocoder_widget_get_field_value($element['#entity_type'], $field_state['instance'], NULL, $values)) {
+    geophp_load();
+    $geometry = geoPHP::load($field_value[$langcode][$delta]['geom']);
+    // OpenLayers can only use WKT, so translate.
+    $field_value[$langcode][$delta]['geom'] = $geometry->out('wkt');
+    $field_value[$langcode][$delta]['input_format'] = 'wkt';
+    // Override the field's value in the 'input' array to substitute the new
+    // field value for the one that was submitted.
+    drupal_array_set_nested_value($form_state, array_merge(array('values'), array_slice($button['#array_parents'], 0, -3)), $field_value);
+  }
 }
 
 /**
