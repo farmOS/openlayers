@@ -15,7 +15,7 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
   }
 
   $current_path = current_path();
-  if ('system/ajax' == $current_path) {
+  if ('system/ajax' == $current_path && isset($_SESSION['current_path'])) {
     $current_path = $_SESSION['current_path'];
   }
 
