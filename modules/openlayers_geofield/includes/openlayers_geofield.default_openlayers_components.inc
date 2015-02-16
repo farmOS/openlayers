@@ -45,7 +45,7 @@ function openlayers_geofield_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_geofield_component_zoom_to_source';
-  $ol_component->name = 'OpenLayers Geofield Zoomt to Source';
+  $ol_component->name = 'OpenLayers Geofield Zoom to Source';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.component.internal.ZoomToSource';
   $ol_component->options = array(

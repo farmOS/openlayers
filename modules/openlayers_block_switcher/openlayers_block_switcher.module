@@ -43,7 +43,7 @@ function openlayers_block_switcher_block_view($delta = '') {
  *   Array with maps.
  */
 function _olebs_get_maps_with_blockswitcher() {
-  $maps = &drupal_static(__FUNCTION__);
+  $maps = &drupal_static(__FUNCTION__, array());
 
   if (!isset($maps)) {
     ctools_include('export');
