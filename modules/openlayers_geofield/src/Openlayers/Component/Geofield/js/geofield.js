@@ -153,9 +153,16 @@ Drupal.openlayers.pluginManager.register({
       draw_interaction.on('drawend', function(event) {
         // Enforce feature limit.
         if (data.opt.featureLimit && data.opt.featureLimit != -1 && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
-          alert(Drupal.t('You can add a maximum of !limit features. Please remove one before adding a new.', {'!limit': data.opt.featureLimit}));
-          vector_layer.getSource().removeFeature(event.feature);
-          return;
+          if (confirm(Drupal.t('You can add a maximum of !limit features. Dou you want to replace the last feature by the new one?', {'!limit': data.opt.featureLimit}))) {
+            var features = vector_layer.getSource().getFeatures();
+            // The "last" feature is one before the currently drawn.
+            var lastFeature = features[features.length - 2];
+            vector_layer.getSource().removeFeature(lastFeature);
+          }
+          else {
+            vector_layer.getSource().removeFeature(event.feature);
+            return;
+          }
         }
         // give the feature this id
         event.feature.setId(goog.getUid(event));
