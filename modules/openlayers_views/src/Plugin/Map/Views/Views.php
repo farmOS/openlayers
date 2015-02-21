@@ -64,17 +64,17 @@ class Views extends OLMap {
   /**
    * {@inheritdoc}
    */
-  public function getSources() {
-    $sources = parent::getSources();
-    $views_source_name = 'source_map_views_' . str_replace(':', '_', $this->getOption('views_display'));
+  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    parent::preBuild($build, $this);
 
     // Inject the prepared features into the correct source.
+    $sources = parent::getSources();
+    $views_source_name = 'source_map_views_' . str_replace(':', '_', $this->getOption('views_display'));
     foreach ($sources as $source) {
       if ($source->machine_name == $views_source_name) {
         $source->setOption('features', $this->getFeatures());
       }
     }
-    return $sources;
   }
 
   /**
