@@ -467,20 +467,18 @@ function openlayers_requirements($phase) {
   $t = get_t();
 
   if ($phase != 'install') {
-    $ol3 = libraries_detect('openlayers3');
-
-    if ($ol3) {
+    if (($library = libraries_detect('openlayers3')) && !empty($library['installed'])) {
       $requirements['openlayers3'] = array(
-        'title' => $t('OpenLayers library installed'),
+        'title' => $t('Openlayers'),
         'severity' => REQUIREMENT_OK,
-        'value' => $t('OpenLayers %version library installed at %path', array('%path' => $ol3['library path'], '%version' => $ol3['version'])),
+        'value' => $t('Openlayers %version installed at %path', array('%path' => $library['library path'], '%version' => $library['version'])),
       );
     }
     else {
       $requirements['openlayers3'] = array(
-        'title' => $t('OpenLayers'),
+        'title' => $t('Openlayers'),
         'severity' => REQUIREMENT_ERROR,
-        'value' => $t('OpenLayers library was not found.'),
+        'value' => $t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>.', array('@url' => $library['download url'])),
       );
     }
   }

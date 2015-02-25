@@ -5,11 +5,6 @@
  */
 
 /**
- * The OpenLayers library URI.
- */
-define('OPENLAYERS_DOWNLOAD_URI', 'https://github.com/openlayers/ol3/releases/download/v3.2.1/v3.2.1.zip');
-
-/**
  * Implements hook_drush_command().
  */
 function openlayers_drush_command() {
@@ -60,8 +55,10 @@ function drush_openlayers_plugin() {
   $olddir = getcwd();
   chdir($path);
 
+  $library = libraries_detect('openlayers3');
+
   // Download the archive.
-  if ($filepath = drush_download_file(OPENLAYERS_DOWNLOAD_URI)) {
+  if ($filepath = drush_download_file($library['download url'])) {
     $filename = basename($filepath);
     $dirname = basename($filepath, '.zip');
 
