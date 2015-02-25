@@ -159,7 +159,7 @@ class Geofield extends Component {
       }
       $combined_geom = geoPHP::geometryReduce($geoms);
       // If we could parse the geom process further.
-      if ($combined_geom) {
+      if ($combined_geom && $combined_geom->getComponents()) {
         // We want to force the combined_geom into a geometryCollection.
         $geom_type = $combined_geom->geometryType();
         if ($geom_type == 'MultiPolygon' || $geom_type == 'MultiLineString' || $geom_type == 'MultiPoint') {
