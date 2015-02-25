@@ -34,9 +34,7 @@ function openlayers_ui_menu() {
  * Implements hook_ctools_plugin_directory().
  */
 function openlayers_ui_ctools_plugin_directory($owner, $plugin_type) {
-  if ($owner == 'openlayers') {
-    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
-  }
+  return 'src/Plugin/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
 }
 
 /**
