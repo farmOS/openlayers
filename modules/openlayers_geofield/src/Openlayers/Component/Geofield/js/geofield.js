@@ -37,10 +37,15 @@ Drupal.openlayers.pluginManager.register({
     // Add preset data if available.
     if (jQuery('.openlayers-geofield-data', geofieldWrapper).val()) {
       try {
-        var format = new ol.format[data.opt.initialDataType]();
-        var feature = format.readFeature(jQuery('.openlayers-geofield-data', geofieldWrapper).val());
-        feature.getGeometry().transform(data.opt.dataProjection, data.map.getView().getProjection());
-        vector_layer.getSource().addFeatures([feature]);
+        var format = new ol.format[data.opt.initialDataType]({splitCollection: true});
+        vector_layer.getSource().addFeatures(
+          format.readFeatures(
+            jQuery('.openlayers-geofield-data', geofieldWrapper).val(),
+            {
+              dataProjection: data.opt.dataProjection,
+              featureProjection: data.map.getView().getProjection()
+            })
+        );
       }
       catch (e) {
       }
@@ -181,7 +186,7 @@ Drupal.openlayers.pluginManager.register({
       // define a format the data shall be converted to
       var typeFormat = data_type.val();
 
-      var format = new ol.format[typeFormat](),
+      var format = new ol.format[typeFormat]({splitCollection: true}),
       // this will be the data in the chosen format
         datas;
       try {
