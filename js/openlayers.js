@@ -92,7 +92,6 @@ Drupal.openlayers = (function($){
           settings.component.map(function (data) {
             var component = Drupal.openlayers.getObject(context, 'components', data, map_id);
           });
-          $(document).trigger('openlayers.components_post_alter', [{components: settings.component}]);
         }
 
         $(document).trigger('openlayers.build_stop', [
