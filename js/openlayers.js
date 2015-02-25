@@ -25,78 +25,75 @@ Drupal.openlayers = (function($){
 
         $(document).trigger('openlayers.map_post_alter', [{map: Drupal.openlayers.instances[map_id].map}]);
 
-        $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source}]);
-        settings.source.map(function (data) {
-          if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
-            data.opt.attributions = [
-              new ol.Attribution({
-                'html': data.opt.attributions
-              })
-            ];
-          }
-          var source = Drupal.openlayers.getObject(context, 'sources', data, map_id);
-          if (!source && goog.isDef(console)) {
-              Drupal.openlayers.console.log('Failed to build source: ' + data.mn);
-          }
-        });
-        $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source}]);
+        if (settings.source.length > 0) {
+          $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source}]);
+          settings.source.map(function (data) {
+            if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
+              data.opt.attributions = [
+                new ol.Attribution({
+                  'html': data.opt.attributions
+                })
+              ];
+            }
+            var source = Drupal.openlayers.getObject(context, 'sources', data, map_id);
+          });
+          $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source}]);
+        }
 
-        $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control}]);
-        settings.control.map(function (data) {
-          var control = Drupal.openlayers.getObject(context, 'controls', data, map_id);
-          if (control) {
-            map.addControl(control);
-          }
-          else if (goog.isDef(console)) {
-            Drupal.openlayers.console.log('Failed to build control: ' + data.mn);
-          }
-        });
-        $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control}]);
+        if (settings.control.length > 0) {
+          $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control}]);
+          settings.control.map(function (data) {
+            var control = Drupal.openlayers.getObject(context, 'controls', data, map_id);
+            if (control) {
+              map.addControl(control);
+            }
+          });
+          $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control}]);
+        }
 
-        $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction}]);
-        settings.interaction.map(function (data) {
-          var interaction = Drupal.openlayers.getObject(context, 'interactions', data, map_id);
-          if (interaction) {
-            map.addInteraction(interaction);
-          }
-          else  if (goog.isDef(console)) {
-            Drupal.openlayers.console.log('Failed to build interaction: ' + data.mn);
-          }
-        });
-        $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction}]);
+        if (settings.interaction.length > 0) {
+          $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction}]);
+          settings.interaction.map(function (data) {
+            var interaction = Drupal.openlayers.getObject(context, 'interactions', data, map_id);
+            if (interaction) {
+              map.addInteraction(interaction);
+            }
+          });
+          $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction}]);
+        }
 
-        $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style}]);
-        settings.style.map(function (data) {
-          var style = Drupal.openlayers.getObject(context, 'styles', data, map_id);
-          if (!style && goog.isDef(console)) {
-            Drupal.openlayers.console.log('Failed to build style: ' + data.mn);
-          }
-        });
-        $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style}]);
+        if (settings.style.length > 0) {
+          $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style}]);
+          settings.style.map(function (data) {
+            var style = Drupal.openlayers.getObject(context, 'styles', data, map_id);
+          });
+          $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style}]);
+        }
 
-        $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer}]);
-        settings.layer.map(function (data) {
-          // Clone the data to keep the settings as raw as possible.
-          var cloned_data = jQuery.extend(true, {}, data);
-          cloned_data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
-          if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
-            cloned_data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
-          }
-          var layer = Drupal.openlayers.getObject(context, 'layers', cloned_data, map_id);
-          if (layer) {
-            map.addLayer(layer);
-          }
-          else if (goog.isDef(console)) {
-            Drupal.openlayers.console.log('Failed to build layer: ' + data.mn);
-          }
-        });
-        $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer}]);
+        if (settings.layer.length > 0) {
+          $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer}]);
+          settings.layer.map(function (data) {
+            // Clone the data to keep the settings as raw as possible.
+            var cloned_data = jQuery.extend(true, {}, data);
+            cloned_data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
+            if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
+              cloned_data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
+            }
+            var layer = Drupal.openlayers.getObject(context, 'layers', cloned_data, map_id);
+            if (layer) {
+              map.addLayer(layer);
+            }
+          });
+          $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer}]);
+        }
 
-        $(document).trigger('openlayers.components_pre_alter', [{components: settings.component}]);
-        settings.component.map(function (data) {
-          var component = Drupal.openlayers.getObject(context, 'components', data, map_id);
-        });
-        $(document).trigger('openlayers.components_post_alter', [{components: settings.component}]);
+        if (settings.component.length > 0) {
+          $(document).trigger('openlayers.components_pre_alter', [{components: settings.component}]);
+          settings.component.map(function (data) {
+            var component = Drupal.openlayers.getObject(context, 'components', data, map_id);
+          });
+          $(document).trigger('openlayers.components_post_alter', [{components: settings.component}]);
+        }
 
         $(document).trigger('openlayers.build_stop', [
           {
@@ -106,9 +103,9 @@ Drupal.openlayers = (function($){
           }
         ]);
       } catch (e) {
-        if (goog.isDef(console)) {
-          Drupal.openlayers.console.log(e.message);
-          Drupal.openlayers.console.log(e.stack);
+        if (goog.isDef(Drupal.openlayers.console)) {
+          Drupal.openlayers.console.error(e.message);
+          Drupal.openlayers.console.error(e.stack);
         }
         else {
           $(this).text('Error during map rendering: ' + e.message);
@@ -203,7 +200,8 @@ Drupal.openlayers = (function($){
             'data': data,
             'map': Drupal.openlayers.instances[map_id].map,
             'objects': Drupal.openlayers.instances[map_id],
-            'context': context
+            'context': context,
+            'object': object
           }
         ]);
 
@@ -216,9 +214,14 @@ Drupal.openlayers = (function($){
         }
         return object;
       }
-      else if (goog.isDef(console)) {
-        Drupal.openlayers.console.log('Factory service to build ' + type + ' not available: ' + data.fs);
+      else {
+        Drupal.openlayers.log('fake', 'Factory service to build ' + type + ' not available: ' + data.fs);
       }
-    })
+    }),
+    log: function(string) {
+      if (goog.isDef(Drupal.openlayers.console)) {
+        Drupal.openlayers.console.log(string);
+      }
+    }
   };
 })(jQuery);
