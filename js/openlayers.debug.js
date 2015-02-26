@@ -72,8 +72,9 @@
 
   $(document).on('openlayers.object_pre_alter', function(event, objects) {
     console.groupCollapsed("Loading " + objects.type + " " + objects.data.mn + '...');
+    console.info('Object data');
+    console.debug(objects.data);
     console.time('Time');
-
   });
   $(document).on('openlayers.object_post_alter', function(event, objects) {
     if (!goog.isObject(objects.object) && objects.type !== 'components') {
@@ -88,4 +89,14 @@
     console.timeEnd('Total building time');
     console.groupEnd();
   });
+
+  $(document).on('openlayers.build_failed', function(event, objects) {
+    console.timeEnd('Total building time');
+    console.groupEnd();
+    Drupal.openlayers.console.error(objects.error.message);
+    Drupal.openlayers.console.error(objects.error.stack);
+    $('#' + objects.settings.map.map_id).html('<pre><b>Error during map rendering:</b> ' + objects.error.message + '</pre>');
+    $('#' + objects.settings.map.map_id).append('<pre>' + objects.error.stack + '</pre>');
+  });
+
 })(jQuery);

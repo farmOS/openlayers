@@ -22,7 +22,6 @@ Drupal.openlayers = (function($){
       try {
         $(document).trigger('openlayers.map_pre_alter', [{context: context}]);
         map = Drupal.openlayers.getObject(context, 'maps', settings.map, map_id);
-
         $(document).trigger('openlayers.map_post_alter', [{map: Drupal.openlayers.instances[map_id].map}]);
 
         if (settings.source.length > 0) {
@@ -94,23 +93,24 @@ Drupal.openlayers = (function($){
           });
         }
 
-        $(document).trigger('openlayers.build_stop', [
+      } catch (e) {
+        $(document).trigger('openlayers.build_failed', [
           {
-            'type': 'objects',
+            'error': e,
             'settings': settings,
             'context': context
           }
         ]);
-      } catch (e) {
-        if (goog.isDef(Drupal.openlayers.console)) {
-          Drupal.openlayers.console.error(e.message);
-          Drupal.openlayers.console.error(e.stack);
-        }
-        else {
-          $(this).text('Error during map rendering: ' + e.message);
-          $(this).text('Stack: ' + e.stack);
-        }
       }
+
+      $(document).trigger('openlayers.build_stop', [
+        {
+          'type': 'objects',
+          'settings': settings,
+          'context': context
+        }
+      ]);
+
       return map;
     },
 
