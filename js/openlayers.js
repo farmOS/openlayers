@@ -34,7 +34,7 @@ Drupal.openlayers = (function($){
                 })
               ];
             }
-            var source = Drupal.openlayers.getObject(context, 'sources', data, map_id);
+            Drupal.openlayers.getObject(context, 'sources', data, map_id);
           });
           $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source}]);
         }
@@ -64,7 +64,7 @@ Drupal.openlayers = (function($){
         if (settings.style.length > 0) {
           $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style}]);
           settings.style.map(function (data) {
-            var style = Drupal.openlayers.getObject(context, 'styles', data, map_id);
+            Drupal.openlayers.getObject(context, 'styles', data, map_id);
           });
           $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style}]);
         }
@@ -89,11 +89,12 @@ Drupal.openlayers = (function($){
         if (settings.component.length > 0) {
           $(document).trigger('openlayers.components_pre_alter', [{components: settings.component}]);
           settings.component.map(function (data) {
-            var component = Drupal.openlayers.getObject(context, 'components', data, map_id);
+            Drupal.openlayers.getObject(context, 'components', data, map_id);
           });
         }
 
       } catch (e) {
+        $('#' + map_id).empty();
         $(document).trigger('openlayers.build_failed', [
           {
             'error': e,
@@ -101,6 +102,7 @@ Drupal.openlayers = (function($){
             'context': context
           }
         ]);
+        map = false;
       }
 
       $(document).trigger('openlayers.build_stop', [
