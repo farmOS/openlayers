@@ -45,8 +45,8 @@ function openlayers_default_openlayers_maps() {
       2 => 'openlayers_interaction_mousewheelzoom',
     ),
     'components' => array(
-      0 => 'openlayers_examples_component_map_edit_form_values',
-      1 => 'openlayers_examples_component_map_edit_form_setcenter',
+      0 => 'openlayers_component_map_edit_form_values',
+      1 => 'openlayers_component_map_edit_form_setcenter',
     ),
   );
   $export['openlayers_map_view_edit_form'] = $ol_map;
