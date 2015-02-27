@@ -1,7 +1,7 @@
 /**
  * Logging implementation that logs using the browser's logging API.
  * Falls back to doing nothing in case no such API is available. Simulates
- * the presece of Firebug's console API in Drupal.openlayers.console.
+ * the presence of Firebug's console API in Drupal.openlayers.console.
  */
 Drupal.openlayers.console = (function($) {
   "use strict";

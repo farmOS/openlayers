@@ -2,14 +2,13 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.component.internal.setvalues',
   init: function(data) {
     data.map.on('moveend', function(evt){
-      var selector = '#' + data.opt.latitude;
-      jQuery(selector).val(data.map.getView().getCenter()[0]);
-      var selector = '#' + data.opt.longitude;
-      jQuery(selector).val(data.map.getView().getCenter()[1]);
-      var selector = '#' + data.opt.rotation;
-      jQuery(selector).val(Math.round(data.map.getView().getRotation() * (180 / Math.PI)));
-      var selector = '#' + data.opt.zoom;
-      jQuery(selector).val(data.map.getView().getZoom());
+      var view = data.map.getView();
+      var coord = ol.proj.transform(view.getCenter(), view.getProjection(), 'EPSG:4326');
+
+      jQuery('#' + data.opt.latitude).val(coord[0]);
+      jQuery('#' + data.opt.longitude).val(coord[1]);
+      jQuery('#' + data.opt.rotation).val(Math.round(view.getRotation() * (180 / Math.PI)));
+      jQuery('#' + data.opt.zoom).val(view.getZoom());
     });
   }
 });

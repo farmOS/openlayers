@@ -21,31 +21,18 @@ class OLMap extends Map {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
-    $form['options']['misc'] = array(
-      '#type' => 'fieldset',
-      '#title' => 'Miscellaneous options',
-    );
-    $form['options']['misc']['renderer'] = array(
-      '#type' => 'radios',
-      '#title' => 'Renderer',
-      '#description' => 'Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.',
-      '#options' => array('canvas' => 'Canvas', 'dom' => 'DOM', 'webgl' => 'WebGL'),
-      '#default_value' => $this->getOption('renderer', 'canvas'),
-      '#parents' => array('options', 'renderer')
-    );
-
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Size of the map'),
+      '#title' => t('User interface'),
       'width' => array(
         '#type' => 'textfield',
-        '#title' => 'Width',
+        '#title' => 'Width of the map',
         '#default_value' => $this->getOption('width', 'auto'),
         '#parents' => array('options', 'width'),
       ),
       'height' => array(
         '#type' => 'textfield',
-        '#title' => 'height',
+        '#title' => 'Height of the map',
         '#default_value' => $this->getOption('height', '300px'),
         '#parents' => array('options', 'height'),
       ),
@@ -53,7 +40,7 @@ class OLMap extends Map {
 
     $form['options']['view'] = array(
       '#type' => 'fieldset',
-      '#title' => t('View: center and rotation'),
+      '#title' => t('Center and rotation'),
       '#tree' => TRUE,
     );
 
@@ -65,7 +52,7 @@ class OLMap extends Map {
 
       $form['options']['view']['map'] = array(
         '#type' => 'openlayers',
-        '#description' => t('You can drag this map with your mouse, click to center and you can hold alt and shift key to rotate.'),
+        '#description' => $map->description,
         '#map' => $map,
       );
     }
@@ -103,6 +90,19 @@ class OLMap extends Map {
       '#title' => 'Max zoom',
       '#default_value' => $this->getOption(array('view', 'maxZoom'), 0),
     );
+
+    $form['options']['misc'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Miscellaneous options',
+    );
+    $form['options']['misc']['renderer'] = array(
+      '#type' => 'radios',
+      '#title' => 'Renderer',
+      '#description' => 'Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.',
+      '#options' => array('canvas' => 'Canvas', 'dom' => 'DOM', 'webgl' => 'WebGL'),
+      '#default_value' => $this->getOption('renderer', 'canvas'),
+      '#parents' => array('options', 'renderer')
+    );
   }
 
   /**
@@ -110,9 +110,8 @@ class OLMap extends Map {
    */
   public function attached() {
     $attached = parent::attached();
-    // TODO: OpenLayers settings form by default to debug mode.
     $variant = NULL;
-    if (Config::get('openlayers.debug') == TRUE) {
+    if (Config::get('openlayers.debug', FALSE) == TRUE) {
       $variant = 'debug';
     };
     $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
