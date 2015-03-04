@@ -14,7 +14,7 @@ $plugin = array(
 );
 
 /**
- * Class LayerSwitcher
+ * Class LayerSwitcher.
  *
  * @package Drupal\openlayers\Control
  */

@@ -14,16 +14,22 @@ use Drupal\openlayers\Config;
 abstract class Object extends PluginBase implements ObjectInterface {
 
   /**
+   * The unique machine name.
+   *
    * @var string
    */
   public $machine_name;
 
   /**
+   * The human readable name.
+   *
    * @var string
    */
   public $name;
 
   /**
+   * A short description.
+   *
    * @var string
    */
   public $description;
@@ -49,6 +55,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
   protected $collection = NULL;
 
   /**
+   * Holds all the attachment used by this object.
+   *
    * @var array
    */
   protected $attached = array(
@@ -286,13 +294,20 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return $this->attached;
   }
 
+  /**
+   * Returns an array with the maps this object is attached on.
+   *
+   * @return array
+   *   An array of map objects this object is attached on. Keyed by the map
+   *   machine name.
+   */
   public function getParents() {
     $maps = ctools_export_crud_load_all('openlayers_maps');
     $parents = array();
 
-    foreach($maps as $map) {
+    foreach ($maps as $map) {
       $map = openlayers_object_load('map', $map);
-      foreach($map->getCollection()->getFlatList() as $object) {
+      foreach ($map->getCollection()->getFlatList() as $object) {
         if ($object->machine_name == $this->machine_name) {
           $parents[$map->machine_name] = $map;
         }

@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DragRotate
+ * Class DragRotate.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DragRotate extends Interaction {

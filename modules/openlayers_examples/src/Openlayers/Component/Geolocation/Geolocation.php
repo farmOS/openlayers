@@ -105,8 +105,8 @@ class Geolocation extends Component {
           '#attributes' => array(
             'id' => 'speed',
           ),
-        )
-      )
+        ),
+      ),
     );
   }
 

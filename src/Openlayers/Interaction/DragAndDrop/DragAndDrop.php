@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DragAndDrop
+ * Class DragAndDrop.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DragAndDrop extends Interaction {

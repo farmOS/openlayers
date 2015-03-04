@@ -27,33 +27,33 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
     $services['openlayers.manager'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array(
-        'openlayers.manager.internal.'
+        'openlayers.manager.internal.',
       ),
       'calls' => array(
         array(
           'setContainer',
           array(
-            '@service_container'
-          )
-        )
-      )
+            '@service_container',
+          ),
+        ),
+      ),
     );
 
     $services['openlayers.manager.internal.error'] = array(
       'class' => '\Drupal\openlayers\Types\Error',
-      'arguments' => array('@logger.channel.default')
+      'arguments' => array('@logger.channel.default'),
     );
 
     $services['openlayers.manager.internal.collection'] = array(
-      'class' => '\Drupal\openlayers\Types\Collection'
+      'class' => '\Drupal\openlayers\Types\Collection',
     );
 
-    foreach(openlayers_ctools_plugin_type() as $plugin_type => $data) {
+    foreach (openlayers_ctools_plugin_type() as $plugin_type => $data) {
       $plugin_type = drupal_strtolower($plugin_type);
       $services['openlayers.' . $plugin_type] = array();
       $parameters['service_container.plugin_managers']['ctools']['openlayers.' . $plugin_type] = array(
         'owner' => 'openlayers',
-        'type' => drupal_ucfirst($plugin_type)
+        'type' => drupal_ucfirst($plugin_type),
       );
     }
 

@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DragBox
+ * Class DragBox.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DragBox extends Interaction {

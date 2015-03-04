@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DoubleClickZoom
+ * Class DoubleClickZoom.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DoubleClickZoom extends Interaction {

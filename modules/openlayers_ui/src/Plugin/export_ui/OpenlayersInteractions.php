@@ -8,6 +8,7 @@ namespace Drupal\openlayers\UI;
 
 /**
  * Class Interactions.
+ *
  * @package Drupal\openlayers\UI
  */
 class OpenlayersInteractions extends \OpenlayersObjects {

@@ -8,6 +8,7 @@ namespace Drupal\openlayers\UI;
 
 /**
  * Class Controls.
+ *
  * @package Drupal\openlayers\UI
  */
 class OpenlayersControls extends \OpenlayersObjects {

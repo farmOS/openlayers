@@ -52,7 +52,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $form['debug'] = array(
     '#type' => 'checkbox',
     '#title' => t('Debug mode'),
-    '#description' => t('Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn\'t fully work in IE yet.'),
+    '#description' => t("Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn't fully work in IE yet."),
     '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
   );
 
@@ -63,8 +63,8 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $form['buttons'] = array(
     'submit' => array(
       '#type' => 'submit',
-      '#value' => 'Save configuration'
-    )
+      '#value' => 'Save configuration',
+    ),
   );
 
   return $form;

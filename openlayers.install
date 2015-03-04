@@ -4,7 +4,6 @@
  * Openlayers module - installation procedure.
  */
 
-
 /**
  * Implements hook_uninstall().
  */

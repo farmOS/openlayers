@@ -20,9 +20,9 @@ class GeoJSON extends Source {
    * {@inheritdoc}
    */
   public function defaultProperties() {
-    $defaultProperties = parent::defaultProperties();
-    $defaultProperties['options']['paramForwarding'] = TRUE;
-    return $defaultProperties;
+    $default_properties = parent::defaultProperties();
+    $default_properties['options']['paramForwarding'] = TRUE;
+    return $default_properties;
   }
 
   /**

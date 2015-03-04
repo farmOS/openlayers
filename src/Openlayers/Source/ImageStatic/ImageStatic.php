@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class ImageStatic
+ * Class ImageStatic.
+ *
  * @package Drupal\openlayers\Source
  */
 class ImageStatic extends Source {

@@ -59,11 +59,13 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
   if (isset($form_state['values']['openlayers_default_map'])) {
     $maps = $form_state['values']['openlayers_default_map'];
-  } else {
+  }
+  else {
     $map = $map_arg;
     if (($map == NULL) || (!isset($options[$map]))) {
       $maps = array(array_rand($options, 1));
-    } elseif (isset($options[$map])) {
+    }
+    elseif (isset($options[$map])) {
       $maps = array($map);
     }
     if ($map == 'all') {
@@ -98,7 +100,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $form['form'][$map->getId()] = array(
       '#type' => 'fieldset',
       '#title' => $map->name,
-      '#collapsible' => FALSE
+      '#collapsible' => FALSE,
     );
 
     $map->clearOption('contextualLinks');
@@ -189,7 +191,6 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     );
 
   }
-
 
   $form['lat'] = array(
     '#type' => 'hidden',

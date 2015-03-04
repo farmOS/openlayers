@@ -11,7 +11,7 @@ $plugin = array(
   'class' => '\\Drupal\\openlayers\\Interaction\\DragPan',
 );
 
-/***
+/**
  * Class DragPan
  * @package Drupal\openlayers\Interaction
  */

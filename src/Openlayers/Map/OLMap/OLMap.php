@@ -99,9 +99,13 @@ class OLMap extends Map {
       '#type' => 'radios',
       '#title' => 'Renderer',
       '#description' => 'Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.',
-      '#options' => array('canvas' => 'Canvas', 'dom' => 'DOM', 'webgl' => 'WebGL'),
+      '#options' => array(
+        'canvas' => 'Canvas',
+        'dom' => 'DOM',
+        'webgl' => 'WebGL',
+      ),
       '#default_value' => $this->getOption('renderer', 'canvas'),
-      '#parents' => array('options', 'renderer')
+      '#parents' => array('options', 'renderer'),
     );
   }
 

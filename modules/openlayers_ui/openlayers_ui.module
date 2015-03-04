@@ -43,7 +43,7 @@ function openlayers_ui_ctools_plugin_directory($owner, $plugin_type) {
 function openlayers_ui_ctools_plugin_api($module, $api) {
   return array(
     'version' => 1,
-    'path' => drupal_get_path('module', 'openlayers_ui') . '/includes'
+    'path' => drupal_get_path('module', 'openlayers_ui') . '/includes',
   );
 }
 
@@ -57,34 +57,43 @@ function openlayers_ui_help($path, $arg) {
     case 'admin/help#openlayers':
       $output = t('Openlayers is a module who displays information on a map using the <a href="@url">Openlayers library</a>.', array('@url' => 'http://ol3js.org/'));
       break;
+
     case 'admin/structure/openlayers':
       $output = t('Openlayers configuration and settings.');
       break;
+
     case 'admin/structure/openlayers/maps':
       $output = t('Manage the Openlayers maps.');
       break;
+
     case 'admin/structure/openlayers/projections':
       $output = t('Managing projections is not yet ready. Feel free to contribute.');
       break;
+
     case 'admin/structure/openlayers/styles':
       $output = t('Manage the Openlayers styles for the features displayed on maps.');
       break;
+
     case 'admin/structure/openlayers/layers':
       $output = t('Manage the Openlayers layers. Maps are composed of layers.');
       break;
+
     case 'admin/structure/openlayers/sources':
       $output = t('Manage the Openlayers sources. Layers must have a source defined.');
       break;
+
     case 'admin/structure/openlayers/controls':
       $output = t('Manage the Openlayers controls. Maps are composed of controls.');
       break;
+
     case 'admin/structure/openlayers/interactions':
       $output = t('Manage the Openlayers interactions. Maps are composed of interactions.');
       break;
+
     case 'admin/structure/openlayers/components':
       $output = t('Manage the custom components. These components are JS objects that are triggered after the map has been created.');
       break;
   }
 
-  return  '<p>' . $output . '</p>';
+  return '<p>' . $output . '</p>';
 }

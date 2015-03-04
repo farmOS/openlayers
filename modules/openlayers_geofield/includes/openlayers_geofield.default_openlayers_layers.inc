@@ -10,7 +10,6 @@
 function openlayers_geofield_default_openlayers_layers() {
   $export = array();
 
-
   $ol_layer = new stdClass();
   $ol_layer->disabled = FALSE; /* Edit this to true to make a default layer disabled initially */
   $ol_layer->api_version = 1;

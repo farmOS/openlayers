@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DragZoom
+ * Class DragZoom.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DragZoom extends Interaction {

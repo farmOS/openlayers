@@ -12,7 +12,8 @@ $plugin = array(
 );
 
 /**
- * Class DragRotateAndZoom
+ * Class DragRotateAndZoom.
+ *
  * @package Drupal\openlayers\Interaction
  */
 class DragRotateAndZoom extends Interaction {

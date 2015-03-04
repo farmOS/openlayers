@@ -379,7 +379,7 @@ function openlayers_i18n_string_info() {
  *   - callback: callback to apply to the result (both to the translated or
  *     untranslated string)
  *   - update: whether to update source table; defaults to FALSE
- *   - translate: whether to return a translation; defaults to TRUE
+ *   - translate: whether to return a translation; defaults to TRUE.
  *
  * @return string
  *   The translated string if i18n_string is available, the original otherwise.
@@ -418,7 +418,7 @@ function openlayers_i18n_string($name, $default, $options = array()) {
  * @param array $options
  *   Array with additional options:
  *   - 'format', String format if the string has text format
- *   - 'messages', Whether to print out status messages
+ *   - 'messages', Whether to print out status messages.
  *
  * @return mixed
  *   Same return as from i18n_string_update()
@@ -439,7 +439,7 @@ function openlayers_i18n_string_update($name, $string, $options = array()) {
  * to use the source string itself as a search key.
  *
  * @param string $name
- *   String name
+ *   String name.
  * @param string $string
  *   Optional source string (string in default language).
  * @param array $options

@@ -12,7 +12,7 @@ $plugin = array(
 );
 
 /**
- * Class InlineJS
+ * Class InlineJS.
  */
 class InlineJS extends Component {
 
