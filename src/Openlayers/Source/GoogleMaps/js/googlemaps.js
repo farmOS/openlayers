@@ -110,6 +110,9 @@ Drupal.openlayers.pluginManager.register({
 Drupal.openlayers.openlayers_source_internal_googlemaps_initialize = function() {
   jQuery('.openlayers.gmap-map').each(function() {
     var map_id = jQuery(this).attr('id').replace('gmap-', '');
-    Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')]();
+    var callback = Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')];
+    if (typeof callback != 'undefined') {
+      callback();
+    }
   });
 };
