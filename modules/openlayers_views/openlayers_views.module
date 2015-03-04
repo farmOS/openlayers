@@ -85,3 +85,15 @@ function openalyers_views_get_views($style_type = NULL, $reset = FALSE) {
   // Return all types.
   return $cache;
 }
+
+/**
+ * Implements hook_views_invalidate_cache().
+ */
+function openlayers_views_views_invalidate_cache() {
+  // If this hook is fired we've to assume that a openlayers related view was
+  // adjusted and thus we need to flush the openlayers plugin cache. This seems
+  // the only way to get notified about CRUD events of views.
+  cache_clear_all('ctools_export:openlayers_maps:*', 'cache', TRUE);
+  cache_clear_all('ctools_export:openlayers_sources:*', 'cache', TRUE);
+  cache_clear_all('ctools_export:openlayers_layers:*', 'cache', TRUE);
+}
