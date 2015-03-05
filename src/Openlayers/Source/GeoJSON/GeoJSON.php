@@ -116,4 +116,14 @@ class GeoJSON extends Source {
       ),
     );
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getJS() {
+    $js = parent::getJS();
+    // Ensure we've a sane url.
+    $js['opt']['url'] = url($js['opt']['url']);
+    return $js;
+  }
 }
