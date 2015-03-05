@@ -101,10 +101,12 @@ class LayerSwitcher extends Control {
     $labels = $this->getOption('layer_labels', array());
     foreach ($map_layers as $i => $map_layer) {
       if (isset($layers[$map_layer->machine_name])) {
+        $classes = array(drupal_html_class($map_layer->machine_name));
         $checked = '';
         if ($element_type == 'checkbox') {
           if ($map_layer->getOption('visible', 1)) {
             $checked = 'checked ';
+            $classes[] = 'active';
           }
         }
         $label = check_plain($map_layer->name);
@@ -113,8 +115,8 @@ class LayerSwitcher extends Control {
         }
         $items[] = array(
           'data' => '<label><input type="' . $element_type . '" name="layer" ' . $checked . 'value="' . $map_layer->machine_name . '">' . $label . '</label>',
-          'id' => $map_id . '-' . $map_layer->machine_name,
-          'class' => array(drupal_html_class($map_layer->machine_name)),
+          'id' => drupal_html_id($map_id . '-' . $map_layer->machine_name),
+          'class' => $classes,
         );
       }
     }
@@ -129,6 +131,6 @@ class LayerSwitcher extends Control {
         'id' => drupal_html_id($this->machine_name . '-items'),
       ),
     );
-    $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="layerswitcher">' . drupal_render($layerswitcher) . '</div>');
+    $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="' . drupal_html_class($this->machine_name) . ' layerswitcher">' . drupal_render($layerswitcher) . '</div>');
   }
 }
