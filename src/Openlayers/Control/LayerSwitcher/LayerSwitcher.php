@@ -126,7 +126,7 @@ class LayerSwitcher extends Control {
       '#title' => $title,
       '#items' => $items,
       '#attributes' => array(
-        'id' => drupal_html_id($this->machine_name),
+        'id' => drupal_html_id($this->machine_name . '-items'),
       ),
     );
     $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="layerswitcher">' . drupal_render($layerswitcher) . '</div>');
