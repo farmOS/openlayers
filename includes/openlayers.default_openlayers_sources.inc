@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_default_sources().
+ * Implements hook_default_openlayers_sources().
  */
 function openlayers_default_openlayers_sources() {
   $export = array();
