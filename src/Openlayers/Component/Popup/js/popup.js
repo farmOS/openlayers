@@ -48,6 +48,14 @@ Drupal.openlayers.pluginManager.register({
         }
       });
       if (feature) {
+        // If this is a click to the same feature marker it's a close command.
+        if (jQuery(container).data('feature-key') == feature[goog.UID_PROPERTY_]) {
+          container.style.display = 'none';
+          jQuery(container).data('feature-key', '');
+          return;
+        }
+        jQuery(container).data('feature-key', feature[goog.UID_PROPERTY_]);
+
         var name = feature.get('name') || '';
         var description = feature.get('description') || '';
 
