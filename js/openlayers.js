@@ -184,7 +184,8 @@ Drupal.openlayers = (function($){
             'data': data,
             'map': Drupal.openlayers.instances[map_id].map,
             'objects': Drupal.openlayers.instances[map_id],
-            'context': context
+            'context': context,
+            'map_id': map_id
           }
         ]);
         object = Drupal.openlayers.pluginManager.createInstance(data['fs'], {
@@ -192,7 +193,8 @@ Drupal.openlayers = (function($){
           'opt': data.opt,
           'map': Drupal.openlayers.instances[map_id].map,
           'objects': Drupal.openlayers.instances[map_id],
-          'context': context
+          'context': context,
+          'map_id': map_id
         });
         $(document).trigger('openlayers.object_post_alter', [
           {
@@ -202,7 +204,8 @@ Drupal.openlayers = (function($){
             'map': Drupal.openlayers.instances[map_id].map,
             'objects': Drupal.openlayers.instances[map_id],
             'context': context,
-            'object': object
+            'object': object,
+            'map_id': map_id
           }
         ]);
 
