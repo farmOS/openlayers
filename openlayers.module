@@ -143,7 +143,7 @@ function openlayers_libraries_info() {
   $libraries['openlayers3'] = array(
     'name' => 'OpenLayers3',
     'vendor url' => 'http://ol3js.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.2.1/v3.2.1.zip',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.3.0/v3.3.0.zip',
     'version arguments' => array(
       'file' => 'build/ol.js',
       'pattern' => '@Version: (.*)@',
