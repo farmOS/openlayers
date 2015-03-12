@@ -36,7 +36,12 @@ Drupal.openlayers.pluginManager.register({
 
     var overlay = new ol.Overlay({
       element: container,
-      positioning: data.opt.positioning
+      positioning: data.opt.positioning,
+      autoPan: data.opt.autoPan,
+      autoPanAnimation: {
+        duration: data.opt.autoPanAnimation
+      },
+      autoPanMargin: data.opt.autoPanMargin
     });
 
     map.addOverlay(overlay);

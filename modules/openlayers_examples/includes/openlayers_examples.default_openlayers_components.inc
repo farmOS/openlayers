@@ -117,6 +117,10 @@ function openlayers_examples_default_openlayers_components() {
     'layers' => array(
       'openlayers_examples_layer_views_geojson_popup' => 'openlayers_examples_layer_views_geojson_popup',
     ),
+    'positioning' => 'top-right',
+    'autoPan' => TRUE,
+    'autoPanAnimation' => 1000,
+    'autoPanMargin' => 20
   );
   $export['openlayers_examples_component_simple_popup'] = $ol_component;
 
@@ -178,6 +182,9 @@ map.getLayers().forEach(function(layer){
       'openlayers_examples_layer_vector_kml_earthquakes_heatmap' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
     ),
     'positioning' => 'top-right',
+    'autoPan' => TRUE,
+    'autoPanAnimation' => 1000,
+    'autoPanMargin' => 20
   );
   $export['openlayers_examples_component_simple_popup_earthquakes'] = $ol_component;
 
