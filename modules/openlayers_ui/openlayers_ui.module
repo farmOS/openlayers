@@ -95,5 +95,6 @@ function openlayers_ui_help($path, $arg) {
       break;
   }
 
-  return '<p>' . $output . '</p>';
-}
+  if (isset($output)) {
+    return '<p>' . $output . '</p>';
+  }}
