@@ -153,13 +153,17 @@ abstract class OpenlayersObjects extends ctools_export_ui {
  * Wizard wrapper to add Save & edit button.
  */
 function openlayers_objects_ui_form_wrapper($form, $form_state) {
-  $form['buttons']['saveandedit'] = array(
-    '#name' => 'saveandedit',
-    '#type' => 'submit',
-    '#value' => t('Save & edit'),
-    '#wizard type' => 'finish',
-    '#weight' => 1,
-  );
-  $form['buttons']['cancel']['#weight'] = 20;
+
+  if ($form_state['step'] != 'start') {
+    $form['buttons']['saveandedit'] = array(
+      '#name' => 'saveandedit',
+      '#type' => 'submit',
+      '#value' => t('Save & edit'),
+      '#wizard type' => 'finish',
+      '#weight' => 1,
+    );
+    $form['buttons']['cancel']['#weight'] = 20;
+  }
+
   return $form;
 }
