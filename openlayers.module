@@ -455,3 +455,11 @@ function openlayers_i18n_string_remove($name, $string = NULL, $options = array()
     return i18n_string_remove($name, $string, $options);
   }
 }
+
+/**
+ * Implements hook_stream_wrappers_alter().
+ */
+function openlayers_stream_wrappers_alter(&$wrappers) {
+  // Initialize the container
+  ServiceContainer::init();
+}
