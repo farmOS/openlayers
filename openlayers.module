@@ -463,3 +463,11 @@ function openlayers_stream_wrappers_alter(&$wrappers) {
   // Initialize the container
   ServiceContainer::init();
 }
+
+/**
+ * Implements hook_enable().
+ */
+function openlayers_enable() {
+  // Reset the container
+  ServiceContainer::reset();
+}
