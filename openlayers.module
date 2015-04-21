@@ -460,14 +460,20 @@ function openlayers_i18n_string_remove($name, $string = NULL, $options = array()
  * Implements hook_stream_wrappers_alter().
  */
 function openlayers_stream_wrappers_alter(&$wrappers) {
-  // Initialize the container
-  ServiceContainer::init();
+  // Initialize the container. Ensure the class exists, necessary to ensure
+  // a stall registry can be rebuild.
+  if (class_exists('ServiceContainer')) {
+    ServiceContainer::init();
+  }
 }
 
 /**
  * Implements hook_enable().
  */
 function openlayers_enable() {
-  // Reset the container
-  ServiceContainer::reset();
+  // Reset the container. Ensure the class exists, necessary to ensure
+  // a stall registry can be rebuild.
+  if (class_exists('ServiceContainer')) {
+    ServiceContainer::reset();
+  }
 }
