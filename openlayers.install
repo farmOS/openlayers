@@ -477,7 +477,7 @@ function openlayers_requirements($phase) {
       $requirements['openlayers3'] = array(
         'title' => $t('Openlayers'),
         'severity' => REQUIREMENT_ERROR,
-        'value' => $t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>.', array('@url' => $library['download url'])),
+        'value' => $t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>. The library directory must be named <em>openlayers3</em> to be recognized by this module.', array('@url' => $library['download url'])),
       );
     }
   }
