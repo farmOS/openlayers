@@ -36,17 +36,25 @@ Drupal.openlayers.pluginManager.register({
           jQuery(document).trigger('openlayers.bbox_pre_loading', [{'url': url, 'params': params, 'data':  data}]);
 
           var that = this;
-          jQuery.ajax({
-            url: url,
-            data: params,
-            success: function(data) {
-              // If the _clearFeaturesOnLoad flag is set remove the current
-              // features before adding the new ones.
-              if (goog.isDef(that._clearFeaturesOnLoad) && that._clearFeaturesOnLoad) {
-                that.clear();
+            jQuery.ajax({
+              url: url,
+              data: params,
+              success: function(data) {
+                // If the _clearFeaturesOnLoad flag is set remove the current
+                // features before adding the new ones.
+                if (goog.isDef(that._clearFeaturesOnLoad) && that._clearFeaturesOnLoad) {
+                  // Clear features in this extent. We can't use that.clear()
+                  // because this causes some strange trouble afterwards. And we
+                  // can't use that.forEachFeature() or
+                  // that.forEachFeatureInExtent() because those functions won't
+                  // work with that.removeFeature().
+                  var features = that.getFeaturesInExtent(extent);
+                  jQuery(features).each(function (i, f) {
+                    that.removeFeature(f);
+                  });
+                }
+                that.addFeatures(that.readFeatures(data));
               }
-              that.addFeatures(that.readFeatures(data));
-            }
           });
         };
         var vectorSource = new ol.source.ServerVector(data.opt);
@@ -75,30 +83,26 @@ Drupal.openlayers.pluginManager.register({
             var i, ii;
             for (i = 0, ii = extentsToLoad.length; i < ii; ++i) {
               var extentToLoad = extentsToLoad[i];
-              // Check if this has to be loaded every time.
-              if (!this._forceReloadFeatures) {
-                var alreadyLoaded = loadedExtents.forEachInExtent(extentToLoad,
-                  /**
-                   * @param {{extent: ol.Extent}} object Object.
-                   * @return {boolean} Contains.
-                   */
-                  function (object) {
-                    return ol.extent.containsExtent(object.extent, extentToLoad);
-                  });
-              }
+              var alreadyLoaded = loadedExtents.forEachInExtent(extentToLoad,
+                /**
+                 * @param {{extent: ol.Extent}} object Object.
+                 * @return {boolean} Contains.
+                 */
+                function (object) {
+                  return ol.extent.containsExtent(object.extent, extentToLoad);
+                });
               // If the features aren't available yet or the load is forced
               // figure out what we've to load.
               if (!alreadyLoaded || this._forceReloadFeatures) {
                 this.loader_.call(this, extentToLoad, resolution, projection);
                 loadedExtents.insert(extentToLoad, {extent: extentToLoad.slice()});
-                // This has to be enabled / disabled before each loadFeatures
-                // call.
-                this._forceReloadFeatures = false;
               }
             }
+            // This has to be enabled / disabled before each loadFeatures
+            // call.
+            this._forceReloadFeatures = false;
           };
         }
-
 
         return vectorSource;
       }
