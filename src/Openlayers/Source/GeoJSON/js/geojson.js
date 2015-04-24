@@ -40,22 +40,65 @@ Drupal.openlayers.pluginManager.register({
             url: url,
             data: params,
             success: function(data) {
+              // If the _clearFeaturesOnLoad flag is set remove the current
+              // features before adding the new ones.
+              if (goog.isDef(that._clearFeaturesOnLoad) && that._clearFeaturesOnLoad) {
+                that.clear();
+              }
               that.addFeatures(that.readFeatures(data));
             }
           });
         };
         var vectorSource = new ol.source.ServerVector(data.opt);
+        vectorSource._clearFeaturesOnLoad = false;
 
         if (goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
+          vectorSource._clearFeaturesOnLoad = true;
           data.map.getView().on('change:center', function() {
-            vectorSource.clear();
+            vectorSource._forceReloadFeatures = true;
           });
         }
         if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange) {
+          vectorSource._clearFeaturesOnLoad = true;
           data.map.getView().on('change:resolution', function() {
-            vectorSource.clear();
+            vectorSource._forceReloadFeatures = true;
           });
         }
+
+        // If the source relies on zoom factor or extend we need to overwrite
+        // the original source function to load features and ensure a force
+        // works.
+        if (vectorSource._clearFeaturesOnLoad) {
+          vectorSource.loadFeatures = function(extent, resolution, projection) {
+            var loadedExtents = this.loadedExtents_;
+            var extentsToLoad = this.strategy_(extent, resolution);
+            var i, ii;
+            for (i = 0, ii = extentsToLoad.length; i < ii; ++i) {
+              var extentToLoad = extentsToLoad[i];
+              // Check if this has to be loaded every time.
+              if (!this._forceReloadFeatures) {
+                var alreadyLoaded = loadedExtents.forEachInExtent(extentToLoad,
+                  /**
+                   * @param {{extent: ol.Extent}} object Object.
+                   * @return {boolean} Contains.
+                   */
+                  function (object) {
+                    return ol.extent.containsExtent(object.extent, extentToLoad);
+                  });
+              }
+              // If the features aren't available yet or the load is forced
+              // figure out what we've to load.
+              if (!alreadyLoaded || this._forceReloadFeatures) {
+                this.loader_.call(this, extentToLoad, resolution, projection);
+                loadedExtents.insert(extentToLoad, {extent: extentToLoad.slice()});
+                // This has to be enabled / disabled before each loadFeatures
+                // call.
+                this._forceReloadFeatures = false;
+              }
+            }
+          };
+        }
+
 
         return vectorSource;
       }
