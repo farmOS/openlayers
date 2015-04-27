@@ -61,7 +61,7 @@ class Popup extends Component {
    * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
-    $form_state['values']['options']['autoPan'] = boolval($form_state['values']['options']['autoPan']);
+    $form_state['values']['options']['autoPan'] = (bool) $form_state['values']['options']['autoPan'];
   }
 
 
