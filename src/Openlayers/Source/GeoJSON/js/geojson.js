@@ -1,13 +1,13 @@
 Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.source.internal.geojson',
   init: function(data) {
-    data.opt.projection = 'EPSG:3857';
+    data.opt.format = ol.format.GeoJSON();
 
     //// If GeoJSON data is provided with the layer, use that.  Otherwise
     //// check if BBOX, then finally use AJAX method.
     if (data.opt.geojson_data) {
       data.opt.text = data.opt.geojson_data;
-      return new ol.source.GeoJSON(data.opt);
+      return new ol.source.Vector(data.opt);
     }
     else {
       // @todo Add more strategies. Paging strategy would be really interesting
@@ -143,6 +143,6 @@ Drupal.openlayers.pluginManager.register({
       //  var layer = new ol.Layer.Vector(title, options);
     }
 
-    return new ol.source.GeoJSON(data.opt);
+    return new ol.source.Vector(data.opt);
   }
 });
