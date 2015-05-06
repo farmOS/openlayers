@@ -7,10 +7,11 @@ Drupal.openlayers.pluginManager.register({
       projection: map.getView().getProjection()
     });
 
-    var track = new ol.dom.Input(document.getElementById(data.opt.checkboxID));
-    track.bindTo('checked', geolocation, 'tracking');
+    document.getElementById(data.opt.checkboxID).addEventListener('change', function() {
+      geolocation.setTracking(this.checked);
+    });
 
-// update the HTML page when the position changes.
+    // update the HTML page when the position changes.
     geolocation.on('change', function(event) {
       jQuery('#' + data.opt.positionAccuracyID).val(geolocation.getAccuracy() + ' [m]');
       jQuery('#' + data.opt.altitudeID).val(geolocation.getAltitude() + ' [m]');
@@ -40,13 +41,16 @@ Drupal.openlayers.pluginManager.register({
     });
 
     var accuracyFeature = new ol.Feature();
-    accuracyFeature.bindTo('geometry', geolocation, 'accuracyGeometry');
+    geolocation.on('change:accuracyGeometry', function() {
+      accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+    });
 
     var positionFeature = new ol.Feature();
-    positionFeature.bindTo('geometry', geolocation, 'position')
-      .transform(function() {}, function(coordinates) {
-        return coordinates ? new ol.geom.Point(coordinates) : null;
-      });
+    geolocation.on('change:position', function() {
+      var coordinates = geolocation.getPosition();
+      positionFeature.setGeometry(coordinates ?
+        new ol.geom.Point(coordinates) : null);
+    });
 
     var featuresOverlay = new ol.FeatureOverlay({
       map: map,
