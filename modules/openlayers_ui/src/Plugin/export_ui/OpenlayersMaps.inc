@@ -424,40 +424,105 @@ function openlayers_map_form_controls($form, &$form_state) {
   $plugin_name = 'openlayers_controls';
   $plugin = ctools_get_export_ui($plugin_name);
 
-  $rows = array();
+  if (!isset($form_state['item']->options['controls'])) {
+    $form_state['item']->options['controls'] = array();
+  }
+
+  $data = array();
+
+  // Ensure the controls are ordered correctly.
+  foreach (array_reverse($form_state['item']->options['controls']) as $machine_name) {
+    if (isset($all_controls[$machine_name])) {
+      $control = $all_controls[$machine_name];
+      $all_controls = array($machine_name => $control) + $all_controls;
+    }
+
+  }
+
+  $i = 0;
   foreach ($all_controls as $machine_name => $control) {
-    $rows[$machine_name] = array(
+    $data[$machine_name] = array(
       'name' => $control->name,
       'machine_name' => $control->machine_name,
       'description' => $control->description,
-      'operations' => l(
-        t('Edit'),
-        'admin/structure/openlayers/controls/list/' . $machine_name . '/edit',
+      'weight' => $i++,
+      'enable' => (int) in_array($control->machine_name, $form_state['item']->options['controls']),
+      'default' => 1,
+    );
+  }
+
+  $rows = array();
+  $row_elements = array();
+  foreach ($data as $id => $entry) {
+    $rows[$id] = array(
+      'data' => array(
+        array('class', array('entry-cross')),
         array(
-          'query' => array(
-            'destination' => current_path(),
-          ),
-          'attributes' => array(
-            // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall',
-          ),
-        )
+          'data' => array(
+            '#type' => 'weight',
+            '#title' => t('Weight'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['weight'],
+            '#parents' => array('controls', $id, 'weight'),
+            '#attributes' => array(
+              'class' => array('entry-order-weight'),
+            ),
+          )),
+        array(
+          'data' => array(
+            '#type' => 'checkbox',
+            '#title' => t('Enable'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['enable'],
+            '#parents' => array('controls', $id, 'enable'),
+          )),
+        check_plain($entry['name']),
+        check_plain($entry['machine_name']),
+        check_plain($entry['description']),
+        l(t('Edit'), 'admin/structure/openlayers/controls/list/' . $entry['machine_name'] . '/edit',
+          array(
+            'query' => array(
+              'destination' => current_path(),
+            ),
+            'attributes' => array(
+              // Todo: Use CTools modal window ajax for this form.
+              'class' => 'ctools-use-modall',
+            ),
+          )
+        ),
       ),
+      'class' => array('draggable'),
+    );
+    // Build rows of the form elements in the table.
+    $row_elements[$id] = array(
+      'weight' => &$rows[$id]['data'][1]['data'],
+      'enabled' => &$rows[$id]['data'][2]['data'],
     );
   }
 
   $form['options']['#tree'] = TRUE;
 
-  if (!isset($form_state['item']->options['controls'])) {
-    $form_state['item']->options['controls'] = array();
-  }
-
-  $form['options']['controls'] = array(
-    '#type' => 'tableselect',
-    '#header' => $header,
-    '#options' => $rows,
-    '#default_value' => drupal_map_assoc($form_state['item']->options['controls']),
+  // Add the table to the form.
+  $form['controls']['table_controls'] = array(
+    '#theme' => 'table',
+    // The row form elements need to be processed and build,
+    // therefore pass them as element children.
+    'elements' => $row_elements,
+    '#header' => array(
+      // We need two empty columns for the weigth field and the cross.
+      array('data' => NULL, 'colspan' => 2),
+      t('Enabled'),
+      t('Name'),
+      t('Machine name'),
+      t('Description'),
+      t('Operations'),
+    ),
+    '#rows' => $rows,
+    '#empty' => t('There are no entries available.'),
+    '#attributes' => array('id' => 'entry-order-controls'),
   );
+  drupal_add_tabledrag('entry-order-controls', 'order', 'sibling', 'entry-order-weight');
+
 
   return $form;
 }
@@ -466,7 +531,17 @@ function openlayers_map_form_controls($form, &$form_state) {
  * Map controls config form submit handler.
  */
 function openlayers_map_form_controls_submit($form, &$form_state) {
-  $form_state['item']->options['controls'] = array_filter(array_values($form_state['values']['options']['controls']));
+  $controls = $form_state['values']['controls'];
+
+  $controls_enabled = array();
+  foreach ($controls as $id => $data) {
+    if (!empty($data['enable'])) {
+      $controls_enabled[$data['weight']] = $id;
+    }
+  }
+  ksort($controls_enabled);
+
+  $form_state['item']->options['controls'] = array_values($controls_enabled);
 }
 
 /**
