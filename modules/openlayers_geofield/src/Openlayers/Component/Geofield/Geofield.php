@@ -154,7 +154,8 @@ class Geofield extends Component {
           $geoms[] = geoPHP::load($item['geom']);
         }
         else {
-          $geoms[] = geoPHP::load($item);
+          // Is this really necessary ? Commented for now.
+          // $geoms[] = geoPHP::load('');
         }
       }
       $combined_geom = geoPHP::geometryReduce($geoms);
