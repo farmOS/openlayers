@@ -53,11 +53,13 @@ Drupal.openlayers.pluginManager.register({
                     that.removeFeature(f);
                   });
                 }
-                that.addFeatures(that.readFeatures(data));
+                var format = new ol.format.GeoJSON();
+                var features = format.readFeatures(data, {featureProjection: projection});
+                that.addFeatures(features);
               }
           });
         };
-        var vectorSource = new ol.source.ServerVector(data.opt);
+        var vectorSource = new ol.source.Vector(data.opt);
         vectorSource._clearFeaturesOnLoad = false;
 
         if (goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
@@ -78,24 +80,24 @@ Drupal.openlayers.pluginManager.register({
         // works.
         if (vectorSource._clearFeaturesOnLoad) {
           vectorSource.loadFeatures = function(extent, resolution, projection) {
-            var loadedExtents = this.loadedExtents_;
+            var loadedExtentsRtree = this.loadedExtentsRtree_;
             var extentsToLoad = this.strategy_(extent, resolution);
             var i, ii;
             for (i = 0, ii = extentsToLoad.length; i < ii; ++i) {
               var extentToLoad = extentsToLoad[i];
-              var alreadyLoaded = loadedExtents.forEachInExtent(extentToLoad,
+              var alreadyLoaded = loadedExtentsRtree.forEachInExtent(extentToLoad,
                 /**
                  * @param {{extent: ol.Extent}} object Object.
                  * @return {boolean} Contains.
                  */
-                function (object) {
+                function(object) {
                   return ol.extent.containsExtent(object.extent, extentToLoad);
                 });
               // If the features aren't available yet or the load is forced
               // figure out what we've to load.
               if (!alreadyLoaded || this._forceReloadFeatures) {
                 this.loader_.call(this, extentToLoad, resolution, projection);
-                loadedExtents.insert(extentToLoad, {extent: extentToLoad.slice()});
+                loadedExtentsRtree.insert(extentToLoad, {extent: extentToLoad.slice()});
               }
             }
             // This has to be enabled / disabled before each loadFeatures
