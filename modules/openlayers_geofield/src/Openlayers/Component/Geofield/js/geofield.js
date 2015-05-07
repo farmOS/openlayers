@@ -142,7 +142,7 @@ Drupal.openlayers.pluginManager.register({
       map.addInteraction(modify_interaction);
     }
 
-// creates a draw interaction
+    // creates a draw interaction
     function addDrawInteraction() {
       // remove other interactions
       map.removeInteraction(select_interaction);
@@ -157,20 +157,31 @@ Drupal.openlayers.pluginManager.register({
       map.addInteraction(draw_interaction);
     }
 
-// add the draw interaction when the page is first shown
+    // add the draw interaction when the page is first shown
     addDrawInteraction();
 
-// shows data in textarea
-// replace this function by what you need
+    // shows data in textarea
+    // replace this function by what you need
     function saveData() {
       // get the format the user has chosen
       // define a format the data shall be converted to
       var typeFormat = data_type.val();
+      var features = 0;
 
       var format = new ol.format[typeFormat]({splitCollection: true}),
       // this will be the data in the chosen format
         datas;
       try {
+        if (data.opt.featureLimit && data.opt.featureLimit != -1 && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
+          if (confirm(Drupal.t('You can add a maximum of !limit features. Dou you want to replace the last feature by the new one?', {'!limit': data.opt.featureLimit}))) {
+            var lastFeature = features[features.length - 2];
+            vector_layer.getSource().removeFeature(lastFeature);
+          } else {
+            var lastFeature = features[features.length - 1];
+            vector_layer.getSource().removeFeature(lastFeature);
+          }
+        }
+
         // convert the data of the vector_layer into the chosen format
         datas = format.writeFeatures(vector_layer.getSource().getFeatures(), {
           dataProjection: data.opt.dataProjection,
@@ -198,13 +209,13 @@ Drupal.openlayers.pluginManager.register({
       //}
     }
 
-// clear map when user clicks on 'Delete all features'
+    // clear map when user clicks on 'Delete all features'
     jQuery('.clearmap', geofieldWrapper).click(function(e) {
       clearMap();
       e.preventDefault();
     });
 
-// clears the map and the output of the data
+    // clears the map and the output of the data
     function clearMap() {
       vector_layer.getSource().clear();
       if (select_interaction) {
