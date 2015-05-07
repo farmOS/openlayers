@@ -158,5 +158,14 @@ function openlayers_default_openlayers_interactions() {
   $ol_interaction->options = array();
   $export['openlayers_interaction_select'] = $ol_interaction;
 
+  $ol_interaction = new stdClass();
+  $ol_interaction->api_version = 1;
+  $ol_interaction->machine_name = 'openlayers_interaction_snap';
+  $ol_interaction->name = 'Snap';
+  $ol_interaction->description = 'Snap interaction description';
+  $ol_interaction->factory_service = 'openlayers.interaction.internal.Snap';
+  $ol_interaction->options = array();
+  $export['openlayers_interaction_snap'] = $ol_interaction;
+
   return $export;
 }
