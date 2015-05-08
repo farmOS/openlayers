@@ -26,7 +26,8 @@ Drupal.openlayers.pluginManager.register({
             var get_params = location.search.substring(location.search.indexOf('?') + 1 ).split('&');
             jQuery.each(get_params, function(i, val){
               var param = val.split('=');
-              params[param[0]] = param[1] || '';
+              // Decode as these are encoded again.
+              params[decodeURIComponent(param[0])] = decodeURIComponent(param[1]) || '';
             })
           }
           params.bbox = bbox.join(',');
@@ -56,22 +57,28 @@ Drupal.openlayers.pluginManager.register({
                 var format = new ol.format.GeoJSON();
                 var features = format.readFeatures(data, {featureProjection: projection});
                 that.addFeatures(features);
+                that._loadingFeatures = false;
               }
           });
         };
         var vectorSource = new ol.source.Vector(data.opt);
         vectorSource._clearFeaturesOnLoad = false;
+        vectorSource._loadingFeatures = false;
 
         if (goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
           vectorSource._clearFeaturesOnLoad = true;
           data.map.getView().on('change:center', function() {
-            vectorSource._forceReloadFeatures = true;
+            if (!vectorSource._loadingFeatures) {
+              vectorSource._forceReloadFeatures = true;
+            }
           });
         }
         if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange) {
           vectorSource._clearFeaturesOnLoad = true;
           data.map.getView().on('change:resolution', function() {
-            vectorSource._forceReloadFeatures = true;
+            if (!vectorSource._loadingFeatures) {
+              vectorSource._forceReloadFeatures = true;
+            }
           });
         }
 
@@ -96,6 +103,7 @@ Drupal.openlayers.pluginManager.register({
               // If the features aren't available yet or the load is forced
               // figure out what we've to load.
               if (!alreadyLoaded || this._forceReloadFeatures) {
+                this._loadingFeatures = true;
                 this.loader_.call(this, extentToLoad, resolution, projection);
                 loadedExtentsRtree.insert(extentToLoad, {extent: extentToLoad.slice()});
               }
