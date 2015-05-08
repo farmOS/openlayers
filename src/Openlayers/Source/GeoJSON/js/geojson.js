@@ -26,8 +26,9 @@ Drupal.openlayers.pluginManager.register({
             var get_params = location.search.substring(location.search.indexOf('?') + 1 ).split('&');
             jQuery.each(get_params, function(i, val){
               var param = val.split('=');
-              // Decode as these are encoded again.
-              params[decodeURIComponent(param[0])] = decodeURIComponent(param[1]) || '';
+              // Decode as these are encoded again. Manually handle + as this
+              // isn't handled by decodeURIComponent.
+              params[decodeURIComponent(param[0])] = decodeURIComponent(param[1].replace(/\+/g, ' ')) || '';
             })
           }
           params.bbox = bbox.join(',');
