@@ -25,10 +25,12 @@ Drupal.openlayers.pluginManager.register({
           if (data.opt.paramForwarding) {
             var get_params = location.search.substring(location.search.indexOf('?') + 1 ).split('&');
             jQuery.each(get_params, function(i, val){
-              var param = val.split('=');
-              // Decode as these are encoded again. Manually handle + as this
-              // isn't handled by decodeURIComponent.
-              params[decodeURIComponent(param[0])] = decodeURIComponent(param[1].replace(/\+/g, ' ')) || '';
+              if (val.length) {
+                var param = val.split('=');
+                // Decode as these are encoded again. Manually handle + as this
+                // isn't handled by decodeURIComponent.
+                params[decodeURIComponent(param[0])] = (typeof param[1] != 'undefined') ? decodeURIComponent(param[1].replace(/\+/g, ' ')) : '';
+              }
             })
           }
           params.bbox = bbox.join(',');
