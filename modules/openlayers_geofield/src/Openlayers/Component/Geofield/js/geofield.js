@@ -193,7 +193,7 @@ Drupal.openlayers.pluginManager.register({
         jQuery('.openlayers-geofield-data', geofieldWrapper).val(e.name + ": " + e.message);
         return;
       }
-      jQuery('.openlayers-geofield-data').val(datas);
+      jQuery('.openlayers-geofield-data', geofieldWrapper).val(datas);
       // @TODO Doesn't look like the code below is needed anymore.
       //if (typeFormat === 'GeoJSON') {
       //  // format is JSON

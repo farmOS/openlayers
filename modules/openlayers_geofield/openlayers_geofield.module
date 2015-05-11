@@ -510,10 +510,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
       '#attributes' => array('class' => array('field-use-geocoder-submit')),
       // Avoid validation errors for e.g. required fields but do pass the value
       // of the geocoder field.
-      '#limit_validation_errors' => array(
-        array_merge($parents, array($field_name, $langcode)),
-        array($settings['geocoder_field'], $langcode),
-      ),
+      '#limit_validation_errors' => array(),
       '#ajax' => array(
         'callback' => 'openlayers_widget_geocode',
         'wrapper' => $wrapper_id,
@@ -551,7 +548,14 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
   $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
   $geocoder_field = $field_state['instance']['widget']['settings']['geocoder_field'];
   $geocoder_field_parents = array_merge(array_slice($button['#array_parents'], 0, -4), array($geocoder_field, $langcode));
-  $values = drupal_array_get_nested_value($form_state['values'], $geocoder_field_parents);
+  // Since all validation errors are disabled we need to fetch the values for
+  // the geocoding as only validate values are sent to the values array of the
+  // form state.
+  $values = drupal_array_get_nested_value($form_state['input'], $geocoder_field_parents);
+  // Inject the values into the values array to ensure the geofield module is
+  // able to handle the data.
+  drupal_array_set_nested_value($form_state['values'], $geocoder_field_parents, $values);
+
   if ($field_value = geocoder_widget_get_field_value($element['#entity_type'], $field_state['instance'], NULL, $values)) {
     geophp_load();
     $geometry = geoPHP::load($field_value[$langcode][$delta]['geom']);

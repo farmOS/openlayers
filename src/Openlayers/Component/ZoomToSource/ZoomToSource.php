@@ -47,6 +47,12 @@ class ZoomToSource extends Component {
         ),
       ),
     );
+    $form['options']['process_once'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Zoom just on map build'),
+      '#default_value' => !empty($form_state['item']->options['process_once']),
+      '#description' => t('If enabled the zoom to source only will fire once at map build. And ignore change events on the source.'),
+    );
 
     $form['options']['enableAnimations'] = array(
       '#type' => 'checkbox',
