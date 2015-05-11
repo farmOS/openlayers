@@ -16,6 +16,11 @@ Drupal.openlayers.pluginManager.register({
       extent: projection.getExtent()
     });
 
+    // Provide empty defaults to suppress Openlayers defaults that contains
+    // all interactions and controls available.
+    options.interactions = [];
+    options.controls = [];
+
     var map = new ol.Map(options);
     map.target = data.opt.target;
 
