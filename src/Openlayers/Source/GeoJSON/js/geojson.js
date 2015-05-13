@@ -1,7 +1,7 @@
 Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.source.internal.geojson',
   init: function(data) {
-    data.opt.format = ol.format.GeoJSON();
+    data.opt.format = new ol.format.GeoJSON();
 
     //// If GeoJSON data is provided with the layer, use that.  Otherwise
     //// check if BBOX, then finally use AJAX method.
