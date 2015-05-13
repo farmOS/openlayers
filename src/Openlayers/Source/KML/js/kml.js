@@ -1,7 +1,7 @@
 Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.source.internal.kml',
   init: function(data) {
-    data.opt.format = ol.format.KML({
+    data.opt.format = new ol.format.KML({
       extractStyles: false
     });
     return new ol.source.Vector(data.opt);
