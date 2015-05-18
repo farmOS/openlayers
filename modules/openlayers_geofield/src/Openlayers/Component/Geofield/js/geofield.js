@@ -166,13 +166,13 @@ Drupal.openlayers.pluginManager.register({
       // get the format the user has chosen
       // define a format the data shall be converted to
       var typeFormat = data_type.val();
-      var features = 0;
+      var features = vector_layer.getSource().getFeatures();
 
       var format = new ol.format[typeFormat]({splitCollection: true}),
       // this will be the data in the chosen format
         datas;
       try {
-        if (data.opt.featureLimit && data.opt.featureLimit != -1 && data.opt.featureLimit < vector_layer.getSource().getFeatures().length) {
+        if (data.opt.featureLimit && data.opt.featureLimit != -1 && data.opt.featureLimit < features.length) {
           if (confirm(Drupal.t('You can add a maximum of !limit features. Dou you want to replace the last feature by the new one?', {'!limit': data.opt.featureLimit}))) {
             var lastFeature = features[features.length - 2];
             vector_layer.getSource().removeFeature(lastFeature);
