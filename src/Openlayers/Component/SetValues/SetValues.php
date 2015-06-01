@@ -39,6 +39,11 @@ class SetValues extends Component {
       '#title' => t('Zoom'),
       '#default_value' => $this->getOption('zoom'),
     );
+    $form['options']['extent'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Extent'),
+      '#default_value' => $this->getOption('extent'),
+    );
   }
 
 }

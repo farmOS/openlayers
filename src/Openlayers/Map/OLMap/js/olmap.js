@@ -13,6 +13,11 @@ Drupal.openlayers.pluginManager.register({
       extent: projection.getExtent()
     };
 
+    // Check if a extent boundaries are set.
+    if (options.view.limit_extent && options.view.extent) {
+      view_opts.extent = options.view.extent.replace(/\s*/ig, '').split(',');
+    }
+
     // Just use min / max zoom if set to a non 0 value to avoid problems.
     if (options.view.minZoom) {
       view_opts.minZoom = options.view.minZoom;

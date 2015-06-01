@@ -22,6 +22,7 @@ function openlayers_default_openlayers_components() {
     'longitude' => 'edit-options-view-center-lon',
     'rotation' => 'edit-options-view-rotation',
     'zoom' => 'edit-options-view-zoom',
+    'extent' => 'edit-options-view-extent',
   );
   $export['openlayers_component_map_edit_form_values'] = $ol_component;
 

@@ -32,7 +32,7 @@ class OLMap extends Map {
       ),
       'height' => array(
         '#type' => 'textfield',
-        '#title' => 'Height of the map',
+        '#title' => t('Height of the map'),
         '#default_value' => $this->getOption('height', '300px'),
         '#parents' => array('options', 'height'),
       ),
@@ -65,48 +65,64 @@ class OLMap extends Map {
       '#tree' => TRUE,
       'lat' => array(
         '#type' => 'textfield',
-        '#title' => 'Latitude',
+        '#title' => t('Latitude'),
         '#default_value' => $this->getOption(array('view', 'center', 'lat'), 0),
       ),
       'lon' => array(
         '#type' => 'textfield',
-        '#title' => 'Longitude',
+        '#title' => t('Longitude'),
         '#default_value' => $this->getOption(array('view', 'center', 'lat'), 0),
       ),
     );
     $form['options']['view']['rotation'] = array(
       '#type' => 'textfield',
-      '#title' => 'Rotation',
+      '#title' => t('Rotation'),
       '#default_value' => $this->getOption(array('view', 'rotation'), 0),
     );
     $form['options']['view']['zoom'] = array(
       '#type' => 'textfield',
-      '#title' => 'Zoom',
+      '#title' => t('Zoom'),
       '#default_value' => $this->getOption(array('view', 'zoom'), 0),
     );
     $form['options']['view']['minZoom'] = array(
       '#type' => 'textfield',
-      '#title' => 'Min zoom',
+      '#title' => t('Min zoom'),
       '#default_value' => $this->getOption(array('view', 'minZoom'), 0),
     );
     $form['options']['view']['maxZoom'] = array(
       '#type' => 'textfield',
-      '#title' => 'Max zoom',
+      '#title' => t('Max zoom'),
       '#default_value' => $this->getOption(array('view', 'maxZoom'), 0),
+    );
+    $form['options']['view']['limit_extent'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Limit to extent'),
+      '#description' => t('If enabled navigation on the map is limited to the give extent.'),
+      '#default_value' => $this->getOption(array('view', 'limit_extent'), FALSE),
+    );
+    $form['options']['view']['extent'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Extent [minx, miny, maxx, maxy]'),
+      '#default_value' => $this->getOption(array('view', 'extent'), ''),
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="options[view][limit_extent]"]' => array('checked' => FALSE),
+        ),
+      ),
     );
 
     $form['options']['misc'] = array(
       '#type' => 'fieldset',
-      '#title' => 'Miscellaneous options',
+      '#title' => t('Miscellaneous options'),
     );
     $form['options']['misc']['renderer'] = array(
       '#type' => 'radios',
-      '#title' => 'Renderer',
-      '#description' => 'Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.',
+      '#title' => t('Renderer'),
+      '#description' => t('Renderer by default. Canvas, DOM and WebGL renderers are tested for support in that order. Note that at present only the Canvas renderer support vector data.'),
       '#options' => array(
-        'canvas' => 'Canvas',
-        'dom' => 'DOM',
-        'webgl' => 'WebGL',
+        'canvas' => t('Canvas'),
+        'dom' => t('DOM'),
+        'webgl' => t('WebGL'),
       ),
       '#default_value' => $this->getOption('renderer', 'canvas'),
       '#parents' => array('options', 'renderer'),

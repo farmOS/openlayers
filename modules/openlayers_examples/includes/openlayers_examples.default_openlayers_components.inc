@@ -22,6 +22,7 @@ function openlayers_examples_default_openlayers_components() {
     'longitude' => 'lon',
     'rotation' => 'rot',
     'zoom' => 'zoom',
+    'extent' => 'extent',
   );
   $export['openlayers_examples_component_ajax_values'] = $ol_component;
 
