@@ -117,5 +117,15 @@ function openlayers_examples_default_openlayers_styles() {
   );
   $export['openlayers_examples_style_blue'] = $ol_style;
 
+  $ol_style = new stdClass();
+  $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_examples_style_cluster';
+  $ol_style->name = 'OpenLayers cluster style';
+  $ol_style->description = '';
+  $ol_style->factory_service = 'openlayers.style.internal.ClusterStyle';
+  $ol_style->options = array();
+  $export['openlayers_examples_style_cluster'] = $ol_style;
+
   return $export;
 }

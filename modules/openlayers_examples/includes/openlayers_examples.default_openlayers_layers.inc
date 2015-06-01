@@ -168,6 +168,7 @@ function openlayers_examples_default_openlayers_layers() {
   $ol_layer->factory_service = 'openlayers.layer.internal.Vector';
   $ol_layer->options = array(
     'source' => 'openlayers_examples_source_cluster',
+    'style' => 'openlayers_examples_style_cluster',
   );
   $export['openlayers_examples_layer_cluster_cities'] = $ol_layer;
 
