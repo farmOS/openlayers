@@ -47,6 +47,10 @@ class OLMap extends Map {
     if ($this->machine_name != Config::get('openlayers.edit_view_map')) {
       $map = openlayers_object_load('Map', Config::get('openlayers.edit_view_map'));
       if ($view = $this->getOption('view')) {
+        // Don't apply min / max zoom settings to this map to avoid lock-in.
+        $view['minZoom'] = 0;
+        $view['maxZoom'] = 0;
+
         $map->setOption('view', $view);
       }
 
