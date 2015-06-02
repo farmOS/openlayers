@@ -50,6 +50,8 @@ class OLMap extends Map {
         // Don't apply min / max zoom settings to this map to avoid lock-in.
         $view['minZoom'] = 0;
         $view['maxZoom'] = 0;
+        // Same goes for limit extent.
+        $view['limit_extent'] = 0;
 
         $map->setOption('view', $view);
       }
