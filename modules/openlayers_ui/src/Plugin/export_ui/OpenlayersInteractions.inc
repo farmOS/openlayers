@@ -90,6 +90,7 @@ function openlayers_interaction_form_start($form, &$form_state) {
     '#title' => 'Add this to a map ?',
     '#description' => 'Select the map to add this object to.',
     '#options' => $options,
+    '#default_value' => isset($form_state['item']->attachToMap) ? $form_state['item']->attachToMap : '',
   );
 
   return $form;
@@ -111,12 +112,6 @@ function openlayers_interaction_form_start_submit($form, &$form_state) {
   $class = new \Drupal\openlayers\UI\OpenlayersInteractions();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
-
-  if ($form_state['values']['attachToMap']) {
-    $map = ctools_export_crud_load('openlayers_maps', $form_state['values']['attachToMap']);
-    $map->options['interactions'][] = $form_state['item']->machine_name;
-    ctools_export_crud_save('openlayers_maps', $map);
-  }
 }
 
 /**
@@ -168,6 +163,14 @@ function openlayers_interaction_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
+
+  if (isset($form_state['item']->attachToMap)) {
+    $map = ctools_export_crud_load('openlayers_maps', $form_state['item']->attachToMap);
+    $map->options['components'][] = $form_state['item']->machine_name;
+    ctools_export_crud_save('openlayers_maps', $map);
+    unset($form_state['item']->attachToMap);
+  }
+
   $interaction = openlayers_object_load('Interaction', $form_state['item']);
   $interaction->optionsFormSubmit($form, $form_state);
 }

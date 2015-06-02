@@ -10,6 +10,26 @@
 abstract class OpenlayersObjects extends ctools_export_ui {
 
   /**
+   * Handle the submission of the edit form.
+   *
+   * At this point, submission is successful. Our only responsibility is
+   * to copy anything out of values onto the item that we are able to edit.
+   *
+   * If the keys all match up to the schema, this method will not need to be
+   * overridden.
+   */
+  function edit_form_submit(&$form, &$form_state) {
+    parent::edit_form_submit($form, $form_state);
+
+    if (isset($form_state['values']['attachToMap'])) {
+      $form_state['item']->attachToMap = $form_state['values']['attachToMap'];
+    }
+    if (isset($form_state['values']['attachToLayer'])) {
+      $form_state['item']->attachToLayer = $form_state['values']['attachToLayer'];
+    }
+  }
+
+  /**
    * Create the filter/sort form at the top of a list of exports.
    *
    * This handles the very default conditions, and most lists are expected
