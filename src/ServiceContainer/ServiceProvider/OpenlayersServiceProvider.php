@@ -20,10 +20,6 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
     $services = array();
     $parameters = array();
 
-    $services['service_container'] = array(
-      'class' => '\Drupal\service_container\DependencyInjection\Container',
-    );
-
     $services['openlayers.manager'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array(
