@@ -115,6 +115,13 @@ class GeoJSON extends Source {
         ),
       ),
     );
+
+    $form['options']['devMode'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Enable developer mode.'),
+      '#description' => t('If enabled you can edit the request to send using a dialog.'),
+      '#default_value' => $this->getOption('devMode'),
+    );
   }
 
   /**
@@ -123,7 +130,57 @@ class GeoJSON extends Source {
   public function getJS() {
     $js = parent::getJS();
     // Ensure we've a sane url.
-    $js['opt']['url'] = url($js['opt']['url']);
+    if (!empty($js['opt']['url'])) {
+      $js['opt']['url'] = url($js['opt']['url']);
+    }
+    else {
+      // Remove the option as it is even used if empty.
+      unset($js['opt']['url']);
+    }
+
+    // @TODO Find a way how to do this just once per map / collection.
+    if ($this->getOption('devMode')) {
+      $form_state = array();
+      $form_state['build_info']['args'] = array($this);
+      $form = drupal_build_form('openlayers_dev_dialog_form', $form_state);
+      unset($form['options']['devMode']);
+      $js['opt']['devDialog'] = filter_xss(
+        drupal_render($form),
+        array(
+          'label',
+          'form',
+          'input',
+          'select',
+          'textarea',
+          'div',
+          'ul',
+          'ol',
+          'li',
+          'dl',
+          'dt',
+          'dd',
+        )
+      );
+    }
+
     return $js;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function attached() {
+    $attached = parent::attached();
+    if ($this->getOption('devMode')) {
+      // @TODO Find a way how to do this just once per map / collection.
+      $attached['library']['system.ui.dialog'] = array('system', 'ui.dialog');
+      $attached['library']['system.jquery.cookie'] = array('system', 'jquery.cookie');
+    }
+    else {
+      $plugin = $this->getConfiguration();
+      unset($attached['js'][$plugin['path'] . '/js/geojson_dev.js']);
+      unset($attached['css'][$plugin['path'] . '/css/geojson_dev.css']);
+    }
+    return $attached;
   }
 }

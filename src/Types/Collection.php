@@ -42,9 +42,10 @@ class Collection {
         $object_attached = $object->attached() + array(
           'js' => array(),
           'css' => array(),
+          'library' => array(),
           'libraries_load' => array(),
         );
-        foreach (array('js', 'css', 'libraries_load') as $type) {
+        foreach (array('js', 'css', 'library', 'libraries_load') as $type) {
           foreach ($object_attached[$type] as $data) {
             $attached[$type][] = $data;
           }
