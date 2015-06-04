@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers\Source;
 use Drupal\openlayers\Types\Source;
+use Drupal\openlayers\Config;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Source\\GeoJSON',
@@ -171,13 +172,14 @@ class GeoJSON extends Source {
    */
   public function attached() {
     $attached = parent::attached();
+    $plugin = $this->getConfiguration();
     if ($this->getOption('devMode')) {
       // @TODO Find a way how to do this just once per map / collection.
       $attached['library']['system.ui.dialog'] = array('system', 'ui.dialog');
       $attached['library']['system.jquery.cookie'] = array('system', 'jquery.cookie');
+      $attached['js'][$plugin['path'] . '/js/geojson_dev.js']['weight'] = Config::get('openlayers.js_css.weight') + 1;
     }
     else {
-      $plugin = $this->getConfiguration();
       unset($attached['js'][$plugin['path'] . '/js/geojson_dev.js']);
       unset($attached['css'][$plugin['path'] . '/css/geojson_dev.css']);
     }
