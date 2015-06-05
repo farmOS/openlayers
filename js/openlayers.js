@@ -20,12 +20,12 @@ Drupal.openlayers = (function($){
       ]);
 
       try {
-        $(document).trigger('openlayers.map_pre_alter', [{context: context}]);
+        $(document).trigger('openlayers.map_pre_alter', [{context: context, settings: settings, map_id: map_id}]);
         map = Drupal.openlayers.getObject(context, 'maps', settings.map, map_id);
         $(document).trigger('openlayers.map_post_alter', [{map: Drupal.openlayers.instances[map_id].map}]);
 
         if (settings.source.length > 0) {
-          $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source}]);
+          $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source, map_id: map_id}]);
           settings.source.map(function (data) {
             if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
               data.opt.attributions = [
@@ -36,41 +36,41 @@ Drupal.openlayers = (function($){
             }
             Drupal.openlayers.getObject(context, 'sources', data, map_id);
           });
-          $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source}]);
+          $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source, map_id: map_id}]);
         }
 
         if (settings.control.length > 0) {
-          $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control}]);
+          $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control, map_id: map_id}]);
           settings.control.map(function (data) {
             var control = Drupal.openlayers.getObject(context, 'controls', data, map_id);
             if (control) {
               map.addControl(control);
             }
           });
-          $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control}]);
+          $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control, map_id: map_id}]);
         }
 
         if (settings.interaction.length > 0) {
-          $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction}]);
+          $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction, map_id: map_id}]);
           settings.interaction.map(function (data) {
             var interaction = Drupal.openlayers.getObject(context, 'interactions', data, map_id);
             if (interaction) {
               map.addInteraction(interaction);
             }
           });
-          $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction}]);
+          $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction, map_id: map_id}]);
         }
 
         if (settings.style.length > 0) {
-          $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style}]);
+          $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style, map_id: map_id}]);
           settings.style.map(function (data) {
             Drupal.openlayers.getObject(context, 'styles', data, map_id);
           });
-          $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style}]);
+          $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style, map_id: map_id}]);
         }
 
         if (settings.layer.length > 0) {
-          $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer}]);
+          $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer, map_id: map_id}]);
           settings.layer.map(function (data) {
             // Clone the data to keep the settings as raw as possible.
             var cloned_data = jQuery.extend(true, {}, data);
@@ -83,7 +83,7 @@ Drupal.openlayers = (function($){
               map.addLayer(layer);
             }
           });
-          $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer}]);
+          $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer, map_id: map_id}]);
         }
 
         if (settings.component.length > 0) {
