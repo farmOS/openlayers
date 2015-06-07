@@ -157,7 +157,7 @@ openlayers_source_internal_geojson.updateSource = function(data, source) {
     openlayers_source_internal_geojson.configureVectorSource(map.sources[source], instance_data);
   }
   else if (goog.isDef(source_conf.opt.url)) {
-    map.sources[source].loader_ = ol.featureloader.xhr(url, source_conf.opt.format);
+    map.sources[source].loader_ = ol.featureloader.xhr(source_conf.opt.url, source_conf.opt.format);
   }
 
   map.sources[source].clear();
