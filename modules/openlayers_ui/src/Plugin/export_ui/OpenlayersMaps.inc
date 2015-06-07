@@ -411,19 +411,6 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
 function openlayers_map_form_controls($form, &$form_state) {
   $all_controls = ctools_export_crud_load_all('openlayers_controls');
 
-  $header = array(
-    'name' => t('Name'),
-    'machine_name' => t('Machine name'),
-    'description' => t('Description'),
-    'operations' => t('Operations'),
-  );
-
-  ctools_include('modal');
-  ctools_modal_add_js();
-
-  $plugin_name = 'openlayers_controls';
-  $plugin = ctools_get_export_ui($plugin_name);
-
   if (!isset($form_state['item']->options['controls'])) {
     $form_state['item']->options['controls'] = array();
   }
@@ -436,7 +423,6 @@ function openlayers_map_form_controls($form, &$form_state) {
       $control = $all_controls[$machine_name];
       $all_controls = array($machine_name => $control) + $all_controls;
     }
-
   }
 
   $i = 0;
@@ -456,7 +442,12 @@ function openlayers_map_form_controls($form, &$form_state) {
   foreach ($data as $id => $entry) {
     $rows[$id] = array(
       'data' => array(
-        array('class', array('entry-cross')),
+        array(
+          'class',
+          array(
+            'entry-cross'
+          )
+        ),
         array(
           'data' => array(
             '#type' => 'weight',
@@ -467,7 +458,8 @@ function openlayers_map_form_controls($form, &$form_state) {
             '#attributes' => array(
               'class' => array('entry-order-weight'),
             ),
-          )),
+          )
+        ),
         array(
           'data' => array(
             '#type' => 'checkbox',
@@ -475,7 +467,8 @@ function openlayers_map_form_controls($form, &$form_state) {
             '#title_display' => 'invisible',
             '#default_value' => $entry['enable'],
             '#parents' => array('controls', $id, 'enable'),
-          )),
+          )
+        ),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
@@ -483,10 +476,6 @@ function openlayers_map_form_controls($form, &$form_state) {
           array(
             'query' => array(
               'destination' => current_path(),
-            ),
-            'attributes' => array(
-              // Todo: Use CTools modal window ajax for this form.
-              'class' => 'ctools-use-modall',
             ),
           )
         ),
@@ -522,7 +511,6 @@ function openlayers_map_form_controls($form, &$form_state) {
     '#attributes' => array('id' => 'entry-order-controls'),
   );
   drupal_add_tabledrag('entry-order-controls', 'order', 'sibling', 'entry-order-weight');
-
 
   return $form;
 }
@@ -570,10 +558,6 @@ function openlayers_map_form_interactions($form, &$form_state) {
           'query' => array(
             'destination' => current_path(),
           ),
-          'attributes' => array(
-            // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall',
-          ),
         )
       ),
     );
@@ -611,47 +595,99 @@ function openlayers_map_form_interactions_submit($form, &$form_state) {
 function openlayers_map_form_components($form, &$form_state) {
   $all_components = ctools_export_crud_load_all('openlayers_components');
 
-  $header = array(
-    'name' => t('Name'),
-    'machine_name' => t('Machine name'),
-    'description' => t('Description'),
-    'operations' => t('Operations'),
-  );
+  if (!isset($form_state['item']->options['controls'])) {
+    $form_state['item']->options['controls'] = array();
+  }
 
-  $rows = array();
+  $data = array();
+
+  // Ensure the components are ordered correctly.
+  foreach (array_reverse($form_state['item']->options['components']) as $machine_name) {
+    if (isset($all_components[$machine_name])) {
+      $component = $all_components[$machine_name];
+      $all_components = array($machine_name => $component) + $all_components;
+    }
+  }
+
+  $i = 0;
   foreach ($all_components as $machine_name => $component) {
-    $rows[$machine_name] = array(
+    $data[$machine_name] = array(
       'name' => $component->name,
       'machine_name' => $component->machine_name,
       'description' => $component->description,
-      'operations' => l(
-        t('Edit'),
-        'admin/structure/openlayers/components/list/' . $machine_name . '/edit/options',
+      'weight' => $i++,
+      'enable' => (int) in_array($component->machine_name, $form_state['item']->options['components']),
+      'default' => 1,
+    );
+  }
+
+  $rows = array();
+  $row_elements = array();
+  foreach ($data as $id => $entry) {
+    $rows[$id] = array(
+      'data' => array(
+        array('class', array('entry-cross')),
         array(
-          'query' => array(
-            'destination' => current_path(),
-          ),
-          'attributes' => array(
-            // Todo: Use CTools modal window ajax for this form.
-            'class' => 'ctools-use-modall',
-          ),
-        )
+          'data' => array(
+            '#type' => 'weight',
+            '#title' => t('Weight'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['weight'],
+            '#parents' => array('components', $id, 'weight'),
+            '#attributes' => array(
+              'class' => array('entry-order-weight'),
+            ),
+          )),
+        array(
+          'data' => array(
+            '#type' => 'checkbox',
+            '#title' => t('Enable'),
+            '#title_display' => 'invisible',
+            '#default_value' => $entry['enable'],
+            '#parents' => array('components', $id, 'enabled'),
+          )),
+        check_plain($entry['name']),
+        check_plain($entry['machine_name']),
+        check_plain($entry['description']),
+        l(t('Edit'), 'admin/structure/openlayers/components/list/' . $entry['machine_name'] . '/edit',
+          array(
+            'query' => array(
+              'destination' => current_path(),
+            ),
+          )
+        ),
       ),
+      'class' => array('draggable'),
+    );
+    // Build rows of the form elements in the table.
+    $row_elements[$id] = array(
+      'weight' => &$rows[$id]['data'][1]['data'],
+      'enabled' => &$rows[$id]['data'][2]['data'],
     );
   }
 
   $form['options']['#tree'] = TRUE;
 
-  if (!isset($form_state['item']->options['components'])) {
-    $form_state['item']->options['components'] = array();
-  }
-
-  $form['options']['components'] = array(
-    '#type' => 'tableselect',
-    '#header' => $header,
-    '#options' => $rows,
-    '#default_value' => drupal_map_assoc($form_state['item']->options['components']),
+  // Add the table to the form.
+  $form['components']['table_components'] = array(
+    '#theme' => 'table',
+    // The row form elements need to be processed and build,
+    // therefore pass them as element children.
+    'elements' => $row_elements,
+    '#header' => array(
+      // We need two empty columns for the weight field and the cross.
+      array('data' => NULL, 'colspan' => 2),
+      t('Enabled'),
+      t('Name'),
+      t('Machine name'),
+      t('Description'),
+      t('Operations'),
+    ),
+    '#rows' => $rows,
+    '#empty' => t('There are no entries available.'),
+    '#attributes' => array('id' => 'entry-order-components'),
   );
+  drupal_add_tabledrag('entry-order-components', 'order', 'sibling', 'entry-order-weight');
 
   return $form;
 }
@@ -663,7 +699,17 @@ function openlayers_map_form_components_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $form_state['item']->options['components'] = array_filter(array_values($form_state['values']['options']['components']));
+  $components = $form_state['values']['components'];
+
+  $components_enabled = array();
+  foreach ($components as $id => $data) {
+    if (!empty($data['enabled'])) {
+      $components_enabled[$data['weight']] = $id;
+    }
+  }
+  ksort($components_enabled);
+
+  $form_state['item']->options['components'] = array_values($components_enabled);
 }
 
 /**
