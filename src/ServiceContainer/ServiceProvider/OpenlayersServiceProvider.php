@@ -35,9 +35,13 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       ),
     );
 
+    $services['openlayers.messenger'] = array(
+      'alias' => 'messenger'
+    );
+
     $services['openlayers.internal.error'] = array(
       'class' => '\Drupal\openlayers\Types\Error',
-      'arguments' => array('@logger.channel.default', '@messenger'),
+      'arguments' => array('@logger.channel.default', '@openlayers.messenger'),
     );
 
     $services['openlayers.internal.collection'] = array(

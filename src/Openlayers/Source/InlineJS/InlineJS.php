@@ -33,7 +33,7 @@ class InlineJS extends Source {
       );
     }
     else {
-      \Drupal::service('messenger')->addMessage(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
+      \Drupal::service('openlayers.messenger')->addMessage(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
     }
 
     $form['options']['javascript'] = array(
