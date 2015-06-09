@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers\Types;
 use Drupal\Core\Logger\LoggerChannelInterface;
+use Drupal\service_container\Messenger\MessengerInterface;
 
 /**
  * Class openlayers_config.
@@ -20,13 +21,26 @@ class Error extends Object {
    */
   public $errorMessage;
 
+  /**
+   * The loggerChannel service.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelInterface
+   */
   protected $loggerChannel;
+
+  /**
+   * The messenger service.
+   *
+   * @var \Drupal\service_container\Messenger\MessengerInterface
+   */
+  protected $messenger;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(LoggerChannelInterface $logger_channel) {
+  public function __construct(LoggerChannelInterface $logger_channel, MessengerInterface $messenger) {
     $this->loggerChannel = $logger_channel;
+    $this->messenger = $messenger;
 
     foreach ($this->defaultProperties() as $property => $value) {
       $this->{$property} = $value;
@@ -55,7 +69,7 @@ class Error extends Object {
     }
 
     $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
-    drupal_set_message($this->getMessage(), 'error', FALSE);
+    $this->messenger->addMessage($this->getMessage(), 'error', FALSE);
   }
 
   /**
