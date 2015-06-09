@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.component.internal.boostrapjs_popup',
+  fs: 'openlayers.Component.internal.boostrapjs_popup',
   init: function(data) {
     jQuery("body").append("<div id='popup'></div>");
 

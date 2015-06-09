@@ -16,7 +16,7 @@ function openlayers_geofield_default_openlayers_layers() {
   $ol_layer->machine_name = 'openlayers_geofield_layer_openstreetmap';
   $ol_layer->name = 'Geofield OpenStreetMap';
   $ol_layer->description = '';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->factory_service = 'openlayers.Layer.internal.Tile';
   $ol_layer->options = array(
     'source' => 'openlayers_geofield_source_openstreetmap',
   );
@@ -28,7 +28,7 @@ function openlayers_geofield_default_openlayers_layers() {
   $ol_layer->machine_name = 'geofield_field_formatter_layer';
   $ol_layer->name = 'Geofield Field Formatter Layer';
   $ol_layer->description = '';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Vector';
+  $ol_layer->factory_service = 'openlayers.Layer.internal.Vector';
   $ol_layer->options = array(
     'source' => 'geofield_field_formatter_source',
   );

@@ -16,7 +16,7 @@ function openlayers_default_openlayers_maps() {
   $ol_map->machine_name = 'openlayers_map_view_edit_form';
   $ol_map->name = 'Map view edit form';
   $ol_map->description = 'Map used in the the map edit form to get center and zoom. You can drag this map with your mouse, click to center and you can hold alt and shift key to rotate. Min & max zoom as well as "Limit to extent" settings are not applied to this map.';
-  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->factory_service = 'openlayers.Map.internal.OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '400px',

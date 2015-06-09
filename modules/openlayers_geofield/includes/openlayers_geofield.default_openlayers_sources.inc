@@ -15,7 +15,7 @@ function openlayers_geofield_default_openlayers_sources() {
   $ol_source->machine_name = 'openlayers_geofield_source_openstreetmap';
   $ol_source->name = 'Geofield OpenStreetMap';
   $ol_source->description = 'Source OpenStreetMap description';
-  $ol_source->factory_service = 'openlayers.source.internal.OSM';
+  $ol_source->factory_service = 'openlayers.Source.internal.OSM';
   $ol_source->options = array();
   $export['openlayers_geofield_source_openstreetmap'] = $ol_source;
 
@@ -25,7 +25,7 @@ function openlayers_geofield_default_openlayers_sources() {
   $ol_source->machine_name = 'geofield_field_formatter_source';
   $ol_source->name = 'Geofield Field Formatter Source';
   $ol_source->description = '';
-  $ol_source->factory_service = 'openlayers.source.internal.Geofield';
+  $ol_source->factory_service = 'openlayers.Source.internal.Geofield';
   $ol_source->options = array();
   $export['geofield_field_formatter_source'] = $ol_source;
 

@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.control.internal.inlinejs',
+  fs: 'openlayers.Control.internal.inlinejs',
   init: function(data) {
     eval(data.opt.javascript);
     return control;

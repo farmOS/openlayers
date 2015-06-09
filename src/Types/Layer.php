@@ -67,7 +67,7 @@ abstract class Layer extends Object implements LayerInterface {
 
     return array(
       'mn' => $this->machine_name,
-      'fs' => strtolower($this->factory_service),
+      'fs' => $this->factory_service,
       'opt' => $options,
     );
   }

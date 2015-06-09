@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.bingmaps',
+  fs: 'openlayers.Source.internal.bingmaps',
   init: function(data) {
     return new ol.source.BingMaps(data.opt);
   }

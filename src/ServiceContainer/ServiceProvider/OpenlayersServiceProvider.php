@@ -20,10 +20,10 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
     $services = array();
     $parameters = array();
 
-    $services['openlayers.manager'] = array(
+    $services['openlayers'] = array(
       'class' => '\Drupal\service_container\Plugin\ContainerAwarePluginManager',
       'arguments' => array(
-        'openlayers.manager.internal.',
+        'openlayers.internal.',
       ),
       'calls' => array(
         array(
@@ -35,23 +35,16 @@ class OpenlayersServiceProvider extends ServiceContainerServiceProvider {
       ),
     );
 
-    $services['openlayers.manager.internal.error'] = array(
+    $services['openlayers.internal.error'] = array(
       'class' => '\Drupal\openlayers\Types\Error',
       'arguments' => array('@logger.channel.default'),
     );
 
-    $services['openlayers.manager.internal.collection'] = array(
+    $services['openlayers.internal.collection'] = array(
       'class' => '\Drupal\openlayers\Types\Collection',
     );
 
-    foreach (openlayers_ctools_plugin_type() as $plugin_type => $data) {
-      $plugin_type = drupal_strtolower($plugin_type);
-      $services['openlayers.' . $plugin_type] = array();
-      $parameters['service_container.plugin_managers']['ctools']['openlayers.' . $plugin_type] = array(
-        'owner' => 'openlayers',
-        'type' => drupal_ucfirst($plugin_type),
-      );
-    }
+    $parameters['ctools_plugins_auto_discovery']['openlayers'] = TRUE;
 
     return array(
       'parameters' => $parameters,

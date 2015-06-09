@@ -16,7 +16,7 @@ function openlayers_ui_default_openlayers_maps() {
   $ol_map->machine_name = 'openlayers_map_ui_default';
   $ol_map->name = 'Default UI Map';
   $ol_map->description = 'Map used if there are no other maps defined';
-  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->factory_service = 'openlayers.Map.internal.OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '400px',

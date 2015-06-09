@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.control.internal.fullscreen',
+  fs: 'openlayers.Control.internal.fullscreen',
   init: function(data) {
     return new ol.control.FullScreen(data.opt);
   }

@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.geofield',
+  fs: 'openlayers.Source.internal.geofield',
   init: function(data) {
 
     var options = {

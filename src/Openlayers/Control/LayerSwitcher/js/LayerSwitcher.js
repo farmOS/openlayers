@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.control.internal.layerswitcher',
+  fs: 'openlayers.Control.internal.layerswitcher',
   init: function(data) {
     var element = jQuery(data.opt.element);
 

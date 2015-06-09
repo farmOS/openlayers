@@ -15,7 +15,7 @@ function openlayers_default_openlayers_layers() {
   $ol_layer->machine_name = 'openlayers_layer_tile_mapquest_osm';
   $ol_layer->name = 'MapQuest OpenStreetMap';
   $ol_layer->description = 'Layer MapQuest OpenStreetMap description';
-  $ol_layer->factory_service = 'openlayers.layer.internal.Tile';
+  $ol_layer->factory_service = 'openlayers.Layer.internal.Tile';
   $ol_layer->options = array(
     'source' => 'openlayers_source_mapquest_osm',
   );

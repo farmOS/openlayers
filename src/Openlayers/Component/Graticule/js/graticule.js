@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.component.internal.graticule',
+  fs: 'openlayers.Component.internal.graticule',
   init: function(data) {
     var graticule = new ol.Graticule({
       strokeStyle: new ol.style.Stroke({

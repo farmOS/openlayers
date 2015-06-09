@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.component.internal.lazyprocessing',
+  fs: 'openlayers.Component.internal.lazyprocessing',
   init: function(data) {
   }
 });

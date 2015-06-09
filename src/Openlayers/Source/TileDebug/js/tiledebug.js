@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.tiledebug',
+  fs: 'openlayers.Source.internal.tiledebug',
   init: function(data) {
     var options = {
       tileGrid: new ol.tilegrid.XYZ({maxZoom: data.opt.maxZoom}),

@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.component.internal.setvalues',
+  fs: 'openlayers.Component.internal.setvalues',
   init: function(data) {
     data.map.on('moveend', function(evt){
       var view = data.map.getView();

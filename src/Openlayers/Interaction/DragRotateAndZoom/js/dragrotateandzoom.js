@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.interaction.internal.dragrotateandzoom',
+  fs: 'openlayers.Interaction.internal.dragrotateandzoom',
   init: function(data) {
     return new ol.interaction.DragRotateAndZoom(data.opt);
   }

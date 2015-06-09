@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.map.internal.views',
+  fs: 'openlayers.Map.internal.views',
   init: function (data) {
     var projection = ol.proj.get('EPSG:3857');
 

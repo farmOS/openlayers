@@ -16,7 +16,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_simple_layer_switcher';
   $ol_control->name = 'Openlayers Examples simple layer switcher';
   $ol_control->description = '';
-  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->factory_service = 'openlayers.Control.internal.LayerSwitcher';
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(
@@ -33,7 +33,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_openweather_layer_switcher';
   $ol_control->name = 'OpenLayers Examples Control OpenWeather Layer Switcher';
   $ol_control->description = '';
-  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->factory_service = 'openlayers.Control.internal.LayerSwitcher';
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(
@@ -59,7 +59,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_esri_layer_switcher';
   $ol_control->name = 'ESRI layer switcher';
   $ol_control->description = '';
-  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->factory_service = 'openlayers.Control.internal.LayerSwitcher';
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(
@@ -82,7 +82,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_osm_layer_switcher';
   $ol_control->name = 'OSM layer switcher';
   $ol_control->description = '';
-  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->factory_service = 'openlayers.Control.internal.LayerSwitcher';
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(
@@ -111,7 +111,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_mapbox_layer_switcher';
   $ol_control->name = 'Mapbox layer switcher';
   $ol_control->description = '';
-  $ol_control->factory_service = 'openlayers.control.internal.LayerSwitcher';
+  $ol_control->factory_service = 'openlayers.Control.internal.LayerSwitcher';
   $ol_control->options = array(
     'label' => 'Layers',
     'layers' => array(

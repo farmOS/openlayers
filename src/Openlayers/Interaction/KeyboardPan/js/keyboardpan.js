@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.interaction.internal.keyboardpan',
+  fs: 'openlayers.Interaction.internal.keyboardpan',
   init: function(data) {
     return new ol.interaction.KeyboardPan(data.opt);
   }

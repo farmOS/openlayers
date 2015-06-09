@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.kml',
+  fs: 'openlayers.Source.internal.kml',
   init: function(data) {
     data.opt.format = new ol.format.KML({
       extractStyles: false

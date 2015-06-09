@@ -16,7 +16,7 @@ function openlayers_geofield_default_openlayers_maps() {
   $ol_map->machine_name = 'openlayers_geofield_map_geofield';
   $ol_map->name = 'Geofield Map';
   $ol_map->description = '';
-  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->factory_service = 'openlayers.Map.internal.OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
@@ -57,7 +57,7 @@ function openlayers_geofield_default_openlayers_maps() {
   $ol_map->machine_name = 'openlayers_geofield_map_geofield_formatter';
   $ol_map->name = 'Geofield Map: Field Formatter';
   $ol_map->description = '';
-  $ol_map->factory_service = 'openlayers.map.internal.OLMap';
+  $ol_map->factory_service = 'openlayers.Map.internal.OLMap';
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',

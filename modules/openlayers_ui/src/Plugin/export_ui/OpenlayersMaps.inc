@@ -120,7 +120,7 @@ function openlayers_map_form_start_submit($form, &$form_state) {
  */
 function openlayers_map_form_settings($form, &$form_state) {
   if (!isset($form_state['item']->factory_service)) {
-    $form_state['item']->factory_service = 'openlayers.map.internal.OLMap';
+    $form_state['item']->factory_service = 'openlayers.Map.internal.OLMap';
   }
   $map = openlayers_object_load('Map', $form_state['item']);
   $map->optionsForm($form, $form_state);
@@ -135,7 +135,7 @@ function openlayers_map_form_settings($form, &$form_state) {
 function openlayers_map_form_settings_validate($form, &$form_state) {
   $item = $form_state['item'];
   if (empty($item->factory_service)) {
-    $item->factory_service = 'openlayers.map.internal.OLMap';
+    $item->factory_service = 'openlayers.Map.internal.OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
@@ -151,7 +151,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 function openlayers_map_form_settings_submit($form, &$form_state) {
   // todo: fix.
   if (empty($form_state['item']->factory_service)) {
-    $form_state['item']->factory_service = 'openlayers.map.internal.OLMap';
+    $form_state['item']->factory_service = 'openlayers.Map.internal.OLMap';
   }
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);

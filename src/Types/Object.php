@@ -88,7 +88,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function __construct(array $configuration) {
     // @todo This needs to be check in depth.
     $this->pluginDefinition = $configuration;
-    $this->pluginId = strtolower($configuration['plugin module'] . '.' . $configuration['plugin type']) . '.' . 'internal.' . $configuration['name'];
+    $this->pluginId = $configuration['plugin module'] . '.' . $configuration['plugin type'] . '.' . 'internal.' . $configuration['name'];
     $this->configuration = $configuration;
   }
 
@@ -351,7 +351,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getCollection() {
     if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
-      $this->collection = \Drupal::service('openlayers.manager')->createInstance('collection');
+      $this->collection = \Drupal::service('openlayers')->createInstance('collection');
     }
     return $this->collection;
   }
@@ -362,7 +362,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getJS() {
     return array(
       'mn' => $this->machine_name,
-      'fs' => strtolower($this->factory_service),
+      'fs' => $this->factory_service,
       'opt' => $this->options,
     );
   }

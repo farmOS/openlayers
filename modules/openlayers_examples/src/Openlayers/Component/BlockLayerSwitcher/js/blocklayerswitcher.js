@@ -1,4 +1,4 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.component.internal.blocklayerswitcher',
+  fs: 'openlayers.Component.internal.blocklayerswitcher',
   init: function(data) {}
 });

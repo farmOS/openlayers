@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.layer.internal.vector',
+  fs: 'openlayers.Layer.internal.vector',
   init: function(data) {
 
     var layer = new ol.layer.Vector(data.opt);

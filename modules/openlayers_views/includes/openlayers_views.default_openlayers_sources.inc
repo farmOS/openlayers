@@ -24,7 +24,7 @@ function openlayers_views_default_openlayers_sources_alter(&$sources) {
         $ol_source->machine_name = $machine_name;
         $ol_source->name = 'Views Source: ' . $view->name . '_' . $display;
         $ol_source->description = '';
-        $ol_source->factory_service = 'openlayers.source.internal.Vector';
+        $ol_source->factory_service = 'openlayers.Source.internal.Vector';
         $ol_source->options = array(
           'url' => url($view->display_handler->get_url(), array('absolute' => TRUE)),
         );
@@ -46,7 +46,7 @@ function openlayers_views_default_openlayers_sources_alter(&$sources) {
       $ol_source->machine_name = $machine_name;
       $ol_source->name = 'Views Map: ' . $view_name . ':' . $display;
       $ol_source->description = t('Source for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
-      $ol_source->factory_service = 'openlayers.source.internal.Vector';
+      $ol_source->factory_service = 'openlayers.Source.internal.Vector';
       $ol_source->options = array();
       $sources[$ol_source->machine_name] = $ol_source;
     }

@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.stamen',
+  fs: 'openlayers.Source.internal.stamen',
   init: function(data) {
     return new ol.source.Stamen(data.opt);
   }

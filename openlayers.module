@@ -25,7 +25,7 @@ function openlayers_ctools_plugin_directory($owner, $plugin_type) {
     return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
   }
   if ($owner == 'service_container') {
-    return 'src/ServiceContainer/' . $plugin_type;
+    return 'src/ServiceContainer/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
   }
 }
 
@@ -80,7 +80,6 @@ function openlayers_ctools_plugin_type() {
  */
 function openlayers_object_load($object_type, $export) {
   // @todo: This needs to be refactored properly.
-  Openlayers::init();
   ctools_include('export');
 
   $object = NULL;
@@ -95,16 +94,15 @@ function openlayers_object_load($object_type, $export) {
   }
 
   if (is_array($exportable) && isset($exportable['factory_service'])) {
-    if (Openlayers::hasService($exportable['factory_service'])) {
-      $service = explode('.', $exportable['factory_service']);
-      $object = \Drupal::service($service[0] . '.' . $service[1])->createInstance($service[3]);
+    if (\Drupal::hasService($exportable['factory_service'])) {
+      $object = \Drupal::service($exportable['factory_service']);
     }
     else {
       $exportable += array(
         'type' => $object_type,
         'errorMessage' => 'Service <em>@service</em> doesn\'t exists, unable to load @type @machine_name',
       );
-      $object = \Drupal::service('openlayers.manager')->createInstance('error');
+      $object = \Drupal::service('openlayers')->createInstance('error');
     }
   }
   else {
@@ -113,7 +111,7 @@ function openlayers_object_load($object_type, $export) {
       'machine_name' => $export,
       'errorMessage' => 'Unable to load CTools exportable @type @machine_name.',
     );
-    $object = \Drupal::service('openlayers.manager')->createInstance('error');
+    $object = \Drupal::service('openlayers')->createInstance('error');
   }
   $object->init($exportable);
 
@@ -453,28 +451,6 @@ function openlayers_i18n_string_update($name, $string, $options = array()) {
 function openlayers_i18n_string_remove($name, $string = NULL, $options = array()) {
   if (module_exists('i18n_string')) {
     return i18n_string_remove($name, $string, $options);
-  }
-}
-
-/**
- * Implements hook_stream_wrappers_alter().
- */
-function openlayers_stream_wrappers_alter(&$wrappers) {
-  // Initialize the container. Ensure the class exists, necessary to ensure
-  // a stall registry can be rebuild.
-  if (class_exists('ServiceContainer')) {
-    ServiceContainer::init();
-  }
-}
-
-/**
- * Implements hook_enable().
- */
-function openlayers_enable() {
-  // Reset the container. Ensure the class exists, necessary to ensure
-  // a stall registry can be rebuild.
-  if (class_exists('ServiceContainer')) {
-    ServiceContainer::reset();
   }
 }
 

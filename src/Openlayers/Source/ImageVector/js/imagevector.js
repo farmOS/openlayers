@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.imagevector',
+  fs: 'openlayers.Source.internal.imagevector',
   init: function(data) {
     if (goog.isDef(data.objects.sources[data.opt.source])) {
       var options = jQuery.extend(true, {}, data.opt);

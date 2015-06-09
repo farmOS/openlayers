@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.source.internal.vector',
+  fs: 'openlayers.Source.internal.vector',
   init: function(data) {
 
     var options = {

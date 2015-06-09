@@ -486,7 +486,7 @@ function openlayers_requirements($phase) {
 }
 
 /**
- * Update to the 3.1.x version.
+ * Update to the 3.x version.
  */
 function openlayers_update_7350() {
 
@@ -527,5 +527,25 @@ function openlayers_update_7350() {
     if (!isset($table_schema['data']['machine_name']) && db_field_exists($table, 'data')) {
       db_drop_field($table, 'data');
     }
+  }
+}
+
+/**
+ * Update factory_service property of each OL objects.
+ */
+function openlayers_update_7360() {
+  $tables = openlayers_schema();
+  foreach ($tables as $table => $table_data) {
+    if (!isset($table_data['fields']['factory_service'])) {
+      continue;
+    }
+
+    $plugin_type = array_pop(explode('_', $table_data['export']['identifier']));
+    $fs_before = 'openlayers.' . $plugin_type . '.';
+    $fs_after = 'openlayers.' . drupal_ucfirst($plugin_type) . '.';
+
+    db_update($table)
+      ->expression('factory_service', 'REPLACE(factory_service, :before, :after)', array(':before' => $fs_before, ':after' => $fs_after))
+      ->execute();
   }
 }
