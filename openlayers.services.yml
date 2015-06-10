@@ -1,0 +1,20 @@
+parameters:
+  ctools_plugins_auto_discovery:
+    openlayers: true
+
+services:
+  openlayers:
+    class: \Drupal\service_container\Plugin\ContainerAwarePluginManager
+    arguments: ['openlayers.internal.']
+    calls:
+      - [ setContainer, [ '@service_container' ] ]
+
+  openlayers.messenger:
+    alias: messenger
+
+  openlayers.internal.error:
+    class: \Drupal\openlayers\Types\Error
+    arguments: ['@logger.channel.default', '@openlayers.messenger']
+
+  openlayers.internal.collection:
+    class: \Drupal\openlayers\Types\Collection

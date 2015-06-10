@@ -3,12 +3,13 @@ description = "OpenLayers base API module"
 core = 7.x
 php = 5.5
 package = "OpenLayers"
+
 dependencies[] = libraries (>=2.1)
 dependencies[] = ctools
 dependencies[] = file
 dependencies[] = image
 dependencies[] = registry_autoload
-dependencies[] = service_container
+dependencies[] = service_container_symfony
 dependencies[] = jquery_update
 
 registry_autoload[] = PSR-4

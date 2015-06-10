@@ -10,10 +10,9 @@ include 'includes/openlayers.helpers.inc';
  * Implements hook_ctools_plugin_api().
  */
 function openlayers_ctools_plugin_api($module, $api) {
-  $path = drupal_get_path('module', 'openlayers') . '/includes';
   return array(
     'version' => 1,
-    'path' => $path,
+    'path' => drupal_get_path('module', 'openlayers') . '/includes',
   );
 }
 
@@ -23,9 +22,6 @@ function openlayers_ctools_plugin_api($module, $api) {
 function openlayers_ctools_plugin_directory($owner, $plugin_type) {
   if ($owner == 'openlayers') {
     return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
-  }
-  if ($owner == 'service_container') {
-    return 'src/ServiceContainer/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
   }
 }
 
