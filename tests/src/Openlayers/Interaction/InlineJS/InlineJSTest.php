@@ -11,8 +11,8 @@ use Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS;
 
 /**
  * @coversDefaultClass \Drupal\openlayers\Interaction\InlineJS\InlineJS
- * @group dic 
- */       
+ * @group openlayers
+ */
 class InlineJSTest extends \PHPUnit_Framework_TestCase {
 
   public function setUp() {
@@ -26,7 +26,7 @@ class InlineJSTest extends \PHPUnit_Framework_TestCase {
     );
 
     $this->inlineJS = new InlineJS($configuration, $this->moduleHandler, $this->messenger, $this->drupal7);
-  }       
+  }
 
   /**
    * @covers ::__construct

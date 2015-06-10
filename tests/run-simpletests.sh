@@ -8,4 +8,4 @@ set -e
 DIR=$(dirname $0)
 cd $DIR
 
-drush test-run "service_container" "$@"
+drush test-run "openlayers" "$@"
