@@ -86,9 +86,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
    *   A configuration array containing information about the plugin instance.
    */
   public function __construct(array $configuration) {
-    // @todo This needs to be check in depth.
     $this->pluginDefinition = $configuration;
-    $this->pluginId = $configuration['plugin module'] . '.' . $configuration['plugin type'] . '.' . 'internal.' . $configuration['name'];
+    $this->pluginId = $configuration['plugin module'] . '.' . $configuration['plugin type'] . ':' . $configuration['name'];
     $this->configuration = $configuration;
   }
 

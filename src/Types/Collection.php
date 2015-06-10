@@ -26,7 +26,7 @@ class Collection {
    */
   public function append(\Drupal\openlayers\Types\Object $object) {
     list($plugin_manager, $plugin_id) = explode(':', $object->factory_service);
-    list($module, $plugin_type) = explode('.', drupal_strtolower($plugin_manager));
+    list($module, $plugin_type) = explode('.', drupal_strtolower($plugin_manager), 2);
 
     $this->objects[$plugin_type][$object->machine_name] = $object;
   }
