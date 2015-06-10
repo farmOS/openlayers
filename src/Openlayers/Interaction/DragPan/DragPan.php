@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Interaction;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Interaction\\DragPan',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

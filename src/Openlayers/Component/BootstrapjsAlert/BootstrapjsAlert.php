@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Component;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\BootstrapjsAlert',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

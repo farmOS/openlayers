@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Source;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Source\\Cluster',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

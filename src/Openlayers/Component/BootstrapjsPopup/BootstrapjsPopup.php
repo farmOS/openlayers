@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Component;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\BootstrapjsPopup',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

@@ -10,7 +10,6 @@ use Drupal\openlayers\Types\Interaction;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Interaction\\Snap',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

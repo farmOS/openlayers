@@ -6,10 +6,7 @@
 
 namespace Drupal\openlayers\Types;
 use Drupal\Component\Plugin\PluginBase;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\openlayers\Config;
-use Drupal\service_container\Legacy\Drupal7;
-use Drupal\service_container\Messenger\MessengerInterface;
 
 /**
  * Class openlayers_object.
@@ -58,27 +55,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   protected $collection = NULL;
 
   /**
-   * The module_handler service.
-   *
-   * @var \Drupal\service_container\Extension\ModuleHandler
-   */
-  protected $moduleHandler;
-
-  /**
-   * The messenger service.
-   *
-   * @var \Drupal\service_container\Messenger\MessengerInterface
-   */
-  protected $messenger;
-
-  /**
-   * The Drupal7 service.
-   *
-   * @var \Drupal\service_container\Legacy\Drupal7
-   */
-  protected $drupal7;
-
-  /**
    * Holds all the attachment used by this object.
    *
    * @var array
@@ -109,14 +85,10 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.
    */
-  public function __construct(array $configuration, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
+  public function __construct(array $configuration) {
     $this->pluginDefinition = $configuration;
     $this->pluginId = $configuration['plugin module'] . '.' . $configuration['plugin type'] . ':' . $configuration['name'];
-    $this->collection = \Drupal::service('openlayers')->createInstance('collection');
     $this->configuration = $configuration;
-    $this->moduleHandler = $module_handler;
-    $this->messenger = $messenger;
-    $this->drupal7 = $drupal7;
   }
 
   /**
@@ -377,6 +349,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getCollection() {
+    if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
+      $this->collection = \Drupal::service('openlayers')->createInstance('collection');
+    }
     return $this->collection;
   }
 

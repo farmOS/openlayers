@@ -8,7 +8,6 @@ namespace Drupal\openlayers\Source;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Source\\Geofield',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Component;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\Autopopup',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

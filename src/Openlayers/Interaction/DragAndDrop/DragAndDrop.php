@@ -9,7 +9,6 @@ use Drupal\openlayers\Types\Interaction;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Interaction\\DragAndDrop',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**
