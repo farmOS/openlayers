@@ -10,7 +10,7 @@ namespace Drupal\Tests\openlayers\Openlayers\Interaction\InlineJS;
 use Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS;
 
 /**
- * @coversDefaultClass \Drupal\openlayers\Interaction\InlineJS\InlineJS
+ * @coversDefaultClass \Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS
  * @group openlayers
  */
 class InlineJSTest extends \PHPUnit_Framework_TestCase {
