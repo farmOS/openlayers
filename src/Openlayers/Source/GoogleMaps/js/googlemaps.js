@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Source.internal.GoogleMaps',
+  fs: 'openlayers.Source:GoogleMaps',
   init: function(data) {
 
     var olMapDiv = jQuery(data.map.getViewport()).parent();
@@ -56,10 +56,10 @@ Drupal.openlayers.pluginManager.register({
   attach: function(context, settings) {
     if (typeof google === 'undefined') {
       // If a script is already loading bail out.
-      if (Drupal.openlayers.pluginManager.getPlugin('openlayers.Source.internal.GoogleMaps').scriptLoading) {
+      if (Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading) {
         return;
       }
-      Drupal.openlayers.pluginManager.getPlugin('openlayers.Source.internal.GoogleMaps').scriptLoading = true;
+      Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading = true;
 
       var params = {
         v: 3,

@@ -88,8 +88,9 @@ abstract class OpenlayersObjects extends ctools_export_ui {
     $name = $item->{$this->plugin['export']['key']};
     $schema = ctools_export_get_schema($this->plugin['schema']);
 
-    list($module, $plugin) = explode('.', $item->factory_service);
-    $object = openlayers_object_load($plugin, $item->machine_name);
+    list($plugin_manager, $plugin_id) = explode(':', $item->factory_service);
+    list($module, $plugin_type) = explode('.', $plugin_manager);
+    $object = openlayers_object_load($plugin_type, $item->machine_name);
 
     // Note: $item->{$schema['export']['export type string']} should have
     // already been set up by export.inc so we can use it safely.

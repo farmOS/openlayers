@@ -16,7 +16,7 @@ function openlayers_geofield_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_geofield_component_geofield';
   $ol_component->name = 'OpenLayers Geofield';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Geofield';
+  $ol_component->factory_service = 'openlayers.Component:Geofield';
   $ol_component->options = array(
     'dataType' => array(
       'GeoJSON' => 'GeoJSON',
@@ -47,7 +47,7 @@ function openlayers_geofield_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_geofield_component_zoom_to_source';
   $ol_component->name = 'OpenLayers Geofield Zoom to Source';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.ZoomToSource';
+  $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
   $ol_component->options = array(
     'source' => 'geofield_field_formatter_source',
     'animations' => array(

@@ -37,6 +37,7 @@ abstract class Layer extends Object implements LayerInterface {
    */
   public function getSource() {
     $source = array_values($this->getCollection()->getObjects('source'));
+
     return ($source[0] instanceof SourceInterface) ? $source[0] : FALSE;
   }
 

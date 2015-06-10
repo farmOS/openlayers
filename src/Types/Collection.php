@@ -25,8 +25,10 @@ class Collection {
    *   Object instance to add to this collection.
    */
   public function append(\Drupal\openlayers\Types\Object $object) {
-    $type = strtolower(implode('', array_slice(explode('.', $object->factory_service), -3, 1)));
-    $this->objects[$type][$object->machine_name] = $object;
+    list($plugin_manager, $plugin_id) = explode(':', $object->factory_service);
+    list($module, $plugin_type) = explode('.', drupal_strtolower($plugin_manager));
+
+    $this->objects[$plugin_type][$object->machine_name] = $object;
   }
 
   /**

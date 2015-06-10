@@ -69,9 +69,6 @@ class OpenlayersMaps extends \OpenlayersObjects {
     $name = $item->{$this->plugin['export']['key']};
     $schema = ctools_export_get_schema($this->plugin['schema']);
 
-    list($module, $plugin) = explode('.', $item->factory_service);
-    $object = openlayers_object_load($plugin, $item->machine_name);
-
     // Note: $item->{$schema['export']['export type string']} should have
     // already been set up by export.inc so we can use it safely.
     switch ($form_state['values']['order']) {

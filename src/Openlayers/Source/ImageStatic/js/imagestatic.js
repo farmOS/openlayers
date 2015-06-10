@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Source.internal.ImageStatic',
+  fs: 'openlayers.Source:ImageStatic',
   init: function(data) {
     var pixelProjection = new ol.proj.Projection({
       code: 'pixel',

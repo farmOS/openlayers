@@ -1,5 +1,5 @@
 var openlayers_source_internal_geojson = {
-  fs: 'openlayers.Source.internal.GeoJSON',
+  fs: 'openlayers.Source:GeoJSON',
   init: function(data) {
     data.opt.format = new ol.format.GeoJSON();
 

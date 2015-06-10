@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component.internal.Autopopup',
+  fs: 'openlayers.Component:Autopopup',
   init: function(data) {
     var map = data.map;
 

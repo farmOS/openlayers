@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Source.internal.XYZ',
+  fs: 'openlayers.Source:XYZ',
   init: function(data) {
     return new ol.source.XYZ(data.opt);
   }

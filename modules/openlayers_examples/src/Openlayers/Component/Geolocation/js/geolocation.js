@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component.internal.geolocation',
+  fs: 'openlayers.Component:geolocation',
   init: function(data) {
     var map = data.map;
 

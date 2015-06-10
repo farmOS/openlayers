@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Source.internal.OSM',
+  fs: 'openlayers.Source:OSM',
   init: function(data) {
     if (!goog.isDef(data.opt)) {
       data.opt = {};

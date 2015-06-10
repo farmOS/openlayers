@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component.internal.Tooltip',
+  fs: 'openlayers.Component:Tooltip',
   init: function(data) {
     var map = data.map;
 

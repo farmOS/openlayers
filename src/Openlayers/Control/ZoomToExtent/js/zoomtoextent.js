@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Control.internal.ZoomToExtent',
+  fs: 'openlayers.Control:ZoomToExtent',
   init: function(data) {
     return new ol.control.ZoomToExtent(data.opt);
   }

@@ -90,8 +90,12 @@ function openlayers_object_load($object_type, $export) {
   }
 
   if (is_array($exportable) && isset($exportable['factory_service'])) {
-    if (\Drupal::hasService($exportable['factory_service'])) {
-      $object = \Drupal::service($exportable['factory_service']);
+    list($plugin_manager_id, $plugin_id) = explode(':', $exportable['factory_service']);
+    if (\Drupal::hasService($plugin_manager_id)) {
+      $plugin_manager = \Drupal::service($plugin_manager_id);
+      if ($plugin_manager->hasDefinition($plugin_id)) {
+        $object = $plugin_manager->createInstance($plugin_id);
+      }
     }
     else {
       $exportable += array(

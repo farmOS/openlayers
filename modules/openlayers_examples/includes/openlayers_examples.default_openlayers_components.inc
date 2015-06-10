@@ -16,7 +16,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_ajax_values';
   $ol_component->name = 'openlayers_examples_component_ajax_values';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.SetValues';
+  $ol_component->factory_service = 'openlayers.Component:SetValues';
   $ol_component->options = array(
     'latitude' => 'lat',
     'longitude' => 'lon',
@@ -32,7 +32,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_geolocation';
   $ol_component->name = 'Geolocation example';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Geolocation';
+  $ol_component->factory_service = 'openlayers.Component:Geolocation';
   $ol_component->options = array(
     'checkboxID' => 'trackPosition',
     'positionAccuracyID' => 'positionAccuracy',
@@ -49,7 +49,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_graticule';
   $ol_component->name = 'Graticule example';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Graticule';
+  $ol_component->factory_service = 'openlayers.Component:Graticule';
   $ol_component->options = array(
     'rgba' => '0, 0, 0, 0.2',
     'width' => '2',
@@ -63,7 +63,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_zoom_to_source';
   $ol_component->name = 'Zoom To Source Examples';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.ZoomToSource';
+  $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
   $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'animations' => array(
@@ -81,7 +81,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_autopopup';
   $ol_component->name = 'OpenLayers Examples Autopopup';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Autopopup';
+  $ol_component->factory_service = 'openlayers.Component:Autopopup';
   $ol_component->options = array(
     'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
     'zoom' => 'auto',
@@ -100,7 +100,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_tooltip_earthquakes';
   $ol_component->name = 'Earthquakes tooltip';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Tooltip';
+  $ol_component->factory_service = 'openlayers.Component:Tooltip';
   $ol_component->options = array(
     'layer' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
     'positioning' => 'top-right',
@@ -113,7 +113,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_simple_popup';
   $ol_component->name = 'Simple popup';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Popup';
+  $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
     'layers' => array(
       'openlayers_examples_layer_views_geojson_popup' => 'openlayers_examples_layer_views_geojson_popup',
@@ -131,7 +131,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->machine_name = 'openlayers_examples_component_earthquake_style';
   $ol_component->name = 'Earthquake style';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.InlineJS';
+  $ol_component->factory_service = 'openlayers.Component:InlineJS';
   $ol_component->options = array(
     'javascript' => 'var map = data.map;
 
@@ -177,7 +177,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_simple_popup_earthquakes';
   $ol_component->name = 'Earthquakes popup';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.Popup';
+  $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
     'layers' => array(
       'openlayers_examples_layer_vector_kml_earthquakes_heatmap' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
@@ -195,7 +195,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_blocklayerswitcher';
   $ol_component->name = 'Block Layer Switcher';
   $ol_component->description = '';
-  $ol_component->factory_service = 'openlayers.Component.internal.BlockLayerSwitcher';
+  $ol_component->factory_service = 'openlayers.Component:BlockLayerSwitcher';
   $export['openlayers_examples_component_blocklayerswitcher'] = $ol_component;
 
   $ol_component = new stdClass();
@@ -203,7 +203,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_bootstrapjs_popup';
   $ol_component->name = 'Bootstrap JS popup';
   $ol_component->description = 'Bootstrap JS popup component is a component who allows you to display popup when clicking on a feature. It requires the bootstrapjs module to work.';
-  $ol_component->factory_service = 'openlayers.Component.internal.BootstrapjsPopup';
+  $ol_component->factory_service = 'openlayers.Component:BootstrapjsPopup';
   $ol_component->options = array();
   $export['openlayers_examples_component_bootstrapjs_popup'] = $ol_component;
 
@@ -212,7 +212,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_bootstrapjs_alert';
   $ol_component->name = 'Bootstrap JS alert';
   $ol_component->description = 'Display an alert on the top of the map.';
-  $ol_component->factory_service = 'openlayers.Component.internal.BootstrapjsAlert';
+  $ol_component->factory_service = 'openlayers.Component:BootstrapjsAlert';
   $ol_component->options = array(
     'message' => '<strong>Success !</strong>The map has been loaded.',
   );
@@ -224,7 +224,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->machine_name = 'openlayers_examples_component_tileutfgrid';
   $ol_component->name = 'Component TileUTFGrid';
   $ol_component->description = 'Example based on http://openlayers.org/en/v3.1.0/examples/tileutfgrid.html.';
-  $ol_component->factory_service = 'openlayers.Component.internal.InlineJS';
+  $ol_component->factory_service = 'openlayers.Component:InlineJS';
   $ol_component->options = array(
     'javascript' => 'var map = data.map;
 

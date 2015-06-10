@@ -549,3 +549,22 @@ function openlayers_update_7360() {
       ->execute();
   }
 }
+
+/**
+ * Update factory_service property of each OL objects to remove '.internal.'.
+ */
+function openlayers_update_7370() {
+  $tables = openlayers_schema();
+  foreach ($tables as $table => $table_data) {
+    if (!isset($table_data['fields']['factory_service'])) {
+      continue;
+    }
+
+    $fs_before = '.internal.';
+    $fs_after = ':';
+
+    db_update($table)
+      ->expression('factory_service', 'REPLACE(factory_service, :before, :after)', array(':before' => $fs_before, ':after' => $fs_after))
+      ->execute();
+  }
+}
