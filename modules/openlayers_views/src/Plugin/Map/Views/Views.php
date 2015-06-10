@@ -10,6 +10,7 @@ use Drupal\openlayers\Map;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Map\\Views',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

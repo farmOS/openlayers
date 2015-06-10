@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Style;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Style\\ClusterStyle',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

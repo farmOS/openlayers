@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Layer;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Layer\\InlineJS',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

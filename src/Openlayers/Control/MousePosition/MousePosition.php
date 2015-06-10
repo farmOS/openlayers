@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Control;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Control\\MousePosition',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

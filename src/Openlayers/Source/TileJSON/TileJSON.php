@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Source;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Source\\TileJSON',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

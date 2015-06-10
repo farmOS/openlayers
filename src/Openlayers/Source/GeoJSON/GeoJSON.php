@@ -10,6 +10,7 @@ use Drupal\openlayers\Config;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Source\\GeoJSON',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

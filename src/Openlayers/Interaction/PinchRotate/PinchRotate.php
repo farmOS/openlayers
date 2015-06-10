@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Interaction;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Interaction\\PinchRotate',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

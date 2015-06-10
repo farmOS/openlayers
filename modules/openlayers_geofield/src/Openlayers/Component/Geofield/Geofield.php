@@ -10,6 +10,7 @@ use \geoPHP;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\Geofield',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

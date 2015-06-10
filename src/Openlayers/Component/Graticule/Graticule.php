@@ -9,6 +9,7 @@ use Drupal\openlayers\Types\Component;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Component\\Graticule',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

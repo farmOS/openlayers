@@ -10,6 +10,7 @@ use Drupal\openlayers\Types\Map;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Map\\OLMap',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**

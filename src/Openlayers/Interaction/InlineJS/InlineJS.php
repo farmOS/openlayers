@@ -22,20 +22,6 @@ $plugin = array(
 class InlineJS extends Interaction {
 
   /**
-   * Constructs an InlineJS plugin.
-   *
-   * @param @todo
-   * @param @todo
-   * @param @todo
-   */
-  public function __construct(array $configuration, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
-    parent::__construct($configuration);
-    $this->moduleHandler = $module_handler;
-    $this->messenger = $messenger;
-    $this->drupal7 = $drupal7;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
