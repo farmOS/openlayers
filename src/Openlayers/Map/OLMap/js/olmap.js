@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Map.internal.olmap',
+  fs: 'openlayers.Map.internal.OLMap',
   init: function(data) {
     var options = jQuery.extend(true, {}, data.opt);
     var projection = ol.proj.get('EPSG:3857');

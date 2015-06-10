@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Interaction.internal.draw',
+  fs: 'openlayers.Interaction.internal.Draw',
   init: function(data) {
 
     var featureOverlay = new ol.FeatureOverlay({

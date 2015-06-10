@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Style.internal.clusterstyle',
+  fs: 'openlayers.Style.internal.ClusterStyle',
   init: function(data) {
     var styleCache = {};
     var clusterStyle = function(feature, resolution) {

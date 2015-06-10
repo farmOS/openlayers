@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Source.internal.cluster',
+  fs: 'openlayers.Source.internal.Cluster',
   init: function(data) {
     if (goog.isDef(data.objects.sources[data.opt.source])) {
       var options = jQuery.extend(true, {}, data.opt);

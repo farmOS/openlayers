@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Style.internal.olstyle',
+  fs: 'openlayers.Style.internal.OLStyle',
   init: function(data) {
     var fill = new ol.style.Fill({
       color: 'rgba(255,255,255,0.4)'

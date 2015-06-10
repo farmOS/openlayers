@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Control.internal.mouseposition',
+  fs: 'openlayers.Control.internal.MousePosition',
   init: function(data) {
 //  We can like automatically check if data.opt is not undefined
 //  for all the ol types.

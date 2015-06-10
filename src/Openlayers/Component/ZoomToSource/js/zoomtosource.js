@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component.internal.zoomtosource',
+  fs: 'openlayers.Component.internal.ZoomToSource',
   init: function(data) {
     var map = data.map;
 
