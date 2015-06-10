@@ -1,14 +1,12 @@
-name = "OpenLayers"
-description = "OpenLayers base API module"
+name = "Openlayers"
+description = "Openlayers base API module"
 core = 7.x
-php = 5.5
-package = "OpenLayers"
+php = 5.3.10
+package = "Openlayers"
 
 dependencies[] = libraries (>=2.1)
-dependencies[] = ctools
 dependencies[] = file
 dependencies[] = image
-dependencies[] = registry_autoload
 dependencies[] = service_container_symfony
 dependencies[] = jquery_update
 
