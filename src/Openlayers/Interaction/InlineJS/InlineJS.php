@@ -4,11 +4,16 @@
  * Interaction: JS.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\InlineJS;
+
 use Drupal\openlayers\Types\Interaction;
+use Drupal\service_container\Messenger\MessengerInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\service_container\Legacy\Drupal7;
 
 $plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\InlineJS',
+  'class' => '\Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS',
+  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
 );
 
 /**
@@ -17,23 +22,37 @@ $plugin = array(
 class InlineJS extends Interaction {
 
   /**
+   * Constructs an InlineJS plugin.
+   *
+   * @param @todo
+   * @param @todo
+   * @param @todo
+   */
+  public function __construct(array $configuration, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
+    parent::__construct($configuration);
+    $this->moduleHandler = $module_handler;
+    $this->messenger = $messenger;
+    $this->drupal7 = $drupal7;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $attached = array();
 
-    if (module_exists('ace_editor')) {
+    if ($this->moduleHandler->moduleExists('ace_editor')) {
       $attached = array(
         'library' => array(
           array('ace_editor', 'ace-editor'),
         ),
         'js' => array(
-          drupal_get_path('module', 'openlayers') . '/js/openlayers.editor.js',
+          $this->drupal7->drupal_get_path('module', 'openlayers') . '/js/openlayers.editor.js',
         ),
       );
     }
     else {
-      \Drupal::service('openlayers.messenger')->addMessage(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
+      $this->messenger->addMessage(t('To get syntax highlighting, you should install the module <a href="@url1">ace_editor</a> and its <a href="@url2">library</a>.', array('@url1' => 'http://drupal.org/project/ace_editor', '@url2' => 'http://ace.c9.io/')), 'warning');
     }
 
     $form['options']['javascript'] = array(
