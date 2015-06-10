@@ -39,11 +39,9 @@ Drupal.openlayers.pluginManager = (function($) {
         return false;
       }
 
-      plugins[plugin.fs.toLowerCase()] = plugin;
+      plugins[plugin.fs] = plugin;
     },
     createInstance: function(factoryService, data) {
-      var factoryService = factoryService.toLowerCase();
-
       if (!this.isRegistered(factoryService)) {
         return false;
       }
@@ -69,7 +67,7 @@ Drupal.openlayers.pluginManager = (function($) {
       return false;
     },
     isRegistered: function(factoryService) {
-      return (factoryService.toLowerCase() in plugins);
+      return (factoryService in plugins);
     }
   };
 })(jQuery);
