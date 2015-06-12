@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component:geofield',
+  fs: 'openlayers.Component:Geofield',
   init: function(data) {
     var map = data.map;
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
