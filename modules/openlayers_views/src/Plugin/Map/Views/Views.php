@@ -80,10 +80,9 @@ class Views extends OLMap {
   /**
    * {@inheritdoc}
    */
-  public function buildCollection() {
+  protected function buildCollection() {
     parent::buildCollection();
     $this->getSources();
-    return $this->getCollection();
   }
 
   /**

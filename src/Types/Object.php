@@ -99,16 +99,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
     if (empty($this->machine_name)) {
       $this->machine_name = drupal_html_id($this->getType() . '-' . time());
     }
-
-    $this->buildCollection();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildCollection() {
-    $this->getCollection()->append($this);
-    return $this->getCollection();
   }
 
   /**
@@ -334,11 +324,21 @@ abstract class Object extends PluginBase implements ObjectInterface {
   }
 
   /**
+   * Allows to adjust the initially built collection.
+   *
+   * The collection can be accessed already by calling $this->getCollection().
+   */
+  protected function buildCollection() {
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getCollection() {
     if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
       $this->collection = \Drupal::service('openlayers')->createInstance('collection');
+      $this->collection->append($this);
+      $this->buildCollection();
     }
     return $this->collection;
   }

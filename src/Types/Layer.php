@@ -14,7 +14,7 @@ abstract class Layer extends Object implements LayerInterface {
   /**
    * {@inheritdoc}
    */
-  public function buildCollection() {
+  protected function buildCollection() {
     parent::buildCollection();
 
     foreach (array('source', 'style') as $type) {
@@ -25,8 +25,6 @@ abstract class Layer extends Object implements LayerInterface {
         }
       }
     }
-
-    return $this->getCollection();
   }
 
   /**

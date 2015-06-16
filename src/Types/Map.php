@@ -28,7 +28,7 @@ abstract class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function buildCollection() {
+  protected function buildCollection() {
     parent::buildCollection();
 
     $ol_types = array(
@@ -47,8 +47,6 @@ abstract class Map extends Object implements MapInterface {
         }
       }
     }
-
-    return $this->getCollection();
   }
 
   /**
