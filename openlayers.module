@@ -23,6 +23,9 @@ function openlayers_ctools_plugin_directory($owner, $plugin_type) {
   if ($owner == 'openlayers') {
     return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
   }
+  elseif ($owner == 'ctools' && $plugin_type == 'content_types') {
+    return 'plugins/' . $plugin_type;
+  }
 }
 
 /**
