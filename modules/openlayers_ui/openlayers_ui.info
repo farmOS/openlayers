@@ -1,7 +1,7 @@
 name = "OpenLayers UI"
 description = "Provides a user interface to manage OpenLayers maps."
 core = "7.x"
-package = "OpenLayers"
+package = "Openlayers"
 dependencies[] = "openlayers"
 
 configure = admin/structure/openlayers

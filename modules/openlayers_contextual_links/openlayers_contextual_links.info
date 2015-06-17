@@ -1,7 +1,7 @@
 name = OpenLayers Contextual Links
 description = Provide contextual links on a map.
 core = 7.x
-package = "OpenLayers"
+package = "Openlayers"
 
 dependencies[] = contextual
 dependencies[] = openlayers_ui

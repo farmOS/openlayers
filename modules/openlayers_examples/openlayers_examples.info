@@ -1,7 +1,7 @@
 name = OpenLayers Examples
 description = OpenLayers Examples
 core = 7.x
-package = "OpenLayers"
+package = "Openlayers"
 
 dependencies[] = openlayers
 dependencies[] = views_geojson

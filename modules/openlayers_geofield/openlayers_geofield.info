@@ -1,7 +1,7 @@
 name = OpenLayers Geofield
 description = OpenLayers Geofield integration
 core = 7.x
-package = "OpenLayers"
+package = "Openlayers"
 
 dependencies[] = openlayers
 dependencies[] = geofield (>=7.x-2.3)

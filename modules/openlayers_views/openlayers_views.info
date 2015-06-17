@@ -1,7 +1,7 @@
 name = OpenLayers Views
 description = OpenLayers module for Views
 core = 7.x
-package = "OpenLayers"
+package = "Openlayers"
 
 dependencies[] = views
 dependencies[] = openlayers
