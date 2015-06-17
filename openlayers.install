@@ -568,3 +568,16 @@ function openlayers_update_7370() {
       ->execute();
   }
 }
+
+/**
+ * Make sure that the submodule service_container_symfony from
+ * module service_container is properly enabled.
+ */
+function openlayers_update_7380() {
+  if (!module_exists('service_container_symfony')) {
+    $enabled = module_enable(array('service_container_symfony'));
+    if (!$enabled) {
+      throw new DrupalUpdateException('Unable to enable the module service_container_symfony from service_container.');
+    }
+  }
+}
