@@ -128,8 +128,6 @@ function openlayers_object_load($object_type, $export) {
     $object->disabled = 1;
   }
 
-  vdpm($object);
-
   return $object;
 }
 
