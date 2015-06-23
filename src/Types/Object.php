@@ -338,7 +338,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getType() {
     $class = explode('\\', get_class($this));
-    return $class[2];
+    return $class[3];
   }
 
   /**
