@@ -4,15 +4,17 @@
  * Source: Mapquest.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\MapQuest;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\MapQuest',
-);
 
 /**
  * Class MapQuest.
+ *
+ * @Plugin(
+ *  id = "MapQuest"
+ * )
+ *
  */
 class MapQuest extends Source {
 

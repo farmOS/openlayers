@@ -4,17 +4,18 @@
  * Interaction: DragBox.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragBox;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragBox',
-);
 
 /**
  * Class DragBox.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DragBox"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DragBox
  */
 class DragBox extends Interaction {
 

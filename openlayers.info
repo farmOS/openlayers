@@ -7,7 +7,7 @@ package = "Openlayers"
 dependencies[] = libraries (>=2.1)
 dependencies[] = file
 dependencies[] = image
-dependencies[] = service_container
+dependencies[] = service_container (7.x-1.x, >=7.x-1.0-beta3)
 dependencies[] = jquery_update
 
 registry_autoload[] = PSR-4

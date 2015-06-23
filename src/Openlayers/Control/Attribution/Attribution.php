@@ -4,15 +4,17 @@
  * Control: Attribution.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\Attribution;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\Attribution',
-);
 
 /**
  * Class Attribution.
+ *
+ * @Plugin(
+ *  id = "Attribution"
+ * )
+ *
  */
 class Attribution extends Control {
 

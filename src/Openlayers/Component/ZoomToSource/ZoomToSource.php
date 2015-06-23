@@ -4,15 +4,16 @@
  * Component: ZoomSource.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\ZoomToSource;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\ZoomToSource',
-);
 
 /**
  * Class ZoomToSource.
+ *
+ * @Plugin(
+ *  id = "ZoomToSource"
+ * )
  */
 class ZoomToSource extends Component {
 

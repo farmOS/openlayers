@@ -4,15 +4,17 @@
  * Source: TileDebug.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\TileDebug;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\TileDebug',
-);
 
 /**
  * Class TileDebug.
+ *
+ * @Plugin(
+ *  id = "TileDebug"
+ * )
+ *
  */
 class TileDebug extends Source {
 

@@ -1,6 +1,12 @@
 parameters:
-  ctools_plugins_auto_discovery:
-    openlayers: true
+  annotated_plugins_auto_discovery:
+    - { owner: 'openlayers', type: 'Component', directory: 'Openlayers/Component'}
+    - { owner: 'openlayers', type: 'Control', directory: 'Openlayers/Control'}
+    - { owner: 'openlayers', type: 'Interaction', directory: 'Openlayers/Interaction'}
+    - { owner: 'openlayers', type: 'Layer', directory: 'Openlayers/Layer'}
+    - { owner: 'openlayers', type: 'Map', directory: 'Openlayers/Map'}
+    - { owner: 'openlayers', type: 'Source', directory: 'Openlayers/Source'}
+    - { owner: 'openlayers', type: 'Style', directory: 'Openlayers/Style'}
 
 services:
   openlayers:

@@ -4,13 +4,19 @@
  * Source: Stamen.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\Stamen;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
 
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\Stamen',
-);
-
+/**
+ * Class Stamen
+ *
+ * @Plugin(
+ *  id = "Stamen"
+ * )
+ *
+ * @package Drupal\openlayers\Source
+ */
 class Stamen extends Source {
 
   /**

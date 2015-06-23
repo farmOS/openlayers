@@ -4,15 +4,17 @@
  * Source: OSM.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\OSM;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\OSM',
-);
 
 /**
  * Class OSM.
+ *
+ * @Plugin(
+ *  id = "OSM"
+ * )
+ *
  */
 class OSM extends Source {
 

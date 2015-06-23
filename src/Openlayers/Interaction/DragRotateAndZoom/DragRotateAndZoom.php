@@ -4,17 +4,18 @@
  * Interaction: DragRotateAndZoom.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragRotateAndZoom;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragRotateAndZoom',
-);
 
 /**
  * Class DragRotateAndZoom.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DragRotateAndZoom"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DragRotateAndZoom
  */
 class DragRotateAndZoom extends Interaction {
 

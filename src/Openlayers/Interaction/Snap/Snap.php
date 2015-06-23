@@ -5,15 +5,17 @@
  * Interaction: Snap.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\Snap;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\Snap',
-);
 
 /**
  * Class Snap.
+ *
+ * @Plugin(
+ *  id = "Snap"
+ * )
+ *
  */
 class Snap extends Interaction {
 

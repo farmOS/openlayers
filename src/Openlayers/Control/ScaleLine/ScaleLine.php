@@ -4,15 +4,17 @@
  * Control: ScaleLine.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\ScaleLine;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\ScaleLine',
-);
 
 /**
  * Class ScaleLine.
+ *
+ * @Plugin(
+ *  id = "ScaleLine"
+ * )
+ *
  */
 class ScaleLine extends Control {
 

@@ -6,15 +6,17 @@
  * http://bl.ocks.org/elemoine/e82c7dd4b1d0ef45a9a4
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\GoogleMaps;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\GoogleMaps',
-);
 
 /**
  * Class GoogleMaps.
+ *
+ * @Plugin(
+ *  id = "GoogleMaps"
+ * )
+ *
  */
 class GoogleMaps extends Source {
 

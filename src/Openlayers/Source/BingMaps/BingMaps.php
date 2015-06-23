@@ -4,15 +4,17 @@
  * Source: BingMaps.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\BingMaps;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\BingMaps',
-);
 
 /**
  * Class BingMaps.
+ *
+ * @Plugin(
+ *  id = "BingMaps"
+ * )
+ *
  */
 class BingMaps extends Source {
 

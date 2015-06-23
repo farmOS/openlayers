@@ -4,16 +4,19 @@
  * Map: Map.
  */
 
-namespace Drupal\openlayers\Map;
+namespace Drupal\openlayers\Openlayers\Map\OLMap;
+
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Map;
 
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Map\\OLMap',
-);
-
 /**
  * Class OLMap.
+ *
+ * @Plugin(
+ *  id = "OLMap"
+ * )
+ *
  */
 class OLMap extends Map {
 

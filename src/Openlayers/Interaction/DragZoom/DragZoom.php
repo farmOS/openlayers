@@ -4,17 +4,18 @@
  * Interaction: DragZoom.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragZoom;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragZoom',
-);
 
 /**
  * Class DragZoom.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DragZoom"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DragZoom
  */
 class DragZoom extends Interaction {
 

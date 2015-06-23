@@ -20,48 +20,9 @@ function openlayers_ctools_plugin_api($module, $api) {
  * Implements hook_ctools_plugin_directory().
  */
 function openlayers_ctools_plugin_directory($owner, $plugin_type) {
-  if ($owner == 'openlayers') {
-    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin_type);
-  }
-  elseif ($owner == 'ctools' && $plugin_type == 'content_types') {
+  if ($owner == 'ctools' && $plugin_type == 'content_types') {
     return 'plugins/' . $plugin_type;
   }
-}
-
-/**
- * Implements hook_ctools_plugin_type().
- */
-function openlayers_ctools_plugin_type() {
-  return array(
-    'Map' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Layer' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Style' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Source' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Control' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Interaction' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-    'Component' => array(
-      'use hooks' => FALSE,
-      'extension' => 'php',
-    ),
-  );
 }
 
 /**
@@ -150,7 +111,7 @@ function openlayers_libraries_info() {
   $libraries['openlayers3'] = array(
     'name' => 'OpenLayers3',
     'vendor url' => 'http://ol3js.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.5.0/v3.5.0.zip',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.6.0/v3.6.0.zip',
     'version arguments' => array(
       'file' => 'build/ol.js',
       'pattern' => '@Version: (.*)@',

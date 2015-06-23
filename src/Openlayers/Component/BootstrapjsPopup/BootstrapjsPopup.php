@@ -4,15 +4,17 @@
  * Component: Bootstap JS Popup.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\BootstrapjsPopup;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\BootstrapjsPopup',
-);
 
 /**
  * Class BootstrapjsPopup.
+ *
+ * @Plugin(
+ *  id = "BootstrapjsPopup"
+ * )
+ *
  */
 class BootstrapjsPopup extends Component {
 

@@ -4,7 +4,7 @@
  * Layer: Geofield.
  */
 
-namespace Drupal\openlayers\Layer;
+namespace Drupal\openlayers\Openlayers\Layer;
 
 $plugin = array(
   'class' => '\\Drupal\\openlayers\\Layer\\Geofield',

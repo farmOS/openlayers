@@ -581,3 +581,16 @@ function openlayers_update_7380() {
     }
   }
 }
+
+/**
+ * Make sure that the submodule service_container_annotation_discovery from
+ * module service_container is properly enabled.
+ */
+function openlayers_update_7390() {
+  if (!module_exists('service_container_annotation_discovery')) {
+    $enabled = module_enable(array('service_container_annotation_discovery'));
+    if (!$enabled) {
+      throw new DrupalUpdateException('Unable to enable the module service_container_annotation_discovery from service_container.');
+    }
+  }
+}

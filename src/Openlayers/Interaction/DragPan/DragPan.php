@@ -4,16 +4,18 @@
  * Interaction: DragPan.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragPan;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragPan',
-);
 
 /**
  * Class DragPan
- * @package Drupal\openlayers\Interaction
+ *
+ * @Plugin(
+ *  id = "DragPan"
+ * )
+ *
+ * @package Drupal\openlayers\Interaction\DragPan
  */
 class DragPan extends Interaction {
 

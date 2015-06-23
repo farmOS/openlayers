@@ -244,8 +244,10 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function attached() {
     if ($plugin = $this->getConfiguration()) {
-      $jsdir = $plugin['path'] . '/js';
-      $cssdir = $plugin['path'] . '/css';
+      $path = $this->getClassDirectory();
+
+      $jsdir = $path . '/js';
+      $cssdir = $path . '/css';
       if (file_exists($jsdir)) {
         foreach (file_scan_directory($jsdir, '/.*\.js$/') as $file) {
           $this->attached['js'][$file->uri] = array(
@@ -306,6 +308,22 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getConfiguration() {
     return $this->pluginDefinition;
+  }
+
+  /**
+   * Returns the path to the plugin directory.
+   */
+  public function getClassDirectory() {
+    $class = explode('\\', $this->pluginDefinition['class']);
+    return drupal_get_path('module', $class[1]) . '/src/' . implode('/', array_slice($class, 2, -1));
+  }
+
+  /**
+   * Returns the path to the class file.
+   */
+  public function getClassPath() {
+    $class = explode('\\', $this->pluginDefinition['class']);
+    return drupal_get_path('module', $class[1]) . '/src/' . implode('/', array_slice($class, 2)) . '.php';
   }
 
   /**

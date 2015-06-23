@@ -4,15 +4,17 @@
  * Interaction: Draw.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\Draw;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\Draw',
-);
 
 /**
  * Class Draw.
+ *
+ * @Plugin(
+ *  id = "Draw"
+ * )
+ *
  */
 class Draw extends Interaction {
 

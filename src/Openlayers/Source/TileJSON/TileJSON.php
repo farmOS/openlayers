@@ -4,15 +4,17 @@
  * Source: TileJson.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\TileJSON;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\TileJSON',
-);
 
 /**
  * Class TileJSON.
+ *
+ * @Plugin(
+ *  id = "TileJSON"
+ * )
+ *
  */
 class TileJSON extends Source {
 

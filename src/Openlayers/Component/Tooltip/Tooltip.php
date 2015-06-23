@@ -4,15 +4,16 @@
  * Component: Tooltip.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\Tooltip;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Tooltip',
-);
 
 /**
  * Class Tooltip.
+ *
+ * @Plugin(
+ *  id = "Tooltip"
+ * )
  */
 class Tooltip extends Component {
 

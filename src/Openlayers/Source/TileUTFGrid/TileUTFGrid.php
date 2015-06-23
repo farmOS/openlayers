@@ -4,15 +4,17 @@
  * Source: TileUTFGrid.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\TileUTFGrid;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\TileUTFGrid',
-);
 
 /**
  * Class TileUTFGrid.
+ *
+ * @Plugin(
+ *  id = "TileUTFGrid"
+ * )
+ *
  */
 class TileUTFGrid extends Source {
 

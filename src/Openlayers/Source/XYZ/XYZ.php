@@ -4,15 +4,17 @@
  * Source: XYZ.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\XYZ;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\XYZ',
-);
 
 /**
  * Class XYZ.
+ *
+ * @Plugin(
+ *  id = "XYZ"
+ * )
+ *
  */
 class XYZ extends Source {
   /**

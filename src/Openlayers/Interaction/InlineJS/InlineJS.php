@@ -4,20 +4,21 @@
  * Interaction: JS.
  */
 
-namespace Drupal\openlayers\Openlayers\Interaction\InlineJS;
+namespace Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS;
 
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
 use Drupal\service_container\Messenger\MessengerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\service_container\Legacy\Drupal7;
 
-$plugin = array(
-  'class' => '\Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS',
-  'arguments' => array('@module_handler', '@messenger', '@drupal7'),
-);
-
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Interaction {
 

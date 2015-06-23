@@ -4,17 +4,18 @@
  * Interaction: DragRotate.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragRotate;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragRotate',
-);
 
 /**
  * Class DragRotate.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DragRotate"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DragRotate
  */
 class DragRotate extends Interaction {
 

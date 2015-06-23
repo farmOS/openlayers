@@ -4,15 +4,17 @@
  * Layer: Heatmap.
  */
 
-namespace Drupal\openlayers\Layer;
+namespace Drupal\openlayers\Openlayers\Layer\Heatmap;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Layer;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Layer\\Heatmap',
-);
 
 /**
  * Class Heatmap.
+ *
+ * @Plugin(
+ *  id = "Heatmap"
+ * )
+ *
  */
 class Heatmap extends Layer {
 

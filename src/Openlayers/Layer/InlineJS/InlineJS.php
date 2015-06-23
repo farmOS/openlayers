@@ -4,15 +4,17 @@
  * Layer: JS.
  */
 
-namespace Drupal\openlayers\Layer;
+namespace Drupal\openlayers\Openlayers\Layer\InlineJS;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Layer;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Layer\\InlineJS',
-);
 
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Layer {
 

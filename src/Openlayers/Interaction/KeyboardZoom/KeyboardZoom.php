@@ -4,15 +4,17 @@
  * Interaction: KeyboardZoom.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\KeyboardZoom;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\KeyboardZoom',
-);
 
 /**
  * Class KeyboardZoom.
+ *
+ * @Plugin(
+ *  id = "KeyboardZoom"
+ * )
+ *
  */
 class KeyboardZoom extends Interaction {
 

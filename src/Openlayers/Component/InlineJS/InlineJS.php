@@ -4,15 +4,17 @@
  * Component: JS Component.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\InlineJS;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\InlineJS',
-);
 
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Component {
 

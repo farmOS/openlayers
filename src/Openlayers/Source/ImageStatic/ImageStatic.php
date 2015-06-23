@@ -4,17 +4,18 @@
  * Source: ImageStatic.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\ImageStatic;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\ImageStatic',
-);
 
 /**
  * Class ImageStatic.
  *
- * @package Drupal\openlayers\Source
+ * @Plugin(
+ *  id = "ImageStatic"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Source\ImageStatic
  */
 class ImageStatic extends Source {
 

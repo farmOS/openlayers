@@ -4,15 +4,17 @@
  * Source: JS.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\InlineJS;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\InlineJS',
-);
 
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Source {
 

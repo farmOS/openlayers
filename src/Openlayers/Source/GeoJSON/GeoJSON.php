@@ -4,16 +4,18 @@
  * Source: GeoJson.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\GeoJSON;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
 use Drupal\openlayers\Config;
 
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\GeoJSON',
-);
-
 /**
  * Class GeoJSON.
+ *
+ * @Plugin(
+ *  id = "GeoJSON"
+ * )
+ *
  */
 class GeoJSON extends Source {
 
@@ -173,6 +175,7 @@ class GeoJSON extends Source {
   public function attached() {
     $attached = parent::attached();
     $plugin = $this->getConfiguration();
+    $plugin['path'] = $this->getClassDirectory();
     if ($this->getOption('devMode')) {
       // @TODO Find a way how to do this just once per map / collection.
       $attached['library']['system.ui.dialog'] = array('system', 'ui.dialog');

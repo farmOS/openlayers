@@ -4,15 +4,17 @@
  * Style: ClusterStyle.
  */
 
-namespace Drupal\openlayers\Style;
+namespace Drupal\openlayers\Openlayers\Style\ClusterStyle;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Style;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Style\\ClusterStyle',
-);
 
 /**
  * Class ClusterStyle.
+ *
+ * @Plugin(
+ *  id = "ClusterStyle"
+ * )
+ *
  */
 class ClusterStyle extends Style {
   //TODO: Provide options to let user customize the cluster style.

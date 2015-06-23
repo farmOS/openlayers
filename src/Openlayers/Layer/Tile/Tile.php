@@ -4,15 +4,17 @@
  * Layer: Tile.
  */
 
-namespace Drupal\openlayers\Layer;
+namespace Drupal\openlayers\Openlayers\Layer\Tile;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Layer;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Layer\\Tile',
-);
 
 /**
  * Class Tile.
+ *
+ * @Plugin(
+ *  id = "Tile"
+ * )
+ *
  */
 class Tile extends Layer {
 

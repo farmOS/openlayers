@@ -4,15 +4,17 @@
  * Control: JS Control.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\InlineJS;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\InlineJS',
-);
 
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Control {
 

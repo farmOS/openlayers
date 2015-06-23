@@ -4,15 +4,17 @@
  * Control: Fullscreen.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\FullScreen;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\FullScreen',
-);
 
 /**
  * Class FullScreen.
+ *
+ * @Plugin(
+ *  id = "FullScreen"
+ * )
+ *
  */
 class FullScreen extends Control {
 

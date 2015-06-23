@@ -4,17 +4,18 @@
  * Interaction: DragAndDrop.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DragAndDrop;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DragAndDrop',
-);
 
 /**
  * Class DragAndDrop.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DragAndDrop"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DragAndDrop
  */
 class DragAndDrop extends Interaction {
 

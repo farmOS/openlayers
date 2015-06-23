@@ -4,15 +4,17 @@
  * Control: Rotate.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\Rotate;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\Rotate',
-);
 
 /**
  * Class Rotate.
+ *
+ * @Plugin(
+ *  id = "Rotate"
+ * )
+ *
  */
 class Rotate extends Control {
 

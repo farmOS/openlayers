@@ -4,17 +4,18 @@
  * Interaction: DoubleClickZoom.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\DoubleClickZoom;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\DoubleClickZoom',
-);
 
 /**
  * Class DoubleClickZoom.
  *
- * @package Drupal\openlayers\Interaction
+ * @Plugin(
+ *  id = "DoubleClickZoom"
+ * )
+ *
+ * @package Drupal\openlayers\Openlayers\Interaction\DoubleClickZoom
  */
 class DoubleClickZoom extends Interaction {
 

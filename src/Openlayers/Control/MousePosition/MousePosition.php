@@ -4,15 +4,17 @@
  * Control: MousePosition.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\MousePosition;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\MousePosition',
-);
 
 /**
  * Class MousePosition.
+ *
+ * @Plugin(
+ *  id = "MousePosition"
+ * )
+ *
  */
 class MousePosition extends Control {
 

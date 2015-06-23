@@ -4,7 +4,7 @@
  * Component: Geolocation.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component;
 use Drupal\openlayers\Types\Component;
 
 $plugin = array(

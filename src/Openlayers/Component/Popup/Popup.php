@@ -4,15 +4,16 @@
  * Component: Popup.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\Popup;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Popup',
-);
 
 /**
  * Class Popup.
+ *
+ * @Plugin(
+ *  id = "Popup"
+ * )
  */
 class Popup extends Component {
 

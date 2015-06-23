@@ -4,15 +4,17 @@
  * Control: ZoomExtent.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\ZoomToExtent;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\ZoomToExtent',
-);
 
 /**
  * Class ZoomToExtent.
+ *
+ * @Plugin(
+ *  id = "ZoomToExtent"
+ * )
+ *
  */
 class ZoomToExtent extends Control {
 

@@ -4,15 +4,17 @@
  * Source: KML.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\KML;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\KML',
-);
 
 /**
  * Class KML.
+ *
+ * @Plugin(
+ *  id = "KML"
+ * )
+ *
  */
 class KML extends Source {
 

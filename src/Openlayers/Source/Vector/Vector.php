@@ -4,15 +4,17 @@
  * Source: Vector.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\Vector;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\Vector',
-);
 
 /**
  * Class Vector.
+ *
+ * @Plugin(
+ *  id = "Vector"
+ * )
+ *
  */
 class Vector extends Source {
 

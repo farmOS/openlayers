@@ -4,15 +4,18 @@
  * Component: Autopopup.
  */
 
-namespace Drupal\openlayers\Component;
-use Drupal\openlayers\Types\Component;
+namespace Drupal\openlayers\Openlayers\Component\Autopopup;
 
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Autopopup',
-);
+use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Types\Component;
 
 /**
  * Class Autopopup.
+ *
+ * @Plugin(
+ *  id = "Autopopup"
+ * )
+ *
  */
 class Autopopup extends Component {
 

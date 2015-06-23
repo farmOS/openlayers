@@ -4,15 +4,17 @@
  * Source: ImageVector.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\ImageVector;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\ImageVector',
-);
 
 /**
  * Class ImageVector.
+ *
+ * @Plugin(
+ *  id = "ImageVector"
+ * )
+ *
  */
 class ImageVector extends Source {
 

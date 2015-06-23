@@ -4,15 +4,17 @@
  * Component: Graticule.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\Graticule;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Graticule',
-);
 
 /**
  * Class Graticule.
+ *
+ * @Plugin(
+ *  id = "Graticule"
+ * )
+ *
  */
 class Graticule extends Component {
 

@@ -4,15 +4,17 @@
  * Interaction: Select.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\Select;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\Select',
-);
 
 /**
  * Class Select.
+ *
+ * @Plugin(
+ *  id = "Select"
+ * )
+ *
  */
 class Select extends Interaction {
 

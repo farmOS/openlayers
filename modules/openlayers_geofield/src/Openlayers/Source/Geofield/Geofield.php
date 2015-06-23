@@ -4,14 +4,17 @@
  * Source: Geofield.
  */
 
-namespace Drupal\openlayers\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\Geofield',
-);
+namespace Drupal\openlayers\Openlayers\Source\Geofield;
+use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Openlayers\Layer\Vector\Vector;
 
 /**
  * Class Geofield.
+ *
+ * @Plugin(
+ *  id = "Geofield"
+ * )
+ *
  */
 class Geofield extends Vector {
 

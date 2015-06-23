@@ -4,15 +4,17 @@
  * Style: Style.
  */
 
-namespace Drupal\openlayers\Style;
+namespace Drupal\openlayers\Openlayers\Style\OLStyle;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Style;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Style\\OLStyle',
-);
 
 /**
  * Class OLStyle.
+ *
+ * @Plugin(
+ *  id = "OLStyle"
+ * )
+ *
  */
 class OLStyle extends Style {
 

@@ -4,15 +4,17 @@
  * Component: LazyProcessing.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\LazyProcessing;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\LazyProcessing',
-);
 
 /**
  * Class LazyProcessing.
+ *
+ * @Plugin(
+ *  id = "LazyProcessing"
+ * )
+ *
  */
 class LazyProcessing extends Component {
   /**

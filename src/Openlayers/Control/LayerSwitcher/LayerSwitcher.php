@@ -6,15 +6,16 @@
  * Proof of concept based on http://geocre.github.io/ol3/layerswitcher.html
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\LayerSwitcher;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\LayerSwitcher',
-);
 
 /**
  * Class LayerSwitcher.
+ *
+ * @Plugin(
+ *  id = "LayerSwitcher"
+ * )
  *
  * @package Drupal\openlayers\Control
  */

@@ -4,15 +4,17 @@
  * Source: Cluster.
  */
 
-namespace Drupal\openlayers\Source;
+namespace Drupal\openlayers\Openlayers\Source\Cluster;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Source;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Source\\Cluster',
-);
 
 /**
  * Class Cluster.
+ *
+ * @Plugin(
+ *  id = "Cluster"
+ * )
+ *
  */
 class Cluster extends Source {
 

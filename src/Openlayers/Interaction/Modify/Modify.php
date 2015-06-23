@@ -4,15 +4,17 @@
  * Interaction: Modify.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\Modify;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\Modify',
-);
 
 /**
  * Class Modify.
+ *
+ * @Plugin(
+ *  id = "Modify"
+ * )
+ *
  */
 class Modify extends Interaction {
 

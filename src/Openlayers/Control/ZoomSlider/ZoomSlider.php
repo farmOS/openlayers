@@ -4,15 +4,17 @@
  * Control: ZoomSlider.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\ZoomSlider;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\ZoomSlider',
-);
 
 /**
  * Class ZoomSlider.
+ *
+ * @Plugin(
+ *  id = "ZoomSlider"
+ * )
+ *
  */
 class ZoomSlider extends Control {
 

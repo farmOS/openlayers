@@ -4,15 +4,17 @@
  * Component: Bootstrap JS.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\BootstrapjsAlert;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\BootstrapjsAlert',
-);
 
 /**
  * Class BootstrapjsAlert.
+ *
+ * @Plugin(
+ *  id = "BootstrapjsAlert"
+ * )
+ *
  */
 class BootstrapjsAlert extends Component {
 

@@ -4,15 +4,17 @@
  * Interaction: PinchRotate.
  */
 
-namespace Drupal\openlayers\Interaction;
+namespace Drupal\openlayers\Openlayers\Interaction\PinchRotate;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Interaction\\PinchRotate',
-);
 
 /**
  * Class PinchRotate.
+ *
+ * @Plugin(
+ *  id = "PinchRotate"
+ * )
+ *
  */
 class PinchRotate extends Interaction {
 

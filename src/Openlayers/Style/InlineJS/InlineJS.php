@@ -4,15 +4,17 @@
  * Style: JS.
  */
 
-namespace Drupal\openlayers\Style;
+namespace Drupal\openlayers\Openlayers\Style\InlineJS;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Style;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Style\\InlineJS',
-);
 
 /**
  * Class InlineJS.
+ *
+ * @Plugin(
+ *  id = "InlineJS"
+ * )
+ *
  */
 class InlineJS extends Style {
 

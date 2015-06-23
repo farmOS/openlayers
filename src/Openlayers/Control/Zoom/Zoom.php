@@ -4,15 +4,17 @@
  * Control: Zoom.
  */
 
-namespace Drupal\openlayers\Control;
+namespace Drupal\openlayers\Openlayers\Control\Zoom;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Control;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Control\\Zoom',
-);
 
 /**
  * Class Zoom.
+ *
+ * @Plugin(
+ *  id = "Zoom"
+ * )
+ *
  */
 class Zoom extends Control {
 

@@ -4,15 +4,17 @@
  * Layer: Vector.
  */
 
-namespace Drupal\openlayers\Layer;
+namespace Drupal\openlayers\Openlayers\Layer\Vector;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Layer;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Layer\\Vector',
-);
 
 /**
  * Class Vector.
+ *
+ * @Plugin(
+ *  id = "Vector"
+ * )
+ *
  */
 class Vector extends Layer {
 

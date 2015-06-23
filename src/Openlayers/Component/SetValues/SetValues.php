@@ -4,15 +4,16 @@
  * Component: SetValues.
  */
 
-namespace Drupal\openlayers\Component;
+namespace Drupal\openlayers\Openlayers\Component\SetValues;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\SetValues',
-);
 
 /**
  * Class SetValues.
+ *
+ * @Plugin(
+ *  id = "SetValues"
+ * )
  */
 class SetValues extends Component {
   /**

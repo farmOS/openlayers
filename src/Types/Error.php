@@ -38,7 +38,8 @@ class Error extends Object {
   /**
    * {@inheritdoc}
    */
-  public function __construct(LoggerChannelInterface $logger_channel, MessengerInterface $messenger) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerChannelInterface $logger_channel, MessengerInterface $messenger) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->loggerChannel = $logger_channel;
     $this->messenger = $messenger;
 
