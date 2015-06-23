@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Class openlayers_object.
+ * Class Collection.
  */
 
 namespace Drupal\openlayers\Types;
@@ -13,7 +13,7 @@ class Collection {
 
   /**
    * @var array
-   *  List of objects in this collections. The items have to be instances of
+   *  List of objects in this collection. The items have to be instances of
    * \Drupal\openlayers\Types\Object.
    */
   protected $objects = array();

@@ -4,16 +4,18 @@
  * Component: Geofield.
  */
 
-namespace Drupal\openlayers\Openlayers\Component;
+namespace Drupal\openlayers_geofield\Openlayers\Component\Geofield;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
 use \geoPHP;
 
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Geofield',
-);
-
 /**
  * Class Geofield.
+ *
+ * @Plugin(
+ *  id = "Geofield"
+ * )
+ *
  */
 class Geofield extends Component {
 

@@ -4,7 +4,7 @@
  * Interaction: JS.
  */
 
-namespace Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS;
+namespace Drupal\openlayers\Openlayers\Interaction\InlineJS;
 
 use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Interaction;

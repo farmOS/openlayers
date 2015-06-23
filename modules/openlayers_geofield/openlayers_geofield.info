@@ -6,4 +6,5 @@ package = "Openlayers"
 dependencies[] = openlayers
 dependencies[] = geofield (>=7.x-2.3)
 
+registry_autoload[] = PSR-0
 registry_autoload[] = PSR-4
