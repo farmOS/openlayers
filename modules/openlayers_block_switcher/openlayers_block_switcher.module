@@ -24,7 +24,7 @@ function openlayers_block_switcher_block_info() {
  */
 function openlayers_block_switcher_block_view($delta = '') {
   $block = array();
-  /** @var \Drupal\openlayers\Map\OLMap $map */
+  /** @var \Drupal\openlayers\Plugins\Map\OLMap\OLMap $map */
   $map = openlayers_object_load('Map', _olebs_get_map_name($delta));
 
   $block['subject'] = $map->name;

@@ -16,15 +16,6 @@ function openlayers_examples_ctools_plugin_api($module, $api) {
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function openlayers_examples_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'openlayers') {
-    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin);
-  }
-}
-
-/**
  * Implements hook_menu().
  */
 function openlayers_examples_menu() {

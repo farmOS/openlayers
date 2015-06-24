@@ -15,13 +15,6 @@ function openlayers_views_views_api() {
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function openlayers_views_ctools_plugin_directory($module, $plugin) {
-  return 'src/Plugin/' . $plugin;
-}
-
-/**
  * Implements hook_ctools_plugin_api().
  */
 function openlayers_views_ctools_plugin_api($module, $api) {

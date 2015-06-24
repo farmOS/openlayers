@@ -5,15 +5,17 @@
  */
 
 namespace Drupal\openlayers\Map;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Map;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Map\\Views',
-);
+use Drupal\openlayers\Plugins\Map\OLMap\OLMap;
 
 /**
  * Class Views.
+ *
+ * @Plugin(
+ *   id = "Views"
+ * )
  */
 class Views extends OLMap {
 

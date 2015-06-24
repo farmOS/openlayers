@@ -6,7 +6,7 @@
 
 namespace Drupal\openlayers_geofield\Openlayers\Source\Geofield;
 use Drupal\Component\Annotation\Plugin;
-use Drupal\openlayers\Openlayers\Layer\Vector\Vector;
+use Drupal\openlayers\Plugins\Source\Vector\Vector;
 
 /**
  * Class Geofield.

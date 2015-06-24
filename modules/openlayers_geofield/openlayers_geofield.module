@@ -19,15 +19,6 @@ function openlayers_geofield_ctools_plugin_api($module, $api) {
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function openlayers_geofield_ctools_plugin_directory($module, $plugin) {
-  if ($module == 'openlayers') {
-    return 'src/Openlayers/' . str_replace("\\", DIRECTORY_SEPARATOR, $plugin);
-  }
-}
-
-/**
  * Implements hook_field_formatter_info().
  */
 function openlayers_geofield_field_formatter_info() {
