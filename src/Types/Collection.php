@@ -6,6 +6,8 @@
 
 namespace Drupal\openlayers\Types;
 
+use Drupal\openlayers\Types\Object;
+
 /**
  * Class Collection.
  */
@@ -21,12 +23,12 @@ class Collection {
   /**
    * Add object to this collection.
    *
-   * @param \Drupal\openlayers\Types\Object $object
+   * @param Object $object
    *   Object instance to add to this collection.
    */
-  public function append(\Drupal\openlayers\Types\Object $object) {
-    list($plugin_manager, $plugin_id) = explode(':', $object->factory_service);
-    list($module, $plugin_type) = explode('.', drupal_strtolower($plugin_manager), 2);
+  public function append(Object $object) {
+    list($plugin_manager, $plugin_id) = array_pad(explode(':', $object->factory_service), 2, NULL);
+    list($module, $plugin_type) = array_pad(explode('.', drupal_strtolower($plugin_manager), 2), 2, NULL);
 
     $this->objects[$plugin_type][$object->machine_name] = $object;
   }

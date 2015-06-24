@@ -4,15 +4,16 @@
  * Component: Geolocation.
  */
 
-namespace Drupal\openlayers\Openlayers\Component;
+namespace Drupal\openlayers_examples\Openlayers\Component\Geolocation;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\Geolocation',
-);
 
 /**
  * Class Geolocation.
+ *
+ * @plugin(
+ *   id = "Geolocation"
+ * )
+ *
  */
 class Geolocation extends Component {
 

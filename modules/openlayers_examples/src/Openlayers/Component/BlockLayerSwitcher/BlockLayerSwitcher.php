@@ -4,15 +4,15 @@
  * Component: Block Layer Switcher.
  */
 
-namespace Drupal\openlayers\Openlayers\Component;
+namespace Drupal\openlayers_examples\Openlayers\Component\BlockLayerSwitcher;
 use Drupal\openlayers\Types\Component;
-
-$plugin = array(
-  'class' => '\\Drupal\\openlayers\\Component\\BlockLayerSwitcher',
-);
 
 /**
  * Class BlockLayerSwitcher.
+ *
+ * @plugin(
+ *   id = "BlockLayerSwitcher"
+ * )
  */
 class BlockLayerSwitcher extends Component {
 
