@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_style.
+ * Class Style.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_style.
+ * Class Style.
  */
 abstract class Style extends Object implements StyleInterface {
 

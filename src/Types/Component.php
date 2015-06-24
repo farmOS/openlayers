@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_component.
+ * Class Component.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_component.
+ * Class Component.
  */
 abstract class Component extends Object implements ComponentInterface {
 

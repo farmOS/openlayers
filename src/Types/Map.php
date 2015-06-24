@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_map.
+ * Class Map.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_map.
+ * Class Map.
  */
 abstract class Map extends Object implements MapInterface {
 
