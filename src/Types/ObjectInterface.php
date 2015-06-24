@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Interface openlayers_object_interface.
+ * Interface ObjectInterface.
  */
 
 namespace Drupal\openlayers\Types;

@@ -1,12 +1,13 @@
 parameters:
   annotated_plugins_auto_discovery:
-    - { owner: 'openlayers', type: 'Component', directory: 'Openlayers/Component'}
-    - { owner: 'openlayers', type: 'Control', directory: 'Openlayers/Control'}
-    - { owner: 'openlayers', type: 'Interaction', directory: 'Openlayers/Interaction'}
-    - { owner: 'openlayers', type: 'Layer', directory: 'Openlayers/Layer'}
-    - { owner: 'openlayers', type: 'Map', directory: 'Openlayers/Map'}
-    - { owner: 'openlayers', type: 'Source', directory: 'Openlayers/Source'}
-    - { owner: 'openlayers', type: 'Style', directory: 'Openlayers/Style'}
+    - { owner: 'openlayers', type: 'Component', directory: 'Plugins/Component'}
+    - { owner: 'openlayers', type: 'Control', directory: 'Plugins/Control'}
+    - { owner: 'openlayers', type: 'Interaction', directory: 'Plugins/Interaction'}
+    - { owner: 'openlayers', type: 'Layer', directory: 'Plugins/Layer'}
+    - { owner: 'openlayers', type: 'Map', directory: 'Plugins/Map'}
+    - { owner: 'openlayers', type: 'Source', directory: 'Plugins/Source'}
+    - { owner: 'openlayers', type: 'Style', directory: 'Plugins/Style'}
+    - { owner: 'openlayers', type: 'Types', directory: 'Plugins/Types'}
 
 services:
   openlayers:
@@ -14,13 +15,3 @@ services:
     arguments: ['openlayers.internal.']
     calls:
       - [ setContainer, [ '@service_container' ] ]
-
-  openlayers.messenger:
-    alias: messenger
-
-  openlayers.internal.error:
-    class: \Drupal\openlayers\Types\Error
-    arguments: ['@logger.channel.default', '@openlayers.messenger']
-
-  openlayers.internal.collection:
-    class: \Drupal\openlayers\Types\Collection

@@ -1,15 +1,17 @@
 <?php
 /**
  * @file
- * Class openlayers_object.
+ * Class Object.
  */
 
 namespace Drupal\openlayers\Types;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
+use Drupal\openlayers\Plugins\Types\Collection;
+use Drupal\openlayers\Types\ObjectInterface;
 
 /**
- * Class openlayers_object.
+ * Class Object.
  */
 abstract class Object extends PluginBase implements ObjectInterface {
 
@@ -52,7 +54,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * @var Collection
    */
-  protected $collection = NULL;
+  protected $collection;
 
   /**
    * Holds all the attachment used by this object.
@@ -127,7 +129,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, ObjectInterface $context = NULL) {
     foreach ($this->getCollection()->getFlatList() as $object) {
       if ($object !== $this) {
         $object->preBuild($build, $this);
@@ -140,7 +142,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+  public function postBuild(array &$build, ObjectInterface $context = NULL) {
     foreach ($this->getCollection()->getFlatList() as $object) {
       if ($object !== $this) {
         $object->postBuild($build, $context);
@@ -353,8 +355,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getCollection() {
-    if (!($this->collection instanceof \Drupal\openlayers\Types\Collection)) {
-      $this->collection = \Drupal::service('openlayers')->createInstance('collection');
+    if (!($this->collection instanceof Collection)) {
+      $this->collection = \Drupal::service('openlayers.Types')->createInstance('Collection');
       $this->collection->append($this);
       $this->buildCollection();
     }

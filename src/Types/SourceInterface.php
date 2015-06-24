@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Interface openlayers_source_interface.
+ * Interface SourceInterface.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Interface openlayers_source_interface.
+ * Interface SourceInterface.
  */
 interface SourceInterface {
 

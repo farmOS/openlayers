@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_interaction.
+ * Class Interaction.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_interaction.
+ * Class Interaction.
  */
 abstract class Interaction extends Object implements InteractionInterface {
 

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Interface openlayers_projection_interface.
+ * Interface ProjectionInterface.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Interface openlayers_projection_interface.
+ * Interface ProjectionInterface.
  */
 interface ProjectionInterface {
 

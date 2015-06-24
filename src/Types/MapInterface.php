@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Interface openlayers_map_interface.
+ * Interface MapInterface.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Interface openlayers_map_interface.
+ * Interface MapInterface.
  */
 interface MapInterface {
   /**

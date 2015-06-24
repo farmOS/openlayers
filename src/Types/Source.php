@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_source.
+ * Class Source.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_source.
+ * Class Source.
  */
 abstract class Source extends Object implements SourceInterface {
 

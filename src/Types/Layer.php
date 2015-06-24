@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_layer.
+ * Class Layer.
  */
 
 namespace Drupal\openlayers\Types;
 
 /**
- * Class openlayers_layer.
+ * Class Layer.
  */
 abstract class Layer extends Object implements LayerInterface {
 
