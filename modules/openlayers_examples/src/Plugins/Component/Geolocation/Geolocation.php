@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers_examples\Plugins\Component\Geolocation;
+use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
 
 /**

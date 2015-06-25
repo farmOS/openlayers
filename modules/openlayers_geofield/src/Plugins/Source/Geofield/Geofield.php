@@ -4,7 +4,7 @@
  * Source: Geofield.
  */
 
-namespace Drupal\openlayers_geofield\Openlayers\Source\Geofield;
+namespace Drupal\openlayers_geofield\Plugins\Source\Geofield;
 use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Plugins\Source\Vector\Vector;
 
