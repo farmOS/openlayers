@@ -47,7 +47,7 @@ class Openlayers extends ServiceContainer {
     $options = array('' => t('<Choose the @plugin type>', array('@plugin' => $plugin)));
     $service_basename = 'openlayers.' . $plugin;
     foreach (\Drupal::service($service_basename)->getDefinitions() as $service => $data) {
-      $name = isset($data['name']) ? $data['name'] : $data['id'];
+      $name = isset($data['label']) ? $data['label'] : $data['id'];
       $options[$service_basename . ':' . $data['id']] = $name;
     }
     return $options;
