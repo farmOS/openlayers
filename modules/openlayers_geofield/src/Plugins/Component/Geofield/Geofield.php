@@ -4,7 +4,7 @@
  * Component: Geofield.
  */
 
-namespace Drupal\openlayers_geofield\Openlayers\Component\Geofield;
+namespace Drupal\openlayers_geofield\Plugins\Component\Geofield;
 use Drupal\Component\Annotation\Plugin;
 use Drupal\openlayers\Types\Component;
 use \geoPHP;
