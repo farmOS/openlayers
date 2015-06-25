@@ -7,7 +7,7 @@ parameters:
     - { owner: 'openlayers', type: 'Map', directory: 'Plugins/Map'}
     - { owner: 'openlayers', type: 'Source', directory: 'Plugins/Source'}
     - { owner: 'openlayers', type: 'Style', directory: 'Plugins/Style'}
-    - { owner: 'openlayers', type: 'Types', directory: 'Plugins/Types'}
+    - { owner: 'openlayers', type: 'Types', directory: 'Types'}
 
 services:
   openlayers:

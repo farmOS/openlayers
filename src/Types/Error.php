@@ -5,8 +5,10 @@
  */
 
 namespace Drupal\openlayers\Types;
+
+use Drupal\Component\Annotation\Plugin;
 use Drupal\Core\Logger\LoggerChannelInterface;
-use Drupal\openlayers\Plugins\Types\Object;
+use Drupal\openlayers\Types\Object;
 use Drupal\service_container\Messenger\MessengerInterface;
 
 /**

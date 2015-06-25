@@ -4,8 +4,9 @@
  * Class Collection.
  */
 
-namespace Drupal\openlayers\Plugins\Types;
+namespace Drupal\openlayers\Types;
 
+use Drupal\Component\Annotation\Plugin;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Types\Object;
 
@@ -140,7 +141,7 @@ class Collection extends PluginBase {
   /**
    * Merges another collection into this one.
    *
-   * @param \Drupal\openlayers\Plugins\Types\Collection $collection
+   * @param \Drupal\openlayers\Types\Collection $collection
    *   The collection to merge into this one.
    */
   public function merge(Collection $collection) {

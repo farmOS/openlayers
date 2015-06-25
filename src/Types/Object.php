@@ -7,7 +7,7 @@
 namespace Drupal\openlayers\Types;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
-use Drupal\openlayers\Plugins\Types\Collection;
+use Drupal\openlayers\Types\Collection;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
