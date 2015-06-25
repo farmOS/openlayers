@@ -5,12 +5,12 @@
  * Contains \Drupal\Tests\openlayers\Openlayers\Interaction\InlineJS\InlineJSTest;
  */
 
-namespace Drupal\Tests\openlayers\Openlayers\Interaction\InlineJS;
+namespace Drupal\Tests\openlayers\Plugins\Interaction\InlineJS;
 
-use Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS;
+use Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS;
 
 /**
- * @coversDefaultClass \Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS
+ * @coversDefaultClass \Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS
  * @group openlayers
  */
 class InlineJSTest extends \PHPUnit_Framework_TestCase {
@@ -25,13 +25,13 @@ class InlineJSTest extends \PHPUnit_Framework_TestCase {
        'name' => 'openlayers.interaction', // @todo check the name.
     );
 
-    $this->inlineJS = new InlineJS($configuration, $this->moduleHandler, $this->messenger, $this->drupal7);
+    $this->inlineJS = new InlineJS($configuration, 'InkineJS', array(), $this->moduleHandler, $this->messenger, $this->drupal7);
   }
 
   /**
    * @covers ::__construct
    */
   public function test_construct() {
-    $this->assertInstanceOf('\Drupal\openlayers\Openlayers\Interaction\InlineJS\InlineJS', $this->inlineJS);
+    $this->assertInstanceOf('\Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS', $this->inlineJS);
   }
 }

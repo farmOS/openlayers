@@ -16,7 +16,12 @@ use Drupal\service_container\Legacy\Drupal7;
  * Class InlineJS.
  *
  * @Plugin(
- *  id = "InlineJS"
+ *  id = "InlineJS",
+ *  arguments = {
+ *    "@module_handler",
+ *    "@messenger",
+ *    "@drupal7"
+ *  }
  * )
  *
  */
@@ -29,8 +34,8 @@ class InlineJS extends Interaction {
    * @param @todo
    * @param @todo
    */
-  public function __construct(array $configuration, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
-    parent::__construct($configuration);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->moduleHandler = $module_handler;
     $this->messenger = $messenger;
     $this->drupal7 = $drupal7;

@@ -183,7 +183,7 @@ function openlayers_source_form_options_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if (isset($form_state['item']->attachToLayer)) {
+  if (!empty($form_state['item']->attachToMap)) {
     $layer = ctools_export_crud_load('openlayers_layers', $form_state['item']->attachToLayer);
     $layer->options['source'] = $form_state['item']->machine_name;
     ctools_export_crud_save('openlayers_layers', $layer);

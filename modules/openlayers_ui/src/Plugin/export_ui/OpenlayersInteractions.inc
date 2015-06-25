@@ -164,7 +164,7 @@ function openlayers_interaction_form_options_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if (isset($form_state['item']->attachToMap)) {
+  if (!empty($form_state['item']->attachToMap)) {
     $map = ctools_export_crud_load('openlayers_maps', $form_state['item']->attachToMap);
     $map->options['components'][] = $form_state['item']->machine_name;
     ctools_export_crud_save('openlayers_maps', $map);
