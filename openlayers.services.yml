@@ -1,13 +1,13 @@
 parameters:
   annotated_plugins_auto_discovery.openlayers:
-    - { owner: 'openlayers', type: 'Component', directory: 'Plugins/Component'}
-    - { owner: 'openlayers', type: 'Control', directory: 'Plugins/Control'}
-    - { owner: 'openlayers', type: 'Interaction', directory: 'Plugins/Interaction'}
-    - { owner: 'openlayers', type: 'Layer', directory: 'Plugins/Layer'}
-    - { owner: 'openlayers', type: 'Map', directory: 'Plugins/Map'}
-    - { owner: 'openlayers', type: 'Source', directory: 'Plugins/Source'}
-    - { owner: 'openlayers', type: 'Style', directory: 'Plugins/Style'}
-    - { owner: 'openlayers', type: 'Types', directory: 'Types'}
+    - { owner: 'openlayers', type: 'Component', directory: 'Plugin/Component'}
+    - { owner: 'openlayers', type: 'Control', directory: 'Plugin/Control'}
+    - { owner: 'openlayers', type: 'Interaction', directory: 'Plugin/Interaction'}
+    - { owner: 'openlayers', type: 'Layer', directory: 'Plugin/Layer'}
+    - { owner: 'openlayers', type: 'Map', directory: 'Plugin/Map'}
+    - { owner: 'openlayers', type: 'Source', directory: 'Plugin/Source'}
+    - { owner: 'openlayers', type: 'Style', directory: 'Plugin/Style'}
+    - { owner: 'openlayers', type: 'Types', directory: 'Plugin/Type'}
 
 services:
   openlayers:

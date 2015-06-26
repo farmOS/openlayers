@@ -9,7 +9,7 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
     return FALSE;
   }
 
-  if (!($context instanceof Drupal\openlayers\Types\MapInterface)) {
+  if (!($context instanceof Drupal\openlayers\Plugin\Type\MapInterface)) {
     return FALSE;
   }
 

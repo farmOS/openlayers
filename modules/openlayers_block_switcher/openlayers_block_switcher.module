@@ -97,7 +97,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   $default_value = array();
   $options_overlays = array();
 
-  if (!($map instanceof \Drupal\openlayers\Types\MapInterface)) {
+  if (!($map instanceof \Drupal\openlayers\Plugin\Type\MapInterface)) {
     return FALSE;
   }
 

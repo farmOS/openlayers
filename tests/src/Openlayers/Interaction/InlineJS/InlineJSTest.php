@@ -7,10 +7,10 @@
 
 namespace Drupal\Tests\openlayers\Plugins\Interaction\InlineJS;
 
-use Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS;
+use Drupal\openlayers\Plugin\Interaction\InlineJS\InlineJS;
 
 /**
- * @coversDefaultClass \Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS
+ * @coversDefaultClass \Drupal\openlayers\Plugin\Interaction\InlineJS\InlineJS
  * @group openlayers
  */
 class InlineJSTest extends \PHPUnit_Framework_TestCase {
@@ -32,6 +32,6 @@ class InlineJSTest extends \PHPUnit_Framework_TestCase {
    * @covers ::__construct
    */
   public function test_construct() {
-    $this->assertInstanceOf('\Drupal\openlayers\Plugins\Interaction\InlineJS\InlineJS', $this->inlineJS);
+    $this->assertInstanceOf('\Drupal\openlayers\Plugin\Interaction\InlineJS\InlineJS', $this->inlineJS);
   }
 }
