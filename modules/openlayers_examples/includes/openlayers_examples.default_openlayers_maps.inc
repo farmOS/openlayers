@@ -14,7 +14,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_earthquake';
-  $ol_map->name = '2012 Earthquakes map, tooltips and popups.';
+  $ol_map->name = 'Openlayers examples: 2012 Earthquakes, tooltips and popups.';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -55,7 +55,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_geojson_cities';
-  $ol_map->name = 'Map GeoJSON Cities';
+  $ol_map->name = 'Openlayers examples: GeoJSON Cities';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -89,7 +89,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_geojson_cities_heatmap';
-  $ol_map->name = 'Map GeoJSON Cities Heatmap';
+  $ol_map->name = 'Openlayers examples: GeoJSON Cities Heatmap';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -123,7 +123,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_geolocation';
-  $ol_map->name = 'Map geolocation';
+  $ol_map->name = 'Openlayers examples: Geolocation';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -159,7 +159,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_mapquest_views_geojson';
-  $ol_map->name = 'MapQuest Satellite with features from Views GeoJSON';
+  $ol_map->name = 'Openlayers examples: Features from Views';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -195,7 +195,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_geojson_cluster';
-  $ol_map->name = 'Map with cluster';
+  $ol_map->name = 'Openlayers examples: Cluster';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -239,7 +239,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_popup_autozoom';
-  $ol_map->name = 'Map with simple popup overlay and autozoom.';
+  $ol_map->name = 'Openlayers examples: Simple popup overlay and autozoom.';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -286,7 +286,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_blocklayerswitcher';
-  $ol_map->name = 'Map with block layer switcher';
+  $ol_map->name = 'Openlayers examples: Layer switcher in a block';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -346,7 +346,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map = new stdClass();
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_mapquest_openstreetmap';
-  $ol_map->name = 'MapQuest OpenStreetMap';
+  $ol_map->name = 'Openlayers examples: MapQuest OpenStreetMap';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -386,7 +386,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_mapquest_hybrid';
-  $ol_map->name = 'MapQuest Hybrid';
+  $ol_map->name = 'Openlayers examples: MapQuest Hybrid';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -424,7 +424,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map = new stdClass();
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_mapquest_satellite';
-  $ol_map->name = 'MapQuest Satellite';
+  $ol_map->name = 'Openlayers examples: MapQuest Satellite';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -461,7 +461,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_ec_europa_osm';
-  $ol_map->name = 'EC Europa OpenStreetMap';
+  $ol_map->name = 'Openlayers examples: EC Europa';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -497,7 +497,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_osm';
-  $ol_map->name = 'OpenStreetMap examples';
+  $ol_map->name = 'Openlayers examples: OpenStreetMap';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -567,7 +567,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_openstreetmap_tiledebug';
-  $ol_map->name = 'OpenStreetMap with tile debug.';
+  $ol_map->name = 'Openlayers examples: OpenStreetMap with tile debug.';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -601,7 +601,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_stamen';
-  $ol_map->name = 'Stamen map';
+  $ol_map->name = 'Openlayers examples: Stamen';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -637,7 +637,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_esri';
-  $ol_map->name = 'ESRI examples';
+  $ol_map->name = 'Openlayers examples: ESRI examples';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -697,7 +697,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_googlemaps';
-  $ol_map->name = 'Google Maps';
+  $ol_map->name = 'Openlayers examples: Google Maps';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -734,8 +734,8 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map = new stdClass();
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
-  $ol_map->machine_name = 'openlayers_examples_map_atlas_webgl';
-  $ol_map->name = 'OpenLayers Examples Map Atlas WebGL';
+  $ol_map->machine_name = 'openlayers_examples_map_symbols_webgl';
+  $ol_map->name = 'Openlayers examples: Symbols with WebGL';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -752,12 +752,12 @@ function openlayers_examples_default_openlayers_maps() {
         'lon' => '0',
       ),
       'rotation' => '0',
-      'zoom' => '2',
+      'zoom' => '5',
       'minZoom' => '0',
       'maxZoom' => '0',
     ),
     'layers' => array(
-      0 => 'openlayers_examples_layer_atlas_webgl',
+      0 => 'openlayers_examples_layer_symbols_webgl',
     ),
     'sources' => array(),
     'controls' => array(
@@ -773,13 +773,13 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'components' => array(),
   );
-  $export['openlayers_examples_map_atlas_webgl'] = $ol_map;
+  $export['openlayers_examples_map_symbols_webgl'] = $ol_map;
 
   $ol_map = new stdClass();
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_icon_sprite';
-  $ol_map->name = 'OpenLayers Examples Map Icon Sprite';
+  $ol_map->name = 'Openlayers examples: Icon sprites with WebGL';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -796,7 +796,7 @@ function openlayers_examples_default_openlayers_maps() {
         'lon' => '0',
       ),
       'rotation' => '0',
-      'zoom' => '2',
+      'zoom' => '5',
       'minZoom' => '0',
       'maxZoom' => '0',
     ),
@@ -804,7 +804,11 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_examples_layer_icon_sprite',
     ),
     'sources' => array(),
-    'controls' => array(),
+    'controls' => array(
+      0 => 'openlayers_control_fullscreen',
+      1 => 'openlayers_control_rotate',
+      2 => 'openlayers_control_zoom',
+    ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -819,7 +823,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_openweather';
-  $ol_map->name = 'OpenLayers Examples Map OpenWeather';
+  $ol_map->name = 'Openlayers examples: OpenWeather';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(
@@ -873,7 +877,7 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_mapbox';
-  $ol_map->name = 'Mapbox examples';
+  $ol_map->name = 'Openlayers examples: Mapbox';
   $ol_map->description = '';
   $ol_map->factory_service = 'openlayers.Map:OLMap';
   $ol_map->options = array(

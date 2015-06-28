@@ -5,11 +5,12 @@
  */
 
 namespace Drupal\openlayers\Types;
+use Drupal\Component\Plugin\PluginInspectionInterface;
 
 /**
  * Interface openlayers_object_interface.
  */
-interface ObjectInterface {
+interface ObjectInterface extends PluginInspectionInterface {
   /**
    * Return a list of default properties.
    *
@@ -20,31 +21,16 @@ interface ObjectInterface {
 
   /**
    * Initializes the object.
-   *
-   * @param array $data
-   *   The configuration data.
    */
-  public function init(array $data);
+  public function init();
 
   /**
    * The type of this object.
-   *
-   * @todo: Shouldn't we automatically compute this based on the fully qualified
-   * class name ?
-   * ex: \Drupal\openlayers\Control\MousePosition => Control
    *
    * @return string|FALSE
    *   The object type or FALSE on failure.
    */
   public function getType();
-
-  /**
-   * Returns the plugin definition.
-   *
-   * @return array
-   *   The plugin definition.
-   */
-  public function getConfiguration();
 
   /**
    * @TODO was does this?
@@ -53,6 +39,13 @@ interface ObjectInterface {
    *   @TODO Define how this has to look like if it is an array.
    */
   public function clearOption($parents);
+
+  /**
+   * Return the options array.
+   *
+   * @return array
+   */
+  public function getOptions();
 
   /**
    * Returns an option.
@@ -148,7 +141,7 @@ interface ObjectInterface {
    * @param \Drupal\openlayers\Types\ObjectInterface $context
    *   The context of the build. Mostly the map object.
    */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
+  public function preBuild(array &$build, ObjectInterface $context = NULL);
 
   /**
    * Invoked after an objects render array is built.
@@ -160,5 +153,71 @@ interface ObjectInterface {
    * @param \Drupal\openlayers\Types\ObjectInterface $context
    *   The context of the build. Mostly the map object.
    */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL);
+  public function postBuild(array &$build, ObjectInterface $context = NULL);
+
+  /**
+   * Return an object, CTools Exportable.
+   *
+   * @return \StdClass
+   */
+  public function getExport();
+
+  /**
+   * Return the object configuration.
+   *
+   * @return array
+   */
+  public function getConfiguration();
+
+  /**
+   * Return an array of OL objects indexed by their type.
+   *
+   * @param string $type
+   * @return array
+   */
+  public function getObjects($type = NULL);
+
+  /**
+   * Returns an array with the maps this object is attached on.
+   *
+   * @return array
+   *   An array of map objects this object is attached on. Keyed by the map
+   *   machine name.
+   */
+  public function getParents();
+
+  /**
+   * Return the module that provides this plugin.
+   *
+   * @return string
+   */
+  public function getProvider();
+
+  /**
+   * Returns the path to the plugin directory.
+   *
+   * @return string
+   */
+  public function getClassDirectory();
+
+  /**
+   * Returns the path to the class file.
+   *
+   * @return string
+   */
+  public function getClassPath();
+
+  /**
+   * Return the Collection object linked to the object.
+   *
+   * @return Collection
+   */
+  public function getCollection();
+
+  /**
+   * Return the JS to insert in the page when building the object.
+   *
+   * @return array
+   */
+  public function getJS();
 }

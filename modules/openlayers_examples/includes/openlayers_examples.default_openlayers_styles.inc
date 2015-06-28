@@ -13,8 +13,8 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
-  $ol_style->machine_name = 'openlayers_examples_style_blue_marker';
-  $ol_style->name = 'OpenLayers blue marker';
+  $ol_style->machine_name = 'openlayers_examples_style_icon_marker';
+  $ol_style->name = 'Openlayers examples: Icon marker';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:InlineJS';
   $ol_style->options = array(
@@ -28,13 +28,13 @@ function openlayers_examples_default_openlayers_styles() {
                         }))
                     });',
   );
-  $export['openlayers_examples_style_blue_marker'] = $ol_style;
+  $export['openlayers_examples_style_icon_marker'] = $ol_style;
 
   $ol_style = new stdClass();
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_examples_style_green';
-  $ol_style->name = 'OpenLayers green style';
+  $ol_style->name = 'Openlayers examples: Green marker';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:InlineJS';
   $ol_style->options = array(
@@ -63,7 +63,7 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_examples_style_red';
-  $ol_style->name = 'OpenLayers red style';
+  $ol_style->name = 'Openlayers examples: Red marker';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:InlineJS';
   $ol_style->options = array(
@@ -92,7 +92,7 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_examples_style_blue';
-  $ol_style->name = 'OpenLayers blue style';
+  $ol_style->name = 'Openlayers examples: Blue marker';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:InlineJS';
   $ol_style->options = array(
@@ -121,7 +121,7 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->disabled = FALSE; /* Edit this to true to make a default style disabled initially */
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_examples_style_cluster';
-  $ol_style->name = 'OpenLayers cluster style';
+  $ol_style->name = 'Openlayers examples: Cluster';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:ClusterStyle';
   $ol_style->options = array();

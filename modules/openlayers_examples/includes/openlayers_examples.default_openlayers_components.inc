@@ -14,7 +14,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_ajax_values';
-  $ol_component->name = 'openlayers_examples_component_ajax_values';
+  $ol_component->name = 'Openlayers examples: openlayers_examples_component_ajax_values';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:SetValues';
   $ol_component->options = array(
@@ -30,7 +30,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_geolocation';
-  $ol_component->name = 'Geolocation example';
+  $ol_component->name = 'Openlayers examples: Geolocation';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Geolocation';
   $ol_component->options = array(
@@ -47,7 +47,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_graticule';
-  $ol_component->name = 'Graticule example';
+  $ol_component->name = 'Openlayers examples: Graticule';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Graticule';
   $ol_component->options = array(
@@ -61,7 +61,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_zoom_to_source';
-  $ol_component->name = 'Zoom To Source Examples';
+  $ol_component->name = 'Openlayers examples: Zoom To Source';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
   $ol_component->options = array(
@@ -79,7 +79,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_autopopup';
-  $ol_component->name = 'OpenLayers Examples Autopopup';
+  $ol_component->name = 'Openlayers examples: Autopopup';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Autopopup';
   $ol_component->options = array(
@@ -98,7 +98,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_tooltip_earthquakes';
-  $ol_component->name = 'Earthquakes tooltip';
+  $ol_component->name = 'Openlayers examples: Earthquakes tooltip';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Tooltip';
   $ol_component->options = array(
@@ -111,7 +111,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_simple_popup';
-  $ol_component->name = 'Simple popup';
+  $ol_component->name = 'Openlayers examples: Simple popup';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
@@ -129,7 +129,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_earthquake_style';
-  $ol_component->name = 'Earthquake style';
+  $ol_component->name = 'Openlayers examples: Earthquake style';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:InlineJS';
   $ol_component->options = array(
@@ -175,7 +175,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_simple_popup_earthquakes';
-  $ol_component->name = 'Earthquakes popup';
+  $ol_component->name = 'Openlayers examples: Earthquakes popup';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
@@ -193,7 +193,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_blocklayerswitcher';
-  $ol_component->name = 'Block Layer Switcher';
+  $ol_component->name = 'Openlayers examples: Block Layer Switcher';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:BlockLayerSwitcher';
   $export['openlayers_examples_component_blocklayerswitcher'] = $ol_component;
@@ -210,7 +210,7 @@ map.getLayers().forEach(function(layer){
   $ol_component = new stdClass();
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_bootstrapjs_alert';
-  $ol_component->name = 'Bootstrap JS alert';
+  $ol_component->name = 'Openlayers examples: Bootstrap JS alert';
   $ol_component->description = 'Display an alert on the top of the map.';
   $ol_component->factory_service = 'openlayers.Component:BootstrapjsAlert';
   $ol_component->options = array(
@@ -222,7 +222,7 @@ map.getLayers().forEach(function(layer){
   $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_tileutfgrid';
-  $ol_component->name = 'Component TileUTFGrid';
+  $ol_component->name = 'Openlayers examples: TileUTFGrid';
   $ol_component->description = 'Example based on http://openlayers.org/en/v3.1.0/examples/tileutfgrid.html.';
   $ol_component->factory_service = 'openlayers.Component:InlineJS';
   $ol_component->options = array(

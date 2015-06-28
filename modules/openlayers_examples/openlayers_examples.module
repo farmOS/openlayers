@@ -22,7 +22,7 @@ function openlayers_examples_menu() {
   $items = array();
 
   $items['openlayers_examples'] = array(
-    'title' => 'OpenLayers 3.1.x examples',
+    'title' => 'OpenLayers 3.x examples',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openlayers_examples'),
     'access arguments' => array('access content'),
@@ -36,17 +36,14 @@ function openlayers_examples_menu() {
  * Form handler.
  */
 function openlayers_examples($form, &$form_state, $map_arg = NULL) {
-  ctools_include('export');
-  $maps = ctools_export_crud_load_all('openlayers_maps');
+  $maps = array();
   $options = array();
-  foreach ($maps as $machine_name => $data) {
+  foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
     if (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE)) {
       continue;
     }
-    $options[$data->machine_name] = $data->name;
+    $options[$machine_name] = $data->name;
   }
-
-  ksort($options);
 
   if (isset($form_state['values']['openlayers_default_map'])) {
     $maps = $form_state['values']['openlayers_default_map'];
@@ -86,7 +83,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   );
 
   foreach ($maps as $map) {
-    $map = openlayers_object_load('Map', $map);
+    $map = \Drupal\openlayers\Openlayers::load('Map', $map);
 
     $form['form'][$map->getId()] = array(
       '#type' => 'fieldset',

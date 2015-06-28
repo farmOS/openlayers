@@ -7,6 +7,7 @@
 namespace Drupal\openlayers\Types;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Collection;
 use Drupal\openlayers\Types\ObjectInterface;
 
@@ -37,14 +38,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public $description;
 
   /**
-   * @var string
-   */
-  public $class;
-
-  /**
    * @var array
    */
-  public $options = array();
+  protected $options = array();
 
   /**
    * @var string
@@ -84,17 +80,17 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function init(array $data) {
+  public function init() {
     // Mash the provided configuration with the defaults.
     foreach ($this->defaultProperties() as $property => $value) {
-      if (isset($data[$property])) {
-        $this->{$property} = $data[$property];
+      if (isset($this->configuration[$property])) {
+        $this->{$property} = $this->configuration[$property];
       }
     }
 
     // If there are options ensure the provided ones overwrite the defaults.
-    if (isset($data['options'])) {
-      $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
+    if (isset($this->configuration['options'])) {
+      $this->options = array_replace_recursive((array) $this->options, (array) $this->configuration['options']);
     }
 
     // We need to ensure the object has a proper machine name.
@@ -211,8 +207,50 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function getOptions() {
+    $this->syncOptions();
+    return $this->options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExport() {
+    $configuration = $this->configuration;
+    $configuration['options'] = $this->getOptions();
+    unset($configuration['options']['target']);
+    return (object) $configuration;
+  }
+
+  /**
+   * Synchronize the object options with the Collection of objects it has.
+   *
+   * @return void
+   */
+  protected function syncOptions() {
+    // Synchronize this item's options with its the Collection.
+    foreach($this->getCollection()->getExport() as $type => $items) {
+      $option = drupal_strtolower($type) . 's';
+      if (isset($this->options[$option])) {
+        $this->setOption($option, array_merge((array) $this->options[$option], (array) $items));
+      } else {
+        $this->setOption($option, (array) $items);
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getConfiguration() {
+    return $this->configuration;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getOption($parents, $default_value = NULL) {
-    $options = $this->options;
+    $options = $this->getOptions();
 
     if (is_string($parents)) {
       $parents = array($parents);
@@ -245,7 +283,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function attached() {
-    if ($plugin = $this->getConfiguration()) {
+    if ($plugin = $this->getPluginDefinition()) {
       $path = $this->getClassDirectory();
 
       $jsdir = $path . '/js';
@@ -276,18 +314,19 @@ abstract class Object extends PluginBase implements ObjectInterface {
   }
 
   /**
-   * Returns an array with the maps this object is attached on.
-   *
-   * @return array
-   *   An array of map objects this object is attached on. Keyed by the map
-   *   machine name.
+   * {@inheritdoc}
+   */
+  public function getObjects($type = NULL) {
+    return array_values($this->getCollection()->getObjects($type));
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function getParents() {
-    $maps = ctools_export_crud_load_all('openlayers_maps');
     $parents = array();
 
-    foreach ($maps as $map) {
-      $map = openlayers_object_load('map', $map);
+    foreach (Openlayers::loadAll('Map') as $map) {
       foreach ($map->getCollection()->getFlatList() as $object) {
         if ($object->machine_name == $this->machine_name) {
           $parents[$map->machine_name] = $map;
@@ -308,24 +347,25 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function getConfiguration() {
-    return $this->pluginDefinition;
+  public function getProvider() {
+    $class = explode('\\', $this->pluginDefinition['class']);
+    return $class[1];
   }
 
   /**
-   * Returns the path to the plugin directory.
+   * {@inheritdoc}
    */
   public function getClassDirectory() {
     $class = explode('\\', $this->pluginDefinition['class']);
-    return drupal_get_path('module', $class[1]) . '/src/' . implode('/', array_slice($class, 2, -1));
+    return drupal_get_path('module', $this->getProvider()) . '/src/' . implode('/', array_slice($class, 2, -1));
   }
 
   /**
-   * Returns the path to the class file.
+   * {@inheritdoc}
    */
   public function getClassPath() {
     $class = explode('\\', $this->pluginDefinition['class']);
-    return drupal_get_path('module', $class[1]) . '/src/' . implode('/', array_slice($class, 2)) . '.php';
+    return drupal_get_path('module', $this->getProvider()) . '/src/' . implode('/', array_slice($class, 2)) . '.php';
   }
 
   /**
@@ -348,8 +388,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    *
    * The collection can be accessed already by calling $this->getCollection().
    */
-  protected function buildCollection() {
-  }
+  protected function buildCollection() {}
 
   /**
    * {@inheritdoc}
@@ -367,10 +406,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getJS() {
+    // Refactor this to use getExport().
     return array(
       'mn' => $this->machine_name,
       'fs' => $this->factory_service,
-      'opt' => $this->options,
+      'opt' => $this->getOptions(),
     );
   }
 }
