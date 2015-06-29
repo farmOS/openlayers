@@ -126,7 +126,7 @@ class Geofield extends Component {
     // Auto-detect the source to use for the features.
     if (empty($this->options['source'])) {
       foreach ($context->getCollection()->getObjects('source') as $source) {
-        if ($source instanceof \Drupal\openlayers\Source\Geofield) {
+        if ($source instanceof \Drupal\openlayers_geofield\Plugins\Source\Geofield\Geofield) {
           $this->setOption('source', $source->machine_name);
         }
       }
