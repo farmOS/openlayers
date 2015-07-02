@@ -33,10 +33,24 @@ class Collection extends PluginBase {
    * @param Object $object
    *   Object instance to add to this collection.
    */
-  public function append(Object $object) {
+  public function append(ObjectInterface $object) {
     $type = drupal_strtolower($object->getType());
-    unset($this->objects[$type][$object->machine_name]);
+    $this->delete($object);
     $this->objects[$type][$object->machine_name] = $object;
+  }
+
+  /**
+   * Remove object from this collection.
+   *
+   * @param \Drupal\openlayers\Types\ObjectInterface $object
+   *   Object instance to remove from this collection.
+   */
+  public function delete(ObjectInterface $object) {
+    foreach($this->getFlatList($object->getType()) as $candidate) {
+      if ($candidate->machine_name == $object->machine_name) {
+        unset($this->objects[$object->getType()][$object->machine_name]);
+      }
+    }
   }
 
   /**

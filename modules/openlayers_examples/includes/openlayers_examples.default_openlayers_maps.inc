@@ -598,7 +598,7 @@ function openlayers_examples_default_openlayers_maps() {
   $export['openlayers_examples_map_openstreetmap_tiledebug'] = $ol_map;
 
   $ol_map = new stdClass();
-  $ol_map->disabled = FALSE; /* Edit this to true to make a default map disabled initially */
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
   $ol_map->api_version = 1;
   $ol_map->machine_name = 'openlayers_examples_map_stamen';
   $ol_map->name = 'Openlayers examples: Stamen';
@@ -619,16 +619,26 @@ function openlayers_examples_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_examples_layer_stamen2',
-      1 => 'openlayers_examples_layer_stamen1',
+      0 => 'openlayers_examples_layer_stamen3',
+      1 => 'openlayers_examples_layer_stamen2',
+      2 => 'openlayers_examples_layer_stamen1',
     ),
     'controls' => array(
       0 => 'openlayers_control_zoom',
+      1 => 'openlayers_examples_stamen_layer_switcher',
+      2 => 'openlayers_control_attribution',
+      3 => 'openlayers_control_fullscreen',
+      4 => 'openlayers_control_mouseposition',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
       2 => 'openlayers_interaction_mousewheelzoom',
+    ),
+    'sources' => array(
+      0 => 'openlayers_examples_source_stamen1',
+      1 => 'openlayers_examples_source_stamen2',
+      2 => 'openlayers_examples_source_stamen3',
     ),
   );
   $export['openlayers_examples_map_stamen'] = $ol_map;

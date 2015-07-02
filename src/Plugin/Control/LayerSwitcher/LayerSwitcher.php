@@ -50,7 +50,7 @@ class LayerSwitcher extends Control {
     );
 
     $labels = $this->getOption('layer_labels', array());
-    foreach ($this->getOption('layers') as $i => $machine_name) {
+    foreach ((array) $this->getOption('layers') as $i => $machine_name) {
       $map_layer = Openlayers::load('Layer', $machine_name);
       $label = check_plain($map_layer->name);
       if (isset($labels[$machine_name])) {

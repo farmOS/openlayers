@@ -143,7 +143,7 @@ abstract class Map extends Object implements MapInterface {
   public function getJS() {
     $js = parent::getJS();
 
-    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
+    foreach(Openlayers::getPluginTypes() as $type) {
       unset($js['opt'][$type . 's']);
     }
 

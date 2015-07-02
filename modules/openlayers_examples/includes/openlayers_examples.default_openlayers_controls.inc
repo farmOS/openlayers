@@ -13,6 +13,24 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control = new stdClass();
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_examples_stamen_layer_switcher';
+  $ol_control->name = 'Openlayers examples: Stamen layer switcher';
+  $ol_control->description = '';
+  $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
+  $ol_control->options = array(
+    'label' => 'Layers',
+    'layers' => array(
+      'openlayers_examples_layer_stamen1' => 'openlayers_examples_layer_stamen1',
+      'openlayers_examples_layer_stamen2' => 'openlayers_examples_layer_stamen2',
+      'openlayers_examples_layer_stamen3' => 'openlayers_examples_layer_stamen3',
+    ),
+    'multiselect' => 1,
+  );
+  $export['openlayers_examples_stamen_layer_switcher'] = $ol_control;
+
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_simple_layer_switcher';
   $ol_control->name = 'Openlayers examples: Simple layer switcher';
   $ol_control->description = '';

@@ -229,12 +229,19 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   protected function syncOptions() {
     // Synchronize this item's options with its the Collection.
-    foreach($this->getCollection()->getExport() as $type => $items) {
-      $option = drupal_strtolower($type) . 's';
+    foreach($this->getCollection()->getFlatList() as $object) {
+      $option = drupal_strtolower($object->getType()) . 's';
+      $options = array();
+
       if (isset($this->options[$option])) {
-        $this->setOption($option, array_merge((array) $this->options[$option], (array) $items));
+        if (!in_array($object->machine_name, $this->options[$option])) {
+          $options = array_merge((array) $this->options[$option], array($object->machine_name));
+        }
       } else {
-        $this->setOption($option, (array) $items);
+        $options = array($object->machine_name);
+      }
+      if (!empty($options)) {
+        $this->setOption($option, $options);
       }
     }
   }
