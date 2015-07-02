@@ -51,15 +51,12 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   $settings = $display['settings'];
 
   // Get preset options, filtered to those which have the GeoField source.
-  ctools_include('export');
-  $maps = ctools_export_crud_load_all('openlayers_maps');
   $map_options = array();
-  foreach ($maps as $machine_name => $data) {
-    /** @var \Drupal\openlayers\Plugins\Map\OLMap\OLMap $map */
-    $map = openlayers_object_load('Map', $data);
-    foreach ($map->getSources() as $source) {
-      if ($source instanceof \Drupal\openlayers_geofield\Plugins\Source\Geofield\Geofield) {
-        $map_options[$machine_name] = $data->name;
+  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $machine_name => $map) {
+    foreach ($map->getObjects('source') as $source) {
+      // TODO: add getSource() to Object and Object Interface.
+      if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
+        $map_options[$machine_name] = $map->name;
       }
     }
   }
@@ -114,7 +111,7 @@ function openlayers_geofield_field_formatter_settings_summary($field, $instance,
   }
 
   if ($display['type'] == 'openlayers_geofield' && !empty($settings['map_preset'])) {
-    $map = openlayers_object_load('Map', $settings['map_preset']);
+    $map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset']);
     $summary[] = t('Openlayers Map: @data', array('@data' => $map->name));
   }
 
@@ -204,10 +201,10 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
 
   // Load map and set features.
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
-  $map = openlayers_object_load('Map', $map_name);
+  $map = \Drupal\openlayers\Openlayers::load('Map', $map_name);
   $geofield_source = NULL;
-  foreach ($map->getSources() as $source) {
-    if ($source instanceof \Drupal\openlayers_geofield\Plugins\Source\Geofield\Geofield) {
+  foreach ($map->getObjects('source') as $source) {
+    if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
       $geofield_source = $source;
       $source->setOption('features', $features);
     }
@@ -261,15 +258,12 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $form = array();
 
   // Get preset options, filtered to those which have the GeoField component.
-  ctools_include('export');
-  $maps = ctools_export_crud_load_all('openlayers_maps');
+  $maps = \Drupal\openlayers\Openlayers::loadAll('Map');
   $map_options = array();
-  foreach ($maps as $machine_name => $data) {
-    /** @var \Drupal\openlayers\Plugins\Map\OLMap\OLMap $map */
-    $map = openlayers_object_load('Map', $data);
-    foreach ($map->getComponents() as $component) {
-      if ($component instanceof \Drupal\openlayers_geofield\Plugins\Component\Geofield\Geofield) {
-        $map_options[$machine_name] = $data->name;
+  foreach ($maps as $machine_name => $map) {
+    foreach ($map->getObjects('component') as $component) {
+      if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
+        $map_options[$machine_name] = $map->name;
       }
     }
   }
@@ -392,11 +386,10 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
 
   $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield';
 
-  /** @var \Drupal\openlayers\Plugins\Map\OLMap\OLMap $map */
-  $map = openlayers_object_load('Map', $openlayers_map_id);
-  foreach ($map->getComponents() as $component) {
+  $map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id);
+  foreach ($map->getObjects('component') as $component) {
     // Configure component based on the widget settings.
-    if ($component instanceof \Drupal\openlayers_geofield\Plugins\Component\Geofield\Geofield) {
+    if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
       $component->setOption('dataType', array('WKT' => 'WKT'));
       $component->setOption('dataProjection', 'EPSG:4326');
 

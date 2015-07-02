@@ -9,12 +9,12 @@ namespace Drupal\openlayers\Types;
 /**
  * Interface LayerInterface.
  */
-interface LayerInterface {
+interface LayerInterface extends ObjectInterface {
 
   /**
    * Returns the source of this layer.
    *
-   * @return openlayers_source_interface|FALSE
+   * @return SourceInterface|FALSE
    *   The source assigned to this layer.
    */
   public function getSource();

@@ -19,7 +19,7 @@ function openlayers_ui_OpenlayersControls_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\UI\\OpenlayersControls',
+      'class' => '\\Drupal\\openlayers_ui\\UI\\OpenlayersControls',
       'file' => 'OpenlayersControls.php',
     ),
 
@@ -71,23 +71,22 @@ function openlayers_ui_OpenlayersControls_ctools_export_ui() {
  * Control base config form handler.
  */
 function openlayers_control_form_start($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\OpenlayersControls();
+  $class = new Drupal\openlayers_ui\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
-  $maps = ctools_export_crud_load_all('openlayers_maps');
-  $options = array('' => 'Dont attach');
-  foreach ($maps as $machine_name => $data) {
-    $map = openlayers_object_load('Map', $machine_name);
+  $options = array();
+  foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $map) {
     if (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE)) {
       continue;
     }
-    $options[$machine_name] = $data->name;
+    $options[$machine_name] = $map->name;
   }
 
   $form['attachToMap'] = array(
     '#type' => 'select',
     '#title' => 'Add this to a map ?',
+    '#empty_option' => t('- Do no attach -'),
     '#description' => 'Select the map to add this object to.',
     '#options' => $options,
     '#default_value' => isset($form_state['item']->attachToMap) ? $form_state['item']->attachToMap : '',
@@ -100,7 +99,7 @@ function openlayers_control_form_start($form, &$form_state) {
  * Control base config form validation handler.
  */
 function openlayers_control_form_start_validate($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\OpenlayersControls();
+  $class = new Drupal\openlayers_ui\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -109,7 +108,7 @@ function openlayers_control_form_start_validate($form, &$form_state) {
  * Control base config form submit handler.
  */
 function openlayers_control_form_start_submit($form, &$form_state) {
-  $class = new Drupal\openlayers\UI\OpenlayersControls();
+  $class = new Drupal\openlayers_ui\UI\OpenlayersControls();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }
@@ -121,9 +120,10 @@ function openlayers_control_form_type($form, &$form_state) {
   $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Control Type'),
+    '#empty_option' => t('- Select a @plugin type -', array('@plugin' => 'Control')),
     '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of control.'),
-    '#options' => Openlayers::getOLObjectsOptions('Control'),
+    '#options' => \Drupal\openlayers\Openlayers::getOLObjectsOptions('Control'),
     '#required' => TRUE,
   );
 
@@ -141,7 +141,7 @@ function openlayers_control_form_type_submit($form, &$form_state) {
  * Control options config form handler.
  */
 function openlayers_control_form_options($form, &$form_state) {
-  $control = openlayers_object_load('Control', $form_state['item']);
+  $control = \Drupal\openlayers\Openlayers::load('Control', $form_state['item']);
   $control->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -152,7 +152,7 @@ function openlayers_control_form_options($form, &$form_state) {
  * Control options config form validation handler.
  */
 function openlayers_control_form_options_validate($form, &$form_state) {
-  $control = openlayers_object_load('Control', $form_state['item']);
+  $control = \Drupal\openlayers\Openlayers::load('Control', $form_state['item']);
   $control->optionsFormValidate($form, $form_state);
 }
 
@@ -165,12 +165,12 @@ function openlayers_control_form_options_submit($form, &$form_state) {
   }
 
   if (!empty($form_state['item']->attachToMap)) {
-    $map = ctools_export_crud_load('openlayers_maps', $form_state['item']->attachToMap);
-    $map->options['components'][] = $form_state['item']->machine_name;
-    ctools_export_crud_save('openlayers_maps', $map);
+    $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']->attachToMap);
+    $map->getCollection()->append(\Drupal\openlayers\Openlayers::load('control', $form_state['item']));
+    \Drupal\openlayers\Openlayers::save($map);
     unset($form_state['item']->attachToMap);
   }
 
-  $control = openlayers_object_load('Control', $form_state['item']);
+  $control = \Drupal\openlayers\Openlayers::load('Control', $form_state['item']);
   $control->optionsFormSubmit($form, $form_state);
 }

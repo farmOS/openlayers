@@ -1,0 +1,7 @@
+name = Openlayers Boxes
+description = Openlayers integration with Boxes module.
+core = 7.x
+package = "Openlayers"
+
+dependencies[] = openlayers
+dependencies[] = boxes

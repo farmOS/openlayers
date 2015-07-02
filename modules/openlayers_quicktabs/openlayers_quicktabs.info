@@ -1,0 +1,7 @@
+name = Openlayers Quicktabs
+description = Openlayers integration with Quicktabs module.
+core = 7.x
+package = "Openlayers"
+
+dependencies[] = openlayers
+dependencies[] = quicktabs

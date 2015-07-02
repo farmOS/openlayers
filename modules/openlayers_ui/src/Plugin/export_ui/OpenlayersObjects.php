@@ -90,7 +90,7 @@ abstract class OpenlayersObjects extends ctools_export_ui {
 
     list($plugin_manager, $plugin_id) = explode(':', $item->factory_service);
     list($module, $plugin_type) = explode('.', $plugin_manager);
-    $object = openlayers_object_load($plugin_type, $item->machine_name);
+    $object = \Drupal\openlayers\Openlayers::load($plugin_type, $item->machine_name);
 
     // Note: $item->{$schema['export']['export type string']} should have
     // already been set up by export.inc so we can use it safely.

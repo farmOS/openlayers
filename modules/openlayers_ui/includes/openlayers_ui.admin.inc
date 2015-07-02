@@ -12,15 +12,12 @@
  * @see system_settings_form()
  */
 function openlayers_ui_admin_settings($form, &$form_state) {
-  ctools_include('export');
-  $maps = ctools_export_crud_load_all('openlayers_maps');
   $options = array();
-  foreach ($maps as $machine_name => $data) {
-    // Todo: Rewrite properly and create a generic function to load all objects.
+  foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
     if (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE)) {
       continue;
     }
-    $options[$data->machine_name] = $data->name;
+    $options[$machine_name] = $data->name;
   }
 
   $map = \Drupal\openlayers\Config::get('openlayers.default_ui_map');
@@ -59,6 +56,100 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $form['current_path'] = array('#type' => 'hidden', '#value' => current_path());
+
+  $form['plugin-info'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Plugin information',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE
+  );
+
+  foreach(\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
+    $rows = array();
+
+    $form['plugin-info'][$type . '-group'] = array(
+      '#type' => 'fieldset',
+      '#title' => $type,
+      '#collapsed' => TRUE,
+      '#collapsible' => TRUE
+    );
+
+    foreach(\Drupal::service('openlayers.' . $type)->getDefinitions() as $service => $definition) {
+      $definition += array('arguments' => array('NULL'));
+
+      /* @var \Drupal\openlayers\Types\Object $instance */
+      $instance = \Drupal::service('openlayers.' . $type)->createInstance($definition['id']);
+      $attached = $instance->attached();
+
+      $sizes = array('js' => 0, 'css' => 0);
+      foreach(array_keys($sizes) as $size_type) {
+        foreach($attached[$size_type] as $index => $data) {
+          $sizes[$size_type] += filesize($data['data']);
+        }
+      }
+
+      if (count($attached['js']) != 0) {
+        $sizes['js'] .= ' bytes.<br/>(' . count($attached['js']) . ' file(s))';
+      }
+      if (count($attached['css']) != 0) {
+        $sizes['css'] .= 'bytes.<br/>(' . count($attached['css']) . ' file(s))';
+      }
+
+      $class = array(
+        'Classfile: ' . $instance->getClassPath(),
+        'Namespace: ' . $definition['class'],
+      );
+
+      $rows[] = array(
+        $instance->getProvider(),
+        $instance->getBaseId(),
+        implode('<br/>', $class),
+        implode('|', $definition['arguments']),
+        $sizes['js'],
+        $sizes['css'],
+      );
+    }
+
+    $header = array(
+      'Module provider',
+      'ID',
+      'Class',
+      'Arguments',
+      'JS size',
+      'CSS size'
+    );
+    $table = theme('table', array('header' => $header, 'rows' => $rows, 'empty' => t('No plugin available.')));
+
+    $form['plugin-info'][$type . '-group']['table'] = array(
+      '#markup' => $table
+    );
+  }
+
+  $library = \Drupal\openlayers\Openlayers::getLibrary();
+  if ($library['installed'] == TRUE) {
+    $rows = array();
+    $rows1 = array('name', 'vendor url', 'download url', 'library path', 'version');
+    $header = array('Property', 'Value');
+    foreach($rows1 as $row) {
+      $rows[] = array(
+        $row,
+        $library[$row]
+      );
+    }
+    $output = theme('table', array('header' => $header, 'rows' => $rows));
+  } else {
+    $output = t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>. The library directory must be named <em>openlayers3</em> to be recognized by this module.', array('@url' => $library['download url']));
+  }
+
+  $form['library-fieldset'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Library information',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    'version' => array(
+      '#markup' => $output
+    )
+  );
 
   $form['buttons'] = array(
     'submit' => array(

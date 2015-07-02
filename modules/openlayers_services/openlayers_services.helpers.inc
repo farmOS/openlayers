@@ -5,7 +5,7 @@
  */
 
 function _openlayers_services_retrieve($name) {
-  $map = openlayers_object_load('Map', check_plain($name));
+  $map = \Drupal\openlayers\Openlayers::load('Map', $name);
   $build = $map->build();
   $render = drupal_render($build);
   $js = drupal_get_js();
@@ -19,6 +19,6 @@ function _openlayers_services_retrieve($name) {
 }
 
 function _openlayers_services_access($operation, $map) {
-  $map = openlayers_object_load('Map', check_plain($map[0]));
+  $map = \Drupal\openlayers\Openlayers::load('Map', $map[0]);
   return (bool) $map->getOption('provideIframe', FALSE);
 }

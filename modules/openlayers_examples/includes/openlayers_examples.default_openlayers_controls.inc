@@ -14,7 +14,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_simple_layer_switcher';
-  $ol_control->name = 'Openlayers Examples simple layer switcher';
+  $ol_control->name = 'Openlayers examples: Simple layer switcher';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
   $ol_control->options = array(
@@ -31,7 +31,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_openweather_layer_switcher';
-  $ol_control->name = 'OpenLayers Examples Control OpenWeather Layer Switcher';
+  $ol_control->name = 'Openlayers examples: OpenWeather Layer Switcher';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
   $ol_control->options = array(
@@ -57,7 +57,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_esri_layer_switcher';
-  $ol_control->name = 'ESRI layer switcher';
+  $ol_control->name = 'Openlayers examples: ESRI layer switcher';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
   $ol_control->options = array(
@@ -80,7 +80,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_osm_layer_switcher';
-  $ol_control->name = 'OSM layer switcher';
+  $ol_control->name = 'Openlayers examples: OSM layer switcher';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
   $ol_control->options = array(
@@ -109,7 +109,7 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_examples_control_mapbox_layer_switcher';
-  $ol_control->name = 'Mapbox layer switcher';
+  $ol_control->name = 'Openlayers examples: Mapbox layer switcher';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:LayerSwitcher';
   $ol_control->options = array(

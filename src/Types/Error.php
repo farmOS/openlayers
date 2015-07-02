@@ -71,13 +71,13 @@ class Error extends Object {
   /**
    * {@inheritdoc}
    */
-  public function init(array $data) {
-    foreach ($data as $property => $value) {
-      $this->{$property} = $data[$property];
+  public function init() {
+    foreach ($this->configuration as $property => $value) {
+      $this->{$property} = $this->configuration[$property];
     }
 
-    if (isset($data['options'])) {
-      $this->options = array_replace_recursive((array) $this->options, (array) $data['options']);
+    if (isset($this->configuration['options'])) {
+      $this->options = array_replace_recursive((array) $this->options, (array) $this->configuration['options']);
     }
 
     $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
@@ -97,48 +97,6 @@ class Error extends Object {
       '@service' => $service,
       '@type' => $type,
     ));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getSource() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getSources() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getLayers() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getControls() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getInteractions() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getComponents() {
-    return array();
   }
 
   /**

@@ -19,7 +19,7 @@ function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
     ),
 
     'handler' => array(
-      'class' => '\\Drupal\\openlayers\\UI\\OpenlayersStyles',
+      'class' => '\\Drupal\\openlayers_ui\\UI\\OpenlayersStyles',
       'file' => 'OpenlayersStyles.php',
     ),
 
@@ -71,7 +71,7 @@ function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
  * Style base config form handler.
  */
 function openlayers_style_form_start($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
+  $class = new \Drupal\openlayers_ui\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form($form, $form_state);
 
@@ -82,7 +82,7 @@ function openlayers_style_form_start($form, &$form_state) {
  * Style base config form validation handler.
  */
 function openlayers_style_form_start_validate($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
+  $class = new \Drupal\openlayers_ui\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form_validate($form, $form_state);
 }
@@ -91,7 +91,7 @@ function openlayers_style_form_start_validate($form, &$form_state) {
  * Style base config form submit handler.
  */
 function openlayers_style_form_start_submit($form, &$form_state) {
-  $class = new \Drupal\openlayers\UI\OpenlayersStyles();
+  $class = new \Drupal\openlayers_ui\UI\OpenlayersStyles();
   $class->init($form_state['plugin']);
   $class->edit_form_submit($form, $form_state);
 }
@@ -103,9 +103,10 @@ function openlayers_style_form_type($form, &$form_state) {
   $form['factory_service'] = array(
     '#type' => 'select',
     '#title' => t('Style type'),
+    '#empty_option' => t('- Select a @plugin type -', array('@plugin' => 'Style')),
     '#default_value' => isset($form_state['item']->factory_service) ? $form_state['item']->factory_service : '',
     '#description' => t('Select the type of style.'),
-    '#options' => Openlayers::getOLObjectsOptions('Style'),
+    '#options' => \Drupal\openlayers\Openlayers::getOLObjectsOptions('Style'),
     '#required' => TRUE,
   );
 
@@ -127,7 +128,7 @@ function openlayers_style_form_type_submit($form, &$form_state) {
  * Style options config form handler.
  */
 function openlayers_style_form_options($form, &$form_state) {
-  $style = openlayers_object_load('Style', $form_state['item']);
+  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
   $style->optionsForm($form, $form_state);
   $form['options']['#tree'] = TRUE;
 
@@ -138,7 +139,7 @@ function openlayers_style_form_options($form, &$form_state) {
  * Style options config form validation handler.
  */
 function openlayers_style_form_options_validate($form, &$form_state) {
-  $style = openlayers_object_load('Style', $form_state['item']);
+  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
   $style->optionsFormValidate($form, $form_state);
 }
 
@@ -149,6 +150,6 @@ function openlayers_style_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $style = openlayers_object_load('Style', $form_state['item']);
+  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
   $style->optionsFormSubmit($form, $form_state);
 }

@@ -34,10 +34,9 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function append(Object $object) {
-    list($plugin_manager, $plugin_id) = array_pad(explode(':', $object->factory_service), 2, NULL);
-    list($module, $plugin_type) = array_pad(explode('.', drupal_strtolower($plugin_manager), 2), 2, NULL);
-
-    $this->objects[$plugin_type][$object->machine_name] = $object;
+    $type = drupal_strtolower($object->getType());
+    unset($this->objects[$type][$object->machine_name]);
+    $this->objects[$type][$object->machine_name] = $object;
   }
 
   /**
@@ -102,6 +101,8 @@ class Collection extends PluginBase {
       return $this->objects;
     }
 
+    $type = drupal_strtolower($type);
+
     if (isset($this->objects[$type])) {
       return $this->objects[$type];
     }
@@ -116,7 +117,7 @@ class Collection extends PluginBase {
    *   Type to filter for. If set only a list with objects of this type is
    *   returned.
    *
-   * @return array
+   * @return \Drupal\openlayers\Types\Object[]
    *   List of objects of this collection or list of a specific type of objects.
    */
   public function getFlatList($type = NULL) {
@@ -145,10 +146,21 @@ class Collection extends PluginBase {
    *   The collection to merge into this one.
    */
   public function merge(Collection $collection) {
-    foreach ($collection->getObjects() as $objects) {
-      foreach ($objects as $object) {
-        $this->append($object);
-      }
+    foreach ($collection->getFlatList() as $object) {
+      $this->append($object);
     }
+  }
+
+  /**
+   * Get the collection as an export array with id's instead of objects.
+   *
+   * @return array
+   */
+  public function getExport() {
+    $export = array();
+    foreach($this->getFlatList() as $object) {
+      $export[$object->getType()][] = $object->machine_name;
+    }
+    return $export;
   }
 }

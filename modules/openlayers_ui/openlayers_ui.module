@@ -24,7 +24,7 @@ function openlayers_ui_menu() {
     'title' => 'Settings',
     'access arguments' => array('administer openlayers'),
     'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => 10,
+    'weight' => 15,
   );
 
   return $items;
