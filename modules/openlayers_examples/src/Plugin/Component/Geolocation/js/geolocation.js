@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component:geolocation',
+  fs: 'openlayers.Component:Geolocation',
   init: function(data) {
     var map = data.map;
 
@@ -12,7 +12,7 @@ Drupal.openlayers.pluginManager.register({
     });
 
     // update the HTML page when the position changes.
-    geolocation.on('change', function(event) {
+    geolocation.on('change', function() {
       jQuery('#' + data.opt.positionAccuracyID).val(geolocation.getAccuracy() + ' [m]');
       jQuery('#' + data.opt.altitudeID).val(geolocation.getAltitude() + ' [m]');
       jQuery('#' + data.opt.altitudeAccuracyID).val(geolocation.getAltitudeAccuracy() + ' [m]');
