@@ -43,6 +43,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
   protected $options = array();
 
   /**
+   * @var int
+   */
+  protected $weight = -1;
+
+  /**
    * @var string
    */
   public $factory_service = NULL;
@@ -229,6 +234,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   protected function syncOptions() {
     // Synchronize this item's options with its the Collection.
+
     foreach($this->getCollection()->getFlatList() as $object) {
       $option = drupal_strtolower($object->getType()) . 's';
       $options = array();
@@ -395,7 +401,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
    *
    * The collection can be accessed already by calling $this->getCollection().
    */
-  protected function buildCollection() {}
+  public function buildCollection() {
+    $this->getCollection()->append($this);
+  }
 
   /**
    * {@inheritdoc}
@@ -403,7 +411,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getCollection() {
     if (!($this->collection instanceof Collection)) {
       $this->collection = \Drupal::service('openlayers.Types')->createInstance('Collection');
-      $this->collection->append($this);
       $this->buildCollection();
     }
     return $this->collection;
@@ -419,5 +426,19 @@ abstract class Object extends PluginBase implements ObjectInterface {
       'fs' => $this->factory_service,
       'opt' => $this->getOptions(),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setWeight($weight) {
+    $this->weight = (int) $weight;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getWeight() {
+    return $this->weight;
   }
 }

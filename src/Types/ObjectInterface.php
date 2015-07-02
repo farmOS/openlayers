@@ -208,6 +208,13 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function getClassPath();
 
   /**
+   * Fill in the Collection object from the object's options.
+   *
+   * @return void
+   */
+  public function buildCollection();
+
+  /**
    * Return the Collection object linked to the object.
    *
    * @return Collection
@@ -220,4 +227,19 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @return array
    */
   public function getJS();
+
+  /**
+   * Set the weight of an object.
+   *
+   * @param int $weight
+   * @return void
+   */
+  public function setWeight($weight);
+
+  /**
+   * Get the weight of an object.
+   *
+   * @return int
+   */
+  public function getWeight();
 }

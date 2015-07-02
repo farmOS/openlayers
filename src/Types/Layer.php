@@ -11,13 +11,10 @@ use Drupal\openlayers\Openlayers;
  * Class Layer.
  */
 abstract class Layer extends Object implements LayerInterface {
-
   /**
    * {@inheritdoc}
    */
-  protected function buildCollection() {
-    parent::buildCollection();
-
+  public function buildCollection() {
     foreach (array('source', 'style') as $type) {
       if ($data = $this->getOption($type, FALSE)) {
         if ($object = Openlayers::load($type, $data)) {
@@ -25,6 +22,7 @@ abstract class Layer extends Object implements LayerInterface {
         }
       }
     }
+    $this->getCollection()->append($this);
   }
 
   /**

@@ -83,16 +83,7 @@ class Views extends OLMap {
   /**
    * {@inheritdoc}
    */
-  protected function buildCollection() {
-    parent::buildCollection();
-    $this->getObjects('source');
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function optionsForm(&$form, &$form_state) {
-
     $options = array();
     $views = openalyers_views_get_views('openlayers_map_views');
     foreach ($views as $view_settings) {

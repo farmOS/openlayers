@@ -37,6 +37,10 @@ class Collection extends PluginBase {
     $type = drupal_strtolower($object->getType());
     $this->delete($object);
     $this->objects[$type][$object->machine_name] = $object;
+    // If the dependency system is working, we don't need this.
+    uasort($this->objects[$type], function($a, $b) {
+      return strcmp($a->getWeight(), $b->getWeight());
+    });
   }
 
   /**

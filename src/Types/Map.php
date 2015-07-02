@@ -28,16 +28,16 @@ abstract class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  protected function buildCollection() {
-    parent::buildCollection();
-
-    foreach (Openlayers::getPluginTypes(array('style', 'map')) as $type) {
-      foreach ($this->getOption($type . 's', array()) as $object) {
+  public function buildCollection() {
+    foreach (Openlayers::getPluginTypes(array('map')) as $type) {
+      foreach ($this->getOption($type . 's', array()) as $weight => $object) {
         if ($merge_object = Openlayers::load($type, $object)) {
+          $merge_object->setWeight($weight);
           $this->getCollection()->merge($merge_object->getCollection());
         }
       }
     }
+    parent::buildCollection();
   }
 
   /**
@@ -59,6 +59,7 @@ abstract class Map extends Object implements MapInterface {
    */
   public function build() {
     $map = $this;
+
     $build = array();
 
     // Run prebuild hook to all objects who implements it.
