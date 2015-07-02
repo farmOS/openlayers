@@ -312,5 +312,4 @@ class Geofield extends Component {
       $build += $component;
     }
   }
-
 }
