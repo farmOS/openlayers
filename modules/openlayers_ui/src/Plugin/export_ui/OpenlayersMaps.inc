@@ -169,7 +169,9 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
  */
 function openlayers_map_form_layers($form, &$form_state) {
   $all_layers = \Drupal\openlayers\Openlayers::loadAllExportable('Layer');
-  $map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item']);
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+    return;
+  }
 
   $layers = array();
   foreach ($map->getObjects('layer') as $layer) {
@@ -644,7 +646,6 @@ function openlayers_map_form_components($form, &$form_state) {
 
   $data = array();
 
-  $form_state['item']->options += array('components' => array());
   // Ensure the components are ordered correctly.
   foreach (array_reverse($form_state['item']->options['components']) as $machine_name) {
     if (isset($all_components[$machine_name])) {
