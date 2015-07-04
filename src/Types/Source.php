@@ -16,7 +16,7 @@ abstract class Source extends Object implements SourceInterface {
    */
   public function buildCollection() {
     foreach ((array) $this->getOption('sources', array()) as $weight => $object) {
-      if ($merge_object = Openlayers::load('source', $object)) {
+      if (($merge_object = Openlayers::load('source', $object)) == TRUE) {
         $merge_object->setWeight($weight);
         $this->getCollection()->merge($merge_object->getCollection());
       }

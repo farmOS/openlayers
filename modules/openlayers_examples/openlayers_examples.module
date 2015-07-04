@@ -39,7 +39,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   $maps = array();
   $options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
-    if (!$data || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
+    if (!is_object($data) || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
       continue;
     }
     $options[$machine_name] = $data->name;
@@ -83,7 +83,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
   );
 
   foreach ($maps as $map) {
-    if (!($map = \Drupal\openlayers\Openlayers::load('Map', $map))) {
+    if (($map = \Drupal\openlayers\Openlayers::load('Map', $map)) == FALSE) {
       continue;
     }
 

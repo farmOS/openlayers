@@ -77,7 +77,7 @@ function openlayers_component_form_start($form, &$form_state) {
 
   $options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $map) {
-    if (!$map || (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE))) {
+    if (!is_object($map) || (property_exists($map, 'disabled') && ($map->disabled == 1 || $map->disabled == TRUE))) {
       continue;
     }
     $options[$machine_name] = $map->name;
@@ -141,7 +141,7 @@ function openlayers_component_form_type_submit($form, &$form_state) {
  * Component options form handler.
  */
 function openlayers_component_form_options($form, &$form_state) {
-  if ($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) {
+  if (($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) == TRUE) {
     $component->optionsForm($form, $form_state);
     $form['options']['#tree'] = TRUE;
   }
@@ -153,7 +153,7 @@ function openlayers_component_form_options($form, &$form_state) {
  * Component options form validation handler.
  */
 function openlayers_component_form_options_validate($form, &$form_state) {
-  if ($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) {
+  if (($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) == TRUE) {
     $component->optionsFormValidate($form, $form_state);
   }
 }
@@ -166,8 +166,8 @@ function openlayers_component_form_options_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if ($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) {
-    if (!empty($form_state['item']->attachToMap) && ($map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']->attachToMap))) {
+  if (($component = \Drupal\openlayers\Openlayers::load('Component', $form_state['item'])) == TRUE) {
+    if (!empty($form_state['item']->attachToMap) && ($map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']->attachToMap)) == TRUE) {
       $map->getCollection()->append($component);
       \Drupal\openlayers\Openlayers::save($map);
       unset($form_state['item']->attachToMap);
