@@ -234,19 +234,21 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   protected function syncOptions() {
     // Synchronize this item's options with its the Collection.
-    foreach($this->getCollection()->getFlatList() as $object) {
-      $option = drupal_strtolower($object->getType()) . 's';
-      $options = array();
+    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
+      foreach($this->getCollection()->getFlatList($type) as $object) {
+        $option = drupal_strtolower($type . 's');
+        $options = array();
 
-      if (isset($this->options[$option])) {
-        if (!in_array($object->machine_name, $this->options[$option])) {
-          $options = array_merge((array) $this->options[$option], array($object->machine_name));
+        if (isset($this->options[$option])) {
+          if (!in_array($object->machine_name, $this->options[$option])) {
+            $options = array_merge((array) $this->options[$option], array($object->machine_name));
+          }
+        } else {
+          $options = array($object->machine_name);
         }
-      } else {
-        $options = array($object->machine_name);
-      }
-      if (!empty($options)) {
-        $this->options[$option] = $options;
+        if (!empty($options)) {
+          $this->options[$option] = $options;
+        }
       }
     }
   }

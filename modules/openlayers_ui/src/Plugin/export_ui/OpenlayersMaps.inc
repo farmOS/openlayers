@@ -639,12 +639,13 @@ function openlayers_map_form_interactions_submit($form, &$form_state) {
  */
 function openlayers_map_form_components($form, &$form_state) {
   $all_components = \Drupal\openlayers\Openlayers::loadAllExportable('Component');
-
-  if (!isset($form_state['item']->options['controls'])) {
-    $form_state['item']->options['controls'] = array();
-  }
-
   $data = array();
+
+  // See if we can get rid of these kinds of stuff
+  $form_state['item']->options += array(
+    'controls' => array(),
+    'components' => array()
+  );
 
   // Ensure the components are ordered correctly.
   foreach (array_reverse($form_state['item']->options['components']) as $machine_name) {
