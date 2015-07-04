@@ -77,7 +77,7 @@ function openlayers_source_form_start($form, &$form_state) {
 
   $options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Layer') as $machine_name => $layer) {
-    if (property_exists($layer, 'disabled') && ($layer->disabled == 1 || $layer->disabled == TRUE)) {
+    if (!$layer || (property_exists($layer, 'disabled') && ($layer->disabled == 1 || $layer->disabled == TRUE))) {
       continue;
     }
     $options[$machine_name] = $layer->name;
@@ -160,9 +160,10 @@ function openlayers_source_form_type_submit($form, &$form_state) {
  * Source options config form handler.
  */
 function openlayers_source_form_options($form, &$form_state) {
-  $source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item']);
-  $source->optionsForm($form, $form_state);
-  $form['options']['#tree'] = TRUE;
+  if ($source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item'])) {
+    $source->optionsForm($form, $form_state);
+    $form['options']['#tree'] = TRUE;
+  }
 
   return $form;
 }
@@ -171,8 +172,9 @@ function openlayers_source_form_options($form, &$form_state) {
  * Source options config form validation handler.
  */
 function openlayers_source_form_options_validate($form, &$form_state) {
-  $source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item']);
-  $source->optionsFormValidate($form, $form_state);
+  if ($source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item'])) {
+    $source->optionsFormValidate($form, $form_state);
+  }
 }
 
 /**
@@ -183,14 +185,15 @@ function openlayers_source_form_options_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if (!empty($form_state['item']->attachToLayer)) {
-    $layer = \Drupal\openlayers\Openlayers::load('layer', $form_state['item']->attachToLayer);
-    // We should add the object to the Collection so JS and CSS files are imported.
+  if (!empty($form_state['item']->attachToLayer) && $layer = \Drupal\openlayers\Openlayers::load('layer', $form_state['item']->attachToLayer)) {
+    // We should add the object to the Collection so JS and CSS files are
+    // imported.
     $layer->setOption('source', $form_state['item']->machine_name);
     \Drupal\openlayers\Openlayers::save($layer);
     unset($form_state['item']->attachToLayer);
   }
 
-  $source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item']);
-  $source->optionsFormSubmit($form, $form_state);
+  if ($source = \Drupal\openlayers\Openlayers::load('Source', $form_state['item'])) {
+    $source->optionsFormSubmit($form, $form_state);
+  }
 }

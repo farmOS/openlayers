@@ -74,13 +74,14 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
 }
 
 function openlayers_contextual_links_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
-  $map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item']);
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
 
-  $form['options']['ui']['contextualLinks'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Contextual links',
-    '#description' => t('Enable contextual links on the map.'),
-    '#default_value' => $map->getOption('contextualLinks', FALSE),
-    '#parents' => array('options', 'contextualLinks'),
-  );
+    $form['options']['ui']['contextualLinks'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Contextual links',
+      '#description' => t('Enable contextual links on the map.'),
+      '#default_value' => $map->getOption('contextualLinks', FALSE),
+      '#parents' => array('options', 'contextualLinks'),
+    );
+  }
 }

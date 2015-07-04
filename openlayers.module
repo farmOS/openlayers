@@ -205,8 +205,9 @@ function openlayers_element_info() {
  */
 function openlayers_element_process_callback($element, $form_state, $complete_form) {
   /* @var \Drupal\openlayers\Types\Map $map */
-  $map = \Drupal\openlayers\Openlayers::load('Map', $element['#map']);
-  $element['map'] = $map->build();
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $element['#map'])) {
+    $element['map'] = $map->build();
+  }
 
   return $element;
 }
@@ -217,8 +218,9 @@ function openlayers_element_process_callback($element, $form_state, $complete_fo
 function openlayers_element_prerender_callback($element) {
   if (empty($element['map'])) {
     /* @var \Drupal\openlayers\Types\Map $map */
-    $map = \Drupal\openlayers\Openlayers::load('Map', $element['#map']);
-    $element['map'] = $map->build();
+    if ($map = \Drupal\openlayers\Openlayers::load('Map', $element['#map'])) {
+      $element['map'] = $map->build();
+    }
   }
 
   return $element;

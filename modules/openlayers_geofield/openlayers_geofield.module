@@ -53,10 +53,12 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   // Get preset options, filtered to those which have the GeoField source.
   $map_options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $machine_name => $map) {
-    foreach ($map->getObjects('source') as $source) {
-      // TODO: add getSource() to Object and Object Interface.
-      if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-        $map_options[$machine_name] = $map->name;
+    if ($map) {
+      foreach ($map->getObjects('source') as $source) {
+        // TODO: add getSource() to Object and Object Interface.
+        if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
+          $map_options[$machine_name] = $map->name;
+        }
       }
     }
   }
@@ -111,8 +113,9 @@ function openlayers_geofield_field_formatter_settings_summary($field, $instance,
   }
 
   if ($display['type'] == 'openlayers_geofield' && !empty($settings['map_preset'])) {
-    $map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset']);
-    $summary[] = t('Openlayers Map: @data', array('@data' => $map->name));
+    if ($map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset'])) {
+      $summary[] = t('Openlayers Map: @data', array('@data' => $map->name));
+    }
   }
 
   if (!empty($settings['address']) && $settings['address']) {
@@ -201,20 +204,21 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
 
   // Load map and set features.
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
-  $map = \Drupal\openlayers\Openlayers::load('Map', $map_name);
-  $geofield_source = NULL;
-  foreach ($map->getObjects('source') as $source) {
-    if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-      $geofield_source = $source;
-      $source->setOption('features', $features);
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) {
+    $geofield_source = NULL;
+    foreach ($map->getObjects('source') as $source) {
+      if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
+        $geofield_source = $source;
+        $source->setOption('features', $features);
+      }
     }
-  }
-  if (!isset($geofield_source)) {
-    drupal_set_message(t('Trying to render a geofield formatter on a map without the geofield source.'), 'error');
-  }
+    if (!isset($geofield_source)) {
+      drupal_set_message(t('Trying to render a geofield formatter on a map without the geofield source.'), 'error');
+    }
 
-  // Build map.
-  $element[0] = $map->build();
+    // Build map.
+    $element[0] = $map->build();
+  }
   return $element;
 }
 
@@ -261,9 +265,11 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $maps = \Drupal\openlayers\Openlayers::loadAll('Map');
   $map_options = array();
   foreach ($maps as $machine_name => $map) {
-    foreach ($map->getObjects('component') as $component) {
-      if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
-        $map_options[$machine_name] = $map->name;
+    if ($map) {
+      foreach ($map->getObjects('component') as $component) {
+        if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
+          $map_options[$machine_name] = $map->name;
+        }
       }
     }
   }
@@ -386,7 +392,10 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
 
   $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield';
 
-  $map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id);
+  if (!($map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id))) {
+    // If the map couldn't be load we can't do a thing.
+    return NULL;
+  }
   foreach ($map->getObjects('component') as $component) {
     // Configure component based on the widget settings.
     if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {

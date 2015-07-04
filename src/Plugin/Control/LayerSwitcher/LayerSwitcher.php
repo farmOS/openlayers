@@ -51,16 +51,17 @@ class LayerSwitcher extends Control {
 
     $labels = $this->getOption('layer_labels', array());
     foreach ((array) $this->getOption('layers') as $i => $machine_name) {
-      $map_layer = Openlayers::load('Layer', $machine_name);
-      $label = check_plain($map_layer->name);
-      if (isset($labels[$machine_name])) {
-        $label = $labels[$machine_name];
+      if ($map_layer = Openlayers::load('Layer', $machine_name)) {
+        $label = check_plain($map_layer->name);
+        if (isset($labels[$machine_name])) {
+          $label = $labels[$machine_name];
+        }
+        $form['options']['layer_labels'][$machine_name] = array(
+          '#type' => 'textfield',
+          '#title' => t('Label for layer @label:', array('@label' => $map_layer->name)),
+          '#default_value' => $label,
+        );
       }
-      $form['options']['layer_labels'][$machine_name] = array(
-        '#type' => 'textfield',
-        '#title' => t('Label for layer @label:', array('@label' => $map_layer->name)),
-        '#default_value' => $label,
-      );
     }
     // @TODO Add configuration for initial visibility. (Adjust JS accordingly)
     // @TODO Add configuration for ordering?

@@ -47,7 +47,9 @@ class Openlayers {
     $options = array();
     $type = drupal_ucfirst(drupal_strtolower($type));
     foreach (Openlayers::loadAllExportable($type) as $machine_name => $data) {
-      $options[$machine_name] = $data->name;
+      if ($data) {
+        $options[$machine_name] = $data->name;
+      }
     }
     return $options;
   }
@@ -119,6 +121,11 @@ class Openlayers {
     }
 
     if (is_array($configuration) && isset($configuration['factory_service'])) {
+      // Bail out if the base service can't be found - likely due a registry
+      // rebuild.
+      if (!\Drupal::hasService('openlayers.Types')) {
+        return NULL;
+      }
       list($plugin_manager_id, $plugin_id) = explode(':', $configuration['factory_service'], 2);
       if (\Drupal::hasService($plugin_manager_id)) {
         $plugin_manager = \Drupal::service($plugin_manager_id);
@@ -167,8 +174,10 @@ class Openlayers {
    */
   public static function loadAll($object_type = NULL) {
     $objects = array();
-    foreach(Openlayers::loadAllExportable($object_type) as $exportable) {
-      $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
+    foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
+      if ($exportable) {
+        $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
+      }
     }
     return $objects;
   }

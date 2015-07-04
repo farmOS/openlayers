@@ -128,9 +128,10 @@ function openlayers_style_form_type_submit($form, &$form_state) {
  * Style options config form handler.
  */
 function openlayers_style_form_options($form, &$form_state) {
-  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
-  $style->optionsForm($form, $form_state);
-  $form['options']['#tree'] = TRUE;
+  if ($style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item'])) {
+    $style->optionsForm($form, $form_state);
+    $form['options']['#tree'] = TRUE;
+  }
 
   return $form;
 }
@@ -139,8 +140,9 @@ function openlayers_style_form_options($form, &$form_state) {
  * Style options config form validation handler.
  */
 function openlayers_style_form_options_validate($form, &$form_state) {
-  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
-  $style->optionsFormValidate($form, $form_state);
+  if ($style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item'])) {
+    $style->optionsFormValidate($form, $form_state);
+  }
 }
 
 /**
@@ -150,6 +152,7 @@ function openlayers_style_form_options_submit($form, &$form_state) {
   if (isset($form_state['values']['options'])) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
-  $style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item']);
-  $style->optionsFormSubmit($form, $form_state);
+  if ($style = \Drupal\openlayers\Openlayers::load('Style', $form_state['item'])) {
+    $style->optionsFormSubmit($form, $form_state);
+  }
 }

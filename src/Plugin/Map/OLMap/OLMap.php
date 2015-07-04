@@ -49,22 +49,23 @@ class OLMap extends Map {
     );
 
     if ($this->machine_name != Config::get('openlayers.edit_view_map')) {
-      $map = Openlayers::load('Map', Config::get('openlayers.edit_view_map'));
-      if ($view = $this->getOption('view')) {
-        // Don't apply min / max zoom settings to this map to avoid lock-in.
-        $view['minZoom'] = 0;
-        $view['maxZoom'] = 0;
-        // Same goes for limit extent.
-        $view['limit_extent'] = 0;
+      if ($map = Openlayers::load('Map', Config::get('openlayers.edit_view_map'))) {
+        if ($view = $this->getOption('view')) {
+          // Don't apply min / max zoom settings to this map to avoid lock-in.
+          $view['minZoom'] = 0;
+          $view['maxZoom'] = 0;
+          // Same goes for limit extent.
+          $view['limit_extent'] = 0;
 
-        $map->setOption('view', $view);
+          $map->setOption('view', $view);
+        }
+
+        $form['options']['view']['map'] = array(
+          '#type' => 'openlayers',
+          '#description' => $map->description,
+          '#map' => $map,
+        );
       }
-
-      $form['options']['view']['map'] = array(
-        '#type' => 'openlayers',
-        '#description' => $map->description,
-        '#map' => $map,
-      );
     }
 
     $form['options']['view']['center'] = array(
