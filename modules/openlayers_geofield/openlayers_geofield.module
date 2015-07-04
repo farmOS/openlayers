@@ -53,7 +53,7 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   // Get preset options, filtered to those which have the GeoField source.
   $map_options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $machine_name => $map) {
-    if ($map) {
+    if (is_object($map)) {
       foreach ($map->getObjects('source') as $source) {
         // TODO: add getSource() to Object and Object Interface.
         if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
@@ -113,7 +113,7 @@ function openlayers_geofield_field_formatter_settings_summary($field, $instance,
   }
 
   if ($display['type'] == 'openlayers_geofield' && !empty($settings['map_preset'])) {
-    if ($map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset'])) {
+    if (($map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset'])) == TRUE) {
       $summary[] = t('Openlayers Map: @data', array('@data' => $map->name));
     }
   }
@@ -204,7 +204,7 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
 
   // Load map and set features.
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
     $geofield_source = NULL;
     foreach ($map->getObjects('source') as $source) {
       if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
@@ -265,7 +265,7 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $maps = \Drupal\openlayers\Openlayers::loadAll('Map');
   $map_options = array();
   foreach ($maps as $machine_name => $map) {
-    if ($map) {
+    if (is_object($map)) {
       foreach ($map->getObjects('component') as $component) {
         if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
           $map_options[$machine_name] = $map->name;
@@ -392,7 +392,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
 
   $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield';
 
-  if (!($map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id))) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id)) == FALSE) {
     // If the map couldn't be load we can't do a thing.
     return NULL;
   }

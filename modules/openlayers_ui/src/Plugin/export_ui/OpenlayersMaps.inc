@@ -122,7 +122,7 @@ function openlayers_map_form_settings($form, &$form_state) {
   if (!isset($form_state['item']->factory_service)) {
     $form_state['item']->factory_service = 'openlayers.Map:OLMap';
   }
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
     $map->optionsForm($form, $form_state);
     $form['options']['#tree'] = TRUE;
   }
@@ -142,7 +142,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $item)) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $item)) == TRUE) {
     $map->optionsFormValidate($form, $form_state);
   }
 }
@@ -159,7 +159,7 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
     $map->optionsFormSubmit($form, $form_state);
   }
 }
@@ -169,13 +169,13 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
  */
 function openlayers_map_form_layers($form, &$form_state) {
   $all_layers = \Drupal\openlayers\Openlayers::loadAllExportable('Layer');
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == FALSE) {
     return;
   }
 
   $layers = array();
   foreach ($map->getObjects('layer') as $layer) {
-    if (isset($all_layers[$layer->machine_name])) {
+    if (is_object($layer) && isset($all_layers[$layer->machine_name])) {
       $layers[$layer->machine_name] = $all_layers[$layer->machine_name];
       $layers[$layer->machine_name]->enable = 1;
       unset($all_layers[$layer->machine_name]);
@@ -189,7 +189,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   $i = 0;
   /* @var \Drupal\openlayers\Types\Layer $layer */
   foreach ($layers as $machine_name => $layer) {
-    if ($layer) {
+    if (is_object($layer)) {
       $data[$machine_name] = array(
         'name' => $layer->name,
         'machine_name' => $layer->machine_name,
@@ -299,7 +299,7 @@ function openlayers_map_form_layers($form, &$form_state) {
 
   $sources = array();
   /* @var \Drupal\openlayers\Types\Map $map */
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
     foreach ($map->getObjects('source') as $source) {
       if (isset($all_sources[$source->machine_name])) {
         $sources[$source->machine_name] = $all_sources[$source->machine_name];
@@ -315,7 +315,7 @@ function openlayers_map_form_layers($form, &$form_state) {
 
   $i = 0;
   foreach ($sources as $machine_name => $source) {
-    if ($source) {
+    if (is_object($source)) {
       $data[$machine_name] = array(
         'name' => $source->name,
         'machine_name' => $source->machine_name,
@@ -415,7 +415,7 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
       $layers_enabled[$data['weight']] = $id;
 
       //Update the layer style.
-      if ($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) {
+      if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
         if (!is_null($data['style'])) {
           if ($data['style'] != $layer->getOption('style')) {
             $layer->setOption('style', $data['style']);
@@ -468,7 +468,7 @@ function openlayers_map_form_controls($form, &$form_state) {
 
   $i = 0;
   foreach ($all_controls as $machine_name => $control) {
-    if ($control) {
+    if (is_object($control)) {
       $data[$machine_name] = array(
         'name' => $control->name,
         'machine_name' => $control->machine_name,
@@ -590,7 +590,7 @@ function openlayers_map_form_interactions($form, &$form_state) {
 
   $rows = array();
   foreach ($all_interactions as $machine_name => $interaction) {
-    if ($interaction) {
+    if (is_object($interaction)) {
       $rows[$machine_name] = array(
         'name' => $interaction->name,
         'machine_name' => $interaction->machine_name,
@@ -656,7 +656,7 @@ function openlayers_map_form_components($form, &$form_state) {
 
   $i = 0;
   foreach ($all_components as $machine_name => $component) {
-    if ($component) {
+    if (is_object($component)) {
       $data[$machine_name] = array(
         'name' => $component->name,
         'machine_name' => $component->machine_name,
@@ -777,7 +777,7 @@ function openlayers_map_form_styles_submit($form, &$form_state) {
  * Map preview form handler.
  */
 function openlayers_map_form_preview($form, &$form_state) {
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
     $form['preview'] = $map->build();
   }
   return $form;

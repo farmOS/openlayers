@@ -75,7 +75,7 @@ function openlayers_content_types_openlayers_content_type_admin_info($subtype, $
   $map_name = t('Unknown');
   try {
     /** @var Drupal\openlayers\Types\Map $map */
-    if ($map = \Drupal\openlayers\Openlayers::load('Map', $conf['map'])) {
+    if (($map = \Drupal\openlayers\Openlayers::load('Map', $conf['map'])) == TRUE) {
       $map_name = $map->name;
     }
   }

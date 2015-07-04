@@ -47,7 +47,7 @@ class Openlayers {
     $options = array();
     $type = drupal_ucfirst(drupal_strtolower($type));
     foreach (Openlayers::loadAllExportable($type) as $machine_name => $data) {
-      if ($data) {
+      if (is_object($data)) {
         $options[$machine_name] = $data->name;
       }
     }
@@ -175,7 +175,7 @@ class Openlayers {
   public static function loadAll($object_type = NULL) {
     $objects = array();
     foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
-      if ($exportable) {
+      if (is_object($exportable)) {
         $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
       }
     }

@@ -5,7 +5,7 @@
  */
 
 function _openlayers_services_retrieve($name) {
-  if ($map = \Drupal\openlayers\Openlayers::load('Map', $name)) {
+  if (($map = \Drupal\openlayers\Openlayers::load('Map', $name)) == TRUE) {
     $build = $map->build();
     $render = drupal_render($build);
     $js = drupal_get_js();
@@ -21,5 +21,5 @@ function _openlayers_services_retrieve($name) {
 
 function _openlayers_services_access($operation, $map) {
   $map = \Drupal\openlayers\Openlayers::load('Map', $map[0]);
-  return $map && (bool) $map->getOption('provideIframe', FALSE);
+  return $map == TRUE && (bool) $map->getOption('provideIframe', FALSE);
 }
