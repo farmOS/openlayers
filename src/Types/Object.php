@@ -339,9 +339,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $parents = array();
 
     foreach (Openlayers::loadAll('Map') as $map) {
-      foreach ($map->getCollection()->getFlatList() as $object) {
-        if ($object->machine_name == $this->machine_name) {
-          $parents[$map->machine_name] = $map;
+      if ($map) {
+        foreach ($map->getCollection()->getFlatList() as $object) {
+          if ($object->machine_name == $this->machine_name) {
+            $parents[$map->machine_name] = $map;
+          }
         }
       }
     }

@@ -14,7 +14,7 @@
 function openlayers_ui_admin_settings($form, &$form_state) {
   $options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
-    if (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE)) {
+    if (!$data || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
       continue;
     }
     $options[$machine_name] = $data->name;

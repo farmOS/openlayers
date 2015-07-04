@@ -7,7 +7,7 @@ function openlayers_block_block_info() {
   $blocks = array();
 
   foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
-    if ($map->getOption('provideBlock', FALSE)) {
+    if ($map && $map->getOption('provideBlock', FALSE)) {
       $key = _openlayers_block_get_block_id($map->machine_name);
       $blocks[$key]['info'] = t('OpenLayers block for @map_name', array('@map_name' => $map->name));
     }
@@ -62,7 +62,7 @@ function _openlayers_block_get_block_id($map_machine_name) {
  */
 function _openlayers_block_get_map_name($delta) {
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $map) {
-    if (_openlayers_block_get_block_id($map->machine_name) == $delta) {
+    if ($map && _openlayers_block_get_block_id($map->machine_name) == $delta) {
       return $map->machine_name;
     }
   }
@@ -70,13 +70,13 @@ function _openlayers_block_get_map_name($delta) {
 }
 
 function openlayers_block_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
-  $map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item']);
-
-  $form['options']['ui']['provideBlock'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Provide Drupal block for this map ?',
-    '#description' => t('Enable this to provide a Drupal block for this map.'),
-    '#default_value' => $map->getOption('provideBlock', FALSE),
-    '#parents' => array('options', 'provideBlock'),
-  );
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+    $form['options']['ui']['provideBlock'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Provide Drupal block for this map ?',
+      '#description' => t('Enable this to provide a Drupal block for this map.'),
+      '#default_value' => $map->getOption('provideBlock', FALSE),
+      '#parents' => array('options', 'provideBlock'),
+    );
+  }
 }

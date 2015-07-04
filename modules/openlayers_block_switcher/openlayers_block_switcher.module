@@ -25,11 +25,11 @@ function openlayers_block_switcher_block_info() {
 function openlayers_block_switcher_block_view($delta = '') {
   $block = array();
   /** @var \Drupal\openlayers\Plugin\Map\OLMap\OLMap $map */
-  $map = \Drupal\openlayers\Openlayers::load('Map', _olebs_get_map_name($delta));
-
-  $block['subject'] = $map->name;
-  $form = drupal_get_form('olebs_blockswitcher_form', $map);
-  $block['content'] = drupal_render($form);
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', _olebs_get_map_name($delta))) {
+    $block['subject'] = $map->name;
+    $form = drupal_get_form('olebs_blockswitcher_form', $map);
+    $block['content'] = drupal_render($form);
+  }
 
   return $block;
 }
@@ -47,7 +47,7 @@ function _olebs_get_maps_with_blockswitcher() {
 
   if (!isset($maps)) {
     foreach(\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
-      if ($map->getOption('provideBlockLayerSwitcher', FALSE) == TRUE) {
+      if ($map && $map->getOption('provideBlockLayerSwitcher', FALSE) == TRUE) {
         $maps[] = $map;
       }
     }
@@ -131,13 +131,13 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
 }
 
 function openlayers_block_switcher_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
-  $map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item']);
-
-  $form['options']['ui']['provideBlockLayerSwitcher'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Provide Drupal block layer switcher',
-    '#description' => t('Enable this to enable a Drupal block to display a layer switcher.'),
-    '#default_value' => $map->getOption('provideBlockLayerSwitcher', FALSE),
-    '#parents' => array('options', 'provideBlockLayerSwitcher'),
-  );
+  if ($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) {
+    $form['options']['ui']['provideBlockLayerSwitcher'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Provide Drupal block layer switcher',
+      '#description' => t('Enable this to enable a Drupal block to display a layer switcher.'),
+      '#default_value' => $map->getOption('provideBlockLayerSwitcher', FALSE),
+      '#parents' => array('options', 'provideBlockLayerSwitcher'),
+    );
+  }
 }

@@ -64,21 +64,22 @@ function openlayers_services_theme($existing, $type, $theme, $path) {
 }
 
 function openlayers_services_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
-  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+  if ($map = \Drupal\openlayers\Openlayers::load('map', $form_state['item'])) {
 
-  $form['options']['ui']['provideIframe'] = array(
-    '#type' => 'checkbox',
-    '#title' => 'Provide iframe of this map ?',
-    '#description' => t('Enable this to provide this map as an iframe through the service module.'),
-    '#default_value' => $map->getOption('provideIframe', FALSE),
-    '#parents' => array('options', 'provideIframe'),
-  );
+    $form['options']['ui']['provideIframe'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Provide iframe of this map ?',
+      '#description' => t('Enable this to provide this map as an iframe through the service module.'),
+      '#default_value' => $map->getOption('provideIframe', FALSE),
+      '#parents' => array('options', 'provideIframe'),
+    );
+  }
 }
 
 function openlayers_services_form_openlayers_map_form_preview_alter(&$form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  if ((bool) $map->getOption('provideIframe', FALSE) == FALSE) {
+  if (!$map || (bool) $map->getOption('provideIframe', FALSE) == FALSE) {
     return;
   }
 
