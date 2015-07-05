@@ -406,44 +406,44 @@ function openlayers_map_form_layers($form, &$form_state) {
  * Map layers config form submit handler.
  */
 function openlayers_map_form_layers_submit($form, &$form_state) {
-  $layers = $form_state['values']['layers'];
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  $layers_enabled = array();
-  foreach ($layers as $id => $data) {
-    if ($data['enable'] == 1) {
-      //Update the weight.
-      $layers_enabled[$data['weight']] = $id;
+  $layers_enabled = array_filter($form_state['values']['layers'], function($item) {
+    return (bool) $item['enable'];
+  });
 
-      //Update the layer style.
-      if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
-        if (!is_null($data['style'])) {
-          if ($data['style'] != $layer->getOption('style')) {
-            $layer->setOption('style', $data['style']);
-          }
+  foreach ($layers_enabled as $id => $data) {
+    //Update the layer style.
+    if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
+      if (!is_null($data['style'])) {
+        if ($data['style'] != $layer->getOption('style')) {
+          $layer->setOption('style', $data['style']);
         }
-        else {
-          $layer->clearOption('style');
-        }
-        \Drupal\openlayers\Openlayers::save($layer);
       }
+      else {
+        $layer->clearOption('style');
+      }
+      \Drupal\openlayers\Openlayers::save($layer);
     }
   }
 
-  ksort($layers_enabled);
-
-  $sources = $form_state['values']['sources'];
-
-  $sources_enabled = array();
-  foreach ($sources as $id => $data) {
-    if ($data['enable'] == 1) {
-      $sources_enabled[$data['weight']] = $id;
-    }
+  $map->getCollection()->clear(array('layer'));
+  foreach($layers_enabled as $layer => $data) {
+    $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
+    $map->getCollection()->append($layer);
   }
 
-  ksort($sources_enabled);
+  $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
+    return (bool) $item['enable'];
+  });
 
-  $form_state['item']->options['layers'] = array_values($layers_enabled);
-  $form_state['item']->options['sources'] = array_values($sources_enabled);
+  $map->getCollection()->clear(array('source'));
+  foreach($sources_enabled as $source => $data) {
+    $source = \Drupal\openlayers\Openlayers::load('source', $source);
+    $map->getCollection()->append($source);
+  }
+
+  $form_state['item'] = $map->getExport();
 }
 
 /**

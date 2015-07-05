@@ -213,8 +213,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getOptions() {
-    $this->syncOptions();
-    return $this->options;
+    return $this->syncOptions();
   }
 
   /**
@@ -230,27 +229,27 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * Synchronize the object options with the Collection of objects it has.
    *
-   * @return void
+   * @return array
    */
   protected function syncOptions() {
+    $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
+    $options = $this->options;
+
+    foreach(Openlayers::getPluginTypes() as $type) {
+      unset($options[$type.'s']);
+    }
+
     // Synchronize this item's options with its the Collection.
     foreach(Openlayers::getPluginTypes(array('map')) as $type) {
-      foreach($this->getCollection()->getFlatList($type) as $object) {
-        $option = drupal_strtolower($type . 's');
-        $options = array();
-
-        if (isset($this->options[$option])) {
-          if (!in_array($object->machine_name, $this->options[$option])) {
-            $options = array_merge((array) $this->options[$option], array($object->machine_name));
-          }
-        } else {
-          $options = array($object->machine_name);
-        }
-        if (!empty($options)) {
-          $this->options[$option] = $options;
-        }
+      $option = drupal_strtolower($type);
+      if (isset($export[$type])) {
+        $options[$option . 's'] = $export[$type];
       }
     }
+
+    $this->options = $options;
+
+    return $this->options;
   }
 
   /**

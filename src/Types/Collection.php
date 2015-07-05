@@ -58,6 +58,17 @@ class Collection extends PluginBase {
   }
 
   /**
+   * Remove object type.
+   *
+   * @param array $types
+   */
+  public function clear(array $types = array()) {
+    foreach($types as $type) {
+      unset($this->objects[$type]);
+    }
+  }
+
+  /**
    * Returns an array with all the attachments of the collection objects.
    *
    * @return array
