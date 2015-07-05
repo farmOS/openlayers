@@ -814,7 +814,7 @@ function openlayers_map_form_styles($form, &$form_state) {
     '#type' => 'tableselect',
     '#header' => $header,
     '#options' => $rows,
-    '#default_value' => drupal_map_assoc($export->options['styles']),
+    '#default_value' => isset($export->options['styles']) ? drupal_map_assoc($export->options['styles']) : array(),
   );
 
   return $form;
