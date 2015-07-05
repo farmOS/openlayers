@@ -776,6 +776,47 @@ function openlayers_map_form_components_submit($form, &$form_state) {
  * Map styles config form handler.
  */
 function openlayers_map_form_styles($form, &$form_state) {
+  $all_styles = \Drupal\openlayers\Openlayers::loadAllExportable('Style');
+
+  $header = array(
+    'name' => t('Name'),
+    'machine_name' => t('Machine name'),
+    'description' => t('Description'),
+    'operations' => t('Operations'),
+  );
+
+  $rows = array();
+  foreach ($all_styles as $machine_name => $style) {
+    if (is_object($style)) {
+      $rows[$machine_name] = array(
+        'name' => $style->name,
+        'machine_name' => $style->machine_name,
+        'description' => $style->description,
+        'operations' => l(
+          t('Edit'),
+          'admin/structure/openlayers/styles/list/' . $machine_name . '/edit/options',
+          array(
+            'query' => array(
+              'destination' => current_path(),
+            ),
+          )
+        ),
+      );
+    }
+  }
+
+  $form['options']['#tree'] = TRUE;
+
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+  $export = $map->getExport();
+
+  $form['options']['styles'] = array(
+    '#type' => 'tableselect',
+    '#header' => $header,
+    '#options' => $rows,
+    '#default_value' => drupal_map_assoc($export->options['styles']),
+  );
+
   return $form;
 }
 
@@ -783,7 +824,17 @@ function openlayers_map_form_styles($form, &$form_state) {
  * Map styles config form submit handler.
  */
 function openlayers_map_form_styles_submit($form, &$form_state) {
-  // $form_state['item']->options = $form_state['item']->options, (array) $form_state['values']['options']);
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+
+  $styles_enabled = array_filter($form_state['values']['options']['styles']);
+
+  $map->getCollection()->clear(array('style'));
+  foreach ($styles_enabled as $style => $data) {
+    $style = \Drupal\openlayers\Openlayers::load('style', $style);
+    $map->getCollection()->append($style);
+  }
+
+  $form_state['item'] = $map->getExport();
 }
 
 /**
