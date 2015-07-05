@@ -30,7 +30,7 @@ class Collection extends PluginBase {
   /**
    * Add object to this collection.
    *
-   * @param Object $object
+   * @param ObjectInterface $object
    *   Object instance to add to this collection.
    */
   public function append(ObjectInterface $object) {
@@ -39,7 +39,7 @@ class Collection extends PluginBase {
     $this->objects[$type][$object->machine_name] = $object;
     // If the dependency system is working, we don't need this.
     uasort($this->objects[$type], function($a, $b) {
-      return strcmp($a->getWeight(), $b->getWeight());
+      return $a->getWeight() - $b->getWeight();
     });
   }
 

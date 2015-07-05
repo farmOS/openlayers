@@ -434,13 +434,13 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function setWeight($weight) {
-    $this->weight = (int) $weight;
+    $this->weight = $weight;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getWeight() {
-    return $this->weight;
+    return intval($this->weight);
   }
 }

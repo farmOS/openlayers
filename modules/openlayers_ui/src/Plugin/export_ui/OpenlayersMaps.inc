@@ -177,7 +177,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   foreach ($map->getObjects('layer') as $layer) {
     if (is_object($layer) && isset($all_layers[$layer->machine_name])) {
       $layers[$layer->machine_name] = $all_layers[$layer->machine_name];
-      $layers[$layer->machine_name]->enable = 1;
+      $layers[$layer->machine_name]->enabled = 1;
       unset($all_layers[$layer->machine_name]);
     }
   }
@@ -195,7 +195,7 @@ function openlayers_map_form_layers($form, &$form_state) {
         'machine_name' => $layer->machine_name,
         'factory_service' => $layer->factory_service,
         'weight' => $i++,
-        'enable' => isset($layer->enable) ? $layer->enable : 0,
+        'enabled' => isset($layer->enabled) ? $layer->enabled : 0,
         'default' => 1,
         'style' => isset($layer->options['style']) ? $layer->options['style'] : NULL
       );
@@ -224,8 +224,8 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#type' => 'checkbox',
             '#title' => t('Enable'),
             '#title_display' => 'invisible',
-            '#default_value' => $entry['enable'],
-            '#parents' => array('layers', $id, 'enable'),
+            '#default_value' => $entry['enabled'],
+            '#parents' => array('layers', $id, 'enabled'),
           )),
         array(
           'data' => array(
@@ -303,7 +303,7 @@ function openlayers_map_form_layers($form, &$form_state) {
     foreach ($map->getObjects('source') as $source) {
       if (isset($all_sources[$source->machine_name])) {
         $sources[$source->machine_name] = $all_sources[$source->machine_name];
-        $sources[$source->machine_name]->enable = 1;
+        $sources[$source->machine_name]->enabled = 1;
         unset($all_sources[$source->machine_name]);
       }
     }
@@ -321,7 +321,7 @@ function openlayers_map_form_layers($form, &$form_state) {
         'machine_name' => $source->machine_name,
         'factory_service' => $source->factory_service,
         'weight' => $i++,
-        'enable' => isset($source->enable) ? $source->enable : 0,
+        'enabled' => isset($source->enabled) ? $source->enabled : 0,
         'default' => 1,
       );
     }
@@ -348,8 +348,8 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#type' => 'checkbox',
             '#title' => t('Enable'),
             '#title_display' => 'invisible',
-            '#default_value' => $entry['enable'],
-            '#parents' => array('sources', $id, 'enable'),
+            '#default_value' => $entry['enabled'],
+            '#parents' => array('sources', $id, 'enabled'),
           )),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
@@ -409,7 +409,7 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
   $layers_enabled = array_filter($form_state['values']['layers'], function($item) {
-    return (bool) $item['enable'];
+    return (bool) $item['enabled'];
   });
 
   foreach ($layers_enabled as $id => $data) {
@@ -430,16 +430,18 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   $map->getCollection()->clear(array('layer'));
   foreach($layers_enabled as $layer => $data) {
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
+    $layer->setWeight($data['weight']);
     $map->getCollection()->append($layer);
   }
 
   $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
-    return (bool) $item['enable'];
+    return (bool) $item['enabled'];
   });
 
   $map->getCollection()->clear(array('source'));
   foreach($sources_enabled as $source => $data) {
     $source = \Drupal\openlayers\Openlayers::load('source', $source);
+    $source->setWeight($data['weight']);
     $map->getCollection()->append($source);
   }
 
@@ -474,7 +476,7 @@ function openlayers_map_form_controls($form, &$form_state) {
         'machine_name' => $control->machine_name,
         'description' => $control->description,
         'weight' => $i++,
-        'enable' => (int) in_array($control->machine_name, $form_state['item']->options['controls']),
+        'enabled' => (int) in_array($control->machine_name, $form_state['item']->options['controls']),
         'default' => 1,
       );
     }
@@ -508,8 +510,8 @@ function openlayers_map_form_controls($form, &$form_state) {
             '#type' => 'checkbox',
             '#title' => t('Enable'),
             '#title_display' => 'invisible',
-            '#default_value' => $entry['enable'],
-            '#parents' => array('controls', $id, 'enable'),
+            '#default_value' => $entry['enabled'],
+            '#parents' => array('controls', $id, 'enabled'),
           )
         ),
         check_plain($entry['name']),
@@ -562,17 +564,20 @@ function openlayers_map_form_controls($form, &$form_state) {
  * Map controls config form submit handler.
  */
 function openlayers_map_form_controls_submit($form, &$form_state) {
-  $controls = $form_state['values']['controls'];
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  $controls_enabled = array();
-  foreach ($controls as $id => $data) {
-    if (!empty($data['enable'])) {
-      $controls_enabled[$data['weight']] = $id;
-    }
+  $controls_enabled = array_filter($form_state['values']['controls'], function($item) {
+    return (bool) $item['enabled'];
+  });
+
+  $map->getCollection()->clear(array('control'));
+  foreach($controls_enabled as $control => $data) {
+    $control = \Drupal\openlayers\Openlayers::load('control', $control);
+    $control->setWeight($data['weight']);
+    $map->getCollection()->append($control);
   }
-  ksort($controls_enabled);
 
-  $form_state['item']->options['controls'] = array_values($controls_enabled);
+  $form_state['item'] = $map->getExport();
 }
 
 /**
@@ -628,10 +633,17 @@ function openlayers_map_form_interactions($form, &$form_state) {
  * Map interactions config form submit handler.
  */
 function openlayers_map_form_interactions_submit($form, &$form_state) {
-  if (isset($form_state['values']['options'])) {
-    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+
+  $interactions_enabled = array_filter($form_state['values']['options']['interactions']);
+
+  $map->getCollection()->clear(array('interaction'));
+  foreach ($interactions_enabled as $interaction => $data) {
+    $interaction = \Drupal\openlayers\Openlayers::load('interaction', $interaction);
+    $map->getCollection()->append($interaction);
   }
-  $form_state['item']->options['interactions'] = array_filter(array_values($form_state['values']['options']['interactions']));
+
+  $form_state['item'] = $map->getExport();
 }
 
 /**
@@ -663,7 +675,7 @@ function openlayers_map_form_components($form, &$form_state) {
         'machine_name' => $component->machine_name,
         'description' => $component->description,
         'weight' => $i++,
-        'enable' => (int) in_array($component->machine_name, $form_state['item']->options['components']),
+        'enabled' => (int) in_array($component->machine_name, $form_state['item']->options['components']),
         'default' => 1,
       );
     }
@@ -691,7 +703,7 @@ function openlayers_map_form_components($form, &$form_state) {
             '#type' => 'checkbox',
             '#title' => t('Enable'),
             '#title_display' => 'invisible',
-            '#default_value' => $entry['enable'],
+            '#default_value' => $entry['enabled'],
             '#parents' => array('components', $id, 'enabled'),
           )),
         check_plain($entry['name']),
@@ -744,20 +756,20 @@ function openlayers_map_form_components($form, &$form_state) {
  * Map components config form submit handler.
  */
 function openlayers_map_form_components_submit($form, &$form_state) {
-  if (isset($form_state['values']['options'])) {
-    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
-  }
-  $components = $form_state['values']['components'];
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  $components_enabled = array();
-  foreach ($components as $id => $data) {
-    if (!empty($data['enabled'])) {
-      $components_enabled[$data['weight']] = $id;
-    }
-  }
-  ksort($components_enabled);
+  $components_enabled = array_filter($form_state['values']['components'], function ($item) {
+    return (bool) $item['enabled'];
+  });
 
-  $form_state['item']->options['components'] = array_values($components_enabled);
+  $map->getCollection()->clear(array('component'));
+  foreach ($components_enabled as $component => $data) {
+    $component = \Drupal\openlayers\Openlayers::load('component', $component);
+    $component->setWeight($data['weight']);
+    $map->getCollection()->append($component);
+  }
+
+  $form_state['item'] = $map->getExport();
 }
 
 /**
@@ -789,14 +801,4 @@ function openlayers_map_form_preview($form, &$form_state) {
  */
 function openlayers_map_form_preview_submit($form, &$form_state) {
 
-}
-
-/**
- * Helper function to sort an array by item weight.
- */
-function _openlayers_maps_sort_by_weight($a, $b) {
-  if (isset($a['weight']) && isset($b['weight'])) {
-    return $a['weight'] < $b['weight'] ? -1 : 1;
-  }
-  return 0;
 }
