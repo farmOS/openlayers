@@ -1039,7 +1039,6 @@ function openlayers_examples_default_openlayers_maps() {
   $ol_map->options = array(
     'width' => 'auto',
     'height' => '300px',
-    'provideBlockLayerSwitcher' => 0,
     'view' => array(
       'center' => array(
         'lat' => '0',

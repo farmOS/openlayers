@@ -34,7 +34,7 @@ Drupal.openlayers.pluginManager.register({
         }
       }
       var coordinates = graphToCoords(graph);
-      document.getElementById('count').innerHTML = coordinates.length;
+      document.getElementById('count').innerHTML = coordinates.length - 1;
       geometry.setCoordinates(coordinates);
       feature.setGeometry(geometry);
     }

@@ -25,7 +25,7 @@ class Fractal extends Component {
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
     $build = array(
       'map' => $build,
-      'Swipe' => array(
+      'Fractal' => array(
         '#type' => 'fieldset',
         '#title' => 'Example Fractal component',
         'info' => array(
@@ -33,8 +33,9 @@ class Fractal extends Component {
         ),
         'swipe' => array(
           '#type' => 'rangefield',
+          '#title' => 'Depth',
           '#min' => 0,
-          '#max' => 9,
+          '#max' => 10,
           '#step' => 1,
           '#value' => 5,
           '#attributes' => array(
@@ -43,13 +44,10 @@ class Fractal extends Component {
           ),
         ),
         'count' => array(
-          '#type' => 'container',
-          '#prefix' => 'Points: ',
-          '#attributes' => array(
-            'id' => 'count',
-            'style' => 'width: 100%;'
+          '#type' => 'item',
+          '#title' => 'Points',
+          '#markup' => '<span id="count"></span>'
           ),
-        ),
       ),
     );
   }
