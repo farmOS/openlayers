@@ -105,7 +105,7 @@ class OLMap extends Map {
       '#type' => 'checkbox',
       '#title' => t('Limit to extent'),
       '#description' => t('If enabled navigation on the map is limited to the give extent.'),
-      '#default_value' => $this->getOption(array('view', 'limit_extent'), FALSE),
+      '#default_value' => (bool) $this->getOption(array('view', 'extent'), FALSE),
     );
     $form['options']['view']['extent'] = array(
       '#type' => 'textfield',
@@ -134,6 +134,17 @@ class OLMap extends Map {
       '#default_value' => $this->getOption('renderer', 'canvas'),
       '#parents' => array('options', 'renderer'),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsFormSubmit($form, &$form_state) {
+    if ((bool) $form_state['values']['options']['view']['limit_extent'] == FALSE || empty(trim($form_state['values']['options']['view']['limit_extent']))) {
+      unset($form_state['item']->options['view']['extent']);
+      unset($form_state['item']->options['view']['limit_extent']);
+    }
+    parent::optionsFormSubmit($form, $form_state);
   }
 
   /**
