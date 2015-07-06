@@ -137,6 +137,18 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source = new stdClass();
   $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
   $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_kml_timezones';
+  $ol_source->name = 'Openlayers examples: Timezones (KML)';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.Source:KML';
+  $ol_source->options = array(
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/timezones.kml', array('absolute' => TRUE)),
+  );
+  $export['openlayers_examples_source_kml_timezones'] = $ol_source;
+
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
   $ol_source->machine_name = 'openlayers_examples_source_cluster';
   $ol_source->name = 'Openlayers examples: Cluster cities';
   $ol_source->description = '';

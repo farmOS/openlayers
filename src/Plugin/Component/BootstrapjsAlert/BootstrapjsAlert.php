@@ -23,7 +23,7 @@ class BootstrapjsAlert extends Component {
    */
   public function attached() {
     $attached = parent::attached();
-    $attached['libraries_load'][] = array('bootstrapjs');
+    $attached['libraries_load'][] = array('bootstrap');
     return $attached;
   }
 
@@ -32,7 +32,7 @@ class BootstrapjsAlert extends Component {
    */
   public function dependencies() {
     return array(
-      'bootstrapjs',
+      'bootstrap_library',
     );
   }
 

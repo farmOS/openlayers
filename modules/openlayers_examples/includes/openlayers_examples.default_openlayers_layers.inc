@@ -140,6 +140,18 @@ function openlayers_examples_default_openlayers_layers() {
 
   $ol_layer = new stdClass();
   $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_vector_kml_timezones';
+  $ol_layer->name = 'Openlayers examples: Timezones';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Vector';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_kml_timezones',
+    'style' => 'openlayers_style_default'
+  );
+  $export['openlayers_examples_layer_vector_kml_timezones'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_vector_kml_earthquakes_heatmap';
   $ol_layer->name = 'Openlayers examples: Earthquakes 2012 Heatmap';
   $ol_layer->description = '';

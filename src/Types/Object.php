@@ -221,7 +221,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   protected function syncOptions() {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
-    $options = $this->configuration['options'];
+    $options = isset($this->configuration['options']) ? $this->configuration['options'] : array();
 
     foreach(Openlayers::getPluginTypes() as $type) {
       unset($options[$type.'s']);
