@@ -1023,8 +1023,6 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'sources' => array(
       0 => 'openlayers_examples_source_stamen3',
-      1 => 'openlayers_examples_source_openstreetmap_mapnik',
-      2 => 'openlayers_source_mapquest_osm',
       3 => 'openlayers_examples_source_kml_timezones',
     ),
     'styles' => array(
