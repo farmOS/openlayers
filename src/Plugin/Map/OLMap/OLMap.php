@@ -101,18 +101,21 @@ class OLMap extends Map {
       '#default_value' => $this->getOption(array('view', 'maxZoom'), 0),
     );
     $form['options']['view']['limit_extent'] = array(
-      '#type' => 'checkbox',
+      '#type' => 'select',
       '#title' => t('Limit to extent'),
+      '#empty_option' => t('Disabled'),
+      '#empty_value' => '',
+      '#options' => array('custom' => 'Custom extent', 'projection' => 'Map projection'),
       '#description' => t('If enabled navigation on the map is limited to the give extent.'),
-      '#default_value' => (bool) $this->getOption(array('view', 'extent'), FALSE),
+      '#default_value' => $this->getOption(array('view', 'limit_extent'), FALSE),
     );
     $form['options']['view']['extent'] = array(
       '#type' => 'textfield',
       '#title' => t('Extent [minx, miny, maxx, maxy]'),
       '#default_value' => $this->getOption(array('view', 'extent'), ''),
       '#states' => array(
-        'invisible' => array(
-          ':input[name="options[view][limit_extent]"]' => array('checked' => FALSE),
+        'visible' => array(
+          ':input[name="options[view][limit_extent]"]' => array('value' => 'custom'),
         ),
       ),
     );
@@ -141,10 +144,8 @@ class OLMap extends Map {
   public function optionsFormSubmit($form, &$form_state) {
     $extent = trim($form_state['values']['options']['view']['limit_extent']);
 
-    if ((bool) $form_state['values']['options']['view']['limit_extent'] == FALSE || empty($extent)) {
+    if ($form_state['values']['options']['view']['limit_extent'] == 'custom' && empty($extent)) {
       unset($form_state['item']->options['view']['extent']);
-      unset($form_state['item']->options['view']['limit_extent']);
-    } else {
       unset($form_state['item']->options['view']['limit_extent']);
     }
 

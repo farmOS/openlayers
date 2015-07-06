@@ -9,13 +9,19 @@ Drupal.openlayers.pluginManager.register({
       center: coord,
       rotation: options.view.rotation * (Math.PI / 180),
       zoom: options.view.zoom,
-      projection: projection,
-      extent: projection.getExtent()
+      projection: projection
     };
 
-    // Check if a extent boundaries are set.
-    if (options.view.extent) {
-      view_opts.extent = ol.proj.transform(options.view.extent.replace(/\s*/ig, '').split(','), 'EPSG:4326', projection);
+    if (options.view.limit_extent) {
+      if (options.view.limit_extent == 'custom') {
+        // Check if a extent boundaries are set.
+        if (options.view.extent) {
+          view_opts.extent = ol.proj.transform(options.view.extent.replace(/\s*/ig, '').split(','), 'EPSG:4326', projection);
+        }
+      }
+      if (options.view.limit_extent == 'projection') {
+        view_opts.extent = projection.getExtent();
+      }
     }
 
     // Just use min / max zoom if set to a non 0 value to avoid problems.
@@ -32,11 +38,9 @@ Drupal.openlayers.pluginManager.register({
     // all interactions and controls available.
     options.interactions = [];
     options.controls = [];
+    options.target = data.opt.target;
 
-    var map = new ol.Map(options);
-    map.target = data.opt.target;
-
-    return map;
+    return new ol.Map(options);
   },
   attach: function(context, settings) {},
   detach: function(context, settings) {}
