@@ -60,7 +60,7 @@ Drupal.openlayers.pluginManager.register({
               map.beforeRender(pan, zoom);
             }
             var dataExtent = feature.getGeometry().getExtent();
-            map.getView().fitExtent(dataExtent, map.getSize());
+            map.getView().fit(dataExtent, map.getSize());
             if (data.opt.zoom != 'auto') {
               map.getView().setZoom(data.opt.zoom);
             } else {

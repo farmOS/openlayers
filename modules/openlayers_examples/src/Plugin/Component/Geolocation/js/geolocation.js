@@ -52,9 +52,11 @@ Drupal.openlayers.pluginManager.register({
         new ol.geom.Point(coordinates) : null);
     });
 
-    var featuresOverlay = new ol.FeatureOverlay({
+    var featuresOverlay = new ol.layer.Vector({
       map: map,
-      features: [accuracyFeature, positionFeature]
+      source: new ol.source.Vector({
+        features: [accuracyFeature, positionFeature]
+      })
     });
   }
 });
