@@ -146,7 +146,7 @@ function openlayers_examples_default_openlayers_layers() {
   $ol_layer->factory_service = 'openlayers.Layer:Vector';
   $ol_layer->options = array(
     'source' => 'openlayers_examples_source_kml_timezones',
-    'style' => 'openlayers_style_default'
+    'style' => 'openlayers_examples_style_timezones'
   );
   $export['openlayers_examples_layer_vector_kml_timezones'] = $ol_layer;
 

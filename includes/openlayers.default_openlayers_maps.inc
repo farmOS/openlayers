@@ -22,11 +22,11 @@ function openlayers_default_openlayers_maps() {
     'height' => '400px',
     'view' => array(
       'center' => array(
-        'lat' => '0',
-        'lon' => '0',
+        'lat' => 0,
+        'lon' => 0,
       ),
-      'rotation' => '0',
-      'zoom' => '2',
+      'rotation' => 0,
+      'zoom' => 2,
     ),
     'contextualLinks' => 0,
     'provideBlock' => 0,

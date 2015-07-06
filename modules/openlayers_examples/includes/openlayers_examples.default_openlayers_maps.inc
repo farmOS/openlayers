@@ -957,11 +957,8 @@ function openlayers_examples_default_openlayers_maps() {
         'lat' => '0',
         'lon' => '0',
       ),
-      'rotation' => '0',
+      'rotation' => 0,
       'zoom' => '2',
-      'minZoom' => '0',
-      'maxZoom' => '0',
-      'limit_extent' => 0,
     ),
     'renderer' => 'canvas',
     'layers' => array(

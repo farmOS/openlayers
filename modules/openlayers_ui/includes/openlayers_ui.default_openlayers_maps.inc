@@ -22,11 +22,11 @@ function openlayers_ui_default_openlayers_maps() {
     'height' => '400px',
     'view' => array(
       'center' => array(
-        'lat' => '0',
-        'lon' => '0',
+        'lat' => 0,
+        'lon' => 0,
       ),
-      'rotation' => '0',
-      'zoom' => '2',
+      'rotation' => 0,
+      'zoom' => 2,
     ),
     'contextualLinks' => 0,
     'provideBlock' => 0,
@@ -45,7 +45,6 @@ function openlayers_ui_default_openlayers_maps() {
       1 => 'openlayers_interaction_dragrotate',
       2 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'components' => array(),
   );
   $export['openlayers_map_ui_default'] = $ol_map;
 

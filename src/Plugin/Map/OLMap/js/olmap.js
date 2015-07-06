@@ -14,7 +14,7 @@ Drupal.openlayers.pluginManager.register({
     };
 
     // Check if a extent boundaries are set.
-    if (options.view.limit_extent && options.view.extent) {
+    if (options.view.extent) {
       view_opts.extent = ol.proj.transform(options.view.extent.replace(/\s*/ig, '').split(','), 'EPSG:4326', projection);
     }
 

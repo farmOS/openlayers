@@ -67,7 +67,7 @@ abstract class Layer extends Object implements LayerInterface {
       $this->setOption('style', $style->machine_name);
     }
 
-    return $this->options;
+    return $this->configuration['options'];
   }
 
   /**
