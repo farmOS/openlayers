@@ -12,7 +12,7 @@ Drupal.openlayers.pluginManager.register({
     var displayFeatureInfo = function(pixel) {
       info.css({
         left: pixel[0] + 'px',
-        top: (pixel[1] - 15) + 'px'
+        top: (pixel[1] + 30) + 'px'
       });
       var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         return feature;
@@ -29,7 +29,7 @@ Drupal.openlayers.pluginManager.register({
 
     map.on('pointermove', function(evt) {
       if (evt.dragging) {
-        //info.tooltip('hide');
+        info.tooltip('hide');
         return;
       }
       displayFeatureInfo(map.getEventPixel(evt.originalEvent));
