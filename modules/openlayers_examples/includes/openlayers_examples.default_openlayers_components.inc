@@ -297,5 +297,14 @@ map.on(\'click\', function(evt) {
   $ol_component->factory_service = 'openlayers.Component:Timezones';
   $export['openlayers_examples_component_timezones'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_fractal';
+  $ol_component->name = 'Openlayers examples: Fractal';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:Fractal';
+  $export['openlayers_examples_component_fractal'] = $ol_component;
+
   return $export;
 }
