@@ -125,7 +125,8 @@ class Geofield extends Component {
    */
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
     // Auto-detect the source to use for the features.
-    if (empty($this->options['source'])) {
+    $source = $this->getOption('source');
+    if (empty($source)) {
       foreach ($context->getCollection()->getObjects('source') as $source) {
         if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
           $this->setOption('source', $source->machine_name);
@@ -139,20 +140,22 @@ class Geofield extends Component {
    */
   public function getJS() {
     // Ensure the options are properly set and clean.
-    $this->options['dataType'] = array_filter($this->options['dataType']);
-    $this->options['typeOfFeature'] = array_filter($this->options['typeOfFeature']);
-    $this->options['actionFeature'] = array_filter($this->options['actionFeature']);
+    $this->setOption('dataType', array_filter($this->getOption('dataType', array('WKT' => 'WKT'))));
+    $this->setOption('typeOfFeature', array_filter($this->getOption('typeOfFeature', array())));
+    $this->setOption('actionFeature', array_filter($this->getOption('actionFeature', array())));
+
+    $initial_data = $this->getOption('initialData');
 
     // Process initial data. Ensure it's WKT.
-    if (isset($this->options['initialData'])) {
+    if (isset($initial_data)) {
 
       // Process strings and arrays likewise.
       geophp_load();
-      if (!is_array($this->options['initialData'])) {
-        $this->options['initialData'] = array($this->options['initialData']);
+      if (!is_array($initial_data)) {
+        $initial_data = array($initial_data);
       }
       $geoms = array();
-      foreach ($this->options['initialData'] as $delta => $item) {
+      foreach ($initial_data as $delta => $item) {
         if (is_array($item) && array_key_exists('geom', $item)) {
           $geoms[] = geoPHP::load($item['geom']);
         }
@@ -171,13 +174,14 @@ class Geofield extends Component {
         }
 
         // Ensure proper initial data in the textarea / hidden field.
-        $this->options['initialData'] = $combined_geom->out(strtolower(key($this->options['dataType'])));
-        $this->options['initialDataType'] = key($this->options['dataType']);
+        $data_type = key($this->getOption('dataType', array('WKT' => 'WKT')));
+        $this->setOption('initialData', $combined_geom->out(strtolower($data_type)));
+        $this->setOption('initialDataType', $data_type);
       }
       else {
         // Set initial data to NULL if the data couldn't be evaluated.
-        $this->options['initialData'] = NULL;
-        $this->options['initialDataType'] = key($this->options['dataType']);
+        $this->setOption('initialData', NULL);
+        $this->setOption('initialDataType', key($this->getOption('dataType', array('WKT' => 'WKT'))));
       }
     }
     return parent::getJS();
@@ -288,8 +292,8 @@ class Geofield extends Component {
       '#attributes' => array(
         'class' => array('openlayers-geofield-data'),
       ),
-      '#default_value' => $this->getOption('initialData'),
-      '#value' => $this->getOption('initialData'),
+      '#default_value' => $this->getOption('initialData', ''),
+      '#value' => $this->getOption('initialData', ''),
     );
 
     // Now add the component into the build array. This is a bit complex due
