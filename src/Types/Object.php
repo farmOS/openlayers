@@ -424,6 +424,10 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getJS() {
     $export = $this->getExport();
 
+    foreach(Openlayers::getPluginTypes() as $type) {
+      unset($export->options[$type . 's']);
+    }
+
     return array(
       'mn' => $export->machine_name,
       'fs' => $export->factory_service,

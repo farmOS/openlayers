@@ -118,7 +118,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.Source:GeoJSON';
   $ol_source->options = array(
-    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/cities.json', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/cities.json'),
   );
   $export['openlayers_examples_source_geojson_file'] = $ol_source;
 
@@ -130,7 +130,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.Source:KML';
   $ol_source->options = array(
-    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/2012_Earthquakes_Mag5.kml', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/2012_Earthquakes_Mag5.kml'),
   );
   $export['openlayers_examples_source_kml_earthquakes'] = $ol_source;
 
@@ -142,7 +142,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = '';
   $ol_source->factory_service = 'openlayers.Source:KML';
   $ol_source->options = array(
-    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/timezones.kml', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/timezones.kml'),
   );
   $export['openlayers_examples_source_kml_timezones'] = $ol_source;
 
@@ -343,7 +343,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'Source Image Static description';
   $ol_source->factory_service = 'openlayers.Source:ImageStatic';
   $ol_source->options = array(
-    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/druplicon.png', array('absolute' => TRUE)),
+    'url' => file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/druplicon.png'),
   );
   $export['openlayers_examples_source_imagestatic'] = $ol_source;
 

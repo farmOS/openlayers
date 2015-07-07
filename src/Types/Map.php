@@ -30,8 +30,6 @@ abstract class Map extends Object implements MapInterface {
         }
       }
     }
-
-    $this->setOption('target', $this->getId());
   }
 
   /**
@@ -139,6 +137,8 @@ abstract class Map extends Object implements MapInterface {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
     $options = isset($this->options) ? $this->options : array();
 
+    unset($export['map']);
+
     // Synchronize this item's options with its the Collection.
     foreach(Openlayers::getPluginTypes(array('map')) as $type) {
       $option = drupal_strtolower($type) . 's';
@@ -147,13 +147,17 @@ abstract class Map extends Object implements MapInterface {
       }
     }
 
-    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
-      $type = drupal_strtolower($type) . 's';
-      unset($options[$type]);
-    }
-
     $this->options = $options;
 
     return $this->options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getJS() {
+    $js = parent::getJS();
+    $js['opt']['target'] = $this->getId();
+    return $js;
   }
 }
