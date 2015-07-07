@@ -232,8 +232,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $option = drupal_strtolower($type) . 's';
       if (isset($export[$type])) {
         $options[$option] = $export[$type];
-      } else {
-        $options[$option] = array();
       }
     }
 
@@ -418,18 +416,17 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getJS() {
-    // Refactor this to use getExport().
-    $js = array(
-      'mn' => $this->machine_name,
-      'fs' => $this->factory_service,
-      'opt' => $this->getOptions(),
-    );
+    $export = $this->getExport();
 
     foreach(Openlayers::getPluginTypes() as $type) {
-      unset($js['opt'][$type . 's']);
+      unset($export->options[$type . 's']);
     }
 
-    return $js;
+    return array(
+      'mn' => $export->machine_name,
+      'fs' => $export->factory_service,
+      'opt' => $export->options,
+    );
   }
 
   /**

@@ -101,14 +101,12 @@ class Collection extends PluginBase {
    *   All the JS settings of the collection objects.
    */
   public function getJS() {
-    $clone = clone $this;
     $settings = array();
-    foreach ($clone->objects as $type => $objects) {
-      foreach ($objects as $object) {
-        $settings[$type][] = $object->getJS();
-      }
+    foreach($this->getFlatList() as $object) {
+      $settings[$object->getType()][] = $object->getJS();
     }
 
+    $settings = array_change_key_case($settings, CASE_LOWER);
     $settings = array_map_recursive('_floatval_if_numeric', $settings);
     $settings = removeEmptyElements($settings);
 

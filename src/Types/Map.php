@@ -137,16 +137,4 @@ abstract class Map extends Object implements MapInterface {
 
     return $build;
   }
-
-  /**
-   * @inheritdoc
-   */
-  public function getJS() {
-    $js = parent::getJS();
-
-    // Add the id to the JS settings.
-    $js['map_id'] = $this->getId();
-
-    return $js;
-  }
 }
