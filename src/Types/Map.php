@@ -22,13 +22,7 @@ abstract class Map extends Object implements MapInterface {
    */
   public function init() {
     parent::init();
-    $this->setOption('target', $this->getId());
-  }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function buildCollection() {
     foreach (Openlayers::getPluginTypes(array('map')) as $type) {
       foreach ($this->getOption($type . 's', array()) as $weight => $object) {
         if ($merge_object = Openlayers::load($type, $object)) {
@@ -37,7 +31,8 @@ abstract class Map extends Object implements MapInterface {
         }
       }
     }
-    parent::buildCollection();
+
+    $this->setOption('target', $this->getId());
   }
 
   /**
@@ -136,5 +131,29 @@ abstract class Map extends Object implements MapInterface {
     $map->postBuild($build, $map);
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOptions() {
+    $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
+    $options = isset($this->options) ? $this->options : array();
+
+    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
+      unset($options[$type.'s']);
+    }
+
+    // Synchronize this item's options with its the Collection.
+    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
+      $option = drupal_strtolower($type) . 's';
+      if (isset($export[$type])) {
+        $options[$option] = $export[$type];
+      }
+    }
+
+    $this->options = $options;
+
+    return $this->options;
   }
 }
