@@ -47,7 +47,12 @@ class Fractal extends Component {
           '#type' => 'item',
           '#title' => 'Points',
           '#markup' => '<span id="count"></span>'
-          ),
+        ),
+        'length' => array(
+          '#type' => 'item',
+          '#title' => 'Length',
+          '#markup' => '<span id="length"></span>'
+        ),
       ),
     );
   }

@@ -35,6 +35,7 @@ Drupal.openlayers.pluginManager.register({
       }
       var coordinates = graphToCoords(graph);
       document.getElementById('count').innerHTML = coordinates.length - 1;
+      document.getElementById('length').innerHTML = graphToLength(graph);
       geometry.setCoordinates(coordinates);
       feature.setGeometry(geometry);
     }
@@ -93,22 +94,20 @@ Drupal.openlayers.pluginManager.register({
       return coordinates;
     }
 
+    function graphToLength(graph) {
+      var coordinates = graphToCoords(graph);
+      var depthInput = document.getElementById('depth').value;
+      return 3 * Math.pow(4/3, (depthInput));
+    }
+
     var depthInput = document.getElementById('depth');
 
     function update() {
       makeFractal(Number(depthInput.value));
     }
 
-    var updateTimer;
-
-
-    /**
-     * Regenerate fractal on depth change.  Change events are debounced so updates
-     * only occur every 200ms.
-     */
     depthInput.onchange = function() {
-      window.clearTimeout(updateTimer);
-      updateTimer = window.setTimeout(update, 200);
+      update();
     };
 
     update();
