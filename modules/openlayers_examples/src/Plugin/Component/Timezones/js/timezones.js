@@ -12,7 +12,7 @@ Drupal.openlayers.pluginManager.register({
     var displayFeatureInfo = function(pixel) {
       info.css({
         left: pixel[0] + 'px',
-        top: (pixel[1] + 30) + 'px'
+        top: (pixel[1] + 20) + 'px'
       });
       var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         return feature;
