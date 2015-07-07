@@ -51,7 +51,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Graticule';
   $ol_component->options = array(
-    'rgba' => '0, 0, 0, 0.2',
+    'rgba' => '255,120,0,0.9',
     'width' => '2',
     'lineDash' => '0.5, 4',
   );
