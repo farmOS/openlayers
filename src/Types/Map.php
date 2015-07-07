@@ -11,7 +11,6 @@ use Drupal\openlayers\Openlayers;
  * Class Map.
  */
 abstract class Map extends Object implements MapInterface {
-
   /**
    * @var string
    */
@@ -140,16 +139,17 @@ abstract class Map extends Object implements MapInterface {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
     $options = isset($this->options) ? $this->options : array();
 
-    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
-      unset($options[$type.'s']);
-    }
-
     // Synchronize this item's options with its the Collection.
     foreach(Openlayers::getPluginTypes(array('map')) as $type) {
       $option = drupal_strtolower($type) . 's';
       if (isset($export[$type])) {
         $options[$option] = $export[$type];
       }
+    }
+
+    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
+      $type = drupal_strtolower($type) . 's';
+      unset($options[$type]);
     }
 
     $this->options = $options;

@@ -213,16 +213,17 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
     $options = isset($this->options) ? $this->options : array();
 
-    foreach(Openlayers::getPluginTypes() as $type) {
-      unset($options[$type.'s']);
-    }
-
     // Synchronize this item's options with its the Collection.
     foreach(Openlayers::getPluginTypes(array('map')) as $type) {
       $option = drupal_strtolower($type) . 's';
       if (isset($export[$type])) {
         $options[$option] = $export[$type];
       }
+    }
+
+    foreach(Openlayers::getPluginTypes() as $type) {
+      $type = drupal_strtolower($type) . 's';
+      unset($options[$type]);
     }
 
     $this->options = $options;
