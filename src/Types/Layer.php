@@ -75,8 +75,6 @@ abstract class Layer extends Object implements LayerInterface {
    * {@inheritdoc}
    */
   public function getOptions() {
-    $this->syncOptions();
-
     if ($source = $this->getSource()) {
       $this->setOption('source', $source->machine_name);
     }
@@ -85,6 +83,6 @@ abstract class Layer extends Object implements LayerInterface {
       $this->setOption('style', $style->machine_name);
     }
 
-    return $this->options;
+    return parent::getOptions();
   }
 }

@@ -210,31 +210,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getOptions() {
-    return $this->syncOptions();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOptions(array $options = array()) {
-    $this->options = $options;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExport() {
-    $configuration = $this->getConfiguration();
-    $configuration['options'] = $this->getOptions();
-    return (object) $configuration;
-  }
-
-  /**
-   * Synchronize the object options with the Collection of objects it has.
-   *
-   * @return array
-   */
-  protected function syncOptions() {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
     $options = isset($this->options) ? $this->options : array();
 
@@ -253,6 +228,22 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $this->options = $options;
 
     return $this->options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOptions(array $options = array()) {
+    $this->options = $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExport() {
+    $configuration = $this->getConfiguration();
+    $configuration['options'] = $this->getOptions();
+    return (object) $configuration;
   }
 
   /**

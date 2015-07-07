@@ -32,8 +32,8 @@ class Cluster extends Source {
   /**
    * {@inheritdoc}
    */
-  protected function syncOptions() {
-    $options = parent::syncOptions();
+  public function getOptions() {
+    $options = parent::getOptions();
 
     if ($sources = $this->getObjects('source')) {
       $source = array_shift($sources);
