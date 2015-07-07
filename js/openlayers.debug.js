@@ -88,6 +88,7 @@
   $(document).on('openlayers.build_stop', function(event, objects) {
     console.timeEnd('Total building time');
     console.groupEnd();
+    console.groupEnd();
   });
 
   $(document).on('openlayers.build_failed', function(event, objects) {
