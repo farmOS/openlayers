@@ -95,7 +95,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $this->machine_name = drupal_html_id($this->getType() . '-' . time());
     }
 
-    if (isset($this->configuration['options'])) {
+    if (!empty($this->configuration['options'])) {
       $this->setOptions($this->configuration['options']);
     }
   }
