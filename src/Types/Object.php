@@ -47,6 +47,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public $factory_service = NULL;
 
+  protected $options = array();
+
   /**
    * @var Collection
    */
@@ -92,6 +94,10 @@ abstract class Object extends PluginBase implements ObjectInterface {
     if (empty($this->machine_name)) {
       $this->machine_name = drupal_html_id($this->getType() . '-' . time());
     }
+
+    if (isset($this->configuration['options'])) {
+      $this->setOptions($this->configuration['options']);
+    }
   }
 
   /**
@@ -106,15 +112,18 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormValidate($form, &$form_state) {
-
-  }
+  public function optionsFormValidate($form, &$form_state) {}
 
   /**
    * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
+    if (isset($form_state['values']['options'])) {
+      $options = array_merge((array) $this->getOptions(), (array) $form_state['values']['options']);
+      $this->setOptions($options);
+    }
 
+    $form_state['item'] = $this->getExport();
   }
 
   /**
@@ -146,15 +155,13 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function build() {
-
-  }
+  public function build() {}
 
   /**
    * {@inheritdoc}
    */
   public function clearOption($parents) {
-    $ref = &$this->configuration['options'];
+    $ref = &$this->options;
 
     if (is_string($parents)) {
       $parents = array($parents);
@@ -184,7 +191,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function setOption($parents, $value = NULL) {
-    $ref = &$this->configuration['options'];
+    $ref = &$this->options;
 
     if (is_string($parents)) {
       $parents = array($parents);
@@ -209,9 +216,17 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function setOptions(array $options = array()) {
+    $this->options = $options;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getExport() {
-    $this->syncOptions();
-    return (object) $this->configuration;
+    $configuration = $this->getConfiguration();
+    $configuration['options'] = $this->getOptions();
+    return (object) $configuration;
   }
 
   /**
@@ -221,7 +236,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   protected function syncOptions() {
     $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
-    $options = isset($this->configuration['options']) ? $this->configuration['options'] : array();
+    $options = isset($this->options) ? $this->options : array();
 
     foreach(Openlayers::getPluginTypes() as $type) {
       unset($options[$type.'s']);
@@ -235,9 +250,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
       }
     }
 
-    $this->configuration['options'] = $options;
+    $this->options = $options;
 
-    return $this->configuration['options'];
+    return $this->options;
   }
 
   /**
@@ -258,11 +273,12 @@ abstract class Object extends PluginBase implements ObjectInterface {
     if (is_array($parents)) {
       $notfound = FALSE;
 
-      if (!isset($this->configuration['options'])) {
+      if (!isset($this->options)) {
         $notfound = TRUE;
         $parents = array();
+        $options = array();
       } else {
-        $options = $this->configuration['options'];
+        $options = $this->options;
       }
 
       foreach ($parents as $parent) {
@@ -393,9 +409,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   }
 
   /**
-   * Allows to adjust the initially built collection.
-   *
-   * The collection can be accessed already by calling $this->getCollection().
+   * {@inheritdoc}
    */
   public function buildCollection() {
     $this->getCollection()->append($this);

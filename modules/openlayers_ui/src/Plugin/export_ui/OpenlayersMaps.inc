@@ -134,34 +134,21 @@ function openlayers_map_form_settings($form, &$form_state) {
  * Map settings config form validation handler.
  */
 function openlayers_map_form_settings_validate($form, &$form_state) {
-  $item = $form_state['item'];
-  if (empty($item->factory_service)) {
-    $item->factory_service = 'openlayers.Map:OLMap';
-  }
-  if (isset($form_state['values']['options'])) {
-    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
-  }
-
-  if (($map = \Drupal\openlayers\Openlayers::load('Map', $item)) == TRUE) {
-    $map->optionsFormValidate($form, $form_state);
-  }
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+  $map->optionsFormValidate($form, $form_state);
 }
 
 /**
  * Map settings config form submit handler.
  */
 function openlayers_map_form_settings_submit($form, &$form_state) {
-  // todo: fix.
-  if (empty($form_state['item']->factory_service)) {
-    $form_state['item']->factory_service = 'openlayers.Map:OLMap';
-  }
-  if (isset($form_state['values']['options'])) {
-    $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+
+  if (empty($map->factory_service)) {
+    $map->factory_service = 'openlayers.Map:OLMap';
   }
 
-  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
-    $map->optionsFormSubmit($form, $form_state);
-  }
+  $map->optionsFormSubmit($form, $form_state);
 }
 
 /**
@@ -415,13 +402,16 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   foreach ($layers_enabled as $id => $data) {
     //Update the layer style.
     if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
-      if (!is_null($data['style'])) {
-        if ($data['style'] != $layer->getOption('style')) {
-          $layer->setOption('style', $data['style']);
+      if (!empty($data['style'])) {
+        $layer_style = $layer->getStyle();
+        if (!$layer_style || ($data['style'] != $layer_style->machine_name)) {
+          $style = \Drupal\openlayers\Openlayers::load('style', $data['style']);
+          $layer->setStyle($style);
         }
       }
       else {
         $layer->clearOption('style');
+        $layer->getCollection()->clear(array('style'));
       }
       \Drupal\openlayers\Openlayers::save($layer);
     }

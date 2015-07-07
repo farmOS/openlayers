@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers\Plugin\Source\Cluster;
 use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Source;
 
 /**
@@ -17,6 +18,30 @@ use Drupal\openlayers\Types\Source;
  *
  */
 class Cluster extends Source {
+  /**
+   * {@inheritdoc}
+   */
+  public function init() {
+    parent::init();
+    if ($source = $this->getOption('source')) {
+      $object = Openlayers::load('source', $source);
+      $this->getCollection()->append($object);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function syncOptions() {
+    $options = parent::syncOptions();
+
+    if ($sources = $this->getObjects('source')) {
+      $source = array_shift($sources);
+      $options['source'] = $source->machine_name;
+    }
+
+    return $options;
+  }
 
   /**
    * {@inheritdoc}

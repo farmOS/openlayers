@@ -48,6 +48,14 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function getOptions();
 
   /**
+   * Set the options array.
+   *
+   * @param array $options
+   *   The options array.
+   */
+  public function setOptions(array $options = array());
+
+  /**
    * Returns an option.
    *
    * @param string|array $parents
@@ -209,6 +217,8 @@ interface ObjectInterface extends PluginInspectionInterface {
 
   /**
    * Fill in the Collection object from the object's options.
+   * Allows to adjust the initially built collection.
+   * The collection can be accessed already by calling $this->getCollection().
    *
    * @return void
    */

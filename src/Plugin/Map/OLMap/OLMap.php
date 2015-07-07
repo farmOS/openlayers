@@ -142,12 +142,12 @@ class OLMap extends Map {
    * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
-    $extent = trim($form_state['values']['options']['view']['extent']);
-    $limit_extent = $form_state['values']['options']['view']['limit_extent'];
+    $limit_extent = $this->getOption(array('view', 'limit_extent'), '');
+    $extent = $this->getOption(array('view', 'extent'), '');
 
     if (empty($limit_extent) || ($limit_extent == 'custom' && empty($extent))) {
-      unset($form_state['item']->options['view']['extent']);
-      unset($form_state['item']->options['view']['limit_extent']);
+      unset($form_state['values']['options']['view']['extent']);
+      unset($form_state['values']['options']['view']['limit_extent']);
     }
 
     parent::optionsFormSubmit($form, $form_state);

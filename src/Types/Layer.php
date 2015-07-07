@@ -11,18 +11,20 @@ use Drupal\openlayers\Openlayers;
  * Class Layer.
  */
 abstract class Layer extends Object implements LayerInterface {
+
   /**
    * {@inheritdoc}
    */
-  public function buildCollection() {
+  public function init() {
+    parent::init();
+
     foreach (array('source', 'style') as $type) {
       if ($data = $this->getOption($type, FALSE)) {
         if ($object = Openlayers::load($type, $data)) {
-          $this->getCollection()->merge($object->getCollection());
+          $this->getCollection()->append($object);
         }
       }
     }
-    $this->getCollection()->append($this);
   }
 
   /**
@@ -54,6 +56,22 @@ abstract class Layer extends Object implements LayerInterface {
   }
 
   /**
+   * Set the source of this layer.
+   */
+  public function setSource(SourceInterface $source) {
+    $this->getCollection()->clear(array('source'));
+    $this->getCollection()->append($source);
+  }
+
+  /**
+   * Set the style of this layer.
+   */
+  public function setStyle(StyleInterface $style) {
+    $this->getCollection()->clear(array('style'));
+    $this->getCollection()->append($style);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getOptions() {
@@ -67,20 +85,6 @@ abstract class Layer extends Object implements LayerInterface {
       $this->setOption('style', $style->machine_name);
     }
 
-    return $this->configuration['options'];
+    return $this->options;
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getJS() {
-    $js = parent::getJS();
-
-    foreach(Openlayers::getPluginTypes() as $type) {
-      unset($js['opt'][$type . 's']);
-    }
-
-    return $js;
-  }
-
 }
