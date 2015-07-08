@@ -395,6 +395,17 @@ function openlayers_map_form_layers($form, &$form_state) {
 function openlayers_map_form_layers_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
+  $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
+    return (bool) $item['enabled'];
+  });
+
+  $map->getCollection()->clear(array('source'));
+  foreach($sources_enabled as $source => $data) {
+    $source = \Drupal\openlayers\Openlayers::load('source', $source);
+    $source->setWeight($data['weight']);
+    $map->getCollection()->merge($source->getCollection());
+  }
+
   $layers_enabled = array_filter($form_state['values']['layers'], function($item) {
     return (bool) $item['enabled'];
   });
@@ -421,18 +432,7 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   foreach($layers_enabled as $layer => $data) {
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
     $layer->setWeight($data['weight']);
-    $map->getCollection()->append($layer);
-  }
-
-  $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
-    return (bool) $item['enabled'];
-  });
-
-  $map->getCollection()->clear(array('source'));
-  foreach($sources_enabled as $source => $data) {
-    $source = \Drupal\openlayers\Openlayers::load('source', $source);
-    $source->setWeight($data['weight']);
-    $map->getCollection()->append($source);
+    $map->getCollection()->merge($layer->getCollection());
   }
 
   $form_state['item'] = $map->getExport();

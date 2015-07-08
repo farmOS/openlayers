@@ -25,7 +25,7 @@ class Cluster extends Source {
     parent::init();
     if ($source = $this->getOption('source')) {
       $object = Openlayers::load('source', $source);
-      $this->getCollection()->append($object);
+      $this->getCollection()->merge($object->getCollection());
     }
   }
 

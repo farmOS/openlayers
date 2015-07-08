@@ -21,7 +21,7 @@ abstract class Layer extends Object implements LayerInterface {
     foreach (array('source', 'style') as $type) {
       if ($data = $this->getOption($type, FALSE)) {
         if ($object = Openlayers::load($type, $data)) {
-          $this->getCollection()->append($object);
+          $this->getCollection()->merge($object->getCollection());
         }
       }
     }
