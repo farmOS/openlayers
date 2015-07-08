@@ -95,7 +95,6 @@ Drupal.openlayers.pluginManager.register({
     }
 
     function graphToLength(graph) {
-      var coordinates = graphToCoords(graph);
       var depthInput = document.getElementById('depth').value;
       return 3 * Math.pow(4/3, (depthInput));
     }
