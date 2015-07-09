@@ -315,5 +315,14 @@ map.on(\'click\', function(evt) {
   $ol_component->factory_service = 'openlayers.Component:IconSprites';
   $export['openlayers_examples_component_icon_sprite'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_debug';
+  $ol_component->name = 'Openlayers examples: Debug';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:Debug';
+  $export['openlayers_examples_component_debug'] = $ol_component;
+
   return $export;
 }
