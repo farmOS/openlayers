@@ -17,7 +17,7 @@ class Config {
       'openlayers.js_css.weight' => 20,
       'openlayers.edit_view_map' => 'openlayers_map_view_edit_form',
       'openlayers.default_ui_map' => 'openlayers_map_ui_default',
-      'openlayers.debug' => TRUE,
+      'openlayers.debug' => FALSE,
     );
     if ($key == NULL) {
       return $defaults;
