@@ -77,17 +77,19 @@ class Collection extends PluginBase {
    */
   public function getAttached() {
     $attached = array();
-    foreach ($this->objects as $objects) {
-      foreach ($objects as $object) {
-        $object_attached = $object->attached() + array(
+    foreach($this->getFlatList() as $object) {
+      $object_attached = $object->attached() + array(
           'js' => array(),
           'css' => array(),
           'library' => array(),
           'libraries_load' => array(),
         );
-        foreach (array('js', 'css', 'library', 'libraries_load') as $type) {
-          foreach ($object_attached[$type] as $data) {
-            $attached[$type][] = $data;
+      foreach (array('js', 'css', 'library', 'libraries_load') as $type) {
+        foreach ($object_attached[$type] as $data) {
+          if (isset($attached[$type])) {
+            array_unshift($attached[$type], $data);
+          } else {
+            $attached[$type] = array($data);
           }
         }
       }
@@ -108,8 +110,6 @@ class Collection extends PluginBase {
     }
 
     $settings = array_change_key_case($settings, CASE_LOWER);
-    $settings = array_map_recursive('_floatval_if_numeric', $settings);
-    $settings = removeEmptyElements($settings);
 
     return $settings;
   }

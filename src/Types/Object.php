@@ -243,7 +243,12 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getExport() {
     $configuration = $this->getConfiguration();
-    $configuration['options'] = $this->getOptions();
+    $options = $this->getOptions();
+
+    $options = array_map_recursive('_floatval_if_numeric', $options);
+    $options = removeEmptyElements($options);
+    $configuration['options'] = $options;
+
     return (object) $configuration;
   }
 
@@ -428,11 +433,16 @@ abstract class Object extends PluginBase implements ObjectInterface {
       unset($export->options[$type . 's']);
     }
 
-    return array(
+    $js = array(
       'mn' => $export->machine_name,
       'fs' => $export->factory_service,
-      'opt' => $export->options,
     );
+
+    if (!empty($export->options)) {
+      $js['opt'] = $export->options;
+    }
+
+    return $js;
   }
 
   /**

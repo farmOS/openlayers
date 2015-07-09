@@ -95,7 +95,7 @@ abstract class Map extends Object implements MapInterface {
       $css_styles .= $property . ':' . $value . ';';
     }
 
-    $build += array(
+    $build['openlayers'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'openlayers-container-' . $map->getId(),
