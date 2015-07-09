@@ -19,22 +19,13 @@ use Drupal\openlayers\Types\ObjectInterface;
  */
 class Debug extends Component {
   /**
-   * @inheritDoc
-   */
-  public function attached() {
-    $attached = parent::attached();
-    $attached['libraries_load']['openlayers3'] = array('openlayers3', 'debug');
-    return $attached;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
     $build['Debug'] = array(
       '#type' => 'fieldset',
       '#title' => 'Map debug',
-      '#description' => 'Here\'s a quick view of all the objects in the map. You can also hit F12 to get information on the Javascript.',
+      '#description' => 'Here\'s a quick view of all the objects in the map.',
       '#collapsible' => TRUE,
       '#collapsed' => TRUE
     );
