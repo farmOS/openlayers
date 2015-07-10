@@ -5,14 +5,14 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\GeoJSON;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Source;
 use Drupal\openlayers\Config;
 
 /**
  * Class GeoJSON.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "GeoJSON"
  * )
  *

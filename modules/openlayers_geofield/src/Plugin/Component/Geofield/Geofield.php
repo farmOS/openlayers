@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_geofield\Plugin\Component\Geofield;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
 use \geoPHP;
@@ -13,7 +13,7 @@ use \geoPHP;
 /**
  * Class Geofield.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Geofield"
  * )
  *

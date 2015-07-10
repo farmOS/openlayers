@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\OSM;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Source;
 
 /**
  * Class OSM.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "OSM"
  * )
  *

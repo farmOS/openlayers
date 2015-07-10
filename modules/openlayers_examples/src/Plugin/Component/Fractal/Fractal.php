@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_examples\Plugin\Component\Fractal;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
@@ -13,7 +13,7 @@ use Drupal\openlayers\Types\ObjectInterface;
 /**
  * Class Fractal.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *   id = "Fractal"
  * )
  *

@@ -5,14 +5,14 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\Cluster;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Source;
 
 /**
  * Class Cluster.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Cluster"
  * )
  *

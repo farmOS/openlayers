@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Style\ClusterStyle;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Style;
 
 /**
  * Class ClusterStyle.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "ClusterStyle"
  * )
  *

@@ -7,13 +7,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\GoogleMaps;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Source;
 
 /**
  * Class GoogleMaps.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "GoogleMaps"
  * )
  *

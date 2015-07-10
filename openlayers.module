@@ -17,17 +17,6 @@ function openlayers_ctools_plugin_api($module, $api) {
 }
 
 /**
- * Implements hook_ctools_plugin_directory().
- */
-function openlayers_ctools_plugin_directory($owner, $plugin_type) {
-  if ($owner == 'ctools' && $plugin_type == 'content_types') {
-    return 'plugins/' . $plugin_type;
-  }
-}
-
-
-
-/**
  * Implements hook_permission().
  */
 function openlayers_permission() {

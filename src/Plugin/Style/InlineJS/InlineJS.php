@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Style\InlineJS;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Style;
 
 /**
  * Class InlineJS.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "InlineJS"
  * )
  *

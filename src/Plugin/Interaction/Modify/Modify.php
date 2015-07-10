@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\Modify;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class Modify.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Modify"
  * )
  *

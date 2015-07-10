@@ -6,7 +6,7 @@
 
 namespace Drupal\openlayers\Plugin\Map\OLMap;
 
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Map;
@@ -14,7 +14,7 @@ use Drupal\openlayers\Types\Map;
 /**
  * Class OLMap.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "OLMap"
  * )
  *

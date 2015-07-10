@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_views\Plugin\Map\Views;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Map;
 use Drupal\openlayers\Plugin\Map\OLMap\OLMap;
@@ -14,7 +14,7 @@ use Drupal\openlayers\Types\ObjectInterface;
 /**
  * Class Views.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *   id = "Views"
  * )
  */

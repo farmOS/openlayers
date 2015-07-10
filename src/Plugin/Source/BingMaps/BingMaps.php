@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\BingMaps;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Source;
 
 /**
  * Class BingMaps.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "BingMaps"
  * )
  *

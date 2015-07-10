@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\DragBox;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class DragBox.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "DragBox"
  * )
  *

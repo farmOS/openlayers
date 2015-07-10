@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Component\Popup;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Component;
 
 /**
  * Class Popup.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Popup"
  * )
  */

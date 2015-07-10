@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Layer\Heatmap;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Layer;
 
 /**
  * Class Heatmap.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Heatmap"
  * )
  *

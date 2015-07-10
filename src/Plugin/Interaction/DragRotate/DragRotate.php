@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\DragRotate;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class DragRotate.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "DragRotate"
  * )
  *

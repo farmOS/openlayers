@@ -5,14 +5,14 @@
  */
 
 namespace Drupal\openlayers\Plugin\Component\Debug;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
  * Class Debug.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Debug"
  * )
  *

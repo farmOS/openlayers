@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_examples\Plugin\Style\Timezones;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Types\Style;
@@ -13,7 +13,7 @@ use Drupal\openlayers\Types\Style;
 /**
  * Class Timezones.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *   id = "Timezones"
  * )
  *

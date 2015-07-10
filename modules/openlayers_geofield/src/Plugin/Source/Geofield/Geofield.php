@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers_geofield\Plugin\Source\Geofield;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Plugin\Source\Vector\Vector;
 
 /**
  * Class Geofield.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Geofield"
  * )
  *

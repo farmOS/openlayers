@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Component\BootstrapjsAlert;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Component;
 
 /**
  * Class BootstrapjsAlert.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "BootstrapjsAlert"
  * )
  *

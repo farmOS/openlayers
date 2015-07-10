@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Control\Rotate;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Control;
 
 /**
  * Class Rotate.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Rotate"
  * )
  *

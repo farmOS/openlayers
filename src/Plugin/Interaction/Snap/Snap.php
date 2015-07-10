@@ -6,13 +6,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\Snap;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class Snap.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Snap"
  * )
  *

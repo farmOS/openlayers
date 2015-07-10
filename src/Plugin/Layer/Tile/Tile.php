@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Layer\Tile;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Layer;
 
 /**
  * Class Tile.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Tile"
  * )
  *

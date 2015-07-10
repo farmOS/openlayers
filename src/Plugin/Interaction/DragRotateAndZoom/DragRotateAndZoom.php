@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\DragRotateAndZoom;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class DragRotateAndZoom.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "DragRotateAndZoom"
  * )
  *

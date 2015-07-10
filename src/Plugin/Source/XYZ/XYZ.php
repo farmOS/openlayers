@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Source\XYZ;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Source;
 
 /**
  * Class XYZ.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "XYZ"
  * )
  *

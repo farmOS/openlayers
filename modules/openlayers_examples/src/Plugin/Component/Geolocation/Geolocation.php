@@ -5,14 +5,14 @@
  */
 
 namespace Drupal\openlayers_examples\Plugin\Component\Geolocation;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
  * Class Geolocation.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *   id = "Geolocation"
  * )
  *

@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Layer\Image;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Layer;
 
 /**
  * Class Image.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "Image"
  * )
  *

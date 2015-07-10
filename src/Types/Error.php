@@ -6,7 +6,7 @@
 
 namespace Drupal\openlayers\Types;
 
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\openlayers\Types\Object;
 use Drupal\service_container\Messenger\MessengerInterface;
@@ -14,7 +14,7 @@ use Drupal\service_container\Messenger\MessengerInterface;
 /**
  * Class Error.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *   id = "Error",
  *   arguments = {
  *     "@logger.channel.default",

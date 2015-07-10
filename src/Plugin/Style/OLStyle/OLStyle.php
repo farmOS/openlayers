@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Style\OLStyle;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Style;
 
 /**
  * Class OLStyle.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "OLStyle"
  * )
  *

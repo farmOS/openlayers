@@ -5,13 +5,13 @@
  */
 
 namespace Drupal\openlayers\Plugin\Interaction\KeyboardZoom;
-use Drupal\Component\Annotation\Plugin;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
  * Class KeyboardZoom.
  *
- * @Plugin(
+ * @OpenlayersPlugin(
  *  id = "KeyboardZoom"
  * )
  *
