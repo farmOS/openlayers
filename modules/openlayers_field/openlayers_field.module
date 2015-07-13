@@ -130,6 +130,10 @@ function openlayers_field_field_widget_form(&$form, &$form_state, $field, $insta
     $options[$machine_name] = $map->name;
   }
 
+  if (empty($options)) {
+    $options = \Drupal\openlayers\Openlayers::loadAllAsOptions('map');
+  }
+
   if (isset($form['#type']) && $form['#type'] == 'fieldset') {
     $instance['settings']['force_default'] = FALSE;
   }
