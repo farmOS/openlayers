@@ -208,6 +208,12 @@ function openlayers_map_form_layers($form, &$form_state) {
           )),
         array(
           'data' => array(
+            '#type' => 'hidden',
+            '#default_value' => $entry['machine_name'],
+            '#parents' => array('layers', $id, 'machine_name'),
+          )),
+        array(
+          'data' => array(
             '#type' => 'checkbox',
             '#title' => t('Enable'),
             '#title_display' => 'invisible',
@@ -224,12 +230,6 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#parents' => array('layers', $id, 'style'),
           )
         ),
-        array(
-          'data' => array(
-            '#type' => 'hidden',
-            '#default_value' => $entry['machine_name'],
-            '#parents' => array('layers', $id, 'machine_name'),
-          )),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['factory_service']),
@@ -268,11 +268,10 @@ function openlayers_map_form_layers($form, &$form_state) {
     '#header' => array(
       // We need two empty columns for the weigth field and the cross.
       array('data' => NULL, 'colspan' => 2),
-      t('Enabled'),
+      array('data' => t('Enabled'), 'colspan' => 2),
       array('data' => t('Style'), 'colspan' => 1),
       t('Name'),
       t('Machine name'),
-      t('Style'),
       t('Factory service'),
       t('Operations'),
     ),
