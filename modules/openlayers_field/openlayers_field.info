@@ -1,0 +1,6 @@
+name = Openlayers Field
+description = Provides an Openlayers field to display a map in your entities.
+core = 7.x
+package = "Openlayers"
+
+dependencies[] = openlayers
