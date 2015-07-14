@@ -17,20 +17,11 @@ abstract class Map extends Object implements MapInterface {
   protected $id;
 
   /**
-   * {@inheritdoc}
+   * The array containing the options.
+   *
+   * @var array
    */
-  public function init() {
-    parent::init();
-
-    foreach (Openlayers::getPluginTypes(array('map')) as $type) {
-      foreach ($this->getOption($type . 's', array()) as $weight => $object) {
-        if ($merge_object = Openlayers::load($type, $object)) {
-          $merge_object->setWeight($weight);
-          $this->getCollection()->merge($merge_object->getCollection());
-        }
-      }
-    }
-  }
+  protected $options = array();
 
   /**
    * {@inheritdoc}
@@ -128,28 +119,6 @@ abstract class Map extends Object implements MapInterface {
     $map->postBuild($build, $map);
 
     return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOptions() {
-    $export = array_change_key_case($this->getCollection()->getExport(), CASE_LOWER);
-    $options = isset($this->options) ? $this->options : array();
-
-    unset($export['map']);
-
-    // Synchronize this item's options with its the Collection.
-    foreach(Openlayers::getPluginTypes(array('map')) as $type) {
-      $option = drupal_strtolower($type) . 's';
-      if (isset($export[$type])) {
-        $options[$option] = $export[$type];
-      }
-    }
-
-    $this->options = $options;
-
-    return $this->options;
   }
 
   /**

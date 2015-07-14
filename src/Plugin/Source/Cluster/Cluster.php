@@ -21,31 +21,6 @@ class Cluster extends Source {
   /**
    * {@inheritdoc}
    */
-  public function init() {
-    parent::init();
-    if ($source = $this->getOption('source')) {
-      $object = Openlayers::load('source', $source);
-      $this->getCollection()->merge($object->getCollection());
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOptions() {
-    $options = parent::getOptions();
-
-    if ($sources = $this->getObjects('source')) {
-      $source = array_shift($sources);
-      $options['source'] = $source->machine_name;
-    }
-
-    return $options;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['source'] = array(
       '#type' => 'select',
@@ -63,5 +38,18 @@ class Cluster extends Source {
       '#default_value' => isset($form_state['item']->options['distance']) ? $form_state['item']->options['distance'] : 50,
       '#description' => t('Cluster distance.'),
     );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function optionsToObjects() {
+    $import = parent::optionsToObjects();
+
+    if ($source = $this->getOption('source')) {
+      $import[] = Openlayers::load('source', $source);
+    }
+
+    return $import;
   }
 }

@@ -11,6 +11,13 @@ namespace Drupal\openlayers\Types;
  */
 abstract class Style extends Object implements StyleInterface {
   /**
+   * The array containing the options.
+   *
+   * @var array
+   */
+  protected $options;
+
+  /**
    * {@inheritdoc}
    */
   public function getJS() {

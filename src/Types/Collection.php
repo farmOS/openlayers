@@ -8,6 +8,7 @@ namespace Drupal\openlayers\Types;
 
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\Component\Plugin\PluginBase;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Object;
 
 
@@ -26,6 +27,18 @@ class Collection extends PluginBase {
    * \Drupal\openlayers\Types\Object.
    */
   protected $objects = array();
+
+  /**
+   * Import a flat list of Openlayers Objects.
+   *
+   * @param array ObjectInterface[]
+   */
+  public function import(array $import = array()) {
+    foreach ($import as $object) {
+      /* @var Object $object */
+      $this->merge($object->getCollection());
+    }
+  }
 
   /**
    * Add object to this collection.

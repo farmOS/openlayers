@@ -11,21 +11,12 @@ use Drupal\openlayers\Openlayers;
  * Class Layer.
  */
 abstract class Layer extends Object implements LayerInterface {
-
   /**
-   * {@inheritdoc}
+   * The array containing the options.
+   *
+   * @var array
    */
-  public function init() {
-    parent::init();
-
-    foreach (array('source', 'style') as $type) {
-      if ($data = $this->getOption($type, FALSE)) {
-        if ($object = Openlayers::load($type, $data)) {
-          $this->getCollection()->merge($object->getCollection());
-        }
-      }
-    }
-  }
+  protected $options = array();
 
   /**
    * Returns the source of this layer.
@@ -59,30 +50,33 @@ abstract class Layer extends Object implements LayerInterface {
    * Set the source of this layer.
    */
   public function setSource(SourceInterface $source) {
-    $this->getCollection()->clear(array('source'));
-    $this->getCollection()->append($source);
+    /* @var Source $source */
+    $this->setOption('source', $source->machine_name);
   }
 
   /**
    * Set the style of this layer.
    */
   public function setStyle(StyleInterface $style) {
-    $this->getCollection()->clear(array('style'));
-    $this->getCollection()->append($style);
+    /* @var Style $style */
+    $this->setOption('style', $style->machine_name);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getOptions() {
-    if ($source = $this->getSource()) {
-      $this->setOption('source', $source->machine_name);
+  public function optionsToObjects() {
+    $import = parent::optionsToObjects();
+
+    if ($style = $this->getOption('style')) {
+      $import[] = Openlayers::load('style', $style);
+
     }
 
-    if ($style = $this->getStyle()) {
-      $this->setOption('style', $style->machine_name);
+    if ($source = $this->getOption('source')) {
+      $import[] = Openlayers::load('source', $source);
     }
 
-    return parent::getOptions();
+    return $import;
   }
 }
