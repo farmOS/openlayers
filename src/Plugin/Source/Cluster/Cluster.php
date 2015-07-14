@@ -47,7 +47,8 @@ class Cluster extends Source {
     $import = parent::optionsToObjects();
 
     if ($source = $this->getOption('source')) {
-      $import[] = Openlayers::load('source', $source);
+      $source = Openlayers::load('source', $source);
+      $import = array_merge($import, $source->getCollection()->getFlatList());
     }
 
     return $import;

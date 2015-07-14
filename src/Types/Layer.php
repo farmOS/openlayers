@@ -69,12 +69,13 @@ abstract class Layer extends Object implements LayerInterface {
     $import = parent::optionsToObjects();
 
     if ($style = $this->getOption('style')) {
-      $import[] = Openlayers::load('style', $style);
-
+      $style = Openlayers::load('style', $style);
+      $import = array_merge($import, $style->getCollection()->getFlatList());
     }
 
     if ($source = $this->getOption('source')) {
-      $import[] = Openlayers::load('source', $source);
+      $source = Openlayers::load('source', $source);
+      $import = array_merge($import, $source->getCollection()->getFlatList());
     }
 
     return $import;
