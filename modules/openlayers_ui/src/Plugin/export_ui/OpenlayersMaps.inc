@@ -394,16 +394,11 @@ function openlayers_map_form_layers($form, &$form_state) {
 function openlayers_map_form_layers_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
+  $sources_enabled = array_keys(array_filter($form_state['values']['sources'], function($item) {
     return (bool) $item['enabled'];
-  });
+  }));
 
-  $map->getCollection()->clear(array('source'));
-  foreach($sources_enabled as $source => $data) {
-    $source = \Drupal\openlayers\Openlayers::load('source', $source);
-    $source->setWeight($data['weight']);
-    $map->getCollection()->merge($source->getCollection());
-  }
+  $map->setOption('sources', $sources_enabled);
 
   $layers_enabled = array_filter($form_state['values']['layers'], function($item) {
     return (bool) $item['enabled'];
@@ -413,26 +408,16 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
     //Update the layer style.
     if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
       if (!empty($data['style'])) {
-        $layer_style = $layer->getStyle();
-        if (!$layer_style || ($data['style'] != $layer_style->machine_name)) {
-          $style = \Drupal\openlayers\Openlayers::load('style', $data['style']);
-          $layer->setStyle($style);
-        }
+        $layer->setOption('style', $data['style']);
       }
       else {
         $layer->clearOption('style');
-        $layer->getCollection()->clear(array('style'));
       }
       \Drupal\openlayers\Openlayers::save($layer);
     }
   }
 
-  $map->getCollection()->clear(array('layer'));
-  foreach($layers_enabled as $layer => $data) {
-    $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
-    $layer->setWeight($data['weight']);
-    $map->getCollection()->merge($layer->getCollection());
-  }
+  $map->setOption('layers', array_keys($layers_enabled));
 
   $form_state['item'] = $map->getExport();
 }
@@ -559,12 +544,7 @@ function openlayers_map_form_controls_submit($form, &$form_state) {
     return (bool) $item['enabled'];
   });
 
-  $map->getCollection()->clear(array('control'));
-  foreach($controls_enabled as $control => $data) {
-    $control = \Drupal\openlayers\Openlayers::load('control', $control);
-    $control->setWeight($data['weight']);
-    $map->getCollection()->append($control);
-  }
+  $map->setOption('controls', array_keys($controls_enabled));
 
   $form_state['item'] = $map->getExport();
 }
@@ -626,11 +606,7 @@ function openlayers_map_form_interactions_submit($form, &$form_state) {
 
   $interactions_enabled = array_filter($form_state['values']['options']['interactions']);
 
-  $map->getCollection()->clear(array('interaction'));
-  foreach ($interactions_enabled as $interaction => $data) {
-    $interaction = \Drupal\openlayers\Openlayers::load('interaction', $interaction);
-    $map->getCollection()->append($interaction);
-  }
+  $map->setOption('interactions', array_keys($interactions_enabled));
 
   $form_state['item'] = $map->getExport();
 }
@@ -751,12 +727,7 @@ function openlayers_map_form_components_submit($form, &$form_state) {
     return (bool) $item['enabled'];
   });
 
-  $map->getCollection()->clear(array('component'));
-  foreach ($components_enabled as $component => $data) {
-    $component = \Drupal\openlayers\Openlayers::load('component', $component);
-    $component->setWeight($data['weight']);
-    $map->getCollection()->append($component);
-  }
+  $map->setOption('components', array_keys($components_enabled));
 
   $form_state['item'] = $map->getExport();
 }
@@ -817,11 +788,7 @@ function openlayers_map_form_styles_submit($form, &$form_state) {
 
   $styles_enabled = array_filter($form_state['values']['options']['styles']);
 
-  $map->getCollection()->clear(array('style'));
-  foreach ($styles_enabled as $style => $data) {
-    $style = \Drupal\openlayers\Openlayers::load('style', $style);
-    $map->getCollection()->append($style);
-  }
+  $map->setOption('styles', array_keys($styles_enabled));
 
   $form_state['item'] = $map->getExport();
 }
