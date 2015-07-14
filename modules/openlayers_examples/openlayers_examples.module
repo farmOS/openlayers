@@ -96,25 +96,21 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->clearOption('contextualLinks');
     $map->setOption('height', '500px');
 
-    $controls = array_filter(array_merge($map->getOption('controls', array()), array(
+    $controls = array_values(array_merge($map->getOption('controls', array()), array(
       'openlayers_control_zoom',
       'openlayers_control_rotate',
       'openlayers_control_fullscreen',
     )));
     $map->setOption('controls', $controls);
 
-    $map->setOption(
-      'interactions',
-      array(
+    $map->setOption('interactions', array(
         'openlayers_interaction_doubleclickzoom',
         'openlayers_interaction_dragpan',
         'openlayers_interaction_dragrotate',
-        'openlayers_interaction_mousewheelzoom',
-      ),
-      TRUE
+      )
     );
 
-    $components = array_filter(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values')));
+    $components = array_values(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values', 'openlayers_examples_component_viewsync')));
     $map->setOption('components', $components);
 
     if (isset($form_state['input']['zoom'])) {
