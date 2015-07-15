@@ -22,7 +22,7 @@ use Drupal\openlayers\Types\Object;
 class Collection extends PluginBase {
 
   /**
-   * @var array
+   * @var ObjectInterface[]
    *  List of objects in this collection. The items have to be instances of
    * \Drupal\openlayers\Types\Object.
    */
@@ -123,13 +123,12 @@ class Collection extends PluginBase {
    */
   public function getJS() {
     $settings = array();
+
     foreach($this->getFlatList() as $object) {
       $settings[$object->getType()][] = $object->getJS();
     }
 
-    $settings = array_change_key_case($settings, CASE_LOWER);
-
-    return $settings;
+    return array_change_key_case($settings, CASE_LOWER);
   }
 
   /**
