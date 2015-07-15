@@ -218,11 +218,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_layer_tile_mapquest_osm',
       1 => 'openlayers_examples_layer_cluster_cities',
     ),
-    'sources' => array(
-      0 => 'openlayers_source_mapquest_osm',
-      1 => 'openlayers_examples_source_geojson_file',
-      2 => 'openlayers_examples_source_cluster',
-    ),
     'controls' => array(
       0 => 'openlayers_control_zoom',
       1 => 'openlayers_control_zoomslider',
@@ -231,7 +226,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
     ),
-    'components' => array(),
   );
   $export['openlayers_examples_map_geojson_cluster'] = $ol_map;
 
@@ -261,9 +255,6 @@ function openlayers_examples_default_openlayers_maps() {
     'layers' => array(
       0 => 'openlayers_layer_tile_mapquest_osm',
       1 => 'openlayers_examples_layer_views_geojson_popup',
-    ),
-    'sources' => array(
-      0 => 'openlayers_source_mapquest_osm',
     ),
     'controls' => array(
       0 => 'openlayers_control_attribution',
@@ -324,18 +315,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
       2 => 'openlayers_interaction_mousewheelzoom',
-    ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_openstreetmap_mapnik',
-      1 => 'openlayers_examples_source_mapbox_geography_class',
-      2 => 'openlayers_examples_source_mapquest_hyb',
-      3 => 'openlayers_examples_source_mapquest_sat',
-      4 => 'openlayers_examples_source_stamen3',
-      5 => 'openlayers_source_mapquest_osm',
-      6 => 'openlayers_examples_source_kml_earthquakes',
-      7 => 'views_geojson_openlayers_examples_geojson_feed_1',
-      8 => 'openlayers_examples_source_geojson_file',
-      9 => 'openlayers_examples_source_cluster',
     ),
     'components' => array(
       0 => 'openlayers_examples_component_blocklayerswitcher',
@@ -532,20 +511,6 @@ function openlayers_examples_default_openlayers_maps() {
       12 => 'openlayers_examples_layer_openstreetmap_de',
       13 => 'openlayers_examples_layer_openstreetmap_mapnik',
     ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_openstreetmap_bw',
-      1 => 'openlayers_examples_source_openmapsurfer_adminb',
-      2 => 'openlayers_examples_source_openstreetmap_mapnik',
-      3 => 'openlayers_source_mapquest_osm',
-      4 => 'openlayers_examples_source_openstreetmap_hot',
-      5 => 'openlayers_examples_source_opencyclemap',
-      6 => 'openlayers_examples_source_opencyclemap_outdoors',
-      7 => 'openlayers_examples_source_openstreetmap_europa',
-      8 => 'openlayers_examples_source_opencyclemap_thunderforest',
-      9 => 'openlayers_examples_source_opencyclemap_transport',
-      10 => 'openlayers_examples_source_opencyclemap_landscape',
-      11 => 'openlayers_examples_source_openmapsurfer_roads',
-    ),
     'controls' => array(
       0 => 'openlayers_control_attribution',
       1 => 'openlayers_control_fullscreen',
@@ -559,7 +524,6 @@ function openlayers_examples_default_openlayers_maps() {
       2 => 'openlayers_interaction_dragrotate',
       3 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'components' => array(),
   );
   $export['openlayers_examples_map_osm'] = $ol_map;
 
@@ -635,11 +599,6 @@ function openlayers_examples_default_openlayers_maps() {
       1 => 'openlayers_interaction_dragpan',
       2 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_stamen1',
-      1 => 'openlayers_examples_source_stamen2',
-      2 => 'openlayers_examples_source_stamen3',
-    ),
   );
   $export['openlayers_examples_map_stamen'] = $ol_map;
 
@@ -676,16 +635,6 @@ function openlayers_examples_default_openlayers_maps() {
       6 => 'openlayers_examples_layer_esri_worldterrainbase',
       7 => 'openlayers_examples_layer_esri_worldtopomap',
     ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_esri_delorme',
-      1 => 'openlayers_examples_source_esri_natgeoworldmap',
-      2 => 'openlayers_examples_source_esri_oceanbasemap',
-      3 => 'openlayers_examples_source_esri_worldimagery',
-      4 => 'openlayers_examples_source_esri_worldshadedrelief',
-      5 => 'openlayers_examples_source_esri_worldstreetmap',
-      6 => 'openlayers_examples_source_esri_worldterrainbase',
-      7 => 'openlayers_examples_source_esri_worldtopomap',
-    ),
     'controls' => array(
       0 => 'openlayers_examples_control_esri_layer_switcher',
       1 => 'openlayers_control_attribution',
@@ -699,7 +648,6 @@ function openlayers_examples_default_openlayers_maps() {
       2 => 'openlayers_interaction_dragrotate',
       3 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'components' => array(),
   );
   $export['openlayers_examples_map_esri'] = $ol_map;
 
@@ -769,7 +717,6 @@ function openlayers_examples_default_openlayers_maps() {
     'layers' => array(
       0 => 'openlayers_examples_layer_symbols_webgl',
     ),
-    'sources' => array(),
     'controls' => array(
       0 => 'openlayers_control_fullscreen',
       1 => 'openlayers_control_rotate',
@@ -781,7 +728,6 @@ function openlayers_examples_default_openlayers_maps() {
       2 => 'openlayers_interaction_dragrotateandzoom',
       3 => 'openlayers_interaction_mousewheelzoom',
     ),
-    'components' => array(),
   );
   $export['openlayers_examples_map_symbols_webgl'] = $ol_map;
 
@@ -912,14 +858,6 @@ function openlayers_examples_default_openlayers_maps() {
       4 => 'openlayers_examples_layer_mapbox_natural_earth_hypso_bathy',
       5 => 'openlayers_examples_layer_mapbox_geography_class_utfgrid',
     ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_mapbox_example3',
-      1 => 'openlayers_examples_source_mapbox_geography_class_utfgrid',
-      2 => 'openlayers_examples_source_mapbox_geography_class',
-      3 => 'openlayers_examples_source_mapbox_natural_earth_hypso_bathy',
-      4 => 'openlayers_examples_source_mapbox_example2',
-      5 => 'openlayers_examples_source_mapbox_example1',
-    ),
     'controls' => array(
       0 => 'openlayers_control_attribution',
       1 => 'openlayers_control_fullscreen',
@@ -1016,10 +954,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_examples_layer_stamen3',
       1 => 'openlayers_examples_layer_vector_kml_timezones',
     ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_stamen3',
-      3 => 'openlayers_examples_source_kml_timezones',
-    ),
     'styles' => array(
       0 => 'openlayers_examples_style_timezones',
       1 => 'openlayers_style_default',
@@ -1093,9 +1027,6 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_examples_layer_image',
-    ),
-    'sources' => array(
-      0 => 'openlayers_examples_source_imagestatic',
     ),
   );
   $export['openlayers_examples_map_image_static'] = $ol_map;
