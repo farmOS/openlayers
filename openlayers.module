@@ -4,8 +4,6 @@
  * Openlayers module.
  */
 
-include 'includes/openlayers.helpers.inc';
-
 /**
  * Implements hook_ctools_plugin_api().
  */
