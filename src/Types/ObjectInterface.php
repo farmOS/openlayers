@@ -251,9 +251,10 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function getName();
 
   /**
-   * Return the machine name of the object.
+   * Return the unique machine name of the object.
    *
    * @return string
+   *   The unique machine name of this object.
    */
   public function getMachineName();
 
