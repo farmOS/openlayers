@@ -4,15 +4,15 @@ Drupal.behaviors.openlayers = (function($) {
     attach: function (context, settings) {
       Drupal.openlayers.pluginManager.attach(context, settings);
 
-      $('.openlayers-map:not(.asynchronous)').once('openlayers-map', function () {
+      $('.openlayers-map:not(.asynchronous)', context).once('openlayers-map', function () {
         var map_id = $(this).attr('id');
-          if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
-            Drupal.openlayers.processMap(map_id, context);
-          }
+        if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+          Drupal.openlayers.processMap(map_id, context);
+        }
       });
 
       // Create dynamic callback functions for asynchronous maps.
-      $('.openlayers-map.asynchronous').once('openlayers-map.asynchronous', function () {
+      $('.openlayers-map.asynchronous', context).once('openlayers-map.asynchronous', function () {
         var map_id = $(this).attr('id');
         if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
           Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')] = function () {
