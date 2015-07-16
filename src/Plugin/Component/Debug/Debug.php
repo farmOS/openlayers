@@ -105,6 +105,14 @@ class Debug extends Component {
       )
     );
 
+    if (!empty($object->getPluginDescription())) {
+      $info['pd'] = array(
+        '#type' => 'item',
+        '#title' => 'Plugin description:',
+        '#markup' => $object->getPluginDescription()
+      );
+    }
+
     if (isset($js['opt'])) {
       $info['opt'] = array(
         '#type' => 'item',
