@@ -48,7 +48,7 @@ class Collection extends PluginBase {
    */
   public function append(ObjectInterface $object) {
     $this->delete($object);
-    $this->objects[] = $object;
+    $this->objects[$object->getType() . '_' . $object->getMachineName()] = $object;
   }
 
   /**
@@ -58,8 +58,7 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function prepend(ObjectInterface $object) {
-    $this->delete($object);
-    array_unshift($this->objects, $object);
+    $this->objects = array_merge(array($object->getType() . '_' . $object->getMachineName() => $object), $this->objects);
   }
 
   /**
@@ -69,20 +68,17 @@ class Collection extends PluginBase {
    *   Object instance to remove from this collection.
    */
   public function delete(ObjectInterface $object) {
-    foreach($this->getFlatList($object->getType()) as $candidate) {
-      if ($candidate->machine_name == $object->machine_name) {
-        unset($this->objects[$object->getType()][$object->machine_name]);
-      }
-    }
+    unset($this->objects[$object->getType() . '_' . $object->getMachineName()]);
   }
 
   /**
    * Remove object type.
    *
    * @param array $types
+   *   The types of objects to remove.
    */
   public function clear(array $types = array()) {
-    foreach($types as $type) {
+    foreach ($types as $type) {
       unset($this->objects[$type]);
     }
   }
@@ -95,18 +91,19 @@ class Collection extends PluginBase {
    */
   public function getAttached() {
     $attached = array();
-    foreach($this->getFlatList() as $object) {
+    foreach ($this->getFlatList() as $object) {
       $object_attached = $object->attached() + array(
-          'js' => array(),
-          'css' => array(),
-          'library' => array(),
-          'libraries_load' => array(),
-        );
+        'js' => array(),
+        'css' => array(),
+        'library' => array(),
+        'libraries_load' => array(),
+      );
       foreach (array('js', 'css', 'library', 'libraries_load') as $type) {
         foreach ($object_attached[$type] as $data) {
           if (isset($attached[$type])) {
             array_unshift($attached[$type], $data);
-          } else {
+          }
+          else {
             $attached[$type] = array($data);
           }
         }
@@ -124,7 +121,7 @@ class Collection extends PluginBase {
   public function getJS() {
     $settings = array();
 
-    foreach($this->getFlatList() as $object) {
+    foreach ($this->getFlatList() as $object) {
       $settings[$object->getType()][] = $object->getJS();
     }
 
@@ -200,7 +197,7 @@ class Collection extends PluginBase {
    */
   public function getExport() {
     $export = array();
-    foreach($this->getFlatList() as $object) {
+    foreach ($this->getFlatList() as $object) {
       $export[$object->getType()][] = $object->machine_name;
     }
     return array_change_key_case($export, CASE_LOWER);

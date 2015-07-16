@@ -73,6 +73,13 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function getMachineName() {
+    return $this->machine_name;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function defaultProperties() {
     return array(
       'machine_name' => NULL,

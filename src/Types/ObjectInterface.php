@@ -11,6 +11,15 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
  * Interface openlayers_object_interface.
  */
 interface ObjectInterface extends PluginInspectionInterface {
+
+  /**
+   * Return the unique machine name of this object.
+   *
+   * @return string
+   *   The unique machine name of this object.
+   */
+  public function getMachineName();
+
   /**
    * Return a list of default properties.
    *
