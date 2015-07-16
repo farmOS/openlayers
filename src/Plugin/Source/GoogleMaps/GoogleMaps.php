@@ -65,7 +65,7 @@ class GoogleMaps extends Source {
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $map = NULL) {
     $map_id = $map->getId();
     $gmap_id = 'gmap-' . $map_id;
-    $build['gmap'] = array(
+    $build['openlayers']['gmap'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
       '#value' => '',
