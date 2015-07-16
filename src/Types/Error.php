@@ -54,32 +54,14 @@ class Error extends Object {
     $this->loggerChannel = $logger_channel;
     $this->messenger = $messenger;
 
-    foreach ($this->defaultProperties() as $property => $value) {
-      $this->{$property} = $value;
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function defaultProperties() {
-    $properties = parent::defaultProperties();
-    $properties['errorMessage'] = 'Error while loading @type @machine_name having service @service.';
-    return $properties;
+    $this->errorMessage = 'Error while loading @type @machine_name having service @service.';
   }
 
   /**
    * {@inheritdoc}
    */
   public function init() {
-    foreach ($this->configuration as $property => $value) {
-      $this->{$property} = $this->configuration[$property];
-    }
-
-    if (isset($this->configuration['options'])) {
-      $this->options = array_replace_recursive((array) $this->options, (array) $this->configuration['options']);
-    }
-
+    parent::init();
     $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
     $this->messenger->addMessage($this->getMessage(), 'error', FALSE);
   }

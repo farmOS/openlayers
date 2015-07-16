@@ -13,7 +13,7 @@ function openlayers_default_openlayers_styles() {
   $ol_style = new stdClass();
   $ol_style->api_version = 1;
   $ol_style->machine_name = 'openlayers_style_default';
-  $ol_style->name = 'OpenLayers default style';
+  $ol_style->name = 'Openlayers default style';
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:OLStyle';
   $ol_style->options = array();

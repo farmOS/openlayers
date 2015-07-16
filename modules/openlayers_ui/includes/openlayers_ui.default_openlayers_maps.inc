@@ -45,6 +45,25 @@ function openlayers_ui_default_openlayers_maps() {
       1 => 'openlayers_interaction_dragrotate',
       2 => 'openlayers_interaction_mousewheelzoom',
     ),
+    'capabilities' => array(
+      'enabled' => 1,
+      'options' => array(
+        'container_type' => 'fieldset',
+        'title' => 'Map capabilities',
+        'description' => '',
+        'collapsible' => 1,
+        'collapsed' => 0,
+        'table' => array(
+          'openlayers_control_rotate' => 'Display a small icon that indicates the map\'s orientation, it get reset to 0 when clicked.',
+          'openlayers_control_zoomslider' => 'Provides a slider for zooming.',
+          'openlayers_control_fullscreen' => 'Provides an fullscreen button.',
+          'openlayers_control_zoom' => 'Provides a button, one for zoom in and one for zoom out.',
+          'openlayers_interaction_mousewheelzoom' => 'Allows the user to zoom the map by scrolling the mouse wheel.',
+          'openlayers_interaction_dragrotate' => 'Allows the user to rotate the map by clicking and dragging on the map when the [ALT] and [SHIFT] keys are held down. This interaction is only supported for mouse devices.',
+          'openlayers_interaction_dragpan' => 'Allows the user to pan the map by dragging the map.',
+        ),
+      ),
+    ),
   );
   $export['openlayers_map_ui_default'] = $ol_map;
 

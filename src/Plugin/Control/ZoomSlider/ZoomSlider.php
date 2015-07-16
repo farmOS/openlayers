@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Control;
  * Class ZoomSlider.
  *
  * @OpenlayersPlugin(
- *  id = "ZoomSlider"
+ *  id = "ZoomSlider",
+ *  description = "Provides a slider for zooming."
  * )
  *
  */

@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Control;
  * Class Rotate.
  *
  * @OpenlayersPlugin(
- *  id = "Rotate"
+ *  id = "Rotate",
+ *  description = "Display a small icon that indicates the map's orientation, it get reset to 0 when clicked."
  * )
  *
  */

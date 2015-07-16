@@ -86,10 +86,11 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     if (($map = \Drupal\openlayers\Openlayers::load('Map', $map)) == FALSE) {
       continue;
     }
+    $map_configuration = $map->getConfiguration();
 
     $form['form'][$map->getId()] = array(
       '#type' => 'fieldset',
-      '#title' => $map->name,
+      '#title' => $map_configuration['name'],
       '#collapsible' => FALSE,
     );
 
@@ -129,8 +130,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $form['form'][$map->getId()]['map'] = array(
       '#weight' => 0,
       '#type' => 'openlayers',
-      '#map' => $map,
-      '#description' => 'Use your mouse to navigate the map. Double click to zoom, hold your click and move to dragpan, hold shift and alt keys and left button mouse to rotate.',
+      '#map' => $map
     );
 
     if (module_exists('openlayers_services')) {

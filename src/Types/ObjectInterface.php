@@ -11,23 +11,6 @@ use Drupal\Component\Plugin\PluginInspectionInterface;
  * Interface openlayers_object_interface.
  */
 interface ObjectInterface extends PluginInspectionInterface {
-
-  /**
-   * Return the unique machine name of this object.
-   *
-   * @return string
-   *   The unique machine name of this object.
-   */
-  public function getMachineName();
-
-  /**
-   * Return a list of default properties.
-   *
-   * @return array
-   *   The default properties for this class.
-   */
-  public function defaultProperties();
-
   /**
    * Initializes the object.
    */
@@ -259,4 +242,32 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @return Object[]
    */
   public function optionsToObjects();
+
+  /**
+   * Return the human name of the object.
+   *
+   * @return string
+   */
+  public function getName();
+
+  /**
+   * Return the machine name of the object.
+   *
+   * @return string
+   */
+  public function getMachineName();
+
+  /**
+   * Return the description of the object.
+   *
+   * @return string
+   */
+  public function getDescription();
+
+  /**
+   * Return the description of the object's plugin.
+   *
+   * @return string
+   */
+  public function getPluginDescription();
 }

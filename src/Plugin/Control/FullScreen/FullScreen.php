@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Control;
  * Class FullScreen.
  *
  * @OpenlayersPlugin(
- *  id = "FullScreen"
+ *  id = "FullScreen",
+ *  description = "Provides an fullscreen button."
  * )
  *
  */

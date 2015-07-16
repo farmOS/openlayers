@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Interaction;
  * Class MouseWheelZoom.
  *
  * @OpenlayersPlugin(
- *  id = "MouseWheelZoom"
+ *  id = "MouseWheelZoom",
+ *  description = "Allows the user to zoom the map by scrolling the mouse wheel."
  * )
  *
  */

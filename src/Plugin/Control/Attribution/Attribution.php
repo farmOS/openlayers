@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Control;
  * Class Attribution.
  *
  * @OpenlayersPlugin(
- *  id = "Attribution"
+ *  id = "Attribution",
+ *  description = "Provides an information button with layers information."
  * )
  *
  */

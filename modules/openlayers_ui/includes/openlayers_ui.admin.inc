@@ -96,8 +96,8 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       }
 
       $class = array(
+        'Class: ' . $definition['class'],
         'Classfile: ' . $instance->getClassPath(),
-        'Namespace: ' . $definition['class'],
       );
 
       $rows[] = array(

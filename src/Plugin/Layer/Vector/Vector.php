@@ -17,16 +17,6 @@ use Drupal\openlayers\Types\Layer;
  *
  */
 class Vector extends Layer {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function defaultProperties() {
-    $default_properties = parent::defaultProperties();
-    $default_properties['options']['zoomActivity'] = '';
-    return $default_properties;
-  }
-
   /**
    * {@inheritdoc}
    */
@@ -35,7 +25,7 @@ class Vector extends Layer {
       '#title' => t('Show on certain zoom levels only'),
       '#description' => t('Define a zoom level per line, keep empty to show the layer always.'),
       '#type' => 'textarea',
-      '#default_value' => $this->getOption('zoomActivity'),
+      '#default_value' => $this->getOption('zoomActivity', ''),
     );
   }
 

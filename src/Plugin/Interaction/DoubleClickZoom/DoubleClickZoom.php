@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Interaction;
  * Class DoubleClickZoom.
  *
  * @OpenlayersPlugin(
- *  id = "DoubleClickZoom"
+ *  id = "DoubleClickZoom",
+ *  description = "Allows the user to zoom by double-clicking on the map."
  * )
  *
  * @package Drupal\openlayers\Openlayers\Interaction\DoubleClickZoom

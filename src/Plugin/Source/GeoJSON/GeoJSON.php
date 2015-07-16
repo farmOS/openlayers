@@ -18,16 +18,6 @@ use Drupal\openlayers\Config;
  *
  */
 class GeoJSON extends Source {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function defaultProperties() {
-    $default_properties = parent::defaultProperties();
-    $default_properties['options']['paramForwarding'] = TRUE;
-    return $default_properties;
-  }
-
   /**
    * {@inheritdoc}
    */

@@ -47,7 +47,6 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function append(ObjectInterface $object) {
-    $this->delete($object);
     $this->objects[$object->getType() . '_' . $object->getMachineName()] = $object;
   }
 
@@ -58,7 +57,7 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function prepend(ObjectInterface $object) {
-    $this->objects = array_merge(array($object->getType() . '_' . $object->getMachineName() => $object), $this->objects);
+    $this->objects = array_merge(array($object->getType() . '_' . $object->getMachineName() => $object), array_reverse($this->objects));
   }
 
   /**

@@ -65,6 +65,18 @@ class GoogleMaps extends Source {
   public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $map = NULL) {
     $map_id = $map->getId();
     $gmap_id = 'gmap-' . $map_id;
+
+    $styles = array(
+      'width' => $map->getOption('width'),
+      'height' => $map->getOption('height'),
+      'overflow' => 'hidden',
+    );
+
+    $css_styles = '';
+    foreach ($styles as $property => $value) {
+      $css_styles .= $property . ':' . $value . ';';
+    }
+
     $build['openlayers']['gmap'] = array(
       '#theme' => 'html_tag',
       '#tag' => 'div',
@@ -72,7 +84,7 @@ class GoogleMaps extends Source {
       '#attributes' => array(
         'id' => $gmap_id,
         'class' => array('openlayers', 'gmap-map'),
-        'style' => 'height: 100%; width: 100%;',
+        'style' => $css_styles,
       ),
     );
   }

@@ -12,16 +12,11 @@ use Drupal\openlayers\Openlayers;
  */
 abstract class Map extends Object implements MapInterface {
   /**
+   * A unique ID for the map.
+   *
    * @var string
    */
   protected $id;
-
-  /**
-   * The array containing the options.
-   *
-   * @var array
-   */
-  protected $options = array();
 
   /**
    * {@inheritdoc}
@@ -90,18 +85,17 @@ abstract class Map extends Object implements MapInterface {
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'openlayers-container-' . $map->getId(),
-        'style' => $css_styles,
         'class' => array(
           'contextual-links-region',
           'openlayers-container',
         ),
       ),
       'map' => array(
-        '#theme' => 'html_tag',
-        '#tag' => 'div',
-        '#value' => '',
+        '#type' => 'container',
+        '#weight' => 0,
         '#attributes' => array(
           'id' => $map->getId(),
+          'style' => $css_styles,
           'class' => array(
             'openlayers-map',
             $map->machine_name,
@@ -114,6 +108,37 @@ abstract class Map extends Object implements MapInterface {
     // If this is an asynchronous map flag it as such.
     if ($asynchronous) {
       $build['openlayers']['map']['#attributes']['class'][] = 'asynchronous';
+    }
+
+    if ((bool) $this->getOption('capabilities', FALSE) === TRUE) {
+      $items = array_values($this->getOption(array('capabilities', 'options', 'table'), array()));
+      array_walk($items, 'check_plain');
+
+      $variables = array(
+        'items' => $items,
+        'title' => '',
+        'type' => 'ul',
+      );
+
+      $build['openlayers']['capabilities'] = array(
+        '#weight' => 1,
+        '#type' => $this->getOption(array('capabilities', 'options', 'container_type'), 'fieldset'),
+        '#title' => $this->getOption(array('capabilities', 'options', 'title'), NULL),
+        '#description' => $this->getOption(array('capabilities', 'options', 'description'), NULL),
+        '#collapsible' => $this->getOption(array('capabilities', 'options', 'collapsible'), TRUE),
+        '#collapsed' => $this->getOption(array('capabilities', 'options', 'collapsed'), TRUE),
+        'description' => array(
+          '#type' => 'container',
+          '#attributes' => array(
+            'class' => array(
+              'description'
+            )
+          ),
+          array(
+            '#markup' => theme('item_list', $variables)
+          )
+        )
+      );
     }
 
     $map->postBuild($build, $map);
@@ -145,6 +170,7 @@ abstract class Map extends Object implements MapInterface {
   public function getJS() {
     $js = parent::getJS();
     $js['opt']['target'] = $this->getId();
+    unset($js['opt']['capabilities']);
     return $js;
   }
 }

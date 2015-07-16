@@ -12,7 +12,8 @@ use Drupal\openlayers\Types\Interaction;
  * Class DragPan
  *
  * @OpenlayersPlugin(
- *  id = "DragPan"
+ *  id = "DragPan",
+ *  description = "Allows the user to pan the map by dragging the map."
  * )
  *
  * @package Drupal\openlayers\Interaction\DragPan

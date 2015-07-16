@@ -15,7 +15,8 @@ use Drupal\openlayers\Types\Control;
  * Class LayerSwitcher.
  *
  * @OpenlayersPlugin(
- *  id = "LayerSwitcher"
+ *  id = "LayerSwitcher",
+ *  description = "Provides a layer switcher control."
  * )
  *
  * @package Drupal\openlayers\Control
