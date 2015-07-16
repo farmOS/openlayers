@@ -54,11 +54,13 @@ Drupal.openlayers.pluginManager.register({
    */
   scriptLoading: false,
   attach: function(context, settings) {
+    // There seem cases in which google is already defind, but the loading isn't
+    // finished, so make sure we'll wait till the loading is complete before
+    // calling the initialize function ourselves.
+    if (Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading) {
+      return;
+    }
     if (typeof google === 'undefined') {
-      // If a script is already loading bail out.
-      if (Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading) {
-        return;
-      }
       Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading = true;
 
       var params = {
@@ -108,6 +110,7 @@ Drupal.openlayers.pluginManager.register({
  * Callback to initialize all google maps as soon as the gmap API is available.
  */
 Drupal.openlayers.openlayers_source_internal_googlemaps_initialize = function() {
+  Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading = false;
   jQuery('.openlayers.gmap-map').each(function() {
     var map_id = jQuery(this).attr('id').replace('gmap-', '');
     var callback = Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')];
