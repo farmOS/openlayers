@@ -61,6 +61,7 @@ abstract class Map extends Object implements MapInterface {
    */
   public function build() {
     $map = $this;
+
     $build = array();
 
     // Run prebuild hook to all objects who implements it.
