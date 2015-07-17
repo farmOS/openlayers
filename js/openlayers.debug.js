@@ -90,6 +90,11 @@
     console.groupEnd();
     console.groupEnd();
   });
+  $(document).on('openlayers.object_error', function(event, objects) {
+    console.info('Object ' + objects.data.mn + ' of type ' + objects.type + ' does not provide JS plugin.');
+    console.info('Object data');
+    console.debug(objects.data);
+  });
 
   $(document).on('openlayers.build_failed', function(event, objects) {
     console.timeEnd('Total building time');

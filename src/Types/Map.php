@@ -93,6 +93,7 @@ abstract class Map extends Object implements MapInterface {
       'map-container' => array(
         '#type' => 'container',
         '#attributes' => array(
+          'id' => 'map-container-' . $map->getId(),
           'style' => $css_styles,
           'class' => array()
         ),

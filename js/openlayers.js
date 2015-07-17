@@ -219,7 +219,18 @@ Drupal.openlayers = (function($){
         return object;
       }
       else {
-        Drupal.openlayers.log('fake', 'Factory service to build ' + type + ' not available: ' + data.fs);
+        $(document).trigger('openlayers.object_error', [
+          {
+            'type': type,
+            'mn': data.mn,
+            'data': data,
+            'map': Drupal.openlayers.instances[map_id].map,
+            'objects': Drupal.openlayers.instances[map_id],
+            'context': context,
+            'object': object,
+            'map_id': map_id
+          }
+        ]);
       }
     }),
     log: function(string) {
