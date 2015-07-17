@@ -48,6 +48,8 @@ class Cluster extends Source {
 
     if ($source = $this->getOption('source')) {
       $source = Openlayers::load('source', $source);
+      // This source is a dependency of the current one, we need a lighter weight.
+      $source->setWeight($this->getWeight() - 1);
       $import = array_merge($import, $source->getCollection()->getFlatList());
     }
 

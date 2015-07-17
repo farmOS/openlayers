@@ -46,7 +46,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * @var int
    */
-  protected $weight = -1;
+  protected $weight = 0;
   /**
    * The array containing the options.
    *
