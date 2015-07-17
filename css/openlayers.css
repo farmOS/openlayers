@@ -1,3 +1,8 @@
+.openlayers-map-container {
+  overflow: hidden;
+  position: relative;
+}
+
 .openlayers-map {
   height: 100%;
   width: 100%;
@@ -39,3 +44,4 @@
 .popover-content {
   min-width: 180px;
 }
+

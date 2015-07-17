@@ -185,6 +185,11 @@ class Openlayers {
     return $objects;
   }
 
+  /**
+   * Save an object in the database.
+   *
+   * @param ObjectInterface $object
+   */
   public static function save(Object $object) {
     ctools_include('export');
     $configuration = $object->getConfiguration();

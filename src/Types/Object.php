@@ -132,7 +132,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
         $object->postBuild($build, $context);
       }
     }
-
     drupal_alter('openlayers_object_postprocess', $build, $this);
   }
 
@@ -248,7 +247,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getMachineName() {
     $configuration = $this->getConfiguration();
-    return check_plain($configuration['machine_name']);
+    if (isset($configuration['machine_name'])) {
+      return check_plain($configuration['machine_name']);
+    } else {
+      return 'undefined';
+    }
   }
 
   /**
@@ -256,7 +259,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getName() {
     $configuration = $this->getConfiguration();
-    return check_plain($configuration['name']);
+    if (isset($configuration['name'])) {
+      return check_plain($configuration['name']);
+    } else {
+      return 'undefined';
+    }
   }
 
   /**
@@ -264,7 +271,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getDescription() {
     $configuration = $this->getConfiguration();
-    return check_plain($configuration['description']);
+    if (isset($configuration['description'])) {
+      return check_plain($configuration['description']);
+    } else {
+      return 'undefined';
+    }
   }
 
   /**
@@ -272,7 +283,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getFactoryService() {
     $configuration = $this->getConfiguration();
-    return check_plain($configuration['factory_service']);
+    if (isset($configuration['factory_service'])) {
+      return check_plain($configuration['factory_service']);
+    } else {
+      return 'undefined';
+    }
   }
 
   /**
@@ -360,17 +375,11 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getParents() {
-    $parents = array();
-
-    foreach (Openlayers::loadAll('Map') as $map) {
-      foreach ($map->getObjects($this->getType()) as $object) {
-        if ($object->machine_name == $this->machine_name) {
-          $parents[$map->machine_name] = $map;
-        }
-      }
-    }
-
-    return $parents;
+    return array_filter(Openlayers::loadAll('Map'), function($map) {
+      return array_filter($map->getObjects($this->getType()), function($object) {
+        return $object->getMachineName() == $this->getMachineName();
+      });
+    });
   }
 
   /**
@@ -416,7 +425,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function getType() {
     $class = explode('\\', get_class($this));
-    return $class[3];
+    return drupal_strtolower($class[3]);
   }
 
   /**
@@ -444,9 +453,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getJS() {
     $export = $this->getExport();
 
-    foreach(Openlayers::getPluginTypes() as $type) {
+    array_map(function($type) use ($export) {
       unset($export->options[$type . 's']);
-    }
+    }, Openlayers::getPluginTypes());
 
     $js = array(
       'mn' => $export->machine_name,

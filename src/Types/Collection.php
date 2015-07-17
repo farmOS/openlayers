@@ -166,7 +166,7 @@ class Collection extends PluginBase {
       $type = drupal_strtolower($type);
       $list = array_filter($this->objects, function($obj) use ($type) {
         /* @var Object $obj */
-        return drupal_strtolower($obj->getType()) == $type;
+        return $obj->getType() == $type;
       });
     }
 

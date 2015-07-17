@@ -33,11 +33,34 @@ abstract class Map extends Object implements MapInterface {
   }
 
   /**
+   * @inheritDoc
+   */
+  public function attached() {
+    $attached = parent::attached();
+
+    $settings = $this->getCollection()->getJS();
+    $settings['map'] = array_shift($settings['map']);
+
+    $attached['js'][] = array(
+      'data' => array(
+        'openlayers' => array(
+          'maps' => array(
+            $this->getId() => $settings,
+          ),
+        ),
+      ),
+      'type' => 'setting',
+    );
+
+    return $attached;
+  }
+
+
+  /**
    * {@inheritdoc}
    */
   public function build() {
     $map = $this;
-
     $build = array();
 
     // Run prebuild hook to all objects who implements it.
@@ -49,38 +72,19 @@ abstract class Map extends Object implements MapInterface {
       $asynchronous += (int) $object->isAsynchronous();
     }
 
-    $settings = $map->getCollection()->getJS();
-    $settings['map'] = $settings['map'][0];
-    $settings = array(
-      'data' => array(
-        'openlayers' => array(
-          'maps' => array(
-            $map->getId() => $settings,
-          ),
-        ),
-      ),
-      'type' => 'setting',
-    );
-
     // If this is asynchronous flag it as such.
     if ($asynchronous) {
       $settings['data']['openlayers']['maps'][$map->getId()]['map']['async'] = $asynchronous;
     }
 
-    $attached = $map->getCollection()->getAttached();
-    $attached['js'][] = $settings;
-
     $styles = array(
       'width' => $map->getOption('width'),
       'height' => $map->getOption('height'),
-      'overflow' => 'hidden',
-      'position' => 'relative'
     );
 
-    $css_styles = '';
-    foreach ($styles as $property => $value) {
-      $css_styles .= $property . ':' . $value . ';';
-    }
+    $styles = implode(array_map(function($k, $v) {
+      return $k . ':'. $v .';';
+    }, array_keys($styles), $styles));
 
     $build['openlayers'] = array(
       '#type' => 'container',
@@ -95,8 +99,10 @@ abstract class Map extends Object implements MapInterface {
         '#type' => 'container',
         '#attributes' => array(
           'id' => 'map-container-' . $map->getId(),
-          'style' => $css_styles,
-          'class' => array()
+          'style' => $styles,
+          'class' => array(
+            'openlayers-map-container'
+          )
         ),
         'map' => array(
           '#type' => 'container',
@@ -107,7 +113,7 @@ abstract class Map extends Object implements MapInterface {
               $map->machine_name,
             ),
           ),
-          '#attached' => $attached,
+          '#attached' => $map->getCollection()->getAttached(),
         ),
       )
     );
@@ -120,12 +126,6 @@ abstract class Map extends Object implements MapInterface {
     if ((bool) $this->getOption('capabilities', FALSE) === TRUE) {
       $items = array_values($this->getOption(array('capabilities', 'options', 'table'), array()));
       array_walk($items, 'check_plain');
-
-      $variables = array(
-        'items' => $items,
-        'title' => '',
-        'type' => 'ul',
-      );
 
       $build['openlayers']['capabilities'] = array(
         '#weight' => 1,
@@ -142,7 +142,14 @@ abstract class Map extends Object implements MapInterface {
             )
           ),
           array(
-            '#markup' => theme('item_list', $variables)
+            '#markup' => theme(
+              'item_list',
+              array(
+                'items' => $items,
+                'title' => '',
+                'type' => 'ul',
+                )
+            )
           )
         )
       );

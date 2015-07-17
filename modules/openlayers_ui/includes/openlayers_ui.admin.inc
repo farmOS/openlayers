@@ -13,6 +13,7 @@
  */
 function openlayers_ui_admin_settings($form, &$form_state) {
   $options = array();
+
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
     if (!is_object($data) || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
       continue;
@@ -77,14 +78,21 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     foreach(\Drupal::service('openlayers.' . $type)->getDefinitions() as $service => $definition) {
       $definition += array('arguments' => array('NULL'));
 
+      $configuration = array(
+        'machine_name' => '',
+        'factory_service' => ''
+      );
+
       /* @var \Drupal\openlayers\Types\Object $instance */
-      $instance = \Drupal::service('openlayers.' . $type)->createInstance($definition['id']);
+      $instance = \Drupal::service('openlayers.' . $type)->createInstance($definition['id'], $configuration);
       $attached = $instance->attached();
 
       $sizes = array('js' => 0, 'css' => 0);
       foreach(array_keys($sizes) as $size_type) {
         foreach($attached[$size_type] as $index => $data) {
-          $sizes[$size_type] += filesize($data['data']);
+          if (!is_array($data['data'])) {
+            $sizes[$size_type] += filesize($data['data']);
+          }
         }
       }
 
