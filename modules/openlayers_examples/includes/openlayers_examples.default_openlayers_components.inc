@@ -367,5 +367,14 @@ map.on(\'click\', function(evt) {
   );
   $export['openlayers_examples_component_spinjs'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_progressbar';
+  $ol_component->name = 'Openlayers examples: Progress bar';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:ProgressBar';
+  $export['openlayers_examples_component_progressbar'] = $ol_component;
+
   return $export;
 }
