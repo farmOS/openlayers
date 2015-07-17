@@ -68,6 +68,14 @@ function openlayers_default_openlayers_controls() {
 
   $ol_control = new stdClass();
   $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_control_overviewmap';
+  $ol_control->name = 'OverviewMap';
+  $ol_control->description = 'Create a new control with a map acting as an overview map for an other defined map.';
+  $ol_control->factory_service = 'openlayers.Control:OverviewMap';
+  $export['openlayers_control_overviewmap'] = $ol_control;
+
+  $ol_control = new stdClass();
+  $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_control_zoomslider';
   $ol_control->name = 'Zoom slider';
   $ol_control->description = 'Zoom slider control description';

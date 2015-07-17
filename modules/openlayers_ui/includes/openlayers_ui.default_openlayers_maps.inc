@@ -37,7 +37,7 @@ function openlayers_ui_default_openlayers_maps() {
     'controls' => array(
       0 => 'openlayers_control_rotate',
       1 => 'openlayers_control_zoom',
-      2 => 'openlayers_control_zoomslider',
+      2 => 'openlayers_control_overviewmap',
       3 => 'openlayers_control_fullscreen',
     ),
     'interactions' => array(
@@ -55,9 +55,9 @@ function openlayers_ui_default_openlayers_maps() {
         'collapsed' => 0,
         'table' => array(
           'openlayers_control_rotate' => 'Display a small icon that indicates the map\'s orientation, it get reset to 0 when clicked.',
-          'openlayers_control_zoomslider' => 'Provides a slider for zooming.',
           'openlayers_control_fullscreen' => 'Provides a button that when clicked fills up the full screen with the map. When in full screen mode, a close button is shown to exit full screen mode.',
           'openlayers_control_zoom' => 'Provides a button, one for zoom in and one for zoom out.',
+          'openlayers_control_overviewmap' => 'Create a new control with a map acting as an overview map for an other defined map.',
           'openlayers_interaction_mousewheelzoom' => 'Allows the user to zoom the map by scrolling the mouse wheel.',
           'openlayers_interaction_dragrotate' => 'Allows the user to rotate the map by clicking and dragging on the map when the [ALT] and [SHIFT] keys are held down. This interaction is only supported for mouse devices.',
           'openlayers_interaction_dragpan' => 'Allows the user to pan the map by dragging the map.',
