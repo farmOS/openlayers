@@ -271,4 +271,9 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @return string
    */
   public function getPluginDescription();
+
+  /**
+   * Refresh string translations.
+   */
+  public function i18nStringsRefresh();
 }

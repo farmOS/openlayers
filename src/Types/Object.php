@@ -106,6 +106,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
     }
 
     $form_state['item'] = $this->getExport();
+
+    // Refresh translatable strings.
+    $this->i18nStringsRefresh();
   }
 
   /**
@@ -117,7 +120,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
         $object->preBuild($build, $this);
       }
     }
-
     drupal_alter('openlayers_object_preprocess', $build, $this);
   }
 
@@ -480,4 +482,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
     return isset($plugin_definition['description']) ? $plugin_definition['description'] : '';
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function i18nStringsRefresh() {}
 }

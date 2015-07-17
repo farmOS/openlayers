@@ -71,28 +71,6 @@ class LayerSwitcher extends Control {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
-    parent::optionsFormSubmit($form, $form_state);
-    // Ensure just labels of active layers are stored.
-    $labels = $this->getOption('layer_labels', array());
-    $layers = $this->getOption('layers', array());
-    $existing_layers = array_intersect_key($labels, $layers);
-    $removed_layers = array_diff_key($layers, $labels);
-    // Handle translatable values.
-    // Remove / register string translations.
-    foreach ($removed_layers as $layer) {
-      openlayers_i18n_string_remove('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label');
-    }
-    foreach ($existing_layers as $layer => $label) {
-      openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label', $label);
-    }
-    // Register string in i18n string if possible.
-    openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':title', $this->getOption('label', 'Layers'));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
     $map_id = $context->getId();
     $layers = $this->getOption('layers', array());
@@ -137,5 +115,26 @@ class LayerSwitcher extends Control {
       ),
     );
     $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="' . drupal_html_class($this->machine_name) . ' layerswitcher">' . drupal_render($layerswitcher) . '</div>');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function i18nStringsRefresh() {
+    // Ensure just labels of active layers are stored.
+    $labels = $this->getOption('layer_labels', array());
+    $layers = $this->getOption('layers', array());
+    $existing_layers = array_intersect_key($labels, $layers);
+    $removed_layers = array_diff_key($layers, $labels);
+    // Handle translatable values.
+    // Remove / register string translations.
+    foreach ($removed_layers as $layer) {
+      openlayers_i18n_string_remove('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label');
+    }
+    foreach ($existing_layers as $layer => $label) {
+      openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label', $label);
+    }
+    // Register string in i18n string if possible.
+    openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':title', $this->getOption('label', 'Layers'));
   }
 }
