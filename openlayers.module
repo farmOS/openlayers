@@ -364,8 +364,8 @@ function openlayers_dev_dialog_form_clean(array &$form) {
  */
 function openlayers_i18n_string_refresh() {
   foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
-    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $machine_name => $map) {
-      $object = \Drupal\openlayers\Openlayers::load($type, $map);
+    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $machine_name => $exportable) {
+      $object = \Drupal\openlayers\Openlayers::load($type, $exportable);
       $object->i18nStringsRefresh();
     }
   }
