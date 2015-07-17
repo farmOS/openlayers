@@ -117,7 +117,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
     foreach ($this->getCollection()->getFlatList() as $object) {
       if ($object !== $this) {
-        $object->preBuild($build, $this);
+        $object->preBuild($build, $context);
       }
     }
     drupal_alter('openlayers_object_preprocess', $build, $this);
