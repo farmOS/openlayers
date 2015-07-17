@@ -150,6 +150,9 @@ class Openlayers {
     else {
       $configuration += array(
         'type' => $object_type,
+        'name' => 'Error',
+        'description' => 'Error',
+        'factory_service' => '',
         'machine_name' => $export,
         'errorMessage' => 'Unable to load CTools exportable @type @machine_name.',
       );

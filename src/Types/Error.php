@@ -55,6 +55,10 @@ class Error extends Object {
     $this->messenger = $messenger;
 
     $this->errorMessage = 'Error while loading @type @machine_name having service @service.';
+
+    if (!empty($configuration['errorMessage'])) {
+      $this->errorMessage = $configuration['errorMessage'];
+    }
   }
 
   /**
@@ -72,7 +76,7 @@ class Error extends Object {
   public function getMessage() {
     $machine_name = isset($this->machine_name) ? $this->machine_name : 'undefined';
     $service = isset($this->factory_service) ? $this->factory_service : 'undefined';
-    $type = isset($this->type) ? $this->type : 'undefined';
+    $type = isset($this->configuration['type']) ? $this->configuration['type'] : 'undefined';
 
     return t($this->errorMessage, array(
       '@machine_name' => $machine_name,
