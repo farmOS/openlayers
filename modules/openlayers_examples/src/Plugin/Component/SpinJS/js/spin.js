@@ -5,7 +5,9 @@
         var target = document.getElementById('map-container-' + map_id);
         var spinner = new Spinner(settings.spinjs[map_id]).spin(target);
         setTimeout(function() {
-          spinner.stop();
+          $(spinner.el).fadeOut('slow', function() {
+            spinner.stop();
+          });
         }, 1000);
       }
     }
