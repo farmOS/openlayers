@@ -74,6 +74,7 @@ abstract class Map extends Object implements MapInterface {
       'width' => $map->getOption('width'),
       'height' => $map->getOption('height'),
       'overflow' => 'hidden',
+      'position' => 'relative'
     );
 
     $css_styles = '';
