@@ -336,5 +336,36 @@ map.on(\'click\', function(evt) {
   );
   $export['openlayers_examples_component_viewsync'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_spinjs';
+  $ol_component->name = 'Openlayers examples: SpinJS';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:SpinJS';
+  $ol_component->options = array(
+    'lines' => 12,
+    'length' => 15,
+    'width' => 8,
+    'radius' => 30,
+    'scale' => 1,
+    'corners' => 1,
+    'color' => '#000',
+    'opacity' => 0.25,
+    'rotate' => 0,
+    'direction' => 1,
+    'speed' => 2,
+    'trail' => 100,
+    'fps' => 20,
+    'zIndex' => 0,
+    'className' => 'spinner',
+    'top' => '50%',
+    'left' => '50%',
+    'shadow' => FALSE,
+    'hwaccel' => FALSE,
+    'position' => 'relative',
+  );
+  $export['openlayers_examples_component_spinjs'] = $ol_component;
+
   return $export;
 }

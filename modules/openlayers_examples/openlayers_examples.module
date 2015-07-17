@@ -111,7 +111,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
       )
     );
 
-    $components = array_values(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values', 'openlayers_examples_component_viewsync')));
+    $components = array_values(array_merge($map->getOption('components', array()), array('openlayers_examples_component_ajax_values', 'openlayers_examples_component_viewsync', 'openlayers_examples_component_spinjs')));
     $map->setOption('components', $components);
 
     if (isset($form_state['input']['zoom'])) {
