@@ -132,10 +132,25 @@ function openlayers_source_form_type($form, &$form_state) {
   );
 
   $form['options']['attributions'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Attributions options'),
+  );
+  $form['options']['attributions']['enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable attributions'),
+    '#default_value' => isset($form_state['item']->options['attributions']) ? TRUE : FALSE,
+    '#description' => t('Enable attributions ?'),
+  );
+  $form['options']['attributions']['data'] = array(
     '#type' => 'textfield',
     '#title' => t('Attributions'),
     '#default_value' => isset($form_state['item']->options['attributions']) ? $form_state['item']->options['attributions'] : '',
     '#description' => t('Attributions HTML text. Empty to disable.'),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="options[attributions][enabled]"]' => array('checked' => TRUE),
+      ),
+    ),
   );
 
   return $form;
@@ -149,10 +164,13 @@ function openlayers_source_form_type_submit($form, &$form_state) {
     $form_state['item']->options = array_merge((array) $form_state['item']->options, (array) $form_state['values']['options']);
   }
 
-  if (empty($form_state['values']['options']['attributions'])) {
+  if ((bool) $form_state['values']['options']['attributions']['enabled'] == FALSE) {
     unset($form_state['item']->options['attributions']);
+  } else {
+    unset($form_state['item']->options['attributions']['enabled']);
+    $form_state['item']->options['attributions'] = $form_state['values']['options']['attributions']['data'];
   }
-
+  
   $form_state['item']->factory_service = $form_state['values']['factory_service'];
 }
 

@@ -13,7 +13,7 @@ use Drupal\openlayers\Types\Control;
  *
  * @OpenlayersPlugin(
  *  id = "Rotate",
- *  description = "Display a small icon that indicates the map's orientation, it get reset to 0 when clicked."
+ *  description = "Provides a button control to reset rotation to 0."
  * )
  *
  */

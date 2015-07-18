@@ -35,10 +35,11 @@ function openlayers_ui_default_openlayers_maps() {
       0 => 'openlayers_layer_tile_mapquest_osm',
     ),
     'controls' => array(
-      0 => 'openlayers_control_rotate',
-      1 => 'openlayers_control_zoom',
-      2 => 'openlayers_control_overviewmap',
-      3 => 'openlayers_control_fullscreen',
+      0 => 'openlayers_control_attribution',
+      1 => 'openlayers_control_rotate',
+      2 => 'openlayers_control_zoom',
+      3 => 'openlayers_control_overviewmap',
+      4 => 'openlayers_control_fullscreen',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
@@ -54,7 +55,8 @@ function openlayers_ui_default_openlayers_maps() {
         'collapsible' => 1,
         'collapsed' => 0,
         'table' => array(
-          'openlayers_control_rotate' => 'Display a small icon that indicates the map\'s orientation, it get reset to 0 when clicked.',
+          'openlayers_control_attribution' => 'Provides a control to show all the attributions associated with the layer sources in the map.',
+          'openlayers_control_rotate' => 'Provides a button control to reset rotation to 0.',
           'openlayers_control_fullscreen' => 'Provides a button that when clicked fills up the full screen with the map. When in full screen mode, a close button is shown to exit full screen mode.',
           'openlayers_control_zoom' => 'Provides a button, one for zoom in and one for zoom out.',
           'openlayers_control_overviewmap' => 'Create a new control with a map acting as an overview map for an other defined map.',

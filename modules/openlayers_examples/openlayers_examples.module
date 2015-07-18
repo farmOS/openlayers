@@ -98,6 +98,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->setOption('height', '500px');
 
     $controls = array_values(array_merge($map->getOption('controls', array()), array(
+      'openlayers_control_attributions',
       'openlayers_control_zoom',
       'openlayers_control_rotate',
       'openlayers_control_fullscreen',

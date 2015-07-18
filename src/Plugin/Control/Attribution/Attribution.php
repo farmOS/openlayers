@@ -13,7 +13,7 @@ use Drupal\openlayers\Types\Control;
  *
  * @OpenlayersPlugin(
  *  id = "Attribution",
- *  description = "Provides an information button with layers information."
+ *  description = "Provides a control to show all the attributions associated with the layer sources in the map."
  * )
  *
  */
