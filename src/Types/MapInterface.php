@@ -24,5 +24,5 @@ interface MapInterface extends ObjectInterface {
    * @return array
    *   The render array.
    */
-  public function build();
+  public function build(array $build = array());
 }

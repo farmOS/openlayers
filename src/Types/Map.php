@@ -59,10 +59,8 @@ abstract class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function build() {
+  public function build(array $build = array()) {
     $map = $this;
-
-    $build = array();
 
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);

@@ -138,11 +138,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function build() {}
-
-  /**
-   * {@inheritdoc}
-   */
   public function clearOption($parents) {
     $ref = &$this->options;
 
