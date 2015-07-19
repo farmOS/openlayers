@@ -60,7 +60,7 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
     }
   }
 
-  $build['contextual_links'] = array(
+  $build['openlayers']['contextual_links'] = array(
     '#prefix' => '<div class="contextual-links-wrapper">',
     '#suffix' => '</div>',
     '#theme' => 'links__contextual',
