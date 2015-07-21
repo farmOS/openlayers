@@ -385,5 +385,70 @@ map.on(\'click\', function(evt) {
   $ol_component->factory_service = 'openlayers.Component:Permalink';
   $export['openlayers_examples_component_permalink'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_layerclipping';
+  $ol_component->name = 'Openlayers examples: Layer clipping';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:InlineJS';
+  $ol_component->options = array(
+    'javascript' => 'var draw = function(ctx) {
+    ctx.save();
+    ctx.translate((ctx.canvas.width / 2) - 100, (ctx.canvas.height / 2) + 50);
+    ctx.scale(1, 1);
+
+    ctx.lineCap = \'butt\';
+    ctx.lineJoin = \'miter\';
+    ctx.miterLimit = 4;
+
+    ctx.beginPath();
+    ctx.moveTo(115.298, -6.622);
+    ctx.bezierCurveTo(86.173, -6.622, 62.567, 16.984, 62.567, 46.102);
+    ctx.bezierCurveTo(62.567, 75.202, 86.167, 98.80199999999999, 115.267, 98.80199999999999);
+    ctx.bezierCurveTo(144.378, 98.80199999999999, 167.98399999999998, 75.192, 167.98399999999998, 46.07399999999999);
+    ctx.bezierCurveTo(168.016, 17, 144.409, -6.622, 115.298, -6.622);
+
+    ctx.moveTo(180.858, -16.681);
+    ctx.bezierCurveTo(196.48000000000002, -0.3810000000000002, 206.058, 21.718999999999998, 206.058, 46.101);
+    ctx.bezierCurveTo(206.058, 76.958, 190.648, 104.205, 167.123, 120.601);
+    ctx.bezierCurveTo(210.605, 107.185, 246.58299999999997, 74.50200000000001, 262.68899999999996, 34.913);
+    ctx.bezierCurveTo(284.95899999999995, -19.847, 264.224, -61.068, 229.41099999999997, -98.437);
+    ctx.bezierCurveTo(230.47099999999998, -93.637, 231.11099999999996, -88.53699999999999, 231.11099999999996, -83.437);
+    ctx.bezierCurveTo(231.105, -51.728, 209.855, -25.012, 180.858, -16.681);
+
+    ctx.moveTo(121.316, -83.42);
+    ctx.bezierCurveTo(121.316, -61.120000000000005, 139.416, -43.120000000000005, 161.61599999999999, -43.089);
+    ctx.bezierCurveTo(183.81599999999997, -43.05799999999999, 201.98, -61.146, 201.98, -83.42);
+    ctx.bezierCurveTo(201.98, -105.69, 183.92499999999998, -123.745, 161.653, -123.745);
+    ctx.bezierCurveTo(139.381, -123.745, 121.316, -105.69, 121.316, -83.42);
+
+    ctx.moveTo(45.84, 104.572);
+    ctx.bezierCurveTo(32.52, 88.771, 24.494000000000003, 68.382, 24.494000000000003, 46.101000000000006);
+    ctx.bezierCurveTo(24.494000000000003, -0.377999999999993, 59.42700000000001, -38.67199999999999, 104.462, -44.028);
+    ctx.bezierCurveTo(96.734, -55.226, 92.196, -68.793, 92.196, -83.42);
+    ctx.bezierCurveTo(92.196, -121.77199999999999, 123.287, -152.868, 161.654, -152.868);
+    ctx.bezierCurveTo(164.821, -152.868, 167.954, -152.668, 170.954, -152.268);
+    ctx.bezierCurveTo(148.233, -171.877, 125.56200000000001, -191.764, 107.667, -213.508);
+    ctx.bezierCurveTo(116.807, -118.29100000000001, 20.947000000000003, -152.889, -14.489000000000004, -65.14700000000002);
+    ctx.bezierCurveTo(-38.243, -6.232, -16.81, 66.5, 45.8, 104.572);
+    ctx.restore();
+    ctx.clip();
+};
+
+var osm = data.objects.layers[Object.keys(data.objects.layers)[0]];
+
+osm.on(\'precompose\', function(event) {
+  var ctx = event.context;
+  draw(ctx);
+});
+
+osm.on(\'postcompose\', function(event) {
+  var ctx = event.context;
+  ctx.restore();
+});',
+  );
+  $export['openlayers_examples_component_layerclipping'] = $ol_component;
+
   return $export;
 }
