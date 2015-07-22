@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class for tab content of type "map" - this is for rendering a map as tab
+ * Class for tab content of type "openlayers_map" - this is for rendering a map as tab
  * content.
  */
 class OpenlayersMap extends QuickContent {
@@ -10,7 +10,7 @@ class OpenlayersMap extends QuickContent {
    * @inheritdoc
    */
   public static function getType() {
-    return 'map';
+    return 'Openlayers-map';
   }
 
   /**
@@ -20,12 +20,12 @@ class OpenlayersMap extends QuickContent {
     $tab = $this->settings;
     $form = array();
 
-    $form['map']['map'] = array(
+    $form['Openlayers-map']['map'] = array(
       '#type' => 'select',
       '#title' => t('Openlayers map'),
       '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Map'),
       "#empty_option" => t('- Select a map -'),
-      '#default_value' => isset($tab['map']) ? $tab['map'] : '',
+      '#default_value' => isset($tab['openlayers_map']) ? $tab['openlayers_map'] : '',
     );
     return $form;
   }
@@ -52,6 +52,6 @@ class OpenlayersMap extends QuickContent {
    * @inheritdoc
    */
   public function getAjaxKeys() {
-    return array('map');
+    return array('Openlayers-map');
   }
 }
