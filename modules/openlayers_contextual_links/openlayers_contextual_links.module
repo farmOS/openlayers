@@ -33,7 +33,10 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
     ),
   );
 
-  foreach ($context->getCollection()->getFlatList() as $object) {
+  $objects = $context->getCollection()->getFlatList(\Drupal\openlayers\Openlayers::getPluginTypes(array('map')));
+  ksort($objects);
+
+  foreach ($objects as $object) {
     $object_links = array();
 
     // Build contextual link for this object.
