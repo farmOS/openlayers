@@ -57,17 +57,14 @@ function openlayers_schema() {
       'description' => array(
         'description' => 'The description of the map.',
         'type' => 'text',
-        'not null' => TRUE,
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Map service.',
       ),
       'options' => array(
         'description' => 'The serialized map.',
         'type' => 'text',
-        'not null' => TRUE,
         'serialize' => TRUE,
       ),
     ),
@@ -111,17 +108,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Layer description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Layer service.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Layer options serialized.',
         'serialize' => TRUE,
       ),
@@ -166,17 +160,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Source description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Service class.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Source options serialized.',
         'serialize' => TRUE,
       ),
@@ -221,17 +212,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Control description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Control service.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Control options serialized.',
         'serialize' => TRUE,
       ),
@@ -276,17 +264,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Interaction description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Interaction service.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Interaction options serialized.',
         'serialize' => TRUE,
       ),
@@ -331,17 +316,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Component description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Component service.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Component options serialized.',
         'serialize' => TRUE,
       ),
@@ -386,12 +368,10 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Projection description.',
       ),
       'definition' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Projection options definition.',
       ),
     ),
@@ -435,17 +415,14 @@ function openlayers_schema() {
       ),
       'description' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Style description.',
       ),
       'factory_service' => array(
         'type' => 'text',
-        'not null' => TRUE,
         'description' => 'Style service.',
       ),
       'options' => array(
         'type' => 'text',
-        'not null' => FALSE,
         'description' => 'Style options serialized.',
         'serialize' => TRUE,
       ),
@@ -490,6 +467,20 @@ function openlayers_requirements($phase) {
  */
 function openlayers_update_7350() {
 
+  // Enable new dependencies.
+  $dependencies = array(
+    'registry_autoload',
+    'service_container',
+  );
+  foreach ($dependencies as $module) {
+    if (!module_exists($module)) {
+      $enabled = module_enable(array($module));
+      if (!$enabled) {
+        throw new DrupalUpdateException('Could not enable ' . $module . ' module. Make sure it exists and try again.');
+      }
+    }
+  }
+
   // Ensure update 7201 is done.
   if (db_table_exists('openlayers_map_presets')) {
     // Change table name.
@@ -524,8 +515,33 @@ function openlayers_update_7350() {
     }
     // If there's a data field but none is defined in the schema drop it.
     // @TODO This leads to data loss! Can we do anything better?
-    if (!isset($table_schema['data']['machine_name']) && db_field_exists($table, 'data')) {
+    if (!isset($table_schema['data']) && db_field_exists($table, 'data')) {
       db_drop_field($table, 'data');
+    }
+  }
+  // Create missing columns.
+  foreach ($schema as $table => $table_schema) {
+    foreach ($table_schema['fields'] as $field => $field_data) {
+      if (!db_field_exists($table, $field)) {
+        db_add_field($table, $field, $table_schema['fields'][$field]);
+      }
+    }
+  }
+  // Drop extra projection columns.
+  // @TODO This ALSO leads to data loss! Can we do anything better?
+  $old_projection_columns = array(
+    'identifier',
+    'authority',
+    'code',
+    'definition',
+    'projectedextentleft',
+    'projectedextentbottom',
+    'projectedextentright',
+    'projectedextenttop',
+  );
+  foreach ($old_projection_columns as $column) {
+    if (db_field_exists('openlayers_projections', $column)) {
+      db_drop_field('openlayers_projections', $column);
     }
   }
 }
