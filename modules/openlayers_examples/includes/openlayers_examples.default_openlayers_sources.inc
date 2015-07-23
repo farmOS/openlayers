@@ -733,5 +733,22 @@ var source = new ol.source.Vector({
   );
   $export['openlayers_examples_source_openweather_wind'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_tilewms';
+  $ol_source->name = 'Openlayers examples: TileWMS';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.Source:TileWMS';
+  $ol_source->options = array(
+    'url' => 'http://services.nationalmap.gov/arcgis/services/transportation/MapServer/WMSServer',
+    'wms_layers' => '1,2,3,4,5,6,7,8,9',
+    'version' => '',
+    'params' => array(
+      'LAYERS' => '1,2,3,4,5,6,7,8,9',
+    ),
+  );
+  $export['openlayers_examples_source_tilewms'] = $ol_source;
+
   return $export;
 }

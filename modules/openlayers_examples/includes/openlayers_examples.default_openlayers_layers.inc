@@ -723,5 +723,19 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_openweather_wind'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_tilewms';
+  $ol_layer->name = 'Openlayers examples: TileWMS';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_tilewms',
+    'visible' => 1,
+    'opacity' => 1,
+  );
+  $export['openlayers_examples_layer_tilewms'] = $ol_layer;
+
   return $export;
 }
