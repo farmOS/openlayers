@@ -351,6 +351,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
             'type' => 'file',
             'group' => Config::get('openlayers.js_css.group'),
             'weight' => Config::get('openlayers.js_css.weight'),
+            'media' => Config::get('openlayers.js_css.media')
           );
         }
       }

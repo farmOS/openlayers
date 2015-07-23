@@ -28,11 +28,10 @@ function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
       'order' => array(
         'start' => t('Administrative settings'),
         'settings' => t('Map settings'),
-        'layers' => t('Layers and sources'),
+        'layers' => t('Layers'),
         'controls' => t('Controls'),
         'interactions' => t('Interactions'),
         'components' => t('Components'),
-        'styles' => t('Styles'),
         'preview' => t('Preview'),
       ),
       'forms' => array(
@@ -53,9 +52,6 @@ function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
         ),
         'components' => array(
           'form id' => 'openlayers_map_form_components',
-        ),
-        'styles' => array(
-          'form id' => 'openlayers_map_form_styles',
         ),
         'preview' => array(
           'form id' => 'openlayers_map_form_preview',
@@ -165,9 +161,10 @@ function openlayers_map_form_layers($form, &$form_state) {
     $object->enabled = 0;
   });
 
-  foreach ($map->getObjects('layer') as $layer) {
+  foreach ($map->getOption('layers') as $weight => $layer) {
     /* @var Drupal\openlayers\Types\Layer $layer */
-    $all_layers[$layer->machine_name]->weight = $layer->getWeight();
+    $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
+    $all_layers[$layer->machine_name]->weight = $weight;
     $all_layers[$layer->machine_name]->enabled = 1;
   }
 
@@ -268,13 +265,6 @@ function openlayers_map_form_layers($form, &$form_state) {
     );
   }
 
-  $form['layers'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Layers',
-    '#collapsible' => FALSE,
-    '#collapsed' => FALSE,
-  );
-
   // Add the table to the form.
   $form['layers']['table_layers'] = array(
     '#theme' => 'table',
@@ -297,125 +287,6 @@ function openlayers_map_form_layers($form, &$form_state) {
   );
   drupal_add_tabledrag('entry-order-layers', 'order', 'sibling', 'entry-order-weight');
 
-  $all_sources = \Drupal\openlayers\Openlayers::loadAllExportable('Source');
-
-  array_walk($all_sources, function($object) {
-    $object->weight = 0;
-    $object->enabled = 0;
-  });
-
-  foreach ($map->getObjects('source') as $source) {
-    /* @var Drupal\openlayers\Types\Source $source */
-    $all_sources[$source->machine_name]->weight = $source->getWeight();
-    $all_sources[$source->machine_name]->enabled = 1;
-  }
-
-  uasort($all_sources, function($a, $b) {
-    if ($a->enabled > $b->enabled) {
-      return -1;
-    } else if ($a->enabled < $b->enabled) {
-      return 1;
-    }
-    if ($a->weight < $b->weight) {
-      return -1;
-    } else if ($a->weight > $b->weight) {
-      return 1;
-    }
-    if ($a->machine_name < $b->machine_name) {
-      return -1;
-    } else if ($a->machine_name > $b->machine_name) {
-      return 1;
-    }
-    return 0;
-  });
-
-  $data = array();
-  $i = 0;
-  foreach ($all_sources as $machine_name => $source) {
-    if (is_object($source)) {
-      $data[$machine_name] = array(
-        'name' => $source->name,
-        'machine_name' => $source->machine_name,
-        'factory_service' => $source->factory_service,
-        'weight' => $i++,
-        'enabled' => isset($source->enabled) ? $source->enabled : 0,
-        'default' => 1,
-      );
-    }
-  }
-
-  $rows = array();
-  foreach ($data as $id => $entry) {
-    $rows[$id] = array(
-      'data' => array(
-        array('class', array('entry-cross')),
-        array(
-          'data' => array(
-            '#type' => 'weight',
-            '#title' => t('Weight'),
-            '#title_display' => 'invisible',
-            '#default_value' => $entry['weight'],
-            '#parents' => array('sources', $id, 'weight'),
-            '#attributes' => array(
-              'class' => array('entry-order-weight'),
-            ),
-          )),
-        array(
-          'data' => array(
-            '#type' => 'checkbox',
-            '#title' => t('Enable'),
-            '#title_display' => 'invisible',
-            '#default_value' => $entry['enabled'],
-            '#parents' => array('sources', $id, 'enabled'),
-          )),
-        check_plain($entry['name']),
-        check_plain($entry['machine_name']),
-        check_plain($entry['factory_service']),
-        l(t('Edit'), 'admin/structure/openlayers/sources/list/' . $entry['machine_name'] . '/edit/options',
-          array(
-            'query' => array(
-              'destination' => current_path(),
-            ),
-          )
-        ),
-      ),
-      'class' => array('draggable'),
-    );
-    // Build rows of the form elements in the table.
-    $row_elements[$id] = array(
-      'weight' => &$rows[$id]['data'][1]['data'],
-      'enabled' => &$rows[$id]['data'][2]['data'],
-    );
-  }
-
-  $form['sources'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Sources',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-
-  // Add the table to the form.
-  $form['sources']['table_sources'] = array(
-    '#theme' => 'table',
-    // The row form elements need to be processed and build,
-    // therefore pass them as element children.
-    'elements' => $row_elements,
-    '#header' => array(
-      // We need two empty columns for the weigth field and the cross.
-      array('data' => NULL, 'colspan' => 2),
-      t('Enabled'),
-      t('Name'),
-      t('Machine name'),
-      t('Class'),
-      t('Operations'),
-    ),
-    '#rows' => $rows,
-    '#empty' => t('There are no entries available.'),
-    '#attributes' => array('id' => 'entry-order-sources'),
-  );
-  drupal_add_tabledrag('entry-order-sources', 'order', 'sibling', 'entry-order-weight');
-
   return $form;
 }
 
@@ -424,16 +295,6 @@ function openlayers_map_form_layers($form, &$form_state) {
  */
 function openlayers_map_form_layers_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
-
-  $sources_enabled = array_filter($form_state['values']['sources'], function($item) {
-    return (bool) $item['enabled'];
-  });
-
-  uasort($sources_enabled, function($a, $b) {
-    return $a['weight'] - $b['weight'];
-  });
-
-  $map->setOption('sources', array_keys($sources_enabled));
 
   $layers_enabled = array_filter($form_state['values']['layers'], function($item) {
     return (bool) $item['enabled'];
@@ -806,65 +667,6 @@ function openlayers_map_form_components_submit($form, &$form_state) {
   });
 
   $map->setOption('components', array_keys($components_enabled));
-
-  $form_state['item'] = $map->getExport();
-}
-
-/**
- * Map styles config form handler.
- */
-function openlayers_map_form_styles($form, &$form_state) {
-  $all_styles = \Drupal\openlayers\Openlayers::loadAllExportable('Style');
-
-  $header = array(
-    'name' => t('Name'),
-    'machine_name' => t('Machine name'),
-    'description' => t('Description'),
-    'operations' => t('Operations'),
-  );
-
-  $rows = array();
-  foreach ($all_styles as $machine_name => $style) {
-    $rows[$machine_name] = array(
-      'name' => $style->name,
-      'machine_name' => $style->machine_name,
-      'description' => $style->description,
-      'operations' => l(
-        t('Edit'),
-        'admin/structure/openlayers/styles/list/' . $machine_name . '/edit/options',
-        array(
-          'query' => array(
-            'destination' => current_path(),
-          ),
-        )
-      ),
-    );
-  }
-
-  $form['options']['#tree'] = TRUE;
-
-  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
-  $export = $map->getExport();
-
-  $form['options']['styles'] = array(
-    '#type' => 'tableselect',
-    '#header' => $header,
-    '#options' => $rows,
-    '#default_value' => isset($export->options['styles']) ? drupal_map_assoc($export->options['styles']) : array(),
-  );
-
-  return $form;
-}
-
-/**
- * Map styles config form submit handler.
- */
-function openlayers_map_form_styles_submit($form, &$form_state) {
-  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
-
-  $styles_enabled = array_filter($form_state['values']['options']['styles']);
-
-  $map->setOption('styles', array_keys($styles_enabled));
 
   $form_state['item'] = $map->getExport();
 }

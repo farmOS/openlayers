@@ -66,18 +66,21 @@ Drupal.openlayers.pluginManager.register({
 
     var progress = new Progress(document.getElementById('progress-' + data.map.get('target')));
 
-    data.map.getLayers().forEach(function(layer) {
-      var source = layer.getSource();
-      source.on('tileloadstart', function(event) {
-        progress.addLoading();
-      });
-      source.on('tileloadend', function(event) {
-        progress.addLoaded();
-      });
-      source.on('tileloaderror', function(event) {
-        progress.addLoaded();
-      });
-    });
+    for (var i in data.objects.layers) {
+      var layer = data.objects.layers[i];
 
+      if (!(layer instanceof ol.layer.Group)) {
+        var source = layer.getSource();
+        source.on('tileloadstart', function (event) {
+          progress.addLoading();
+        });
+        source.on('tileloadend', function (event) {
+          progress.addLoaded();
+        });
+        source.on('tileloaderror', function (event) {
+          progress.addLoaded();
+        });
+      }
+    }
   }
 });
