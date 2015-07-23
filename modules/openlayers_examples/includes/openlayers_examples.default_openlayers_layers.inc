@@ -737,6 +737,9 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_tilewms'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
   $ol_layer->machine_name = 'openlayers_examples_layer_group_overlay';
   $ol_layer->name = 'Openlayers examples: Group Overlay';
   $ol_layer->description = '';
