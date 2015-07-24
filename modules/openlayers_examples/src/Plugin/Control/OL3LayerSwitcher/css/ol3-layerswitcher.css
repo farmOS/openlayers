@@ -1,11 +1,11 @@
-.layer-switcher {
+.openlayers-map .layer-switcher {
   position: absolute;
   top: 3.5em;
   right: 0.5em;
   text-align: left;
 }
 
-.layer-switcher .panel {
+.openlayers-map .layer-switcher .panel {
   padding-right: 50px;
   border: 1px solid #cccccc;
   background-color: white;
@@ -13,11 +13,11 @@
   display: none;
 }
 
-.layer-switcher.shown .panel {
+.openlayers-map .layer-switcher.shown .panel {
   display: block;
 }
 
-.layer-switcher button {
+.openlayers-map .layer-switcher button {
   float: right;
   width: 38px;
   height: 38px;
@@ -28,32 +28,30 @@
   border: none;
 }
 
-.layer-switcher button:focus, .layer-switcher button:hover {
+.openlayers-map .layer-switcher button:focus, .layer-switcher button:hover {
   background-color: white;
 }
 
-.layer-switcher ul {
+.openlayers-map .layer-switcher ul {
+  margin: 0.25em 0 0.25em 0;
   padding-left: 1em;
   list-style: none;
 }
 
-.layer-switcher li.group {
+.openlayers-map .layer-switcher li.group {
   padding-top: 5px;
 }
 
-.openlayers-map label,
-.layer-switcher li.group > label {
+.openlayers-map .layer-switcher li label,
+.openlayers-map .layer-switcher li.group > label {
   font-weight: bold;
   display: inline-block;
 }
 
-.layer-switcher input {
+.openlayers-map .layer-switcher input {
   margin: 4px;
 }
 
 .openlayers-map .layer-switcher li {
   list-style: none;
-}
-.openlayers-map .layer-switcher ul {
-  margin: 0.25em 0 0.25em 0.5em;
 }
