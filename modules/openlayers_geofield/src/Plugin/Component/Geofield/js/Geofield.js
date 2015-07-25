@@ -107,11 +107,15 @@ Drupal.openlayers.pluginManager.register({
         // listen to pressing of delete key, then delete selected features
         jQuery(document).on('keyup', function (event) {
           if (event.keyCode == 46) {
-            // remove from select_interaction
-            selected_features.remove(feature);
-            // remove from vector_layer
-            vector_layer.getSource().removeFeature(feature);
-            // save the changed data
+            try {
+              // remove from select_interaction
+              selected_features.remove(feature);
+              // remove from vector_layer
+              vector_layer.getSource().removeFeature(feature);
+              // save the changed data
+            } catch (e) {
+              // No matter what happened - ensure the data are written.
+            }
             saveData();
             // remove listener
             jQuery(document).off('keyup');
