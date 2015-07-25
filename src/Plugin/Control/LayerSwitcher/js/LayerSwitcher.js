@@ -26,7 +26,7 @@ Drupal.openlayers.pluginManager.register({
               // Keep invisible if layer isn't activated in layerswitcher.
               if (visibility && !jQuery('input[value=' + e.target.mn + ']', element).is(':checked')) {
                 e.target.setVisible(false);
-                e.stopPropagation();
+                e.preventDefault();
               }
             });
           }
