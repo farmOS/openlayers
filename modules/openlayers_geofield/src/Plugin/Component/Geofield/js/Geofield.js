@@ -177,6 +177,13 @@ Drupal.openlayers.pluginManager.register({
           featureProjection: data.map.getView().getProjection()
         });
 
+        // Ensure an empty geometry collection doesn't write any data. That way
+        // the original geofield validator will work and a required field is
+        // properly detected as empty.
+        if (datas == 'GEOMETRYCOLLECTION EMPTY') {
+          datas = '';
+        }
+
       } catch (e) {
         // at time of creation there is an error in the GPX format (18.7.2014)
         jQuery('.openlayers-geofield-data', geofieldWrapper).val(e.name + ": " + e.message);
