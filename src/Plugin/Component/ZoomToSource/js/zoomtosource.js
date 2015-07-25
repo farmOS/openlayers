@@ -20,16 +20,18 @@ Drupal.openlayers.pluginManager.register({
               });
               map.beforeRender(pan, zoom);
             }
-            var dataExtent = source.getExtent();
-            map.getView().fit(dataExtent, map.getSize());
-            if (data.opt.zoom != 'auto') {
-              map.getView().setZoom(data.opt.zoom);
-            } else {
-              var zoom = map.getView().getZoom() - 1;
-              if (goog.isDef(data.opt.max_zoom) && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
-                zoom = data.opt.max_zoom;
+            if (source.getFeatures().length) {
+              var dataExtent = source.getExtent();
+              map.getView().fit(dataExtent, map.getSize());
+              if (data.opt.zoom != 'auto') {
+                map.getView().setZoom(data.opt.zoom);
+              } else {
+                var zoom = map.getView().getZoom() - 1;
+                if (goog.isDef(data.opt.max_zoom) && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
+                  zoom = data.opt.max_zoom;
+                }
+                map.getView().setZoom(zoom);
               }
-              map.getView().setZoom(zoom);
             }
           }
         };
