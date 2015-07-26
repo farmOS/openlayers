@@ -107,23 +107,16 @@ Drupal.openlayers.pluginManager.register({
         // listen to pressing of delete key, then delete selected features
         jQuery(document).on('keyup', function (event) {
           if (event.keyCode == 46) {
-            // remove all selected features from select_interaction and drawing_vectorlayer
-            selected_features.forEach(function (selected_feature) {
-              var selected_feature_id = selected_feature.getId();
+            try {
               // remove from select_interaction
-              selected_features.remove(selected_feature);
-              // remove features from vectorlayer
-              var vectorlayer_features = vector_layer.getSource().getFeatures();
-              vectorlayer_features.forEach(function (source_feature) {
-                var source_feature_id = source_feature.getId();
-                if (source_feature_id === selected_feature_id) {
-                  // remove from drawing_vectorlayer
-                  vector_layer.getSource().removeFeature(source_feature);
-                  // save the changed data
-                  saveData();
-                }
-              });
-            });
+              selected_features.remove(feature);
+              // remove from vector_layer
+              vector_layer.getSource().removeFeature(feature);
+              // save the changed data
+            } catch (e) {
+              // No matter what happened - ensure the data are written.
+            }
+            saveData();
             // remove listener
             jQuery(document).off('keyup');
           }
@@ -187,6 +180,13 @@ Drupal.openlayers.pluginManager.register({
           dataProjection: data.opt.dataProjection,
           featureProjection: data.map.getView().getProjection()
         });
+
+        // Ensure an empty geometry collection doesn't write any data. That way
+        // the original geofield validator will work and a required field is
+        // properly detected as empty.
+        if (datas == 'GEOMETRYCOLLECTION EMPTY') {
+          datas = '';
+        }
 
       } catch (e) {
         // at time of creation there is an error in the GPX format (18.7.2014)
