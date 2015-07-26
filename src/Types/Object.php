@@ -444,6 +444,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * !Attention! This function will remove any option that is named after a
+   * plugin type e.g.: layers, controls, components
    */
   public function getJS() {
     $export = $this->getExport();
