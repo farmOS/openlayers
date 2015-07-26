@@ -71,6 +71,8 @@ class Popup extends Component {
    * {@inheritdoc}
    */
   public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+    parent::preBuild($build, $context);
+
     $layers = $this->getOption('layers', array());
     $map_layers = $context->getObjects('layer');
     // Only handle layers available in the map and configured in the control.
@@ -82,6 +84,8 @@ class Popup extends Component {
         $frontend_layers[$map_layer->machine_name] = $map_layer->machine_name;
       }
     }
-    $this->setOption('layers', $frontend_layers);
+    // Don't name these "layers" otherwise Object::getJS() will delete the
+    // option from the JS array.
+    $this->setOption('frontend_layers', $frontend_layers);
   }
 }

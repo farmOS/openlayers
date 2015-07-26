@@ -48,7 +48,7 @@ Drupal.openlayers.pluginManager.register({
 
     map.on('click', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-        if (goog.isDef(data.objects.layers[layer.mn])) {
+        if (goog.isDef(data.opt.frontend_layers[layer.mn])) {
           return feature;
         }
       });
