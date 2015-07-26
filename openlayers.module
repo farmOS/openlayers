@@ -370,3 +370,23 @@ function openlayers_i18n_string_refresh() {
     }
   }
 }
+
+/**
+ * Returns an array with positioning options.
+ *
+ * @return array
+ *   Array with positioning options.
+ */
+function openlayers_positioning_options() {
+  return array(
+    'bottom-left' => t('bottom-left'),
+    'bottom-center' => t('bottom-center'),
+    'bottom-right' => t('bottom-right'),
+    'center-left' => t('center-left'),
+    'center-center' => t('center-center'),
+    'center-right' => t('center-right'),
+    'top-left' => t('top-left'),
+    'top-center' => t('top-center'),
+    'top-right' => t('top-right'),
+  );
+}
