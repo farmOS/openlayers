@@ -100,8 +100,8 @@ abstract class Map extends Object implements MapInterface {
           'id' => 'map-container-' . $map->getId(),
           'style' => $styles,
           'class' => array(
-            'openlayers-map-container'
-          )
+            'openlayers-map-container',
+          ),
         ),
         'map' => array(
           '#type' => 'container',
@@ -114,7 +114,7 @@ abstract class Map extends Object implements MapInterface {
           ),
           '#attached' => $map->getCollection()->getAttached(),
         ),
-      )
+      ),
     );
 
     // If this is an asynchronous map flag it as such.
@@ -137,8 +137,8 @@ abstract class Map extends Object implements MapInterface {
           '#type' => 'container',
           '#attributes' => array(
             'class' => array(
-              'description'
-            )
+              'description',
+            ),
           ),
           array(
             '#markup' => theme(
@@ -147,10 +147,10 @@ abstract class Map extends Object implements MapInterface {
                 'items' => $items,
                 'title' => '',
                 'type' => 'ul',
-                )
-            )
-          )
-        )
+              )
+            ),
+          ),
+        ),
       );
     }
 
