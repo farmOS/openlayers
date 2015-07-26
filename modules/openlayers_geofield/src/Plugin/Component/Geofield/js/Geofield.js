@@ -227,10 +227,31 @@ Drupal.openlayers.pluginManager.register({
   }
 });
 
-/** Ensures the  map is fully rebuilt on ajax request - e.g. geocoder. */
+/**
+ * Ensures the  map is fully rebuilt on ajax request - e.g. geocoder.
+ * Ensures that opening a collapsed fieldset will refresh the map.
+ */
 Drupal.behaviors.openlayersGeofieldWidget = (function($) {
   "use strict";
   return {
+    attach: function (context, settings) {
+      $('fieldset:has(.openlayers-map)', context).bind('collapsed', function (e) {
+        // If not collapsed update the size of the map. But wait a moment so the
+        // animation is done already.
+        var fieldset = this;
+        if (!e.value) {
+          window.setTimeout(function() {
+            jQuery('.openlayers-map', fieldset).each(function (index, elem) {
+              var map = Drupal.openlayers.getMapById(jQuery(elem).attr('id'));
+              if (map && goog.isDef(map.map)) {
+                map.map.updateSize();
+              }
+            });
+          }, 1000);
+        }
+      });
+    },
+
     detach: function (context, settings) {
       $('.openlayers-map').removeOnce('openlayers-map', function () {
         var map_id = $(this).attr('id');
