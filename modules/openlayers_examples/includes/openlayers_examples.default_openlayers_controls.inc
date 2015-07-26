@@ -143,5 +143,14 @@ function openlayers_examples_default_openlayers_controls() {
   );
   $export['openlayers_examples_control_mapbox_layer_switcher'] = $ol_control;
 
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_examples_control_ol3layerswitcher';
+  $ol_control->name = 'Openlayers examples: Control OL3 LayerSwitcher';
+  $ol_control->description = '';
+  $ol_control->factory_service = 'openlayers.Control:OL3LayerSwitcher';
+  $export['openlayers_examples_control_ol3layerswitcher'] = $ol_control;
+
   return $export;
 }

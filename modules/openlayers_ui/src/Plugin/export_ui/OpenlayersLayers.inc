@@ -142,7 +142,7 @@ function openlayers_layer_form_type($form, &$form_state) {
     '#default_value' => isset($form_state['item']->options['source']) ? $form_state['item']->options['source'] : '',
     '#description' => t('Select the source.'),
     '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Source'),
-    '#required' => TRUE,
+    '#required' => FALSE,
   );
 
   $form['options']['visible'] = array(
@@ -180,7 +180,7 @@ function openlayers_layer_form_style($form, &$form_state) {
     '#default_value' => isset($form_state['item']->options['style']) ? $form_state['item']->options['style'] : '',
     '#description' => t('Select the style.'),
     '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Style'),
-    '#required' => TRUE,
+    '#required' => FALSE,
   );
 
   return $form;

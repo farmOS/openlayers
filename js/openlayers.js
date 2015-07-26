@@ -39,17 +39,6 @@ Drupal.openlayers = (function($){
           $(document).trigger('openlayers.sources_post_alter', [{sources: settings.source, map_id: map_id}]);
         }
 
-        if (settings.control.length > 0) {
-          $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control, map_id: map_id}]);
-          settings.control.map(function (data) {
-            var control = Drupal.openlayers.getObject(context, 'controls', data, map_id);
-            if (control) {
-              map.addControl(control);
-            }
-          });
-          $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control, map_id: map_id}]);
-        }
-
         if (settings.interaction.length > 0) {
           $(document).trigger('openlayers.interactions_pre_alter', [{interactions: settings.interaction, map_id: map_id}]);
           settings.interaction.map(function (data) {
@@ -71,19 +60,74 @@ Drupal.openlayers = (function($){
 
         if (settings.layer.length > 0) {
           $(document).trigger('openlayers.layers_pre_alter', [{layers: settings.layer, map_id: map_id}]);
-          settings.layer.map(function (data) {
-            // Clone the data to keep the settings as raw as possible.
-            var cloned_data = jQuery.extend(true, {}, data);
-            cloned_data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
-            if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
-              cloned_data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
-            }
-            var layer = Drupal.openlayers.getObject(context, 'layers', cloned_data, map_id);
-            if (layer) {
-              map.addLayer(layer);
+
+          var groups = {};
+          var layers = {};
+
+          settings.layer.map(function (data, key) {
+            if (data.fs === 'openlayers.Layer:Group') {
+              groups[data.mn] = data;
+            } else {
+              layers[data.mn] = data;
             }
           });
+
+          for (var i in layers) {
+            var data = jQuery.extend(true, {}, layers[i]);
+            data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
+            if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
+              data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
+            }
+            var layer = Drupal.openlayers.getObject(context, 'layers', data, map_id);
+
+            if (layer) {
+              if (typeof data.opt.name !== 'undefined') {
+                layer.set('title', data.opt.name);
+              }
+              layers[i] = layer;
+            }
+          }
+
+          for (var i in groups) {
+            data = jQuery.extend(true, {}, groups[i]);
+            var candidates = [];
+            data.opt.grouplayers.map(function(layer_machine_name) {
+              candidates.push(layers[layer_machine_name]);
+              delete layers[layer_machine_name];
+            });
+            data.opt.grouplayers = candidates;
+            layer = Drupal.openlayers.getObject(context, 'layers', data, map_id);
+
+            if (layer) {
+              groups[i] = layer;
+            }
+          }
+
+          $.map(layers, function(layer) {
+            map.addLayer(layer);
+          });
+
+          // Todo: See why it's not ordered properly automatically.
+          var groupsOrdered = [];
+          for (var i in groups) {
+            groupsOrdered.push(groups[i]);
+          }
+          groupsOrdered.reverse().map(function(layer) {
+            map.addLayer(layer);
+          });
+
           $(document).trigger('openlayers.layers_post_alter', [{layers: settings.layer, map_id: map_id}]);
+        }
+
+        if (settings.control.length > 0) {
+          $(document).trigger('openlayers.controls_pre_alter', [{controls: settings.control, map_id: map_id}]);
+          settings.control.map(function (data) {
+            var control = Drupal.openlayers.getObject(context, 'controls', data, map_id);
+            if (control) {
+              map.addControl(control);
+            }
+          });
+          $(document).trigger('openlayers.controls_post_alter', [{controls: settings.control, map_id: map_id}]);
         }
 
         if (settings.component.length > 0) {

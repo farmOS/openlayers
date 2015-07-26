@@ -737,5 +737,40 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_tilewms'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_group_overlay';
+  $ol_layer->name = 'Openlayers examples: Group Overlay';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Group';
+  $ol_layer->options = array(
+    'grouptitle' => 'Overlays',
+    'grouplayers' => array(
+      0 => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
+      1 => 'openlayers_examples_layer_vector_geojson_cities_heatmap',
+      2 => 'openlayers_examples_layer_cluster_cities',
+    ),
+  );
+  $export['openlayers_examples_layer_group_overlay'] = $ol_layer;
+
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_group_base';
+  $ol_layer->name = 'Openlayers examples: Group Base';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Group';
+  $ol_layer->options = array(
+    'grouptitle' => 'Base layers',
+    'grouplayers' => array(
+      0 => 'openlayers_layer_tile_mapquest_osm',
+      1 => 'openlayers_examples_layer_openstreetmap_mapnik',
+      2 => 'openlayers_examples_layer_openstreetmap_hot',
+      3 => 'openlayers_examples_layer_openstreetmap_de',
+    ),
+  );
+  $export['openlayers_examples_layer_group_base'] = $ol_layer;
+
   return $export;
 }

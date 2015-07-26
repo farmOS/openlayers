@@ -76,7 +76,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_examples_layer_tile_mapbox_example3',
       1 => 'openlayers_examples_layer_vector_geojson_cities',
     ),
-    'controls' => array(),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -110,7 +109,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_examples_layer_tile_mapbox_example3',
       1 => 'openlayers_examples_layer_vector_geojson_cities_heatmap',
     ),
-    'controls' => array(),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -143,7 +141,6 @@ function openlayers_examples_default_openlayers_maps() {
     'layers' => array(
       0 => 'openlayers_examples_layer_openstreetmap_mapnik',
     ),
-    'controls' => array(),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -184,7 +181,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_control_zoom',
       1 => 'openlayers_control_zoomslider',
     ),
-    'interactions' => array(),
     'components' => array(
       0 => 'openlayers_examples_component_zoom_to_source',
     ),
@@ -552,7 +548,6 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_examples_layer_openstreetmap_mapnik',
       1 => 'openlayers_examples_layer_tiledebug',
     ),
-    'controls' => array(),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -1108,7 +1103,7 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_examples_component_debug'
-    )
+      )
   );
   $export['openlayers_examples_map_ui_default_debug'] = $ol_map;
 
@@ -1136,7 +1131,6 @@ function openlayers_examples_default_openlayers_maps() {
     'layers' => array(
       0 => 'openlayers_examples_layer_openmapsurfer_roads',
     ),
-    'controls' => array(),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
@@ -1184,6 +1178,51 @@ function openlayers_examples_default_openlayers_maps() {
     ),
   );
   $export['openlayers_examples_map_tilewms'] = $ol_map;
+
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_ol3layerswitcher';
+  $ol_map->name = 'Openlayers examples: OL3 LayerSwitcher';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.Map:OLMap';
+  $ol_map->options = array(
+    'width' => 'auto',
+    'height' => '300px',
+    'provideBlock' => 0,
+    'provideBlockLayerSwitcher' => 0,
+    'contextualLinks' => 0,
+    'provideIframe' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => 0,
+        'lon' => 0,
+      ),
+      'rotation' => 0,
+      'zoom' => 2,
+      'minZoom' => 0,
+      'maxZoom' => 0,
+    ),
+    'renderer' => 'canvas',
+    'layers' => array(
+      0 => 'openlayers_examples_layer_group_overlay',
+      1 => 'openlayers_examples_layer_group_base',
+    ),
+    'controls' => array(
+      0 => 'openlayers_examples_control_ol3layerswitcher',
+      1 => 'openlayers_control_attribution',
+      2 => 'openlayers_control_fullscreen',
+      3 => 'openlayers_control_overviewmap',
+      4 => 'openlayers_control_rotate',
+      5 => 'openlayers_control_zoom',
+    ),
+    'interactions' => array(
+      0 => 'openlayers_interaction_doubleclickzoom',
+      1 => 'openlayers_interaction_dragrotate',
+      2 => 'openlayers_interaction_dragpan',
+    ),
+  );
+  $export['openlayers_examples_map_ol3layerswitcher'] = $ol_map;
 
   return $export;
 }
