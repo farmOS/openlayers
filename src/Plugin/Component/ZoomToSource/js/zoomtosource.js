@@ -2,13 +2,17 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.Component:ZoomToSource',
   init: function(data) {
     var map = data.map;
+    var maxExtent = ol.extent.createEmpty();
 
     map.getLayers().forEach(function(layer) {
       var source = layer.getSource();
-      if (source && source.mn === data.opt.source) {
+
+      if (source && typeof data.opt.source[source.mn] !== 'undefined') {
+
         var zoomToSource = function() {
           if (!data.opt.process_once || !data.opt.processed_once) {
             data.opt.processed_once = true;
+
             if (data.opt.enableAnimations == 1) {
               var pan = ol.animation.pan({
                 duration: data.opt.animations.pan,
@@ -20,21 +24,26 @@ Drupal.openlayers.pluginManager.register({
               });
               map.beforeRender(pan, zoom);
             }
-            if (source.getFeatures().length) {
-              var dataExtent = source.getExtent();
-              map.getView().fit(dataExtent, map.getSize());
-              if (data.opt.zoom != 'auto') {
-                map.getView().setZoom(data.opt.zoom);
-              } else {
-                var zoom = map.getView().getZoom() - 1;
-                if (goog.isDef(data.opt.max_zoom) && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
-                  zoom = data.opt.max_zoom;
+
+            if (source.getFeatures().length !== 0 ) {
+              ol.extent.extend(maxExtent, source.getExtent());
+              map.getView().fit(maxExtent, map.getSize());
+
+              if (data.opt.zoom !== 'disabled') {
+                if (data.opt.zoom !== 'auto') {
+                  map.getView().setZoom(data.opt.zoom);
+                } else {
+                  var zoom = map.getView().getZoom() - 1;
+                  if (goog.isDef(data.opt.max_zoom) && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
+                    zoom = data.opt.max_zoom;
+                  }
+                  map.getView().setZoom(zoom);
                 }
-                map.getView().setZoom(zoom);
               }
             }
           }
         };
+
         source.on('change', zoomToSource, source);
 
         // Ensure the initial zoom to source is done if there are already

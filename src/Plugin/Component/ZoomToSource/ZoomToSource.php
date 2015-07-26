@@ -29,13 +29,14 @@ class ZoomToSource extends Component {
       '#description' => t('Select the source.'),
       '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Source'),
       '#required' => TRUE,
+      '#multiple' => TRUE
     );
 
     $form['options']['zoom'] = array(
       '#type' => 'textfield',
       '#title' => t('Zoom'),
       '#default_value' => isset($form_state['item']->options['zoom']) ? $form_state['item']->options['zoom'] : 10,
-      '#description' => t('Integer or <em>auto</em>.'),
+      '#description' => t('Integer or <em>auto</em> or <em>disabled</em>.'),
       '#required' => TRUE,
     );
     $form['options']['max_zoom'] = array(
