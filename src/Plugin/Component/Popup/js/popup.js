@@ -2,23 +2,24 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.Component:Popup',
   init: function(data) {
     var map = data.map;
+    var random = (new Date()).getTime();
 
     var container = jQuery('<div/>', {
-      id: 'popup',
+      id: 'popup-' + random,
       'class': 'ol-popup'
     }).appendTo('body');
     var content = jQuery('<div/>', {
-      id: 'popup-content'
-    }).appendTo('#popup');
+      id: 'popup-content-' + random
+    }).appendTo('#popup-' + random);
     var closer = jQuery('<a/>', {
       href: '#',
-      id: 'popup-closer',
+      id: 'popup-closer-' + random,
       'class': 'ol-popup-closer'
-    }).appendTo('#popup');
+    }).appendTo('#popup-' + random);
 
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
+    var container = document.getElementById('popup-' + random);
+    var content = document.getElementById('popup-content-' + random);
+    var closer = document.getElementById('popup-closer-' + random);
 
     /**
      * Add a click handler to hide the popup.
