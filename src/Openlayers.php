@@ -302,4 +302,24 @@ class Openlayers {
     }
     return $array;
   }
+
+  /**
+   * Returns an array with positioning options.
+   *
+   * @return array
+   *   Array with positioning options.
+   */
+  public static function positioningOptions() {
+    return array(
+      'bottom-left' => t('bottom-left'),
+      'bottom-center' => t('bottom-center'),
+      'bottom-right' => t('bottom-right'),
+      'center-left' => t('center-left'),
+      'center-center' => t('center-center'),
+      'center-right' => t('center-right'),
+      'top-left' => t('top-left'),
+      'top-center' => t('top-center'),
+      'top-right' => t('top-right'),
+    );
+  }
 }

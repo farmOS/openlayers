@@ -1,21 +1,21 @@
 <?php
 /**
  * @file
- * Style: ClusterStyle.
+ * Style: Cluster.
  */
 
-namespace Drupal\openlayers\Plugin\Style\ClusterStyle;
+namespace Drupal\openlayers\Plugin\Style\Cluster;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Style;
 
 /**
- * Class ClusterStyle.
+ * Class Cluster.
  *
  * @OpenlayersPlugin(
- *  id = "ClusterStyle"
+ *  id = "Cluster"
  * )
  *
  */
-class ClusterStyle extends Style {
+class Cluster extends Style {
   //TODO: Provide options to let user customize the cluster style.
 }

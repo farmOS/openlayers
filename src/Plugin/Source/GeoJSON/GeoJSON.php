@@ -133,6 +133,7 @@ class GeoJSON extends Source {
 
     // @TODO Find a way how to do this just once per map / collection.
     if ($this->getOption('devMode')) {
+      include 'forms.inc';
       $form_state = array();
       $form_state['build_info']['args'] = array($this);
       $form = drupal_build_form('openlayers_dev_dialog_form', $form_state);
