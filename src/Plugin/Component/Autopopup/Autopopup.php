@@ -7,6 +7,7 @@
 namespace Drupal\openlayers\Plugin\Component\Autopopup;
 
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
 
 /**
@@ -76,7 +77,7 @@ class Autopopup extends Component {
       '#title' => t('Positioning'),
       '#default_value' => isset($form_state['item']->options['positioning']) ? $form_state['item']->options['positioning'] : 'top-left',
       '#description' => t('Defines how the overlay is actually positioned. Default is top-left.'),
-      '#options' => openlayers_positioning_options(),
+      '#options' => Openlayers::positioningOptions(),
       '#required' => TRUE,
     );
 
