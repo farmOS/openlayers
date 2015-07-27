@@ -1,0 +1,9 @@
+name = Openlayers library
+description = Provides various plugins that you can reuse.
+core = 7.x
+package = "Openlayers"
+
+dependencies[] = openlayers
+
+registry_autoload[] = PSR-0
+registry_autoload[] = PSR-4
