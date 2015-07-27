@@ -1,11 +1,10 @@
-name = OpenLayers Examples
-description = OpenLayers Examples
+name = Openlayers Examples
+description = Openlayers examples that contains various map and objects.
 core = 7.x
 package = "Openlayers"
 
 dependencies[] = openlayers
+dependencies[] = openlayers_library
 dependencies[] = views_geojson
 dependencies[] = openlayers_block_switcher
 dependencies[] = openlayers_geofield
-
-registry_autoload[] = PSR-4
