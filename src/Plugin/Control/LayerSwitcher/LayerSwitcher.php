@@ -115,6 +115,9 @@ class LayerSwitcher extends Control {
       ),
     );
     $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="' . drupal_html_class($this->machine_name) . ' layerswitcher">' . drupal_render($layerswitcher) . '</div>');
+
+    // Allow the parent class to perform it's pre-build actions.
+    parent::preBuild($build, $context);
   }
 
   /**
