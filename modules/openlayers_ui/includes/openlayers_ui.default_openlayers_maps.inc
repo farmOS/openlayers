@@ -131,5 +131,36 @@ function openlayers_ui_default_openlayers_maps() {
   );
   $export['openlayers_map_view_edit_form'] = $ol_map;
 
+  $ol_map = new stdClass();
+  $ol_map->disabled = TRUE; /* Edit this to true to make a default ol_map disabled initially */
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_ui_map_style_demo';
+  $ol_map->name = 'Openlayers UI style demo';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.Map:OLMap';
+  $ol_map->options = array(
+    'width' => '100px',
+    'height' => '100px',
+    'provideBlock' => 0,
+    'provideBlockLayerSwitcher' => 0,
+    'contextualLinks' => 0,
+    'provideIframe' => 0,
+    'view' => array(
+      'center' => array(
+        'lat' => 0,
+        'lon' => 0,
+      ),
+      'rotation' => 0,
+      'zoom' => 2,
+      'minZoom' => 0,
+      'maxZoom' => 0,
+    ),
+    'renderer' => 'canvas',
+    'layers' => array(
+      0 => 'openlayers_ui_layer_style_demo',
+    ),
+  );
+  $export['openlayers_ui_map_style_demo'] = $ol_map;
+
   return $export;
 }

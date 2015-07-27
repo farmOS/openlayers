@@ -161,7 +161,7 @@ function openlayers_map_form_layers($form, &$form_state) {
     $object->enabled = 0;
   });
 
-  foreach ($map->getOption('layers') as $weight => $layer) {
+  foreach ($map->getOption('layers', array()) as $weight => $layer) {
     /* @var Drupal\openlayers\Types\Layer $layer */
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
     $all_layers[$layer->machine_name]->weight = $weight;

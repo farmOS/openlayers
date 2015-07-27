@@ -15,8 +15,15 @@ function openlayers_default_openlayers_styles() {
   $ol_style->machine_name = 'openlayers_style_default';
   $ol_style->name = 'Openlayers default style';
   $ol_style->description = '';
-  $ol_style->factory_service = 'openlayers.Style:OLStyle';
-  $ol_style->options = array();
+  $ol_style->factory_service = 'openlayers.Style:Circle';
+  $ol_style->options = array(
+    'color' => '255, 255, 255, 0.4',
+    'stroke' => array(
+      'color' => '51, 153, 204, 1',
+      'width' => 1.25,
+    ),
+    'radius' => 5,
+  );
   $export['openlayers_style_default'] = $ol_style;
 
   return $export;
