@@ -9,8 +9,8 @@ function openlayers_field_field_schema($field) {
       'value' => array(
         'type' => 'varchar',
         'length' => 128,
-        'not null' => FALSE
-      )
-    )
+        'not null' => FALSE,
+      ),
+    ),
   );
 }
