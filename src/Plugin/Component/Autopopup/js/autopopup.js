@@ -50,7 +50,8 @@ Drupal.openlayers.pluginManager.register({
       if (source.mn === data.opt.source) {
         source.on('change', function(evt) {
           var feature = source.getFeatures()[0];
-          var coordinates = feature.getGeometry().flatCoordinates;
+          var coordinates = feature.getGeometry().getFirstCoordinate();
+
           if (feature) {
             var name = feature.get('name') || '';
             var description = feature.get('description') || '';
