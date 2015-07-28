@@ -14,12 +14,11 @@ use Drupal\openlayers\Types\Component;
  * Class Autopopup.
  *
  * @OpenlayersPlugin(
- *  id = "Autopopup"
+ *  id = "Autopopup",
+ *  description = "Automatically opens a popup on the first feature of the source."
  * )
- *
  */
 class Autopopup extends Component {
-
   /**
    * {@inheritdoc}
    */
@@ -37,17 +36,20 @@ class Autopopup extends Component {
       '#type' => 'textfield',
       '#title' => t('Zoom'),
       '#default_value' => isset($form_state['item']->options['zoom']) ? $form_state['item']->options['zoom'] : 10,
-      '#description' => t('Integer or <em>auto</em>.'),
+      '#description' => t('Integer or <em>auto</em> or <em>disabled</em>.'),
       '#required' => TRUE,
     );
-
+    $form['options']['closer'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Display close button ?'),
+      '#default_value' => isset($form_state['item']->options['closer']) ? $form_state['item']->options['closer'] : FALSE,
+    );
     $form['options']['enableAnimations'] = array(
       '#type' => 'checkbox',
       '#title' => t('Enable animations'),
       '#default_value' => isset($form_state['item']->options['enableAnimations']) ? $form_state['item']->options['enableAnimations'] : FALSE,
       '#description' => t('Enable pan and zoom animation.'),
     );
-
     $form['options']['animations'] = array(
       '#type' => 'fieldset',
       '#title' => 'Animations options',
@@ -57,21 +59,18 @@ class Autopopup extends Component {
         ),
       ),
     );
-
     $form['options']['animations']['pan'] = array(
       '#type' => 'textfield',
       '#title' => t('Pan animation duration'),
       '#default_value' => isset($form_state['item']->options['animations']['pan']) ? $form_state['item']->options['animations']['pan'] : '500',
       '#description' => t('Duration of the pan animation.'),
     );
-
     $form['options']['animations']['zoom'] = array(
       '#type' => 'textfield',
       '#title' => t('Zoom animation duration'),
       '#default_value' => isset($form_state['item']->options['animations']['zoom']) ? $form_state['item']->options['animations']['zoom'] : '500',
       '#description' => t('Duration of the zoom animation.'),
     );
-
     $form['options']['positioning'] = array(
       '#type' => 'select',
       '#title' => t('Positioning'),
@@ -80,6 +79,6 @@ class Autopopup extends Component {
       '#options' => Openlayers::positioningOptions(),
       '#required' => TRUE,
     );
-
   }
+
 }

@@ -13,11 +13,11 @@ use Drupal\openlayers\Types\Component;
  * Class Popup.
  *
  * @OpenlayersPlugin(
- *  id = "Popup"
+ *  id = "Popup",
+ *  description = "Display a popup when a feature is clicked."
  * )
  */
 class Popup extends Component {
-
   /**
    * {@inheritdoc}
    */
@@ -31,6 +31,11 @@ class Popup extends Component {
       '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Layer'),
       '#required' => TRUE,
       '#multiple' => TRUE,
+    );
+    $form['options']['closer'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Display close button ?'),
+      '#default_value' => isset($form_state['item']->options['closer']) ? $form_state['item']->options['closer'] : FALSE,
     );
     $form['options']['positioning'] = array(
       '#type' => 'select',
@@ -67,7 +72,6 @@ class Popup extends Component {
     $form_state['values']['options']['autoPan'] = (bool) $form_state['values']['options']['autoPan'];
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -89,4 +93,5 @@ class Popup extends Component {
     // option from the JS array.
     $this->setOption('frontend_layers', $frontend_layers);
   }
+
 }

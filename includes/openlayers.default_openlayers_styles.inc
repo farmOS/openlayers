@@ -26,5 +26,13 @@ function openlayers_default_openlayers_styles() {
   );
   $export['openlayers_style_default'] = $ol_style;
 
+  $ol_style = new stdClass();
+  $ol_style->api_version = 1;
+  $ol_style->machine_name = 'openlayers_style_invisible';
+  $ol_style->name = 'Openlayers style invisible';
+  $ol_style->description = '';
+  $ol_style->factory_service = 'openlayers.Style:Invisible';
+  $export['openlayers_style_invisible'] = $ol_style;
+
   return $export;
 }

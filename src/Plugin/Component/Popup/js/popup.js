@@ -11,25 +11,29 @@ Drupal.openlayers.pluginManager.register({
     var content = jQuery('<div/>', {
       id: 'popup-content-' + random
     }).appendTo('#popup-' + random);
-    var closer = jQuery('<a/>', {
-      href: '#',
-      id: 'popup-closer-' + random,
-      'class': 'ol-popup-closer'
-    }).appendTo('#popup-' + random);
 
     var container = document.getElementById('popup-' + random);
     var content = document.getElementById('popup-content-' + random);
-    var closer = document.getElementById('popup-closer-' + random);
 
-    /**
-     * Add a click handler to hide the popup.
-     * @return {boolean} Don't follow the href.
-     */
-    closer.onclick = function() {
-      container.style.display = 'none';
-      closer.blur();
-      return false;
-    };
+    if (typeof data.opt.closer !== 'undefined' && data.opt.closer !== 0) {
+      var closer = jQuery('<a/>', {
+        href: '#',
+        id: 'popup-closer-' + random,
+        'class': 'ol-popup-closer'
+      }).appendTo('#popup-' + random);
+
+      var closer = document.getElementById('popup-closer-' + random);
+
+      /**
+       * Add a click handler to hide the popup.
+       * @return {boolean} Don't follow the href.
+       */
+      closer.onclick = function() {
+        container.style.display = 'none';
+        closer.blur();
+        return false;
+      };
+    }
 
     /**
      * Create an overlay to anchor the popup to the map.
