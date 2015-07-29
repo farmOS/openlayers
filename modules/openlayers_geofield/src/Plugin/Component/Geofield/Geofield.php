@@ -16,7 +16,6 @@ use \geoPHP;
  * @OpenlayersPlugin(
  *  id = "Geofield"
  * )
- *
  */
 class Geofield extends Component {
   /**
@@ -54,19 +53,6 @@ class Geofield extends Component {
       '#multiple' => TRUE,
       '#options' => array('draw' => t('Draw'), 'modify' => t('Modify')),
       '#default_value' => $this->getOption('actionFeature'),
-      '#required' => TRUE,
-    );
-    $form['options']['typeOfFeature'] = array(
-      '#type' => 'checkboxes',
-      '#title' => t('Geometry type'),
-      '#description' => t('If more than one type is choosen a control to select the type to use is displayed when drawing.'),
-      '#multiple' => TRUE,
-      '#options' => array(
-        'Point' => t('Point'),
-        'LineString' => t('LineString'),
-        'Polygon' => t('Polygon'),
-      ),
-      '#default_value' => $this->getOption('typeOfFeature'),
       '#required' => TRUE,
     );
     $form['options']['featureLimit'] = array(
@@ -258,10 +244,6 @@ class Geofield extends Component {
         ),
       );
     }
-    $component['clearmap'] = array(
-      '#markup' => '<a href="#" class="clearmap">' . t('Clear the map') . '</a>',
-    );
-
     $component['data'] = array(
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
@@ -274,7 +256,6 @@ class Geofield extends Component {
 
     // Now add the component into the build array. This is a bit complex due
     // the fact that we want to support form nesting.
-    $build = array('map' => $build);
     $parents = array('geofield', 'component');
     $data_input_field_name = $this->getOption('inputFieldName');
     if (!empty($data_input_field_name)) {

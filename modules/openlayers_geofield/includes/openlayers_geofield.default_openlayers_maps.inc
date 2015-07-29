@@ -35,7 +35,9 @@ function openlayers_geofield_default_openlayers_maps() {
       0 => 'openlayers_geofield_layer_openstreetmap',
       1 => 'geofield_field_formatter_layer',
     ),
-    'controls' => array(),
+    'controls' => array(
+      0 => 'openlayers_geofield_control_geofield',
+    ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
