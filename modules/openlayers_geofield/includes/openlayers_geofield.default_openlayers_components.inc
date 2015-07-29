@@ -38,6 +38,7 @@ function openlayers_geofield_default_openlayers_components() {
     'inputFieldName' => 'geom',
     'initialData' => '',
     'dataProjection' => 'EPSG:4326',
+    'editStyle' => 'openlayers_geofield_style_edit',
   );
   $export['openlayers_geofield_component_geofield'] = $ol_component;
 

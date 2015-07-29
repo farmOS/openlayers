@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers_geofield\Plugin\Component\Geofield;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
 use \geoPHP;
@@ -80,6 +81,28 @@ class Geofield extends Component {
       '#description' => t('Initial data to set. You can use any of the data types available as "Data type". Ensure the data have the same projection as defined in "Data projection".'),
       '#default_value' => $this->getOption('initialData'),
     );
+    $form['options']['editStyle'] = array(
+      '#type' => 'select',
+      '#title' => t('Edit style'),
+      '#default_value' => $this->getOption('editStyle'),
+      '#options' => Openlayers::loadAllAsOptions('style'),
+    );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function optionsToObjects() {
+    $import = parent::optionsToObjects();
+
+    if ($style = $this->getOption('editStyle')) {
+      $style = Openlayers::load('style', $style);
+
+      $this->setWeight($style->getWeight() + 1);
+      $import = array_merge($style->getCollection()->getFlatList(), $import);
+    }
+
+    return $import;
   }
 
   /**

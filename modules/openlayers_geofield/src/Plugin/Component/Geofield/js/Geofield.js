@@ -12,6 +12,11 @@ Drupal.openlayers.pluginManager.register({
       var source = new ol.source.Vector();
     }
 
+    // Select the related source or fallback to a generic one.
+    if (goog.isDef(data.opt.editStyle) && goog.isDef(data.objects.styles[data.opt.editStyle])) {
+      var editStyle = data.objects.styles[data.opt.editStyle];
+    }
+
     // create a vector layer used for editing.
     var vector_layer = new ol.layer.Vector({
       name: 'drawing_vectorlayer',
@@ -212,7 +217,8 @@ Drupal.openlayers.pluginManager.register({
         source: vector_layer.getSource(),
         type: /** @type {ol.geom.GeometryType} */ (value),
         geometryFunction: geometryFunction,
-        maxPoints: maxPoints
+        maxPoints: maxPoints,
+        style: editStyle
       });
 
       // add it to the map
