@@ -319,6 +319,9 @@ class OLMap extends Map {
    * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
+    // So we can use the map API instead of working with arrays.
+    parent::optionsFormSubmit($form, $form_state);
+
     $limit_extent = $this->getOption(array('view', 'limit_extent'), '');
     $extent = $this->getOption(array('view', 'extent'), '');
 
