@@ -1,44 +1,41 @@
+goog.provide('ol.control.AutoZoom');
+
+goog.require('ol.control.Control');
+
 ol.control.AutoZoom = function(opt_options) {
   var options = goog.isDef(opt_options) ? opt_options : {};
   var className = goog.isDef(options.className) ? options.className : 'ol-autozoom';
-
-  var this_ = this;
-  var handleClick_ = function(e) {
-    this_.handleClick_(e);
-  };
 
   var autozoomLabel = goog.isDef(options.autozoomLabel) ?
     options.autozoomLabel : 'A';
   var autozoomTipLabel = goog.isDef(options.autozoomInTipLabel) ?
     options.autozoomTipLabel : 'Autozoom';
+  var autozoomElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
+    'class': className + '-autozoom',
+    'type' : 'button',
+    'title': autozoomTipLabel
+  }, autozoomLabel);
+  goog.events.listen(autozoomElement,
+    goog.events.EventType.CLICK, goog.partial(
+      ol.control.AutoZoom.prototype.handleClick_, 'AutoZoom'), false, this);
+  ol.control.Control.bindMouseOutFocusOutBlur(autozoomElement);
 
-  var button = document.createElement('button');
-  button.innerHTML = autozoomLabel;
-  button.title = autozoomTipLabel;
-  button.className = className + '-autozoom';
-  button.type = 'button';
+  var cssClasses = className + ' ' + ol.css.CLASS_CONTROL;
 
-  var element = document.createElement('div');
-  element.className = className + ' ol-unselectable ol-control';
-  element.appendChild(button);
+  var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, autozoomElement);
 
-  ol.control.Control.call(this, {
+  goog.base(this, {
     element: element,
     target: options.target
   });
 
-  button.addEventListener('click', handleClick_, false);
-  this.options = options;
+  this.options_ = options;
 };
 goog.inherits(ol.control.AutoZoom, ol.control.Control);
 
-/**
- * @param {event} event Browser event.
- */
-ol.control.AutoZoom.prototype.handleClick_ = function(event) {
-  event.preventDefault();
+ol.control.AutoZoom.prototype.handleClick_ = function(type, event) {
+  var options = this.options_;
   var map = this.getMap();
-  var options = this.options;
 
   function getLayersFromObject(object) {
     var layersInside = new ol.Collection();
