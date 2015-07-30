@@ -24,15 +24,6 @@ function openlayers_geofield_default_openlayers_components() {
       'GPX' => 'GPX',
       'WKT' => 'WKT',
     ),
-    'actionFeature' => array(
-      'draw' => 'draw',
-      'modify' => 'modify',
-    ),
-    'typeOfFeature' => array(
-      'Point' => 'Point',
-      'LineString' => 'LineString',
-      'Polygon' => 'Polygon',
-    ),
     'featureLimit' => 0,
     'showInputField' => 1,
     'inputFieldName' => 'geom',

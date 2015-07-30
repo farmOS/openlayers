@@ -48,14 +48,6 @@ class Geofield extends Component {
       '#default_value' => $this->getOption('dataProjection', 'EPSG:4326'),
       '#required' => TRUE,
     );
-    $form['options']['actionFeature'] = array(
-      '#type' => 'checkboxes',
-      '#title' => t('Type of interaction allowed'),
-      '#multiple' => TRUE,
-      '#options' => array('draw' => t('Draw'), 'modify' => t('Modify')),
-      '#default_value' => $this->getOption('actionFeature'),
-      '#required' => TRUE,
-    );
     $form['options']['featureLimit'] = array(
       '#type' => 'textfield',
       '#title' => t('Feature limit'),
@@ -126,8 +118,6 @@ class Geofield extends Component {
   public function getJS() {
     // Ensure the options are properly set and clean.
     $this->setOption('dataType', array_filter($this->getOption('dataType', array('WKT' => 'WKT'))));
-    $this->setOption('typeOfFeature', array_filter($this->getOption('typeOfFeature', array())));
-    $this->setOption('actionFeature', array_filter($this->getOption('actionFeature', array())));
 
     $initial_data = $this->getOption('initialData');
 
@@ -184,30 +174,6 @@ class Geofield extends Component {
       ),
     );
 
-    $action_feature = $type_of_feature = $this->getOption('actionFeature');
-    if (count($action_feature) > 1) {
-      $component['actionFeature'] = array(
-        '#type' => 'select',
-        '#title' => 'Type of interaction',
-        '#options' => array_intersect_key(
-          array('draw' => t('Draw'), 'modify' => t('Modify')),
-          $action_feature
-        ),
-        '#attributes' => array(
-          'class' => array('action-feature'),
-        ),
-      );
-    }
-    else {
-      $component['actionFeature'] = array(
-        '#type' => 'hidden',
-        '#default_value' => reset($action_feature),
-        '#attributes' => array(
-          'class' => array('action-feature'),
-        ),
-      );
-    }
-
     $data_type = $this->getOption('dataType');
     if (count($data_type) > 1) {
       $component['dataType'] = array(
@@ -238,35 +204,6 @@ class Geofield extends Component {
       );
     }
 
-    $type_of_feature = $this->getOption('typeOfFeature');
-    if (count($type_of_feature) > 1) {
-      $component['typeOfFeature'] = array(
-        '#type' => 'select',
-        '#title' => 'Geometry type',
-        '#options' => array_intersect_key(
-          array(
-            'Point' => t('Point'),
-            'LineString' => t('LineString'),
-            'Polygon' => t('Polygon'),
-          ),
-          $type_of_feature
-        ),
-        '#attributes' => array(
-          'id' => 'typeOfFeature',
-          'class' => array('type-of-feature'),
-        ),
-      );
-    }
-    else {
-      $component['typeOfFeature'] = array(
-        '#type' => 'hidden',
-        '#default_value' => reset($type_of_feature),
-        '#value' => reset($type_of_feature),
-        '#attributes' => array(
-          'class' => array('type-of-feature'),
-        ),
-      );
-    }
     $component['data'] = array(
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
