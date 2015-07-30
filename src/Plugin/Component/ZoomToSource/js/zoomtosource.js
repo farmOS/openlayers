@@ -3,12 +3,28 @@ Drupal.openlayers.pluginManager.register({
   init: function(data) {
     var map = data.map;
     var maxExtent = ol.extent.createEmpty();
+    var layers = getLayersFromObject(map);
 
-    map.getLayers().forEach(function(layer) {
+    function getLayersFromObject(object) {
+      var layersInside = new ol.Collection();
+
+      object.getLayers().forEach(function(layer) {
+        if (layer instanceof ol.layer.Group) {
+          layersInside.extend(getLayersFromObject(layer).getArray());
+        } else {
+          if (typeof layer.getSource === 'function') {
+            layersInside.push(layer);
+          }
+        }
+      });
+
+      return layersInside;
+    }
+
+    layers.forEach(function(layer) {
       var source = layer.getSource();
 
       if (source && typeof data.opt.source[source.mn] !== 'undefined') {
-
         var zoomToSource = function() {
           if (!data.opt.process_once || !data.opt.processed_once) {
             data.opt.processed_once = true;
