@@ -36,8 +36,6 @@ goog.inherits(ol.control.AutoZoom, ol.control.Control);
 ol.control.AutoZoom.prototype.handleClick_ = function(type, event) {
   var options = this.options_;
   var map = this.getMap();
-  var maxExtent = ol.extent.createEmpty();
-  var layers = getLayersFromObject(map);
 
   function getLayersFromObject(object) {
     var layersInside = new ol.Collection();
@@ -56,37 +54,55 @@ ol.control.AutoZoom.prototype.handleClick_ = function(type, event) {
     return layersInside;
   }
 
-  layers.forEach(function (layer) {
-    var source = layer.getSource();
-    if (source.getFeatures().length !== 0) {
-      ol.extent.extend(maxExtent, source.getExtent());
-    }
-  });
+  var calculateMaxExtent = function() {
+    var maxExtent = ol.extent.createEmpty();
 
-  if (options.enableAnimations == 1) {
-    var animationPan = ol.animation.pan({
-      duration: options.animations.pan,
-      source: map.getView().getCenter()
-    });
-    var animationZoom = ol.animation.zoom({
-      duration: options.animations.zoom,
-      resolution: map.getView().getResolution()
-    });
-    map.beforeRender(animationPan, animationZoom);
-  }
-
-  map.getView().fit(maxExtent, map.getSize());
-
-  if (options.zoom !== 'disabled') {
-    if (options.zoom !== 'auto') {
-      map.getView().setZoom(options.zoom);
-    }
-    else {
-      var zoom = map.getView().getZoom() - 1;
-      if (goog.isDef(options.max_zoom) && options.max_zoom > 0 && zoom > options.max_zoom) {
-        zoom = options.max_zoom;
+    getLayersFromObject(map).forEach(function (layer) {
+      var source = layer.getSource();
+      if (typeof source.getFeatures === 'function') {
+        if (source.getFeatures().length !== 0) {
+          ol.extent.extend(maxExtent, source.getExtent());
+        }
       }
-      map.getView().setZoom(zoom);
+    });
+
+    return maxExtent;
+  };
+
+  var zoomToSource = function(source) {
+    if (!options.process_once || !options.processed_once) {
+      options.processed_once = true;
+
+      if (options.enableAnimations === 1) {
+        var animationPan = ol.animation.pan({
+          duration: options.animations.pan,
+          source: map.getView().getCenter()
+        });
+        var animationZoom = ol.animation.zoom({
+          duration: options.animations.zoom,
+          resolution: map.getView().getResolution()
+        });
+        map.beforeRender(animationPan, animationZoom);
+      }
+
+      var maxExtent = calculateMaxExtent();
+      if (!ol.extent.isEmpty(maxExtent)) {
+        map.getView().fit(maxExtent, map.getSize());
+      }
+
+      if (options.zoom !== 'disabled') {
+        if (options.zoom !== 'auto') {
+          map.getView().setZoom(options.zoom);
+        } else {
+          var zoom = map.getView().getZoom() - 1;
+          if (goog.isDef(options.max_zoom) && options.max_zoom > 0 && zoom > options.max_zoom) {
+            zoom = options.max_zoom;
+          }
+          map.getView().setZoom(zoom);
+        }
+      }
     }
-  }
+  };
+
+  zoomToSource.call();
 };
