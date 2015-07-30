@@ -37,6 +37,8 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'controls' => array(
       0 => 'openlayers_geofield_control_geofield',
+      1 => 'openlayers_control_zoom',
+      2 => 'openlayers_examples_control_autozoom',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',

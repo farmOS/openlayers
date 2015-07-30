@@ -35,6 +35,8 @@ ol.inherits(ol.control.AutoZoom, ol.control.Control);
  */
 ol.control.AutoZoom.prototype.handleClick_ = function(event) {
   event.preventDefault();
+  event.target.blur();
+
   var map = this.getMap();
   var options = this.options;
 
