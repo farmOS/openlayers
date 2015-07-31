@@ -329,4 +329,25 @@ class Openlayers {
       'top-right' => t('top-right'),
     );
   }
+
+  /**
+   * The list of geometries available.
+   *
+   * @return array
+   *   The list of geometries.
+   */
+  public static function getGeometryTypes() {
+    return array(
+      'Point' => t('Point'),
+      'MultiPoint' => t('MultiPoint'),
+      'LineString' => t('LineString'),
+      'LinearRing' => t('LinearRing'),
+      'MultiLineString' => t('MultiLineString'),
+      'Polygon' => t('Polygon'),
+      'MultiPolygon' => t('Polygon'),
+      'GeometryCollection' => t('GeometryCollection'),
+      'Circle' => t('Circle'),
+    );
+  }
+
 }
