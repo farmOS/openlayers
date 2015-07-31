@@ -544,6 +544,9 @@ function openlayers_update_7350() {
       db_drop_field('openlayers_projections', $column);
     }
   }
+  // Truncate the styles table to remove old OL 2.x styles.
+  // @TODO Yes... more data loss...
+  db_query('TRUNCATE {openlayers_styles}');
 }
 
 /**
