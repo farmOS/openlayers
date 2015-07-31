@@ -25,12 +25,12 @@ class Circle extends Style {
       '#title' => 'Radius',
       '#default_value' => $this->getOption('radius', '5'),
     );
-    $form['options']['fillcolor'] = array(
+    $form['options']['fill']['color'] = array(
       '#type' => 'textfield',
       '#title' => 'Fill color',
       '#field_prefix' => 'rgba(',
       '#field_suffix' => ')',
-      '#default_value' => $this->getOption('fillcolor', '255,255,255,0.4'),
+      '#default_value' => $this->getOption(array('fill', 'color'), '255,255,255,0.4'),
     );
     $form['options']['stroke'] = array(
       '#type' => 'fieldset',

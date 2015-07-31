@@ -17,7 +17,9 @@ function openlayers_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'color' => '255, 255, 255, 0.4',
+    'fill' => array(
+      'color' => '255, 255, 255, 0.4',
+    ),
     'stroke' => array(
       'color' => '51, 153, 204, 1',
       'width' => 1.25,

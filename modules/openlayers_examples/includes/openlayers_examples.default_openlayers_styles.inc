@@ -35,7 +35,9 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'color' => '0, 255, 0, 0.4',
+    'fill' => array(
+      'color' => '0, 255, 0, 0.4',
+    ),
     'stroke' => array(
       'color' => '0, 255, 0, 1',
       'width' => 1.25,
@@ -52,7 +54,9 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'color' => '255, 0, 0, 0.4',
+    'fill' => array(
+      'color' => '255, 0, 0, 0.4',
+    ),
     'stroke' => array(
       'color' => '255, 0, 0, 1',
       'width' => 1.25,
@@ -69,7 +73,9 @@ function openlayers_examples_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'color' => '0, 0, 255, 0.4',
+    'fill' => array(
+      'color' => '0, 0, 255, 0.4',
+    ),
     'stroke' => array(
       'color' => '0, 0, 255, 1',
       'width' => 1.25,

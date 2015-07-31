@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager.register({
       new ol.style.Style({
         image: new ol.style.Circle({
           fill: new ol.style.Fill({
-            color: 'rgba(' + data.opt.color + ')'
+            color: 'rgba(' + data.opt.fill.color + ')'
           }),
           stroke: new ol.style.Stroke({
             width: data.opt.stroke.width,
