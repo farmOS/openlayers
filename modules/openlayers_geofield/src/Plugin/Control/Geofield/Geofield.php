@@ -43,7 +43,7 @@ class Geofield extends Control {
       '#title' => 'Edit options',
       '#default_value' => $this->getOption('actions', array()),
       '#options' => array(
-        'Select' => 'Select and modify a feature',
+        'Edit' => 'Select and edit a feature',
         'Move' => 'Move the feature',
         'Clear' => 'Clear the map',
       ),

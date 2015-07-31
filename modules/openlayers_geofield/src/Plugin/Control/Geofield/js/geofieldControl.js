@@ -1,36 +1,40 @@
-goog.provide('ol.control.GeoField');
-
-goog.require('ol.control.Control');
-
-ol.control.GeoField = function(opt_options) {
+ol.control.Geofield = function(opt_options) {
   var options = goog.isDef(opt_options) ? opt_options : {};
   var className = goog.isDef(options.className) ? options.className : 'ol-geofield';
+  this.options = {};
 
-  // This is for the global even at the top down the file.
-  // Not needed now, but maybe later.
   var this_ = this;
-  var handleClickEvent = function(e) {
-    this_.handleClickEvent(e);
+  var handleDrawClick_ = function(e) {
+    this_.handleDrawClick_(e);
+  };
+  var handleActionsClick_ = function(e) {
+    this_.handleActionsClick_(e);
+  };
+  var handleOptionsClick_ = function(e) {
+    this_.handleOptionsClick_(e);
   };
 
   draw = options.draw || {};
   actions = options.actions || {};
   options = options.options || {};
 
+  drawElements = new ol.Collection();
+  actionsElements = new ol.Collection();
+  optionsElements = new ol.Collection();
+
   if (draw.Point) {
     var pointLabel = goog.isDef(options.pointLabel) ?
       options.pointLabel : '\u25CB';
     var pointTipLabel = goog.isDef(options.pointInTipLabel) ?
       options.pointTipLabel : 'Draw a point';
-    var pointElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-point',
-      'type' : 'button',
-      'title': pointTipLabel
-    }, pointLabel);
-    goog.events.listen(pointElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Point'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(pointElement);
+    var pointElement = document.createElement('button');
+    pointElement.className = className + '-point';
+    pointElement.type = 'button';
+    pointElement.draw = 'Point';
+    pointElement.title = pointTipLabel;
+    pointElement.innerHTML = pointLabel;
+    pointElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(pointElement);
   }
 
   if (draw.MultiPoint) {
@@ -38,15 +42,14 @@ ol.control.GeoField = function(opt_options) {
       options.multipointLabel : '\u25CB';
     var multipointTipLabel = goog.isDef(options.multipointInTipLabel) ?
       options.multipointTipLabel : 'Draw a multipoint';
-    var multipointElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-multipoint',
-      'type': 'button',
-      'title': multipointTipLabel
-    }, multipointLabel);
-    goog.events.listen(multipointElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'MultiPoint'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(multipointElement);
+    var multipointElement = document.createElement('button');
+    multipointElement.className = className + '-multipoint';
+    multipointElement.type = 'button';
+    multipointElement.draw = 'MultiPoint';
+    multipointElement.title = multipointTipLabel;
+    multipointElement.innerHTML = multipointLabel;
+    multipointElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(multipointElement);
   }
 
   if (draw.LineString) {
@@ -54,15 +57,14 @@ ol.control.GeoField = function(opt_options) {
       options.pointLabel : '\u2500';
     var linestringTipLabel = goog.isDef(options.linestringTipLabel) ?
       options.pointTipLabel : 'Draw a linestring, hold [shift] for free hand.';
-    var linestringElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-linestring',
-      'type' : 'button',
-      'title': linestringTipLabel
-    }, linestringLabel);
-    goog.events.listen(linestringElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'LineString'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(linestringElement);
+    var linestringElement = document.createElement('button');
+    linestringElement.className = className + '-linestring';
+    linestringElement.type = 'button';
+    linestringElement.draw = 'LineString';
+    linestringElement.title = linestringTipLabel;
+    linestringElement.innerHTML = linestringLabel;
+    linestringElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(linestringElement);
   }
 
   if (draw.MultiLineString) {
@@ -70,15 +72,14 @@ ol.control.GeoField = function(opt_options) {
       options.pointLabel : '\u2500';
     var multilinestringTipLabel = goog.isDef(options.multilinestringTipLabel) ?
       options.pointTipLabel : 'Draw a multilinestring, hold [shift] for free hand.';
-    var multilinestringElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-multilinestring',
-      'type' : 'button',
-      'title': multilinestringTipLabel
-    }, multilinestringLabel);
-    goog.events.listen(multilinestringElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'MultiLineString'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(multilinestringElement);
+    var multilinestringElement = document.createElement('button');
+    multilinestringElement.className = className + '-multilinestring';
+    multilinestringElement.type = 'button';
+    multilinestringElement.draw = 'MultiLineString';
+    multilinestringElement.title = multilinestringTipLabel;
+    multilinestringElement.innerHTML = multilinestringLabel;
+    multilinestringElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(multilinestringElement);
   }
 
   if (draw.Triangle) {
@@ -86,15 +87,14 @@ ol.control.GeoField = function(opt_options) {
       options.triangleLabel : '\u25B2';
     var triangleTipLabel = goog.isDef(options.triangleTipLabel) ?
       options.triangleTipLabel : 'Draw a triangle';
-    var triangleElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-triangle',
-      'type' : 'button',
-      'title': triangleTipLabel
-    }, triangleLabel);
-    goog.events.listen(triangleElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Triangle'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(triangleElement);
+    var triangleElement = document.createElement('button');
+    triangleElement.className = className + '-triangle';
+    triangleElement.type = 'button';
+    triangleElement.draw = 'Triangle';
+    triangleElement.title = triangleTipLabel;
+    triangleElement.innerHTML = triangleLabel;
+    triangleElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(triangleElement);
   }
 
   if (draw.Square) {
@@ -102,15 +102,14 @@ ol.control.GeoField = function(opt_options) {
       options.squareLabel : '\u25A0';
     var squareTipLabel = goog.isDef(options.squareTipLabel) ?
       options.squareTipLabel : 'Draw a square';
-    var squareElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-square',
-      'type' : 'button',
-      'title': squareTipLabel
-    }, squareLabel);
-    goog.events.listen(squareElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Square'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(squareElement);
+    var squareElement = document.createElement('button');
+    squareElement.className = className + '-square';
+    squareElement.type = 'button';
+    squareElement.draw = 'Square';
+    squareElement.title = squareTipLabel;
+    squareElement.innerHTML = squareLabel;
+    squareElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(squareElement);
   }
 
   if (draw.Box) {
@@ -118,15 +117,14 @@ ol.control.GeoField = function(opt_options) {
       options.boxLabel : '\u25AE';
     var boxTipLabel = goog.isDef(options.boxTipLabel) ?
       options.boxTipLabel : 'Draw a box';
-    var boxElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-box',
-      'type' : 'button',
-      'title': boxTipLabel
-    }, boxLabel);
-    goog.events.listen(boxElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Box'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(boxElement);
+    var boxElement = document.createElement('button');
+    boxElement.className = className + '-box';
+    boxElement.type = 'button';
+    boxElement.draw = 'Box';
+    boxElement.title = boxTipLabel;
+    boxElement.innerHTML = boxLabel;
+    boxElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(boxElement);
   }
 
   if (draw.Circle) {
@@ -134,15 +132,14 @@ ol.control.GeoField = function(opt_options) {
       options.circleLabel : '\u25CF';
     var circleTipLabel = goog.isDef(options.circleTipLabel) ?
       options.circleTipLabel : 'Draw a circle';
-    var circleElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-circle',
-      'type' : 'button',
-      'title': circleTipLabel
-    }, circleLabel);
-    goog.events.listen(circleElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Circle'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(circleElement);
+    var circleElement = document.createElement('button');
+    circleElement.className = className + '-circle';
+    circleElement.type = 'button';
+    circleElement.draw = 'Circle';
+    circleElement.title = circleTipLabel;
+    circleElement.innerHTML = circleLabel;
+    circleElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(circleElement);
   }
 
   if (draw.Polygon) {
@@ -150,15 +147,14 @@ ol.control.GeoField = function(opt_options) {
       options.polygonLabel : '\u2B1F';
     var polygonTipLabel = goog.isDef(options.polygonTipLabel) ?
       options.polygonTipLabel : 'Draw a polygon';
-    var polygonElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-polygon',
-      'type' : 'button',
-      'title': polygonTipLabel
-    }, polygonLabel);
-    goog.events.listen(polygonElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'Polygon'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(polygonElement);
+    var polygonElement = document.createElement('button');
+    polygonElement.className = className + '-polygon';
+    polygonElement.type = 'button';
+    polygonElement.draw = 'Polygon';
+    polygonElement.title = polygonTipLabel;
+    polygonElement.innerHTML = polygonLabel;
+    polygonElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(polygonElement);
   }
 
   if (draw.MultiPolygon) {
@@ -166,31 +162,29 @@ ol.control.GeoField = function(opt_options) {
       options.multipolygonLabel : '\u2B1F';
     var multipolygonTipLabel = goog.isDef(options.multipolygonTipLabel) ?
       options.multipolygonTipLabel : 'Draw a multipolygon';
-    var multipolygonElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-multipolygon',
-      'type' : 'button',
-      'title': multipolygonTipLabel
-    }, multipolygonLabel);
-    goog.events.listen(multipolygonElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleDrawClick_, 'MultiPolygon'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(multipolygonElement);
+    var multipolygonElement = document.createElement('button');
+    multipolygonElement.className = className + '-multipolygon';
+    multipolygonElement.type = 'button';
+    multipolygonElement.draw = 'MultiPolygon';
+    multipolygonElement.title = multipolygonTipLabel;
+    multipolygonElement.innerHTML = multipolygonLabel;
+    multipolygonElement.addEventListener('click', handleDrawClick_, false);
+    drawElements.push(multipolygonElement);
   }
 
-  if (actions.Select) {
-    var selectLabel = goog.isDef(options.selectLabel) ?
-      options.selectLabel : '\u270D';
-    var selectTipLabel = goog.isDef(options.selectTipLabel) ?
-      options.selectTipLabel : 'Edit features';
-    var selectElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-select',
-      'type' : 'button',
-      'title': selectTipLabel
-    }, selectLabel);
-    goog.events.listen(selectElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleActionsClick_, 'Select'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(selectElement);
+  if (actions.Edit) {
+    var editLabel = goog.isDef(options.editLabel) ?
+      options.editLabel : '\u270D';
+    var editTipLabel = goog.isDef(options.editTipLabel) ?
+      options.editTipLabel : 'Edit features';
+    var editElement = document.createElement('button');
+    editElement.className = className + '-edit';
+    editElement.type = 'button';
+    editElement.action = 'Edit';
+    editElement.title = editTipLabel;
+    editElement.innerHTML = editLabel;
+    editElement.addEventListener('click', handleActionsClick_, false);
+    actionsElements.push(editElement);
   }
 
   if (actions.Move) {
@@ -198,15 +192,14 @@ ol.control.GeoField = function(opt_options) {
       options.moveLabel : '\u27A4';
     var moveTipLabel = goog.isDef(options.moveTipLabel) ?
       options.moveTipLabel : 'Move features';
-    var moveElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-move',
-      'type': 'button',
-      'title': moveTipLabel
-    }, moveLabel);
-    goog.events.listen(moveElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleActionsClick_, 'Move'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(moveElement);
+    var moveElement = document.createElement('button');
+    moveElement.className = className + '-move';
+    moveElement.type = 'button';
+    moveElement.action = 'Move';
+    moveElement.title = moveTipLabel;
+    moveElement.innerHTML = moveLabel;
+    moveElement.addEventListener('click', handleActionsClick_, false);
+    actionsElements.push(moveElement);
   }
 
   if (actions.Clear) {
@@ -214,15 +207,14 @@ ol.control.GeoField = function(opt_options) {
       options.clearLabel : 'X';
     var clearTipLabel = goog.isDef(options.clearTipLabel) ?
       options.clearTipLabel : 'Clear features';
-    var clearElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-clear',
-      'type': 'button',
-      'title': clearTipLabel
-    }, clearLabel);
-    goog.events.listen(clearElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleActionsClick_, 'Clear'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(clearElement);
+    var clearElement = document.createElement('button');
+    clearElement.className = className + '-clear';
+    clearElement.type = 'button';
+    clearElement.action = 'Clear';
+    clearElement.title = clearTipLabel;
+    clearElement.innerHTML = clearLabel;
+    clearElement.addEventListener('click', handleActionsClick_, false);
+    actionsElements.push(clearElement);
   }
 
   if (options.Snap) {
@@ -230,107 +222,121 @@ ol.control.GeoField = function(opt_options) {
       options.snapLabel : '\u2609';
     var snapTipLabel = goog.isDef(options.snapTipLabel) ?
       options.snapTipLabel : 'Snap to features';
-    var snapElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-      'class': className + '-snap',
-      'type': 'button',
-      'title': snapTipLabel
-    }, snapLabel);
-    goog.events.listen(snapElement,
-      goog.events.EventType.CLICK, goog.partial(
-        ol.control.GeoField.prototype.handleOptionsClick_, 'Snap'), false, this);
-    ol.control.Control.bindMouseOutFocusOutBlur(snapElement);
+    var snapElement = document.createElement('button');
+    snapElement.className = className + '-snap';
+    snapElement.type = 'button';
+    snapElement.option = 'Snap';
+    snapElement.title = snapTipLabel;
+    snapElement.innerHTML = snapLabel;
+    snapElement.addEventListener('click', handleOptionsClick_, false);
+    optionsElements.push(snapElement);
   }
 
-  var cssClasses = className + ' ' + ol.css.CLASS_CONTROL;
+  var cssClasses = className + ' ' + 'ol-control';
 
-  var drawElements = goog.dom.createDom(goog.dom.TagName.DIV, 'draw', pointElement, multipointElement, linestringElement, multilinestringElement, triangleElement, squareElement, boxElement, polygonElement, multipolygonElement, circleElement);
-  var actionsElements = goog.dom.createDom(goog.dom.TagName.DIV, 'actions', selectElement, moveElement, clearElement);
-  var optionsElements = goog.dom.createDom(goog.dom.TagName.DIV, 'options', snapElement);
+  var drawElement = document.createElement('div');
+  drawElement.className = 'draw';
+  drawElements.forEach(function(element) {
+    drawElement.appendChild(element);
+  });
 
-  var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, drawElements, actionsElements, optionsElements);
+  var actionsElement = document.createElement('div');
+  actionsElement.className = 'actions';
+  actionsElements.forEach(function(element) {
+    actionsElement.appendChild(element);
+  });
 
-  element.addEventListener('click', handleClickEvent, false);
+  var optionsElement = document.createElement('div');
+  optionsElement.className = 'options';
+  optionsElements.forEach(function(element) {
+    optionsElement.appendChild(element);
+  });
 
-  goog.base(this, {
+  var element = document.createElement('div');
+  element.className = cssClasses;
+  element.appendChild(drawElement);
+  element.appendChild(actionsElement);
+  element.appendChild(optionsElement);
+
+  ol.control.Control.call(this, {
     element: element,
     target: options.target
   });
 };
-goog.inherits(ol.control.GeoField, ol.control.Control);
+goog.inherits(ol.control.Geofield, ol.control.Control);
 
-ol.control.GeoField.prototype.handleDrawClick_ = function(type, event) {
-  // Disable actions buttons and options.
-  goog.array.forEach(goog.dom.getChildren(goog.dom.getElementByClass('actions', this.element)), function(e, i, a) {
-    goog.dom.classlist.remove(e, 'enable');
+ol.control.Geofield.prototype.handleDrawClick_ = function(event) {
+  var options = this.options;
+
+  // Disable actions buttons.
+  var divs = this.element.getElementsByClassName('actions')[0];
+  [].map.call(divs.children, function(element) {
+    element.classList.remove('enable');
   });
-  options = this.get('options') || {};
-  options.actions = options.actions || {};
-  options.actions[type] = true;
-  this.set('options', options);
+  delete options.actions;
 
-  // Disable other draw buttons except the one we've clicked.
-  goog.array.forEach(goog.dom.getChildren(goog.dom.getElementByClass('draw', this.element)), function(e, i, a) {
-    if (e != event.target) {
-      goog.dom.classlist.remove(e, 'enable');
-    }
+  // Disable other draw buttons.
+  divs = this.element.getElementsByClassName('draw')[0];
+  [].map.call(divs.children, function(element) {
+    element.classList.remove('enable');
   });
-  goog.dom.classlist.toggle(event.target, 'enable');
+  event.target.classList.toggle('enable');
 
-  if (goog.dom.classlist.contains(event.target, 'enable')) {
-    options = this.get('options') || {};
-    options.draw = type;
-    this.set('options', options);
+  if (event.target.classList.contains('enable')) {
+    options.draw = event.target.draw;
   } else {
-    options = this.get('options') || {};
     options.draw = false;
-    this.set('options', options);
   }
+
+  this.options = options;
+  event = new CustomEvent('change');
+  this.dispatchEvent(event);
 };
 
-ol.control.GeoField.prototype.handleOptionsClick_ = function(type, event) {
-  goog.dom.classlist.toggle(event.target, 'enable');
+ol.control.Geofield.prototype.handleActionsClick_ = function(event) {
+  var options = this.options;
 
-  if (goog.dom.classlist.contains(event.target, 'enable')) {
-    options = this.get('options') || {};
-    options.options = options.options || {};
-    options.options[type] = true;
-    this.set('options', options);
-  } else {
-    options = this.get('options') || {};
-    options.options[type] = false;
-    this.set('options', options);
-  }
-};
-
-ol.control.GeoField.prototype.handleActionsClick_ = function(type, event) {
-  // Disable draw buttons and options.
-  goog.array.forEach(goog.dom.getChildren(goog.dom.getElementByClass('draw', this.element)), function(e, i, a) {
-    goog.dom.classlist.remove(e, 'enable');
+  // Disable draw buttons.
+  var divs = this.element.getElementsByClassName('draw')[0];
+  [].map.call(divs.children, function(element) {
+    element.classList.remove('enable');
   });
-  options = this.get('options') || {};
   options.draw = false;
-  this.set('options', options);
 
-  // Disable other actions except the one we've clicked.
-  goog.array.forEach(goog.dom.getChildren(goog.dom.getElementByClass('actions', this.element)), function(e, i, a) {
-    if (e != event.target) {
-      goog.dom.classlist.remove(e, 'enable');
+  // Disable other draw buttons.
+  divs = this.element.getElementsByClassName('actions')[0];
+  [].map.call(divs.children, function(element) {
+    if (event.target !== element) {
+      element.classList.remove('enable');
     }
   });
-  goog.dom.classlist.toggle(event.target, 'enable');
+  event.target.classList.toggle('enable');
 
-  if (goog.dom.classlist.contains(event.target, 'enable')) {
-    options = this.get('options') || {};
+  if (event.target.classList.contains('enable')) {
     options.actions = options.actions || {};
-    options.actions[type] = true;
-    this.set('options', options);
+    options.actions[event.target.action] = true;
   } else {
-    options = this.get('options') || {};
-    options.actions[type] = false;
-    this.set('options', options);
+    options.actions[event.target.action] = false;
   }
+
+  this.options = options;
+  event = new CustomEvent('change');
+  this.dispatchEvent(event);
 };
 
-ol.control.GeoField.prototype.handleClickEvent = function(e) {
-  // if we need a global event here.
+ol.control.Geofield.prototype.handleOptionsClick_ = function(event) {
+  var options = this.options;
+  event.target.classList.toggle('enable');
+
+  if (event.target.classList.contains('enable')) {
+    options.options = options.options || {};
+    options.options[event.target.option] = true;
+  } else {
+    options.options[event.target.option] = false;
+    event.target.blur();
+  }
+
+  this.options = options;
+  event = new CustomEvent('change');
+  this.dispatchEvent(event);
 };

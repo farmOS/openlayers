@@ -17,7 +17,9 @@ function openlayers_geofield_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'color' => '255, 255, 255, 0',
+    'fill' => array(
+      'color' => '100, 100, 100, 0.90',
+    ),
     'stroke' => array(
       'color' => '0, 0, 0, 1',
       'width' => 3,

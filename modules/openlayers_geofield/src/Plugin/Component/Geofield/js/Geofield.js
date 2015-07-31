@@ -62,14 +62,14 @@ Drupal.openlayers.pluginManager.register({
       move_interaction;
 
     map.getControls().forEach(function(control) {
-      if (control instanceof ol.control.GeoField) {
+      if (control instanceof ol.control.Geofield) {
         geofieldControl = control;
       }
     });
 
     if (typeof geofieldControl !== 'undefined') {
-      geofieldControl.on('change:options', function(event) {
-        var options = event.target.get('options');
+      geofieldControl.on('change', function(event) {
+        var options = event.c.options;
 
         removeMapInteractions();
 
@@ -82,7 +82,7 @@ Drupal.openlayers.pluginManager.register({
           addMoveInteraction();
         }
 
-        if ((((options || {}).actions || {}).Select || false) === true) {
+        if ((((options || {}).actions || {}).Edit || false) === true) {
           addSelectInteraction();
           addModifyInteraction();
         }
@@ -95,7 +95,7 @@ Drupal.openlayers.pluginManager.register({
           addSnapInteraction();
         }
 
-        event.target.set(options);
+        event.c.options = options;
       });
     }
 
@@ -256,7 +256,7 @@ Drupal.openlayers.pluginManager.register({
         // Ensure an empty geometry collection doesn't write any data. That way
         // the original geofield validator will work and a required field is
         // properly detected as empty.
-        if (datas == 'GEOMETRYCOLLECTION EMPTY') {
+        if (datas === 'GEOMETRYCOLLECTION EMPTY') {
           datas = '';
         }
 

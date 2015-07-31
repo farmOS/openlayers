@@ -31,7 +31,7 @@ function openlayers_geofield_default_openlayers_controls() {
       'MultiPolygon' => 0,
     ),
     'actions' => array(
-      'Select' => 'Select',
+      'Edit' => 'Edit',
       'Move' => 'Move',
       'Clear' => 'Clear',
     ),

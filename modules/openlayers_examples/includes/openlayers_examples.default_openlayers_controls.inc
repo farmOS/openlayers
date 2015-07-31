@@ -171,6 +171,16 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->machine_name = 'openlayers_examples_control_autozoom';
   $ol_control->name = 'Openlayers examples: AutoZoom';
   $ol_control->description = '';
+  $ol_control->options = array(
+    'zoom' => 'disabled',
+    'max_zoom' => 0,
+    'process_once' => 0,
+    'enableAnimations' => 1,
+    'animations' => array(
+      'pan' => 500,
+      'zoom' => 500,
+    ),
+  );
   $ol_control->factory_service = 'openlayers.Control:AutoZoom';
   $export['openlayers_examples_control_autozoom'] = $ol_control;
 

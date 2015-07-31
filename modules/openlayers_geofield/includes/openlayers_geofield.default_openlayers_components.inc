@@ -46,7 +46,7 @@ function openlayers_geofield_default_openlayers_components() {
       'pan' => '500',
       'zoom' => '500',
     ),
-    'zoom' => 'auto',
+    'zoom' => 'disabled',
     'enableAnimations' => 1,
   );
   $export['openlayers_geofield_component_zoom_to_source'] = $ol_component;
