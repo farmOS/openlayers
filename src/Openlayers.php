@@ -298,9 +298,9 @@ class Openlayers {
    * @return array
    *   The cleaned array.
    */
-  public static function removeEmptyElements($array) {
+  public static function removeEmptyElements(array $array) {
     foreach ($array as $key => $value) {
-      if (empty($value) && $value != 0) {
+      if ($value === '' && $value !== 0) {
         unset($array[$key]);
       }
       elseif (is_array($value)) {

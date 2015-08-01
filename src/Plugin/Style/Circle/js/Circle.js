@@ -3,10 +3,11 @@ Drupal.openlayers.pluginManager.register({
   init: function(data) {
     return function (feature, resolution) {
       var geometry = feature.getGeometry().getType();
+      var geometry_style;
       if (goog.isDef(data.opt[geometry])) {
-        var geometry_style = data.opt[geometry];
+        geometry_style = data.opt[geometry];
       }else {
-        var geometry_style = data.opt['default'];
+        geometry_style = data.opt['default'];
       }
       return [
         new ol.style.Style({
@@ -15,8 +16,9 @@ Drupal.openlayers.pluginManager.register({
               color: 'rgba(' + geometry_style.image.fill.color + ')'
             }),
             stroke: new ol.style.Stroke({
-              width: data.opt.stroke.width,
-              color: 'rgba(' + geometry_style.image.stroke.color + ')'
+              width: geometry_style.image.stroke.width,
+              color: 'rgba(' + geometry_style.image.stroke.color + ')',
+              lineDash: geometry_style.image.stroke.lineDash.split(',')
             }),
             radius: geometry_style.image.radius
           }),
@@ -25,7 +27,8 @@ Drupal.openlayers.pluginManager.register({
           }),
           stroke: new ol.style.Stroke({
             width: geometry_style.stroke.width,
-            color: 'rgba(' + geometry_style.stroke.color + ')'
+            color: 'rgba(' + geometry_style.stroke.color + ')',
+            lineDash: geometry_style.stroke.lineDash.split(',')
           })
         })
       ];

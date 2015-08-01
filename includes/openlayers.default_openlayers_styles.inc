@@ -17,14 +17,27 @@ function openlayers_default_openlayers_styles() {
   $ol_style->description = '';
   $ol_style->factory_service = 'openlayers.Style:Circle';
   $ol_style->options = array(
-    'fill' => array(
-      'color' => '255, 255, 255, 0.4',
+    'default' => array(
+      'image' => array(
+        'radius' => 5,
+        'fill' => array(
+          'color' => '255,255,255,0.4',
+        ),
+        'stroke' => array(
+          'color' => '51,153,204,1',
+          'width' => 1.25,
+          'lineDash' => '0,0',
+        ),
+      ),
+      'stroke' => array(
+        'color' => '51,153,204,1',
+        'width' => 1.25,
+        'lineDash' => '0,0',
+      ),
+      'fill' => array(
+        'color' => '51,153,204,1',
+      ),
     ),
-    'stroke' => array(
-      'color' => '51, 153, 204, 1',
-      'width' => 1.25,
-    ),
-    'radius' => 5,
   );
   $export['openlayers_style_default'] = $ol_style;
 
