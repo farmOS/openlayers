@@ -69,6 +69,12 @@ class Circle extends Style {
       '#default_value' => $this->getOption(array('default', 'image', 'stroke', 'width'), '1.25'),
       '#required' => TRUE,
     );
+    $form['options']['default']['image']['stroke']['lineDash'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Line dash',
+      '#default_value' => $this->getOption(array('default', 'image', 'stroke', 'lineDash'), '0,0'),
+      '#required' => TRUE,
+    );
     $form['options']['default']['stroke']['lineDash'] = array(
       '#type' => 'textfield',
       '#title' => 'Line dash',

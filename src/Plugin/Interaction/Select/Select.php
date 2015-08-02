@@ -22,6 +22,12 @@ class Select extends Interaction {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
+    $form['options']['multi'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Multi select ?'),
+      '#default_value' => $this->getOption('multi', TRUE),
+      '#description' => t('A boolean that determines if the default behaviour should select only single features or all (overlapping) features at the clicked map position. Default is false i.e single select.'),
+    );
     $form['options']['condition'] = array(
       '#type' => 'select',
       '#title' => t('Condition'),
@@ -33,7 +39,32 @@ class Select extends Interaction {
         'shiftKeyOnly' => t('Shift key only'),
         'pointerMove' => t('Pointer move'),
       ),
-      '#required' => TRUE,
+    );
+    $form['options']['addCondition'] = array(
+      '#type' => 'select',
+      '#title' => t('Add condition'),
+      '#empty_option' => t('- Select an add condition -'),
+      '#default_value' => $this->getOption('addCondition', 'never'),
+      '#description' => t('Select the add condition.'),
+      '#options' => array(
+        'never' => t('Never'),
+        'singleClick' => t('Single click'),
+        'shiftKeyOnly' => t('Shift key only'),
+        'pointerMove' => t('Pointer move'),
+      ),
+    );
+    $form['options']['toggleCondition'] = array(
+      '#type' => 'select',
+      '#title' => t('Toggle condition'),
+      '#empty_option' => t('- Select a toggle condition -'),
+      '#default_value' => $this->getOption('toggleCondition', 'shiftKeyOnly'),
+      '#description' => t('Select the toggle condition.'),
+      '#options' => array(
+        'never' => t('Never'),
+        'singleClick' => t('Single click'),
+        'shiftKeyOnly' => t('Shift key only'),
+        'pointerMove' => t('Pointer move'),
+      ),
     );
     $form['options']['style'] = array(
       '#type' => 'select',
