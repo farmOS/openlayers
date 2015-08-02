@@ -772,5 +772,18 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_group_base'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_random_features';
+  $ol_layer->name = 'Openlayers examples: Random features';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Vector';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_random_features',
+    'visible' => 1,
+  );
+  $export['openlayers_examples_layer_random_features'] = $ol_layer;
+
   return $export;
 }

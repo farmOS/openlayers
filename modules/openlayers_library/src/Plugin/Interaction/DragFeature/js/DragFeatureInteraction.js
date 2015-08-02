@@ -2,7 +2,9 @@
  * @constructor
  * @extends {ol.interaction.Pointer}
  */
-ol.interaction.DragFeature = function() {
+ol.interaction.DragFeature = function(data) {
+
+  var options = data.opt;
 
   ol.interaction.Pointer.call(this, {
     handleDownEvent: ol.interaction.DragFeature.prototype.handleDownEvent,
@@ -35,6 +37,13 @@ ol.interaction.DragFeature = function() {
    */
   this.previousCursor_ = undefined;
 
+  if (goog.isDef(data.objects.styles[options.style])) {
+    this.dragFeatureStyle_ = data.objects.styles[options.style];
+  } else {
+    this.dragFeatureStyle_ = ol.style.defaultStyleFunction;
+  }
+
+  this.style_ = null;
 };
 ol.inherits(ol.interaction.DragFeature, ol.interaction.Pointer);
 
@@ -54,6 +63,7 @@ ol.interaction.DragFeature.prototype.handleDownEvent = function(evt) {
   if (feature) {
     this.coordinate_ = evt.coordinate;
     this.feature_ = feature;
+    this.style_ = feature.getStyleFunction();
   }
 
   return !!feature;
@@ -77,6 +87,8 @@ ol.interaction.DragFeature.prototype.handleDragEvent = function(evt) {
   var geometry = /** @type {ol.geom.SimpleGeometry} */
     (this.feature_.getGeometry());
   geometry.translate(deltaX, deltaY);
+
+  this.feature_.setStyle(this.dragFeatureStyle_(feature));
 
   this.coordinate_[0] = evt.coordinate[0];
   this.coordinate_[1] = evt.coordinate[1];
@@ -113,6 +125,12 @@ ol.interaction.DragFeature.prototype.handleMoveEvent = function(evt) {
  */
 ol.interaction.DragFeature.prototype.handleUpEvent = function(evt) {
   this.coordinate_ = null;
+  if (typeof this.style_ === 'undefined') {
+    this.feature_.setStyle(ol.style.defaultStyleFunction);
+  } else {
+    this.feature_.setStyle(this.style_(this.feature_));
+  }
+  this.style_ = null;
   this.feature_ = null;
   return false;
 };

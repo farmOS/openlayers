@@ -32,7 +32,7 @@ class Select extends Interaction {
       '#type' => 'select',
       '#title' => t('Condition'),
       '#empty_option' => t('- Select a condition -'),
-      '#default_value' => $this->getOption('condition', 'singleClick'),
+      '#default_value' => $this->getOption('condition', ''),
       '#description' => t('Select the condition.'),
       '#options' => array(
         'singleClick' => t('Single click'),

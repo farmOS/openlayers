@@ -18,5 +18,37 @@ use Drupal\openlayers\Types\Interaction;
  * )
  */
 class DragFeature extends Interaction {
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsForm(&$form, &$form_state) {
+    $form['options']['style'] = array(
+      '#type' => 'select',
+      '#title' => t('Style when drag'),
+      '#empty_option' => t('- Select the Style -'),
+      '#default_value' => $this->getOption('style', array()),
+      '#description' => t('Select the style.'),
+      '#options' => Openlayers::loadAllAsOptions('Style'),
+    );
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function optionsToObjects() {
+    $import = parent::optionsToObjects();
+
+    if ($style = $this->getOption('style', FALSE)) {
+      $style = Openlayers::load('style', $style);
+
+      // This source is a dependency of the current one,
+      // we need a lighter weight.
+      $this->setWeight($style->getWeight() + 1);
+      $import = array_merge($style->getCollection()
+        ->getFlatList(), $import);
+    }
+
+    return $import;
+  }
 
 }
