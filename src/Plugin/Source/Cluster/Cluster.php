@@ -25,7 +25,7 @@ class Cluster extends Source {
       '#type' => 'select',
       '#title' => t('Source'),
       '#empty_option' => t('- Select a Source -'),
-      '#default_value' => isset($form_state['item']->options['source']) ? $form_state['item']->options['source'] : '',
+      '#default_value' => $this->getOption('source', ''),
       '#description' => t('Select the source.'),
       '#options' => Openlayers::loadAllAsOptions('Source'),
       '#required' => TRUE,

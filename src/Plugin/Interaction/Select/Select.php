@@ -22,6 +22,19 @@ class Select extends Interaction {
    * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
+    $form['options']['condition'] = array(
+      '#type' => 'select',
+      '#title' => t('Condition'),
+      '#empty_option' => t('- Select a condition -'),
+      '#default_value' => $this->getOption('condition', 'singleClick'),
+      '#description' => t('Select the condition.'),
+      '#options' => array(
+        'singleClick' => t('Single click'),
+        'shiftKeyOnly' => t('Shift key only'),
+        'pointerMove' => t('Pointer move'),
+      ),
+      '#required' => TRUE,
+    );
     $form['options']['style'] = array(
       '#type' => 'select',
       '#title' => t('Style'),

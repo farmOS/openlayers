@@ -2,6 +2,9 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.Style:Circle',
   init: function(data) {
     return function (feature, resolution) {
+      if (!(feature instanceof ol.Feature)) {
+        return null;
+      }
       var geometry = feature.getGeometry().getType();
       var geometry_style;
       if (goog.isDef(data.opt[geometry])) {
