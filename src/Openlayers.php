@@ -344,7 +344,7 @@ class Openlayers {
       'LinearRing' => t('LinearRing'),
       'MultiLineString' => t('MultiLineString'),
       'Polygon' => t('Polygon'),
-      'MultiPolygon' => t('Polygon'),
+      'MultiPolygon' => t('MultiPolygon'),
       'GeometryCollection' => t('GeometryCollection'),
       'Circle' => t('Circle'),
     );
