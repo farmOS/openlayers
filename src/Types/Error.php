@@ -25,7 +25,7 @@ use Drupal\service_container\Messenger\MessengerInterface;
  * Dummy class to avoid breaking the whole processing if a plugin class is
  * missing.
  */
-class Error extends Object implements SourceInterface,StyleInterface,LayerInterface,ComponentInterface {
+class Error extends Object implements ControlInterface, ComponentInterface, LayerInterface, SourceInterface, StyleInterface {
 
   /**
    * @var string
