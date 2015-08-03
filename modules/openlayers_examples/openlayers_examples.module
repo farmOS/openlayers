@@ -22,7 +22,7 @@ function openlayers_examples_menu() {
   $items = array();
 
   $items['openlayers_examples'] = array(
-    'title' => 'OpenLayers 3.x examples',
+    'title' => 'Openlayers 3.x examples',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openlayers_examples'),
     'access arguments' => array('access content'),
@@ -161,9 +161,9 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
             $width = ($map->getOption('width', 'auto') == 'auto') ? '100%' : $map->getOption('width', 'auto');
             $height = $map->getOption('height', 'auto');
-            $iframe = "<iframe src='" . url('openlayers/openlayers-map/' . $map->machine_name, array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
+            $iframe = "<iframe src='" . url('openlayers/openlayers-map/' . $map->getMachineName(), array('absolute' => TRUE)) . "' width='" . $width . "' height='" . $height . "'/>";
 
-            $form['form'][$map->getId()]['openlayers_services'][$map->machine_name] = array(
+            $form['form'][$map->getId()]['openlayers_services'][$map->getMachineName()] = array(
               '#type' => 'textarea',
               '#description' => t('Copy paste this html code to embed this map in your content.'),
               '#rows' => 3,
@@ -184,7 +184,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
 
     $form['form'][$map->getId()]['permalink']['link'] = array(
       '#type' => 'textfield',
-      '#value' => url('openlayers_examples/' . $map->machine_name, array('absolute' => TRUE)),
+      '#value' => url('openlayers_examples/' . $map->getMachineName(), array('absolute' => TRUE)),
       '#size' => 128,
     );
 
@@ -244,7 +244,7 @@ function _openlayers_examples_ajax_reload_default_map($form, &$form_state) {
 function openlayers_examples_block_info() {
   return array(
     'openlayers_examples' => array(
-      'info' => 'OpenLayers Examples',
+      'info' => 'Openlayers Examples',
     ),
   );
 }

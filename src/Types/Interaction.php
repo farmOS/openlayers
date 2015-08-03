@@ -16,4 +16,5 @@ abstract class Interaction extends Object implements InteractionInterface {
    * @var array
    */
   protected $options;
+
 }

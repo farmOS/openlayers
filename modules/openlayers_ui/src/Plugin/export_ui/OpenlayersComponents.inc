@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersComponents_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'components',
       'menu title' => 'Components',
-      'menu description' => 'Administer OpenLayers components.',
+      'menu description' => 'Administer Openlayers components.',
     ),
 
     'handler' => array(
@@ -51,8 +51,8 @@ function openlayers_ui_OpenlayersComponents_ctools_export_ui() {
 
     'title singular' => t('component'),
     'title plural' => t('components'),
-    'title singular proper' => t('OpenLayers component preset'),
-    'title plural proper' => t('OpenLayers component presets'),
+    'title singular proper' => t('Openlayers component preset'),
+    'title plural proper' => t('Openlayers component presets'),
 
     'strings' => array(
       'confirmation' => array(

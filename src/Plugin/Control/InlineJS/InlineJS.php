@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Control;
  * @OpenlayersPlugin(
  *  id = "InlineJS"
  * )
- *
  */
 class InlineJS extends Control {
 

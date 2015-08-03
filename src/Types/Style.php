@@ -27,4 +27,5 @@ abstract class Style extends Object implements StyleInterface {
 
     return $js;
   }
+
 }

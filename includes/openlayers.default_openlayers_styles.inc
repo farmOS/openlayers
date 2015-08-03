@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_default_styles().
+ * Implements hook_default_openlayers_styles().
  */
 function openlayers_default_openlayers_styles() {
   $export = array();

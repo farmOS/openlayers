@@ -15,7 +15,6 @@ use Drupal\openlayers\Config;
  * @OpenlayersPlugin(
  *  id = "GeoJSON"
  * )
- *
  */
 class GeoJSON extends Source {
   /**
@@ -57,46 +56,6 @@ class GeoJSON extends Source {
       '#default_value' => $this->getOption('reloadOnExtentChange'),
     );
 
-//    //see http://dev.openlayers.org/docs/files/OpenLayers/Strategy/BBOX-js.html#OpenLayers.Strategy.BBOX.resFactor
-//    $form['options']['resFactor'] = array(
-//      '#type' => 'textfield',
-//      '#title' => t('Bounding Box resFactor'),
-//      '#description' => t('Used to determine when previously requested features are invalid (set to 1 if unsure).
-//          The resFactor will be compared to the resolution of the previous request to the current map resolution.<br />
-//          If resFactor > (old / new) and 1/resFactor < (old / new).
-//          <ul>
-//          <li>If you set a resFactor of 1, data will be requested every time the resolution changes.</li>
-//          <li>If you set a resFactor of 3, data will be requested if the old resolution is 3 times the new, or if the new is 3 times the old.</li>
-//          <li>If the old bounds do not contain the new bounds new data will always be requested (with or without considering resFactor).</li>
-//          </ul>
-//          '),
-//      '#default_value' => $this->getOption('resFactor', 1),
-//    );
-//  //see hZttp://dev.openlayers.org/docs/files/OpenLayers/Strategy/BBOX-js.html#OpenLayers.Strategy.BBOX.ratio
-//    $form['options']['ratio'] = array(
-//      '#type' => 'textfield',
-//      '#title' => t('Bounding Box ratio'),
-//      '#description' => t('The ratio of the data bounds to the viewport bounds (in each dimension).  Default is 3.'),
-//      '#default_value' => $this->getOption('ratio', 3),
-//    );
-//    $form['options']['preload'] = array(
-//      '#type' => 'checkbox',
-//      '#title' => t('Preload layer'),
-//      '#description' => t('Load data before layer is made visible. Useful when you want to avoid having to wait for an Ajax call to load the data'),
-//      '#default_value' => $this->getOption('preload', FALSE),
-//    );
-//    $form['options']['useScript'] = array(
-//      '#type' => 'checkbox',
-//      '#title' => t('Use Script Method'),
-//      '#description' => t('Avoid 405 error and XSS issues load data from another server with ajax'),
-//      '#default_value' => $this->getOption('useScript', FALSE),
-//    );
-//    $form['options']['callbackKey'] = array(
-//      '#type' => 'textfield',
-//      '#title' => t('Script Callback Key'),
-//      '#description' => t('Key returned by callback along with geoJSON'),
-//      '#default_value' => $this->getOption('callbackKey', NULL),
-//    );
     $form['options']['geojson_data'] = array(
       '#type' => 'textarea',
       '#title' => t('GeoJSON Data'),

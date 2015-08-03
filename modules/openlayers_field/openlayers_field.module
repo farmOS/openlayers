@@ -105,7 +105,7 @@ function openlayers_field_field_formatter_settings_form($field, $instance, $view
   /*
   $sources = \Drupal\openlayers\Openlayers::loadAll('source');
   $maps = array();
-  foreach($sources as $index => $source) {
+  foreach ($sources as $index => $source) {
     if ($source->getFactoryService() != 'openlayers.Source:Field') {
       $maps += $source->getParents();
     }

@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "Select"
  * )
- *
  */
 class Select extends Interaction {
 

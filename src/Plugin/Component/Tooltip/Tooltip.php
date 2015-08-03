@@ -28,7 +28,7 @@ class Tooltip extends Component {
       '#empty_option' => t('- Select a Layer -'),
       '#default_value' => isset($form_state['item']->options['layer']) ? $form_state['item']->options['layer'] : '',
       '#description' => t('Select the layer.'),
-      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Layer'),
+      '#options' => Openlayers::loadAllAsOptions('Layer'),
       '#required' => TRUE,
     );
 
@@ -41,4 +41,5 @@ class Tooltip extends Component {
       '#required' => TRUE,
     );
   }
+
 }

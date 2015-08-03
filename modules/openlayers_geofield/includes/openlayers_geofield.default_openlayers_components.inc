@@ -14,7 +14,7 @@ function openlayers_geofield_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_geofield_component_geofield';
-  $ol_component->name = 'OpenLayers Geofield';
+  $ol_component->name = 'Openlayers Geofield';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Geofield';
   $ol_component->options = array(
@@ -45,7 +45,7 @@ function openlayers_geofield_default_openlayers_components() {
   $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
   $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_geofield_component_zoom_to_source';
-  $ol_component->name = 'OpenLayers Geofield Zoom to Source';
+  $ol_component->name = 'Openlayers Geofield Zoom to Source';
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
   $ol_component->options = array(

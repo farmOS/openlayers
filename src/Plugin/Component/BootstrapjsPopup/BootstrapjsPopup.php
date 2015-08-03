@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Component;
  * @OpenlayersPlugin(
  *  id = "BootstrapjsPopup"
  * )
- *
  */
 class BootstrapjsPopup extends Component {
 

@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersControls_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'controls',
       'menu title' => 'Controls',
-      'menu description' => 'Administer OpenLayers controls.',
+      'menu description' => 'Administer Openlayers controls.',
     ),
 
     'handler' => array(
@@ -51,8 +51,8 @@ function openlayers_ui_OpenlayersControls_ctools_export_ui() {
 
     'title singular' => t('control'),
     'title plural' => t('controls'),
-    'title singular proper' => t('OpenLayers control preset'),
-    'title plural proper' => t('OpenLayers control presets'),
+    'title singular proper' => t('Openlayers control preset'),
+    'title plural proper' => t('Openlayers control presets'),
 
     'strings' => array(
       'confirmation' => array(

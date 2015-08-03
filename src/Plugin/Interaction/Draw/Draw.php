@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "Draw"
  * )
- *
  */
 class Draw extends Interaction {
 

@@ -26,7 +26,7 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
   $links = array(
     'openlayers' => array(
       'title' => 'Edit this map',
-      'href' => 'admin/structure/openlayers/maps/list/' . $context->machine_name . '/edit',
+      'href' => 'admin/structure/openlayers/maps/list/' . $context->getMachineName() . '/edit',
       'query' => array(
         'destination' => $current_path,
       ),
@@ -42,12 +42,12 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
     // Build contextual link for this object.
     $name = $object->name;
     if (empty($name)) {
-      $name = $object->machine_name;
+      $name = $object->getMachineName();
     }
 
-    $object_links[$object->getType() . ':' . $object->machine_name] = array(
+    $object_links[$object->getType() . ':' . $object->getMachineName()] = array(
       'title' => t('Edit @object_name', array('@object_name' => $name)),
-      'href' => 'admin/structure/openlayers/' . $object->getType() . 's/list/' . $object->machine_name . '/edit',
+      'href' => 'admin/structure/openlayers/' . $object->getType() . 's/list/' . $object->getMachineName() . '/edit',
       'query' => array(
         'destination' => $current_path,
       ),

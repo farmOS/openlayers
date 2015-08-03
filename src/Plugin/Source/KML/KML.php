@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "KML"
  * )
- *
  */
 class KML extends Source {
 
@@ -28,4 +27,5 @@ class KML extends Source {
       '#default_value' => $this->getOption('url'),
     );
   }
+
 }

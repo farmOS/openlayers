@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "MousePosition",
  *  description = "Provides 2D coordinates of the mouse cursor."
  * )
- *
  */
 class MousePosition extends Control {
 

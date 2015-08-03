@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_default_maps().
+ * Implements hook_default_openlayers_maps().
  */
 function openlayers_examples_default_openlayers_maps() {
   $export = array();

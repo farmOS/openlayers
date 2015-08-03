@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersInteractions_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'interactions',
       'menu title' => 'Interactions',
-      'menu description' => 'Administer OpenLayers interactions.',
+      'menu description' => 'Administer Openlayers interactions.',
     ),
 
     'handler' => array(
@@ -51,8 +51,8 @@ function openlayers_ui_OpenlayersInteractions_ctools_export_ui() {
 
     'title singular' => t('interaction'),
     'title plural' => t('interactions'),
-    'title singular proper' => t('OpenLayers interaction preset'),
-    'title plural proper' => t('OpenLayers interaction presets'),
+    'title singular proper' => t('Openlayers interaction preset'),
+    'title plural proper' => t('Openlayers interaction presets'),
 
     'strings' => array(
       'confirmation' => array(

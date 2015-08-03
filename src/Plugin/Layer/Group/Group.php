@@ -16,7 +16,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *  id = "Group"
  * )
- *
  */
 class Group extends Layer {
   /**
@@ -26,10 +25,10 @@ class Group extends Layer {
     $form['options']['grouptitle'] = array(
       '#type' => 'textfield',
       '#title' => 'Layer group title',
-      '#default_value' => $this->getOption('grouptitle', 'Base layers')
+      '#default_value' => $this->getOption('grouptitle', 'Base layers'),
     );
 
-    $all_layers = \Drupal\openlayers\Openlayers::loadAllExportable('Layer');
+    $all_layers = Openlayers::loadAllExportable('Layer');
 
     array_walk($all_layers, function($object) {
       $object->weight = 0;
@@ -45,17 +44,20 @@ class Group extends Layer {
     uasort($all_layers, function($a, $b) {
       if ($a->enabled > $b->enabled) {
         return -1;
-      } else if ($a->enabled < $b->enabled) {
+      }
+      elseif ($a->enabled < $b->enabled) {
         return 1;
       }
       if ($a->weight < $b->weight) {
         return -1;
-      } else if ($a->weight > $b->weight) {
+      }
+      elseif ($a->weight > $b->weight) {
         return 1;
       }
       if ($a->machine_name < $b->machine_name) {
         return -1;
-      } else if ($a->machine_name > $b->machine_name) {
+      }
+      elseif ($a->machine_name > $b->machine_name) {
         return 1;
       }
       return 0;
@@ -90,13 +92,15 @@ class Group extends Layer {
               '#attributes' => array(
                 'class' => array('entry-order-weight'),
               ),
-            )),
+            ),
+          ),
           array(
             'data' => array(
               '#type' => 'hidden',
               '#default_value' => $entry['machine_name'],
               '#parents' => array('grouplayers', $id, 'machine_name'),
-            )),
+            ),
+          ),
           array(
             'data' => array(
               '#type' => 'checkbox',
@@ -104,7 +108,8 @@ class Group extends Layer {
               '#title_display' => 'invisible',
               '#default_value' => $entry['enabled'],
               '#parents' => array('grouplayers', $id, 'enabled'),
-            )),
+            ),
+          ),
           check_plain($entry['name']),
           check_plain($entry['machine_name']),
           check_plain($entry['factory_service']),
@@ -193,7 +198,7 @@ class Group extends Layer {
    */
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
     $layers = $context->getObjects('layer');
-    foreach($layers as $layer) {
+    foreach ($layers as $layer) {
       $layer->setOption('title', $layer->name);
     }
   }

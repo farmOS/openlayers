@@ -82,7 +82,7 @@ var openlayers_source_internal_geojson = {
     }
     //else {
     //  // Fixed strategy.
-    //  // @see http://dev.ol.org/releases/OpenLayers-2.12/doc/apidocs/files/OpenLayers/Strategy/Fixed-js.html
+    //  // @see http://dev.ol.org/releases/Openlayers-2.12/doc/apidocs/files/Openlayers/Strategy/Fixed-js.html
     //  if (data.opt.preload) {
     //    data.opt.strategies = [new ol.Strategy.Fixed({preload: true})];
     //  }

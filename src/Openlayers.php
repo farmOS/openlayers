@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Contains Openlayers
+ * Contains Openlayers.
  */
 
 namespace Drupal\openlayers;
@@ -58,11 +58,13 @@ class Openlayers {
    * Load a CTools exportable.
    *
    * @param string $object_type
-   *   Type of object to load: map|layer|source|control|interaction|style|component
+   *   Type of object to load:
+   *   map|layer|source|control|interaction|style|component .
    * @param string $export_id
-   *   The exportable id
+   *   The exportable id.
    *
    * @return array
+   *   The exported object.
    */
   public static function loadExportable($object_type, $export_id) {
     ctools_include('export');
@@ -131,7 +133,8 @@ class Openlayers {
         $plugin_manager = \Drupal::service($plugin_manager_id);
         if ($plugin_manager->hasDefinition($plugin_id)) {
           $object = $plugin_manager->createInstance($plugin_id, $configuration);
-        } else {
+        }
+        else {
           $configuration += array(
             'type' => $object_type,
             'errorMessage' => 'Unable to load @type @machine_name',
@@ -171,9 +174,12 @@ class Openlayers {
   /**
    * Load all objects.
    *
-   * @param null $type
-   *   Type of object to load: map|layer|source|control|interaction|style|component
+   * @param string $object_type
+   *   Type of object to load:
+   *   map|layer|source|control|interaction|style|component.
+   *
    * @return \Drupal\openlayers\Types\Object[]
+   *   The array of objects.
    */
   public static function loadAll($object_type = NULL) {
     $objects = array();
@@ -189,8 +195,9 @@ class Openlayers {
    * Save an object in the database.
    *
    * @param ObjectInterface $object
+   *   The object to save.
    */
-  public static function save(Object $object) {
+  public static function save(ObjectInterface $object) {
     ctools_include('export');
     $configuration = $object->getConfiguration();
     $export = $object->getExport();
@@ -208,7 +215,7 @@ class Openlayers {
   public static function getPluginTypes(array $filter = array()) {
     $plugins = array();
 
-    foreach(\Drupal::getContainer()->getDefinitions() as $id => $definition) {
+    foreach (\Drupal::getContainer()->getDefinitions() as $id => $definition) {
       $id = explode(".", drupal_strtolower($id));
       if (count($id) == 2) {
         if ($id[0] == 'openlayers') {

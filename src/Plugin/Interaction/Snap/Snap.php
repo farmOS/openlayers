@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "Snap"
  * )
- *
  */
 class Snap extends Interaction {
 

@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Layer;
  * @OpenlayersPlugin(
  *  id = "Tile"
  * )
- *
  */
 class Tile extends Layer {
   /**
@@ -25,7 +24,8 @@ class Tile extends Layer {
       '#type' => 'textfield',
       '#title' => t('Opacity'),
       '#default_value' => $this->getOption('opacity', 1),
-      '#description' => t(''),
+      '#description' => t('Opacity, between 0 and 1.'),
     );
   }
+
 }

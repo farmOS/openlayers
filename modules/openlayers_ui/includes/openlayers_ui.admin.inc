@@ -65,17 +65,17 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#collapsed' => TRUE
   );
 
-  foreach(\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
+  foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
     $rows = array();
 
     $form['plugin-info'][$type . '-group'] = array(
       '#type' => 'fieldset',
       '#title' => $type,
       '#collapsed' => TRUE,
-      '#collapsible' => TRUE
+      '#collapsible' => TRUE,
     );
 
-    foreach(\Drupal::service('openlayers.' . $type)->getDefinitions() as $service => $definition) {
+    foreach (\Drupal::service('openlayers.' . $type)->getDefinitions() as $service => $definition) {
       $definition += array('arguments' => array('NULL'));
 
       $configuration = array(
@@ -88,8 +88,8 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       $attached = $instance->attached();
 
       $sizes = array('js' => 0, 'css' => 0);
-      foreach(array_keys($sizes) as $size_type) {
-        foreach($attached[$size_type] as $index => $data) {
+      foreach (array_keys($sizes) as $size_type) {
+        foreach ($attached[$size_type] as $index => $data) {
           if (!is_array($data['data'])) {
             $sizes[$size_type] += filesize($data['data']);
           }
@@ -138,14 +138,15 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     $rows = array();
     $rows1 = array('name', 'vendor url', 'download url', 'library path', 'version');
     $header = array('Property', 'Value');
-    foreach($rows1 as $row) {
+    foreach ($rows1 as $row) {
       $rows[] = array(
         $row,
-        $library[$row]
+        $library[$row],
       );
     }
     $output = theme('table', array('header' => $header, 'rows' => $rows));
-  } else {
+  }
+  else {
     $output = t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>. The library directory must be named <em>openlayers3</em> to be recognized by this module.', array('@url' => $library['download url']));
   }
 

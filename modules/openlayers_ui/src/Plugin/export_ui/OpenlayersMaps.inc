@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'maps',
       'menu title' => 'Maps',
-      'menu description' => 'Administer OpenLayers maps presets.',
+      'menu description' => 'Administer Openlayers maps presets.',
     ),
 
     'handler' => array(
@@ -67,8 +67,8 @@ function openlayers_ui_OpenlayersMaps_ctools_export_ui() {
 
     'title singular' => t('map'),
     'title plural' => t('maps'),
-    'title singular proper' => t('OpenLayers map preset'),
-    'title plural proper' => t('OpenLayers maps presets'),
+    'title singular proper' => t('Openlayers map preset'),
+    'title plural proper' => t('Openlayers maps presets'),
 
     'strings' => array(
       'confirmation' => array(
@@ -164,24 +164,27 @@ function openlayers_map_form_layers($form, &$form_state) {
   foreach ($map->getOption('layers', array()) as $weight => $layer) {
     /* @var Drupal\openlayers\Types\Layer $layer */
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
-    $all_layers[$layer->machine_name]->weight = $weight;
-    $all_layers[$layer->machine_name]->enabled = 1;
+    $all_layers[$layer->getMachineName()]->weight = $weight;
+    $all_layers[$layer->getMachineName()]->enabled = 1;
   }
 
   uasort($all_layers, function($a, $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
-    } else if ($a->enabled < $b->enabled) {
+    }
+    elseif ($a->enabled < $b->enabled) {
       return 1;
     }
     if ($a->weight < $b->weight) {
       return -1;
-    } else if ($a->weight > $b->weight) {
+    }
+    elseif ($a->weight > $b->weight) {
       return 1;
     }
     if ($a->machine_name < $b->machine_name) {
       return -1;
-    } else if ($a->machine_name > $b->machine_name) {
+    }
+    elseif ($a->machine_name > $b->machine_name) {
       return 1;
     }
     return 0;
@@ -198,7 +201,7 @@ function openlayers_map_form_layers($form, &$form_state) {
       'weight' => $i++,
       'enabled' => isset($layer->enabled) ? $layer->enabled : 0,
       'default' => 1,
-      'style' => isset($layer->options['style']) ? $layer->options['style'] : NULL
+      'style' => isset($layer->options['style']) ? $layer->options['style'] : NULL,
     );
   }
 
@@ -218,13 +221,15 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#attributes' => array(
               'class' => array('entry-order-weight'),
             ),
-          )),
+          ),
+        ),
         array(
           'data' => array(
             '#type' => 'hidden',
             '#default_value' => $entry['machine_name'],
             '#parents' => array('layers', $id, 'machine_name'),
-          )),
+          ),
+        ),
         array(
           'data' => array(
             '#type' => 'checkbox',
@@ -232,7 +237,8 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#title_display' => 'invisible',
             '#default_value' => $entry['enabled'],
             '#parents' => array('layers', $id, 'enabled'),
-          )),
+          ),
+        ),
         array(
           'data' => array(
             '#type' => 'select',
@@ -241,7 +247,7 @@ function openlayers_map_form_layers($form, &$form_state) {
             '#options' => array('' => t('- Select a Style -')) + \Drupal\openlayers\Openlayers::loadAllAsOptions('style'),
             '#default_value' => $entry['style'],
             '#parents' => array('layers', $id, 'style'),
-          )
+          ),
         ),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
@@ -340,24 +346,27 @@ function openlayers_map_form_controls($form, &$form_state) {
 
   foreach ($map->getObjects('control') as $control) {
     /* @var Drupal\openlayers\Types\Control $control */
-    $all_controls[$control->machine_name]->weight = $control->getWeight();
-    $all_controls[$control->machine_name]->enabled = 1;
+    $all_controls[$control->getMachineName()]->weight = $control->getWeight();
+    $all_controls[$control->getMachineName()]->enabled = 1;
   }
 
   uasort($all_controls, function($a, $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
-    } else if ($a->enabled < $b->enabled) {
+    }
+    elseif ($a->enabled < $b->enabled) {
       return 1;
     }
     if ($a->weight < $b->weight) {
       return -1;
-    } else if ($a->weight > $b->weight) {
+    }
+    elseif ($a->weight > $b->weight) {
       return 1;
     }
     if ($a->machine_name < $b->machine_name) {
       return -1;
-    } else if ($a->machine_name > $b->machine_name) {
+    }
+    elseif ($a->machine_name > $b->machine_name) {
       return 1;
     }
     return 0;
@@ -546,24 +555,27 @@ function openlayers_map_form_components($form, &$form_state) {
 
   foreach ($map->getObjects('component') as $component) {
     /* @var Drupal\openlayers\Types\Component $component */
-    $all_components[$component->machine_name]->weight = $component->getWeight();
-    $all_components[$component->machine_name]->enabled = 1;
+    $all_components[$component->getMachineName()]->weight = $component->getWeight();
+    $all_components[$component->getMachineName()]->enabled = 1;
   }
 
   uasort($all_components, function($a, $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
-    } else if ($a->enabled < $b->enabled) {
+    }
+    elseif ($a->enabled < $b->enabled) {
       return 1;
     }
     if ($a->weight < $b->weight) {
       return -1;
-    } else if ($a->weight > $b->weight) {
+    }
+    elseif ($a->weight > $b->weight) {
       return 1;
     }
     if ($a->machine_name < $b->machine_name) {
       return -1;
-    } else if ($a->machine_name > $b->machine_name) {
+    }
+    elseif ($a->machine_name > $b->machine_name) {
       return 1;
     }
     return 0;

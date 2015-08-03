@@ -20,6 +20,9 @@ interface LayerInterface extends ObjectInterface {
 
   /**
    * Set the source of this layer.
+   *
+   * @param SourceInterface $source
+   *   The source object.
    */
   public function setSource(SourceInterface $source);
 
@@ -33,6 +36,10 @@ interface LayerInterface extends ObjectInterface {
 
   /**
    * Set the style of this layer.
+   *
+   * @param StyleInterface $style
+   *   The style object.
    */
   public function setStyle(StyleInterface $style);
+
 }

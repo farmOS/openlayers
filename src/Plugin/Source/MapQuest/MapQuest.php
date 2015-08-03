@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "MapQuest"
  * )
- *
  */
 class MapQuest extends Source {
 

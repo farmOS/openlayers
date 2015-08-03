@@ -20,8 +20,8 @@ function openlayers_ctools_plugin_api($module, $api) {
 function openlayers_permission() {
   return array(
     'administer openlayers' => array(
-      'title' => t('Administer OpenLayers'),
-      'description' => t('Configure OpenLayers settings, styles, maps, and layers.'),
+      'title' => t('Administer Openlayers'),
+      'description' => t('Configure Openlayers settings, styles, maps, and layers.'),
     ),
   );
 }
@@ -40,7 +40,7 @@ function openlayers_libraries_info() {
   }
 
   $libraries['openlayers3'] = array(
-    'name' => 'OpenLayers3',
+    'name' => 'Openlayers3',
     'vendor url' => 'http://ol3js.org/',
     'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.7.0/v3.7.0.zip',
     'version arguments' => array(

@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "Attribution",
  *  description = "Provides a control to show all the attributions associated with the layer sources in the map."
  * )
- *
  */
 class Attribution extends Control {
 

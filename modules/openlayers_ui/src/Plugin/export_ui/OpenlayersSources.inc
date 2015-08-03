@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersSources_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'sources',
       'menu title' => 'Sources',
-      'menu description' => 'Administer OpenLayers sources.',
+      'menu description' => 'Administer Openlayers sources.',
     ),
 
     'handler' => array(
@@ -51,8 +51,8 @@ function openlayers_ui_OpenlayersSources_ctools_export_ui() {
 
     'title singular' => t('source'),
     'title plural' => t('sources'),
-    'title singular proper' => t('OpenLayers source preset'),
-    'title plural proper' => t('OpenLayers sources presets'),
+    'title singular proper' => t('Openlayers source preset'),
+    'title plural proper' => t('Openlayers sources presets'),
 
     'strings' => array(
       'confirmation' => array(
@@ -166,11 +166,12 @@ function openlayers_source_form_type_submit($form, &$form_state) {
 
   if ((bool) $form_state['values']['options']['attributions']['enabled'] == FALSE) {
     unset($form_state['item']->options['attributions']);
-  } else {
+  }
+  else {
     unset($form_state['item']->options['attributions']['enabled']);
     $form_state['item']->options['attributions'] = $form_state['values']['options']['attributions']['data'];
   }
-  
+
   $form_state['item']->factory_service = $form_state['values']['factory_service'];
 }
 

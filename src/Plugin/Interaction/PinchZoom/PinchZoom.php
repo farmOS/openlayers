@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "PinchZoom"
  * )
- *
  */
 class PinchZoom extends Interaction {
 

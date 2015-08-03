@@ -36,7 +36,6 @@ class OpenlayersStyles extends \OpenlayersObjects {
 
     $header[] = array('data' => t('Machine name'), 'class' => array('ctools-export-ui-name'));
     $header[] = array('data' => t('Service'), 'class' => array('ctools-export-ui-service'));
-    $header[] = array('data' => t('Parents'), 'class' => array('ctools-export-ui-parents'));
     $header[] = array('data' => t('Storage'), 'class' => array('ctools-export-ui-storage'));
     $header[] = array('data' => t('Operations'), 'class' => array('ctools-export-ui-operations'));
 
@@ -57,10 +56,7 @@ class OpenlayersStyles extends \OpenlayersObjects {
 
     list($plugin_manager, $plugin_id) = explode(':', $item->factory_service);
     list($module, $plugin_type) = explode('.', $plugin_manager);
-    $count_parents = 0;
-    if ($object = \Drupal\openlayers\Openlayers::load($plugin_type, $item->machine_name)) {
-      $count_parents = count($object->getParents());
-    }
+    $object = \Drupal\openlayers\Openlayers::load($plugin_type, $item->machine_name);
 
     // Note: $item->{$schema['export']['export type string']} should have
     // already been set up by export.inc so we can use it safely.
@@ -105,7 +101,6 @@ class OpenlayersStyles extends \OpenlayersObjects {
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($count_parents), 'class' => array('ctools-export-ui-parents'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(

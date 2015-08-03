@@ -9,7 +9,7 @@ use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
 
 /**
- * Class DragPan
+ * Class DragPan.
  *
  * @OpenlayersPlugin(
  *  id = "DragPan",
@@ -43,4 +43,5 @@ class DragPan extends Interaction {
       '#description' => t('Delay to consider to calculate the kinetic.'),
     );
   }
+
 }

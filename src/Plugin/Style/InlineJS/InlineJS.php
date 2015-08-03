@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Style;
  * @OpenlayersPlugin(
  *  id = "InlineJS"
  * )
- *
  */
 class InlineJS extends Style {
 

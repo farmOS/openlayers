@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "OSM"
  * )
- *
  */
 class OSM extends Source {
 
@@ -38,4 +37,5 @@ class OSM extends Source {
       unset($form_state['item']->options['url']);
     }
   }
+
 }

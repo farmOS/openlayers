@@ -41,4 +41,5 @@ class Icon extends Style {
       '#default_value' => $this->getOption(array('anchor', 'y'), 0.5),
     );
   }
+
 }

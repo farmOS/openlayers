@@ -1,5 +1,5 @@
 /**
- * OpenLayers 3 Layer Switcher Control.
+ * Openlayers 3 Layer Switcher Control.
  * See [the examples](./examples) for usage.
  * @constructor
  * @extends {ol.control.Control}

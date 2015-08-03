@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Component;
  * @OpenlayersPlugin(
  *  id = "BootstrapjsAlert"
  * )
- *
  */
 class BootstrapjsAlert extends Component {
 

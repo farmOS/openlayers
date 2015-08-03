@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * OpenLayers Block Switcher.
+ * Openlayers Block Switcher.
  */
 
 /**
@@ -12,8 +12,8 @@ function openlayers_block_switcher_block_info() {
   $blocks = array();
 
   foreach ($maps as $map) {
-    $blockid = _olebs_get_block_id($map->machine_name);
-    $blocks[$blockid]['info'] = t('OpenLayers layer switcher for @name', array('@name' => $map->name));
+    $blockid = _olebs_get_block_id($map->getMachineName());
+    $blocks[$blockid]['info'] = t('Openlayers layer switcher for @name', array('@name' => $map->getName()));
   }
 
   return $blocks;
@@ -80,8 +80,8 @@ function _olebs_get_block_id($map_name) {
  */
 function _olebs_get_map_name($delta) {
   foreach (_olebs_get_maps_with_blockswitcher() as $map) {
-    if (_olebs_get_block_id($map->machine_name) == $delta) {
-      return $map->machine_name;
+    if (_olebs_get_block_id($map->getMachineName()) == $delta) {
+      return $map->getMachineName();
     }
   }
   return FALSE;
@@ -99,9 +99,9 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   }
 
   foreach ($map->getObjects('layer') as $layer) {
-    $options_overlays[$layer->machine_name] = $layer->name;
+    $options_overlays[$layer->getMachineName()] = $layer->getName();
     if ('1' == $layer->getOption('visible', 1)) {
-      $default_value[] = $layer->machine_name;
+      $default_value[] = $layer->getMachineName();
     }
   }
 
@@ -117,7 +117,7 @@ function olebs_blockswitcher_form($form, &$form_state, $map) {
   // By default we can only rely on the machine name which is a css class.
   $form['map'] = array(
     '#type'    => 'hidden',
-    '#value' => $map->machine_name,
+    '#value' => $map->getMachineName(),
   );
 
   $form['#attached']['css'] = array();

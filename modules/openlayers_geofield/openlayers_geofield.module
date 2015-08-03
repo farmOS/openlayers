@@ -23,7 +23,7 @@ function openlayers_geofield_ctools_plugin_api($module, $api) {
  */
 function openlayers_geofield_field_formatter_info() {
   $formatters['openlayers_geofield'] = array(
-    'label' => t('OpenLayers'),
+    'label' => t('Openlayers'),
     'field types' => array('geofield'),
     'settings' => array('data' => 'full', 'map_preset' => 'openlayers_geofield_map_geofield_formatter'),
   );
@@ -68,12 +68,12 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   }
 
   $element['map_preset'] = array(
-    '#title' => t('OpenLayers Preset'),
+    '#title' => t('Openlayers Preset'),
     '#type' => 'select',
     '#default_value' => $settings['map_preset'] ? $settings['map_preset'] : 'openlayers_geofield_map_geofield_formatter',
     '#required' => TRUE,
     '#options' => $map_options,
-    '#description' => t('Select which OpenLayers map you would like to use. Only maps which have the geofield placeholder layer may be selected. If your preferred map is not here, add the geofield placeholder layer to it first.'),
+    '#description' => t('Select which Openlayers map you would like to use. Only maps which have the geofield placeholder layer may be selected. If your preferred map is not here, add the geofield placeholder layer to it first.'),
   );
 
   $data_options = _geofield_formatter_settings_data_options($display['type']);
@@ -280,10 +280,10 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
 
   $form['openlayers_map'] = array(
     '#type' => 'select',
-    '#title' => t('OpenLayers Map'),
+    '#title' => t('Openlayers Map'),
     '#default_value' => isset($settings['openlayers_map']) ? $settings['openlayers_map'] : 'openlayers_geofield_map_geofield',
     '#options' => $map_options,
-    '#description' => t('Select which OpenLayers map you would like to use. Only maps which have the GeoField behavior may be selected. If your preferred map is not here, add the GeoField behavior to it first. The "Draw Features" bahavior is incompatible - presets with this behavior are not shown.'),
+    '#description' => t('Select which Openlayers map you would like to use. Only maps which have the GeoField behavior may be selected. If your preferred map is not here, add the GeoField behavior to it first. The "Draw Features" bahavior is incompatible - presets with this behavior are not shown.'),
   );
   $form['data_storage'] = array(
     '#type' => 'radios',
@@ -552,7 +552,7 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
   if ($field_value = geocoder_widget_get_field_value($element['#entity_type'], $field_state['instance'], NULL, $values)) {
     geophp_load();
     $geometry = geoPHP::load($field_value[$langcode][$delta]['geom']);
-    // OpenLayers can only use WKT, so translate.
+    // Openlayers can only use WKT, so translate.
     $field_value[$langcode][$delta]['geom'] = $geometry->out('wkt');
     $field_value[$langcode][$delta]['input_format'] = 'wkt';
     // Override the field's value in the 'input' array to substitute the new

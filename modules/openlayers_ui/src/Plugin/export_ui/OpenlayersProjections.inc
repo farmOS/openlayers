@@ -15,7 +15,7 @@
 //      'menu prefix' => 'admin/structure/openlayers',
 //      'menu item' => 'projections',
 //      'menu title' => 'Projections',
-//      'menu description' => 'Administer OpenLayers projections.',
+//      'menu description' => 'Administer Openlayers projections.',
 //    ),
 //
 //    'handler' => array(
@@ -43,8 +43,8 @@
 //
 //    'title singular' => t('projection'),
 //    'title plural' => t('projections'),
-//    'title singular proper' => t('OpenLayers projection preset'),
-//    'title plural proper' => t('OpenLayers projection presets'),
+//    'title singular proper' => t('Openlayers projection preset'),
+//    'title plural proper' => t('Openlayers projection presets'),
 //
 //    'strings' => array(
 //      'confirmation' => array(

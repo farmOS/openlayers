@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "OverviewMap",
  *  description = "Create a new control with a map acting as an overview map for an other defined map."
  * )
- *
  */
 class OverviewMap extends Control {
 

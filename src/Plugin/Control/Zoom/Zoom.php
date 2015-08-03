@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "Zoom",
  *  description = "Provides a button, one for zoom in and one for zoom out."
  * )
- *
  */
 class Zoom extends Control {
 

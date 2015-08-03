@@ -17,4 +17,5 @@ abstract class Source extends Object implements SourceInterface {
    * @var array
    */
   protected $options;
+
 }

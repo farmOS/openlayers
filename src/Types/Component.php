@@ -16,4 +16,5 @@ abstract class Component extends Object implements ComponentInterface {
    * @var array
    */
   protected $options;
+
 }

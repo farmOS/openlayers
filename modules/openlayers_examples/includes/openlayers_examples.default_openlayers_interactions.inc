@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_default_interactions().
+ * Implements hook_default_openlayers_interactions().
  */
 function openlayers_examples_default_openlayers_interactions() {
   $export = array();

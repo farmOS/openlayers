@@ -49,4 +49,5 @@ class Circle extends Style {
       '#default_value' => $this->getOption(array('stroke', 'width'), 1.25),
     );
   }
+
 }

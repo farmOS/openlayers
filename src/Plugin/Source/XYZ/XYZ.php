@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "XYZ"
  * )
- *
  */
 class XYZ extends Source {
   /**
@@ -27,4 +26,5 @@ class XYZ extends Source {
       '#default_value' => $this->getOption('url') ? $this->getOption('url') : '',
     );
   }
+
 }

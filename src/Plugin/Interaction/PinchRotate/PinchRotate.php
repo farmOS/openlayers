@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "PinchRotate",
  *  description = "Allows the user to rotate the map by twisting with two fingers on a touch screen."
  * )
- *
  */
 class PinchRotate extends Interaction {
 

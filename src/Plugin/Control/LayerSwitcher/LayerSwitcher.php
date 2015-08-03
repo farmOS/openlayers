@@ -3,10 +3,11 @@
  * @file
  * Control: LayerSwitcher.
  *
- * Proof of concept based on http://geocre.github.io/ol3/layerswitcher.html
+ * Proof of concept based on http://geocre.github.io/ol3/layerswitcher.html .
  */
 
 namespace Drupal\openlayers\Plugin\Control\LayerSwitcher;
+use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Control;
@@ -38,7 +39,7 @@ class LayerSwitcher extends Control {
       '#empty_option' => t('- Select a Layer -'),
       '#multiple' => TRUE,
       '#default_value' => $this->getOption('layers'),
-      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Layer'),
+      '#options' => Openlayers::loadAllAsOptions('Layer'),
     );
     $form['options']['multiselect'] = array(
       '#type' => 'checkbox',
@@ -71,7 +72,7 @@ class LayerSwitcher extends Control {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, ObjectInterface $context = NULL) {
     $map_id = $context->getId();
     $layers = $this->getOption('layers', array());
     $items = array();
@@ -83,8 +84,8 @@ class LayerSwitcher extends Control {
     // @TODO: use Form API (with form_process_* and stuff)
     $labels = $this->getOption('layer_labels', array());
     foreach ($map_layers as $i => $map_layer) {
-      if (isset($layers[$map_layer->machine_name])) {
-        $classes = array(drupal_html_class($map_layer->machine_name));
+      if (isset($layers[$map_layer->getMachineName()])) {
+        $classes = array(drupal_html_class($map_layer->getMachineName()));
         $checked = '';
         if ($element_type == 'checkbox') {
           if ($map_layer->getOption('visible', 1)) {
@@ -92,29 +93,29 @@ class LayerSwitcher extends Control {
             $classes[] = 'active';
           }
         }
-        $label = check_plain($map_layer->name);
-        if (isset($labels[$map_layer->machine_name])) {
-          $label = openlayers_i18n_string('openlayers:layerswitcher:' . $this->machine_name . ':' . $map_layer->machine_name . ':label', $labels[$map_layer->machine_name], array('sanitize' => TRUE));
+        $label = $map_layer->getName();
+        if (isset($labels[$map_layer->getMachineName()])) {
+          $label = openlayers_i18n_string('openlayers:layerswitcher:' . $this->getMachineName() . ':' . $map_layer->getMachineName() . ':label', $labels[$map_layer->getMachineName()], array('sanitize' => TRUE));
         }
         $items[] = array(
-          'data' => '<label><input type="' . $element_type . '" name="layer" ' . $checked . 'value="' . $map_layer->machine_name . '">' . $label . '</label>',
-          'id' => drupal_html_id($map_id . '-' . $map_layer->machine_name),
+          'data' => '<label><input type="' . $element_type . '" name="layer" ' . $checked . 'value="' . $map_layer->getMachineName() . '">' . $label . '</label>',
+          'id' => drupal_html_id($map_id . '-' . $map_layer->getMachineName()),
           'class' => $classes,
         );
       }
     }
 
-    $title = openlayers_i18n_string('openlayers:layerswitcher:' . $this->machine_name . ':title', $this->getOption('label', 'Layers'), array('sanitize' => TRUE));
+    $title = openlayers_i18n_string('openlayers:layerswitcher:' . $this->getMachineName() . ':title', $this->getOption('label', 'Layers'), array('sanitize' => TRUE));
     $layerswitcher = array(
       '#theme' => 'item_list',
       '#type' => 'ul',
       '#title' => $title,
       '#items' => $items,
       '#attributes' => array(
-        'id' => drupal_html_id($this->machine_name . '-items'),
+        'id' => drupal_html_id($this->getMachineName() . '-items'),
       ),
     );
-    $this->setOption('element', '<div id="' . drupal_html_id($this->machine_name) . '" class="' . drupal_html_class($this->machine_name) . ' layerswitcher">' . drupal_render($layerswitcher) . '</div>');
+    $this->setOption('element', '<div id="' . drupal_html_id($this->getMachineName()) . '" class="' . drupal_html_class($this->getMachineName()) . ' layerswitcher">' . drupal_render($layerswitcher) . '</div>');
 
     // Allow the parent class to perform it's pre-build actions.
     parent::preBuild($build, $context);
@@ -132,12 +133,12 @@ class LayerSwitcher extends Control {
     // Handle translatable values.
     // Remove / register string translations.
     foreach ($removed_layers as $layer) {
-      openlayers_i18n_string_remove('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label');
+      openlayers_i18n_string_remove('openlayers:layerswitcher:' . $this->getMachineName() . ':' . $layer . ':label');
     }
     foreach ($existing_layers as $layer => $label) {
-      openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':' . $layer . ':label', $label);
+      openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->getMachineName() . ':' . $layer . ':label', $label);
     }
     // Register string in i18n string if possible.
-    openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->machine_name . ':title', $this->getOption('label', 'Layers'));
+    openlayers_i18n_string_update('openlayers:layerswitcher:' . $this->getMachineName() . ':title', $this->getOption('label', 'Layers'));
   }
 }

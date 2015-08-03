@@ -24,8 +24,8 @@ function openlayers_boxes_boxes_plugins() {
         'parent' => 'boxes_box',
         'class' => 'openlayers',
         'file' => 'openlayers.php',
-        'path' => drupal_get_path('module', 'openlayers_boxes') . '/plugins/boxes'
-      )
-    )
+        'path' => drupal_get_path('module', 'openlayers_boxes') . '/plugins/boxes',
+      ),
+    ),
   );
 }

@@ -11,6 +11,15 @@ namespace Drupal\openlayers;
  */
 class Config {
 
+  /**
+   * Get default configuration.
+   *
+   * @param string $key
+   *   Key to get. If not provided, returns the full array.
+   *
+   * @return array|null
+   *   Returns the array or if a key is provided, it's value.
+   */
   static protected function defaults($key = NULL) {
     $defaults = array(
       'openlayers.js_css.group' => 'openlayers',
@@ -32,7 +41,7 @@ class Config {
    *
    * @param string|array $parents
    *   The path to the configuration value. Strings use dots as path separator.
-   * @param NULL $default_value
+   * @param string|array $default_value
    *   The default value to use if the config value isn't set.
    *
    * @return mixed

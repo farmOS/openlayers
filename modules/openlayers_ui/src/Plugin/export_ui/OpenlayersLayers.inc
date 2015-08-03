@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersLayers_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'layers',
       'menu title' => 'Layers',
-      'menu description' => 'Administer OpenLayers layers presets.',
+      'menu description' => 'Administer Openlayers layers presets.',
     ),
 
     'handler' => array(
@@ -55,8 +55,8 @@ function openlayers_ui_OpenlayersLayers_ctools_export_ui() {
 
     'title singular' => t('layer'),
     'title plural' => t('layers'),
-    'title singular proper' => t('OpenLayers preset'),
-    'title plural proper' => t('OpenLayers Layers presets'),
+    'title singular proper' => t('Openlayers preset'),
+    'title plural proper' => t('Openlayers Layers presets'),
 
     'strings' => array(
       'confirmation' => array(

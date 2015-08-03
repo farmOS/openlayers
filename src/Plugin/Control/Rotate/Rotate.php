@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "Rotate",
  *  description = "Provides a button control to reset rotation to 0."
  * )
- *
  */
 class Rotate extends Control {
 

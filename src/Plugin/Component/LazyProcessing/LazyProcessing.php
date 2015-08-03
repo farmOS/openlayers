@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Component;
  * @OpenlayersPlugin(
  *  id = "LazyProcessing"
  * )
- *
  */
 class LazyProcessing extends Component {
   /**
@@ -34,4 +33,5 @@ class LazyProcessing extends Component {
   public function isAsynchronous() {
     return TRUE;
   }
+
 }

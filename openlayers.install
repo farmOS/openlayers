@@ -25,7 +25,7 @@ function openlayers_schema() {
   $schema = array();
   // Maps table (ctools extras).
   $schema['openlayers_maps'] = array(
-    'description' => 'Storage for User defined OpenLayers maps.',
+    'description' => 'Storage for User defined Openlayers maps.',
     'export' => array(
       'key' => 'machine_name',
       'key name' => 'Machine name',
@@ -75,7 +75,7 @@ function openlayers_schema() {
   );
   // Layers table (ctools extras).
   $schema['openlayers_layers'] = array(
-    'description' => 'Storage for user defined OpenLayers layers.',
+    'description' => 'Storage for user defined Openlayers layers.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -127,7 +127,7 @@ function openlayers_schema() {
   );
   // Sources table (ctools extras).
   $schema['openlayers_sources'] = array(
-    'description' => 'Storage for user defined OpenLayers sources.',
+    'description' => 'Storage for user defined Openlayers sources.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -179,7 +179,7 @@ function openlayers_schema() {
   );
   // Controls table.
   $schema['openlayers_controls'] = array(
-    'description' => 'Storage for user defined OpenLayers controls.',
+    'description' => 'Storage for user defined Openlayers controls.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -231,7 +231,7 @@ function openlayers_schema() {
   );
   // Interactions table.
   $schema['openlayers_interactions'] = array(
-    'description' => 'Storage for user defined OpenLayers interactions.',
+    'description' => 'Storage for user defined Openlayers interactions.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -283,7 +283,7 @@ function openlayers_schema() {
   );
   // Components table.
   $schema['openlayers_components'] = array(
-    'description' => 'Storage for user defined OpenLayers components.',
+    'description' => 'Storage for user defined Openlayers components.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -335,7 +335,7 @@ function openlayers_schema() {
   );
   // Projections table.
   $schema['openlayers_projections'] = array(
-    'description' => 'Storage for user defined OpenLayers projections.',
+    'description' => 'Storage for user defined Openlayers projections.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',
@@ -382,7 +382,7 @@ function openlayers_schema() {
   );
   // Styles table.
   $schema['openlayers_styles'] = array(
-    'description' => 'Storage for user defined OpenLayers styles.',
+    'description' => 'Storage for user defined Openlayers styles.',
     'export' => array(
       'admin_title' => 'machine_name',
       'key' => 'machine_name',

@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Source;
  *  id = "TileWMS",
  *  description = "Layer source for tile data from WMS servers."
  * )
- *
  */
 class TileWMS extends Source {
   /**
@@ -70,4 +69,5 @@ class TileWMS extends Source {
       }
     }
   }
+
 }

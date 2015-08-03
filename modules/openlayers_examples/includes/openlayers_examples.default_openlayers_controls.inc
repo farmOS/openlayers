@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_default_controls().
+ * Implements hook_default_openlayers_controls().
  */
 function openlayers_examples_default_openlayers_controls() {
   $export = array();

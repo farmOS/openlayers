@@ -36,6 +36,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return the options array.
    *
    * @return array
+   *   The array of options.
    */
   public function getOptions();
 

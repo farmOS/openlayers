@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *  id = "Debug"
  * )
- *
  */
 class Debug extends Component {
   /**
@@ -27,24 +26,24 @@ class Debug extends Component {
       '#title' => 'Map debug',
       '#description' => 'Here\'s a quick view of all the objects in the map.',
       '#collapsible' => TRUE,
-      '#collapsed' => TRUE
+      '#collapsed' => TRUE,
     );
 
-    foreach($context->getCollection()->getObjects() as $type => $objects) {
+    foreach ($context->getCollection()->getObjects() as $type => $objects) {
       $build['Debug'][$type] = array(
         '#type' => 'fieldset',
         '#title' => 'Type ' . $type . ':',
         '#collapsible' => TRUE,
-        '#collapsed' => FALSE
+        '#collapsed' => FALSE,
       );
 
-      foreach($objects as $object) {
-        $build['Debug'][$type][$object->machine_name] = array(
+      foreach ($objects as $object) {
+        $build['Debug'][$type][$object->getMachineName()] = array(
           '#type' => 'fieldset',
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,
-          '#title' => $object->machine_name,
-          'configuration' => $this->getInfo($object)
+          '#title' => $object->getMachineName(),
+          'configuration' => $this->getInfo($object),
         );
       }
     }
@@ -53,25 +52,28 @@ class Debug extends Component {
   /**
    * Return the markup for a table.
    *
-   * @param $data
+   * @param array $data
    *   The values of the table.
+   *
    * @return string
+   *   The HTML.
    */
   protected function toInfoArrayMarkup($data) {
     $rows = array();
-    foreach($data as $name => $value) {
+    foreach ($data as $name => $value) {
       if (is_array($value)) {
         $value = $this->toInfoArrayMarkup($value);
-      } else {
+      }
+      else {
         $value = htmlspecialchars($value);
       }
 
       $rows[] = array(
         'data' => array(
           '<code>' . $name . '</code>',
-          '<code>' .  $value. '</code>'
+          '<code>' . $value . '</code>',
         ),
-        'no_striping' => TRUE
+        'no_striping' => TRUE,
       );
     }
 
@@ -96,13 +98,13 @@ class Debug extends Component {
       'mn' => array(
         '#type' => 'item',
         '#title' => 'Machine name:',
-        '#markup' => $object->machine_name
+        '#markup' => $object->getMachineName(),
       ),
       'fs' => array(
         '#type' => 'item',
         '#title' => 'Factory service:',
-        '#markup' => $object->factory_service
-      )
+        '#markup' => $object->getFactoryService(),
+      ),
     );
 
     $plugin_description = $object->getPluginDescription();
@@ -110,7 +112,7 @@ class Debug extends Component {
       $info['pd'] = array(
         '#type' => 'item',
         '#title' => 'Plugin description:',
-        '#markup' => $plugin_description
+        '#markup' => $plugin_description,
       );
     }
 

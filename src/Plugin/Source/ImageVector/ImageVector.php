@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers\Plugin\Source\ImageVector;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Source;
 
 /**
@@ -14,7 +15,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "ImageVector"
  * )
- *
  */
 class ImageVector extends Source {
 
@@ -28,8 +28,9 @@ class ImageVector extends Source {
       '#empty_option' => t('- Select a Source -'),
       '#default_value' => isset($form_state['item']->options['source']) ? $form_state['item']->options['source'] : '',
       '#description' => t('Select the source.'),
-      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Source'),
+      '#options' => Openlayers::loadAllAsOptions('Source'),
       '#required' => TRUE,
     );
   }
+
 }

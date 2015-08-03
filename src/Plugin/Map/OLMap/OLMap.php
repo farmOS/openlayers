@@ -17,7 +17,6 @@ use Drupal\openlayers\Types\Map;
  * @OpenlayersPlugin(
  *  id = "OLMap"
  * )
- *
  */
 class OLMap extends Map {
 
@@ -48,7 +47,7 @@ class OLMap extends Map {
       '#tree' => TRUE,
     );
 
-    if ($this->machine_name != Config::get('openlayers.edit_view_map')) {
+    if ($this->getMachineName() != Config::get('openlayers.edit_view_map')) {
       if (($map = Openlayers::load('Map', Config::get('openlayers.edit_view_map'))) == TRUE) {
         $map_configuration = $map->getConfiguration();
 
@@ -148,9 +147,9 @@ class OLMap extends Map {
       if (isset($map_options['capabilities']['options']['table'][$object->getMachineName()])) {
         $weight = array_search($object->getMachineName(), array_keys($map_options['capabilities']['options']['table']));
       }
-      $data[$object->machine_name] = array(
-        'name' => $object->name,
-        'machine_name' => $object->machine_name,
+      $data[$object->getMachineName()] = array(
+        'name' => $object->getName(),
+        'machine_name' => $object->getMachineName(),
         'text' => isset($map_options['capabilities']['options']['table'][$object->getMachineName()]) ? $map_options['capabilities']['options']['table'][$object->getMachineName()] : $object->getPluginDescription(),
         'weight' => $weight,
         'enabled' => isset($map_options['capabilities']['options']['table'][$object->getMachineName()]) ? TRUE : FALSE,
@@ -161,12 +160,14 @@ class OLMap extends Map {
     uasort($data, function($a, $b) {
       if ($a['enabled'] > $b['enabled']) {
         return -1;
-      } else if ($a['enabled'] < $b['enabled']) {
+      }
+      elseif ($a['enabled'] < $b['enabled']) {
         return 1;
       }
       if ($a['weight'] < $b['weight']) {
         return -1;
-      } else if ($a['weight'] > $b['weight']) {
+      }
+      elseif ($a['weight'] > $b['weight']) {
         return 1;
       }
       return 0;
@@ -187,27 +188,30 @@ class OLMap extends Map {
               '#attributes' => array(
                 'class' => array('entry-order-weight'),
               ),
-            )),
+            ),
+          ),
           array(
             'data' => array(
               '#type' => 'hidden',
               '#default_value' => $entry['machine_name'],
-            )),
+            ),
+          ),
           array(
             'data' => array(
               '#type' => 'checkbox',
               '#title' => t('Enable'),
               '#title_display' => 'invisible',
               '#default_value' => $entry['enabled'],
-            )),
+            ),
+          ),
           array(
             'data' => array(
               '#type' => 'textfield',
               '#title' => t('Text'),
               '#title_display' => 'invisible',
               '#default_value' => $entry['text'],
-              '#maxlength' => 256
-            )
+              '#maxlength' => 256,
+            ),
           ),
           check_plain($entry['name']),
           check_plain($entry['machine_name']),
@@ -245,7 +249,7 @@ class OLMap extends Map {
           '#title' => t('Container type'),
           '#options' => array(
             'fieldset' => 'Fieldset',
-            'container' => 'Simple div'
+            'container' => 'Simple div',
           ),
           '#default_value' => $this->getOption(array('capabilities', 'options', 'container_type'), 'fieldset'),
         ),
@@ -291,7 +295,7 @@ class OLMap extends Map {
             ),
           ),
         ),
-      )
+      ),
     );
 
     // Add the table to the form.
@@ -338,13 +342,14 @@ class OLMap extends Map {
         return $a['weight'] - $b['weight'];
       });
 
-      foreach($elements as $data) {
+      foreach ($elements as $data) {
         if ((bool) $data['enabled'] == TRUE && !empty($data['text'])) {
           $capabilities[$data['machine_name']] = $data['text'];
         }
       }
       $form_state['values']['options']['capabilities']['options']['table'] = $capabilities;
-    } else {
+    }
+    else {
       $this->clearOption('capabilities');
       unset($form_state['values']['options']['capabilities']);
     }
@@ -364,4 +369,5 @@ class OLMap extends Map {
     $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
     return $attached;
   }
+
 }

@@ -15,7 +15,7 @@ function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'styles',
       'menu title' => 'Styles',
-      'menu description' => 'Administer OpenLayers styles.',
+      'menu description' => 'Administer Openlayers styles.',
     ),
 
     'handler' => array(
@@ -51,8 +51,8 @@ function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
 
     'title singular' => t('style'),
     'title plural' => t('styles'),
-    'title singular proper' => t('OpenLayers style preset'),
-    'title plural proper' => t('OpenLayers styles presets'),
+    'title singular proper' => t('Openlayers style preset'),
+    'title plural proper' => t('Openlayers styles presets'),
 
     'strings' => array(
       'confirmation' => array(

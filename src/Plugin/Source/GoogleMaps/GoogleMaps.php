@@ -8,6 +8,7 @@
 
 namespace Drupal\openlayers\Plugin\Source\GoogleMaps;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Types\Source;
 
 /**
@@ -16,7 +17,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "GoogleMaps"
  * )
- *
  */
 class GoogleMaps extends Source {
 
@@ -62,13 +62,13 @@ class GoogleMaps extends Source {
   /**
    * {@inheritdoc}
    */
-  public function postBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $map = NULL) {
+  public function postBuild(array &$build, ObjectInterface $map = NULL) {
     $build['openlayers']['map-container']['gmap'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'gmap-' . $map->getId(),
         'class' => array('openlayers', 'gmap-map'),
-        'style' => $build['openlayers']['map-container']['#attributes']['style']
+        'style' => $build['openlayers']['map-container']['#attributes']['style'],
       ),
     );
   }

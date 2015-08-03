@@ -23,7 +23,7 @@ abstract class Map extends Object implements MapInterface {
    */
   public function getId() {
     if (!isset($this->id)) {
-      $css_map_name = drupal_clean_css_identifier($this->machine_name);
+      $css_map_name = drupal_clean_css_identifier($this->getMachineName());
       // Use uniqid to ensure we've really an unique id - otherwise there will
       // occur issues with caching.
       $this->id = drupal_html_id('openlayers-map-' . $css_map_name . '-' . uniqid('', TRUE));
@@ -109,7 +109,7 @@ abstract class Map extends Object implements MapInterface {
             'id' => $map->getId(),
             'class' => array(
               'openlayers-map',
-              $map->machine_name,
+              $map->getMachineName(),
             ),
           ),
           '#attached' => $map->getCollection()->getAttached(),

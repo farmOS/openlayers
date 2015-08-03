@@ -1,4 +1,4 @@
-name = OpenLayers Contextual Links
+name = Openlayers Contextual Links
 description = Provide contextual links on a map.
 core = 7.x
 package = "Openlayers"

@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "KeyboardZoom",
  *  description = "Allows the user to zoom the map using keyboard [+] and [-]."
  * )
- *
  */
 class KeyboardZoom extends Interaction {
 

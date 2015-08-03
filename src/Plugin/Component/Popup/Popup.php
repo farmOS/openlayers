@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Plugin\Component\Popup;
+use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
@@ -28,7 +29,7 @@ class Popup extends Component {
       '#empty_option' => t('- Select a Layer -'),
       '#default_value' => isset($form_state['item']->options['layers']) ? $form_state['item']->options['layers'] : '',
       '#description' => t('Select the layers.'),
-      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('Layer'),
+      '#options' => Openlayers::loadAllAsOptions('Layer'),
       '#required' => TRUE,
       '#multiple' => TRUE,
     );
@@ -75,7 +76,7 @@ class Popup extends Component {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, \Drupal\openlayers\Types\ObjectInterface $context = NULL) {
+  public function preBuild(array &$build, ObjectInterface $context = NULL) {
     parent::preBuild($build, $context);
 
     $layers = $this->getOption('layers', array());
@@ -85,8 +86,8 @@ class Popup extends Component {
     // configuration flexibility.
     $frontend_layers = array();
     foreach ($map_layers as $map_layer) {
-      if (isset($layers[$map_layer->machine_name])) {
-        $frontend_layers[$map_layer->machine_name] = $map_layer->machine_name;
+      if (isset($layers[$map_layer->getMachineName()])) {
+        $frontend_layers[$map_layer->getMachineName()] = $map_layer->getMachineName();
       }
     }
     // Don't name these "layers" otherwise Object::getJS() will delete the

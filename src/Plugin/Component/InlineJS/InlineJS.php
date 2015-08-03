@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Component;
  * @OpenlayersPlugin(
  *  id = "InlineJS"
  * )
- *
  */
 class InlineJS extends Component {
 
@@ -23,7 +22,6 @@ class InlineJS extends Component {
    */
   public function optionsForm(&$form, &$form_state) {
     $attached = array();
-    // $form = array();
 
     if (module_exists('ace_editor')) {
       $attached = array(

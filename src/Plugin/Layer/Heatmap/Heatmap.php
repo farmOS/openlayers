@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Layer;
  * @OpenlayersPlugin(
  *  id = "Heatmap"
  * )
- *
  */
 class Heatmap extends Layer {
 

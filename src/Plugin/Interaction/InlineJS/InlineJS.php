@@ -23,18 +23,20 @@ use Drupal\service_container\Legacy\Drupal7;
  *    "@drupal7"
  *  }
  * )
- *
  */
 class InlineJS extends Interaction {
 
   /**
    * Constructs an InlineJS plugin.
    *
-   * @param @todo
-   * @param @todo
-   * @param @todo
+   * @param array $configuration
+   *   The configuration array.
+   * @param string $plugin_id
+   *   The plugin id.
+   * @param array $plugin_definition
+   *   The plugin definition.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ModuleHandlerInterface $module_handler, MessengerInterface $messenger, Drupal7 $drupal7) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->moduleHandler = $module_handler;
     $this->messenger = $messenger;

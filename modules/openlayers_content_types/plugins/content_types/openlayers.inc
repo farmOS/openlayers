@@ -23,8 +23,8 @@ function openlayers_content_types_openlayers_content_type_render($subtype, $conf
     'title' => NULL,
     'content' => array(
       '#type' => 'openlayers',
-      '#map' => $conf['map']
-    )
+      '#map' => $conf['map'],
+    ),
   );
 }
 

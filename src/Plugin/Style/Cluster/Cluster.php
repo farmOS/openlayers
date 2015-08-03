@@ -14,8 +14,8 @@ use Drupal\openlayers\Types\Style;
  * @OpenlayersPlugin(
  *  id = "Cluster"
  * )
- *
  */
 class Cluster extends Style {
   //TODO: Provide options to let user customize the cluster style.
+
 }

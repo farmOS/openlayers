@@ -22,16 +22,17 @@ use Drupal\openlayers\Types\Object;
 class Collection extends PluginBase {
 
   /**
-   * @var ObjectInterface[]
-   *  List of objects in this collection. The items have to be instances of
-   * \Drupal\openlayers\Types\Object.
+   * @var ObjectInterface[] $objects
+   *   List of objects in this collection. The items have to be instances of
+   *   \Drupal\openlayers\Types\Object.
    */
   protected $objects = array();
 
   /**
    * Import a flat list of Openlayers Objects.
    *
-   * @param array ObjectInterface[]
+   * @param ObjectInterface[] $import
+   *   The array of objects to import.
    */
   public function import(array $import = array()) {
     foreach ($import as $object) {
@@ -63,7 +64,7 @@ class Collection extends PluginBase {
   /**
    * Remove object from this collection.
    *
-   * @param \Drupal\openlayers\Types\ObjectInterface $object
+   * @param ObjectInterface $object
    *   Object instance to remove from this collection.
    */
   public function delete(ObjectInterface $object) {
@@ -198,11 +199,12 @@ class Collection extends PluginBase {
    * Get the collection as an export array with id's instead of objects.
    *
    * @return array
+   *   The export array.
    */
   public function getExport() {
     $export = array();
     foreach ($this->getFlatList() as $object) {
-      $export[$object->getType()][] = $object->machine_name;
+      $export[$object->getType()][] = $object->getMachineName();
     }
     return array_change_key_case($export, CASE_LOWER);
   }

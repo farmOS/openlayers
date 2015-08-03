@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "KeyboardPan",
  *  description = "Allows the user to pan the map using keyboard arrows."
  * )
- *
  */
 class KeyboardPan extends Interaction {
 

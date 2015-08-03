@@ -14,7 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "Modify"
  * )
- *
  */
 class Modify extends Interaction {
 
