@@ -25,7 +25,7 @@ use Drupal\service_container\Messenger\MessengerInterface;
  * Dummy class to avoid breaking the whole processing if a plugin class is
  * missing.
  */
-class Error extends Object {
+class Error extends Object implements SourceInterface,StyleInterface,LayerInterface,ComponentInterface {
 
   /**
    * @var string
@@ -91,4 +91,33 @@ class Error extends Object {
   public function getType() {
     return 'Error';
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getStyle() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSource() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setStyle(StyleInterface $style) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setSource(SourceInterface $source) {
+
+  }
+
 }
