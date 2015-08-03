@@ -24,6 +24,14 @@ Drupal.openlayers = (function($){
         map = Drupal.openlayers.getObject(context, 'maps', settings.map, map_id);
         $(document).trigger('openlayers.map_post_alter', [{map: Drupal.openlayers.instances[map_id].map}]);
 
+        if (settings.style.length > 0) {
+          $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style, map_id: map_id}]);
+          settings.style.map(function (data) {
+            Drupal.openlayers.getObject(context, 'styles', data, map_id);
+          });
+          $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style, map_id: map_id}]);
+        }
+
         if (settings.source.length > 0) {
           $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source, map_id: map_id}]);
           settings.source.map(function (data) {
@@ -48,14 +56,6 @@ Drupal.openlayers = (function($){
             }
           });
           $(document).trigger('openlayers.interactions_post_alter', [{interactions: settings.interaction, map_id: map_id}]);
-        }
-
-        if (settings.style.length > 0) {
-          $(document).trigger('openlayers.styles_pre_alter', [{styles: settings.style, map_id: map_id}]);
-          settings.style.map(function (data) {
-            Drupal.openlayers.getObject(context, 'styles', data, map_id);
-          });
-          $(document).trigger('openlayers.styles_post_alter', [{styles: settings.style, map_id: map_id}]);
         }
 
         if (settings.layer.length > 0) {

@@ -155,7 +155,9 @@ function openlayers_default_openlayers_interactions() {
   $ol_interaction->name = 'Select';
   $ol_interaction->description = 'Select interaction description';
   $ol_interaction->factory_service = 'openlayers.Interaction:Select';
-  $ol_interaction->options = array();
+  $ol_interaction->options = array(
+    'style' => 'openlayers_style_select',
+  );
   $export['openlayers_interaction_select'] = $ol_interaction;
 
   $ol_interaction = new stdClass();

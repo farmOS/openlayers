@@ -750,5 +750,25 @@ var source = new ol.source.Vector({
   );
   $export['openlayers_examples_source_tilewms'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default ol_source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_random_features';
+  $ol_source->name = 'Openlayers examples: Random features';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.Source:Random';
+  $ol_source->options = array(
+    'Point' => array(
+      'count' => 50,
+    ),
+    'LineString' => array(
+      'count' => 20,
+    ),
+    'Polygon' => array(
+      'count' => 2,
+    ),
+  );
+  $export['openlayers_examples_source_random_features'] = $ol_source;
+
   return $export;
 }

@@ -298,9 +298,9 @@ class Openlayers {
    * @return array
    *   The cleaned array.
    */
-  public static function removeEmptyElements($array) {
+  public static function removeEmptyElements(array $array) {
     foreach ($array as $key => $value) {
-      if (empty($value) && $value != 0) {
+      if ($value === '' && $value !== 0) {
         unset($array[$key]);
       }
       elseif (is_array($value)) {
@@ -329,4 +329,25 @@ class Openlayers {
       'top-right' => t('top-right'),
     );
   }
+
+  /**
+   * The list of geometries available.
+   *
+   * @return array
+   *   The list of geometries.
+   */
+  public static function getGeometryTypes() {
+    return array(
+      'Point' => t('Point'),
+      'MultiPoint' => t('MultiPoint'),
+      'LineString' => t('LineString'),
+      'LinearRing' => t('LinearRing'),
+      'MultiLineString' => t('MultiLineString'),
+      'Polygon' => t('Polygon'),
+      'MultiPolygon' => t('MultiPolygon'),
+      'GeometryCollection' => t('GeometryCollection'),
+      'Circle' => t('Circle'),
+    );
+  }
+
 }

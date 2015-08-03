@@ -10,7 +10,7 @@ namespace Drupal\openlayers\Component\Annotation;
 use Drupal\Component\Annotation\Plugin;
 
 /**
- * Defines a Leaflet Plugin annotation object.
+ * Defines an Openlayers Plugin annotation object.
  *
  * @ingroup plugin_api
  *
