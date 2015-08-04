@@ -52,12 +52,11 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
 
   // Get preset options, filtered to those which have the GeoField source.
   $map_options = array();
-  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $machine_name => $map) {
+  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
     if (is_object($map)) {
       foreach ($map->getObjects('source') as $source) {
-        // TODO: add getSource() to Object and Object Interface.
-        if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-          $map_options[$machine_name] = $map->name;
+        if ($source->getFactoryService() === 'openlayers.Source:Vector') {
+          $map_options[$map->getMachineName()] = $map->getName();
         }
       }
     }
@@ -68,7 +67,7 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   }
 
   $element['map_preset'] = array(
-    '#title' => t('Openlayers Preset'),
+    '#title' => t('Openlayers map'),
     '#type' => 'select',
     '#default_value' => $settings['map_preset'] ? $settings['map_preset'] : 'openlayers_geofield_map_geofield_formatter',
     '#required' => TRUE,
@@ -174,11 +173,6 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
         $items[$delta]['lon'] = geofield_latlon_DECtoDMS($item['lon'], 'lon');
       }
     }
-  }
-
-  // If we are a lat, lon, or latlon, and we are using celestial coordinate
-  // system (instead of decimal degrees), then do a transformation.
-  if (isset($display['settings']['format'])) {
     if ($display['settings']['format'] == 'ccs') {
       foreach ($items as $delta => $item) {
         $items[$delta]['lat'] = geofield_latlon_DECtoCCS($item['lat'], 'lat');
@@ -207,13 +201,13 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
     $geofield_source = NULL;
     foreach ($map->getObjects('source') as $source) {
-      if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
+      if ($source->getFactoryService() === 'openlayers.Source:Vector') {
         $geofield_source = $source;
         $source->setOption('features', $features);
       }
     }
     if (!isset($geofield_source)) {
-      drupal_set_message(t('Trying to render a geofield formatter on a map without the geofield source.'), 'error');
+      drupal_set_message(t('Trying to render a geofield formatter on a map without a vector layer having a vector source.'), 'error');
     }
 
     // Build map.
@@ -221,7 +215,6 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   }
   return $element;
 }
-
 
 /**
  * Implements hook_field_widget_info().
@@ -397,11 +390,9 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     return NULL;
   }
   foreach ($map->getObjects('component') as $component) {
+    /* @var \Drupal\openlayers\Types\Component $component */
     // Configure component based on the widget settings.
-    if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
-      $component->setOption('dataType', array('WKT' => 'WKT'));
-      $component->setOption('dataProjection', 'EPSG:4326');
-
+    if ($component->getFactoryService() === 'openlayers.Component:Geofield') {
       // Conversion from geofield to openlayers geofield feature types.
       $feature_types = $settings['feature_types'];
       if (!empty($feature_types['path'])) {
@@ -416,14 +407,16 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
         $feature_types['Point'] = 'Point';
         unset($feature_types['point']);
       }
-      $component->setOption('typeOfFeature', $feature_types);
 
       $action_feature = array('draw' => 'draw');
       if (!empty($settings['allow_edit'])) {
         $action_feature['modify'] = 'modify';
       }
-      $component->setOption('actionFeature', $action_feature);
 
+      $component->setOption('dataType', array('WKT' => 'WKT'));
+      $component->setOption('dataProjection', 'EPSG:4326');
+      $component->setOption('typeOfFeature', $feature_types);
+      $component->setOption('actionFeature', $action_feature);
       $component->setOption('initialData', $items);
       $component->setOption('featureLimit', $field['cardinality']);
       $component->setOption('inputFieldName', 'geom');

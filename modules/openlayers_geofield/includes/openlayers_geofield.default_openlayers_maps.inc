@@ -33,12 +33,11 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_layer_tile_mapquest_osm',
-      1 => 'geofield_field_formatter_layer',
+      1 => 'openlayers_geofield_layer_formatter',
     ),
     'controls' => array(
-      0 => 'openlayers_geofield_control_geofield',
-      1 => 'openlayers_control_zoom',
-      2 => 'openlayers_examples_control_autozoom',
+      0 => 'openlayers_control_zoom',
+      1 => 'openlayers_examples_control_autozoom',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
@@ -73,7 +72,7 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_layer_tile_mapquest_osm',
-      1 => 'geofield_field_formatter_layer',
+      1 => 'openlayers_geofield_layer_formatter',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',

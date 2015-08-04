@@ -30,7 +30,8 @@ function openlayers_geofield_default_openlayers_components() {
     'initialData' => '',
     'dataProjection' => 'EPSG:4326',
     'editStyle' => 'openlayers_geofield_style_edit',
-    'editLayer' => 'geofield_field_formatter_layer',
+    'editLayer' => 'openlayers_geofield_layer_formatter',
+    'editControl' => 'openlayers_geofield_control_geofield',
   );
   $export['openlayers_geofield_component_geofield'] = $ol_component;
 

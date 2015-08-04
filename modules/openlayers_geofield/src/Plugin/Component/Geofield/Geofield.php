@@ -81,9 +81,15 @@ class Geofield extends Component {
     );
     $form['options']['editLayer'] = array(
       '#type' => 'select',
-      '#title' => t('- Select a layer -'),
+      '#title' => t('Select the formatter layer'),
       '#default_value' => $this->getOption('editLayer'),
       '#options' => Openlayers::loadAllAsOptions('layer'),
+    );
+    $form['options']['editControl'] = array(
+      '#type' => 'select',
+      '#title' => t('Select the edit control'),
+      '#default_value' => $this->getOption('editControl'),
+      '#options' => Openlayers::loadAllAsOptions('control'),
     );
   }
 
@@ -102,7 +108,12 @@ class Geofield extends Component {
 
     if ($layer = $this->getOption('editLayer')) {
       $layer = Openlayers::load('layer', $layer);
-      $import = array_merge($import, $layer->getCollection()->getFlatList());
+      $import = array_merge($layer->getCollection()->getFlatList(), $import);
+    }
+
+    if ($control = $this->getOption('editControl')) {
+      $control = Openlayers::load('control', $control);
+      $import = array_merge($control->getCollection()->getFlatList(), $import);
     }
 
     return $import;

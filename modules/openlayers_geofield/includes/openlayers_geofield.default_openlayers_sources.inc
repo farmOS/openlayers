@@ -16,7 +16,7 @@ function openlayers_geofield_default_openlayers_sources() {
   $ol_source->machine_name = 'geofield_field_formatter_source';
   $ol_source->name = 'Geofield Field Formatter Source';
   $ol_source->description = '';
-  $ol_source->factory_service = 'openlayers.Source:Geofield';
+  $ol_source->factory_service = 'openlayers.Source:Vector';
   $ol_source->options = array();
   $export['geofield_field_formatter_source'] = $ol_source;
 

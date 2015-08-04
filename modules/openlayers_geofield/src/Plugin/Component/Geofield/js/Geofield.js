@@ -2,9 +2,18 @@ Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.Component:Geofield',
   init: function(data) {
     var map = data.map;
+
+    // make interactions global so they can later be removed
+    var select_interaction, draw_interaction,
+      modify_interaction,snap_interaction,
+      move_interaction;
+
+    var vector_layer;
+    var source;
+    var geofieldControl;
+
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
-    var source;
     // Select the related source or fallback to a generic one.
     if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
       var source = data.objects.sources[data.opt.source];
@@ -13,12 +22,14 @@ Drupal.openlayers.pluginManager.register({
       source = new ol.source.Vector();
     }
 
-    // Select the related source or fallback to a generic one.
+    if (goog.isDef(data.opt.editControl) && goog.isDef(data.objects.controls[data.opt.editControl])) {
+      geofieldControl = data.objects.controls[data.opt.editControl];
+    }
+
     if (goog.isDef(data.opt.editStyle) && goog.isDef(data.objects.styles[data.opt.editStyle])) {
       var editStyle = data.objects.styles[data.opt.editStyle];
     }
 
-    var vector_layer;
     // Select the related source or fallback to a generic one.
     if (goog.isDef(data.opt.editLayer) && goog.isDef(data.objects.layers[data.opt.editLayer])) {
       vector_layer = data.objects.layers[data.opt.editLayer];
@@ -26,23 +37,8 @@ Drupal.openlayers.pluginManager.register({
     } else {
       // create a vector layer used for editing.
       vector_layer = new ol.layer.Vector({
-        name: 'drawing_vectorlayer',
         source: source,
-        style: new ol.style.Style({
-          fill: new ol.style.Fill({
-            color: 'rgba(255, 255, 255, 0.2)'
-          }),
-          stroke: new ol.style.Stroke({
-            color: '#ffcc33',
-            width: 2
-          }),
-          image: new ol.style.Circle({
-            radius: 7,
-            fill: new ol.style.Fill({
-              color: '#ffcc33'
-            })
-          })
-        })
+        style: ol.style.defaultStyleFunction
       });
       vector_layer.getSource().on('addfeature', saveData);
       map.addLayer(vector_layer);
@@ -64,19 +60,9 @@ Drupal.openlayers.pluginManager.register({
       catch (e) {}
     }
 
-    // make interactions global so they can later be removed
-    var select_interaction, draw_interaction,
-      modify_interaction,snap_interaction,
-      move_interaction;
-
-    map.getControls().forEach(function(control) {
-      if (control instanceof ol.control.Geofield) {
-        geofieldControl = control;
-      }
-    });
-
     if (typeof geofieldControl !== 'undefined') {
       geofieldControl.on('change', function(event) {
+
         var options = this.options;
 
         removeMapInteractions();

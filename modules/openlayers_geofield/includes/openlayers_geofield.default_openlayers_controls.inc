@@ -14,7 +14,7 @@ function openlayers_geofield_default_openlayers_controls() {
   $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
   $ol_control->api_version = 1;
   $ol_control->machine_name = 'openlayers_geofield_control_geofield';
-  $ol_control->name = 'Geofield toolbar';
+  $ol_control->name = 'Openlayers Geofield toolbar';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:Geofield';
   $ol_control->options = array(
