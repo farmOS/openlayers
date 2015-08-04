@@ -14,7 +14,6 @@ Drupal.openlayers.pluginManager.register({
 
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
-    var source;
     // Select the related source or fallback to a generic one.
     if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
       var source = data.objects.sources[data.opt.source];
