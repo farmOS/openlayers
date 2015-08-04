@@ -4,12 +4,13 @@ Drupal.openlayers.pluginManager.register({
     var map = data.map;
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
+    var source;
     // Select the related source or fallback to a generic one.
     if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
       var source = data.objects.sources[data.opt.source];
     }
     else {
-      var source = new ol.source.Vector();
+      source = new ol.source.Vector();
     }
 
     // Select the related source or fallback to a generic one.
@@ -17,28 +18,35 @@ Drupal.openlayers.pluginManager.register({
       var editStyle = data.objects.styles[data.opt.editStyle];
     }
 
-    // create a vector layer used for editing.
-    var vector_layer = new ol.layer.Vector({
-      name: 'drawing_vectorlayer',
-      source: source,
-      style: new ol.style.Style({
-        fill: new ol.style.Fill({
-          color: 'rgba(255, 255, 255, 0.2)'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#ffcc33',
-          width: 2
-        }),
-        image: new ol.style.Circle({
-          radius: 7,
+    var vector_layer;
+    // Select the related source or fallback to a generic one.
+    if (goog.isDef(data.opt.editLayer) && goog.isDef(data.objects.layers[data.opt.editLayer])) {
+      vector_layer = data.objects.layers[data.opt.editLayer];
+      vector_layer.getSource().on('addfeature', saveData);
+    } else {
+      // create a vector layer used for editing.
+      vector_layer = new ol.layer.Vector({
+        name: 'drawing_vectorlayer',
+        source: source,
+        style: new ol.style.Style({
           fill: new ol.style.Fill({
-            color: '#ffcc33'
+            color: 'rgba(255, 255, 255, 0.2)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffcc33',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
           })
         })
-      })
-    });
-    vector_layer.getSource().on('addfeature', saveData);
-    map.addLayer(vector_layer);
+      });
+      vector_layer.getSource().on('addfeature', saveData);
+      map.addLayer(vector_layer);
+    }
 
     // Add preset data if available.
     if (jQuery('.openlayers-geofield-data', geofieldWrapper).val()) {
@@ -69,7 +77,7 @@ Drupal.openlayers.pluginManager.register({
 
     if (typeof geofieldControl !== 'undefined') {
       geofieldControl.on('change', function(event) {
-        var options = event.c.options;
+        var options = this.options;
 
         removeMapInteractions();
 
@@ -95,7 +103,7 @@ Drupal.openlayers.pluginManager.register({
           addSnapInteraction();
         }
 
-        event.c.options = options;
+        this.options = options;
       });
     }
 
@@ -134,8 +142,8 @@ Drupal.openlayers.pluginManager.register({
     function addSelectInteraction() {
       select_interaction = new ol.interaction.Select({
         // make sure only the desired layer can be selected
-        layers: function(vector_layer) {
-          return vector_layer.get('name') === 'drawing_vectorlayer';
+        layers: function(layer) {
+          return layer === vector_layer;
         }
       });
       map.addInteraction(select_interaction);
@@ -172,6 +180,7 @@ Drupal.openlayers.pluginManager.register({
 
       // create the modify interaction
       modify_interaction = new ol.interaction.Modify({
+        style: editStyle,
         features: selected_features,
         // delete vertices by pressing the SHIFT key
         deleteCondition: function(event) {

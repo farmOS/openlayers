@@ -32,7 +32,7 @@ function openlayers_geofield_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_geofield_layer_openstreetmap',
+      0 => 'openlayers_layer_tile_mapquest_osm',
       1 => 'geofield_field_formatter_layer',
     ),
     'controls' => array(
@@ -46,10 +46,6 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_geofield_component_geofield',
-    ),
-    'sources' => array(
-      0 => 'openlayers_geofield_source_openstreetmap',
-      1 => 'geofield_field_formatter_source',
     ),
   );
   $export['openlayers_geofield_map_geofield'] = $ol_map;
@@ -76,7 +72,7 @@ function openlayers_geofield_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_geofield_layer_openstreetmap',
+      0 => 'openlayers_layer_tile_mapquest_osm',
       1 => 'geofield_field_formatter_layer',
     ),
     'interactions' => array(
@@ -86,10 +82,6 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_geofield_component_zoom_to_source',
-    ),
-    'sources' => array(
-      0 => 'openlayers_geofield_source_openstreetmap',
-      1 => 'geofield_field_formatter_source',
     ),
   );
   $export['openlayers_geofield_map_geofield_formatter'] = $ol_map;

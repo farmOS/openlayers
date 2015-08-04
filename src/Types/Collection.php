@@ -48,6 +48,7 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function append(ObjectInterface $object) {
+    $object->setWeight($object->getWeight() + count($this->objects));
     $this->objects[$object->getType() . '_' . $object->getMachineName()] = $object;
   }
 

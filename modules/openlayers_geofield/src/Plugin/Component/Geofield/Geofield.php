@@ -79,6 +79,12 @@ class Geofield extends Component {
       '#default_value' => $this->getOption('editStyle'),
       '#options' => Openlayers::loadAllAsOptions('style'),
     );
+    $form['options']['editLayer'] = array(
+      '#type' => 'select',
+      '#title' => t('- Select a layer -'),
+      '#default_value' => $this->getOption('editLayer'),
+      '#options' => Openlayers::loadAllAsOptions('layer'),
+    );
   }
 
   /**
@@ -92,6 +98,11 @@ class Geofield extends Component {
 
       $this->setWeight($style->getWeight() + 1);
       $import = array_merge($style->getCollection()->getFlatList(), $import);
+    }
+
+    if ($layer = $this->getOption('editLayer')) {
+      $layer = Openlayers::load('layer', $layer);
+      $import = array_merge($import, $layer->getCollection()->getFlatList());
     }
 
     return $import;
