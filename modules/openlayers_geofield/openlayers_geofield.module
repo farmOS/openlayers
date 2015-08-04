@@ -288,6 +288,23 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
     ),
     '#default_value' => (isset($settings['data_storage'])) ? $settings['data_storage'] : 'single',
   );
+  $form['feature_types'] = array(
+    '#title' => t('Available Features'),
+    '#type' => 'checkboxes',
+    '#options' => array(
+      'point' => t('Point'),
+      'path' => t('Path'),
+      'polygon' => t('Polygon'),
+    ),
+    '#description' => t('Select what features are available to draw.'),
+    '#default_value' => isset($settings['feature_types']) ? $settings['feature_types'] : array('point' => 'point', 'path' => 'path', 'polygon' => 'polygon'),
+  );
+  $form['allow_edit'] = array(
+    '#title' => t('Allow shape modification'),
+    '#type' => 'checkbox',
+    '#description' => t('Can you edit and delete shapes.'),
+    '#default_value' => isset($settings['allow_edit']) ? $settings['allow_edit'] : 1,
+  );
   $form['showInputField'] = array(
     '#type' => 'checkbox',
     '#title' => t('Show input field'),
@@ -357,6 +374,11 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   $settings_defaults = array(
     'openlayers_map' => 'openlayers_geofield_map_geofield',
     'data_storage' => 'single',
+    'feature_types' => array(
+      'point' => 'point',
+      'path' => 'path',
+      'polygon' => 'polygon',
+    ),
     'allow_edit' => 1,
   );
   $settings = array_merge($settings_defaults, $widget['settings']);
@@ -417,6 +439,13 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   // Attach the widget and field settings so they can be accesses by JS and
   // validate functions.
   $element['#widget_settings'] = $settings;
+  $element['#widget_settings']['allow_edit'] = (bool) $settings['allow_edit'];
+  $element['#widget_settings']['feature_types'] = array();
+  foreach ($settings['feature_types'] as $feature => $feature_setting) {
+    if ($feature_setting) {
+      $element['#widget_settings']['feature_types'][] = $feature;
+    }
+  }
   $element['#widget_settings']['cardinality'] = $field['cardinality'];
 
   // Make sure we set the input-format to WKT so geofield knows how to process
