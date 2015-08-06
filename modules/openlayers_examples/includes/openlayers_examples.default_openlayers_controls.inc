@@ -159,7 +159,11 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->name = 'Openlayers examples: Geocoder JS';
   $ol_control->description = '';
   $ol_control->factory_service = 'openlayers.Control:JSGeocoder';
-  $ol_control->options = array();
+  $ol_control->options = array(
+    'placeholder' => 'Search with Google...',
+    'loadingPlaceholder' => 'Loading...',
+    'zoom' => 13,
+  );
   $export['openlayers_examples_control_jsgeocoder'] = $ol_control;
 
   return $export;

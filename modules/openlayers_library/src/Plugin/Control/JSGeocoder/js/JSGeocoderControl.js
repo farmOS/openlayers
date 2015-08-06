@@ -4,7 +4,7 @@ ol.control.JSGeocoder = function(opt_options) {
   var this_ = this;
 
   window.OlControlJSGeocoderGoogleWrapper = function() {
-    this_.enableInput();
+    this_.enableInput(this_);
   };
 
   function debounce(fn, delay) {
@@ -20,7 +20,7 @@ ol.control.JSGeocoder = function(opt_options) {
 
   var handleChange_ = debounce(function(event) {
     ol.control.JSGeocoder.prototype.handleChange_(event, this_);
-  }, 400);
+  }, options.timeout || 500);
 
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -28,22 +28,23 @@ ol.control.JSGeocoder = function(opt_options) {
     '&signed_in=true&callback=OlControlJSGeocoderGoogleWrapper';
   document.body.appendChild(script);
 
-  var button = document.createElement('input');
-  button.className = className + '-geocoder';
-  button.type = 'text';
-  button.disabled = true;
-  button.placeholder = "Loading...";
+  var textInput = document.createElement('input');
+  textInput.className = 'ol-jsgeocoder-textinput';
+  textInput.type = 'text';
+  textInput.disabled = true;
+  textInput.placeholder = options.loadingPlaceholder || '';
+  textInput.size = options.size || 25;
 
   var element = document.createElement('div');
   element.className = className + ' ol-unselectable ol-control';
-  element.appendChild(button);
+  element.appendChild(textInput);
 
   ol.control.Control.call(this, {
     element: element,
     target: options.target
   });
 
-  button.addEventListener('keypress', handleChange_, false);
+  textInput.addEventListener('keypress', handleChange_, false);
   this.options = options;
 };
 goog.inherits(ol.control.JSGeocoder, ol.control.Control);
@@ -55,10 +56,10 @@ ol.control.JSGeocoder.prototype.handleChange_ = function(event, control) {
   this.geocodeAddress(event, control);
 };
 
-ol.control.JSGeocoder.prototype.enableInput = function(event) {
+ol.control.JSGeocoder.prototype.enableInput = function(control) {
   var child=(this.element.firstElementChild||this.element.firstChild);
   child.disabled = false;
-  child.placeholder = 'Search with Google...';
+  child.placeholder = control.options.placeholder || '';
   this.geocoder = new google.maps.Geocoder();
 };
 
@@ -75,7 +76,10 @@ ol.control.JSGeocoder.prototype.geocodeAddress = function(event, control) {
 ol.control.JSGeocoder.prototype.updateMap = function(results, control) {
   var map = control.getMap();
   var child=(control.element.firstElementChild||control.element.firstChild);
-  child.value = results[0].formatted_address;
+
+  if (typeof control.options.autocomplete !== 'undefined' && control.options.autocomplete == 1) {
+    child.value = results[0].formatted_address;
+  }
 
   var coordinates = ol.proj.transform([results[0].geometry.location.lng(), results[0].geometry.location.lat()], 'EPSG:4326', 'EPSG:3857');
 
@@ -90,5 +94,7 @@ ol.control.JSGeocoder.prototype.updateMap = function(results, control) {
   map.beforeRender(animationPan, animationZoom);
 
   map.getView().setCenter(coordinates);
-  map.getView().setZoom(15);
+  if (typeof control.options.zoom !== 'undefined' && control.options.zoom !== 0) {
+    map.getView().setZoom(control.options.zoom);
+  }
 };
