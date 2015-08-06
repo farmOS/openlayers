@@ -1,10 +1,12 @@
 ol.control.Export = function(opt_options) {
   var options = goog.isDef(opt_options) ? opt_options : {};
 
+
   var this_ = this;
   var handleClick_ = function(e) {
     this_.handleClick_(e);
   };
+
 
   var exportTipLabel = goog.isDef(options.exportTipLabel) ?
     options.exportTipLabel : '';
@@ -17,7 +19,7 @@ ol.control.Export = function(opt_options) {
   button.download = 'map.png';
 
   var link = document.createElement('a');
-  link.className = ol.css.CLASS_HIDDEN;
+  link.className = 'ol-hidden';
 
   var element = document.createElement('div');
   element.className = 'ol-export ol-unselectable ol-control';
