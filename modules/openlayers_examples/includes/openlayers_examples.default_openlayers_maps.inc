@@ -1335,7 +1335,7 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'renderer' => 'canvas',
     'layers' => array(
-      0 => 'openlayers_examples_layer_openstreetmap_mapnik',
+      0 => 'openlayers_examples_layer_opencyclemap',
     ),
     'controls' => array(
       0 => 'openlayers_examples_control_export',

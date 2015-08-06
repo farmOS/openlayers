@@ -167,6 +167,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'Source OpenCycleMap description';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
+    'crossOrigin' => 'anonymous',
     'url' => '//{a-c}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png',
   );
   $export['openlayers_examples_source_opencyclemap'] = $ol_source;
