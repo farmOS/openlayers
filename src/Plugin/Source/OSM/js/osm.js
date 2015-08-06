@@ -4,7 +4,6 @@ Drupal.openlayers.pluginManager.register({
     if (!goog.isDef(data.opt)) {
       data.opt = {};
     }
-    data.opt.crossOrigin = null;
     return new ol.source.OSM(data.opt);
   }
 });

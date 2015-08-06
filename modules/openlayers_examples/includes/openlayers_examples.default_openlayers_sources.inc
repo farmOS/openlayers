@@ -178,7 +178,8 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'OpenStreetMap Mapnik source';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
-    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    'crossOrigin' => 'anonymous',
+    'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   );
   $export['openlayers_examples_source_openstreetmap_mapnik'] = $ol_source;
 
