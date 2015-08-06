@@ -1,7 +1,7 @@
 ol.control.Geofield = function(opt_options) {
-  var options = goog.isDef(opt_options) ? opt_options : {};
-  var className = goog.isDef(options.className) ? options.className : 'ol-geofield';
-  this.options = {};
+  var options = opt_options || {};
+  var className = options.className || 'ol-geofield';
+  this.options = options;
 
   var this_ = this;
   var handleDrawClick_ = function(e) {
@@ -23,10 +23,8 @@ ol.control.Geofield = function(opt_options) {
   optionsElements = new ol.Collection();
 
   if (draw.Point) {
-    var pointLabel = goog.isDef(options.pointLabel) ?
-      options.pointLabel : '\u25CB';
-    var pointTipLabel = goog.isDef(options.pointInTipLabel) ?
-      options.pointTipLabel : 'Draw a point';
+    var pointLabel = options.pointLabel || '\u25CB';
+    var pointTipLabel = options.pointTipLabel || 'Draw a point';
     var pointElement = document.createElement('button');
     pointElement.className = className + '-point';
     pointElement.type = 'button';
@@ -38,10 +36,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.MultiPoint) {
-    var multipointLabel = goog.isDef(options.multipointLabel) ?
-      options.multipointLabel : '\u25CB';
-    var multipointTipLabel = goog.isDef(options.multipointInTipLabel) ?
-      options.multipointTipLabel : 'Draw a multipoint';
+    var multipointLabel = options.multipointLabel || '\u25CB';
+    var multipointTipLabel = options.multipointTipLabel || 'Draw a multipoint';
     var multipointElement = document.createElement('button');
     multipointElement.className = className + '-multipoint';
     multipointElement.type = 'button';
@@ -53,10 +49,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.LineString) {
-    var linestringLabel = goog.isDef(options.linestringLabel) ?
-      options.pointLabel : '\u2500';
-    var linestringTipLabel = goog.isDef(options.linestringTipLabel) ?
-      options.pointTipLabel : 'Draw a linestring, hold [shift] for free hand.';
+    var linestringLabel = options.pointLabel || '\u2500';
+    var linestringTipLabel = options.pointTipLabel || 'Draw a linestring, hold [shift] for free hand.';
     var linestringElement = document.createElement('button');
     linestringElement.className = className + '-linestring';
     linestringElement.type = 'button';
@@ -68,10 +62,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.MultiLineString) {
-    var multilinestringLabel = goog.isDef(options.multilinestringLabel) ?
-      options.pointLabel : '\u2500';
-    var multilinestringTipLabel = goog.isDef(options.multilinestringTipLabel) ?
-      options.pointTipLabel : 'Draw a multilinestring, hold [shift] for free hand.';
+    var multilinestringLabel = options.pointLabel || '\u2500';
+    var multilinestringTipLabel = options.pointTipLabel || 'Draw a multilinestring, hold [shift] for free hand.';
     var multilinestringElement = document.createElement('button');
     multilinestringElement.className = className + '-multilinestring';
     multilinestringElement.type = 'button';
@@ -83,10 +75,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Triangle) {
-    var triangleLabel = goog.isDef(options.triangleLabel) ?
-      options.triangleLabel : '\u25B2';
-    var triangleTipLabel = goog.isDef(options.triangleTipLabel) ?
-      options.triangleTipLabel : 'Draw a triangle';
+    var triangleLabel = options.triangleLabel || '\u25B2';
+    var triangleTipLabel = options.triangleTipLabel || 'Draw a triangle';
     var triangleElement = document.createElement('button');
     triangleElement.className = className + '-triangle';
     triangleElement.type = 'button';
@@ -98,10 +88,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Square) {
-    var squareLabel = goog.isDef(options.squareLabel) ?
-      options.squareLabel : '\u25A0';
-    var squareTipLabel = goog.isDef(options.squareTipLabel) ?
-      options.squareTipLabel : 'Draw a square';
+    var squareLabel = options.squareLabel || '\u25A0';
+    var squareTipLabel = options.squareTipLabel || 'Draw a square';
     var squareElement = document.createElement('button');
     squareElement.className = className + '-square';
     squareElement.type = 'button';
@@ -113,10 +101,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Box) {
-    var boxLabel = goog.isDef(options.boxLabel) ?
-      options.boxLabel : '\u25AE';
-    var boxTipLabel = goog.isDef(options.boxTipLabel) ?
-      options.boxTipLabel : 'Draw a box';
+    var boxLabel = options.boxLabel || '\u25AE';
+    var boxTipLabel = options.boxTipLabel || 'Draw a box';
     var boxElement = document.createElement('button');
     boxElement.className = className + '-box';
     boxElement.type = 'button';
@@ -128,10 +114,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Circle) {
-    var circleLabel = goog.isDef(options.circleLabel) ?
-      options.circleLabel : '\u25CF';
-    var circleTipLabel = goog.isDef(options.circleTipLabel) ?
-      options.circleTipLabel : 'Draw a circle';
+    var circleLabel = options.circleLabel || '\u25CF';
+    var circleTipLabel = options.circleTipLabel || 'Draw a circle';
     var circleElement = document.createElement('button');
     circleElement.className = className + '-circle';
     circleElement.type = 'button';
@@ -143,10 +127,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Polygon) {
-    var polygonLabel = goog.isDef(options.polygonLabel) ?
-      options.polygonLabel : '\u2B1F';
-    var polygonTipLabel = goog.isDef(options.polygonTipLabel) ?
-      options.polygonTipLabel : 'Draw a polygon';
+    var polygonLabel = options.polygonLabel || '\u2B1F';
+    var polygonTipLabel = options.polygonTipLabel || 'Draw a polygon';
     var polygonElement = document.createElement('button');
     polygonElement.className = className + '-polygon';
     polygonElement.type = 'button';
@@ -158,10 +140,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.MultiPolygon) {
-    var multipolygonLabel = goog.isDef(options.multipolygonLabel) ?
-      options.multipolygonLabel : '\u2B1F';
-    var multipolygonTipLabel = goog.isDef(options.multipolygonTipLabel) ?
-      options.multipolygonTipLabel : 'Draw a multipolygon';
+    var multipolygonLabel = options.multipolygonLabel || '\u2B1F';
+    var multipolygonTipLabel = options.multipolygonTipLabel || 'Draw a multipolygon';
     var multipolygonElement = document.createElement('button');
     multipolygonElement.className = className + '-multipolygon';
     multipolygonElement.type = 'button';
@@ -173,10 +153,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (actions.Edit) {
-    var editLabel = goog.isDef(options.editLabel) ?
-      options.editLabel : '\u270D';
-    var editTipLabel = goog.isDef(options.editTipLabel) ?
-      options.editTipLabel : 'Edit features';
+    var editLabel = options.editLabel || '\u270D';
+    var editTipLabel = options.editTipLabel || 'Edit features';
     var editElement = document.createElement('button');
     editElement.className = className + '-edit';
     editElement.type = 'button';
@@ -188,10 +166,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (actions.Move) {
-    var moveLabel = goog.isDef(options.moveLabel) ?
-      options.moveLabel : '\u27A4';
-    var moveTipLabel = goog.isDef(options.moveTipLabel) ?
-      options.moveTipLabel : 'Move features';
+    var moveLabel = options.moveLabel || '\u27A4';
+    var moveTipLabel = options.moveTipLabel || 'Move features';
     var moveElement = document.createElement('button');
     moveElement.className = className + '-move';
     moveElement.type = 'button';
@@ -203,10 +179,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (actions.Clear) {
-    var clearLabel = goog.isDef(options.clearLabel) ?
-      options.clearLabel : 'X';
-    var clearTipLabel = goog.isDef(options.clearTipLabel) ?
-      options.clearTipLabel : 'Clear features';
+    var clearLabel = options.clearLabel || 'X';
+    var clearTipLabel = options.clearTipLabel || 'Clear features';
     var clearElement = document.createElement('button');
     clearElement.className = className + '-clear';
     clearElement.type = 'button';
@@ -218,10 +192,8 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (options.Snap) {
-    var snapLabel = goog.isDef(options.snapLabel) ?
-      options.snapLabel : '\u2609';
-    var snapTipLabel = goog.isDef(options.snapTipLabel) ?
-      options.snapTipLabel : 'Snap to features';
+    var snapLabel = options.snapLabel || '\u2609';
+    var snapTipLabel = options.snapTipLabel || 'Snap to features';
     var snapElement = document.createElement('button');
     snapElement.className = className + '-snap';
     snapElement.type = 'button';
@@ -263,7 +235,7 @@ ol.control.Geofield = function(opt_options) {
     target: options.target
   });
 };
-goog.inherits(ol.control.Geofield, ol.control.Control);
+ol.inherits(ol.control.Geofield, ol.control.Control);
 
 ol.control.Geofield.prototype.handleDrawClick_ = function(event) {
   var options = this.options;
@@ -289,8 +261,7 @@ ol.control.Geofield.prototype.handleDrawClick_ = function(event) {
   }
 
   this.options = options;
-  event = new CustomEvent('change');
-  this.dispatchEvent(event);
+  this.element.dispatchEvent(new CustomEvent('change'));
 };
 
 ol.control.Geofield.prototype.handleActionsClick_ = function(event) {

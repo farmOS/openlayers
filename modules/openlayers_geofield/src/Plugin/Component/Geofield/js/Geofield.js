@@ -22,16 +22,16 @@ Drupal.openlayers.pluginManager.register({
       source = new ol.source.Vector();
     }
 
-    if (goog.isDef(data.opt.editControl) && goog.isDef(data.objects.controls[data.opt.editControl])) {
+    if (typeof data.opt.editControl !== 'undefined' && typeof data.objects.controls[data.opt.editControl] !== 'undefined') {
       geofieldControl = data.objects.controls[data.opt.editControl];
     }
 
-    if (goog.isDef(data.opt.editStyle) && goog.isDef(data.objects.styles[data.opt.editStyle])) {
+    if (typeof data.opt.editStyle !== 'undefined' && typeof data.objects.styles[data.opt.editStyle] !== 'undefined') {
       var editStyle = data.objects.styles[data.opt.editStyle];
     }
 
     // Select the related source or fallback to a generic one.
-    if (goog.isDef(data.opt.editLayer) && goog.isDef(data.objects.layers[data.opt.editLayer])) {
+    if (typeof data.opt.editLayer !== 'undefined' && typeof data.objects.layers[data.opt.editLayer] !== 'undefined') {
       vector_layer = data.objects.layers[data.opt.editLayer];
       vector_layer.getSource().on('addfeature', saveData);
     } else {
@@ -62,7 +62,6 @@ Drupal.openlayers.pluginManager.register({
 
     if (typeof geofieldControl !== 'undefined') {
       geofieldControl.on('change', function(event) {
-
         var options = this.options;
 
         removeMapInteractions();

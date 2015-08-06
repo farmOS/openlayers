@@ -184,5 +184,17 @@ function openlayers_examples_default_openlayers_controls() {
   $ol_control->factory_service = 'openlayers.Control:AutoZoom';
   $export['openlayers_examples_control_autozoom'] = $ol_control;
 
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_examples_control_export';
+  $ol_control->name = 'Openlayers examples: Export as image';
+  $ol_control->description = '';
+  $ol_control->factory_service = 'openlayers.Control:Export';
+  $ol_control->options = array(
+    'exportTipLabel' => 'Export as image',
+  );
+  $export['openlayers_examples_control_export'] = $ol_control;
+
   return $export;
 }

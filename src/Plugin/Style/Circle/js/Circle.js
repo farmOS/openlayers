@@ -6,12 +6,8 @@ Drupal.openlayers.pluginManager.register({
         return null;
       }
       var geometry = feature.getGeometry().getType();
-      var geometry_style;
-      if (data.opt[geometry] !== undefined) {
-        geometry_style = data.opt[geometry];
-      }else {
-        geometry_style = data.opt['default'];
-      }
+      var geometry_style = data.opt[geometry] || data.opt['default'];
+
       return [
         new ol.style.Style({
           image: new ol.style.Circle({
