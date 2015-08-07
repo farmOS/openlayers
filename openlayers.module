@@ -337,3 +337,15 @@ function openlayers_i18n_string_refresh() {
     }
   }
 }
+
+/**
+ * Implements hook_hook_info().
+ */
+function openlayers_hook_info() {
+  $hooks = array(
+    'openlayers_object_preprocess_alter',
+    'openlayers_object_postprocess_alter',
+  );
+
+  return array_fill_keys($hooks, array('group' => 'openlayers'));
+}
