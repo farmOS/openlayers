@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Openlayers boxes plugin.
+ */
+
+/**
  * Class openlayers
  */
 class openlayers extends boxes_box {

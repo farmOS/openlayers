@@ -40,7 +40,7 @@ class Random extends Style {
     $import = parent::optionsToObjects();
 
     if ($styles = $this->getOption('style', array())) {
-      foreach($styles as $style) {
+      foreach ($styles as $style) {
         $style = Openlayers::load('style', $style);
 
         // This source is a dependency of the current one,

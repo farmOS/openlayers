@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Openlayers field install file.
+ */
+
+/**
  * Implements hook_field_schema().
  */
 function openlayers_field_field_schema($field) {

@@ -82,7 +82,7 @@ abstract class Map extends Object implements MapInterface {
     );
 
     $styles = implode(array_map(function($k, $v) {
-      return $k . ':'. $v .';';
+      return $k . ':' . $v . ';';
     }, array_keys($styles), $styles));
 
     $build['openlayers'] = array(
