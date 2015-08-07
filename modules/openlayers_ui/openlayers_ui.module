@@ -55,7 +55,7 @@ function openlayers_ui_help($path, $arg) {
 
   switch ($path) {
     case 'admin/help#openlayers':
-      $output = t('Openlayers is a module who displays information on a map using the <a href="@url">Openlayers library</a>.', array('@url' => 'http://ol3js.org/'));
+      $output = t('Openlayers is a module who displays information on a map using the <a href="@url">Openlayers library</a>.', array('@url' => 'http://openlayers.org/'));
       break;
 
     case 'admin/structure/openlayers':
