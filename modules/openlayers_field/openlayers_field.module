@@ -112,36 +112,43 @@ function openlayers_field_field_formatter_settings_form($field, $instance, $view
   }
   */
 
-  $element['map'] = array(
-    '#type' => 'select',
-    '#title' => t('Select an Openlayers map'),
-    '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('map'),
-    '#default_value' => $settings['map'],
-  );
+  switch ($display['type']) {
+    case 'openlayers_map_formatter':
+      break;
 
-  $geocoder_handlers = array();
-  foreach (geocoder_handler_info() as $name => $handler) {
-    $geocoder_handlers[$name] = $handler['title'];
+    case 'openlayers_addressfield_textfield_formatter':
+      $element['map'] = array(
+        '#type' => 'select',
+        '#title' => t('Select an Openlayers map'),
+        '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('map'),
+        '#default_value' => $settings['map'],
+      );
+
+      $geocoder_handlers = array();
+      foreach (geocoder_handler_info() as $name => $handler) {
+        $geocoder_handlers[$name] = $handler['title'];
+      }
+
+      $element['geocoder_handler'] = array(
+        '#type' => 'select',
+        '#title' => t('Geocoder handler'),
+        '#options' => $geocoder_handlers,
+        '#default_value' => $settings['geocoder_handler'],
+      );
+
+      $element['geocoder_cache'] = array(
+        '#type' => 'select',
+        '#title' => t('Geocoder cache type'),
+        '#description' => t('Type of geocoder cache to use'),
+        '#options' => array(
+          0 => t('No caching'),
+          1 => t('Static-cache but no persistent-cache'),
+          2 => t('Both static-cache and persistent-cache'),
+        ),
+        '#default_value' => $settings['geocoder_cache'],
+      );
+      break;
   }
-
-  $element['geocoder_handler'] = array(
-    '#type' => 'select',
-    '#title' => t('Geocoder handler'),
-    '#options' => $geocoder_handlers,
-    '#default_value' => $settings['geocoder_handler'],
-  );
-
-  $element['geocoder_cache'] = array(
-    '#type' => 'select',
-    '#title' => t('Geocoder cache type'),
-    '#description' => t('Type of geocoder cache to use'),
-    '#options' => array(
-      0 => t('No caching'),
-      1 => t('Static-cache but no persistent-cache'),
-      2 => t('Both static-cache and persistent-cache'),
-    ),
-    '#default_value' => $settings['geocoder_cache'],
-  );
 
   return $element;
 }
@@ -152,31 +159,40 @@ function openlayers_field_field_formatter_settings_form($field, $instance, $view
 function openlayers_field_field_formatter_settings_summary($field, $instance, $view_mode) {
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
+  $summary = array();
 
-  $geocoder_cache = 'Not defined.';
-  switch ($settings['geocoder_cache']) {
-    case 0:
-      $geocoder_cache = 'No cache';
+  switch ($display['type']) {
+    case 'openlayers_map_formatter':
       break;
 
-    case 1:
-      $geocoder_cache = 'Static cache only';
-      break;
+    case 'openlayers_addressfield_textfield_formatter':
+      $geocoder_cache = 'Not defined.';
+      switch ($settings['geocoder_cache']) {
+        case 0:
+          $geocoder_cache = 'No cache';
+          break;
 
-    case 2:
-      $geocoder_cache = 'Static and persistent cache';
+        case 1:
+          $geocoder_cache = 'Static cache only';
+          break;
+
+        case 2:
+          $geocoder_cache = 'Static and persistent cache';
+          break;
+      }
+
+      $summary[] = t('Openlayers map: @map', array(
+        '@map' => $settings['map'],
+      ));
+      $summary[] = t('Geocoder handler: @geocoder_handler', array(
+        '@geocoder_handler' => $settings['geocoder_handler'],
+      ));
+      $summary[] = t('Geooder cache: @geocoder_cache', array(
+        '@geocoder_cache' => $geocoder_cache,
+      ));
+
       break;
   }
-
-  $summary[] = t('Openlayers map: @map', array(
-    '@map' => $settings['map'],
-  ));
-  $summary[] = t('Geocoder handler: @geocoder_handler', array(
-    '@geocoder_handler' => $settings['geocoder_handler'],
-  ));
-  $summary[] = t('Geooder cache: @geocoder_cache', array(
-    '@geocoder_cache' => $geocoder_cache,
-  ));
 
   return implode('<br/>', $summary);
 }
