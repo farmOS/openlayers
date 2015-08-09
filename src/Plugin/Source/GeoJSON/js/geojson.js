@@ -36,6 +36,10 @@ var openlayers_source_internal_geojson = {
         data.map.getView().on('change:center', function() {
           if (!vectorSource._loadingFeatures) {
             vectorSource._forceReloadFeatures = true;
+            // @TODO remove once ol.source.Vector.loadFeatures() is in the API.
+            if (!goog.isDef(vectorSource.loadFeatures)) {
+              vectorSource.clear(true);
+            }
           }
         });
       }
@@ -44,14 +48,21 @@ var openlayers_source_internal_geojson = {
         data.map.getView().on('change:resolution', function() {
           if (!vectorSource._loadingFeatures) {
             vectorSource._forceReloadFeatures = true;
+            // @TODO remove once ol.source.Vector.loadFeatures() is in the API.
+            if (!goog.isDef(vectorSource.loadFeatures)) {
+              vectorSource.clear(true);
+            }
           }
         });
       }
 
+      // @TODO Unfortunately we can't overload the loadFeatures() function yet
+      // when in non-debug mode. This because the function isn't part of the OL
+      // API. Once it is, remove the vectorSource.clear(true); statements above.
       // If the source relies on zoom factor or extend we need to overwrite
       // the original source function to load features and ensure a force
       // works.
-      if (vectorSource._clearFeaturesOnLoad) {
+      if (vectorSource._clearFeaturesOnLoad && goog.isDef(vectorSource.loadFeatures)) {
         vectorSource.loadFeatures = function(extent, resolution, projection) {
           var loadedExtentsRtree = this.loadedExtentsRtree_;
           var extentsToLoad = this.strategy_(extent, resolution);
