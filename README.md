@@ -25,7 +25,7 @@ drush en openlayers -y
 
 You may also install the module by just downloading each dependencies manually.
 
-Once the module is installed, you have to download the JS library and install it at the right place.
+Once the module is installed, download the JS library and install it at the right place.
 
 Once again, the easiest way to install it is with drush, we've created a command that will download the library and install it for you.
 Basically it just download a zipfile and unzip it at the right place for you.
@@ -50,13 +50,13 @@ You may also use drush to do so:
 drush libraries-list
 ```
 
-Once the module is enabled, you won't see any user interface. You have to enabled an extra module for it: Openlayers UI
+Once the module is enabled, you won't see any user interface. You have to enable an extra module for it: Openlayers UI
 
 ```
 drush en openlayers_ui -y
 ```
 
-Disabled the UI module will not affect the currently working maps, it's just the admin interface, nothing else.
+Disabling the UI module will not affect your maps, it's just the admin interface, nothing else.
 
 # Getting help
 To create your first map, you must first understand how Openlayers 3, the JS library, works.
