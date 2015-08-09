@@ -16,6 +16,31 @@ var openlayers_source_internal_geojson = {
       }
     }
 
+    // If reloading the features on state change is enabled we abuse the
+    // strategy callback to implement a forced reload of features. This is
+    // necessary since we can't overload the loadFeatures() function from the
+    // source - it is not part of the API and thus isn't available in the
+    // compiled version of ol.
+    if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange || goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
+      data.opt.strategy = function (extent, resolution) {
+        // If reloading the features is forced load them here. Otherwise just
+        // return the extent of the standard loading strategy.
+        if (this._forceReloadFeatures) {
+          this._loadingFeatures = true;
+          var projection = (this.getProjection()) ? this.getProjection() : data.map.getView().getProjection();
+          data.opt.loader.call(this, extent, resolution, projection);
+          // This has to be enabled / disabled before each loadFeatures
+          // call.
+          this._forceReloadFeatures = false;
+          // Return an empty list - so the original loader is skipped.
+          return [];
+        }
+        else {
+          return ol.loadingstrategy.all;
+        }
+      };
+    }
+
     var vectorSource = new ol.source.Vector(data.opt);
     this.configureVectorSource(vectorSource, data);
     return vectorSource;
@@ -36,10 +61,6 @@ var openlayers_source_internal_geojson = {
         data.map.getView().on('change:center', function() {
           if (!vectorSource._loadingFeatures) {
             vectorSource._forceReloadFeatures = true;
-            // @TODO remove once ol.source.Vector.loadFeatures() is in the API.
-            if (!goog.isDef(vectorSource.loadFeatures)) {
-              vectorSource.clear(true);
-            }
           }
         });
       }
@@ -48,47 +69,8 @@ var openlayers_source_internal_geojson = {
         data.map.getView().on('change:resolution', function() {
           if (!vectorSource._loadingFeatures) {
             vectorSource._forceReloadFeatures = true;
-            // @TODO remove once ol.source.Vector.loadFeatures() is in the API.
-            if (!goog.isDef(vectorSource.loadFeatures)) {
-              vectorSource.clear(true);
-            }
           }
         });
-      }
-
-      // @TODO Unfortunately we can't overload the loadFeatures() function yet
-      // when in non-debug mode. This because the function isn't part of the OL
-      // API. Once it is, remove the vectorSource.clear(true); statements above.
-      // If the source relies on zoom factor or extend we need to overwrite
-      // the original source function to load features and ensure a force
-      // works.
-      if (vectorSource._clearFeaturesOnLoad && goog.isDef(vectorSource.loadFeatures)) {
-        vectorSource.loadFeatures = function(extent, resolution, projection) {
-          var loadedExtentsRtree = this.loadedExtentsRtree_;
-          var extentsToLoad = this.strategy_(extent, resolution);
-          var i, ii;
-          for (i = 0, ii = extentsToLoad.length; i < ii; ++i) {
-            var extentToLoad = extentsToLoad[i];
-            var alreadyLoaded = loadedExtentsRtree.forEachInExtent(extentToLoad,
-              /**
-               * @param {{extent: ol.Extent}} object Object.
-               * @return {boolean} Contains.
-               */
-              function(object) {
-                return ol.extent.containsExtent(object.extent, extentToLoad);
-              });
-            // If the features aren't available yet or the load is forced
-            // figure out what we've to load.
-            if (!alreadyLoaded || this._forceReloadFeatures) {
-              this._loadingFeatures = true;
-              this.loader_.call(this, extentToLoad, resolution, projection);
-              loadedExtentsRtree.insert(extentToLoad, {extent: extentToLoad.slice()});
-            }
-          }
-          // This has to be enabled / disabled before each loadFeatures
-          // call.
-          this._forceReloadFeatures = false;
-        };
       }
     }
     //else {
