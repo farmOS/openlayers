@@ -54,6 +54,18 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
   );
 
+  if ($library = libraries_info('openlayers3')) {
+    $variant_options = array_combine(array_keys($library['variants']), array_keys($library['variants']));
+    $form['variant'] = array(
+      '#type' => 'select',
+      '#title' => t('OL Variant'),
+      '#description' => t("Enable this option if you want to use a specific variant of the library - maybe your own distribution."),
+      '#default_value' => \Drupal\openlayers\Config::get('openlayers.variant'),
+      '#empty_option' => t('Auto'),
+      '#options' => $variant_options,
+    );
+  }
+
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
   // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
   $form['current_path'] = array('#type' => 'hidden', '#value' => current_path());
@@ -62,7 +74,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => 'Plugin information',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE
+    '#collapsed' => TRUE,
   );
 
   foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
@@ -80,7 +92,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 
       $configuration = array(
         'machine_name' => '',
-        'factory_service' => ''
+        'factory_service' => '',
       );
 
       /* @var \Drupal\openlayers\Types\Object $instance */
@@ -124,12 +136,12 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       'Class',
       'Arguments',
       'JS size',
-      'CSS size'
+      'CSS size',
     );
     $table = theme('table', array('header' => $header, 'rows' => $rows, 'empty' => t('No plugin available.')));
 
     $form['plugin-info'][$type . '-group']['table'] = array(
-      '#markup' => $table
+      '#markup' => $table,
     );
   }
 
@@ -156,8 +168,8 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     'version' => array(
-      '#markup' => $output
-    )
+      '#markup' => $output,
+    ),
   );
 
   $form['buttons'] = array(
@@ -183,5 +195,8 @@ function _openlayers_ajax_reload_default_map($form, &$form_state) {
 function openlayers_ui_admin_settings_submit($form, &$form_state) {
   $values = $form_state['values'];
   \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
+  if (isset($values['variant'])) {
+    \Drupal\openlayers\Config::set('openlayers.variant', $values['variant']);
+  }
   drupal_set_message(t('The configuration options have been saved.'));
 }

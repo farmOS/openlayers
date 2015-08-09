@@ -366,6 +366,9 @@ class OLMap extends Map {
     if (Config::get('openlayers.debug', FALSE) == TRUE) {
       $variant = 'debug';
     };
+    if (Config::get('openlayers.variant', FALSE)) {
+      $variant = Config::get('openlayers.variant', FALSE);
+    };
     $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
     return $attached;
   }
