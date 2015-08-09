@@ -354,11 +354,16 @@ class Openlayers {
     $attached = array();
 
     if (Config::get('openlayers.origin.method', 'cdnjs') == 'local') {
-
-      $debug = (bool) Config::get('openlayers.debug', 0) == TRUE ? 'debug' : NULL;
+      $variant = NULL;
+      if (Config::get('openlayers.debug', FALSE) == TRUE) {
+        $variant = 'debug';
+      };
+      if (Config::get('openlayers.variant', FALSE)) {
+        $variant = Config::get('openlayers.variant', FALSE);
+      };
 
       $attached['libraries_load'] = array(
-        'openlayers3' => array('openlayers3', $debug)
+        'openlayers3' => array('openlayers3', $variant)
       );
     } else {
       foreach(Config::get('openlayers.origin.files', array()) as $url) {

@@ -28,6 +28,7 @@ class Config {
       'openlayers.edit_view_map' => 'openlayers_map_view_edit_form',
       'openlayers.default_ui_map' => 'openlayers_map_ui_default',
       'openlayers.debug' => FALSE,
+      'openlayers.variant' => '',
     );
     if ($key == NULL) {
       return $defaults;

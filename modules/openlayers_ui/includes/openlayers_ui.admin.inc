@@ -54,12 +54,14 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 
   if ($method == 'local') {
     if ($library['installed'] == TRUE) {
-
-      $form['origin']['debug'] = array(
-        '#type' => 'checkbox',
-        '#title' => t('Debug mode'),
-        '#description' => t("Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn't fully work in IE yet."),
-        '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
+      $variant_options = array_combine(array_keys($library['variants']), array_keys($library['variants']));
+      $form['origin']['variant'] = array(
+        '#type' => 'select',
+        '#title' => t('Openlayers variant'),
+        '#description' => t('Enabled this option if you want to use a specific variant of the library - maybe your own distribution.'),
+        '#empty_option' => t('Auto'),
+        '#options' => $variant_options,
+        '#default_value' => \Drupal\openlayers\Config::get('openlayers.variant'),
       );
 
       $rows = array();
@@ -207,7 +209,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => 'Plugin information',
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE
+    '#collapsed' => TRUE,
   );
 
   foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
@@ -225,7 +227,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 
       $configuration = array(
         'machine_name' => '',
-        'factory_service' => ''
+        'factory_service' => '',
       );
 
       /* @var \Drupal\openlayers\Types\Object $instance */
@@ -271,12 +273,12 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       'Class',
       'Arguments',
       'JS size',
-      'CSS size'
+      'CSS size',
     );
     $table = theme('table', array('header' => $header, 'rows' => $rows, 'empty' => t('No plugin available.')));
 
     $form['plugin-info'][$type . '-group']['table'] = array(
-      '#markup' => $table
+      '#markup' => $table,
     );
   }
 
@@ -329,10 +331,10 @@ function openlayers_ui_admin_settings_submit($form, &$form_state) {
     \Drupal\openlayers\Config::clear('openlayers.origin.files');
   }
 
-  if (isset($values['debug']) && (bool) $values['debug'] == TRUE) {
-    \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
+  if (isset($values['variant'])) {
+    \Drupal\openlayers\Config::set('openlayers.variant', $values['variant']);
   } else {
-    \Drupal\openlayers\Config::clear('openlayers.debug');
+    \Drupal\openlayers\Config::clear('openlayers.variant');
   }
 
   drupal_set_message(t('The configuration options have been saved.'));
