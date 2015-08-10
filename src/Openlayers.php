@@ -241,6 +241,24 @@ class Openlayers {
   }
 
   /**
+   * Return the version of the Openlayers library in use.
+   *
+   * @return string
+   */
+  public static function getLibraryVersion() {
+    $method = Config::get('openlayers.origin.method');
+    switch($method) {
+      case 'local':
+        $library = self::getLibrary();
+        return $library['version'] . ' (local)';
+      break;
+      default:
+        return Config::get('openlayers.origin.version') . ' (cdn)';
+      break;
+    }
+  }
+
+  /**
    * Apply a function recursively to all the value of an array.
    *
    * @param callable $func
@@ -350,6 +368,12 @@ class Openlayers {
     );
   }
 
+  /**
+   * Returns the list of files libraries or js/css files needed according to
+   * the settings.
+   *
+   * @return array
+   */
   public static function getAttached() {
     $attached = array();
 

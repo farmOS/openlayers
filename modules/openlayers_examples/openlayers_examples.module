@@ -214,9 +214,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     '#value' => 0,
   );
 
-  $library = \Drupal\openlayers\Openlayers::getLibrary();
   $form['version'] = array(
-    '#markup' => 'Module running Openlayers version: ' . $library['version'],
+    '#markup' => 'Module running Openlayers version: ' . \Drupal\openlayers\Openlayers::getLibraryVersion(),
   );
 
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
