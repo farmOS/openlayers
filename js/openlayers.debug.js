@@ -77,7 +77,8 @@
     console.time('Time');
   });
   $(document).on('openlayers.object_post_alter', function(event, objects) {
-    if (typeof objects.object !== 'object' && objects.type !== 'components') {
+    var objType = typeof objects.object;
+    if (((objType !== 'object' && objType !== 'function') || objects.object == null) && objects.type !== 'components') {
       Drupal.openlayers.console.error('Failed to create object.');
       Drupal.openlayers.console.error(objects);
     }
