@@ -110,7 +110,6 @@ function openlayers_examples_default_openlayers_controls() {
       'openlayers_examples_layer_opencyclemap_outdoors' => 'openlayers_examples_layer_opencyclemap_outdoors',
       'openlayers_examples_layer_opencyclemap_thunderforest' => 'openlayers_examples_layer_opencyclemap_thunderforest',
       'openlayers_examples_layer_opencyclemap_transport' => 'openlayers_examples_layer_opencyclemap_transport',
-      'openlayers_examples_layer_openmapsurfer_adminb' => 'openlayers_examples_layer_openmapsurfer_adminb',
       'openlayers_examples_layer_openmapsurfer_roads' => 'openlayers_examples_layer_openmapsurfer_roads',
       'openlayers_examples_layer_openmapsurfer_roadsg' => 'openlayers_examples_layer_openmapsurfer_roadsg',
       'openlayers_examples_layer_openstreetmap_bw' => 'openlayers_examples_layer_openstreetmap_bw',

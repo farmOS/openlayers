@@ -493,7 +493,6 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'layers' => array(
       0 => 'openlayers_examples_layer_openstreetmap_bw',
-      1 => 'openlayers_examples_layer_openmapsurfer_adminb',
       2 => 'openlayers_examples_layer_openmapsurfer_roadsg',
       3 => 'openlayers_examples_layer_openmapsurfer_roads',
       4 => 'openlayers_examples_layer_opencyclemap_landscape',

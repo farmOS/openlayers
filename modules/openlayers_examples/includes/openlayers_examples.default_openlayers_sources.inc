@@ -191,6 +191,7 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'OpenStreetMap black and white source';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
+    'crossOrigin' => 'null',
     'url' => '//{a-c}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
     'attributions' => '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   );
@@ -275,7 +276,8 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'OpenMapSurfer Roads source';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
-    'url' => '//openmapsurfer.uni-hd.de/tiles/roads/x={x}&y={y}&z={z}',
+    'crossOrigin' => 'null',
+    'url' => '//korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}',
     'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   );
   $export['openlayers_examples_source_openmapsurfer_roads'] = $ol_source;
@@ -287,7 +289,8 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'OpenMapSurfer Roads grayscale source';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
-    'url' => '//openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}',
+    'crossOrigin' => 'null',
+    'url' => '//korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}',
     'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   );
   $export['openlayers_examples_source_openmapsurfer_roadsg'] = $ol_source;
@@ -299,7 +302,8 @@ function openlayers_examples_default_openlayers_sources() {
   $ol_source->description = 'OpenMapSurfer admin borders source';
   $ol_source->factory_service = 'openlayers.Source:OSM';
   $ol_source->options = array(
-    'url' => '//openmapsurfer.uni-hd.de/tiles/adminb/x={x}&y={y}&z={z}',
+    'crossOrigin' => 'null',
+    'url' => '//korona.geog.uni-heidelberg.de/tiles/adminb/x={x}&y={y}&z={z}',
     'attributions' => 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   );
   $export['openlayers_examples_source_openmapsurfer_adminb'] = $ol_source;
