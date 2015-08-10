@@ -6,12 +6,8 @@ Drupal.openlayers.pluginManager.register({
         return null;
       }
       var geometry = feature.getGeometry().getType();
-      var geometry_style;
-      if (goog.isDef(data.opt[geometry])) {
-        geometry_style = data.opt[geometry];
-      }else {
-        geometry_style = data.opt['default'];
-      }
+      var geometry_style = data.opt[geometry] || data.opt['default'];
+
       var options = {
         fill: new ol.style.Fill({
           color: 'rgba(' + geometry_style.image.fill.color + ')'
@@ -23,22 +19,22 @@ Drupal.openlayers.pluginManager.register({
         })
       };
 
-      if (goog.isDef(geometry_style.image.radius)) {
+      if (typeof geometry_style.image.radius !== 'undefined') {
         options.radius = geometry_style.image.radius;
       }
-      if (goog.isDef(geometry_style.image.points)) {
+      if (typeof geometry_style.image.points !== 'undefined') {
         options.points = geometry_style.image.points;
       }
-      if (goog.isDef(geometry_style.image.radius1)) {
+      if (typeof geometry_style.image.radius1 !== 'undefined') {
         options.radius1 = geometry_style.image.radius1;
       }
-      if (goog.isDef(geometry_style.image.radius2)) {
+      if (typeof geometry_style.image.radius2 !== 'undefined') {
         options.radius2 = geometry_style.image.radius2;
       }
-      if (goog.isDef(geometry_style.image.angle)) {
+      if (typeof geometry_style.image.angle !== 'undefined') {
         options.angle = geometry_style.image.angle * Math.PI / 180;
       }
-      if (goog.isDef(geometry_style.image.rotation)) {
+      if (typeof geometry_style.image.rotation !== 'undefined') {
         options.rotation = geometry_style.image.rotation * Math.PI / 180;
       }
       return [

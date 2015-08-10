@@ -8,7 +8,7 @@ Drupal.openlayers.pluginManager.register({
 
     var style = randomProperty(data.opt.style);
 
-    if (goog.isDef(data.objects.styles[style])) {
+    if (typeof data.objects.styles[style] !== 'undefined') {
       return data.objects.styles[style];
     }
   }

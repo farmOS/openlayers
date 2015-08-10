@@ -72,7 +72,7 @@ Drupal.openlayers.pluginManager.register({
       jQuery('.openlayers.gmap-map').each(function(){
         var map_id = jQuery(this).attr('id').replace('gmap-', '');
 
-        if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+        if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
           jQuery.each(Drupal.settings.openlayers.maps[map_id].source, function(i, source){
             if (source.fs == 'openlayers.Source:GoogleMaps') {
               if (source.opt.channel) {

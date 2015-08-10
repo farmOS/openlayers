@@ -1,5 +1,5 @@
 ol.control.Export = function(opt_options) {
-  var options = goog.isDef(opt_options) ? opt_options : {};
+  var options = opt_options || {};
 
 
   var this_ = this;
@@ -8,8 +8,7 @@ ol.control.Export = function(opt_options) {
   };
 
 
-  var exportTipLabel = goog.isDef(options.exportTipLabel) ?
-    options.exportTipLabel : '';
+  var exportTipLabel = options.exportTipLabel || '';
 
   var button = document.createElement('button');
   button.innerHTML = '\u2193';
@@ -34,7 +33,7 @@ ol.control.Export = function(opt_options) {
   button.addEventListener('click', handleClick_, false);
   this.options = options;
 };
-goog.inherits(ol.control.Export, ol.control.Control);
+ol.inherits(ol.control.Export, ol.control.Control);
 
 /**
  * @param {event} event Browser event.

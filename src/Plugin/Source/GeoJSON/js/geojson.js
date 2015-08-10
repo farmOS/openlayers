@@ -21,7 +21,7 @@ var openlayers_source_internal_geojson = {
     // necessary since we can't overload the loadFeatures() function from the
     // source - it is not part of the API and thus isn't available in the
     // compiled version of ol.
-    if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange || goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
+    if ( (typeof data.opt.reloadOnZoomChange !== 'undefined' && data.opt.reloadOnZoomChange) || (typeof data.opt.reloadOnExtentChange !== 'undefined' && data.opt.reloadOnExtentChange) ) {
       data.opt.strategy = function (extent, resolution) {
         // If reloading the features is forced load them here. Otherwise just
         // return the extent of the standard loading strategy.
@@ -56,7 +56,7 @@ var openlayers_source_internal_geojson = {
       vectorSource._clearFeaturesOnLoad = false;
       vectorSource._loadingFeatures = false;
 
-      if (goog.isDef(data.opt.reloadOnExtentChange) && data.opt.reloadOnExtentChange) {
+      if (typeof data.opt.reloadOnExtentChange !== 'undefined') {
         vectorSource._clearFeaturesOnLoad = true;
         data.map.getView().on('change:center', function() {
           if (!vectorSource._loadingFeatures) {
@@ -64,7 +64,7 @@ var openlayers_source_internal_geojson = {
           }
         });
       }
-      if (goog.isDef(data.opt.reloadOnZoomChange) && data.opt.reloadOnZoomChange) {
+      if (typeof data.opt.reloadOnZoomChange !== 'undefined') {
         vectorSource._clearFeaturesOnLoad = true;
         data.map.getView().on('change:resolution', function() {
           if (!vectorSource._loadingFeatures) {
@@ -142,7 +142,7 @@ var openlayers_source_internal_geojson = {
         success: function(data) {
           // If the _clearFeaturesOnLoad flag is set remove the current
           // features before adding the new ones.
-          if (goog.isDef(that._clearFeaturesOnLoad) && that._clearFeaturesOnLoad) {
+          if (typeof that._clearFeaturesOnLoad !== 'undefined') {
             // Clear features in this extent. We can't use that.clear()
             // because this causes some strange trouble afterwards. And we
             // can't use that.forEachFeature() or

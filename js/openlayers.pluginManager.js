@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager = (function($) {
     attach: function(context, settings) {
       for (var i in plugins) {
         var plugin = plugins[i];
-        if (goog.isFunction(plugin.attach)) {
+        if (typeof plugin.attach === 'function') {
           plugin.attach(context, settings);
         }
       }
@@ -13,7 +13,7 @@ Drupal.openlayers.pluginManager = (function($) {
     detach: function(context, settings) {
       for (var i in plugins) {
         var plugin = plugins[i];
-        if (goog.isFunction(plugin.detach)) {
+        if (typeof plugin.detach === 'function') {
           plugin.detach(context, settings);
         }
       }
@@ -31,11 +31,15 @@ Drupal.openlayers.pluginManager = (function($) {
       return Object.keys(plugins);
     },
     register: function(plugin) {
-      if (!goog.isObject(plugin)) {
+      if ((typeof plugin !== 'object') || (plugin === null)) {
         return false;
       }
 
-      if (!plugin.hasOwnProperty('fs') || !goog.isFunction(plugin.init)) {
+      if (typeof plugin.init !== 'function') {
+        return false;
+      }
+
+      if (!plugin.hasOwnProperty('fs')) {
         return false;
       }
 
@@ -49,7 +53,7 @@ Drupal.openlayers.pluginManager = (function($) {
       try {
         var obj = plugins[factoryService].init(data);
       } catch(e) {
-        if (goog.isDef(console)) {
+        if (typeof console !== 'undefined') {
           Drupal.openlayers.console.log(e.message);
           Drupal.openlayers.console.log(e.stack);
         }
@@ -59,7 +63,8 @@ Drupal.openlayers.pluginManager = (function($) {
         }
       }
 
-      if (goog.isObject(obj)) {
+      var objType = typeof obj;
+      if ((objType === 'object') && (objType !== null) || (objType === 'function')) {
         obj.mn = data.data.mn;
         return obj;
       }

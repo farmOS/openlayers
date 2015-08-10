@@ -1,6 +1,6 @@
 ol.control.JSGeocoder = function(opt_options) {
-  var options = goog.isDef(opt_options) ? opt_options : {};
-  var className = goog.isDef(options.className) ? options.className : 'ol-jsgeocoder';
+  var options = opt_options || {};
+  var className = options.className || 'ol-jsgeocoder';
   var this_ = this;
 
   window.OlControlJSGeocoderGoogleWrapper = function() {
@@ -47,7 +47,7 @@ ol.control.JSGeocoder = function(opt_options) {
   textInput.addEventListener('keypress', handleChange_, false);
   this.options = options;
 };
-goog.inherits(ol.control.JSGeocoder, ol.control.Control);
+ol.inherits(ol.control.JSGeocoder, ol.control.Control);
 
 /**
  * @param {event} event Browser event.
