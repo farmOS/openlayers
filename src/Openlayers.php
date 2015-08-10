@@ -350,4 +350,53 @@ class Openlayers {
     );
   }
 
+  public static function getAttached() {
+    $attached = array();
+
+    if (Config::get('openlayers.origin.method', 'cdnjs') == 'local') {
+
+      $debug = (bool) Config::get('openlayers.debug', 0) == TRUE ? 'debug' : NULL;
+
+      $attached['libraries_load'] = array(
+        'openlayers3' => array('openlayers3', $debug)
+      );
+    } else {
+      foreach(Config::get('openlayers.origin.files', array()) as $url) {
+        $url = trim($url);
+        $ext = pathinfo($url, PATHINFO_EXTENSION);
+
+        $attached[$ext][] = array(
+          'data' => $url,
+          'type' => 'external',
+          'weight' => 0,
+        );
+      }
+
+      $module_path = drupal_get_path('module', 'openlayers');
+
+      $attached['js'][] = array(
+        'data' => $module_path . '/js/openlayers.js',
+        'type' => 'file',
+        'weight' => 8,
+      );
+      $attached['js'][] = array(
+        'data' => $module_path . '/js/openlayers.pluginManager.js',
+        'type' => 'file',
+        'weight' => 10,
+      );
+      $attached['js'][] = array(
+        'data' => $module_path . '/js/openlayers.behaviors.js',
+        'type' => 'file',
+        'weight' => 12,
+      );
+      $attached['css'][] = array(
+        'data' => $module_path . '/css/openlayers.css',
+        'type' => 'file',
+        'weight' => 4,
+      );
+    }
+
+    return $attached;
+  }
+
 }
