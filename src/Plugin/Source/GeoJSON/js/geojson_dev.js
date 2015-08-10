@@ -29,14 +29,14 @@ openlayers_source_internal_geojson.init = function(data) {
           return false;
         },
         dragStop: function( event, ui ) {
-          jQuery.cookie('Drupal.openlayers.devDialog.position', goog.global.JSON.stringify(ui.offset), {
+          jQuery.cookie('Drupal.openlayers.devDialog.position', JSON.stringify(ui.offset), {
             path: Drupal.settings.basePath,
             // The cookie expires in one year.
             expires: 365
           });
         },
         resizeStop: function( event, ui ) {
-          jQuery.cookie('Drupal.openlayers.devDialog.size', goog.global.JSON.stringify(ui.size), {
+          jQuery.cookie('Drupal.openlayers.devDialog.size', JSON.stringify(ui.size), {
             path: Drupal.settings.basePath,
             // The cookie expires in one year.
             expires: 365
@@ -145,7 +145,7 @@ openlayers_source_internal_geojson.updateSource = function(data, source) {
     map.sources[source].addFeatures(source_conf.opt.features);
     return;
   }
-  else if (goog.isDef(source_conf.opt.loader)) {
+  else if (typeof source_conf.opt.loader !== 'undefined') {
     var instance_data = {
       'data': source_conf,
       'opt': source_conf.opt,
@@ -156,7 +156,7 @@ openlayers_source_internal_geojson.updateSource = function(data, source) {
     };
     openlayers_source_internal_geojson.configureVectorSource(map.sources[source], instance_data);
   }
-  else if (goog.isDef(source_conf.opt.url)) {
+  else if (typeof source_conf.opt.url !== 'undefined') {
     map.sources[source].loader_ = ol.featureloader.xhr(source_conf.opt.url, source_conf.opt.format);
   }
 

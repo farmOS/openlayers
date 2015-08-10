@@ -7,7 +7,7 @@ Drupal.openlayers = (function($){
       var map = false;
 
       // If already processed just return the instance.
-      if (goog.isDef(Drupal.openlayers.instances[map_id])) {
+      if (typeof Drupal.openlayers.instances[map_id] !== 'undefined') {
         return Drupal.openlayers.instances[map_id].map;
       }
 
@@ -35,7 +35,7 @@ Drupal.openlayers = (function($){
         if (settings.source.length > 0) {
           $(document).trigger('openlayers.sources_pre_alter', [{sources: settings.source, map_id: map_id}]);
           settings.source.map(function (data) {
-            if (goog.isDef(data.opt) && goog.isDef(data.opt.attributions)) {
+            if (typeof data.opt !== 'undefined' && typeof data.opt.attributions !== 'undefined') {
               data.opt.attributions = [
                 new ol.Attribution({
                   'html': data.opt.attributions
@@ -75,7 +75,7 @@ Drupal.openlayers = (function($){
           for (var i in layers) {
             var data = jQuery.extend(true, {}, layers[i]);
             data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
-            if (goog.isDef(data.opt.style) && goog.isDef(Drupal.openlayers.instances[map_id].styles[data.opt.style])) {
+            if (typeof data.opt.style !== 'undefined' && typeof Drupal.openlayers.instances[map_id].styles[data.opt.style] !== 'undefined') {
               data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
             }
             var layer = Drupal.openlayers.getObject(context, 'layers', data, map_id);
@@ -169,7 +169,7 @@ Drupal.openlayers = (function($){
      *   The object or false if not instantiated yet.
      */
     getMapById: function (map_id) {
-      if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+      if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
         // Return map if it is instantiated already.
         if (Drupal.openlayers.instances[map_id]) {
           return Drupal.openlayers.instances[map_id];
@@ -183,7 +183,7 @@ Drupal.openlayers = (function($){
     // is replaced by an underscore (_).
     asyncIsReadyCallbacks: {},
     asyncIsReady: function (map_id) {
-      if (goog.isDef(Drupal.settings.openlayers.maps[map_id])) {
+      if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
         Drupal.settings.openlayers.maps[map_id].map.async--;
         if (!Drupal.settings.openlayers.maps[map_id].map.async) {
           $('#' + map_id).once('openlayers-map', function () {
@@ -205,16 +205,16 @@ Drupal.openlayers = (function($){
         instances_type = 'map';
       }
       // Prepare instances cache.
-      if (!goog.isDef(Drupal.openlayers.instances[map_id])) {
+      if (typeof Drupal.openlayers.instances[map_id] === 'undefined') {
         Drupal.openlayers.instances[map_id] = {map:null, layers:{}, styles:{}, controls:{}, interactions:{}, sources:{}, projections:{}, components:{}};
       }
 
       // Check if we've already an instance of this object for this map.
-      if (goog.isDef(Drupal.openlayers.instances[map_id]) && goog.isDef(Drupal.openlayers.instances[map_id][instances_type])) {
-        if (instances_type != 'map' && goog.isDef(Drupal.openlayers.instances[map_id][instances_type][data.mn])) {
+      if (typeof Drupal.openlayers.instances[map_id] !== 'undefined' && typeof Drupal.openlayers.instances[map_id][instances_type] !== 'undefined') {
+        if (instances_type !== 'map' && typeof Drupal.openlayers.instances[map_id][instances_type][data.mn] !== 'undefined') {
           return Drupal.openlayers.instances[map_id][instances_type][data.mn];
         }
-        else if (instances_type == 'map' && Drupal.openlayers.instances[map_id][instances_type]) {
+        else if (instances_type === 'map' && Drupal.openlayers.instances[map_id][instances_type]) {
           return Drupal.openlayers.instances[map_id][instances_type];
         }
       }
@@ -278,7 +278,7 @@ Drupal.openlayers = (function($){
       }
     }),
     log: function(string) {
-      if (goog.isDef(Drupal.openlayers.console)) {
+      if (typeof Drupal.openlayers.console !== 'undefined') {
         Drupal.openlayers.console.log(string);
       }
     }

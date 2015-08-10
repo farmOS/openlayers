@@ -7,7 +7,7 @@ Drupal.openlayers.console = (function($) {
   "use strict";
   var api = {};
   var logger;
-  if (goog.isObject(console) && goog.isFunction(console.log)){
+  if (((typeof console === 'object' && typeof console !== 'null') || typeof console === 'function') && typeof console.log === 'function'){
     logger = function(){
       // Use console.log as fallback for missing parts of API if present.
       console.log.apply(console, arguments);
@@ -18,7 +18,7 @@ Drupal.openlayers.console = (function($) {
     };
   }
   $(["log", "debug", "info", "warn", "exception", "assert", "dir","dirxml", "trace", "group", "groupEnd", "groupCollapsed", "profile","profileEnd", "count", "clear", "time", "timeEnd", "timeStamp", "table","error"]).each(function(index, functionName){
-    if (!goog.isObject(console) || !goog.isFunction(console[functionName])){
+    if (typeof console === 'undefined' && typeof console[functionName] !== 'function'){
       // Use fallback as browser does not provide implementation.
       api[functionName] = logger;
     } else {

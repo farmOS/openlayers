@@ -77,7 +77,7 @@
     console.time('Time');
   });
   $(document).on('openlayers.object_post_alter', function(event, objects) {
-    if (!goog.isObject(objects.object) && objects.type !== 'components') {
+    if (typeof objects.object !== 'object' && objects.type !== 'components') {
       Drupal.openlayers.console.error('Failed to create object.');
       Drupal.openlayers.console.error(objects);
     }

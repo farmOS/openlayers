@@ -72,11 +72,6 @@ function openlayers_libraries_info() {
     'integration files' => array(
       'openlayers' => array(
         'js' => array(
-          'js/openlayers.goog.js' => array(
-            'type' => 'file',
-            'weight' => 2,
-            'group' => $js_css_group,
-          ),
           'js/openlayers.js' => array(
             'type' => 'file',
             'weight' => 8,
@@ -132,11 +127,6 @@ function openlayers_libraries_info() {
         'integration files' => array(
           'openlayers' => array(
             'js' => array(
-              'js/openlayers.goog.js' => array(
-                'type' => 'file',
-                'weight' => 2,
-                'group' => $js_css_group,
-              ),
               'js/openlayers.js' => array(
                 'type' => 'file',
                 'weight' => 8,

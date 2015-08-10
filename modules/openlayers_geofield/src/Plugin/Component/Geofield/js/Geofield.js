@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager.register({
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
     // Select the related source or fallback to a generic one.
-    if (goog.isDef(data.opt.source) && goog.isDef(data.objects.sources[data.opt.source])) {
+    if (typeof data.opt.source !== 'undefined' && typeof data.objects.sources[data.opt.source] !== 'undefined') {
       var source = data.objects.sources[data.opt.source];
     }
     else {
@@ -243,7 +243,7 @@ Drupal.behaviors.openlayersGeofieldWidget = (function($) {
           window.setTimeout(function() {
             jQuery('.openlayers-map', fieldset).each(function (index, elem) {
               var map = Drupal.openlayers.getMapById(jQuery(elem).attr('id'));
-              if (map && goog.isDef(map.map)) {
+              if (map && typeof map.map !== 'undefined') {
                 map.map.updateSize();
               }
             });

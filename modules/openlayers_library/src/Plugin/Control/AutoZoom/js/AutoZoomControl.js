@@ -1,16 +1,14 @@
 ol.control.AutoZoom = function(opt_options) {
-  var options = goog.isDef(opt_options) ? opt_options : {};
-  var className = goog.isDef(options.className) ? options.className : 'ol-autozoom';
+  var options = opt_options || {};
+  var className = options.className || 'ol-autozoom';
 
   var this_ = this;
   var handleClick_ = function(e) {
     this_.handleClick_(e);
   };
 
-  var autozoomLabel = goog.isDef(options.autozoomLabel) ?
-    options.autozoomLabel : 'A';
-  var autozoomTipLabel = goog.isDef(options.autozoomInTipLabel) ?
-    options.autozoomTipLabel : 'Autozoom';
+  var autozoomLabel = options.autozoomLabel || 'A';
+  var autozoomTipLabel = options.autozoomTipLabel || 'Autozoom';
 
   var button = document.createElement('button');
   button.innerHTML = autozoomLabel;
@@ -30,7 +28,7 @@ ol.control.AutoZoom = function(opt_options) {
   button.addEventListener('click', handleClick_, false);
   this.options = options;
 };
-goog.inherits(ol.control.AutoZoom, ol.control.Control);
+ol.inherits(ol.control.AutoZoom, ol.control.Control);
 
 /**
  * @param {event} event Browser event.
@@ -98,7 +96,7 @@ ol.control.AutoZoom.prototype.handleClick_ = function(event) {
           map.getView().setZoom(options.zoom);
         } else {
           var zoom = map.getView().getZoom() - 1;
-          if (goog.isDef(options.max_zoom) && options.max_zoom > 0 && zoom > options.max_zoom) {
+          if (typeof options.max_zoom !== 'undefined' && options.max_zoom > 0 && zoom > options.max_zoom) {
             zoom = options.max_zoom;
           }
           map.getView().setZoom(zoom);

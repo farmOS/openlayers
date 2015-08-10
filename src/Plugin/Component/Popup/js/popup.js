@@ -4,6 +4,14 @@ Drupal.openlayers.pluginManager.register({
     var map = data.map;
     var random = (new Date()).getTime();
 
+    /**
+     * Name for unique ID property. Initialized in a way to help avoid collisions
+     * with other closure JavaScript on the same page.
+     * @type {string}
+     * @private
+     */
+    UID_PROPERTY_ = 'closure_uid_' + ((Math.random() * 1e9) >>> 0);
+
     var container = jQuery('<div/>', {
       id: 'popup-' + random,
       'class': 'ol-popup'
@@ -53,18 +61,18 @@ Drupal.openlayers.pluginManager.register({
 
     map.on('click', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-        if (goog.isDef(data.opt.frontend_layers[layer.mn])) {
+        if (typeof data.opt.frontend_layers[layer.mn] !== 'undefined') {
           return feature;
         }
       });
       if (feature) {
         // If this is a click to the same feature marker it's a close command.
-        if (jQuery(container).data('feature-key') == feature[goog.UID_PROPERTY_]) {
+        if (jQuery(container).data('feature-key') == feature[UID_PROPERTY_]) {
           container.style.display = 'none';
           jQuery(container).data('feature-key', '');
           return;
         }
-        jQuery(container).data('feature-key', feature[goog.UID_PROPERTY_]);
+        jQuery(container).data('feature-key', feature[UID_PROPERTY_]);
 
         var name = feature.get('name') || '';
         var description = feature.get('description') || '';

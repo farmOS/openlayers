@@ -22,23 +22,23 @@ Drupal.openlayers.pluginManager.register({
       return condition;
     }
 
-    if (goog.isDef(data.objects.styles[data.opt.style])) {
+    if (typeof data.objects.styles[data.opt.style] !== 'undefined') {
       options.style = data.objects.styles[data.opt.style];
     }
 
-    if (goog.isDef(data.opt.multi) && data.opt.multi === 1) {
+    if (typeof data.opt.multi !== 'undefined' && data.opt.multi === 1) {
       options.multi = true;
     }
 
-    if (goog.isDef(data.opt.condition)) {
+    if (typeof data.opt.condition !== 'undefined') {
       options.condition = getOlEventsCondition(data.opt.condition);
     }
 
-    if (goog.isDef(data.opt.addCondition)) {
+    if (typeof data.opt.addCondition !== 'undefined') {
       options.addCondition = getOlEventsCondition(data.opt.addCondition);
     }
 
-    if (goog.isDef(data.opt.toggleCondition)) {
+    if (typeof data.opt.toggleCondition !== 'undefined') {
       options.toggleCondition = getOlEventsCondition(data.opt.toggleCondition);
     }
 
