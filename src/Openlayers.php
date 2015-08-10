@@ -355,9 +355,6 @@ class Openlayers {
 
     if (Config::get('openlayers.origin.method', 'cdnjs') == 'local') {
       $variant = NULL;
-      if (Config::get('openlayers.debug', FALSE) == TRUE) {
-        $variant = 'debug';
-      };
       if (Config::get('openlayers.variant', FALSE)) {
         $variant = Config::get('openlayers.variant', FALSE);
       };

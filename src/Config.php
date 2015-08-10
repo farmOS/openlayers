@@ -27,8 +27,13 @@ class Config {
       'openlayers.js_css.media' => 'screen',
       'openlayers.edit_view_map' => 'openlayers_map_view_edit_form',
       'openlayers.default_ui_map' => 'openlayers_map_ui_default',
-      'openlayers.debug' => FALSE,
       'openlayers.variant' => '',
+      'openlayers.origin.method' => 'cdnjs',
+      'openlayers.origin.version' => '3.8.2',
+      'openlayers.origin.files' => array(
+        '//cdnjs.cloudflare.com/ajax/libs/ol3/3.8.2/ol.min.css',
+        '//cdnjs.cloudflare.com/ajax/libs/ol3/3.8.2/ol.min.js',
+      ),
     );
     if ($key == NULL) {
       return $defaults;
