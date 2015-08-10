@@ -25,9 +25,24 @@ drush en openlayers -y
 
 You may also install the module by just downloading each dependencies manually.
 
-Once the module is installed, download the JS library and install it at the right place.
+Once the module is enabled, you won't see any user interface. You have to enable an extra module for it: Openlayers UI
 
-Once again, the easiest way to install it is with drush, we've created a command that will download the library and install it for you.
+```
+drush en openlayers_ui -y
+```
+
+Disabling the UI module will not affect your maps, it's just the admin interface, nothing else.
+
+You can chose the method that you prefer to load the Openlayers library.
+
+Either through a CDN (CDNJS or jsDelivr), or locally.
+
+By default, Openlayers is configured to use CDNJS so you don't have to download manually any library.
+
+If you want to install it locally, the easiest way to do so is with drush.
+
+We've created a special command that will download the library and install it for you.
+
 Basically it just download a zipfile and unzip it at the right place for you.
 
 To do it with drush:
@@ -36,7 +51,7 @@ To do it with drush:
 drush dl-openlayers
 ```
 
-The procedure to do it manually is to download the latest Openlayers library from the official website: http://openlayers.org/ and unzip it at the place where your libraries are.
+If you do not use Drush, download the latest Openlayers library from the official website: http://openlayers.org/ and unzip it at the place where your libraries are.
 
 Usually it's in /sites/all/libraries, but it can change depending on your installation.
 
@@ -50,13 +65,7 @@ You may also use drush to do so:
 drush libraries-list
 ```
 
-Once the module is enabled, you won't see any user interface. You have to enable an extra module for it: Openlayers UI
-
-```
-drush en openlayers_ui -y
-```
-
-Disabling the UI module will not affect your maps, it's just the admin interface, nothing else.
+Do not forget to configure jquery_update and use at least jQuery 1.10.
 
 # Getting help
 To create your first map, you must first understand how Openlayers 3, the JS library, works.
