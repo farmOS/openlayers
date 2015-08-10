@@ -361,13 +361,7 @@ class OLMap extends Map {
    * {@inheritdoc}
    */
   public function attached() {
-    $attached = parent::attached();
-    $variant = NULL;
-    if (Config::get('openlayers.debug', FALSE) == TRUE) {
-      $variant = 'debug';
-    };
-    $attached['libraries_load']['openlayers3'] = array('openlayers3', $variant);
-    return $attached;
+    return array_merge_recursive(parent::attached(), Openlayers::getAttached());
   }
 
 }

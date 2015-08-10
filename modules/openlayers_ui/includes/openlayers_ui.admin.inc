@@ -14,6 +14,158 @@
 function openlayers_ui_admin_settings($form, &$form_state) {
   $options = array();
 
+  $result_cdnjs = _openlayers_drupal_http_request('http://api.cdnjs.com/libraries?search=ol3&fields=assets');
+  $result_jsdelivr = _openlayers_drupal_http_request('http://api.jsdelivr.com/v1/jsdelivr/libraries/ol3');
+  $library = \Drupal\openlayers\Openlayers::getLibrary();
+
+  $method = \Drupal\openlayers\Config::get('openlayers.origin.method', 'cdnjs');
+  if (isset($form_state['values']['method'])) {
+    $method = $form_state['values']['method'];
+  }
+
+  $version = \Drupal\openlayers\Config::get('openlayers.origin.version');
+  if (isset($form_state['values']['version'])) {
+    $version = $form_state['values']['version'];
+  }
+
+  $form['origin'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Library loading configuration',
+    '#prefix' => '<div id="openlayers_origin">',
+    '#suffix' => '</div>',
+  );
+
+  $form['origin']['method'] = array(
+    '#type' => 'select',
+    '#title' => 'Select the loading origin for your Openlayers JS library',
+    '#options' => array(
+      'jsdelivr' => 'jsDelivr',
+      'cdnjs' => 'CDNJS',
+      'local' => 'Locally'
+    ),
+    '#default_value' => $method,
+    '#ajax' => array(
+      'callback' => '_openlayers_ajax_reload_origin',
+      'method' => 'replace',
+      'wrapper' => 'openlayers_origin',
+      'effect' => 'fade',
+    ),
+  );
+
+  if ($method == 'local') {
+    if ($library['installed'] == TRUE) {
+
+      $form['origin']['debug'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Debug mode'),
+        '#description' => t("Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn't fully work in IE yet."),
+        '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
+      );
+
+      $rows = array();
+      $rows1 = array('name', 'vendor url', 'download url', 'library path', 'version');
+      $header = array('Property', 'Value');
+      foreach ($rows1 as $row) {
+        $rows[] = array(
+          $row,
+          $library[$row],
+        );
+      }
+      $output = theme('table', array('header' => $header, 'rows' => $rows));
+    }
+    else {
+      $output = t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>. The library directory must be named <em>openlayers3</em> to be recognized by this module.', array('@url' => $library['download url']));
+    }
+
+    $form['origin']['library'] = array(
+      '#markup' => $output
+    );
+
+  } else {
+    $assets = array();
+    if ($method == 'cdnjs') {
+      if ($result_cdnjs->code == 200) {
+        $result_cdnjs = json_decode($result_cdnjs->data, TRUE);
+        foreach ((array) $result_cdnjs['results'][0]['assets'] as $asset) {
+          $files = array();
+          foreach($asset['files'] as $file) {
+            $files[] = '//cdnjs.cloudflare.com/ajax/libs/ol3/' . $asset['version'] . '/' . $file;
+          };
+          $asset['files'] = $files;
+          $assets[$asset['version']] = $asset;
+        }
+      }
+    }
+
+    if ($method == 'jsdelivr') {
+      if ($result_jsdelivr->code == 200) {
+        $result_jsdelivr = json_decode($result_jsdelivr->data, TRUE);
+        foreach ((array) $result_jsdelivr[0]['assets'] as $asset) {
+          $files = array();
+          foreach($asset['files'] as $file) {
+            $files[] = '//cdn.jsdelivr.net/ol3/' . $asset['version'] . '/' . $file;
+          };
+          $asset['files'] = $files;
+          $assets[$asset['version']] = $asset;
+        }
+      }
+    }
+
+    if (!empty($assets)) {
+      $form['origin']['version'] = array(
+        '#type' => 'select',
+        '#title' => 'Version available',
+        '#options' => array_combine(array_keys($assets), array_keys($assets)),
+        '#default_value' => \Drupal\openlayers\Config::get('openlayers.origin.version'),
+        '#ajax' => array(
+          'callback' => '_openlayers_ajax_reload_origin',
+          'method' => 'replace',
+          'wrapper' => 'openlayers_origin',
+          'effect' => 'fade',
+        ),
+      );
+    }
+
+    $version_alt = key($assets);
+    if (!is_string($version)) {
+      $version = key($assets);
+    }
+
+    if (isset($assets[$version])) {
+      $files = array();
+      foreach((array) $assets[$version]['files'] as $file) {
+        $files[$file] = $file;
+      };
+
+      $form['origin']['files'] = array(
+        '#type' => 'checkboxes',
+        '#title' => 'Files to load',
+        '#options' => $files,
+        '#default_value' => \Drupal\openlayers\Config::get('openlayers.origin.files', array()),
+      );
+    } else {
+      if (isset($assets[$version_alt])) {
+        $files = array();
+        foreach((array) $assets[$version_alt]['files'] as $file) {
+          $files[$file] = $file;
+        };
+
+        $form['origin']['files'] = array(
+          '#type' => 'checkboxes',
+          '#title' => 'Files to load',
+          '#options' => $files,
+          '#default_value' => \Drupal\openlayers\Config::get('openlayers.origin.files', array()),
+        );
+      } else {
+        $form['origin']['files'] = array(
+          '#type' => 'textarea',
+          '#title' => 'Files to load',
+          '#default_value' => trim(implode("\n", \Drupal\openlayers\Config::get('openlayers.origin.files', array()))),
+        );
+      }
+    }
+  }
+
   foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
     if (!is_object($data) || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
       continue;
@@ -45,13 +197,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#suffix' => '</div>',
     '#type' => 'openlayers',
     '#map' => $map,
-  );
-
-  $form['debug'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Debug mode'),
-    '#description' => t("Enable this option when creating objects. Hit F12 in Chrome or Firefox to see the debugging informations. Doesn't fully work in IE yet."),
-    '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
   );
 
   // This is for preventing 'system/ajax' as destination when using AJAX maps.
@@ -90,8 +235,10 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       $sizes = array('js' => 0, 'css' => 0);
       foreach (array_keys($sizes) as $size_type) {
         foreach ($attached[$size_type] as $index => $data) {
-          if (!is_array($data['data'])) {
-            $sizes[$size_type] += filesize($data['data']);
+          if (isset($data['type']) && $data['type'] != 'external') {
+            if (!is_array($data['data'])) {
+              $sizes[$size_type] += filesize($data['data']);
+            }
           }
         }
       }
@@ -133,33 +280,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     );
   }
 
-  $library = \Drupal\openlayers\Openlayers::getLibrary();
-  if ($library['installed'] == TRUE) {
-    $rows = array();
-    $rows1 = array('name', 'vendor url', 'download url', 'library path', 'version');
-    $header = array('Property', 'Value');
-    foreach ($rows1 as $row) {
-      $rows[] = array(
-        $row,
-        $library[$row],
-      );
-    }
-    $output = theme('table', array('header' => $header, 'rows' => $rows));
-  }
-  else {
-    $output = t('Openlayers library was not found. To install it, <a href="@url">download it manually</a> or use <em>drush dl-openlayers</em>. The library directory must be named <em>openlayers3</em> to be recognized by this module.', array('@url' => $library['download url']));
-  }
-
-  $form['library-fieldset'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Library information',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-    'version' => array(
-      '#markup' => $output
-    )
-  );
-
   $form['buttons'] = array(
     'submit' => array(
       '#type' => 'submit',
@@ -180,8 +300,52 @@ function _openlayers_ajax_reload_default_map($form, &$form_state) {
   return $form['default_ui_map'];
 }
 
+function _openlayers_ajax_reload_origin($form, &$form_stat) {
+  return $form['origin'];
+}
+
+/**
+ * Submit callback of the Openlayers settings page.
+ */
 function openlayers_ui_admin_settings_submit($form, &$form_state) {
   $values = $form_state['values'];
-  \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
+  \Drupal\openlayers\Config::set('openlayers.origin.method', $values['method']);
+
+  if (isset($values['version'])) {
+    \Drupal\openlayers\Config::set('openlayers.origin.version', $values['version']);
+  } else {
+    \Drupal\openlayers\Config::clear('openlayers.origin.version');
+  }
+
+  if (isset($values['files'])) {
+    $files = $values['files'];
+    if (is_string($files)) {
+      $files = explode("\n", trim($files));
+    } else {
+      $files = array_filter($files);
+    }
+    \Drupal\openlayers\Config::set('openlayers.origin.files', $files);
+  } else {
+    \Drupal\openlayers\Config::clear('openlayers.origin.files');
+  }
+
+  if (isset($values['debug']) && (bool) $values['debug'] == TRUE) {
+    \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
+  } else {
+    \Drupal\openlayers\Config::clear('openlayers.debug');
+  }
+
   drupal_set_message(t('The configuration options have been saved.'));
+}
+
+function _openlayers_drupal_http_request($url, $options = array()) {
+  $cache_name = 'openlayers.' . sha1($url);
+  if (!cache_get($cache_name)) {
+    $data = drupal_http_request($url, $options);
+    cache_set($cache_name, $data, 'cache', REQUEST_TIME + 60);
+    return $data;
+  } else {
+    $return = cache_get($cache_name);
+    return($return->data);
+  }
 }
