@@ -61,9 +61,8 @@ Drupal.openlayers.pluginManager.register({
     }
 
     if (typeof geofieldControl !== 'undefined') {
-      geofieldControl.on('change', function(event) {
-        var options = this.options;
-
+      geofieldControl.element.addEventListener('change', function(event) {
+        var options = event.detail.options;
         removeMapInteractions();
 
         if ((((options || {}).actions || {}).Clear || false) === true) {

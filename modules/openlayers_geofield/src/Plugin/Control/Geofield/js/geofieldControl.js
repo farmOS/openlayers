@@ -261,7 +261,7 @@ ol.control.Geofield.prototype.handleDrawClick_ = function(event) {
   }
 
   this.options = options;
-  this.element.dispatchEvent(new CustomEvent('change'));
+  this.element.dispatchEvent(new CustomEvent('change', {'detail': this }));
 };
 
 ol.control.Geofield.prototype.handleActionsClick_ = function(event) {
@@ -291,8 +291,7 @@ ol.control.Geofield.prototype.handleActionsClick_ = function(event) {
   }
 
   this.options = options;
-  event = new CustomEvent('change');
-  this.dispatchEvent(event);
+  this.element.dispatchEvent(new CustomEvent('change', {'detail': this }));
 };
 
 ol.control.Geofield.prototype.handleOptionsClick_ = function(event) {
@@ -308,6 +307,5 @@ ol.control.Geofield.prototype.handleOptionsClick_ = function(event) {
   }
 
   this.options = options;
-  event = new CustomEvent('change');
-  this.dispatchEvent(event);
+  this.element.dispatchEvent(new CustomEvent('change', {'detail': this }));
 };
