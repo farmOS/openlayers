@@ -246,16 +246,21 @@ class Openlayers {
    * @return string
    */
   public static function getLibraryVersion() {
-    $method = Config::get('openlayers.origin.method');
-    switch($method) {
-      case 'local':
-        $library = self::getLibrary();
-        return $library['version'] . ' (local)';
-      break;
-      default:
-        return Config::get('openlayers.origin.version') . ' (cdn)';
-      break;
+    $variant = \Drupal\openlayers\Config::get('openlayers.variant');
+
+    if ($variant == 'local') {
+      $options = array(
+        'file' => 'build/ol.js',
+        'pattern' => '@Version: (.*)@',
+        'lines' => 3,
+      );
+      $library['library path'] = libraries_get_path('openlayers3');
+      $version = libraries_get_version($library, $options);
+    } else {
+      $version = \Drupal\openlayers\Config::get('openlayers.variant', NULL);
     }
+
+    return $version;
   }
 
   /**
@@ -377,50 +382,13 @@ class Openlayers {
   public static function getAttached() {
     $attached = array();
 
-    if (Config::get('openlayers.origin.method', 'cdnjs') == 'local') {
-      $variant = NULL;
-      if (Config::get('openlayers.variant', FALSE)) {
-        $variant = Config::get('openlayers.variant', FALSE);
-      };
+    $attached['libraries_load'] = array(
+      'openlayers3' => array('openlayers3', Config::get('openlayers.variant', NULL)),
+    );
 
-      $attached['libraries_load'] = array(
-        'openlayers3' => array('openlayers3', $variant)
-      );
-    } else {
-      foreach(Config::get('openlayers.origin.files', array()) as $url) {
-        $url = trim($url);
-        $ext = pathinfo($url, PATHINFO_EXTENSION);
-
-        $attached[$ext][] = array(
-          'data' => $url,
-          'type' => 'external',
-          'weight' => 0,
-        );
-      }
-
-      $module_path = drupal_get_path('module', 'openlayers');
-
-      $attached['js'][] = array(
-        'data' => $module_path . '/js/openlayers.js',
-        'type' => 'file',
-        'weight' => 8,
-      );
-      $attached['js'][] = array(
-        'data' => $module_path . '/js/openlayers.pluginManager.js',
-        'type' => 'file',
-        'weight' => 10,
-      );
-      $attached['js'][] = array(
-        'data' => $module_path . '/js/openlayers.behaviors.js',
-        'type' => 'file',
-        'weight' => 12,
-      );
-      $attached['css'][] = array(
-        'data' => $module_path . '/css/openlayers.css',
-        'type' => 'file',
-        'weight' => 4,
-      );
-    }
+    if (Config::get('openlayers.debug', FALSE)) {
+      $attached['libraries_load']['openlayers3_integration'] = array('openlayers3_integration', 'debug');
+    };
 
     return $attached;
   }

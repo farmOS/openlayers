@@ -27,149 +27,6 @@ function openlayers_permission() {
 }
 
 /**
- * Implements hook_libraries_info().
- */
-function openlayers_libraries_info() {
-
-  // During an upgrade from Openlayers 7.x-2.x branch, the new registry_autoload
-  // dependency may not be enabled, which makes it impossible to use the new
-  // namespaced classes. So provide a fallback variable instead.
-  $js_css_group = 'openlayers';
-  if (class_exists('\Drupal\openlayers\Config')) {
-    $js_css_group = \Drupal\openlayers\Config::get('openlayers.js_css.group');
-  }
-
-  $libraries['openlayers3'] = array(
-    'name' => 'Openlayers3',
-    'vendor url' => 'http://openlayers.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
-    'version arguments' => array(
-      'file' => 'build/ol.js',
-      'pattern' => '@Version: (.*)@',
-      'lines' => 3,
-    ),
-    'files' => array(
-      'js' => array(
-        'closure-library/closure/goog/base.js' => array(
-          'type' => 'file',
-          'weight' => 4,
-          'group' => $js_css_group,
-        ),
-        'build/ol.js' => array(
-          'type' => 'file',
-          'weight' => 6,
-          'group' => $js_css_group,
-        ),
-      ),
-      'css' => array(
-        'css/ol.css' => array(
-          'type' => 'file',
-          'weight' => 4,
-          'group' => $js_css_group,
-        ),
-      ),
-    ),
-    'integration files' => array(
-      'openlayers' => array(
-        'js' => array(
-          'js/openlayers.js' => array(
-            'type' => 'file',
-            'weight' => 8,
-            'group' => $js_css_group,
-          ),
-          'js/openlayers.pluginManager.js' => array(
-            'type' => 'file',
-            'weight' => 12,
-            'group' => $js_css_group,
-          ),
-          'js/openlayers.behaviors.js' => array(
-            'type' => 'file',
-            'weight' => 14,
-            'group' => $js_css_group,
-          ),
-        ),
-        'css' => array(
-          'css/openlayers.css' => array(
-            'type' => 'file',
-            'weight' => 4,
-            'group' => $js_css_group,
-          ),
-        ),
-      ),
-    ),
-    'variants' => array(
-      'debug' => array(
-        'files' => array(
-          'js' => array(
-            'closure-library/closure/goog/base.js' => array(
-              'type' => 'file',
-              'weight' => 4,
-              'group' => $js_css_group,
-            ),
-            'build/ol-deps.js' => array(
-              'type' => 'file',
-              'weight' => 6,
-              'group' => $js_css_group,
-            ),
-            'build/ol-debug.js' => array(
-              'type' => 'file',
-              'weight' => 8,
-              'group' => $js_css_group,
-            ),
-          ),
-          'css' => array(
-            'css/ol.css' => array(
-              'type' => 'file',
-              'group' => $js_css_group,
-            ),
-          ),
-        ),
-        'integration files' => array(
-          'openlayers' => array(
-            'js' => array(
-              'js/openlayers.js' => array(
-                'type' => 'file',
-                'weight' => 8,
-                'group' => $js_css_group,
-              ),
-              'js/openlayers.pluginManager.js' => array(
-                'type' => 'file',
-                'weight' => 12,
-                'group' => $js_css_group,
-              ),
-              'js/openlayers.behaviors.js' => array(
-                'type' => 'file',
-                'weight' => 14,
-                'group' => $js_css_group,
-              ),
-              'js/openlayers.console.js' => array(
-                'type' => 'file',
-                'weight' => 16,
-                'group' => $js_css_group,
-              ),
-              'js/openlayers.debug.js' => array(
-                'type' => 'file',
-                'weight' => 18,
-                'group' => $js_css_group,
-              ),
-            ),
-            'css' => array(
-              'css/openlayers.css' => array(
-                'type' => 'file',
-                'weight' => 4,
-                'group' => $js_css_group,
-              ),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-
-  return $libraries;
-}
-
-/**
  * Implements hook_element_info().
  */
 function openlayers_element_info() {
@@ -325,6 +182,144 @@ function openlayers_i18n_string_refresh() {
       $object = \Drupal\openlayers\Openlayers::load($type, $exportable);
       $object->i18nStringsRefresh();
     }
+  }
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function openlayers_libraries_info() {
+  // During an upgrade from Openlayers 7.x-2.x branch, the new registry_autoload
+  // dependency may not be enabled, which makes it impossible to use the new
+  // namespaced classes. So provide a fallback variable instead.
+  $js_css_group = 'openlayers';
+  if (class_exists('\Drupal\openlayers\Config')) {
+    $js_css_group = \Drupal\openlayers\Config::get('openlayers.js_css.group');
+  }
+
+  $info = system_get_info('module', 'openlayers');
+  $version = $info['version'] ? $info['version'] : '7.x-3.x';
+  $module_path = drupal_get_path('module', 'openlayers');
+
+  $libraries['openlayers3_integration'] = array(
+    'name' => 'Openlayers 3 Drupal integration files',
+    'vendor url' => 'https://drupal.org/project/openlayers',
+    'download url' => 'https://drupal.org/project/openlayers',
+    'version' => $version,
+    'library path' => $module_path,
+    'files' => array(
+      'js' => array(
+        $module_path . '/js/openlayers.js' => array(
+          'data' => $module_path . '/js/openlayers.js',
+          'type' => 'file',
+          'weight' => 8,
+          'group' => $js_css_group,
+        ),
+        $module_path . '/js/openlayers.pluginManager.js' => array(
+          'data' => $module_path . '/js/openlayers.pluginManager.js',
+          'type' => 'file',
+          'weight' => 12,
+          'group' => $js_css_group,
+        ),
+        $module_path . '/js/openlayers.behaviors.js' => array(
+          'data' => $module_path . '/js/openlayers.behaviors.js',
+          'type' => 'file',
+          'weight' => 14,
+          'group' => $js_css_group,
+        ),
+      ),
+      'css' => array(
+        $module_path . '/css/openlayers.css' => array(
+          'data' => $module_path . '/css/openlayers.css',
+          'type' => 'file',
+          'weight' => 4,
+          'group' => $js_css_group,
+        ),
+      ),
+    ),
+    'variants' => array(
+      'debug' => array(
+        'files' => array(
+          'js' => array(
+            'js/openlayers.js' => array(
+              'type' => 'file',
+              'weight' => 8,
+              'group' => $js_css_group,
+            ),
+            'js/openlayers.pluginManager.js' => array(
+              'type' => 'file',
+              'weight' => 12,
+              'group' => $js_css_group,
+            ),
+            'js/openlayers.behaviors.js' => array(
+              'type' => 'file',
+              'weight' => 14,
+              'group' => $js_css_group,
+            ),
+            'js/openlayers.console.js' => array(
+              'type' => 'file',
+              'weight' => 16,
+              'group' => $js_css_group,
+            ),
+            'js/openlayers.debug.js' => array(
+              'type' => 'file',
+              'weight' => 18,
+              'group' => $js_css_group,
+            ),
+          ),
+          'css' => array(
+            'css/openlayers.css' => array(
+              'type' => 'file',
+              'weight' => 4,
+              'group' => $js_css_group,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  $assets['local'] = array(
+    'name' => 'Openlayers 3 local',
+    'files' => array(
+      'js' => array(
+        'build/ol.js' => array(
+          'type' => 'file',
+          'weight' => 6,
+          'group' => $js_css_group,
+        ),
+      ),
+      'css' => array(
+        'css/ol.css' => array(
+          'type' => 'file',
+          'weight' => 4,
+          'group' => $js_css_group,
+        ),
+      ),
+    ),
+  );
+
+  $libraries['openlayers3'] = array(
+    'name' => 'Openlayers 3',
+    'vendor url' => 'http://openlayers.org/',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
+    'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
+    'library path' => $module_path,
+    'variants' => $assets,
+    'dependencies' => array(
+      'openlayers3_integration'
+    )
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_libraries_info_alter().
+ */
+function openlayers_libraries_info_alter(&$info) {
+  if ($path = libraries_get_path('openlayers3')) {
+    $info['openlayers3']['variants']['local']['library path'] = $path;
   }
 }
 

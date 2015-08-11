@@ -1,0 +1,103 @@
+<?php
+/**
+ * @file
+ * Openlayers CDN main module file.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ *
+ * This hook will override the default 'openlayers3' library.
+ * We don't use hook_libraries_info_alter() because it doesn't get cached.
+ * As we have http requests to CDNs, this method is better.
+ */
+function openlayers_cdn_libraries_info() {
+  $js_css_group = 'openlayers';
+  if (class_exists('\Drupal\openlayers\Config')) {
+    $js_css_group = \Drupal\openlayers\Config::get('openlayers.js_css.group');
+  }
+
+  $module_path = drupal_get_path('module', 'openlayers');
+  $assets = array();
+
+  $result_cdnjs = drupal_http_request('http://api.cdnjs.com/libraries?search=ol3&fields=assets');
+  if ($result_cdnjs->code == 200) {
+    $result_cdnjs = json_decode($result_cdnjs->data, TRUE);
+    foreach ((array) $result_cdnjs['results'][0]['assets'] as $asset) {
+      $version = 'cdnjs-' . $asset['version'];
+      foreach($asset['files'] as $file) {
+        $ext = pathinfo($file, PATHINFO_EXTENSION);
+        $file = '//cdnjs.cloudflare.com/ajax/libs/ol3/' . $asset['version'] . '/' . $file;
+
+        if (strpos($file, 'debug') !== FALSE || strpos($file, 'min') !== FALSE) {
+          continue;
+        }
+
+        $assets[$version]['name'] = 'Openlayers ' . $asset['version'] . ' @ CDNJS';
+        $assets[$version]['library path'] = $module_path;
+        $assets[$version]['files'][$ext][$file] = array(
+          'type' => 'external',
+          'data' => $file,
+          'weight' => 0,
+          'group' => $js_css_group,
+        );
+      };
+    }
+  }
+
+  $result_jsdelivr = drupal_http_request('http://api.jsdelivr.com/v1/jsdelivr/libraries/ol3');
+  if ($result_jsdelivr->code == 200) {
+    $result_jsdelivr = json_decode($result_jsdelivr->data, TRUE);
+    foreach ((array) $result_jsdelivr[0]['assets'] as $asset) {
+      $version = 'jsdelivr-' . $asset['version'];
+      foreach($asset['files'] as $file) {
+        $ext = pathinfo($file, PATHINFO_EXTENSION);
+        $file = '//cdn.jsdelivr.net/ol3/' . $asset['version'] . '/' . $file;
+        if ((strpos($file, 'debug') !== FALSE) || (strpos($file, 'min') !== FALSE)){
+          continue;
+        }
+
+        $assets[$version]['name'] = 'Openlayers ' . $asset['version'] . ' @ jsDelivr';
+        $assets[$version]['library path'] = $module_path;
+        $assets[$version]['files'][$ext][$file] = array(
+          'type' => 'external',
+          'data' => $file,
+          'weight' => 0,
+          'group' => $js_css_group,
+        );
+      };
+    }
+  }
+
+  $assets['local'] = array(
+    'name' => 'Openlayers 3 local',
+    'files' => array(
+      'js' => array(
+        'build/ol.js' => array(
+          'type' => 'file',
+          'weight' => 6,
+          'group' => $js_css_group,
+        ),
+      ),
+      'css' => array(
+        'css/ol.css' => array(
+          'type' => 'file',
+          'weight' => 4,
+          'group' => $js_css_group,
+        ),
+      ),
+    ),
+  );
+
+  $libraries['openlayers3'] = array(
+    'name' => 'Openlayers 3',
+    'library path' => $module_path,
+    'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
+    'variants' => $assets,
+    'dependencies' => array(
+      'openlayers3_integration'
+    )
+  );
+
+  return $libraries;
+}
