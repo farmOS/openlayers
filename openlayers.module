@@ -290,7 +290,7 @@ function openlayers_libraries_info() {
       'library path' => $module_path,
       'variants' => array(
         $asset_variant => array(
-          'name' => 'Openlayers ' . $version . ' @ local',
+          'name' => 'Openlayers ' . $version,
           'files' => array(
             'js' => array(
               'build/ol.js' => array(

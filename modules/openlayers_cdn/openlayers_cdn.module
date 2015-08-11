@@ -38,7 +38,7 @@ function openlayers_cdn_libraries_info() {
           continue;
         }
 
-        $assets[$version]['name'] = 'Openlayers ' . $asset['version'] . ' @ CDNJS';
+        $assets[$version]['name'] = 'Openlayers ' . $asset['version'];
         $assets[$version]['library path'] = $module_path;
         $assets[$version]['files'][$ext][$file] = array(
           'type' => 'external',
@@ -67,7 +67,7 @@ function openlayers_cdn_libraries_info() {
           continue;
         }
 
-        $assets[$version]['name'] = 'Openlayers ' . $asset['version'] . ' @ jsDelivr';
+        $assets[$version]['name'] = 'Openlayers ' . $asset['version'];
         $assets[$version]['library path'] = $module_path;
         $assets[$version]['files'][$ext][$file] = array(
           'type' => 'external',
