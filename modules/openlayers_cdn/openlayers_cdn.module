@@ -82,7 +82,7 @@ function openlayers_cdn_libraries_info() {
   if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
     $asset_variant = 'local-' . $version;
     $assets[$asset_variant] = array(
-      'name' => 'Openlayers ' . $version . ' @ local',
+      'name' => 'Openlayers ' . $version,
       'files' => array(
         'js' => array(
           'build/ol.js' => array(
