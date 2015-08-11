@@ -310,8 +310,8 @@ function openlayers_libraries_info() {
         ),
       ),
       'dependencies' => array(
-        'openlayers3_integration'
-      )
+        'openlayers3_integration',
+      ),
     );
   }
 
