@@ -37,7 +37,7 @@ You can chose the method that you prefer to load the Openlayers library.
 
 Either through a CDN (CDNJS or jsDelivr), or locally.
 
-By default, Openlayers is configured to use CDNJS so you don't have to download manually any library.
+By default, Openlayers is configured to use the local library. You may also enabled the submodule Openlayers CDN to have the library automatically loaded without the need to download anything else.
 
 If you want to install it locally, the easiest way to do so is with drush.
 
