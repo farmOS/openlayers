@@ -22,7 +22,9 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $library = libraries_detect('openlayers3');
   $options_variants = array();
   foreach ($library['variants'] as $version => $variant) {
-    $options_variants[$version] = $variant['name'];
+    list($optgroup) = explode('-', $version, 2);
+    $optgroup = drupal_strtoupper($optgroup);
+    $options_variants[$optgroup][$version] = $variant['name'];
   }
 
   $form['origin']['variant'] = array(

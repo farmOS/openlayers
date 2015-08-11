@@ -20,7 +20,12 @@ function openlayers_cdn_libraries_info() {
   $module_path = drupal_get_path('module', 'openlayers');
   $assets = array();
 
-  $result_cdnjs = drupal_http_request('http://api.cdnjs.com/libraries?search=ol3&fields=assets');
+  $result_cdnjs = drupal_http_request(
+    'http://api.cdnjs.com/libraries?search=ol3&fields=assets',
+    array(
+      'timeout' => 5
+    )
+  );
   if ($result_cdnjs->code == 200) {
     $result_cdnjs = json_decode($result_cdnjs->data, TRUE);
     foreach ((array) $result_cdnjs['results'][0]['assets'] as $asset) {
@@ -45,7 +50,12 @@ function openlayers_cdn_libraries_info() {
     }
   }
 
-  $result_jsdelivr = drupal_http_request('http://api.jsdelivr.com/v1/jsdelivr/libraries/ol3');
+  $result_jsdelivr = drupal_http_request(
+    'http://api.jsdelivr.com/v1/jsdelivr/libraries/ol3',
+    array(
+      'timeout' => 5
+    )
+  );
   if ($result_jsdelivr->code == 200) {
     $result_jsdelivr = json_decode($result_jsdelivr->data, TRUE);
     foreach ((array) $result_jsdelivr[0]['assets'] as $asset) {
@@ -69,30 +79,34 @@ function openlayers_cdn_libraries_info() {
     }
   }
 
-  $assets['local'] = array(
-    'name' => 'Openlayers 3 local',
-    'files' => array(
-      'js' => array(
-        'build/ol.js' => array(
-          'type' => 'file',
-          'weight' => 6,
-          'group' => $js_css_group,
+  if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
+    $asset_variant = 'local-' . $version;
+    $assets[$asset_variant] = array(
+      'name' => 'Openlayers ' . $version . ' @ local',
+      'files' => array(
+        'js' => array(
+          'build/ol.js' => array(
+            'type' => 'file',
+            'weight' => 6,
+            'group' => $js_css_group,
+          ),
+        ),
+        'css' => array(
+          'css/ol.css' => array(
+            'type' => 'file',
+            'weight' => 4,
+            'group' => $js_css_group,
+          ),
         ),
       ),
-      'css' => array(
-        'css/ol.css' => array(
-          'type' => 'file',
-          'weight' => 4,
-          'group' => $js_css_group,
-        ),
-      ),
-    ),
-  );
+    );
+  }
 
   $libraries['openlayers3'] = array(
     'name' => 'Openlayers 3',
     'library path' => $module_path,
     'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
+    'version arguments' => array(),
     'variants' => $assets,
     'dependencies' => array(
       'openlayers3_integration'

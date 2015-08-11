@@ -248,20 +248,38 @@ class Openlayers {
   public static function getLibraryVersion() {
     $variant = \Drupal\openlayers\Config::get('openlayers.variant');
 
-    if ($variant == 'local') {
-      $options = array(
-        'file' => 'build/ol.js',
-        'pattern' => '@Version: (.*)@',
-        'lines' => 3,
-      );
-      $library['library path'] = libraries_get_path('openlayers3');
-      $version = libraries_get_version($library, $options);
+    if (strpos($variant, 'local-') !== FALSE) {
+      $version = self::getLocalLibraryVersion();
     } else {
       $version = \Drupal\openlayers\Config::get('openlayers.variant', NULL);
     }
 
     return $version;
   }
+
+  /**
+   * Return the version of the Openlayers library in use.
+   *
+   * @return string
+   */
+  public static function getLocalLibraryVersion() {
+    $version = FALSE;
+    if ($path = libraries_get_path('openlayers3')) {
+      $library = libraries_detect('openlayers3');
+      $options = array(
+        'file' => 'build/ol.js',
+        'pattern' => '@Version: (.*)@',
+        'lines' => 3,
+      );
+      $library['library path'] = $path;
+      if ($version = libraries_get_version($library, $options)) {
+        $version = substr($version, 1);
+      }
+    }
+
+    return $version;
+  }
+
 
   /**
    * Apply a function recursively to all the value of an array.

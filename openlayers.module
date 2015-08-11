@@ -279,37 +279,41 @@ function openlayers_libraries_info() {
     ),
   );
 
-  $assets['local'] = array(
-    'name' => 'Openlayers 3 local',
-    'files' => array(
-      'js' => array(
-        'build/ol.js' => array(
-          'type' => 'file',
-          'weight' => 6,
-          'group' => $js_css_group,
+  if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
+    $asset_variant = 'local-' . $version;
+    $libraries['openlayers3'] = array(
+      'name' => 'Openlayers 3',
+      'vendor url' => 'http://openlayers.org/',
+      'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
+      'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
+      'version arguments' => array(),
+      'library path' => $module_path,
+      'variants' => array(
+        $asset_variant => array(
+          'name' => 'Openlayers ' . $version . ' @ local',
+          'files' => array(
+            'js' => array(
+              'build/ol.js' => array(
+                'type' => 'file',
+                'weight' => 6,
+                'group' => $js_css_group,
+              ),
+            ),
+            'css' => array(
+              'css/ol.css' => array(
+                'type' => 'file',
+                'weight' => 4,
+                'group' => $js_css_group,
+              ),
+            ),
+          ),
         ),
       ),
-      'css' => array(
-        'css/ol.css' => array(
-          'type' => 'file',
-          'weight' => 4,
-          'group' => $js_css_group,
-        ),
-      ),
-    ),
-  );
-
-  $libraries['openlayers3'] = array(
-    'name' => 'Openlayers 3',
-    'vendor url' => 'http://openlayers.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
-    'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
-    'library path' => $module_path,
-    'variants' => $assets,
-    'dependencies' => array(
-      'openlayers3_integration'
-    )
-  );
+      'dependencies' => array(
+        'openlayers3_integration'
+      )
+    );
+  }
 
   return $libraries;
 }
@@ -319,7 +323,8 @@ function openlayers_libraries_info() {
  */
 function openlayers_libraries_info_alter(&$info) {
   if ($path = libraries_get_path('openlayers3')) {
-    $info['openlayers3']['variants']['local']['library path'] = $path;
+    $asset_variant = 'local-' . \Drupal\openlayers\Openlayers::getLocalLibraryVersion();
+    $info['openlayers3']['variants'][$asset_variant]['library path'] = $path;
   }
 }
 
