@@ -27,7 +27,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       $optgroup = t('Other');
     }
     $optgroup = drupal_strtoupper($optgroup);
-    $options_variants[$optgroup][$version] = $variant['name'];
+    $options_variants[$optgroup][$version] = (isset($variant['name'])) ? $variant['name'] : $version;
   }
 
   $form['origin']['variant'] = array(
