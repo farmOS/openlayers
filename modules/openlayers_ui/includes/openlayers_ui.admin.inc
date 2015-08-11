@@ -23,6 +23,9 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $options_variants = array();
   foreach ($library['variants'] as $version => $variant) {
     list($optgroup) = explode('-', $version, 2);
+    if (empty($optgroup)) {
+      $optgroup = t('Other');
+    }
     $optgroup = drupal_strtoupper($optgroup);
     $options_variants[$optgroup][$version] = $variant['name'];
   }
