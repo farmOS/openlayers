@@ -33,11 +33,9 @@ drush en openlayers_ui -y
 
 Disabling the UI module will not affect your maps, it's just the admin interface, nothing else.
 
-You can chose the method that you prefer to load the Openlayers library.
+You can chose the method that you prefer to load the Openlayers library. Either through a CDN, or locally.
 
-Either through a CDN (CDNJS or jsDelivr), or locally.
-
-By default, Openlayers is configured to use the local library. You may also enabled the contrib module [Libraries CDN API](https://www.drupal.org/project/libraries_cdn) to have the library automatically loaded without the need to download anything else.
+By default, Openlayers is configured to use the local library. You may also enable the contrib module [Libraries CDN API](https://www.drupal.org/project/libraries_cdn) to have the library automatically loaded without the need to download anything else.
 
 If you want to install it locally, the easiest way to do so is with drush.
 

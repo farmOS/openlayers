@@ -279,46 +279,47 @@ function openlayers_libraries_info() {
     ),
   );
 
-  if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
-    $asset_variant = 'local:' . $version;
-    $libraries['openlayers3'] = array(
-      'name' => 'Openlayers 3',
-      'vendor url' => 'http://openlayers.org/',
-      'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
-      'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
-      'version arguments' => array(),
-      'library path' => $module_path,
-      // This is taken in account if the module libraries_cdn is enabled.
-      'cdn' => array(
-        'aliases' => array('ol3'),
-        'options' => array(
-          'weight' => 0,
-          'group' => $js_css_group,
-        ),
+  $libraries['openlayers3'] = array(
+    'name' => 'Openlayers 3',
+    'vendor url' => 'http://openlayers.org/',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.8.2/v3.8.2.zip',
+    'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
+    'version arguments' => array(),
+    'library path' => $module_path,
+    // This is taken in account if the module libraries_cdn is enabled.
+    'cdn' => array(
+      'aliases' => array('ol3'),
+      'options' => array(
+        'weight' => 0,
+        'group' => $js_css_group,
       ),
-      'variants' => array(
-        $asset_variant => array(
-          'name' => 'Openlayers ' . $version,
-          'files' => array(
-            'js' => array(
-              'build/ol.js' => array(
-                'type' => 'file',
-                'weight' => 6,
-                'group' => $js_css_group,
-              ),
-            ),
-            'css' => array(
-              'css/ol.css' => array(
-                'type' => 'file',
-                'weight' => 4,
-                'group' => $js_css_group,
-              ),
-            ),
+    ),
+    'variants' => array(),
+    'dependencies' => array(
+      'openlayers3_integration',
+    ),
+  );
+
+
+  if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
+    unset($libraries['library path']);
+    $libraries['openlayers3']['variants']['local:' . $version] = array(
+      'name' => 'Openlayers ' . $version,
+      'files' => array(
+        'js' => array(
+          'build/ol.js' => array(
+            'type' => 'file',
+            'weight' => 6,
+            'group' => $js_css_group,
           ),
         ),
-      ),
-      'dependencies' => array(
-        'openlayers3_integration',
+        'css' => array(
+          'css/ol.css' => array(
+            'type' => 'file',
+            'weight' => 4,
+            'group' => $js_css_group,
+          ),
+        ),
       ),
     );
   }

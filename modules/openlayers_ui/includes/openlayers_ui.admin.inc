@@ -196,4 +196,5 @@ function openlayers_ui_admin_settings_submit($form, &$form_state) {
   }
 
   drupal_set_message(t('The configuration options have been saved.'));
+  drupal_flush_all_caches();
 }
