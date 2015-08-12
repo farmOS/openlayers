@@ -32,7 +32,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 
   $form['origin']['variant'] = array(
     '#type' => 'select',
-    '#title' => 'Select the Openlayers JS library version to load',
+    '#title' => 'Select the origin and version',
     '#options' => $options_variants,
     '#default_value' => \Drupal\openlayers\Config::get('openlayers.variant'),
   );
