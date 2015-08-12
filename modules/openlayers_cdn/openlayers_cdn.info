@@ -5,3 +5,4 @@ php = 5.3.10
 package = "Openlayers"
 
 dependencies[] = openlayers
+dependencies[] = libraries_cdn

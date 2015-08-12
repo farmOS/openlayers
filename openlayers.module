@@ -280,7 +280,7 @@ function openlayers_libraries_info() {
   );
 
   if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
-    $asset_variant = 'local-' . $version;
+    $asset_variant = 'local:' . $version;
     $libraries['openlayers3'] = array(
       'name' => 'Openlayers 3',
       'vendor url' => 'http://openlayers.org/',
@@ -323,7 +323,7 @@ function openlayers_libraries_info() {
  */
 function openlayers_libraries_info_alter(&$info) {
   if ($path = libraries_get_path('openlayers3')) {
-    $asset_variant = 'local-' . \Drupal\openlayers\Openlayers::getLocalLibraryVersion();
+    $asset_variant = 'local:' . \Drupal\openlayers\Openlayers::getLocalLibraryVersion();
     $info['openlayers3']['variants'][$asset_variant]['library path'] = $path;
   }
 }

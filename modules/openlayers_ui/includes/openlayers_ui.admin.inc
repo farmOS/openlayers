@@ -22,7 +22,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   $library = libraries_detect('openlayers3');
   $options_variants = array();
   foreach ($library['variants'] as $version => $variant) {
-    list($optgroup) = explode('-', $version, 2);
+    list($optgroup) = explode(':', $version, 2);
     if (empty($optgroup)) {
       $optgroup = t('Other');
     }
