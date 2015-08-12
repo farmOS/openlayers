@@ -302,7 +302,7 @@ function openlayers_libraries_info() {
 
 
   if ($version = \Drupal\openlayers\Openlayers::getLocalLibraryVersion()) {
-    unset($libraries['library path']);
+    unset($libraries['openlayers3']['library path']);
     $libraries['openlayers3']['variants']['local:' . $version] = array(
       'name' => 'Openlayers ' . $version,
       'files' => array(
@@ -325,16 +325,6 @@ function openlayers_libraries_info() {
   }
 
   return $libraries;
-}
-
-/**
- * Implements hook_libraries_info_alter().
- */
-function openlayers_libraries_info_alter(&$info) {
-  if ($path = libraries_get_path('openlayers3')) {
-    $asset_variant = 'local:' . \Drupal\openlayers\Openlayers::getLocalLibraryVersion();
-    $info['openlayers3']['variants'][$asset_variant]['library path'] = $path;
-  }
 }
 
 /**
