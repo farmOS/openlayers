@@ -288,6 +288,14 @@ function openlayers_libraries_info() {
       'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
       'version arguments' => array(),
       'library path' => $module_path,
+      // This is taken in account if the module libraries_cdn is enabled.
+      'cdn' => array(
+        'aliases' => array('ol3'),
+        'options' => array(
+          'weight' => 0,
+          'group' => $js_css_group,
+        ),
+      ),
       'variants' => array(
         $asset_variant => array(
           'name' => 'Openlayers ' . $version,
