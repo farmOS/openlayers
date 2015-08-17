@@ -1,5 +1,5 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component:Geofield',
+  fs: 'openlayers.Component:GeofieldWidget',
   init: function(data) {
     var map = data.map;
 
@@ -9,65 +9,28 @@ Drupal.openlayers.pluginManager.register({
       move_interaction;
 
     var vector_layer;
-    var source;
     var geofieldControl;
-
-    var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
+    var geofieldWrapper = jQuery('#openlayers-geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
     // Select the related source or fallback to a generic one.
-    if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
-      var source = data.objects.sources[data.opt.source];
-    }
-    else {
-      source = new ol.source.Vector();
-    }
-
-    if (typeof data.opt.editControl !== 'undefined' && typeof data.objects.controls[data.opt.editControl] !== 'undefined') {
-      geofieldControl = data.objects.controls[data.opt.editControl];
+    if (typeof data.opt.editLayer !== 'undefined' && typeof data.objects.layers[data.opt.editLayer] !== 'undefined') {
+      vector_layer = data.objects.layers[data.opt.editLayer];
+      vector_layer.getSource().on('change', saveData);
     }
 
     if (typeof data.opt.editStyle !== 'undefined' && typeof data.objects.styles[data.opt.editStyle] !== 'undefined') {
       var editStyle = data.objects.styles[data.opt.editStyle];
     }
 
-    // Select the related source or fallback to a generic one.
-    if (typeof data.opt.editLayer !== 'undefined' && typeof data.objects.layers[data.opt.editLayer] !== 'undefined') {
-      vector_layer = data.objects.layers[data.opt.editLayer];
-      vector_layer.getSource().on('addfeature', saveData);
-    } else {
-      // create a vector layer used for editing.
-      vector_layer = new ol.layer.Vector({
-        source: source,
-        style: ol.style.defaultStyleFunction
-      });
-      vector_layer.getSource().on('addfeature', saveData);
-      map.addLayer(vector_layer);
-    }
+    if (typeof data.opt.editControl !== 'undefined' && typeof data.objects.controls[data.opt.editControl] !== 'undefined') {
+      geofieldControl = data.objects.controls[data.opt.editControl];
 
-    // Add preset data if available.
-    if (jQuery('.openlayers-geofield-data', geofieldWrapper).val()) {
-      try {
-        var format = new ol.format[data.opt.initialDataType]({splitCollection: true});
-        vector_layer.getSource().addFeatures(
-          format.readFeatures(
-            jQuery('.openlayers-geofield-data', geofieldWrapper).val(),
-            {
-              dataProjection: data.opt.dataProjection,
-              featureProjection: data.map.getView().getProjection()
-            })
-        );
-      }
-      catch (e) {}
-    }
-
-    if (typeof geofieldControl !== 'undefined') {
       geofieldControl.element.addEventListener('change', function(event) {
         var options = event.detail.options;
         removeMapInteractions();
 
         if ((((options || {}).actions || {}).Clear || false) === true) {
           clearMap();
-          options.actions.Clear = false;
         }
 
         if ((((options || {}).actions || {}).Move || false) === true) {
@@ -87,7 +50,7 @@ Drupal.openlayers.pluginManager.register({
           addSnapInteraction();
         }
 
-        this.options = options;
+        this.options = event.detail.options;
       });
     }
 
@@ -96,7 +59,6 @@ Drupal.openlayers.pluginManager.register({
       clearMap();
       removeMapInteractions();
     });
-
 
     function removeMapInteractions() {
       map.removeInteraction(select_interaction);
@@ -183,6 +145,7 @@ Drupal.openlayers.pluginManager.register({
 
       if (value === 'Square') {
         value = 'Circle';
+        maxPoints = 4;
         geometryFunction = ol.interaction.Draw.createRegularPolygon(4);
       } else if (value === 'Box') {
         value = 'LineString';
@@ -202,6 +165,7 @@ Drupal.openlayers.pluginManager.register({
         geometryFunction = ol.interaction.Draw.createRegularPolygon(100);
       } else if (value === 'Triangle') {
         value = 'Circle';
+        maxPoints = 3;
         geometryFunction = ol.interaction.Draw.createRegularPolygon(3);
       }
 
@@ -227,6 +191,7 @@ Drupal.openlayers.pluginManager.register({
       var features = vector_layer.getSource().getFeatures();
 
       var format = new ol.format[typeFormat]({splitCollection: true}),
+//      var format = new ol.format[typeFormat]({splitCollection: true}),
       // this will be the data in the chosen format
         datas;
       try {

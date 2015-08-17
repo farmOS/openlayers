@@ -1,24 +1,25 @@
 <?php
 /**
  * @file
- * Component: Geofield.
+ * Component: GeofieldWidget.
  */
 
-namespace Drupal\openlayers_geofield\Plugin\Component\Geofield;
+namespace Drupal\openlayers_geofield\Plugin\Component\GeofieldWidget;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
+use Drupal\openlayers\Plugin\Source\Vector\Vector;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
 use \geoPHP;
 
 /**
- * Class Geofield.
+ * Class GeofieldWidget.
  *
  * @OpenlayersPlugin(
- *  id = "Geofield"
+ *  id = "GeofieldWidget"
  * )
  */
-class Geofield extends Component {
+class GeofieldWidget extends Component {
   /**
    * {@inheritdoc}
    */
@@ -81,7 +82,7 @@ class Geofield extends Component {
     );
     $form['options']['editLayer'] = array(
       '#type' => 'select',
-      '#title' => t('Select the formatter layer'),
+      '#title' => t('Select the widget layer'),
       '#default_value' => $this->getOption('editLayer'),
       '#options' => Openlayers::loadAllAsOptions('layer'),
     );
@@ -94,7 +95,7 @@ class Geofield extends Component {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function optionsToObjects() {
     $import = parent::optionsToObjects();
@@ -120,99 +121,106 @@ class Geofield extends Component {
   }
 
   /**
-   * {@inheritdoc}
+   * Convert an array of WKT into a Geometry and features.
+   *
+   * @return array
+   *   An array containing the Geometry and the features.
+   * @throws \exception
    */
-  public function preBuild(array &$build, ObjectInterface $context = NULL) {
-    // Auto-detect the source to use for the features.
-    $source = $this->getOption('source');
-    if (empty($source)) {
-      foreach ($context->getCollection()->getObjects('source') as $source) {
-        if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-          $this->setOption('source', $source->getMachineName());
+  private function initialDataToGeomFeatures() {
+    geophp_load();
+    $initial_data = $this->getOption('initialData', '');
+    $geom  = new \GeometryCollection(array());
+    $features = array();
+
+    // Process initial data. Ensure it's WKT.
+    if (isset($initial_data)) {
+      $geoms = array();
+
+      // Process strings and arrays likewise.
+      if (!is_array($initial_data)) {
+        $initial_data = array($initial_data);
+      }
+
+      foreach ($initial_data as $delta => $item) {
+        if (is_array($item) && array_key_exists('geom', $item)) {
+          $geoms[] = geoPHP::load($item['geom']);
+        }
+      }
+
+      $geom = geoPHP::geometryReduce($geoms);
+
+      // If we could parse the geom process further.
+      if ($geom && !$geom->isEmpty()) {
+        if (in_array($geom->getGeomType(), array('MultiPoint', 'MultiLineString', 'MultiPolygon', 'GeometryCollection'))) {
+          foreach ($geom->getComponents() as $component) {
+            $features[] = array(
+              'wkt' => $component->out('wkt'),
+              'projection' => 'EPSG:4326',
+            );
+          }
+        }
+        else {
+          $features[] = array(
+            'wkt' => $geom->out('wkt'),
+            'projection' => 'EPSG:4326',
+          );
         }
       }
     }
+
+    return array(
+      'geom' => $geom,
+      'features' => $features,
+    );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getJS() {
-    // Ensure the options are properly set and clean.
-    $this->setOption('dataType', array_filter($this->getOption('dataType', array('WKT' => 'WKT'))));
-
-    $initial_data = $this->getOption('initialData');
-
-    // Process initial data. Ensure it's WKT.
-    if (isset($initial_data)) {
-
-      // Process strings and arrays likewise.
-      geophp_load();
-      if (!is_array($initial_data)) {
-        $initial_data = array($initial_data);
-      }
-      $geoms = array();
-      foreach ($initial_data as $delta => $item) {
-        if (is_array($item) && array_key_exists('geom', $item)) {
-          $geoms[] = geoPHP::load($item['geom']);
+  public function preBuild(array &$build, ObjectInterface $context = NULL) {
+    foreach ($context->getCollection()->getObjects('layer') as $layer) {
+      if ($layer->getMachineName() == $this->getOption('editLayer', FALSE)) {
+        if ($source = $layer->getSource()) {
+          if ($source instanceof Vector) {
+            $geom = $this->initialDataToGeomFeatures();
+            $source->setOption('features', $geom['features']);
+          }
         }
-        else {
-          // Is this really necessary ? Commented for now.
-          // $geoms[] = geoPHP::load('');
-        }
-      }
-      $combined_geom = geoPHP::geometryReduce($geoms);
-      // If we could parse the geom process further.
-      if ($combined_geom && !$combined_geom->isEmpty()) {
-        // We want to force the combined_geom into a geometryCollection.
-        $geom_type = $combined_geom->geometryType();
-        if ($geom_type == 'MultiPolygon' || $geom_type == 'MultiLineString' || $geom_type == 'MultiPoint') {
-          $combined_geom = new \GeometryCollection($combined_geom->getComponents());
-        }
-
-        // Ensure proper initial data in the textarea / hidden field.
-        $data_type = key($this->getOption('dataType', array('WKT' => 'WKT')));
-        $this->setOption('initialData', $combined_geom->out(strtolower($data_type)));
-        $this->setOption('initialDataType', $data_type);
-      }
-      else {
-        // Set initial data to NULL if the data couldn't be evaluated.
-        $this->setOption('initialData', NULL);
-        $this->setOption('initialDataType', key($this->getOption('dataType', array('WKT' => 'WKT'))));
       }
     }
-    return parent::getJS();
   }
 
   /**
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
+
     $component = array(
-      '#type' => 'fieldset',
-      '#title' => 'Geofield component',
+      '#type' => 'container',
       '#attributes' => array(
-        'id' => 'geofield-' . $context->getId(),
+        'id' => 'openlayers-geofield-' . $context->getId(),
       ),
     );
 
-    $data_type = $this->getOption('dataType');
+    $data_type = $this->getOption('dataType', array('WKT' => 'WKT'));
     if (count($data_type) > 1) {
       $component['dataType'] = array(
         '#type' => 'select',
         '#title' => 'Data type',
         '#options' => array_intersect_key(
           array(
+            'WKT' => 'WKT',
             'GeoJSON' => 'GeoJSON',
             'KML' => 'KML',
             'GPX' => 'GPX',
-            'WKT' => 'WKT',
           ),
           $data_type
         ),
         '#attributes' => array(
           'class' => array('data-type'),
         ),
+        '#default_value' => $data_type,
       );
     }
     else {
@@ -226,14 +234,15 @@ class Geofield extends Component {
       );
     }
 
+    $geom = $this->initialDataToGeomFeatures();
     $component['data'] = array(
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
       '#attributes' => array(
         'class' => array('openlayers-geofield-data'),
       ),
-      '#default_value' => $this->getOption('initialData', ''),
-      '#value' => $this->getOption('initialData', ''),
+      '#default_value' => $geom['geom']->out('wkt'),
+      '#value' => $geom['geom']->out('wkt'),
     );
 
     // Now add the component into the build array. This is a bit complex due

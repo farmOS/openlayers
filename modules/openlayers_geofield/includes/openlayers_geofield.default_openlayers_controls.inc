@@ -41,5 +41,24 @@ function openlayers_geofield_default_openlayers_controls() {
   );
   $export['openlayers_geofield_control_geofield'] = $ol_control;
 
+  $ol_control = new stdClass();
+  $ol_control->disabled = FALSE; /* Edit this to true to make a default ol_control disabled initially */
+  $ol_control->api_version = 1;
+  $ol_control->machine_name = 'openlayers_geofield_control_autozoom';
+  $ol_control->name = 'Openlayers Geofield: AutoZoom';
+  $ol_control->description = '';
+  $ol_control->options = array(
+    'zoom' => 'disabled',
+    'max_zoom' => 0,
+    'process_once' => 0,
+    'enableAnimations' => 1,
+    'animations' => array(
+      'pan' => 500,
+      'zoom' => 500,
+    ),
+  );
+  $ol_control->factory_service = 'openlayers.Control:AutoZoom';
+  $export['openlayers_geofield_control_autozoom'] = $ol_control;
+
   return $export;
 }

@@ -8,14 +8,13 @@ Drupal.openlayers.pluginManager.register({
     if (data.opt !== undefined && data.opt.features !== undefined) {
       // Ensure the features are really an array.
       if (!(data.opt.features instanceof Array)) {
-        data.opt.features = [{geometry: data.opt.features}];
+        data.opt.features = [{wkt: data.opt.features}];
       }
-      var format = new ol.format.WKT();
       for (var i in data.opt.features) {
         if (data.opt.features[i].wkt) {
           try {
             var data_projection = data.opt.features[i].projection || 'EPSG:4326';
-            var feature = format.readFeature(data.opt.features[i].wkt, {
+            var feature = new ol.format.WKT().readFeature(data.opt.features[i].wkt, {
               dataProjection: data_projection,
               featureProjection: data.map.getView().getProjection()
             });
