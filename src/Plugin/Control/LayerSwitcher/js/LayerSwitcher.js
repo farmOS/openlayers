@@ -7,7 +7,14 @@ Drupal.openlayers.pluginManager.register({
       data.map.getLayers().forEach(function(layer, index, array) {
         // If this layer is exposed in the control check its state.
         if (jQuery('input[value=' + layer.mn + ']', element).length) {
-          layer.setVisible(jQuery('input[value=' + layer.mn + ']', element).is(':checked'));
+          var visible = jQuery('input[value=' + layer.mn + ']', element).is(':checked');
+          // If the layer has the zoom activity property get a valid zoom level.
+          var zoomActivity = layer.get('zoomActivity');
+          if (visible && typeof(zoomActivity) != 'undefined' && typeof(zoomActivity[data.map.getView().getZoom()]) == 'undefined') {
+            var firstActiveZoomLevel = zoomActivity[Object.keys(zoomActivity)[0]];
+            data.map.getView().setZoom(firstActiveZoomLevel);
+          }
+          layer.setVisible(visible);
         }
       });
     });
@@ -15,27 +22,27 @@ Drupal.openlayers.pluginManager.register({
     // Register visibility change events. The layerswitcher check's if it's ok
     // to be visible first. This e.g. ensures that the zoomActivity feature of
     // layers respects the layerswitcher state.
-    jQuery(document).on('openlayers.layers_post_alter', function(event, layer_data) {
-      if (data.map_id == layer_data.map_id) {
-        var map = Drupal.openlayers.getMapById(layer_data.map_id);
-        for (var i in layer_data.layers) {
-          // If this layer is exposed in the control check its state.
-          if (jQuery('input[value=' + layer_data.layers[i].mn + ']', element).length) {
-            map.layers[layer_data.layers[i].mn].on('change:visible', function (e) {
-              var visibility = e.target.get(e.key);
-              // Keep invisible if layer isn't activated in layerswitcher.
-              if (visibility && !jQuery('input[value=' + e.target.mn + ']', element).is(':checked')) {
-                e.target.setVisible(false);
-                if (typeof e.stopPropagation != 'undefined') {
-                  e.stopPropagation();
-                }
-                if (typeof e.preventDefault != 'undefined') {
-                  e.preventDefault();
-                }
-              }
-            });
+    data.map.getLayers().forEach(function(layer, index) {
+      // If this layer is exposed in the control check its state.
+      if (jQuery('input[value=' + layer.mn + ']', element).length) {
+        layer.on('change:visible', function (e) {
+          var visibility = e.target.get(e.key);
+          // Keep invisible if layer isn't activated in layerswitcher.
+          if (visibility && !jQuery('input[value=' + e.target.mn + ']', element).is(':checked')) {
+            e.target.setVisible(false);
+            if (typeof e.stopPropagation != 'undefined') {
+              e.stopPropagation();
+            }
+            if (typeof e.preventDefault != 'undefined') {
+              e.preventDefault();
+            }
           }
-        }
+          else if (jQuery('input[value=' + layer.mn + ']', element).prop('checked') != visibility) {
+            jQuery('input[value=' + layer.mn + ']', element)
+              .prop('checked', visibility)
+              .change();
+          }
+        });
       }
     });
 
