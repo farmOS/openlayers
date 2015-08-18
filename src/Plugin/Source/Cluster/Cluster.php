@@ -37,6 +37,35 @@ class Cluster extends Source {
       '#default_value' => isset($form_state['item']->options['distance']) ? $form_state['item']->options['distance'] : 50,
       '#description' => t('Cluster distance.'),
     );
+
+    $form['options']['zoomDistance'] = array(
+      '#title' => t('Set cluster distance per zoom level'),
+      '#description' => t('Define a zoom level / cluster distance per line. Use the notation zoom:distance. If no value is given for a zoom level it falls back to the default distance.'),
+      '#type' => 'textarea',
+      '#default_value' => $this->getOption('zoomDistance', ''),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getJS() {
+    $js = parent::getJS();
+    // Ensure the zoom distance values are prepared.
+    if (!empty($js['opt']['zoomDistance'])) {
+      $zoom_distance = array();
+      foreach (explode("\n", $js['opt']['zoomDistance']) as $data) {
+        $data = array_map('trim', explode(':', trim($data), 2));
+        if (!empty($data)) {
+          $zoom_distance[(int) $data[0]] = (int) (isset($data[1]) ? $data[1] : $data[0]);
+        }
+      }
+      $js['opt']['zoomDistance'] = $zoom_distance;
+      if (empty($js['opt']['zoomDistance'])) {
+        unset($js['opt']['zoomDistance']);
+      }
+    }
+    return $js;
   }
 
   /**
