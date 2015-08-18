@@ -220,6 +220,8 @@ Drupal.openlayers = (function($){
       }
 
       var object = null;
+      // Make sure that data.opt exist even if it's empty.
+      data.opt = $.extend({}, {}, data.opt);
       if (Drupal.openlayers.pluginManager.isRegistered(data['fs'])) {
         $(document).trigger('openlayers.object_pre_alter', [
           {
