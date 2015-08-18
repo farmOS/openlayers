@@ -13,7 +13,6 @@ Drupal.openlayers.pluginManager.register({
             distance = data.opt.zoomDistance[data.map.getView().getZoom()];
           }
           if (clusterSource.set('distance') != distance) {
-            console.log(distance);
             clusterSource.set('distance', distance);
             clusterSource.changed();
           }
