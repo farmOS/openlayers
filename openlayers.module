@@ -293,6 +293,10 @@ function openlayers_libraries_info() {
         'weight' => 0,
         'group' => $js_css_group,
       ),
+      'request' => array(
+        // Maximum 10 seconds for the http requests to CDNs.
+        'timeout' => 10,
+      ),
     ),
     'variants' => array(),
     'dependencies' => array(
