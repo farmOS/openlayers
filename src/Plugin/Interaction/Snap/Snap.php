@@ -40,7 +40,7 @@ class Snap extends Interaction {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function optionsToObjects() {
     $import = parent::optionsToObjects();

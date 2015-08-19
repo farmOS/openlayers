@@ -61,7 +61,7 @@ class Random extends Source {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
     parent::optionsFormSubmit($form, $form_state);
@@ -83,7 +83,7 @@ class Random extends Source {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function optionsToObjects() {
     $import = parent::optionsToObjects();
