@@ -38,34 +38,34 @@ class Cluster extends Source {
       '#description' => t('Cluster distance.'),
     );
 
+    $zoomDistance = $this->getOption('zoomDistance', array());
+    $zoomDistance = array_map(function($v, $k) {
+      return $k . ':' . $v;
+    }, $zoomDistance, array_keys($zoomDistance));
+
     $form['options']['zoomDistance'] = array(
       '#title' => t('Set cluster distance per zoom level'),
       '#description' => t('Define a zoom level / cluster distance per line. Use the notation zoom:distance. If no value is given for a zoom level it falls back to the default distance.'),
       '#type' => 'textarea',
-      '#default_value' => $this->getOption('zoomDistance', ''),
+      '#default_value' => implode(PHP_EOL, array_values($zoomDistance)),
     );
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getJS() {
-    $js = parent::getJS();
-    // Ensure the zoom distance values are prepared.
-    if (!empty($js['opt']['zoomDistance'])) {
+  public function optionsFormSubmit($form, &$form_state) {
+    if (!empty($form_state['values']['options']['zoomDistance'])) {
       $zoom_distance = array();
-      foreach (explode("\n", $js['opt']['zoomDistance']) as $data) {
+      foreach (explode("\n", $form_state['values']['options']['zoomDistance']) as $data) {
         $data = array_map('trim', explode(':', trim($data), 2));
         if (!empty($data)) {
           $zoom_distance[(int) $data[0]] = (int) (isset($data[1]) ? $data[1] : $data[0]);
         }
       }
-      $js['opt']['zoomDistance'] = $zoom_distance;
-      if (empty($js['opt']['zoomDistance'])) {
-        unset($js['opt']['zoomDistance']);
-      }
+      $form_state['values']['options']['zoomDistance'] = $zoom_distance;
     }
-    return $js;
+    parent::optionsFormSubmit($form, $form_state);
   }
 
   /**
