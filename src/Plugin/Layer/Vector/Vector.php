@@ -53,7 +53,7 @@ class Vector extends Layer {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
     $layers = $context->getObjects('layer');

@@ -18,7 +18,7 @@ use Drupal\openlayers\Types\Style;
  */
 class Circle extends Style {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['default'] = array(
@@ -202,7 +202,7 @@ class Circle extends Style {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
     parent::optionsFormSubmit($form, $form_state);

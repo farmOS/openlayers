@@ -34,7 +34,7 @@ class Random extends Style {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function optionsToObjects() {
     $import = parent::optionsToObjects();
