@@ -69,7 +69,7 @@ class Cluster extends Source {
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function optionsToObjects() {
     $import = parent::optionsToObjects();

@@ -12,14 +12,14 @@
 class OpenlayersMap extends QuickContent {
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public static function getType() {
     return 'Openlayers-map';
   }
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function optionsForm($delta, $qt) {
     $tab = $this->settings;
@@ -36,7 +36,7 @@ class OpenlayersMap extends QuickContent {
   }
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function render($hide_empty = FALSE, $args = array()) {
     if ($this->rendered_content) {
@@ -54,7 +54,7 @@ class OpenlayersMap extends QuickContent {
   }
 
   /**
-   * @inheritdoc
+   * {@inheritdoc}
    */
   public function getAjaxKeys() {
     return array('Openlayers-map');

@@ -18,7 +18,7 @@ use Drupal\openlayers\Types\Control;
  */
 class Export extends Control {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['exportTipLabel'] = array(

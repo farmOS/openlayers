@@ -33,7 +33,7 @@ abstract class Map extends Object implements MapInterface {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function attached() {
     $attached = parent::attached();
