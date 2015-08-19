@@ -161,7 +161,7 @@ class Group extends Layer {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
     $layers_enabled = array_filter($form_state['values']['grouplayers'], function($item) {
@@ -194,7 +194,7 @@ class Group extends Layer {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
     $layers = $context->getObjects('layer');

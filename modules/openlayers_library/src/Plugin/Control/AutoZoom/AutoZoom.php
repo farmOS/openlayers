@@ -19,11 +19,12 @@ use Drupal\openlayers\Types\Control;
  */
 class AutoZoom extends ZoomToSource {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     parent::optionsForm($form, $form_state);
 
     unset($form['options']['source']);
   }
+
 }

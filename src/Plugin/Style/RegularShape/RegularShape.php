@@ -19,7 +19,7 @@ use Drupal\openlayers\Types\Style;
  */
 class RegularShape extends Style {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['default'] = array(
@@ -274,7 +274,7 @@ class RegularShape extends Style {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
     parent::optionsFormSubmit($form, $form_state);

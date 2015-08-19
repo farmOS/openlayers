@@ -21,14 +21,14 @@ use Drupal\openlayers\Types\Source;
  */
 class Field extends Vector {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function dependencies() {
     return array('geocoder');
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $geocoder_handlers = array();
@@ -93,7 +93,7 @@ class Field extends Vector {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsFormSubmit($form, &$form_state) {
     $fields = $form_state['values']['options']['fields'];
@@ -124,7 +124,7 @@ class Field extends Vector {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function getJS() {
     $js = parent::getJS();
@@ -182,4 +182,5 @@ class Field extends Vector {
 
     return $features;
   }
+
 }

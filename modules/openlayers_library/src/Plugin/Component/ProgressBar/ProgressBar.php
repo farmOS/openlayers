@@ -17,11 +17,10 @@ use Drupal\openlayers\Types\ObjectInterface;
  *   id = "ProgressBar",
  *   description = "Display a loading bar on the bottom of the map when the layers are loading."
  * )
- *
  */
 class ProgressBar extends Component {
   /**
-   * {@inheritDoc}
+   * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
     $build['openlayers']['map-container']['progress-bar'] = array(
@@ -29,9 +28,9 @@ class ProgressBar extends Component {
       '#attributes' => array(
         'id' => 'progress-' . $context->getId(),
         'class' => array(
-          'openlayers-progressbar'
-        )
-      )
+          'openlayers-progressbar',
+        ),
+      ),
     );
   }
 

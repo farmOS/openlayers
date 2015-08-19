@@ -18,7 +18,7 @@ use Drupal\openlayers\Types\Control;
  */
 class JSGeocoder extends Control {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['placeholder'] = array(

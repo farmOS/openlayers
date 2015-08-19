@@ -17,7 +17,7 @@ use Drupal\openlayers\Types\Style;
  */
 class Icon extends Style {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function optionsForm(&$form, &$form_state) {
     $form['options']['path'] = array(

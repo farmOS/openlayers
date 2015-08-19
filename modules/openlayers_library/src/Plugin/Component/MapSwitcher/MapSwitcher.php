@@ -20,7 +20,7 @@ use Drupal\openlayers\Types\ObjectInterface;
  */
 class MapSwitcher extends Component {
   /**
-   * @inheritDoc
+   * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
     parent::postBuild($build, $context);
@@ -51,13 +51,12 @@ class MapSwitcher extends Component {
     $build['form'] = array(
       '#type' => 'container',
       '#attributes' => array(
-        'id' => $wrapper
-      )
+        'id' => $wrapper,
+      ),
     );
 
     $build['form'][$context->getId()]['map'] = $build['openlayers'];
     unset($build['openlayers']);
-
   }
 
 }
