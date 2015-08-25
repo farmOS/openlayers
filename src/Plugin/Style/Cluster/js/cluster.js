@@ -4,7 +4,7 @@ Drupal.openlayers.pluginManager.register({
     var styleCache = {};
     var clusterStyle = function(feature, resolution) {
       var features = feature.get('features');
-      if (typeof features.length !== 'undefined') {
+      if (features.length !== undefined) {
         var size = features.length;
         var style = styleCache[size];
         if (!style) {

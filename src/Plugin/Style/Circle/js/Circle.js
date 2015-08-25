@@ -7,7 +7,7 @@ Drupal.openlayers.pluginManager.register({
       }
       var geometry = feature.getGeometry().getType();
       var geometry_style;
-      if (typeof data.opt[geometry] !== 'undefined') {
+      if (data.opt[geometry] !== undefined) {
         geometry_style = data.opt[geometry];
       }else {
         geometry_style = data.opt['default'];

@@ -60,7 +60,7 @@ Drupal.openlayers.pluginManager.register({
             map.getView().setZoom(data.opt.zoom);
           } else {
             var zoom = map.getView().getZoom();
-            if (typeof data.opt.max_zoom !== 'undefined' && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
+            if (data.opt.max_zoom !== undefined && data.opt.max_zoom > 0 && zoom > data.opt.max_zoom) {
               zoom = data.opt.max_zoom;
             }
             map.getView().setZoom(zoom);

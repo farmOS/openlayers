@@ -96,7 +96,7 @@ ol.control.AutoZoom.prototype.handleClick_ = function(event) {
           map.getView().setZoom(options.zoom);
         } else {
           var zoom = map.getView().getZoom() - 1;
-          if (typeof options.max_zoom !== 'undefined' && options.max_zoom > 0 && zoom > options.max_zoom) {
+          if (options.max_zoom !== undefined && options.max_zoom > 0 && zoom > options.max_zoom) {
             zoom = options.max_zoom;
           }
           map.getView().setZoom(zoom);

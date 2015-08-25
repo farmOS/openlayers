@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager.register({
     var options = {
       features: []
     };
-    if (typeof data.opt !== 'undefined' && typeof data.opt.features !== 'undefined') {
+    if (data.opt !== undefined && data.opt.features !== undefined) {
       // Ensure the features are really an array.
       if (!(data.opt.features instanceof Array)) {
         data.opt.features = [{geometry: data.opt.features}];
@@ -19,7 +19,7 @@ Drupal.openlayers.pluginManager.register({
               dataProjection: data_projection,
               featureProjection: data.map.getView().getProjection()
             });
-            if (typeof data.opt.features[i].attributes !== 'undefined') {
+            if (data.opt.features[i].attributes !== undefined) {
               feature.setProperties(data.opt.features[i].attributes);
             }
             options.features.push(feature);

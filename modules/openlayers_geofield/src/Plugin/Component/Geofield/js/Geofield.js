@@ -5,7 +5,7 @@ Drupal.openlayers.pluginManager.register({
     var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
     // Select the related source or fallback to a generic one.
-    if (typeof data.opt.source !== 'undefined' && typeof data.objects.sources[data.opt.source] !== 'undefined') {
+    if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
       var source = data.objects.sources[data.opt.source];
     }
     else {
@@ -243,20 +243,13 @@ Drupal.behaviors.openlayersGeofieldWidget = (function($) {
           window.setTimeout(function() {
             jQuery('.openlayers-map', fieldset).each(function (index, elem) {
               var map = Drupal.openlayers.getMapById(jQuery(elem).attr('id'));
-              if (map && typeof map.map !== 'undefined') {
+              if (map && map.map !== undefined) {
                 map.map.updateSize();
               }
             });
           }, 1000);
         }
       });
-    },
-
-    detach: function (context, settings) {
-      $('.openlayers-map').removeOnce('openlayers-map', function () {
-        var map_id = $(this).attr('id');
-        delete Drupal.openlayers.instances[map_id];
-      });
     }
-  }
+  };
 })(jQuery);

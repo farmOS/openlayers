@@ -77,7 +77,7 @@ ol.control.JSGeocoder.prototype.updateMap = function(results, control) {
   var map = control.getMap();
   var child=(control.element.firstElementChild||control.element.firstChild);
 
-  if (typeof control.options.autocomplete !== 'undefined' && control.options.autocomplete == 1) {
+  if (control.options.autocomplete !== undefined && control.options.autocomplete == 1) {
     child.value = results[0].formatted_address;
   }
 
@@ -94,7 +94,7 @@ ol.control.JSGeocoder.prototype.updateMap = function(results, control) {
   map.beforeRender(animationPan, animationZoom);
 
   map.getView().setCenter(coordinates);
-  if (typeof control.options.zoom !== 'undefined' && control.options.zoom !== 0) {
+  if (control.options.zoom !== undefined && control.options.zoom !== 0) {
     map.getView().setZoom(control.options.zoom);
   }
 };

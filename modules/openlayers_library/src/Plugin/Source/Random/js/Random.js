@@ -38,9 +38,9 @@ Drupal.openlayers.pluginManager.register({
         var feature = new ol.Feature(geometry);
 
         if (data.opt[geometry_type].setRandomStyle === 1) {
-          if (typeof data.opt[geometry_type].styles !== 'undefined') {
+          if (data.opt[geometry_type].styles !== undefined) {
             var style = randomProperty(data.opt[geometry_type].styles);
-            if (typeof data.objects.styles[style] !== 'undefined') {
+            if (data.objects.styles[style] !== undefined) {
               if (typeof data.objects.styles[style] === 'function') {
                 style = data.objects.styles[style](feature);
               } else {
