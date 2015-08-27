@@ -42,6 +42,11 @@ Drupal.openlayers.pluginManager.register({
 
     return new ol.Map(options);
   },
-  attach: function(context, settings) {},
-  detach: function(context, settings) {}
+  detach: function (context, settings) {
+    jQuery('.openlayers-map').removeOnce('openlayers-map', function () {
+      var map_id = jQuery(this).attr('id');
+      delete Drupal.openlayers.instances[map_id];
+    });
+  },
+  attach: function(context, settings) {}
 });

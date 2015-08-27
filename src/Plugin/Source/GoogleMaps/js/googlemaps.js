@@ -72,7 +72,7 @@ Drupal.openlayers.pluginManager.register({
       jQuery('.openlayers.gmap-map').each(function(){
         var map_id = jQuery(this).attr('id').replace('gmap-', '');
 
-        if (typeof Drupal.settings.openlayers.maps[map_id] !== 'undefined') {
+        if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
           jQuery.each(Drupal.settings.openlayers.maps[map_id].source, function(i, source){
             if (source.fs == 'openlayers.Source:GoogleMaps') {
               if (source.opt.channel) {
@@ -114,7 +114,7 @@ Drupal.openlayers.openlayers_source_internal_googlemaps_initialize = function() 
   jQuery('.openlayers.gmap-map').each(function() {
     var map_id = jQuery(this).attr('id').replace('gmap-', '');
     var callback = Drupal.openlayers.asyncIsReadyCallbacks[map_id.replace(/[^0-9a-z]/gi, '_')];
-    if (typeof callback !== 'undefined') {
+    if (callback !== undefined) {
       callback();
     }
   });

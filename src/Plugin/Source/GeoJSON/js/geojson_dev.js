@@ -145,7 +145,7 @@ openlayers_source_internal_geojson.updateSource = function(data, source) {
     map.sources[source].addFeatures(source_conf.opt.features);
     return;
   }
-  else if (typeof source_conf.opt.loader !== 'undefined') {
+  else if (source_conf.opt.loader !== undefined) {
     var instance_data = {
       'data': source_conf,
       'opt': source_conf.opt,
@@ -156,7 +156,7 @@ openlayers_source_internal_geojson.updateSource = function(data, source) {
     };
     openlayers_source_internal_geojson.configureVectorSource(map.sources[source], instance_data);
   }
-  else if (typeof source_conf.opt.url !== 'undefined') {
+  else if (source_conf.opt.url !== undefined) {
     map.sources[source].loader_ = ol.featureloader.xhr(source_conf.opt.url, source_conf.opt.format);
   }
 

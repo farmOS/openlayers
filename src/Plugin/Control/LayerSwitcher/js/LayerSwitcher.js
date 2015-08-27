@@ -10,7 +10,7 @@ Drupal.openlayers.pluginManager.register({
           var visible = jQuery('input[value=' + layer.mn + ']', element).is(':checked');
           // If the layer has the zoom activity property get a valid zoom level.
           var zoomActivity = layer.get('zoomActivity');
-          if (visible && typeof(zoomActivity) != 'undefined' && typeof(zoomActivity[data.map.getView().getZoom()]) == 'undefined') {
+          if (visible && zoomActivity !== undefined && zoomActivity[data.map.getView().getZoom()] === undefined) {
             var firstActiveZoomLevel = zoomActivity[Object.keys(zoomActivity)[0]];
             data.map.getView().setZoom(firstActiveZoomLevel);
           }
@@ -30,10 +30,10 @@ Drupal.openlayers.pluginManager.register({
           // Keep invisible if layer isn't activated in layerswitcher.
           if (visibility && !jQuery('input[value=' + e.target.mn + ']', element).is(':checked')) {
             e.target.setVisible(false);
-            if (typeof e.stopPropagation != 'undefined') {
+            if (e.stopPropagation !== undefined) {
               e.stopPropagation();
             }
-            if (typeof e.preventDefault != 'undefined') {
+            if (e.preventDefault !== undefined) {
               e.preventDefault();
             }
           }
@@ -45,8 +45,7 @@ Drupal.openlayers.pluginManager.register({
         });
       }
     });
-
-
+    
     return new ol.control.Control({
       element: element[0]
     });

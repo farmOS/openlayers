@@ -1,8 +1,11 @@
-Drupal.openlayers.pluginManager = (function($) {
+(function ($, Drupal) {
+
   "use strict";
+
   var plugins = [];
-  return {
-    attach: function(context, settings) {
+
+  Drupal.openlayers.pluginManager = {
+    attach: function (context, settings) {
       for (var i in plugins) {
         var plugin = plugins[i];
         if (typeof plugin.attach === 'function') {
@@ -10,7 +13,7 @@ Drupal.openlayers.pluginManager = (function($) {
         }
       }
     },
-    detach: function(context, settings) {
+    detach: function (context, settings) {
       for (var i in plugins) {
         var plugin = plugins[i];
         if (typeof plugin.detach === 'function') {
@@ -18,19 +21,19 @@ Drupal.openlayers.pluginManager = (function($) {
         }
       }
     },
-    alter: function(){
+    alter: function () {
       // @todo: alter hook
     },
-    getPlugin: function(factoryService) {
+    getPlugin: function (factoryService) {
       if (this.isRegistered(factoryService)) {
         return plugins[factoryService];
       }
       return false;
     },
-    getPlugins: function(){
+    getPlugins: function () {
       return Object.keys(plugins);
     },
-    register: function(plugin) {
+    register: function (plugin) {
       if ((typeof plugin !== 'object') || (plugin === null)) {
         return false;
       }
@@ -45,15 +48,15 @@ Drupal.openlayers.pluginManager = (function($) {
 
       plugins[plugin.fs] = plugin;
     },
-    createInstance: function(factoryService, data) {
+    createInstance: function (factoryService, data) {
       if (!this.isRegistered(factoryService)) {
         return false;
       }
 
       try {
         var obj = plugins[factoryService].init(data);
-      } catch(e) {
-        if (typeof console !== 'undefined') {
+      } catch (e) {
+        if (console !== undefined) {
           Drupal.openlayers.console.log(e.message);
           Drupal.openlayers.console.log(e.stack);
         }
@@ -71,8 +74,9 @@ Drupal.openlayers.pluginManager = (function($) {
 
       return false;
     },
-    isRegistered: function(factoryService) {
+    isRegistered: function (factoryService) {
       return (factoryService in plugins);
     }
   };
-})(jQuery);
+
+}(jQuery, Drupal));

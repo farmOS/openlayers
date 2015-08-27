@@ -15,7 +15,7 @@ Drupal.openlayers.pluginManager.register({
     map.on('moveend', function (evt) {
       for (map_id in Drupal.openlayers.instances) {
         var candidate_map = Drupal.openlayers.instances[map_id].map;
-        if (evt.map.get('target') !== candidate_map.get('target') && typeof candidate_map.get('ViewSyncGroup') !== 'undefined') {
+        if (evt.map.get('target') !== candidate_map.get('target') && candidate_map.get('ViewSyncGroup') !== undefined) {
           for (sync in evt.map.get('ViewSyncGroup')) {
             var sync = evt.map.get('ViewSyncGroup')[sync];
             if (candidate_map.get('ViewSyncGroup').indexOf(sync) >= 0) {

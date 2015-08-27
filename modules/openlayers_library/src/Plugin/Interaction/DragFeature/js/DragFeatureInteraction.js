@@ -37,7 +37,7 @@ ol.interaction.DragFeature = function(data) {
    */
   this.previousCursor_ = undefined;
 
-  if (typeof data.objects.styles[options.style] !== 'undefined') {
+  if (data.objects.styles[options.style] !== undefined) {
     this.dragFeatureStyle_ = data.objects.styles[options.style];
   } else {
     this.dragFeatureStyle_ = ol.style.defaultStyleFunction;
