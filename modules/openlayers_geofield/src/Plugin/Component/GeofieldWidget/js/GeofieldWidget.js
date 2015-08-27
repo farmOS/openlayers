@@ -13,16 +13,16 @@ Drupal.openlayers.pluginManager.register({
     var geofieldWrapper = jQuery('#openlayers-geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
     // Select the related source or fallback to a generic one.
-    if (typeof data.opt.editLayer !== 'undefined' && typeof data.objects.layers[data.opt.editLayer] !== 'undefined') {
+    if (data.opt.editLayer !== undefined && data.objects.layers[data.opt.editLayer] !== undefined) {
       vector_layer = data.objects.layers[data.opt.editLayer];
       vector_layer.getSource().on('change', saveData);
     }
 
-    if (typeof data.opt.editStyle !== 'undefined' && typeof data.objects.styles[data.opt.editStyle] !== 'undefined') {
+    if (data.opt.editStyle !== undefined && data.objects.styles[data.opt.editStyle] !== undefined) {
       var editStyle = data.objects.styles[data.opt.editStyle];
     }
 
-    if (typeof data.opt.editControl !== 'undefined' && typeof data.objects.controls[data.opt.editControl] !== 'undefined') {
+    if (data.opt.editControl !== undefined && data.objects.controls[data.opt.editControl] !== undefined) {
       geofieldControl = data.objects.controls[data.opt.editControl];
 
       geofieldControl.element.addEventListener('change', function(event) {
