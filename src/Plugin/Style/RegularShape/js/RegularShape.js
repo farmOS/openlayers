@@ -19,22 +19,22 @@ Drupal.openlayers.pluginManager.register({
         })
       };
 
-      if (typeof geometry_style.image.radius !== 'undefined') {
+      if (geometry_style.image.radius !== undefined) {
         options.radius = geometry_style.image.radius;
       }
-      if (typeof geometry_style.image.points !== 'undefined') {
+      if (geometry_style.image.points !== undefined) {
         options.points = geometry_style.image.points;
       }
-      if (typeof geometry_style.image.radius1 !== 'undefined') {
+      if (geometry_style.image.radius1 !== undefined) {
         options.radius1 = geometry_style.image.radius1;
       }
-      if (typeof geometry_style.image.radius2 !== 'undefined') {
+      if (geometry_style.image.radius2 !== undefined) {
         options.radius2 = geometry_style.image.radius2;
       }
-      if (typeof geometry_style.image.angle !== 'undefined') {
+      if (geometry_style.image.angle !== undefined) {
         options.angle = geometry_style.image.angle * Math.PI / 180;
       }
-      if (typeof geometry_style.image.rotation !== 'undefined') {
+      if (geometry_style.image.rotation !== undefined) {
         options.rotation = geometry_style.image.rotation * Math.PI / 180;
       }
       return [

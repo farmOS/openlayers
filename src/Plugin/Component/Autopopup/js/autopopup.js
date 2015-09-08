@@ -15,7 +15,7 @@ Drupal.openlayers.pluginManager.register({
     var container = document.getElementById('popup-' + random);
     var content = document.getElementById('popup-content-' + random);
 
-    if (typeof data.opt.closer !== 'undefined' && data.opt.closer !== 0) {
+    if (data.opt.closer !== undefined && data.opt.closer !== 0) {
       var closer = jQuery('<a/>', {
         href: '#',
         id: 'popup-closer-' + random,

@@ -23,7 +23,7 @@ Drupal.openlayers.pluginManager.register({
     var container = document.getElementById('popup-' + random);
     var content = document.getElementById('popup-content-' + random);
 
-    if (typeof data.opt.closer !== 'undefined' && data.opt.closer !== 0) {
+    if (data.opt.closer !== undefined && data.opt.closer !== 0) {
       var closer = jQuery('<a/>', {
         href: '#',
         id: 'popup-closer-' + random,
@@ -61,7 +61,7 @@ Drupal.openlayers.pluginManager.register({
 
     map.on('click', function(evt) {
       var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-        if (typeof data.opt.frontend_layers[layer.mn] !== 'undefined') {
+        if (data.opt.frontend_layers[layer.mn] !== undefined) {
           return feature;
         }
       });
