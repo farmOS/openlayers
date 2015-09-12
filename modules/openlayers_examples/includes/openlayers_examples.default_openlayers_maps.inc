@@ -1295,8 +1295,7 @@ function openlayers_examples_default_openlayers_maps() {
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
       1 => 'openlayers_interaction_mousewheelzoom',
-      2 => 'openlayers_examples_interaction_select',
-      3 => 'openlayers_examples_interaction_drag_features',
+      2 => 'openlayers_examples_interaction_translate',
     ),
   );
   $export['openlayers_examples_map_features_interactions'] = $ol_map;

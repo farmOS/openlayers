@@ -169,5 +169,15 @@ function openlayers_default_openlayers_interactions() {
   $ol_interaction->options = array();
   $export['openlayers_interaction_snap'] = $ol_interaction;
 
+  $ol_interaction = new stdClass();
+  $ol_interaction->disabled = FALSE;
+  $ol_interaction->api_version = 1;
+  $ol_interaction->machine_name = 'openlayers_interaction_translate';
+  $ol_interaction->name = 'Translate';
+  $ol_interaction->description = 'Translate interaction description';
+  $ol_interaction->factory_service = 'openlayers.Interaction:Translate';
+  $ol_interaction->options = array();
+  $export['openlayers_interaction_translate'] = $ol_interaction;
+
   return $export;
 }
