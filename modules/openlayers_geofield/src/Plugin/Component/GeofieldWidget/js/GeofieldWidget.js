@@ -6,7 +6,7 @@ Drupal.openlayers.pluginManager.register({
     // make interactions global so they can later be removed
     var select_interaction, draw_interaction,
       modify_interaction,snap_interaction,
-      move_interaction;
+      translate_interaction;
 
     var vector_layer;
     var geofieldControl;
@@ -34,7 +34,8 @@ Drupal.openlayers.pluginManager.register({
         }
 
         if ((((options || {}).actions || {}).Move || false) === true) {
-          addMoveInteraction();
+          addSelectInteraction();
+          addTranslateInteraction();
         }
 
         if ((((options || {}).actions || {}).Edit || false) === true) {
@@ -65,7 +66,7 @@ Drupal.openlayers.pluginManager.register({
       map.removeInteraction(draw_interaction);
       map.removeInteraction(modify_interaction);
       map.removeInteraction(snap_interaction);
-      map.removeInteraction(move_interaction);
+      map.removeInteraction(translate_interaction);
     }
 
     function clearMap() {
@@ -73,9 +74,11 @@ Drupal.openlayers.pluginManager.register({
       saveData();
     }
 
-    function addMoveInteraction() {
-      move_interaction = new ol.interaction.dragFeature();
-      map.addInteraction(move_interaction);
+    function addTranslateInteraction() {
+      translate_interaction = new ol.interaction.Translate({
+        features: select_interaction.getFeatures()
+      });
+      map.addInteraction(translate_interaction);
     }
 
     function addSnapInteraction() {
