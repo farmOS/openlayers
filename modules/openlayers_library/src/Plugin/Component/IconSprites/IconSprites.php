@@ -24,7 +24,7 @@ class IconSprites extends Component {
    */
   public function getJS() {
     $js = parent::getJS();
-    $js['opt']['url'] = file_create_url(drupal_get_path('module', 'openlayers_library') . '/assets/Butterfly.png');
+    $js['opt']['url'] = file_create_url(drupal_get_path('module', 'openlayers_examples') . '/assets/Butterfly.png');
 
     return $js;
   }
