@@ -52,28 +52,27 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
 
   // Get preset options, filtered to those which have the GeoField source.
   $map_options = array();
-  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $machine_name => $map) {
+  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
     if (is_object($map)) {
-      foreach ($map->getObjects('source') as $source) {
-        // TODO: add getSource() to Object and Object Interface.
-        if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-          $map_options[$machine_name] = $map->name;
+      foreach ($map->getObjects('component') as $component) {
+        if ($component->getFactoryService() === 'openlayers.Component:GeofieldFormatter') {
+          $map_options[$map->getMachineName()] = $map->getName();
         }
       }
     }
   }
 
   if (empty($map_options)) {
-    form_set_error('openlayers_map', "Error: You have no compatible openlayers maps. Make sure that at least one map has the 'GeoField' component enabled.");
+    form_set_error('openlayers_map', "Error: You have no compatible openlayers maps. Make sure that at least one map has the 'GeoField Formatter' component enabled.");
   }
 
   $element['map_preset'] = array(
-    '#title' => t('Openlayers Preset'),
+    '#title' => t('Openlayers map'),
     '#type' => 'select',
     '#default_value' => $settings['map_preset'] ? $settings['map_preset'] : 'openlayers_geofield_map_geofield_formatter',
     '#required' => TRUE,
     '#options' => $map_options,
-    '#description' => t('Select which Openlayers map you would like to use. Only maps which have the geofield placeholder layer may be selected. If your preferred map is not here, add the geofield placeholder layer to it first.'),
+    '#description' => t('Select which Openlayers map you would like to use. Only maps which have the "Geofield Formatter" component may be selected. If your preferred map is not here, add the "Geofield Formatter" component to it first.'),
   );
 
   $data_options = _geofield_formatter_settings_data_options($display['type']);
@@ -174,11 +173,6 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
         $items[$delta]['lon'] = geofield_latlon_DECtoDMS($item['lon'], 'lon');
       }
     }
-  }
-
-  // If we are a lat, lon, or latlon, and we are using celestial coordinate
-  // system (instead of decimal degrees), then do a transformation.
-  if (isset($display['settings']['format'])) {
     if ($display['settings']['format'] == 'ccs') {
       foreach ($items as $delta => $item) {
         $items[$delta]['lat'] = geofield_latlon_DECtoCCS($item['lat'], 'lat');
@@ -206,14 +200,15 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
     $geofield_source = NULL;
-    foreach ($map->getObjects('source') as $source) {
-      if ($source instanceof \Drupal\openlayers_geofield\Plugin\Source\Geofield\Geofield) {
-        $geofield_source = $source;
-        $source->setOption('features', $features);
+
+    foreach ($map->getCollection()->getObjects('component') as $component) {
+      if ($component->getFactoryService() == 'openlayers.Component:GeofieldFormatter') {
+        if ($layer = $component->getLayer()) {
+          if ($layer->getSource() instanceof \Drupal\openlayers\Plugin\Source\Vector\Vector) {
+            $layer->getSource()->setOption('features', $features);
+          }
+        }
       }
-    }
-    if (!isset($geofield_source)) {
-      drupal_set_message(t('Trying to render a geofield formatter on a map without the geofield source.'), 'error');
     }
 
     // Build map.
@@ -221,7 +216,6 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   }
   return $element;
 }
-
 
 /**
  * Implements hook_field_widget_info().
@@ -265,11 +259,9 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $maps = \Drupal\openlayers\Openlayers::loadAll('Map');
   $map_options = array();
   foreach ($maps as $machine_name => $map) {
-    if (is_object($map)) {
-      foreach ($map->getObjects('component') as $component) {
-        if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
-          $map_options[$machine_name] = $map->name;
-        }
+    foreach ($map->getObjects('component') as $component) {
+      if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\GeofieldWidget\GeofieldWidget) {
+        $map_options[$machine_name] = $map->name;
       }
     }
   }
@@ -379,7 +371,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   $wrapper_id = drupal_html_id($id_prefix . '-use-geocoder-wrapper');
 
   $settings_defaults = array(
-    'openlayers_map' => 'openlayers_geofield_map_geofield',
+    'openlayers_map' => 'openlayers_geofield_map_geofield_widget',
     'data_storage' => 'single',
     'feature_types' => array(
       'point' => 'point',
@@ -387,21 +379,20 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
       'polygon' => 'polygon',
     ),
     'allow_edit' => 1,
+    'showInputField' => 1,
   );
   $settings = array_merge($settings_defaults, $widget['settings']);
 
-  $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield';
+  $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield_widget';
 
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id)) == FALSE) {
     // If the map couldn't be load we can't do a thing.
-    return NULL;
+    return array();
   }
   foreach ($map->getObjects('component') as $component) {
+    /* @var \Drupal\openlayers\Types\Component $component */
     // Configure component based on the widget settings.
-    if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\Geofield\Geofield) {
-      $component->setOption('dataType', array('WKT' => 'WKT'));
-      $component->setOption('dataProjection', 'EPSG:4326');
-
+    if ($component->getFactoryService() === 'openlayers.Component:GeofieldWidget') {
       // Conversion from geofield to openlayers geofield feature types.
       $feature_types = $settings['feature_types'];
       if (!empty($feature_types['path'])) {
@@ -416,14 +407,16 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
         $feature_types['Point'] = 'Point';
         unset($feature_types['point']);
       }
-      $component->setOption('typeOfFeature', $feature_types);
 
       $action_feature = array('draw' => 'draw');
       if (!empty($settings['allow_edit'])) {
         $action_feature['modify'] = 'modify';
       }
-      $component->setOption('actionFeature', $action_feature);
 
+      $component->setOption('dataType', array('WKT' => 'WKT'));
+      $component->setOption('dataProjection', 'EPSG:4326');
+      $component->setOption('typeOfFeature', $feature_types);
+      $component->setOption('actionFeature', $action_feature);
       $component->setOption('initialData', $items);
       $component->setOption('featureLimit', $field['cardinality']);
       $component->setOption('inputFieldName', 'geom');
@@ -435,6 +428,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   if ($map_build) {
     $element += $map_build;
   }
+
   // Remove the #value key to ensure it's written by the form handler.
   unset($element['geom']['#value']);
 

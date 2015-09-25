@@ -183,7 +183,7 @@ class Circle extends Style {
       );
       $form['options'][$geometry_type]['stroke']['lineDash'] = array(
         '#type' => 'textfield',
-        '#title' => 'Width',
+        '#title' => 'Line dash',
         '#description' => 'Two integers separated by a comma. The comma is mandatory. Default to disable is <em>0,0</em>.',
         '#default_value' => $this->getOption(array($geometry_type, 'stroke', 'lineDash'), '0,0'),
       );

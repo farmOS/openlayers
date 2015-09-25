@@ -97,20 +97,30 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     $map->clearOption('contextualLinks');
     $map->setOption('height', '500px');
 
-    $controls = array_values(array_merge($map->getOption('controls', array()), array(
-      'openlayers_control_attribution',
-      'openlayers_control_zoom',
-      'openlayers_control_rotate',
-      'openlayers_control_fullscreen',
-    )));
-    $map->setOption('controls', $controls);
-
-    $map->setOption('interactions', array(
-        'openlayers_interaction_doubleclickzoom',
-        'openlayers_interaction_dragpan',
-        'openlayers_interaction_dragrotate',
+    $controls = array_values(
+      array_merge(
+        $map->getOption('controls', array()),
+        array(
+          'openlayers_control_attribution',
+          'openlayers_control_zoom',
+          'openlayers_control_rotate',
+          'openlayers_control_fullscreen',
+        )
       )
     );
+    $map->setOption('controls', $controls);
+
+    $components = array_values(
+      array_merge(
+        $map->getOption('interactions', array()),
+        array(
+          'openlayers_interaction_doubleclickzoom',
+          'openlayers_interaction_dragpan',
+          'openlayers_interaction_dragrotate',
+        )
+      )
+    );
+    $map->setOption('interactions', $components);
 
     $components = array_values(
       array_merge(
@@ -120,7 +130,7 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
           'openlayers_examples_component_viewsync',
           'openlayers_examples_component_spinjs',
           'openlayers_examples_component_progressbar',
-          'openlayers_examples_component_permalink'
+          'openlayers_examples_component_permalink',
         )
       )
     );

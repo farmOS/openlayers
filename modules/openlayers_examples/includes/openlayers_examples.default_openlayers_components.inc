@@ -70,7 +70,7 @@ function openlayers_examples_default_openlayers_components() {
       'pan' => '500',
       'zoom' => '500',
     ),
-    'zoom' => 'auto',
+    'zoom' => 'disabled',
     'enableAnimations' => 1,
   );
   $export['openlayers_examples_component_zoom_to_source'] = $ol_component;

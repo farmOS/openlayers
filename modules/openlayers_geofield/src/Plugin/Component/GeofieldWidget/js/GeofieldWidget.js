@@ -1,101 +1,105 @@
 Drupal.openlayers.pluginManager.register({
-  fs: 'openlayers.Component:Geofield',
+  fs: 'openlayers.Component:GeofieldWidget',
   init: function(data) {
     var map = data.map;
-    var geofieldWrapper = jQuery('#geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
-
-    // Select the related source or fallback to a generic one.
-    if (data.opt.source !== undefined && data.objects.sources[data.opt.source] !== undefined) {
-      var source = data.objects.sources[data.opt.source];
-    }
-    else {
-      var source = new ol.source.Vector();
-    }
-
-    // create a vector layer used for editing.
-    var vector_layer = new ol.layer.Vector({
-      name: 'drawing_vectorlayer',
-      source: source,
-      style: new ol.style.Style({
-        fill: new ol.style.Fill({
-          color: 'rgba(255, 255, 255, 0.2)'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#ffcc33',
-          width: 2
-        }),
-        image: new ol.style.Circle({
-          radius: 7,
-          fill: new ol.style.Fill({
-            color: '#ffcc33'
-          })
-        })
-      })
-    });
-    vector_layer.getSource().on('addfeature', saveData);
-
-    map.addLayer(vector_layer);
-
-    // Add preset data if available.
-    if (jQuery('.openlayers-geofield-data', geofieldWrapper).val()) {
-      try {
-        var format = new ol.format[data.opt.initialDataType]({splitCollection: true});
-        vector_layer.getSource().addFeatures(
-          format.readFeatures(
-            jQuery('.openlayers-geofield-data', geofieldWrapper).val(),
-            {
-              dataProjection: data.opt.dataProjection,
-              featureProjection: data.map.getView().getProjection()
-            })
-        );
-      }
-      catch (e) {
-      }
-    }
 
     // make interactions global so they can later be removed
-    var select_interaction,
-      draw_interaction,
-      modify_interaction;
+    var select_interaction, draw_interaction,
+      modify_interaction,snap_interaction,
+      translate_interaction;
 
-    var action_type = jQuery('.action-feature', geofieldWrapper);
-    action_type.change(function(e) {
-      if (this.value === 'draw') {
-        addDrawInteraction();
-      } else {
-        addModifyInteraction();
-      }
-    });
+    var vector_layer;
+    var geofieldControl;
+    var geofieldWrapper = jQuery('#openlayers-geofield-' + jQuery(data.map.getViewport()).parent().attr('id'));
 
-    // get geometry type
-    var geom_type = jQuery('.type-of-feature', geofieldWrapper);
-    geom_type.change(function(e) {
-      map.removeInteraction(draw_interaction);
-      addDrawInteraction();
-    });
+    // Select the related source or fallback to a generic one.
+    if (data.opt.editLayer !== undefined && data.objects.layers[data.opt.editLayer] !== undefined) {
+      vector_layer = data.objects.layers[data.opt.editLayer];
+      vector_layer.getSource().on('change', saveData);
+    }
 
-    // get data type to save in
+    if (data.opt.editStyle !== undefined && data.objects.styles[data.opt.editStyle] !== undefined) {
+      var editStyle = data.objects.styles[data.opt.editStyle];
+    }
+
+    if (data.opt.editControl !== undefined && data.objects.controls[data.opt.editControl] !== undefined) {
+      geofieldControl = data.objects.controls[data.opt.editControl];
+
+      geofieldControl.element.addEventListener('change', function(event) {
+        var options = event.detail.options;
+        removeMapInteractions();
+
+        if ((((options || {}).actions || {}).Clear || false) === true) {
+          clearMap();
+        }
+
+        if ((((options || {}).actions || {}).Move || false) === true) {
+          addSelectInteraction();
+          addTranslateInteraction();
+        }
+
+        if ((((options || {}).actions || {}).Edit || false) === true) {
+          addSelectInteraction();
+          addModifyInteraction();
+        }
+
+        if (((options || {}).draw || false) !== false) {
+          addDrawInteraction(options.draw);
+        }
+
+        if ((((options || {}).options || {}).Snap || false) === true) {
+          addSnapInteraction();
+        }
+
+        this.options = event.detail.options;
+      });
+    }
+
     var data_type = jQuery('.data-type', geofieldWrapper);
     data_type.change(function(e) {
       clearMap();
-      map.removeInteraction(draw_interaction);
-      addDrawInteraction();
+      removeMapInteractions();
     });
 
-    // build up modify interaction
-    // needs a select and a modify interaction working together
-    function addModifyInteraction() {
-      // remove draw interaction
+    function removeMapInteractions() {
+      map.removeInteraction(select_interaction);
       map.removeInteraction(draw_interaction);
-      // create select interaction
+      map.removeInteraction(modify_interaction);
+      map.removeInteraction(snap_interaction);
+      map.removeInteraction(translate_interaction);
+    }
+
+    function clearMap() {
+      vector_layer.getSource().clear();
+      saveData();
+    }
+
+    function addTranslateInteraction() {
+      translate_interaction = new ol.interaction.Translate({
+        features: select_interaction.getFeatures()
+      });
+      map.addInteraction(translate_interaction);
+    }
+
+    function addSnapInteraction() {
+      snap_interaction = new ol.interaction.Snap({
+        source: vector_layer.getSource()
+      });
+      map.addInteraction(snap_interaction);
+    }
+
+    function addSelectInteraction() {
       select_interaction = new ol.interaction.Select({
         // make sure only the desired layer can be selected
-        layers: function(vector_layer) {
-          return vector_layer.get('name') === 'drawing_vectorlayer';
+        layers: function(layer) {
+          return layer === vector_layer;
         }
       });
       map.addInteraction(select_interaction);
+    }
 
+    // build up modify interaction
+    function addModifyInteraction() {
       // grab the features from the select interaction to use in the modify interaction
       var selected_features = select_interaction.getFeatures();
       // when a feature is selected...
@@ -106,7 +110,7 @@ Drupal.openlayers.pluginManager.register({
         feature.on('change', saveData);
         // listen to pressing of delete key, then delete selected features
         jQuery(document).on('keyup', function (event) {
-          if (event.keyCode == 46) {
+          if (event.keyCode === 46) {
             try {
               // remove from select_interaction
               selected_features.remove(feature);
@@ -122,8 +126,10 @@ Drupal.openlayers.pluginManager.register({
           }
         });
       });
+
       // create the modify interaction
       modify_interaction = new ol.interaction.Modify({
+        style: editStyle,
         features: selected_features,
         // delete vertices by pressing the SHIFT key
         deleteCondition: function(event) {
@@ -136,22 +142,48 @@ Drupal.openlayers.pluginManager.register({
     }
 
     // creates a draw interaction
-    function addDrawInteraction() {
-      // remove other interactions
-      map.removeInteraction(select_interaction);
-      map.removeInteraction(modify_interaction);
+    function addDrawInteraction(options) {
+      var geometryFunction, maxPoints;
+      var value = options;
+
+      if (value === 'Square') {
+        value = 'Circle';
+        maxPoints = 4;
+        geometryFunction = ol.interaction.Draw.createRegularPolygon(4);
+      } else if (value === 'Box') {
+        value = 'LineString';
+        maxPoints = 2;
+        geometryFunction = function(coordinates, geometry) {
+          if (!geometry) {
+            geometry = new ol.geom.Polygon(null);
+          }
+          var start = coordinates[0];
+          var end = coordinates[1];
+          geometry.setCoordinates([
+            [start, [start[0], end[1]], end, [end[0], start[1]], start]
+          ]);
+          return geometry;
+        };
+      } else if (value === 'Circle') {
+        geometryFunction = ol.interaction.Draw.createRegularPolygon(100);
+      } else if (value === 'Triangle') {
+        value = 'Circle';
+        maxPoints = 3;
+        geometryFunction = ol.interaction.Draw.createRegularPolygon(3);
+      }
 
       // create the interaction
       draw_interaction = new ol.interaction.Draw({
         source: vector_layer.getSource(),
-        type: /** @type {ol.geom.GeometryType} */ (geom_type.val())
+        type: /** @type {ol.geom.GeometryType} */ (value),
+        geometryFunction: geometryFunction,
+        maxPoints: maxPoints,
+        style: editStyle
       });
+
       // add it to the map
       map.addInteraction(draw_interaction);
     }
-
-    // add the draw interaction when the page is first shown
-    addDrawInteraction();
 
     // shows data in textarea
     // replace this function by what you need
@@ -162,6 +194,7 @@ Drupal.openlayers.pluginManager.register({
       var features = vector_layer.getSource().getFeatures();
 
       var format = new ol.format[typeFormat]({splitCollection: true}),
+//      var format = new ol.format[typeFormat]({splitCollection: true}),
       // this will be the data in the chosen format
         datas;
       try {
@@ -184,7 +217,7 @@ Drupal.openlayers.pluginManager.register({
         // Ensure an empty geometry collection doesn't write any data. That way
         // the original geofield validator will work and a required field is
         // properly detected as empty.
-        if (datas == 'GEOMETRYCOLLECTION EMPTY') {
+        if (datas === 'GEOMETRYCOLLECTION EMPTY') {
           datas = '';
         }
 
@@ -194,36 +227,7 @@ Drupal.openlayers.pluginManager.register({
         return;
       }
       jQuery('.openlayers-geofield-data', geofieldWrapper).val(datas);
-      // @TODO Doesn't look like the code below is needed anymore.
-      //if (typeFormat === 'GeoJSON') {
-      //  // format is JSON
-      //  jQuery('.openlayers-geofield-data', geofieldWrapper).val(JSON.stringify(datas, null, 4));
-      //}
-      //if (typeFormat === 'GPX' || typeFormat === 'KML') {
-      //  // format is XML (GPX or KML)
-      //  var serializer = new XMLSerializer();
-      //  jQuery('.openlayers-geofield-data', geofieldWrapper).val(serializer.serializeToString(datas));
-      //}
-      //if (typeFormat === 'WKT') {
-      //  jQuery('.openlayers-geofield-data').val(datas);
-      //}
     }
-
-    // clear map when user clicks on 'Delete all features'
-    jQuery('.clearmap', geofieldWrapper).click(function(e) {
-      clearMap();
-      e.preventDefault();
-    });
-
-    // clears the map and the output of the data
-    function clearMap() {
-      vector_layer.getSource().clear();
-      if (select_interaction) {
-        select_interaction.getFeatures().clear();
-      }
-      jQuery('.openlayers-geofield-data', geofieldWrapper).val('');
-    }
-
   }
 });
 
