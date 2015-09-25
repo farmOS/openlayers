@@ -12,6 +12,7 @@ Drupal.openlayers.pluginManager.register({
       disableDoubleClickZoom: true,
       scrollwheel: false,
       streetViewControl: false,
+      tilt: 0,
       mapTypeId: google.maps.MapTypeId[data.opt.mapTypeId] || 'roadmap'
     });
     gmapDiv.data('gmap', gmap);
