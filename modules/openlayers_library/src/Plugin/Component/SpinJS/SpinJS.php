@@ -18,7 +18,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  *   id = "SpinJS",
  *   description = "Provides a JS Spinner when the map is loading."
  * )
- *
  */
 class SpinJS extends Component {
   /**

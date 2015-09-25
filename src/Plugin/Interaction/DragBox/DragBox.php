@@ -14,8 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "DragBox"
  * )
- *
- * @package Drupal\openlayers\Openlayers\Interaction\DragBox
  */
 class DragBox extends Interaction {
 

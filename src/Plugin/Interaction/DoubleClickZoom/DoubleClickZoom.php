@@ -15,8 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "DoubleClickZoom",
  *  description = "Allows the user to zoom by double-clicking on the map."
  * )
- *
- * @package Drupal\openlayers\Openlayers\Interaction\DoubleClickZoom
  */
 class DoubleClickZoom extends Interaction {
 

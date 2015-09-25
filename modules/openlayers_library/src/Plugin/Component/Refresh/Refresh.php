@@ -16,6 +16,5 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *   id = "Refresh"
  * )
- *
  */
 class Refresh extends Component {}

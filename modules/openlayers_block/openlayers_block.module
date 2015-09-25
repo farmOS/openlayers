@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Openlayers Block module.
+ */
 
 /**
  * Implements hook_block_info().

@@ -4,7 +4,10 @@
  * Openlayers Contextual Links module.
  */
 
-function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build, $context) {
+/**
+ * Implements hook_openlayers_object_postprocess_alter().
+ */
+function openlayers_contextual_links_openlayers_object_postprocess_alter(array $build, \Drupal\openlayers\Types\ObjectInterface $context) {
   if (!user_access('administer openlayers')) {
     return FALSE;
   }
@@ -76,6 +79,9 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(&$build
   $build['#attributes']['class'][] = 'contextual-links-region';
 }
 
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
 function openlayers_contextual_links_form_openlayers_map_form_settings_alter(&$form, &$form_state) {
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
 

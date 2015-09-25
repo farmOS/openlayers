@@ -19,8 +19,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "LayerSwitcher",
  *  description = "Provides a layer switcher control."
  * )
- *
- * @package Drupal\openlayers\Control
  */
 class LayerSwitcher extends Control {
 

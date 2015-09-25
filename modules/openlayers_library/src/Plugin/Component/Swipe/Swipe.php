@@ -16,7 +16,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *   id = "Swipe"
  * )
- *
  */
 class Swipe extends Component {
   /**

@@ -17,7 +17,6 @@ use Drupal\openlayers\Types\Source;
  *  id = "Field",
  *  description = "Provides a source where data are geocoded from provided options."
  * )
- *
  */
 class Field extends Vector {
   /**

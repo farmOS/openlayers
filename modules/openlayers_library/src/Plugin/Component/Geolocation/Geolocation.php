@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *   id = "Geolocation"
  * )
- *
  */
 class Geolocation extends Component {
 

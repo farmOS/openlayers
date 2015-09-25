@@ -16,7 +16,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *   id = "Timezones"
  * )
- *
  */
 class Timezones extends Component {
   /**

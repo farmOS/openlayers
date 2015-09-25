@@ -16,6 +16,5 @@ use Drupal\openlayers\Types\Style;
  * @OpenlayersPlugin(
  *   id = "Timezones"
  * )
- *
  */
 class Timezones extends Style {}

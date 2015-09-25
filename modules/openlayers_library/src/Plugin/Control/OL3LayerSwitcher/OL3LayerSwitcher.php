@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Control;
  *  id = "OL3LayerSwitcher",
  *  description = ""
  * )
- *
  */
 class OL3LayerSwitcher extends Control {
   /**

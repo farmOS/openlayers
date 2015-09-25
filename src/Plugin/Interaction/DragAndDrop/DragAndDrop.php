@@ -14,8 +14,6 @@ use Drupal\openlayers\Types\Interaction;
  * @OpenlayersPlugin(
  *  id = "DragAndDrop"
  * )
- *
- * @package Drupal\openlayers\Openlayers\Interaction\DragAndDrop
  */
 class DragAndDrop extends Interaction {
 

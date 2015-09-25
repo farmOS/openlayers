@@ -14,8 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "Stamen"
  * )
- *
- * @package Drupal\openlayers\Source
  */
 class Stamen extends Source {
 

@@ -15,8 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "DragZoom",
  *  description = "Allows the user to zoom the map by clicking and dragging on the map when the [ALT] and [SHIFT] keys are held down."
  * )
- *
- * @package Drupal\openlayers\Openlayers\Interaction\DragZoom
  */
 class DragZoom extends Interaction {
 

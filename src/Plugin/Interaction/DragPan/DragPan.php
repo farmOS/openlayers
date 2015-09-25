@@ -15,8 +15,6 @@ use Drupal\openlayers\Types\Interaction;
  *  id = "DragPan",
  *  description = "Allows the user to pan the map by dragging the map."
  * )
- *
- * @package Drupal\openlayers\Interaction\DragPan
  */
 class DragPan extends Interaction {
 

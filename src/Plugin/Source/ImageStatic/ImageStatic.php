@@ -14,8 +14,6 @@ use Drupal\openlayers\Types\Source;
  * @OpenlayersPlugin(
  *  id = "ImageStatic"
  * )
- *
- * @package Drupal\openlayers\Openlayers\Source\ImageStatic
  */
 class ImageStatic extends Source {
 

@@ -16,7 +16,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  * @OpenlayersPlugin(
  *   id = "ViewSync"
  * )
- *
  */
 class ViewSync extends Component {
 
