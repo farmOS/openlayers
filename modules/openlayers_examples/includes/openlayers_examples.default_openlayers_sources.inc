@@ -776,5 +776,17 @@ var source = new ol.source.Vector({
   );
   $export['openlayers_examples_source_random_features'] = $ol_source;
 
+  $ol_source = new stdClass();
+  $ol_source->disabled = FALSE; /* Edit this to true to make a default source disabled initially */
+  $ol_source->api_version = 1;
+  $ol_source->machine_name = 'openlayers_examples_source_opentopomap';
+  $ol_source->name = 'Openlayers examples: Opentopomap';
+  $ol_source->description = '';
+  $ol_source->factory_service = 'openlayers.Source:XYZ';
+  $ol_source->options = array(
+    'url' => '//opentopomap.org/tiles/{z}/{x}/{y}.png',
+  );
+  $export['openlayers_examples_source_opentopomap'] = $ol_source;
+
   return $export;
 }

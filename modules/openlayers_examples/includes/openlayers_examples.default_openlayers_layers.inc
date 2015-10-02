@@ -785,5 +785,16 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_random_features'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_opentopomap';
+  $ol_layer->name = 'Openlayers examples: Opentopomap';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Tile';
+  $ol_layer->options = array(
+    'source' => 'openlayers_examples_source_opentopomap',
+  );
+  $export['openlayers_examples_layer_opentopomap'] = $ol_layer;
+
   return $export;
 }
