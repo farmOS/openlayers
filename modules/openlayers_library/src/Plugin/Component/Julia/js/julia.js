@@ -9,7 +9,7 @@ Drupal.openlayers.pluginManager.register({
         fractalMode = document.getElementById('fractalmode'),
         initialvaluex = document.getElementById('initialvaluex'),
         initialvaluei = document.getElementById('initialvaluei'),
-        fractalInColor = '#000000',
+        fractalInColor = '#FFFFFF',
         layer = new ol.layer.Vector({
           source: new ol.source.Vector({
             features: features
