@@ -34,12 +34,24 @@ Drupal.openlayers.pluginManager.register({
         getFractalValues = function (x, y, cx, cy, iterations) {
           var xx = 0, yy = 0, xy = 0, i = 0;
 
-          while (xx + yy <= 4 && i++ < iterations - 1) {
+          // Escap time algorithm
+          while (xx + yy < 4 && i <= iterations) {
             xy = x * y;
             xx = x * x;
             yy = y * y;
             x = xx - yy + cx;
             y = 2 * xy + cy;
+            // Optimisation: Periodicity checking (Mandelbrot only)
+            if (x*x == xx && y*y == yy) {
+              i = iterations;
+              break;
+            }
+            i++;
+          }
+
+          // Continuous (smooth) coloring.
+          if (i <= iterations) {
+            i = i + 1 - Math.log(Math.log(xx + yy) / 2/Math.log(2)) / Math.log(2);
           }
 
           return [xx+yy, i];
@@ -70,6 +82,14 @@ Drupal.openlayers.pluginManager.register({
               var zx = Math.round(xmin + (xmax - xmin) * x / width);
 
               if (fractaltype === 'mandelbrot') {
+                if (zx < -2 * 1000000 || zx > 0.5 * 1000000) {
+                  continue;
+                }
+
+                if (zy < -1 * 1000000 || zy > 1 * 1000000) {
+                  continue;
+                }
+
                 i = getFractalValues(0, 0, zx/1000000, zy/1000000, iterations);
 
                 if (fractalmode == 'in') {
@@ -94,8 +114,16 @@ Drupal.openlayers.pluginManager.register({
               }
 
               if (fractaltype === 'julia') {
+                if (zx < -2 * 1000000 || zx > 2 * 1000000) {
+                  continue;
+                }
+
+                if (zy < -2 * 1000000 || zy > 2 * 1000000) {
+                  continue;
+                }
+
                 i = getFractalValues(zx/1000000, zy/1000000, initialvaluex, initialvaluei, iterations);
-                if (i[1] > 1) {
+                if (i[1] > 0) {
                   features.push(new ol.Feature({
                         geometry: new ol.geom.MultiPoint([[zx, zy]]),
                         fractalColor: getFractalColor(i[1], iterations),
