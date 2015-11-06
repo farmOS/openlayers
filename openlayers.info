@@ -8,8 +8,8 @@ dependencies[] = libraries
 dependencies[] = file
 dependencies[] = image
 dependencies[] = service_container
-dependencies[] = service_container_symfony
-dependencies[] = service_container_annotation_discovery
+dependencies[] = service_container:service_container_symfony
+dependencies[] = service_container:service_container_annotation_discovery
 dependencies[] = jquery_update
 
 registry_autoload[] = PSR-4
