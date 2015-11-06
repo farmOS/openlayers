@@ -63,7 +63,7 @@ function _openlayers_block_get_block_id($map_machine_name) {
  *   The name of the map.
  */
 function _openlayers_block_get_map_name($delta) {
-  foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $map) {
+  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
     if (is_object($map) && _openlayers_block_get_block_id($map->getMachineName()) == $delta) {
       return $map->getMachineName();
     }
