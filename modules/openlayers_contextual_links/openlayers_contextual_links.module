@@ -7,7 +7,7 @@
 /**
  * Implements hook_openlayers_object_postprocess_alter().
  */
-function openlayers_contextual_links_openlayers_object_postprocess_alter(array $build, \Drupal\openlayers\Types\ObjectInterface $context) {
+function openlayers_contextual_links_openlayers_object_postprocess_alter(array &$build, \Drupal\openlayers\Types\ObjectInterface $context) {
   if (!user_access('administer openlayers')) {
     return FALSE;
   }
