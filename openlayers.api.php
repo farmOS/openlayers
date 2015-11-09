@@ -13,7 +13,7 @@
  * @param \Drupal\openlayers\Types\ObjectInterface $context
  *   The context, this will be an openlayers object.
  */
-function hook_openlayers_object_preprocess_alter(array $build, \Drupal\openlayers\Types\ObjectInterface $context) {
+function hook_openlayers_object_preprocess_alter(array &$build, \Drupal\openlayers\Types\ObjectInterface $context) {
 
 }
 
@@ -25,6 +25,6 @@ function hook_openlayers_object_preprocess_alter(array $build, \Drupal\openlayer
  * @param \Drupal\openlayers\Types\ObjectInterface $context
  *   The context, this will be an openlayers object.
  */
-function hook_openlayers_object_postprocess_alter(array $build, \Drupal\openlayers\Types\ObjectInterface $context) {
+function hook_openlayers_object_postprocess_alter(array &$build, \Drupal\openlayers\Types\ObjectInterface $context) {
 
 }
