@@ -235,14 +235,18 @@ class GeofieldWidget extends Component {
     }
 
     $geom = $this->initialDataToGeomFeatures();
+    $wkt = '';
+    if (!empty($geom['geom'])) {
+      $wkt = $geom['geom']->out('wkt');
+    }
     $component['data'] = array(
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
       '#attributes' => array(
         'class' => array('openlayers-geofield-data'),
       ),
-      '#default_value' => $geom['geom']->out('wkt'),
-      '#value' => $geom['geom']->out('wkt'),
+      '#default_value' => $wkt,
+      '#value' => $wkt,
     );
 
     // Now add the component into the build array. This is a bit complex due
