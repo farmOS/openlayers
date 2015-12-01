@@ -72,10 +72,14 @@ Drupal.openlayers.pluginManager.register({
     var layers = getLayersFromObject(map);
     layers.forEach(function (layer) {
       var source = layer.getSource();
-      source.on('change', zoomToSource, source);
-      if (typeof source.getFeatures === 'function') {
-        if (source.getFeatures().length !== 0) {
-          zoomToSource.call(source);
+
+      // Only zoom to a source if it's in the configured list of sources.
+      if (typeof data.opt.source[source.mn] !== 'undefined') {
+        source.on('change', zoomToSource, source);
+        if (typeof source.getFeatures === 'function') {
+          if (source.getFeatures().length !== 0) {
+            zoomToSource.call(source);
+          }
         }
       }
     });
