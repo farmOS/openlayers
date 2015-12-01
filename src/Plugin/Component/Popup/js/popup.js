@@ -74,6 +74,19 @@ Drupal.openlayers.pluginManager.register({
         }
         jQuery(container).data('feature-key', feature[UID_PROPERTY_]);
 
+        // If the feature is a cluster, then create a list of names and add it
+        // to the overall feature's description. Wrap it in a container with
+        // a max-height and overflow: scroll so it doesn't get too big.
+        var features = feature.get('features');
+        if (features) {
+          var names = '';
+          features.forEach(function (item) {
+            names += item.get('name') + '<br />' || '';
+          });
+          var markup = '<div style="max-height: 250px; overflow: auto;">' + names + '</div>';
+          feature.set('description', markup);
+        }
+
         var name = feature.get('name') || '';
         var description = feature.get('description') || '';
 
