@@ -66,12 +66,6 @@ Drupal.openlayers.pluginManager.register({
         }
       });
       if (feature) {
-        // If this is a click to the same feature marker it's a close command.
-        if (jQuery(container).data('feature-key') == feature[UID_PROPERTY_]) {
-          container.style.display = 'none';
-          jQuery(container).data('feature-key', '');
-          return;
-        }
         jQuery(container).data('feature-key', feature[UID_PROPERTY_]);
 
         // If the feature is a cluster, then create a list of names and add it
