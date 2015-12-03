@@ -72,21 +72,27 @@ Drupal.openlayers.pluginManager.register({
         // to the overall feature's description. Wrap it in a container with
         // a max-height and overflow: scroll so it doesn't get too big.
         var features = feature.get('features');
-        if (features) {
-          var names = '';
+        if (features !== undefined) {
+          var names = [];
           features.forEach(function (item) {
-            names += item.get('name') + '<br />' || '';
+            if (item.get('name') !== undefined) {
+              names.push(item.get('name'));
+            }
           });
-          var markup = '<div style="max-height: 250px; overflow: auto;">' + names + '</div>';
-          feature.set('description', markup);
+          if (names.length != 0) {
+            feature.set('description', '<ul><li>' + names.join('</li><li>') + '</li></ul>');
+          }
+          feature.set('name', names.length + ' item(s):');
         }
 
         var name = feature.get('name') || '';
         var description = feature.get('description') || '';
 
-        overlay.setPosition(evt.coordinate);
-        content.innerHTML = '<div class="ol-popup-name">' + name + '</div><div class="ol-popup-description">' + description + '</div>';
-        container.style.display = 'block';
+        if (name != '' || description != '') {
+          overlay.setPosition(evt.coordinate);
+          content.innerHTML = '<div class="ol-popup-content"><div class="ol-popup-name">' + name + '</div><div class="ol-popup-description">' + description + '</div></div>';
+          container.style.display = 'block';
+        }
       }
     });
   }

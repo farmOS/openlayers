@@ -128,6 +128,25 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component = new stdClass();
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
   $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_simple_popup_cities';
+  $ol_component->name = 'Openlayers examples: Simple popup for layer cities';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:Popup';
+  $ol_component->options = array(
+    'layers' => array(
+      'openlayers_examples_layer_cluster_cities' => 'openlayers_examples_layer_cluster_cities',
+    ),
+    'positioning' => 'top-right',
+    'autoPan' => TRUE,
+    'autoPanAnimation' => 1000,
+    'autoPanMargin' => 20,
+    'closer' => TRUE,
+  );
+  $export['openlayers_examples_component_simple_popup_cities'] = $ol_component;
+
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
   $ol_component->machine_name = 'openlayers_examples_component_earthquake_style';
   $ol_component->name = 'Openlayers examples: Earthquake style';
   $ol_component->description = '';
