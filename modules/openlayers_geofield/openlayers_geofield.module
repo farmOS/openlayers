@@ -199,10 +199,11 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   // Load map and set features.
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
-    $geofield_source = NULL;
 
     foreach ($map->getCollection()->getObjects('component') as $component) {
+      /* @var $component \Drupal\openlayers_geofield\Plugin\Component\GeofieldFormatter\GeofieldFormatter */
       if ($component->getFactoryService() == 'openlayers.Component:GeofieldFormatter') {
+        /* @var $layer \Drupal\openlayers\Types\Layer */
         if ($layer = $component->getLayer()) {
           if ($layer->getSource() instanceof \Drupal\openlayers\Plugin\Source\Vector\Vector) {
             $layer->getSource()->setOption('features', $features);
