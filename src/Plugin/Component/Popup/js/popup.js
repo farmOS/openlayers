@@ -89,9 +89,9 @@ Drupal.openlayers.pluginManager.register({
         var description = feature.get('description') || '';
 
         if (name != '' || description != '') {
-          overlay.setPosition(evt.coordinate);
           content.innerHTML = '<div class="ol-popup-content"><div class="ol-popup-name">' + name + '</div><div class="ol-popup-description">' + description + '</div></div>';
           container.style.display = 'block';
+          overlay.setPosition(evt.coordinate);
         }
       }
     });
