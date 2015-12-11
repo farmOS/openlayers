@@ -21,7 +21,7 @@ function openlayers_views_default_openlayers_maps_alter(&$maps) {
     $map->machine_name = $machine_name;
     $map->name = 'Views Map: ' . $view->name . ':' . $display;
     $map->description = t('Map from !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view->name . '/edit/' . $display)));
-    $map->factory_service = 'openlayers.Map:Views';
+    $map->factory_service = 'openlayers.Map:OLMap';
     $map->options += array(
       'views_display' => $view->name . ':' . $display,
     );
