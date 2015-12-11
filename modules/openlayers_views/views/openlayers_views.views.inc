@@ -39,7 +39,7 @@ function openlayers_views_views_plugins() {
       ),
       'openlayers_map_views' => array(
         'title' => t('Openlayers Views Map'),
-        'help' => t('Provides a map based on a views configureation.'),
+        'help' => t('Provides a map based on a views configuration.'),
         'handler' => 'openlayers_views_plugin_map_views',
         'uses fields' => TRUE,
         'uses row plugin' => TRUE,

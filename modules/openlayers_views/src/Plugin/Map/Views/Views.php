@@ -10,6 +10,7 @@ use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Map;
 use Drupal\openlayers\Plugin\Map\OLMap\OLMap;
 use Drupal\openlayers\Types\ObjectInterface;
+use Drupal\openlayers\Types\SourceInterface;
 
 /**
  * Class Views.
@@ -74,6 +75,7 @@ class Views extends OLMap {
     $sources = parent::getObjects('source');
     $views_source_name = 'source_map_views_' . str_replace(':', '_', $this->getOption('views_display'));
     foreach ($sources as $source) {
+      /* @var $source SourceInterface */
       if ($source->getMachineName() == $views_source_name) {
         $source->setOption('features', $this->getFeatures());
       }

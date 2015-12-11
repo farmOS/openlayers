@@ -12,7 +12,7 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
   /**
    * Store the build map.
    *
-   * @var openlayers_map_interface
+   * @var \Drupal\openlayers\Types\MapInterface
    */
   protected $map;
 
@@ -35,8 +35,24 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
   /**
    * {@inheritdoc}
    */
-  public function render() {
+  public function options_form(&$form, &$form_state) {
+    $form['basemap'] = array(
+      '#type' => 'select',
+      '#title' => 'Base map',
+      '#description' => 'This map will be used as template.',
+      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('map'),
+      '#default_value' => $this->options['basemap'],
+      '#weight' => 1,
+      '#required' => TRUE,
+    );
 
+    parent::options_form($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render() {
     // Fetch the features to use with the map.
     $live_preview = !empty($this->view->live_preview);
     $this->view->live_preview = FALSE;

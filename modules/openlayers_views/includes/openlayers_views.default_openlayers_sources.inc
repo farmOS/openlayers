@@ -8,15 +8,14 @@
  * Implements hook_default_sources_alter().
  */
 function openlayers_views_default_openlayers_sources_alter(&$sources) {
-  $views = openalyers_views_get_views('openlayers_source_vector');
-  foreach ($views as $view_settings) {
-    list($view_name, $display) = $view_settings;
-    $machine_name = 'source_views_' . $view_name . '_' . $display;
+  foreach (openalyers_views_get_views('openlayers_source_vector') as $data) {
+    list($view, $display) = $data;
+    $machine_name = 'source_views_' . $view->name . '_' . $display;
     // Check if the configuration for this source was already defined or if it
     // has been modified. If so don't add it, to keep the source exportable.
     $custom_version = \Drupal\openlayers\Openlayers::loadExportable('source', $machine_name);
     if (!isset($sources[$machine_name]) && empty($custom_version)) {
-      if ($view = views_get_view($view_name)) {
+      if ($view = views_get_view($view->name)) {
         $view->set_display($display);
 
         $ol_source = new stdClass();
@@ -33,10 +32,9 @@ function openlayers_views_default_openlayers_sources_alter(&$sources) {
     }
   }
 
-  $views = openalyers_views_get_views('openlayers_map_views');
-  foreach ($views as $view_settings) {
-    list($view_name, $display) = $view_settings;
-    $machine_name = 'source_map_views_' . $view_name . '_' . $display;
+  foreach (openalyers_views_get_views('openlayers_map_views') as $data) {
+    list($view, $display) = $data;
+    $machine_name = 'source_map_views_' . $view->name . '_' . $display;
     // Check if the configuration for this source was already defined or if it
     // has been modified. If so don't add it, to keep the source exportable.
     $custom_version = \Drupal\openlayers\Openlayers::loadExportable('source', $machine_name);
@@ -44,8 +42,8 @@ function openlayers_views_default_openlayers_sources_alter(&$sources) {
       $ol_source = new stdClass();
       $ol_source->api_version = 1;
       $ol_source->machine_name = $machine_name;
-      $ol_source->name = 'Views Map: ' . $view_name . ':' . $display;
-      $ol_source->description = t('Source for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view_name . '/edit/' . $display)));
+      $ol_source->name = 'Views Map: ' . $view->name . ':' . $display;
+      $ol_source->description = t('Source for !link views map', array('!link' => l(t('this'), 'admin/structure/views/view/' . $view->name . '/edit/' . $display)));
       $ol_source->factory_service = 'openlayers.Source:Vector';
       $ol_source->options = array();
       $sources[$ol_source->machine_name] = $ol_source;
