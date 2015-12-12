@@ -8,7 +8,8 @@
  * Implements hook_default_sources_alter().
  */
 function openlayers_views_default_openlayers_sources_alter(&$sources) {
-  foreach (openalyers_views_get_views() as list($style_plugin, $view, $display)) {
+  foreach (openalyers_views_get_views() as $data) {
+    list($style_plugin, $view, $display) = $data;
     $machine_name = 'openlayers_views_source_' . $view->name . '_' . $display;
     $custom_version = \Drupal\openlayers\Openlayers::loadExportable('source', $machine_name);
     if (!isset($sources[$machine_name]) && empty($custom_version)) {
