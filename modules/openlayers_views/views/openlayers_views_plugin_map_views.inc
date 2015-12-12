@@ -13,12 +13,22 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
    * {@inheritdoc}
    */
   public function options_form(&$form, &$form_state) {
-    $form['basemap'] = array(
+
+    $options = array();
+    foreach (\Drupal\openlayers\Openlayers::loadAll('map') as $map) {
+      foreach($map->getCollection()->getObjects('layer') as $layer) {
+        $key = $map->getMachineName() . ':' . $layer->getMachineName();
+        $value = sprintf("%s: %s (%s)", $map->getName(), $layer->getName(), $layer->getMachineName());
+        $options[$map->getName()][$key] = $value;
+      }
+    }
+
+    $form['base_map_layer'] = array(
       '#type' => 'select',
-      '#title' => 'Base map',
-      '#description' => 'This map will be used as template.',
-      '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('map'),
-      '#default_value' => $this->options['basemap'],
+      '#title' => 'Base map to use and vector layer to fill with the views features',
+      '#description' => 'You may choose any vector layer only.',
+      '#options' => $options,
+      '#default_value' => $this->options['base_map_layer'],
       '#weight' => 1,
       '#required' => TRUE,
     );
@@ -31,25 +41,26 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
    */
   public function render() {
     $output = NULL;
-
-    // Fetch the features to use with the map.
-    $live_preview = !empty($this->view->live_preview);
-    $this->view->live_preview = FALSE;
-    $this->features = parent::render();
-    $this->view->live_preview = $live_preview;
-
     $style_plugin_options = $this->view->style_plugin->options;
 
-    if (empty($this->skipMapRender) && ($map = \Drupal\openlayers\Openlayers::load('Map', $style_plugin_options['basemap'])) == TRUE && !($map instanceof \Drupal\openlayers\Types\Error)) {
-      /** @var $layer \Drupal\openlayers\Types\LayerInterface */
-      $layer = \Drupal\openlayers\Openlayers::load('layer', 'layer_map_views_' . $this->view->name . '_' . $this->view->current_display);
-      $layer->getSource()->setOption('features', $this->features);
-      $layer->setWeight(count($map->getCollection()->getObjects('layer')) + 1);
-      $map->getCollection()->import(array($layer));
-      $output = $map->build();
+    list($mapname, $layername) = explode(':', $style_plugin_options['base_map_layer'], 2);
+
+    if (empty($this->view->style_plugin->options['skipMapRender'])) {
+      if (($map = \Drupal\openlayers\Openlayers::load('Map', $mapname)) == TRUE && !($map instanceof \Drupal\openlayers\Types\Error)) {
+        foreach($map->getCollection()->getObjects('layer') as $layer) {
+          if ($layer->getMachineName() == $layername) {
+            $source = \Drupal\openlayers\Openlayers::load('source', 'openlayers_views_source_' . $this->view->name . '_' . $this->view->current_display);
+            $layer->setSource($source);
+            $map->getCollection()->import(array($source));
+          }
+        }
+        $output = $map->build();
+      }
+    } else {
+      $grouped_results = $this->render_grouping($this->view->result, $this->options['grouping']);
+      $output = $this->map_features($grouped_results);
     }
 
     return $output;
   }
-
 }

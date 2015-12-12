@@ -36,7 +36,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       $output .= t('The following is a dump of the data that is rendered from this display. It is used for debugging purposes only.') . '
         ' . var_export($data, TRUE);
 
-      return $output;
+      return '<pre>' . $output . '</pre>';
     }
   }
 
