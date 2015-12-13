@@ -151,40 +151,40 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
  * Map layers config form handler.
  */
 function openlayers_map_form_layers($form, &$form_state) {
-  $all_layers = \Drupal\openlayers\Openlayers::loadAllExportable('Layer');
+  $all_layers = \Drupal\openlayers\Openlayers::loadAll('Layer');
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == FALSE) {
     return;
   }
 
-  array_walk($all_layers, function($object) {
-    $object->weight = 0;
-    $object->enabled = 0;
+  array_walk($all_layers, function(\Drupal\openlayers\Types\LayerInterface $layer) {
+    $layer->setWeight(0);
+    $layer->enabled = 0;
   });
 
   foreach ($map->getOption('layers', array()) as $weight => $layer) {
-    /* @var Drupal\openlayers\Types\Layer $layer */
+    /** @var Drupal\openlayers\Types\Layer $layer */
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
-    $all_layers[$layer->getMachineName()]->weight = $weight;
+    $all_layers[$layer->getMachineName()]->setWeight($weight);
     $all_layers[$layer->getMachineName()]->enabled = 1;
   }
 
-  uasort($all_layers, function($a, $b) {
+  uasort($all_layers, function(\Drupal\openlayers\Types\LayerInterface $a, \Drupal\openlayers\Types\LayerInterface $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
     }
     elseif ($a->enabled < $b->enabled) {
       return 1;
     }
-    if ($a->weight < $b->weight) {
+    if ($a->getWeight() < $b->getWeight()) {
       return -1;
     }
-    elseif ($a->weight > $b->weight) {
+    elseif ($a->getWeight() > $b->getWeight()) {
       return 1;
     }
-    if ($a->machine_name < $b->machine_name) {
+    if ($a->getMachineName() < $b->getMachineName()) {
       return -1;
     }
-    elseif ($a->machine_name > $b->machine_name) {
+    elseif ($a->getMachineName() > $b->getMachineName()) {
       return 1;
     }
     return 0;
@@ -192,16 +192,16 @@ function openlayers_map_form_layers($form, &$form_state) {
 
   $data = array();
   $i = 0;
-  /* @var \Drupal\openlayers\Types\Layer $layer */
+  /** @var \Drupal\openlayers\Types\Layer $layer */
   foreach ($all_layers as $machine_name => $layer) {
     $data[$machine_name] = array(
-      'name' => $layer->name,
-      'machine_name' => $layer->machine_name,
-      'factory_service' => $layer->factory_service,
+      'name' => $layer->getName(),
+      'machine_name' => $layer->getMachineName(),
+      'factory_service' => $layer->getFactoryService(),
       'weight' => $i++,
       'enabled' => isset($layer->enabled) ? $layer->enabled : 0,
       'default' => 1,
-      'style' => isset($layer->options['style']) ? $layer->options['style'] : NULL,
+      'style' => $layer->getOption('style', NULL),
     );
   }
 
@@ -333,40 +333,40 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
  */
 function openlayers_map_form_controls($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
-  $all_controls = \Drupal\openlayers\Openlayers::loadAllExportable('Control');
+  $all_controls = \Drupal\openlayers\Openlayers::loadAll('Control');
 
   if (!isset($form_state['item']->options['controls'])) {
     $form_state['item']->options['controls'] = array();
   }
 
-  array_walk($all_controls, function($object) {
-    $object->weight = 0;
-    $object->enabled = 0;
+  array_walk($all_controls, function(\Drupal\openlayers\Types\ControlInterface $control) {
+    $control->setWeight(0);
+    $control->enabled = 0;
   });
 
   foreach ($map->getObjects('control') as $control) {
-    /* @var Drupal\openlayers\Types\Control $control */
-    $all_controls[$control->getMachineName()]->weight = $control->getWeight();
+    /** @var Drupal\openlayers\Types\Control $control */
+    $all_controls[$control->getMachineName()]->setWeight($control->getWeight());
     $all_controls[$control->getMachineName()]->enabled = 1;
   }
 
-  uasort($all_controls, function($a, $b) {
+  uasort($all_controls, function(\Drupal\openlayers\Types\ControlInterface $a, \Drupal\openlayers\Types\ControlInterface $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
     }
     elseif ($a->enabled < $b->enabled) {
       return 1;
     }
-    if ($a->weight < $b->weight) {
+    if ($a->getWeight() < $b->getWeight()) {
       return -1;
     }
-    elseif ($a->weight > $b->weight) {
+    elseif ($a->getWeight() > $b->getWeight()) {
       return 1;
     }
-    if ($a->machine_name < $b->machine_name) {
+    if ($a->getMachineName() < $b->getMachineName()) {
       return -1;
     }
-    elseif ($a->machine_name > $b->machine_name) {
+    elseif ($a->getMachineName() > $b->getMachineName()) {
       return 1;
     }
     return 0;
@@ -376,9 +376,9 @@ function openlayers_map_form_controls($form, &$form_state) {
   $i = 0;
   foreach ($all_controls as $machine_name => $control) {
     $data[$machine_name] = array(
-      'name' => $control->name,
-      'machine_name' => $control->machine_name,
-      'description' => $control->description,
+      'name' => $control->getName(),
+      'machine_name' => $control->getMachineName(),
+      'description' => $control->getDescription(),
       'weight' => $i++,
       'enabled' => (int) $control->enabled,
     );
@@ -485,7 +485,8 @@ function openlayers_map_form_controls_submit($form, &$form_state) {
  * Map interactions config form handler.
  */
 function openlayers_map_form_interactions($form, &$form_state) {
-  $all_interactions = \Drupal\openlayers\Openlayers::loadAllExportable('Interaction');
+  $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
+  $all_interactions = \Drupal\openlayers\Openlayers::loadAll('Interaction');
 
   $header = array(
     'name' => t('Name'),
@@ -494,15 +495,48 @@ function openlayers_map_form_interactions($form, &$form_state) {
     'operations' => t('Operations'),
   );
 
+  array_walk($all_interactions, function(\Drupal\openlayers\Types\InteractionInterface $interaction) {
+    $interaction->setWeight(0);
+    $interaction->enabled = 0;
+  });
+
+  foreach ($map->getObjects('interaction') as $interaction) {
+    /** @var Drupal\openlayers\Types\InteractionInterface $interaction */
+    $all_interactions[$interaction->getMachineName()]->setWeight($interaction->getWeight());
+    $all_interactions[$interaction->getMachineName()]->enabled = 1;
+  }
+
+  uasort($all_interactions, function(\Drupal\openlayers\Types\InteractionInterface $a, \Drupal\openlayers\Types\InteractionInterface $b) {
+    if ($a->enabled > $b->enabled) {
+      return -1;
+    }
+    elseif ($a->enabled < $b->enabled) {
+      return 1;
+    }
+    if ($a->getWeight() < $b->getWeight()) {
+      return -1;
+    }
+    elseif ($a->getWeight() > $b->getWeight()) {
+      return 1;
+    }
+    if ($a->getMachineName() < $b->getMachineName()) {
+      return -1;
+    }
+    elseif ($a->getMachineName() > $b->getMachineName()) {
+      return 1;
+    }
+    return 0;
+  });
+
   $rows = array();
-  foreach ($all_interactions as $machine_name => $interaction) {
-    $rows[$machine_name] = array(
-      'name' => $interaction->name,
-      'machine_name' => $interaction->machine_name,
-      'description' => $interaction->description,
+  foreach ($all_interactions as $interaction) {
+    $rows[$interaction->getMachineName()] = array(
+      'name' => $interaction->getName(),
+      'machine_name' => $interaction->getMachineName(),
+      'description' => $interaction->getDescription(),
       'operations' => l(
         t('Edit'),
-        'admin/structure/openlayers/interactions/list/' . $machine_name . '/edit/options',
+        'admin/structure/openlayers/interactions/list/' . $interaction->getMachineName() . '/edit/options',
         array(
           'query' => array(
             'destination' => current_path(),
@@ -546,36 +580,36 @@ function openlayers_map_form_interactions_submit($form, &$form_state) {
  */
 function openlayers_map_form_components($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
-  $all_components = \Drupal\openlayers\Openlayers::loadAllExportable('Component');
+  $all_components = \Drupal\openlayers\Openlayers::loadAll('Component');
 
-  array_walk($all_components, function($object) {
-    $object->weight = 0;
-    $object->enabled = 0;
+  array_walk($all_components, function(\Drupal\openlayers\Types\ComponentInterface $component) {
+    $component->setWeight(0);
+    $component->enabled = 0;
   });
 
   foreach ($map->getObjects('component') as $component) {
-    /* @var Drupal\openlayers\Types\Component $component */
-    $all_components[$component->getMachineName()]->weight = $component->getWeight();
+    /** @var Drupal\openlayers\Types\Component $component */
+    $all_components[$component->getMachineName()]->setWeight($component->getWeight());
     $all_components[$component->getMachineName()]->enabled = 1;
   }
 
-  uasort($all_components, function($a, $b) {
+  uasort($all_components, function(\Drupal\openlayers\Types\ComponentInterface $a, \Drupal\openlayers\Types\ComponentInterface $b) {
     if ($a->enabled > $b->enabled) {
       return -1;
     }
     elseif ($a->enabled < $b->enabled) {
       return 1;
     }
-    if ($a->weight < $b->weight) {
+    if ($a->getWeight() < $b->getWeight()) {
       return -1;
     }
-    elseif ($a->weight > $b->weight) {
+    elseif ($a->getWeight() > $b->getWeight()) {
       return 1;
     }
-    if ($a->machine_name < $b->machine_name) {
+    if ($a->getMachineName() < $b->getMachineName()) {
       return -1;
     }
-    elseif ($a->machine_name > $b->machine_name) {
+    elseif ($a->getMachineName() > $b->getMachineName()) {
       return 1;
     }
     return 0;
@@ -583,11 +617,11 @@ function openlayers_map_form_components($form, &$form_state) {
 
   $data = array();
   $i = 0;
-  foreach ($all_components as $machine_name => $component) {
-    $data[$machine_name] = array(
-      'name' => $component->name,
-      'machine_name' => $component->machine_name,
-      'description' => $component->description,
+  foreach ($all_components as $component) {
+    $data[$component->getMachineName()] = array(
+      'name' => $component->getName(),
+      'machine_name' => $component->getMachineName(),
+      'description' => $component->getDescription(),
       'weight' => $i++,
       'enabled' => $component->enabled,
     );

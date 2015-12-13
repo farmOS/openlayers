@@ -105,7 +105,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
         'factory_service' => '',
       );
 
-      /* @var \Drupal\openlayers\Types\Object $instance */
+      /** @var \Drupal\openlayers\Types\Object $instance */
       $instance = \Drupal::service('openlayers.' . $type)->createInstance($definition['id'], $configuration);
       $attached = $instance->attached();
 

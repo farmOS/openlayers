@@ -69,7 +69,7 @@ class Views extends Source {
       $view->execute();
       // do not render the map, just return the features.
       $view->style_plugin->options['skipMapRender'] = TRUE;
-      $this->features = $view->style_plugin->render();
+      $this->features += $view->style_plugin->render();
       $view->post_execute();
     }
 

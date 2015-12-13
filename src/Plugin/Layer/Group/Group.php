@@ -65,7 +65,7 @@ class Group extends Layer {
 
     $data = array();
     $i = 0;
-    /* @var \Drupal\openlayers\Types\Layer $layer */
+    /** @var \Drupal\openlayers\Types\Layer $layer */
     foreach ($all_layers as $machine_name => $layer) {
       $data[$machine_name] = array(
         'name' => $layer->name,

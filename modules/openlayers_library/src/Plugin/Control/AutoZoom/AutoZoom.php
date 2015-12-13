@@ -8,6 +8,7 @@ namespace Drupal\openlayers_library\Plugin\Control\AutoZoom;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Plugin\Component\ZoomToSource\ZoomToSource;
 use Drupal\openlayers\Types\Control;
+use Drupal\openlayers\Types\ControlInterface;
 
 /**
  * Class AutoZoom.
@@ -17,7 +18,7 @@ use Drupal\openlayers\Types\Control;
  *  description = "Autozoom button"
  * )
  */
-class AutoZoom extends ZoomToSource {
+class AutoZoom extends ZoomToSource implements ControlInterface {
   /**
    * {@inheritdoc}
    */

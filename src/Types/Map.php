@@ -35,6 +35,34 @@ abstract class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
+  public function addLayer(LayerInterface $layer) {
+    $this->addObject($layer);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addControl(ControlInterface $control) {
+    $this->addObject($control);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addInteraction(InteractionInterface $interaction) {
+    $this->addObject($interaction);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addComponent(ComponentInterface $component) {
+    $this->addObject($component);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function attached() {
     $attached = parent::attached();
 
@@ -186,4 +214,5 @@ abstract class Map extends Object implements MapInterface {
     unset($js['opt']['capabilities']);
     return $js;
   }
+
 }

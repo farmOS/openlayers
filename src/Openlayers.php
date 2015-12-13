@@ -104,7 +104,7 @@ class Openlayers {
   public static function load($object_type = NULL, $export) {
     $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
 
-    /* @var \Drupal\openlayers\Types\Object $object */
+    /** @var \Drupal\openlayers\Types\Object $object */
     $object = NULL;
     $configuration = array();
 

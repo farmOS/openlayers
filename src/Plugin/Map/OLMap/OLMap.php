@@ -141,7 +141,7 @@ class OLMap extends Map {
     $i = 0;
     $data = array();
     $map_options = $this->getOptions();
-    /* @var \Drupal\openlayers\Types\Object $object */
+    /** @var \Drupal\openlayers\Types\Object $object */
     foreach ($this->getCollection()->getFlatList() as $object) {
       $weight = 0;
       if (isset($map_options['capabilities']['options']['table'][$object->getMachineName()])) {

@@ -53,8 +53,9 @@ abstract class Layer extends Object implements LayerInterface {
    *   The source object.
    */
   public function setSource(SourceInterface $source) {
-    /* @var Source $source */
+    /** @var Source $source */
     $this->setOption('source', $source->getMachineName());
+    $this->addObject($source);
   }
 
   /**
@@ -64,8 +65,9 @@ abstract class Layer extends Object implements LayerInterface {
    *   The style object.
    */
   public function setStyle(StyleInterface $style) {
-    /* @var Style $style */
+    /** @var Style $style */
     $this->setOption('style', $style->getMachineName());
+    $this->addObject($style);
   }
 
   /**

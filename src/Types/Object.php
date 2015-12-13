@@ -86,6 +86,14 @@ abstract class Object extends PluginBase implements ObjectInterface {
 
   /**
    * {@inheritdoc}
+   */
+  public function addObject(ObjectInterface $object) {
+    $this->setOption($object->getType() . 's', $this->getOption($object->getType() . 's', array()) + array($object->getMachineName()));
+    $this->getCollection()->import(array($object));
+  }
+
+  /**
+   * {@inheritdoc}
    *
    * @TODO What is this return? If it is the form, why is form by reference?
    */

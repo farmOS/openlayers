@@ -35,10 +35,12 @@ class Collection extends PluginBase {
    *   The array of objects to import.
    */
   public function import(array $import = array()) {
-    foreach ($import as $object) {
-      /* @var Object $object */
-      $this->merge($object->getCollection());
-    }
+    array_walk($import, function(Object $object) {
+      $flatlist = $object->getCollection()->getFlatList();
+      array_walk($flatlist, function(Object $object) {
+        $this->append($object);
+      });
+    });
   }
 
   /**
@@ -172,7 +174,7 @@ class Collection extends PluginBase {
       });
 
       $list = array_filter($this->objects, function($obj) use ($types) {
-        /* @var Object $obj */
+        /** @var Object $obj */
         return in_array($obj->getType(), $types);
       });
     }

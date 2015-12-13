@@ -39,8 +39,7 @@ class GeofieldFormatter extends Component {
     $import = parent::optionsToObjects();
 
     if ($layer = $this->getOption('layer')) {
-      $layer = Openlayers::load('layer', $layer);
-      $import = array_merge($layer->getCollection()->getFlatList(), $import);
+      $import = array_merge(Openlayers::load('layer', $layer)->getCollection()->getFlatList(), $import);
     }
 
     return $import;

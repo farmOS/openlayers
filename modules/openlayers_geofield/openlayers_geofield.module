@@ -201,12 +201,13 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
 
     foreach ($map->getCollection()->getObjects('component') as $component) {
-      /* @var $component \Drupal\openlayers_geofield\Plugin\Component\GeofieldFormatter\GeofieldFormatter */
+      /** @var \Drupal\openlayers_geofield\Plugin\Component\GeofieldFormatter\GeofieldFormatter $component */
       if ($component->getFactoryService() == 'openlayers.Component:GeofieldFormatter') {
-        /* @var $layer \Drupal\openlayers\Types\Layer */
+        /** @var \Drupal\openlayers\Types\Layer $layer */
         if ($layer = $component->getLayer()) {
           if ($layer->getSource() instanceof \Drupal\openlayers\Plugin\Source\Vector\Vector) {
             $layer->getSource()->setOption('features', $features);
+            $map->addLayer($layer);
           }
         }
       }
@@ -391,7 +392,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     return array();
   }
   foreach ($map->getObjects('component') as $component) {
-    /* @var \Drupal\openlayers\Types\Component $component */
+    /** @var \Drupal\openlayers\Types\Component $component */
     // Configure component based on the widget settings.
     if ($component->getFactoryService() === 'openlayers.Component:GeofieldWidget') {
       // Conversion from geofield to openlayers geofield feature types.

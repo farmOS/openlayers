@@ -284,4 +284,12 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @return string
    */
   public function getFactoryService();
+
+  /**
+   * Add an object into the collection of the parent object.
+   *
+   * @param \Drupal\openlayers\Types\ObjectInterface $object
+   *   The object to add.
+   */
+  public function addObject(ObjectInterface $object);
 }
