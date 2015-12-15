@@ -82,6 +82,19 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $this->name = $this->getName();
     $this->description = $this->getDescription();
     $this->factory_service = $this->getFactoryService();
+    $this->initCollection();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function initCollection() {
+    if (is_null($this->collection) || !($this->collection instanceof Collection)) {
+      $this->collection = \Drupal::service('openlayers.Types')->createInstance('Collection');
+    }
+
+    $this->getCollection()->import($this->optionsToObjects());
+    $this->getCollection()->append($this);
   }
 
   /**
@@ -445,11 +458,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getCollection() {
-    if (is_null($this->collection) || !($this->collection instanceof Collection)) {
-      $this->collection = \Drupal::service('openlayers.Types')->createInstance('Collection');
-      $this->collection->import($this->optionsToObjects());
-      $this->collection->append($this);
-    }
     return $this->collection;
   }
 

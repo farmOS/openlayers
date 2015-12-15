@@ -17,6 +17,13 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function init();
 
   /**
+   * Initializes the Collection,
+   * Import objects from options,
+   * Import the current object.
+   */
+  public function initCollection();
+
+  /**
    * The type of this object.
    *
    * @return string|FALSE
