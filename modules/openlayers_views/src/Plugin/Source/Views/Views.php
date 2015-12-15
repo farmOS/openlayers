@@ -52,9 +52,11 @@ class Views extends Source {
    */
   public function init() {
     parent::init();
-    $this->features = array();
+    $features = array();
 
-    list($views_id, $display_id) = explode(':', $this->options['view'], 2);
+    $configuration = $this->getConfiguration();
+
+    list($views_id, $display_id) = explode(':', $configuration['options']['view'], 2);
     $view = views_get_view($views_id);
     if ($view && $view->access($display_id)) {
       $view->set_display($display_id);
@@ -69,11 +71,11 @@ class Views extends Source {
       $view->execute();
       // do not render the map, just return the features.
       $view->style_plugin->options['skipMapRender'] = TRUE;
-      $this->features += $view->style_plugin->render();
+      $features = array_merge($features, $view->style_plugin->render());
       $view->post_execute();
     }
 
-    $this->options['features'] = $this->features;
+    $this->setOption('features', $features);
   }
 
 }

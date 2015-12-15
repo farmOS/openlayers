@@ -46,13 +46,13 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
     list($mapname, $layername) = explode(':', $style_plugin_options['base_map_layer'], 2);
 
     if (empty($this->view->style_plugin->options['skipMapRender'])) {
+      /** @var \Drupal\openlayers\Types\MapInterface $map */
       if (($map = \Drupal\openlayers\Openlayers::load('Map', $mapname)) == TRUE && !($map instanceof \Drupal\openlayers\Types\Error)) {
-        foreach($map->getCollection()->getObjects('layer') as $layer) {
-          if ($layer->getMachineName() == $layername) {
-            $source = \Drupal\openlayers\Openlayers::load('source', 'openlayers_views_source_' . $this->view->name . '_' . $this->view->current_display);
-            $layer->setSource($source);
-            $map->getCollection()->import(array($source));
-          }
+        /** @var \Drupal\openlayers\Types\LayerInterface $layer */
+        if ($layer = $map->getCollection()->getObjectById('layer', $layername)) {
+          $source = \Drupal\openlayers\Openlayers::load('source', 'openlayers_views_source_' . $this->view->name . '_' . $this->view->current_display);
+          $layer->setSource($source);
+          $map->addLayer($layer);
         }
         $output = $map->build();
       }

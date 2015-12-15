@@ -97,14 +97,14 @@ class Openlayers {
    * @param array|string|object $export
    *   The exported object.
    *
-   * @return Object|Error
+   * @return ObjectInterface|Error
    *   Returns the instance of the requested object or an instance of
    *   Error on error.
    */
   public static function load($object_type = NULL, $export) {
     $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
 
-    /** @var \Drupal\openlayers\Types\Object $object */
+    /** @var \Drupal\openlayers\Types\ObjectInterface $object */
     $object = NULL;
     $configuration = array();
 
@@ -178,7 +178,7 @@ class Openlayers {
    *   Type of object to load:
    *   map|layer|source|control|interaction|style|component.
    *
-   * @return \Drupal\openlayers\Types\Object[]
+   * @return \Drupal\openlayers\Types\ObjectInterface[]
    *   The array of objects.
    */
   public static function loadAll($object_type = NULL) {
@@ -210,7 +210,7 @@ class Openlayers {
    * @param array $filter
    *   The values to filter out of the result array.
    *
-   * @return array
+   * @return string[]
    */
   public static function getPluginTypes(array $filter = array()) {
     $plugins = array();
@@ -354,7 +354,7 @@ class Openlayers {
   /**
    * Returns an array with positioning options.
    *
-   * @return array
+   * @return string[]
    *   Array with positioning options.
    */
   public static function positioningOptions() {
@@ -374,7 +374,7 @@ class Openlayers {
   /**
    * The list of geometries available.
    *
-   * @return array
+   * @return string[]
    *   The list of geometries.
    */
   public static function getGeometryTypes() {

@@ -35,11 +35,12 @@ class Collection extends PluginBase {
    *   The array of objects to import.
    */
   public function import(array $import = array()) {
-    array_walk($import, function(Object $object) {
-      $flatlist = $object->getCollection()->getFlatList();
-      array_walk($flatlist, function(Object $object) {
-        $this->append($object);
+    array_walk($import, function(Object $object_to_add) {
+      $dependencies = $object_to_add->getCollection()->getFlatList();
+      array_walk($dependencies, function(Object $object_dependency) {
+        $this->append($object_dependency);
       });
+      $this->append($object_to_add);
     });
   }
 
@@ -211,4 +212,23 @@ class Collection extends PluginBase {
     }
     return array_change_key_case($export, CASE_LOWER);
   }
+
+  /**
+   * Return an object given an ID.
+   *
+   * @param $type
+   *   The type of object to get.
+   * @param $id
+   *   The id of the object to get.
+   * @return bool|\Drupal\openlayers\Types\ObjectInterface
+   */
+  public function getObjectById($type, $id) {
+    foreach ($this->getFlatList((array) $type) as $object) {
+      if ($id === $object->getMachineName()) {
+        return $object;
+      }
+    }
+    return FALSE;
+  }
+
 }

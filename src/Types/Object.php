@@ -173,9 +173,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
         }
       }
     }
-
-    // Invalidate the Collection so it gets rebuilt with new options.
-    $this->collection = NULL;
   }
 
   /**
@@ -195,8 +192,12 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $ref = &$ref[$parent];
     }
     $ref = $value;
+  }
 
-    // Invalidate the Collection so it gets rebuilt with new options.
+  /**
+   * {@inheritdoc}
+   */
+  public function resetCollection() {
     $this->collection = NULL;
   }
 

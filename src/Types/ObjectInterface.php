@@ -71,7 +71,12 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param mixed $value
    *   The value to set.
    */
-  public function setOption($parents, $value);
+  public function setOption($parents, $value = NULL);
+
+  /**
+   * Reset the object's Collection.
+   */
+  public function resetCollection();
 
   /**
    * Provides the options form to configure this object.
@@ -240,7 +245,7 @@ interface ObjectInterface extends PluginInspectionInterface {
   /**
    * Return a flat array containing Openlayers Objects from the options array.
    *
-   * @return Object[]
+   * @return ObjectInterface[]
    */
   public function optionsToObjects();
 
