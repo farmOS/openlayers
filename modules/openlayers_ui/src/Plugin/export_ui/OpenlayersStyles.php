@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers_ui\UI;
 use Drupal\openlayers\Openlayers;
+use Drupal\openlayers\Types\MapInterface;
 
 /**
  * Class openlayers_components_ui.
@@ -83,12 +84,10 @@ class OpenlayersStyles extends \OpenlayersObjects {
     }
 
     // Generate a map and use the style on it to make a preview.
+    /** @var MapInterface $map */
     $map = Openlayers::load('map', 'openlayers_ui_map_style_demo');
-    foreach ($map->getCollection()->getFlatList(array('layer')) as $layer) {
-      $layer->setStyle($object);
-      $map->getCollection()->import(array($layer));
-    }
-    $map_build = $map->build();
+    $layer = $map->getCollection()->getObjectById('layer', 'openlayers_ui_layer_style_demo');
+    $map_build = $map->addLayer($layer->setStyle($object))->build();
     $map_render = drupal_render($map_build);
 
     $this->rows[$name]['data'] = array();

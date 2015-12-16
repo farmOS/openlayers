@@ -103,6 +103,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function addObject(ObjectInterface $object) {
     $this->setOption($object->getType() . 's', $this->getOption($object->getType() . 's', array()) + array($object->getMachineName()));
     $this->getCollection()->import(array($object));
+    return $this;
   }
 
   /**
@@ -205,6 +206,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
       $ref = &$ref[$parent];
     }
     $ref = $value;
+
+    return $this;
   }
 
   /**
@@ -239,6 +242,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
 
     // Invalidate the Collection so it gets rebuilt with new options.
     $this->collection = NULL;
+
+    return $this;
   }
 
   /**

@@ -51,12 +51,12 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
         /** @var \Drupal\openlayers\Types\LayerInterface $layer */
         if ($layer = $map->getCollection()->getObjectById('layer', $layername)) {
           $source = \Drupal\openlayers\Openlayers::load('source', 'openlayers_views_source_' . $this->view->name . '_' . $this->view->current_display);
-          $layer->setSource($source);
-          $map->addLayer($layer);
+          $map->addLayer($layer->setSource($source));
         }
         $output = $map->build();
       }
-    } else {
+    }
+    else {
       $grouped_results = $this->render_grouping($this->view->result, $this->options['grouping']);
       $output = $this->map_features($grouped_results);
     }

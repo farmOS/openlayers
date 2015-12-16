@@ -19,10 +19,7 @@ abstract class Layer extends Object implements LayerInterface {
   protected $options = array();
 
   /**
-   * Returns the source of this layer.
-   *
-   * @return SourceInterface|FALSE
-   *   The source assigned to this layer.
+   * {@inheritdoc}
    */
   public function getSource() {
     $source = $this->getObjects('source');
@@ -33,10 +30,7 @@ abstract class Layer extends Object implements LayerInterface {
   }
 
   /**
-   * Returns the style of this layer.
-   *
-   * @return StyleInterface|FALSE
-   *   The style assigned to this layer.
+   * {@inheritdoc}
    */
   public function getStyle() {
     $style = $this->getObjects('style');
@@ -47,27 +41,20 @@ abstract class Layer extends Object implements LayerInterface {
   }
 
   /**
-   * Set the source of this layer.
-   *
-   * @param SourceInterface $source
-   *   The source object.
+   * {@inheritdoc}
    */
   public function setSource(SourceInterface $source) {
-    /** @var Source $source */
     $this->setOption('source', $source->getMachineName());
-    $this->addObject($source);
+    return $this->addObject($source);
   }
 
   /**
-   * Set the style of this layer.
-   *
-   * @param StyleInterface $style
-   *   The style object.
+   * {@inheritdoc}
    */
   public function setStyle(StyleInterface $style) {
     /** @var Style $style */
     $this->setOption('style', $style->getMachineName());
-    $this->addObject($style);
+    return $this->addObject($style);
   }
 
   /**
@@ -76,11 +63,12 @@ abstract class Layer extends Object implements LayerInterface {
   public function optionsToObjects() {
     $import = parent::optionsToObjects();
 
-    foreach(array('style', 'source') as $option) {
+    foreach (array('style', 'source') as $option) {
       if ($option_value = $this->getOption($option)) {
         if ($object = $this->getCollection()->getObjectById($option, $option_value)) {
           $import = array_merge($import, $object->getCollection()->getFlatList());
-        } else {
+        }
+        else {
           $import = array_merge($import, Openlayers::load($option, $option_value)->getCollection()->getFlatList());
         }
       }

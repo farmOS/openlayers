@@ -6,7 +6,6 @@
 
 namespace Drupal\openlayers;
 use Drupal\openlayers\Types\Error;
-use Drupal\openlayers\Types\Object;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
@@ -26,7 +25,7 @@ class Openlayers {
   public static function getOLObjectsOptions($object_type) {
     $options = array();
     $service_basename = 'openlayers.' . $object_type;
-    foreach (\Drupal::service($service_basename)->getDefinitions() as $service => $data) {
+    foreach (\Drupal::service($service_basename)->getDefinitions() as $data) {
       $name = isset($data['label']) ? $data['label'] : $data['id'];
       $options[$service_basename . ':' . $data['id']] = $name;
     }
@@ -75,7 +74,8 @@ class Openlayers {
    * Gets all available OL objects.
    *
    * @param string $type
-   *   The plugin type
+   *   The plugin type.
+   *
    * @return array
    *   Array of Openlayers CTools object instances. (stdClass)
    */
@@ -102,11 +102,10 @@ class Openlayers {
    *   Error on error.
    */
   public static function load($object_type = NULL, $export) {
-    $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
-
     /** @var \Drupal\openlayers\Types\ObjectInterface $object */
     $object = NULL;
     $configuration = array();
+    $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
 
     if (is_array($export)) {
       $configuration = $export;
@@ -211,6 +210,8 @@ class Openlayers {
    *   The values to filter out of the result array.
    *
    * @return string[]
+   *   Return an array of strings. Those strings are the plugin type name
+   *   in lowercase.
    */
   public static function getPluginTypes(array $filter = array()) {
     $plugins = array();
@@ -235,6 +236,8 @@ class Openlayers {
    * Return information about the Openlayers 3 if installed.
    *
    * @return array|false
+   *   Return an array from hook_libraries_info() if the library is found,
+   *   otherwise return False.
    */
   public static function getLibrary() {
     return libraries_detect('openlayers3');
@@ -244,13 +247,15 @@ class Openlayers {
    * Return the version of the Openlayers library in use.
    *
    * @return string
+   *   Return the version of the Openlayers library set in the configuration.
    */
   public static function getLibraryVersion() {
     $variant = \Drupal\openlayers\Config::get('openlayers.variant');
 
     if (strpos($variant, 'local-') !== FALSE) {
       $version = self::getLocalLibraryVersion();
-    } else {
+    }
+    else {
       $version = \Drupal\openlayers\Config::get('openlayers.variant', NULL);
     }
 
@@ -261,6 +266,7 @@ class Openlayers {
    * Return the version of the Openlayers library in use.
    *
    * @return string
+   *   Return the version of the Openlayers library in the filesystem.
    */
   public static function getLocalLibraryVersion() {
     $version = FALSE;

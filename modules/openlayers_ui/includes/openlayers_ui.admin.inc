@@ -87,31 +87,33 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#collapsed' => TRUE,
   );
 
-  foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
+  foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $plugin_type) {
     $rows = array();
 
-    $form['plugin-info'][$type . '-group'] = array(
+    $form['plugin-info'][$plugin_type . '-group'] = array(
       '#type' => 'fieldset',
-      '#title' => $type,
+      '#title' => $plugin_type,
       '#collapsed' => TRUE,
       '#collapsible' => TRUE,
     );
 
-    foreach (\Drupal::service('openlayers.' . $type)->getDefinitions() as $service => $definition) {
+    foreach (\Drupal::service('openlayers.' . $plugin_type)->getDefinitions() as $service => $definition) {
       $definition += array('arguments' => array('NULL'));
 
+      list($module, $type,, $id) = explode('.', $service);
+
       $configuration = array(
-        'machine_name' => '',
-        'factory_service' => '',
+        'machine_name' => $definition['id'],
+        'factory_service' => $module . '.' . $type . ':' . $id,
       );
 
-      /** @var \Drupal\openlayers\Types\Object $instance */
-      $instance = \Drupal::service('openlayers.' . $type)->createInstance($definition['id'], $configuration);
+      /** @var \Drupal\openlayers\Types\ObjectInterface $instance */
+      $instance = \Drupal\openlayers\Openlayers::load($plugin_type, $configuration);
       $attached = $instance->attached();
 
       $sizes = array('js' => 0, 'css' => 0);
       foreach (array_keys($sizes) as $size_type) {
-        foreach ($attached[$size_type] as $index => $data) {
+        foreach ($attached[$size_type] as $data) {
           if (isset($data['type']) && $data['type'] != 'external') {
             if (!is_array($data['data'])) {
               $sizes[$size_type] += filesize($data['data']);
@@ -120,11 +122,16 @@ function openlayers_ui_admin_settings($form, &$form_state) {
         }
       }
 
-      if (count($attached['js']) != 0) {
-        $sizes['js'] .= ' bytes.<br/>(' . count($attached['js']) . ' file(s))';
-      }
-      if (count($attached['css']) != 0) {
-        $sizes['css'] .= 'bytes.<br/>(' . count($attached['css']) . ' file(s))';
+      foreach (array('js', 'css') as $file_type) {
+        if (count($attached[$file_type]) != 0) {
+          $sizes[$file_type] .= ' bytes.<br/>(' . count($attached[$file_type]);
+          if (count($attached[$file_type]) == 1) {
+            $sizes[$file_type] .= ' file)';
+          }
+          else {
+            $sizes[$file_type] .= ' files)';
+          }
+        }
       }
 
       $class = array(
@@ -150,9 +157,16 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       'JS size',
       'CSS size',
     );
-    $table = theme('table', array('header' => $header, 'rows' => $rows, 'empty' => t('No plugin available.')));
+    $table = theme(
+      'table',
+      array(
+        'header' => $header,
+        'rows' => $rows,
+        'empty' => t('No plugin available.'),
+      )
+    );
 
-    $form['plugin-info'][$type . '-group']['table'] = array(
+    $form['plugin-info'][$plugin_type . '-group']['table'] = array(
       '#markup' => $table,
     );
   }

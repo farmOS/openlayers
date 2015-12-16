@@ -521,7 +521,7 @@ function openlayers_update_7350() {
   }
   // Create missing columns.
   foreach ($schema as $table => $table_schema) {
-    foreach ($table_schema['fields'] as $field => $field_data) {
+    foreach (array_keys($table_schema['fields']) as $field) {
       if (!db_field_exists($table, $field)) {
         db_add_field($table, $field, $table_schema['fields'][$field]);
       }
@@ -602,8 +602,8 @@ function openlayers_update_7380() {
 }
 
 /**
- * Make sure that the submodule service_container_annotation_discovery from
- * module service_container is properly enabled.
+ * Make sure that the submodule service_container_annotation_discovery
+ * from module service_container is properly enabled.
  */
 function openlayers_update_7390() {
   if (!module_exists('service_container_annotation_discovery')) {

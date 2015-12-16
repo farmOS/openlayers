@@ -23,6 +23,9 @@ interface LayerInterface extends ObjectInterface {
    *
    * @param SourceInterface $source
    *   The source object.
+   *
+   * @return LayerInterface
+   *   The parent layer.
    */
   public function setSource(SourceInterface $source);
 
@@ -39,6 +42,9 @@ interface LayerInterface extends ObjectInterface {
    *
    * @param StyleInterface $style
    *   The style object.
+   *
+   * @return LayerInterface
+   *   The parent layer.
    */
   public function setStyle(StyleInterface $style);
 

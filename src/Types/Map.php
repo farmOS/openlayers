@@ -34,30 +34,42 @@ abstract class Map extends Object implements MapInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
    */
   public function addLayer(LayerInterface $layer) {
-    $this->addObject($layer);
+    return $this->addObject($layer);
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
    */
   public function addControl(ControlInterface $control) {
-    $this->addObject($control);
+    return $this->addObject($control);
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
    */
   public function addInteraction(InteractionInterface $interaction) {
-    $this->addObject($interaction);
+    return $this->addObject($interaction);
   }
 
   /**
    * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
    */
   public function addComponent(ComponentInterface $component) {
-    $this->addObject($component);
+    return $this->addObject($component);
   }
 
   /**

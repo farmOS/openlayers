@@ -23,6 +23,9 @@ interface MapInterface extends ObjectInterface {
    *
    * @param LayerInterface $layer
    *   The layer object to add.
+   *
+   * @return MapInterface
+   *   The parent map.
    */
   public function addLayer(LayerInterface $layer);
 
@@ -31,6 +34,9 @@ interface MapInterface extends ObjectInterface {
    *
    * @param ControlInterface $control
    *   The control object to add.
+   *
+   * @return MapInterface
+   *   The parent map.
    */
   public function addControl(ControlInterface $control);
 
@@ -39,6 +45,9 @@ interface MapInterface extends ObjectInterface {
    *
    * @param InteractionInterface $interaction
    *   The interaction object to add.
+   *
+   * @return MapInterface
+   *   The parent map.
    */
   public function addInteraction(InteractionInterface $interaction);
 
@@ -47,6 +56,9 @@ interface MapInterface extends ObjectInterface {
    *
    * @param ComponentInterface $component
    *   The component object to add.
+   *
+   * @return MapInterface
+   *   The parent map.
    */
   public function addComponent(ComponentInterface $component);
 

@@ -178,7 +178,7 @@ function openlayers_i18n_string_remove($name, $string = NULL, $options = array()
  */
 function openlayers_i18n_string_refresh() {
   foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
-    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $machine_name => $exportable) {
+    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $exportable) {
       $object = \Drupal\openlayers\Openlayers::load($type, $exportable);
       $object->i18nStringsRefresh();
     }
@@ -282,7 +282,7 @@ function openlayers_libraries_info() {
   $libraries['openlayers3'] = array(
     'name' => 'Openlayers 3',
     'vendor url' => 'http://openlayers.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.10.1/v3.10.1.zip',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.12.0/v3.12.0.zip',
     'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
     'version arguments' => array(),
     'library path' => $module_path,

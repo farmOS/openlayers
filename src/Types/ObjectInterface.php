@@ -52,6 +52,9 @@ interface ObjectInterface extends PluginInspectionInterface {
    *
    * @param array $options
    *   The options array.
+   *
+   * @return ObjectInterface
+   *   The current object.
    */
   public function setOptions(array $options = array());
 
@@ -59,7 +62,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
+   *   TODO Define how this has to look like if it is an array.
    * @param mixed $default_value
    *   The default value to return if the option isn't set. Set to NULL if not
    *   defined.
@@ -73,10 +76,12 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Set an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
-   *
+   *   TODO: Define how this has to look like if it is an array.
    * @param mixed $value
    *   The value to set.
+   *
+   * @return ObjectInterface
+   *   The current object.
    */
   public function setOption($parents, $value = NULL);
 
@@ -126,7 +131,7 @@ interface ObjectInterface extends PluginInspectionInterface {
   /**
    * Defines dependencies.
    *
-   * @TODO Define how this has to look like.
+   * TODO Define how this has to look like.
    *
    * @return array
    *   The dependencies.
@@ -172,6 +177,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return an object, CTools Exportable.
    *
    * @return \StdClass
+   *   The object as CTools exportable.
    */
   public function getExport();
 
@@ -302,6 +308,9 @@ interface ObjectInterface extends PluginInspectionInterface {
    *
    * @param \Drupal\openlayers\Types\ObjectInterface $object
    *   The object to add.
+   *
+   * @return ObjectInterface
+   *   The parent object.
    */
   public function addObject(ObjectInterface $object);
 }

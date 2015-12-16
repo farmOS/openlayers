@@ -22,6 +22,8 @@ use Drupal\openlayers\Types\Object;
 class Collection extends PluginBase {
 
   /**
+   * The variable containing the objects.
+   *
    * @var ObjectInterface[] $objects
    *   List of objects in this collection. The items have to be instances of
    *   \Drupal\openlayers\Types\Object.
@@ -216,11 +218,13 @@ class Collection extends PluginBase {
   /**
    * Return an object given an ID.
    *
-   * @param $type
+   * @param string|array $type
    *   The type of object to get.
-   * @param $id
+   * @param string $id
    *   The id of the object to get.
-   * @return bool|\Drupal\openlayers\Types\ObjectInterface
+   *
+   * @return false|\Drupal\openlayers\Types\ObjectInterface
+   *   If found, returns the object. False otherwise.
    */
   public function getObjectById($type, $id) {
     foreach ($this->getFlatList((array) $type) as $object) {
