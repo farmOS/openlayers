@@ -102,6 +102,9 @@ abstract class Map extends Object implements MapInterface {
   public function build(array $build = array()) {
     $map = $this;
 
+    // Transform the options into objects.
+    $map->getCollection()->import($map->optionsToObjects());
+
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
@@ -205,6 +208,7 @@ abstract class Map extends Object implements MapInterface {
   public function optionsToObjects() {
     $import = array();
 
+    // Add the objects from the configuration.
     foreach (Openlayers::getPluginTypes(array('map')) as $type) {
       foreach ($this->getOption($type . 's', array()) as $weight => $object) {
         if ($merge_object = Openlayers::load($type, $object)) {
@@ -213,6 +217,9 @@ abstract class Map extends Object implements MapInterface {
         }
       }
     }
+
+    // Add to objects added manually, on the top of the others.
+    $import += $this->getCollection()->getFlatList();
 
     return $import;
   }

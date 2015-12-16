@@ -151,8 +151,6 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
       $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
     }
 
-    $map->getCollection()->import($map->optionsToObjects());
-
     $form['form'][$map->getId()]['map'] = array(
       '#weight' => 0,
       '#type' => 'openlayers',
