@@ -27,7 +27,7 @@ class Config {
       'openlayers.js_css.media' => 'screen',
       'openlayers.edit_view_map' => 'openlayers_map_view_edit_form',
       'openlayers.default_ui_map' => 'openlayers_map_ui_default',
-      'openlayers.variant' => 'local:3.12',
+      'openlayers.variant' => 'local:3.12.0',
       'openlayers.debug' => 0,
     );
     if ($key == NULL) {

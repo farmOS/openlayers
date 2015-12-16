@@ -369,7 +369,7 @@ map.on(\'click\', function(evt) {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:ViewSync';
   $ol_component->options = array(
-    'group' => 'openlayers_examples'
+    'group' => 'openlayers_examples',
   );
   $export['openlayers_examples_component_viewsync'] = $ol_component;
 

@@ -95,7 +95,6 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     );
 
     $map->clearOption('contextualLinks');
-    $map->setOption('height', '500px');
 
     $controls = array_values(
       array_merge(
@@ -108,9 +107,8 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
         )
       )
     );
-    $map->setOption('controls', $controls);
 
-    $components = array_values(
+    $interactions = array_values(
       array_merge(
         $map->getOption('interactions', array()),
         array(
@@ -120,7 +118,6 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
         )
       )
     );
-    $map->setOption('interactions', $components);
 
     $components = array_values(
       array_merge(
@@ -134,7 +131,12 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
         )
       )
     );
-    $map->setOption('components', $components);
+
+    $map
+      ->setOption('height', '500px')
+      ->setOption('controls', $controls)
+      ->setOption('interactions', $interactions)
+      ->setOption('components', $components);
 
     if (isset($form_state['input']['zoom'])) {
       $map->setOption(array('view', 'zoom'), $form_state['input']['zoom']);
@@ -149,10 +151,12 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
       $map->setOption(array('view', 'center', 'lon'), $form_state['input']['lon']);
     }
 
+    $map->getCollection()->import($map->optionsToObjects());
+
     $form['form'][$map->getId()]['map'] = array(
       '#weight' => 0,
       '#type' => 'openlayers',
-      '#map' => $map
+      '#map' => $map,
     );
 
     if (module_exists('openlayers_services')) {
