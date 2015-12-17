@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
 /**
@@ -313,4 +314,15 @@ interface ObjectInterface extends PluginInspectionInterface {
    *   The parent object.
    */
   public function addObject(ObjectInterface $object);
+
+  /**
+   * Remove an object from the collection.
+   *
+   * @param string $object_machine_name
+   *   The machine name of the object to remove.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function removeObject($object_machine_name);
 }

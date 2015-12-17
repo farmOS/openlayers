@@ -30,6 +30,17 @@ interface MapInterface extends ObjectInterface {
   public function addLayer(LayerInterface $layer);
 
   /**
+   * Add a component to the map.
+   *
+   * @param ComponentInterface $component
+   *   The component object to add.
+   *
+   * @return MapInterface
+   *   The parent map.
+   */
+  public function addComponent(ComponentInterface $component);
+
+  /**
    * Add a control to the map.
    *
    * @param ControlInterface $control
@@ -52,15 +63,48 @@ interface MapInterface extends ObjectInterface {
   public function addInteraction(InteractionInterface $interaction);
 
   /**
-   * Add a component to the map.
+   * Remove a layer from the map.
    *
-   * @param ComponentInterface $component
-   *   The component object to add.
+   * @param string $layer_id
+   *   The machine name (or id) of the layer to remove.
    *
    * @return MapInterface
-   *   The parent map.
+   *   The map.
    */
-  public function addComponent(ComponentInterface $component);
+  public function removeLayer($layer_id);
+
+  /**
+   * Remove a component from the map.
+   *
+   * @param string $component_id
+   *   The machine name (or id) of the component to remove.
+   *
+   * @return MapInterface
+   *   The map.
+   */
+  public function removeComponent($component_id);
+
+  /**
+   * Remove a control from the map.
+   *
+   * @param string $control_id
+   *   The machine name (or id) of the control to remove.
+   *
+   * @return MapInterface
+   *   The map.
+   */
+  public function removeControl($control_id);
+
+  /**
+   * Remove a interaction from the map.
+   *
+   * @param string $interaction_id
+   *   The machine name (or id) of the interaction to remove.
+   *
+   * @return MapInterface
+   *   The map.
+   */
+  public function removeInteraction($interaction_id);
 
   /**
    * Build render array of a map.
@@ -72,5 +116,29 @@ interface MapInterface extends ObjectInterface {
    *   The render array.
    */
   public function build(array $build = array());
+
+  /**
+   * Render a build array into HTML.
+   *
+   * @return array
+   *   The map HTML.
+   */
+  public function render();
+
+  /**
+   * Return the size of the map.
+   *
+   * @return array $size
+   *   Return an array with width and height.
+   */
+  public function getSize();
+
+  /**
+   * Set the size of the map.
+   *
+   * @return MapInterface
+   *   The map.
+   */
+  public function setSize(array $size = array());
 
 }

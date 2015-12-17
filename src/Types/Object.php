@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Openlayers;
@@ -88,138 +89,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function initCollection() {
-    if (is_null($this->collection) || !($this->collection instanceof Collection)) {
-      $this->collection = \Drupal::service('openlayers.Types')->createInstance('Collection');
-    }
-
-    $this->getCollection()->import($this->optionsToObjects());
-    $this->getCollection()->append($this);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function addObject(ObjectInterface $object) {
-    $this->setOption($object->getType() . 's', $this->getOption($object->getType() . 's', array()) + array($object->getMachineName()));
-    $this->getCollection()->import(array($object));
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   *
-   * @TODO What is this return? If it is the form, why is form by reference?
-   */
-  public function optionsForm(&$form, &$form_state) {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function optionsFormValidate($form, &$form_state) {}
-
-  /**
-   * {@inheritdoc}
-   */
-  public function optionsFormSubmit($form, &$form_state) {
-    if (isset($form_state['values']['options'])) {
-      $options = array_merge((array) $this->getOptions(), (array) $form_state['values']['options']);
-      $this->setOptions($options);
-    }
-
-    $form_state['item'] = $this->getExport();
-
-    // Refresh translatable strings.
-    $this->i18nStringsRefresh();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function preBuild(array &$build, ObjectInterface $context = NULL) {
-    foreach ($this->getCollection()->getFlatList() as $object) {
-      if ($object !== $this) {
-        $object->preBuild($build, $context);
-      }
-    }
-    drupal_alter('openlayers_object_preprocess', $build, $this);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    foreach ($this->getCollection()->getFlatList() as $object) {
-      if ($object !== $this) {
-        $object->postBuild($build, $context);
-      }
-    }
-    drupal_alter('openlayers_object_postprocess', $build, $this);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function clearOption($parents) {
-    $ref = &$this->options;
-
-    if (is_string($parents)) {
-      $parents = array($parents);
-    }
-
-    $last = end($parents);
-    reset($parents);
-    foreach ($parents as $parent) {
-      if (isset($ref) && !is_array($ref)) {
-        $ref = array();
-      }
-      if ($last == $parent) {
-        unset($ref[$parent]);
-      }
-      else {
-        if (isset($ref[$parent])) {
-          $ref = &$ref[$parent];
-        }
-        else {
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOption($parents, $value = NULL) {
-    $ref = &$this->options;
-
-    if (is_string($parents)) {
-      $parents = array($parents);
-    }
-
-    foreach ($parents as $parent) {
-      if (isset($ref) && !is_array($ref)) {
-        $ref = array();
-      }
-      $ref = &$ref[$parent];
-    }
-    $ref = $value;
-
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function resetCollection() {
-    $this->collection = NULL;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getOptions() {
     if (!empty($this->options)) {
       return $this->options;
@@ -244,20 +113,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $this->collection = NULL;
 
     return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getExport() {
-    $configuration = $this->getConfiguration();
-    $options = $this->getOptions();
-
-    $options = Openlayers::array_map_recursive('\Drupal\openlayers\Openlayers::floatval_if_numeric', (array) $options);
-    $options = Openlayers::removeEmptyElements((array) $options);
-    $configuration['options'] = $options;
-
-    return (object) $configuration;
   }
 
   /**
@@ -322,6 +177,63 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function initCollection() {
+    if (is_null($this->collection) || !($this->collection instanceof Collection)) {
+      $this->collection = \Drupal::service('openlayers.Types')
+        ->createInstance('Collection');
+    }
+
+    $this->getCollection()->import($this->optionsToObjects());
+    $this->getCollection()->append($this);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCollection() {
+    return $this->collection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsToObjects() {
+    return array();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addObject(ObjectInterface $object) {
+    $this->setOption($object->getType() . 's', $this->getOption($object->getType() . 's', array()) + array($object->getMachineName()));
+    $this->getCollection()->import(array($object));
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOption($parents, $value = NULL) {
+    $ref = &$this->options;
+
+    if (is_string($parents)) {
+      $parents = array($parents);
+    }
+
+    foreach ($parents as $parent) {
+      if (isset($ref) && !is_array($ref)) {
+        $ref = array();
+      }
+      $ref = &$ref[$parent];
+    }
+    $ref = $value;
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getOption($parents, $default_value = NULL) {
     if (is_string($parents)) {
       $parents = array($parents);
@@ -363,6 +275,125 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function removeObject($object_machine_name) {
+    $this->getCollection()->remove($object_machine_name);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @TODO What is this return? If it is the form, why is form by reference?
+   */
+  public function optionsForm(&$form, &$form_state) {
+    return array();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsFormValidate($form, &$form_state) {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function optionsFormSubmit($form, &$form_state) {
+    if (isset($form_state['values']['options'])) {
+      $options = array_merge((array) $this->getOptions(), (array) $form_state['values']['options']);
+      $this->setOptions($options);
+    }
+
+    $form_state['item'] = $this->getExport();
+
+    // Refresh translatable strings.
+    $this->i18nStringsRefresh();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getExport() {
+    $configuration = $this->getConfiguration();
+    $options = $this->getOptions();
+
+    $options = Openlayers::array_map_recursive('\Drupal\openlayers\Openlayers::floatval_if_numeric', (array) $options);
+    $options = Openlayers::removeEmptyElements((array) $options);
+    $configuration['options'] = $options;
+
+    return (object) $configuration;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function i18nStringsRefresh() {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function preBuild(array &$build, ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object !== $this) {
+        $object->preBuild($build, $context);
+      }
+    }
+    drupal_alter('openlayers_object_preprocess', $build, $this);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function postBuild(array &$build, ObjectInterface $context = NULL) {
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      if ($object !== $this) {
+        $object->postBuild($build, $context);
+      }
+    }
+    drupal_alter('openlayers_object_postprocess', $build, $this);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function clearOption($parents) {
+    $ref = &$this->options;
+
+    if (is_string($parents)) {
+      $parents = array($parents);
+    }
+
+    $last = end($parents);
+    reset($parents);
+    foreach ($parents as $parent) {
+      if (isset($ref) && !is_array($ref)) {
+        $ref = array();
+      }
+      if ($last == $parent) {
+        unset($ref[$parent]);
+      }
+      else {
+        if (isset($ref[$parent])) {
+          $ref = &$ref[$parent];
+        }
+        else {
+          break;
+        }
+      }
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function resetCollection() {
+    $this->collection = NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function attached() {
     if ($plugin = $this->getPluginDefinition()) {
       $path = $this->getClassDirectory();
@@ -398,26 +429,9 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function getObjects($type = NULL) {
-    return array_values($this->getCollection()->getObjects($type));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getParents() {
-    return array_filter(Openlayers::loadAll('Map'), function($map) {
-      return array_filter($map->getObjects($this->getType()), function($object) {
-        return $object->getMachineName() == $this->getMachineName();
-      });
-    });
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function dependencies() {
-    return array();
+  public function getClassDirectory() {
+    $class = explode('\\', $this->pluginDefinition['class']);
+    return drupal_get_path('module', $this->getProvider()) . '/src/' . implode('/', array_slice($class, 2, -1));
   }
 
   /**
@@ -431,9 +445,34 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function getClassDirectory() {
-    $class = explode('\\', $this->pluginDefinition['class']);
-    return drupal_get_path('module', $this->getProvider()) . '/src/' . implode('/', array_slice($class, 2, -1));
+  public function getObjects($type = NULL) {
+    return array_values($this->getCollection()->getObjects($type));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getParents() {
+    return array_filter(Openlayers::loadAll('Map'), function ($map) {
+      return array_filter($map->getObjects($this->getType()), function ($object) {
+        return $object->getMachineName() == $this->getMachineName();
+      });
+    });
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getType() {
+    $class = explode('\\', get_class($this));
+    return drupal_strtolower($class[3]);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function dependencies() {
+    return array();
   }
 
   /**
@@ -453,28 +492,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
 
   /**
    * {@inheritdoc}
-   */
-  public function getType() {
-    $class = explode('\\', get_class($this));
-    return drupal_strtolower($class[3]);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCollection() {
-    return $this->collection;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function optionsToObjects() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
    *
    * !Attention! This function will remove any option that is named after a
    * plugin type e.g.: layers, controls, styles, interactions, components .
@@ -482,7 +499,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getJS() {
     $export = $this->getExport();
 
-    array_map(function($type) use ($export) {
+    array_map(function ($type) use ($export) {
       unset($export->options[$type . 's']);
     }, Openlayers::getPluginTypes());
 
@@ -501,15 +518,15 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function setWeight($weight) {
-    $this->weight = $weight;
+  public function getWeight() {
+    return intval($this->weight);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getWeight() {
-    return intval($this->weight);
+  public function setWeight($weight) {
+    $this->weight = $weight;
   }
 
   /**
@@ -519,10 +536,5 @@ abstract class Object extends PluginBase implements ObjectInterface {
     $plugin_definition = $this->getPluginDefinition();
     return isset($plugin_definition['description']) ? $plugin_definition['description'] : '';
   }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function i18nStringsRefresh() {}
 
 }

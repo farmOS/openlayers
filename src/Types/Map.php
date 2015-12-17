@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+
 use Drupal\openlayers\Openlayers;
 
 /**
@@ -17,20 +18,6 @@ abstract class Map extends Object implements MapInterface {
    * @var string
    */
   protected $id;
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getId() {
-    if (!isset($this->id)) {
-      $css_map_name = drupal_clean_css_identifier($this->getMachineName());
-      // Use uniqid to ensure we've really an unique id - otherwise there will
-      // occur issues with caching.
-      $this->id = drupal_html_id('openlayers-map-' . $css_map_name . '-' . uniqid('', TRUE));
-    }
-
-    return $this->id;
-  }
 
   /**
    * {@inheritdoc}
@@ -74,6 +61,56 @@ abstract class Map extends Object implements MapInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
+   */
+  public function removeLayer($layer_id) {
+    $layers = $this->getOption('layers', array());
+    unset($layers[$layer_id]);
+    return $this->setOption('layers', $layers)->removeObject($layer_id);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
+   */
+  public function removeComponent($component_id) {
+    $components = $this->getOption('components', array());
+    unset($components[$component_id]);
+    return $this->setOption('components', $components)
+      ->removeObject($component_id);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
+   */
+  public function removeControl($control_id) {
+    $controls = $this->getOption('controls', array());
+    unset($controls[$control_id]);
+    return $this->setOption('controls', $controls)->removeObject($control_id);
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @return MapInterface
+   *   The Map object.
+   */
+  public function removeInteraction($interaction_id) {
+    $interactions = $this->getOption('interactions', array());
+    unset($interactions[$interaction_id]);
+    return $this->setOption('interactions', $interactions)
+      ->removeObject($interaction_id);
+  }
+
+  /**
+   * {@inheritdoc}
    */
   public function attached() {
     $attached = parent::attached();
@@ -95,6 +132,44 @@ abstract class Map extends Object implements MapInterface {
     return $attached;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getId() {
+    if (!isset($this->id)) {
+      $css_map_name = drupal_clean_css_identifier($this->getMachineName());
+      // Use uniqid to ensure we've really an unique id - otherwise there will
+      // occur issues with caching.
+      $this->id = drupal_html_id('openlayers-map-' . $css_map_name . '-' . uniqid('', TRUE));
+    }
+
+    return $this->id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setId($id) {
+    $this->id = drupal_html_id($id);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getJS() {
+    $js = parent::getJS();
+    $js['opt']['target'] = $this->getId();
+    unset($js['opt']['capabilities']);
+    return $js;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function render() {
+    $build = $this->build();
+    return drupal_render($build);
+  }
 
   /**
    * {@inheritdoc}
@@ -124,7 +199,7 @@ abstract class Map extends Object implements MapInterface {
       'height' => $map->getOption('height'),
     );
 
-    $styles = implode(array_map(function($k, $v) {
+    $styles = implode(array_map(function ($k, $v) {
       return $k . ':' . $v . ';';
     }, array_keys($styles), $styles));
 
@@ -166,16 +241,40 @@ abstract class Map extends Object implements MapInterface {
     }
 
     if ((bool) $this->getOption('capabilities', FALSE) === TRUE) {
-      $items = array_values($this->getOption(array('capabilities', 'options', 'table'), array()));
+      $items = array_values($this->getOption(array(
+        'capabilities',
+        'options',
+        'table',
+      ), array()));
       array_walk($items, 'check_plain');
 
       $build['openlayers']['capabilities'] = array(
         '#weight' => 1,
-        '#type' => $this->getOption(array('capabilities', 'options', 'container_type'), 'fieldset'),
-        '#title' => $this->getOption(array('capabilities', 'options', 'title'), NULL),
-        '#description' => $this->getOption(array('capabilities', 'options', 'description'), NULL),
-        '#collapsible' => $this->getOption(array('capabilities', 'options', 'collapsible'), TRUE),
-        '#collapsed' => $this->getOption(array('capabilities', 'options', 'collapsed'), TRUE),
+        '#type' => $this->getOption(array(
+          'capabilities',
+          'options',
+          'container_type',
+        ), 'fieldset'),
+        '#title' => $this->getOption(array(
+          'capabilities',
+          'options',
+          'title',
+        ), NULL),
+        '#description' => $this->getOption(array(
+          'capabilities',
+          'options',
+          'description',
+        ), NULL),
+        '#collapsible' => $this->getOption(array(
+          'capabilities',
+          'options',
+          'collapsible',
+        ), TRUE),
+        '#collapsed' => $this->getOption(array(
+          'capabilities',
+          'options',
+          'collapsed',
+        ), TRUE),
         'description' => array(
           '#type' => 'container',
           '#attributes' => array(
@@ -227,11 +326,18 @@ abstract class Map extends Object implements MapInterface {
   /**
    * {@inheritdoc}
    */
-  public function getJS() {
-    $js = parent::getJS();
-    $js['opt']['target'] = $this->getId();
-    unset($js['opt']['capabilities']);
-    return $js;
+  public function setSize(array $size = array()) {
+    list($width, $height) = $size;
+    $this->setOption('width', $width);
+    $this->setOption('height', $height);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSize() {
+    return array($this->getOption('width'), $this->getOption('height'));
   }
 
 }

@@ -6,11 +6,11 @@
 
 namespace Drupal\openlayers\Plugin\Interaction\InlineJS;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Interaction;
-use Drupal\service_container\Messenger\MessengerInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\service_container\Legacy\Drupal7;
+use Drupal\service_container\Messenger\MessengerInterface;
 
 /**
  * Class InlineJS.

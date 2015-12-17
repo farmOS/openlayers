@@ -6,8 +6,8 @@
 
 namespace Drupal\openlayers\Types;
 
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\Core\Logger\LoggerChannelInterface;
+use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\Object;
 use Drupal\service_container\Messenger\MessengerInterface;
 

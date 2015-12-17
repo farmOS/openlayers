@@ -10,7 +10,7 @@ use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Plugin\Source\Vector\Vector;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
-use \geoPHP;
+use geoPHP;
 
 /**
  * Class GeofieldWidget.

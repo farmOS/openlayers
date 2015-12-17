@@ -5,10 +5,10 @@
  */
 
 namespace Drupal\openlayers\Plugin\Component\Popup;
-use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
+use Drupal\openlayers\Types\ObjectInterface;
 
 /**
  * Class Popup.
