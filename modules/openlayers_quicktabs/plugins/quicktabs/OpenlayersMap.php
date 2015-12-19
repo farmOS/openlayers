@@ -46,7 +46,7 @@ class OpenlayersMap extends QuickContent {
 
     $output = array(
       '#type' => 'openlayers',
-      '#map' => $item['map']
+      '#map' => $item['map'],
     );
 
     $this->rendered_content = $output;

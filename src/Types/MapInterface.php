@@ -141,4 +141,23 @@ interface MapInterface extends ObjectInterface {
    */
   public function setSize(array $size = array());
 
+  /**
+   * Set the target element to render this map into.
+   *
+   * @param string $target
+   *   The html ID of the element to render the map into.
+   *
+   * @return MapInterface
+   *   The map.
+   */
+  public function setTarget($target);
+
+  /**
+   * Get the target ID in which this map is rendered.
+   *
+   * @return string
+   *   The ID of the Element that the map is rendered in.
+   */
+  public function getTarget();
+
 }

@@ -53,11 +53,9 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
   // Get preset options, filtered to those which have the GeoField source.
   $map_options = array();
   foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
-    if (is_object($map)) {
-      foreach ($map->getObjects('component') as $component) {
-        if ($component->getFactoryService() === 'openlayers.Component:GeofieldFormatter') {
-          $map_options[$map->getMachineName()] = $map->getName();
-        }
+    foreach ($map->getObjects('component') as $component) {
+      if ($component->getFactoryService() === 'openlayers.Component:GeofieldFormatter') {
+        $map_options[$map->getMachineName()] = $map->getName();
       }
     }
   }
@@ -197,6 +195,7 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   }
 
   // Load map and set features.
+  /** @var \Drupal\openlayers\Types\MapInterface $map */
   $map_name = $display['settings']['map_preset'] ? $display['settings']['map_preset'] : 'openlayers_geofield_map_geofield_formatter';
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
 
@@ -258,12 +257,11 @@ function openlayers_geofield_field_widget_settings_form($field, $instance) {
   $form = array();
 
   // Get preset options, filtered to those which have the GeoField component.
-  $maps = \Drupal\openlayers\Openlayers::loadAll('Map');
   $map_options = array();
-  foreach ($maps as $machine_name => $map) {
+  foreach (\Drupal\openlayers\Openlayers::loadAll('Map') as $map) {
     foreach ($map->getObjects('component') as $component) {
       if ($component instanceof \Drupal\openlayers_geofield\Plugin\Component\GeofieldWidget\GeofieldWidget) {
-        $map_options[$machine_name] = $map->name;
+        $map_options[$map->getMachineName()] = $map->getName();
       }
     }
   }

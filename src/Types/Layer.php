@@ -82,4 +82,46 @@ abstract class Layer extends Object implements LayerInterface {
 
     return $import;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOpacity($opacity) {
+    return $this->setOption('opacity', floatval($opacity));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOpacity() {
+    return $this->getOption('opacity');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setZIndex($zindex) {
+    return $this->setOption('zIndex', intval($zindex));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getZIndex() {
+    return $this->getOption('zIndex');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setVisible($visibility) {
+    return $this->setOption('visible', (bool) $visibility);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getVisible() {
+    return (bool) $this->getOption('visible');
+  }
 }

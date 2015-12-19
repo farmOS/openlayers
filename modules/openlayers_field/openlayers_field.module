@@ -221,6 +221,7 @@ function openlayers_field_field_formatter_view($entity_type, $entity, $field, $i
       $fields = array();
       $map = \Drupal\openlayers\Openlayers::load('map', $settings['map']);
 
+      /** @var \Drupal\openlayers\Types\SourceInterface $source */
       foreach ($map->getCollection()->getFlatList(array('source')) as $source) {
         if ($source->getFactoryService() == 'openlayers.Source:Field') {
           $sources[] = $source;
@@ -282,7 +283,7 @@ function openlayers_field_field_widget_form(&$form, &$form_state, $field, $insta
 
   foreach ($allowed_maps as $machine_name) {
     $map = \Drupal\openlayers\Openlayers::load('map', $machine_name);
-    $options[$machine_name] = $map->name;
+    $options[$machine_name] = $map->getMachineName();
   }
 
   if (empty($options)) {

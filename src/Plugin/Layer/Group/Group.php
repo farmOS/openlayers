@@ -8,6 +8,7 @@ namespace Drupal\openlayers\Plugin\Layer\Group;
 use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Layer;
+use Drupal\openlayers\Types\LayerInterface;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
@@ -28,16 +29,17 @@ class Group extends Layer {
       '#default_value' => $this->getOption('grouptitle', 'Base layers'),
     );
 
-    $all_layers = Openlayers::loadAllExportable('Layer');
+    /** @var LayerInterface[] $all_layers */
+    $all_layers = Openlayers::loadAll('Layer');
 
     array_walk($all_layers, function($object) {
-      $object->weight = 0;
+      $object->setWeight(0);
       $object->enabled = 0;
     });
 
     foreach ($this->getOption('grouplayers', array()) as $weight => $layer) {
       $layer = Openlayers::load('layer', $layer);
-      $all_layers[$layer->getMachineName()]->weight = $weight;
+      $all_layers[$layer->getMachineName()]->setWeight($weight);
       $all_layers[$layer->getMachineName()]->enabled = 1;
     }
 
@@ -48,16 +50,16 @@ class Group extends Layer {
       elseif ($a->enabled < $b->enabled) {
         return 1;
       }
-      if ($a->weight < $b->weight) {
+      if ($a->getWeight() < $b->getWeight()) {
         return -1;
       }
-      elseif ($a->weight > $b->weight) {
+      elseif ($a->getWeight() > $b->getWeight()) {
         return 1;
       }
-      if ($a->machine_name < $b->machine_name) {
+      if ($a->getMachineName() < $b->getMachineName()) {
         return -1;
       }
-      elseif ($a->machine_name > $b->machine_name) {
+      elseif ($a->getMachineName() > $b->getMachineName()) {
         return 1;
       }
       return 0;
@@ -66,11 +68,11 @@ class Group extends Layer {
     $data = array();
     $i = 0;
     /** @var \Drupal\openlayers\Types\Layer $layer */
-    foreach ($all_layers as $machine_name => $layer) {
-      $data[$machine_name] = array(
-        'name' => $layer->name,
-        'machine_name' => $layer->machine_name,
-        'factory_service' => $layer->factory_service,
+    foreach ($all_layers as $layer) {
+      $data[$layer->getMachineName()] = array(
+        'name' => $layer->getName(),
+        'machine_name' => $layer->getMachineName(),
+        'factory_service' => $layer->getFactoryService(),
         'weight' => $i++,
         'enabled' => isset($layer->enabled) ? $layer->enabled : 0,
       );
@@ -197,9 +199,9 @@ class Group extends Layer {
    * {@inheritdoc}
    */
   public function preBuild(array &$build, ObjectInterface $context = NULL) {
-    $layers = $context->getObjects('layer');
-    foreach ($layers as $layer) {
-      $layer->setOption('title', $layer->name);
+    /** @var LayerInterface $layer */
+    foreach ($context->getObjects('layer') as $layer) {
+      $layer->setOption('title', $layer->getName());
     }
   }
 }

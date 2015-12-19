@@ -158,7 +158,6 @@ abstract class Map extends Object implements MapInterface {
    */
   public function getJS() {
     $js = parent::getJS();
-    $js['opt']['target'] = $this->getId();
     unset($js['opt']['capabilities']);
     return $js;
   }
@@ -176,6 +175,10 @@ abstract class Map extends Object implements MapInterface {
    */
   public function build(array $build = array()) {
     $map = $this;
+
+    if (!$target = $map->getOption('target', FALSE)) {
+      $this->setOption('target', $this->getId());
+    }
 
     // Transform the options into objects.
     $map->getCollection()->import($map->optionsToObjects());
@@ -340,4 +343,17 @@ abstract class Map extends Object implements MapInterface {
     return array($this->getOption('width'), $this->getOption('height'));
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function setTarget($target) {
+    return $this->setOption('target', $target);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getTarget() {
+    return $this->getOption('target');
+  }
 }
