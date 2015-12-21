@@ -16,7 +16,7 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
 
     $options = array();
     foreach (\Drupal\openlayers\Openlayers::loadAll('map') as $map) {
-      foreach($map->getCollection()->getObjects('layer') as $layer) {
+      foreach ($map->getCollection()->getObjects('layer') as $layer) {
         $key = $map->getMachineName() . ':' . $layer->getMachineName();
         $value = sprintf("%s: %s (%s)", $map->getName(), $layer->getName(), $layer->getMachineName());
         $options[$map->getName()][$key] = $value;
