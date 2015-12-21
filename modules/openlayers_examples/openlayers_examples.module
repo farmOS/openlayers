@@ -86,11 +86,10 @@ function openlayers_examples($form, &$form_state, $map_arg = NULL) {
     if (($map = \Drupal\openlayers\Openlayers::load('Map', $map)) == FALSE) {
       continue;
     }
-    $map_configuration = $map->getConfiguration();
 
     $form['form'][$map->getId()] = array(
       '#type' => 'fieldset',
-      '#title' => $map_configuration['name'],
+      '#title' => $map->getName(),
       '#collapsible' => FALSE,
     );
 

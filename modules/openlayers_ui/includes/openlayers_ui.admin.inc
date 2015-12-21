@@ -103,11 +103,11 @@ function openlayers_ui_admin_settings($form, &$form_state) {
       list($module, $type,, $id) = explode('.', $service);
 
       $configuration = array(
+        'name' => $definition['id'],
         'machine_name' => $definition['id'],
         'factory_service' => $module . '.' . $type . ':' . $id,
       );
 
-      /** @var \Drupal\openlayers\Types\ObjectInterface $instance */
       $instance = \Drupal\openlayers\Openlayers::load($plugin_type, $configuration);
       $attached = $instance->attached();
 
@@ -182,7 +182,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 }
 
 /**
- * @TODO: Document.
+ * Ajax callback for the form 'openlayers_ui_admin_settings'.
  */
 function _openlayers_ajax_reload_default_map($form, &$form_state) {
   // This is for preventing 'system/ajax' as destination when using AJAX maps.

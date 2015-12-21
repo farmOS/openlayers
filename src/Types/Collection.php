@@ -37,9 +37,9 @@ class Collection extends PluginBase {
    *   The array of objects to import.
    */
   public function import(array $import = array()) {
-    array_walk($import, function (Object $object_to_add) {
+    array_walk($import, function (ObjectInterface $object_to_add) {
       $dependencies = $object_to_add->getCollection()->getFlatList();
-      array_walk($dependencies, function (Object $object_dependency) {
+      array_walk($dependencies, function (ObjectInterface $object_dependency) {
         $this->append($object_dependency);
       });
       $this->append($object_to_add);
@@ -53,11 +53,12 @@ class Collection extends PluginBase {
    *   Array of type to filter for. If set, only a list with objects of this
    *   type is returned.
    *
-   * @return \Drupal\openlayers\Types\Object[]
+   * @return \Drupal\openlayers\Types\ObjectInterface[]
    *   List of objects of this collection or list of a specific type of objects.
    */
   public function getFlatList(array $types = array()) {
     $list = $this->objects;
+
 
     if (!empty($types)) {
       $types = array_values($types);
@@ -73,7 +74,7 @@ class Collection extends PluginBase {
     }
 
     uasort($list, function ($a, $b) {
-      return $a->getWeight() - $b->getWeight();
+      return strnatcmp($a->getWeight(), $b->getWeight());
     });
 
     return $list;
@@ -86,7 +87,6 @@ class Collection extends PluginBase {
    *   Object instance to add to this collection.
    */
   public function append(ObjectInterface $object) {
-    $object->setWeight($object->getWeight() + count($this->objects));
     $this->objects[$object->getType() . '_' . $object->getMachineName()] = $object;
   }
 

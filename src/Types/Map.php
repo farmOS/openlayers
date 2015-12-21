@@ -176,7 +176,7 @@ abstract class Map extends Object implements MapInterface {
   public function build(array $build = array()) {
     $map = $this;
 
-    if (!$target = $map->getOption('target', FALSE)) {
+    if (!$map->getOption('target', FALSE)) {
       $this->setOption('target', $this->getId());
     }
 
@@ -310,18 +310,26 @@ abstract class Map extends Object implements MapInterface {
   public function optionsToObjects() {
     $import = array();
 
+    // TODO: Simplify this.
     // Add the objects from the configuration.
-    foreach (Openlayers::getPluginTypes(array('map')) as $type) {
+    foreach (Openlayers::getPluginTypes(array('map')) as $weight_type => $type) {
       foreach ($this->getOption($type . 's', array()) as $weight => $object) {
-        if ($merge_object = Openlayers::load($type, $object)) {
-          $merge_object->setWeight($weight);
-          $import[] = $merge_object;
+        if ($col_object = $this->getCollection()->getObjectById($type, $object)) {
+          //$col_object->setWeight($weight_type . '.' . $weight);
+          //$import[] = $col_object;
+        }
+        else {
+          if ($merge_object = Openlayers::load($type, $object)) {
+            $merge_object->setWeight($weight_type . '.' . $weight);
+            $import[$type . '_' . $merge_object->getMachineName()] = $merge_object;
+          }
         }
       }
     }
 
-    // Add to objects added manually, on the top of the others.
-    $import += $this->getCollection()->getFlatList();
+    foreach ($this->getCollection()->getFlatList() as $object) {
+      $import[$object->getType() . '_' . $object->getMachineName()] = $object;
+    }
 
     return $import;
   }

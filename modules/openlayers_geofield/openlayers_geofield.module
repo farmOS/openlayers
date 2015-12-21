@@ -111,7 +111,7 @@ function openlayers_geofield_field_formatter_settings_summary($field, $instance,
 
   if ($display['type'] == 'openlayers_geofield' && !empty($settings['map_preset'])) {
     if (($map = \Drupal\openlayers\Openlayers::load('Map', $settings['map_preset'])) == TRUE) {
-      $summary[] = t('Openlayers Map: @data', array('@data' => $map->name));
+      $summary[] = t('Openlayers Map: @data', array('@data' => $map->getName()));
     }
   }
 

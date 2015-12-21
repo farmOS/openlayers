@@ -52,13 +52,13 @@ class LayerSwitcher extends Control {
     $labels = $this->getOption('layer_labels', array());
     foreach ((array) $this->getOption('layers') as $i => $machine_name) {
       if (($map_layer = Openlayers::load('Layer', $machine_name)) == TRUE) {
-        $label = check_plain($map_layer->name);
+        $label = check_plain($map_layer->getName());
         if (isset($labels[$machine_name])) {
           $label = $labels[$machine_name];
         }
         $form['options']['layer_labels'][$machine_name] = array(
           '#type' => 'textfield',
-          '#title' => t('Label for layer @label:', array('@label' => $map_layer->name)),
+          '#title' => t('Label for layer @label:', array('@label' => $map_layer->getName())),
           '#default_value' => $label,
         );
       }

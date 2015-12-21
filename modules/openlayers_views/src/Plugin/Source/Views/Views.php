@@ -15,7 +15,6 @@ use Drupal\openlayers\Types\Source;
  * )
  */
 class Views extends Source {
-
   /**
    * @inheritDoc
    */
@@ -51,7 +50,6 @@ class Views extends Source {
    * @inheritDoc
    */
   public function init() {
-    parent::init();
     $features = array();
 
     if ($view = $this->getOption('view', FALSE)) {
@@ -76,6 +74,7 @@ class Views extends Source {
     }
 
     $this->setOption('features', $features);
+    return parent::init();
   }
 
 }

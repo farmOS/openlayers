@@ -65,9 +65,9 @@ class Error extends Object implements ControlInterface, ComponentInterface, Laye
    * {@inheritdoc}
    */
   public function init() {
-    parent::init();
     $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
     $this->messenger->addMessage($this->getMessage(), 'error', FALSE);
+    return parent::init();
   }
 
   /**
@@ -119,5 +119,48 @@ class Error extends Object implements ControlInterface, ComponentInterface, Laye
   public function setSource(SourceInterface $source) {
 
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setVisible($visibility) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOpacity($opacity) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setZIndex($zindex) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getVisible() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOpacity() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getZIndex() {
+
+  }
+
 
 }

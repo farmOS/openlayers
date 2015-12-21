@@ -5,7 +5,6 @@
  */
 
 namespace Drupal\openlayers;
-use Drupal\openlayers\Types\Error;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
@@ -54,23 +53,6 @@ class Openlayers {
   }
 
   /**
-   * Load a CTools exportable.
-   *
-   * @param string $object_type
-   *   Type of object to load:
-   *   map|layer|source|control|interaction|style|component .
-   * @param string $export_id
-   *   The exportable id.
-   *
-   * @return array
-   *   The exported object.
-   */
-  public static function loadExportable($object_type, $export_id) {
-    ctools_include('export');
-    return ctools_export_crud_load('openlayers_' . drupal_strtolower(check_plain($object_type)) . 's', $export_id);
-  }
-
-  /**
    * Gets all available OL objects.
    *
    * @param string $type
@@ -86,6 +68,26 @@ class Openlayers {
       return strcmp($a->name, $b->name);
     });
     return $exports;
+  }
+
+  /**
+   * Load all objects.
+   *
+   * @param string $object_type
+   *   Type of object to load:
+   *   map|layer|source|control|interaction|style|component.
+   *
+   * @return \Drupal\openlayers\Types\ObjectInterface[]
+   *   The array of objects.
+   */
+  public static function loadAll($object_type = NULL) {
+    $objects = array();
+    foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
+      if (is_object($exportable)) {
+        $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
+      }
+    }
+    return $objects;
   }
 
   /**
@@ -165,29 +167,24 @@ class Openlayers {
       $object->disabled = 1;
     }
 
-    $object->init();
-
-    return $object;
+    return $object->init();
   }
 
   /**
-   * Load all objects.
+   * Load a CTools exportable.
    *
    * @param string $object_type
    *   Type of object to load:
-   *   map|layer|source|control|interaction|style|component.
+   *   map|layer|source|control|interaction|style|component .
+   * @param string $export_id
+   *   The exportable id.
    *
-   * @return \Drupal\openlayers\Types\ObjectInterface[]
-   *   The array of objects.
+   * @return array
+   *   The exported object.
    */
-  public static function loadAll($object_type = NULL) {
-    $objects = array();
-    foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
-      if (is_object($exportable)) {
-        $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
-      }
-    }
-    return $objects;
+  public static function loadExportable($object_type, $export_id) {
+    ctools_include('export');
+    return ctools_export_crud_load('openlayers_' . drupal_strtolower(check_plain($object_type)) . 's', $export_id);
   }
 
   /**
@@ -286,7 +283,6 @@ class Openlayers {
     return $version;
   }
 
-
   /**
    * Apply a function recursively to all the value of an array.
    *
@@ -354,6 +350,7 @@ class Openlayers {
         $array[$key] = self::removeEmptyElements($value);
       }
     }
+
     return $array;
   }
 

@@ -65,7 +65,7 @@ abstract class Layer extends Object implements LayerInterface {
     $import = parent::optionsToObjects();
 
     foreach (array('style', 'source') as $option) {
-      if ($option_value = $this->getOption($option)) {
+      if ($option_value = $this->getOption($option, FALSE)) {
         if ($object = $this->getCollection()
           ->getObjectById($option, $option_value)
         ) {

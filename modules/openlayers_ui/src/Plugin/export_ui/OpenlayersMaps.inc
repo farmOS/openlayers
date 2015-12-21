@@ -140,8 +140,8 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 function openlayers_map_form_settings_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  if (empty($map->factory_service)) {
-    $map->factory_service = 'openlayers.Map:OLMap';
+  if (empty($map->getFactoryService())) {
+    $map->setFactoryService('openlayers.Map:OLMap');
   }
 
   $map->optionsFormSubmit($form, $form_state);
@@ -151,10 +151,11 @@ function openlayers_map_form_settings_submit($form, &$form_state) {
  * Map layers config form handler.
  */
 function openlayers_map_form_layers($form, &$form_state) {
-  $all_layers = \Drupal\openlayers\Openlayers::loadAll('Layer');
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == FALSE) {
     return;
   }
+
+  $all_layers = \Drupal\openlayers\Openlayers::loadAll('Layer');
 
   array_walk($all_layers, function(\Drupal\openlayers\Types\LayerInterface $layer) {
     $layer->setWeight(0);
@@ -162,7 +163,7 @@ function openlayers_map_form_layers($form, &$form_state) {
   });
 
   foreach ($map->getOption('layers', array()) as $weight => $layer) {
-    /** @var Drupal\openlayers\Types\Layer $layer */
+    /** @var Drupal\openlayers\Types\LayerInterface $layer */
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
     $all_layers[$layer->getMachineName()]->setWeight($weight);
     $all_layers[$layer->getMachineName()]->enabled = 1;
@@ -310,8 +311,8 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
     return $a['weight'] - $b['weight'];
   });
 
-  foreach ($layers_enabled as $id => $data) {
-    //Update the layer style.
+  foreach ($layers_enabled as $data) {
+    // Update the layer style.
     if (($layer = \Drupal\openlayers\Openlayers::load('layer', $data['machine_name'])) == TRUE) {
       if (!empty($data['style'])) {
         $layer->setOption('style', $data['style']);
@@ -324,7 +325,6 @@ function openlayers_map_form_layers_submit($form, &$form_state) {
   }
 
   $map->setOption('layers', array_keys($layers_enabled));
-
   $form_state['item'] = $map->getExport();
 }
 
@@ -724,6 +724,7 @@ function openlayers_map_form_preview($form, &$form_state) {
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
     $form['preview'] = $map->build();
   }
+
   return $form;
 }
 

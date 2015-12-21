@@ -6,7 +6,6 @@
 
 namespace Drupal\openlayers\Plugin\Map\OLMap;
 
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Map;

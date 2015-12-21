@@ -33,10 +33,12 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function getType();
 
   /**
-   * @TODO was does this?
+   * Remove an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
+   *   The option to remove.
+   *   This can be a string or an array of parents keys if the option
+   *   is in a multilevel array.
    */
   public function clearOption($parents);
 
@@ -296,6 +298,17 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Refresh string translations.
    */
   public function i18nStringsRefresh();
+
+  /**
+   * Set the Factory Service of the object.
+   *
+   * @param string $factory_service
+   *   The object's factory service.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function setFactoryService($factory_service);
 
   /**
    * Return the Factory Service of the object.

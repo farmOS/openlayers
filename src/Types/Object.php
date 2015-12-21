@@ -17,38 +17,6 @@ use Drupal\openlayers\Types\ObjectInterface;
  */
 abstract class Object extends PluginBase implements ObjectInterface {
   /**
-   * The unique machine name.
-   *
-   * @var string
-   */
-  public $machine_name;
-
-  /**
-   * The human readable name.
-   *
-   * @var string
-   */
-  public $name;
-
-  /**
-   * A short description.
-   *
-   * @var string
-   */
-  public $description;
-
-  /**
-   * The factory service.
-   *
-   * @var string
-   */
-  public $factory_service;
-
-  /**
-   * @var int
-   */
-  protected $weight = 0;
-  /**
    * The array containing the options.
    *
    * @var array
@@ -79,11 +47,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function init() {
     $this->options = $this->getOptions();
-    $this->machine_name = $this->getMachineName();
-    $this->name = $this->getName();
-    $this->description = $this->getDescription();
-    $this->factory_service = $this->getFactoryService();
-    $this->initCollection();
+    $this->setWeight(0);
+    return $this->initCollection();
   }
 
   /**
@@ -164,6 +129,22 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function dependencies() {
+    return array();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setFactoryService($factory_service) {
+    $this->configuration['factory_service'] = $factory_service;
+
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getFactoryService() {
     $configuration = $this->getConfiguration();
     if (isset($configuration['factory_service'])) {
@@ -185,6 +166,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
 
     $this->getCollection()->import($this->optionsToObjects());
     $this->getCollection()->append($this);
+
+    return $this;
   }
 
   /**
@@ -206,6 +189,7 @@ abstract class Object extends PluginBase implements ObjectInterface {
    */
   public function addObject(ObjectInterface $object) {
     $this->setOption($object->getType() . 's', $this->getOption($object->getType() . 's', array()) + array($object->getMachineName()));
+    $object->setWeight(count($this->getOption($object->getType() . 's', array())) + 2);
     $this->getCollection()->import(array($object));
     return $this;
   }
@@ -471,13 +455,6 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
-  public function dependencies() {
-    return array();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getClassPath() {
     $class = explode('\\', $this->pluginDefinition['class']);
     return drupal_get_path('module', $this->getProvider()) . '/src/' . implode('/', array_slice($class, 2)) . '.php';
@@ -519,14 +496,14 @@ abstract class Object extends PluginBase implements ObjectInterface {
    * {@inheritdoc}
    */
   public function getWeight() {
-    return intval($this->weight);
+    return floatval($this->configuration['weight']);
   }
 
   /**
    * {@inheritdoc}
    */
   public function setWeight($weight) {
-    $this->weight = $weight;
+    $this->configuration['weight'] = floatval($weight);
   }
 
   /**

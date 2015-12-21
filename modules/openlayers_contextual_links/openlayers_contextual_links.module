@@ -43,7 +43,7 @@ function openlayers_contextual_links_openlayers_object_postprocess_alter(array &
     $object_links = array();
 
     // Build contextual link for this object.
-    $name = $object->name;
+    $name = $object->getName();
     if (empty($name)) {
       $name = $object->getMachineName();
     }

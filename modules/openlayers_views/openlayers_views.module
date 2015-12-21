@@ -29,10 +29,6 @@ function openlayers_views_ctools_plugin_api($module, $api) {
  *
  * Uses static caching.
  *
- * @param string $style_type
- *   The style type to filter for. Valid types:
- *   - openlayers_map_views
- *   - openlayers_source_vector
  * @param bool $reset
  *   Resets the static cache.
  *

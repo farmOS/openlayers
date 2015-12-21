@@ -162,12 +162,15 @@ class Field extends Vector {
       $json = FALSE;
       if (isset($field['wkt']) && !empty($field['wkt'])) {
         geophp_load();
-        $json = \geoPHP::load($field['wkt'], 'wkt')->out('json');
+        $geophp = \geoPHP::load($field['wkt'], 'wkt');
+        if (is_object($geophp)) {
+          $json = $geophp->out('json');
+        }
       }
       else {
         if (isset($field['address']) && !empty($field['address'])) {
           $geocoder = geocoder($this->getOption('geocoder_handler', 'google'), $field['address'], array(), $this->getOption('geocoder_cache', 2));
-          if (!is_null($geocoder)) {
+          if (is_object($geocoder)) {
             $json = $geocoder->out('json');
           }
         }

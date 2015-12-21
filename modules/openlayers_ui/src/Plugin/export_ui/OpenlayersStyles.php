@@ -83,6 +83,20 @@ class OpenlayersStyles extends \OpenlayersObjects {
         break;
     }
 
+    switch ($item->type) {
+      case t('Default'):
+      default:
+        $type = t('In code');
+        break;
+
+      case t('Normal'):
+        $type = t('In database');
+        break;
+
+      case t('Overridden'):
+        $type = t('Database overriding code');
+    }
+
     // Generate a map and use the style on it to make a preview.
     /** @var MapInterface $map */
     $map = Openlayers::load('map', 'openlayers_ui_map_style_demo');
@@ -100,7 +114,7 @@ class OpenlayersStyles extends \OpenlayersObjects {
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
+    $this->rows[$name]['data'][] = array('data' => $type, 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(
       'links' => $operations,
