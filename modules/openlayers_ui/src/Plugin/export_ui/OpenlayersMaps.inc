@@ -140,7 +140,7 @@ function openlayers_map_form_settings_validate($form, &$form_state) {
 function openlayers_map_form_settings_submit($form, &$form_state) {
   $map = \Drupal\openlayers\Openlayers::load('map', $form_state['item']);
 
-  if (empty($map->getFactoryService())) {
+  if (!$map->getFactoryService()) {
     $map->setFactoryService('openlayers.Map:OLMap');
   }
 

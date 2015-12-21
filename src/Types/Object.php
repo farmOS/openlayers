@@ -150,9 +150,8 @@ abstract class Object extends PluginBase implements ObjectInterface {
     if (isset($configuration['factory_service'])) {
       return check_plain($configuration['factory_service']);
     }
-    else {
-      return 'undefined';
-    }
+
+    return FALSE;
   }
 
   /**

@@ -313,7 +313,8 @@ interface ObjectInterface extends PluginInspectionInterface {
   /**
    * Return the Factory Service of the object.
    *
-   * @return string
+   * @return string|FALSE
+   *   The factory service otherwise FALSE.
    */
   public function getFactoryService();
 
