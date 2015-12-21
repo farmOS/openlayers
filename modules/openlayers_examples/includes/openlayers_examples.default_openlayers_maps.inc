@@ -222,6 +222,9 @@ function openlayers_examples_default_openlayers_maps() {
       0 => 'openlayers_interaction_doubleclickzoom',
       1 => 'openlayers_interaction_dragpan',
     ),
+    'components' => array(
+      0 => 'openlayers_examples_component_simple_popup_cities',
+    ),
   );
   $export['openlayers_examples_map_geojson_cluster'] = $ol_map;
 
