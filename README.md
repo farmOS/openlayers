@@ -89,3 +89,7 @@ To quickly create a map, here are the steps in this following order:
 
 # Sub-modules
 Find the documentation of each sub-modules in their README file.
+
+# Included libraries
+* Spin.js: http://fgnass.github.io/spin.js/
+* OL3 Layerswitcher: https://github.com/walkermatt/ol3-layerswitcher
