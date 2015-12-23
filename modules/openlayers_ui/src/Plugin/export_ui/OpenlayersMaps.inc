@@ -721,9 +721,10 @@ function openlayers_map_form_components_submit($form, &$form_state) {
  * Map preview form handler.
  */
 function openlayers_map_form_preview($form, &$form_state) {
-  if (($map = \Drupal\openlayers\Openlayers::load('Map', $form_state['item'])) == TRUE) {
-    $form['preview'] = $map->build();
-  }
+  $form['preview'] = array(
+    '#type' => 'openlayers',
+    '#map' => $form_state['item'],
+  );
 
   return $form;
 }

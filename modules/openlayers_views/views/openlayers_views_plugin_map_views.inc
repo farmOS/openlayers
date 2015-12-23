@@ -53,7 +53,10 @@ class openlayers_views_plugin_map_views extends openlayers_views_plugin_style_so
           $source = \Drupal\openlayers\Openlayers::load('source', 'openlayers_views_source_' . $this->view->name . '_' . $this->view->current_display);
           $map->addLayer($layer->setSource($source));
         }
-        $output = $map->build();
+        $output = array(
+          '#type' => 'openlayers',
+          '#map' => $map,
+        );
       }
     }
     else {

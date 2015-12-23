@@ -213,7 +213,11 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
     }
 
     // Build map.
-    $element[0] = $map->build();
+    $element[0] = array(
+      '#type' => 'openlayers',
+      '#map' => $map,
+    );
+
   }
 
   return $element;
@@ -425,10 +429,10 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     }
   }
 
-  $map_build = $map->build();
-  if ($map_build) {
-    $element += $map_build;
-  }
+  $element += array(
+    '#type' => 'openlayers',
+    '#map' => $map,
+  );
 
   // Remove the #value key to ensure it's written by the form handler.
   unset($element['geom']['#value']);
