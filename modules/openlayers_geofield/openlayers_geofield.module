@@ -390,6 +390,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
 
   $openlayers_map_id = !empty($instance['widget']['settings']['openlayers_map']) ? $instance['widget']['settings']['openlayers_map'] : 'openlayers_geofield_map_geofield_widget';
 
+  /** @var \Drupal\openlayers\Types\MapInterface $map */
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $openlayers_map_id)) == FALSE) {
     // If the map couldn't be load we can't do a thing.
     return array();
@@ -429,10 +430,11 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     }
   }
 
-  $element += array(
-    '#type' => 'openlayers',
-    '#map' => $map,
-  );
+  // TODO: Replace this folowing line with a render array instead.
+  $map_build = $map->build();
+  if ($map_build) {
+    $element += $map_build;
+  }
 
   // Remove the #value key to ensure it's written by the form handler.
   unset($element['geom']['#value']);
@@ -521,6 +523,10 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   $full_element['#element_validate'][] = 'openlayers_geofield_widget_element_validate';
 
   return $full_element;
+}
+
+function openlayers_geofield_field_widget_form_submit($form, &$form_state) {
+  dpm('ici');
 }
 
 /**
