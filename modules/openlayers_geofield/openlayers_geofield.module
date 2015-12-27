@@ -29,7 +29,7 @@ function openlayers_geofield_field_formatter_info() {
     'field types' => array('geofield'),
     'settings' => array(
       'data' => 'full',
-      'map_layer_preset' => 'openlayers_geofield_map_geofield_formatter',
+      'map_layer_preset' => 'openlayers_geofield_map_geofield_formatter:openlayers_geofield_layer_formatter',
     ),
   );
 
