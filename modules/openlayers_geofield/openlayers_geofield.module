@@ -74,7 +74,7 @@ function openlayers_geofield_field_formatter_settings_form($field, $instance, $v
     '#default_value' => $settings['map_layer_preset'] ? $settings['map_layer_preset'] : 'openlayers_geofield_map_geofield_formatter',
     '#required' => TRUE,
     '#options' => $options,
-    '#description' => t('Select which Openlayers map you would like to use. Only maps which have the "Geofield Formatter" component may be selected. If your preferred map is not here, add the "Geofield Formatter" component to it first.'),
+    '#description' => t('Select which Openlayers map and layer you would like to add the Geofield data to. Map features will be added to the source of the layer when the map is built.'),
   );
 
   $data_options = _geofield_formatter_settings_data_options($display['type']);
