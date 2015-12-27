@@ -525,10 +525,6 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
   return $full_element;
 }
 
-function openlayers_geofield_field_widget_form_submit($form, &$form_state) {
-  dpm('ici');
-}
-
 /**
  * Submit handler for the geocoder integration.
  */
