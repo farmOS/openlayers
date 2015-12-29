@@ -54,8 +54,8 @@ class MapSwitcher extends Component {
       ),
     );
 
-    $build['form'][$context->getId()]['map'] = $build['openlayers'];
-    unset($build['openlayers']);
+    $build['form'][$context->getId()]['map'] = $build['map'];
+    unset($build['map']);
   }
 
 }
