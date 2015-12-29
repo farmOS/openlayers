@@ -101,8 +101,7 @@ class OpenlayersStyles extends \OpenlayersObjects {
     /** @var MapInterface $map */
     $map = Openlayers::load('map', 'openlayers_ui_map_style_demo');
     $layer = $map->getCollection()->getObjectById('layer', 'openlayers_ui_layer_style_demo');
-    $map_build = $map->addLayer($layer->setStyle($object))->build();
-    $map_render = drupal_render($map_build);
+    $map_render = $map->addLayer($layer->setStyle($object))->render();
 
     $this->rows[$name]['data'] = array();
     $this->rows[$name]['class'] = !empty($item->disabled) ? array('ctools-export-ui-disabled') : array('ctools-export-ui-enabled');
