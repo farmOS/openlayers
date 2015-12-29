@@ -68,7 +68,7 @@ class GoogleMaps extends Source {
       '#attributes' => array(
         'id' => 'gmap-' . $map->getId(),
         'class' => array('openlayers', 'gmap-map'),
-        'style' => $build['#map-container']['style'],
+        'style' => $build['map']['map-container']['#attributes']['style'],
       ),
     );
   }

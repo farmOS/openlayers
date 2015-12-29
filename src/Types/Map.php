@@ -265,7 +265,7 @@ abstract class Map extends Object implements MapInterface {
     $build = array(
       '#theme' => 'openlayers',
       '#map' => $map,
-      'openlayers' => array(
+      'map' => array(
         '#type' => 'container',
         '#attributes' => array(
           'id' => 'openlayers-container-' . $map->getId(),

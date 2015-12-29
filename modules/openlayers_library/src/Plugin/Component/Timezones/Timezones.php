@@ -40,7 +40,7 @@ class Timezones extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['openlayers'][$this->getPluginId()] = array(
+    $build['parameters'][$this->getPluginId()] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'info',

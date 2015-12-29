@@ -22,7 +22,7 @@ class Swipe extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['openlayers'][$this->getPluginId()] = array(
+    $build['parameters'][$this->getPluginId()] = array(
       '#type' => 'fieldset',
       '#title' => 'Example Swipe component',
       'swipe' => array(

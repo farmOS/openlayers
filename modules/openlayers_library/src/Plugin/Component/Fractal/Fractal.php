@@ -23,8 +23,7 @@ class Fractal extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['openlayers'][$this->getPluginId()] = array(
-      '#weight' => 10,
+    $build['parameters'][$this->getPluginId()] = array(
       '#type' => 'fieldset',
       '#title' => 'Example Fractal component',
       'swipe' => array(

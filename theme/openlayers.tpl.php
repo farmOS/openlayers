@@ -8,14 +8,18 @@
  */
 ?>
 
-<?php if ($openlayers['openlayers']): ?>
-  <?php print render($openlayers['openlayers']); ?>
+<?php if (isset($openlayers['map'])): ?>
+  <?php print render($openlayers['map']); ?>
 <?php endif; ?>
 
-<?php if ($openlayers['description']): ?>
+<?php if (isset($openlayers['description'])): ?>
   <?php print render($openlayers['description']); ?>
 <?php endif; ?>
 
-<?php if ($openlayers['capabilities']): ?>
+<?php if (isset($openlayers['parameters'])): ?>
+  <?php print render($openlayers['parameters']); ?>
+<?php endif; ?>
+
+<?php if (isset($openlayers['capabilities'])): ?>
   <?php print render($openlayers['capabilities']); ?>
 <?php endif; ?>

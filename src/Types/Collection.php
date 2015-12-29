@@ -164,7 +164,7 @@ class Collection extends PluginBase {
    *   Type to filter for. If set only a list with objects of this type is
    *   returned.
    *
-   * @return array
+   * @return array|ObjectInterface[]
    *   List of objects of this collection or list of a specific type of objects.
    */
   public function getObjects($type = NULL) {
