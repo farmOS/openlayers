@@ -21,7 +21,7 @@ class Debug extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['Debug'] = array(
+    $build['openlayers'][$this->getPluginId()] = array(
       '#type' => 'fieldset',
       '#title' => 'Map debug',
       '#description' => 'Here\'s a quick view of all the objects in the map.',
@@ -30,7 +30,7 @@ class Debug extends Component {
     );
 
     foreach ($context->getCollection()->getObjects() as $type => $objects) {
-      $build['Debug'][$type] = array(
+      $build['openlayers'][$this->getPluginId()][$type] = array(
         '#type' => 'fieldset',
         '#title' => 'Type ' . $type . ':',
         '#collapsible' => TRUE,
@@ -38,7 +38,7 @@ class Debug extends Component {
       );
 
       foreach ($objects as $object) {
-        $build['Debug'][$type][$object->getMachineName()] = array(
+        $build['openlayers'][$this->getPluginId()][$type][$object->getMachineName()] = array(
           '#type' => 'fieldset',
           '#collapsible' => TRUE,
           '#collapsed' => TRUE,

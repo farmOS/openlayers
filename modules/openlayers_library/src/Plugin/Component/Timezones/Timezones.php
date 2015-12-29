@@ -40,17 +40,13 @@ class Timezones extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build = array(
-      'map' => $build,
-      'info' => array(
-        '#markup' => 'This example is based on the <a href="http://openlayers.org/en/master/examples/kml-timezones.html">offical example</a>. You need the <em><a href="https://drupal.org/project/bootstrap_library">Bootstrap Library</a></em> module to get it working properly.'
-      ),
-      'Timezones' => array(
-        '#type' => 'container',
-        '#attributes' => array(
-          'id' => 'info'
-        )
+    $build['openlayers'][$this->getPluginId()] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'id' => 'info',
       ),
     );
+
+    $build['description']['#description'] = 'This example is based on the <a href="http://openlayers.org/en/master/examples/kml-timezones.html">offical example</a>. You need the <em><a href="https://drupal.org/project/bootstrap_library">Bootstrap Library</a></em> module to get it working properly.';
   }
 }

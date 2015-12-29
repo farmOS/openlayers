@@ -150,7 +150,7 @@ abstract class Map extends Object implements MapInterface {
    * {@inheritdoc}
    */
   public function setId($id) {
-    $this->id = drupal_html_id($id);
+    $this->id = drupal_html_id(drupal_clean_css_identifier($id));
   }
 
   /**
@@ -176,6 +176,11 @@ abstract class Map extends Object implements MapInterface {
   public function build(array $build = array()) {
     $map = $this;
 
+    // If this is an asynchronous map flag it as such.
+    if ($asynchronous = $this->isAsynchronous()) {
+      $map->setOption('async', $asynchronous);
+    }
+
     if (!$map->getOption('target', FALSE)) {
       $this->setOption('target', $this->getId());
     }
@@ -186,63 +191,21 @@ abstract class Map extends Object implements MapInterface {
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
-    $asynchronous = 0;
-    foreach ($map->getCollection()->getFlatList() as $object) {
-      // Check if this object is asynchronous.
-      $asynchronous += (int) $object->isAsynchronous();
-    }
-
-    // If this is asynchronous flag it as such.
-    if ($asynchronous) {
-      $settings['data']['openlayers']['maps'][$map->getId()]['map']['async'] = $asynchronous;
-    }
-
     $styles = array(
       'width' => $map->getOption('width'),
       'height' => $map->getOption('height'),
     );
 
-    $styles = implode(array_map(function ($k, $v) {
-      return $k . ':' . $v . ';';
+    $styles = implode(array_map(function ($key, $value) {
+      return $key . ':' . $value . ';';
     }, array_keys($styles), $styles));
 
-    $build['openlayers'] = array(
-      '#type' => 'container',
-      '#attributes' => array(
-        'id' => 'openlayers-container-' . $map->getId(),
-        'class' => array(
-          'contextual-links-region',
-          'openlayers-container',
-        ),
-      ),
-      'map-container' => array(
-        '#type' => 'container',
-        '#attributes' => array(
-          'id' => 'map-container-' . $map->getId(),
-          'style' => $styles,
-          'class' => array(
-            'openlayers-map-container',
-          ),
-        ),
-        'map' => array(
-          '#type' => 'container',
-          '#attributes' => array(
-            'id' => $map->getId(),
-            'class' => array(
-              'openlayers-map',
-              $map->getMachineName(),
-            ),
-          ),
-          '#attached' => $map->getCollection()->getAttached(),
-        ),
-      ),
-    );
-
     // If this is an asynchronous map flag it as such.
-    if ($asynchronous) {
-      $build['openlayers']['map-container']['map']['#attributes']['class'][] = 'asynchronous';
+    if ($asynchronous = $this->isAsynchronous()) {
+      $this->setOption('async', $asynchronous);
     }
 
+    $capabilities = array();
     if ((bool) $this->getOption('capabilities', FALSE) === TRUE) {
       $items = array_values($this->getOption(array(
         'capabilities',
@@ -251,7 +214,7 @@ abstract class Map extends Object implements MapInterface {
       ), array()));
       array_walk($items, 'check_plain');
 
-      $build['openlayers']['capabilities'] = array(
+      $capabilities = array(
         '#weight' => 1,
         '#type' => $this->getOption(array(
           'capabilities',
@@ -299,6 +262,48 @@ abstract class Map extends Object implements MapInterface {
       );
     }
 
+    $build = array(
+      '#theme' => 'openlayers',
+      '#map' => $map,
+      'openlayers' => array(
+        '#type' => 'container',
+        '#attributes' => array(
+          'id' => 'openlayers-container-' . $map->getId(),
+          'class' => array(
+            'contextual-links-region',
+            'openlayers-container',
+          ),
+        ),
+        'map-container' => array(
+          '#type' => 'container',
+          '#attributes' => array(
+            'id' => 'map-container-' . $map->getId(),
+            'style' => $styles,
+            'class' => array(
+              'openlayers-map-container',
+              ((bool) $asynchronous) ? 'asynchronous' : NULL,
+            ),
+          ),
+          'map' => array(
+            '#type' => 'container',
+            '#attributes' => array(
+              'id' => $map->getId(),
+              'class' => array(
+                'openlayers-map',
+                $map->getMachineName(),
+              ),
+            ),
+          ),
+        ),
+        '#attached' => $map->getCollection()->getAttached(),
+      ),
+      'description' => array(
+        '#theme' => 'form_element',
+        '#description' => $map->getDescription(),
+      ),
+      'capabilities' => $capabilities,
+    );
+
     $map->postBuild($build, $map);
 
     return $build;
@@ -314,11 +319,7 @@ abstract class Map extends Object implements MapInterface {
     // Add the objects from the configuration.
     foreach (Openlayers::getPluginTypes(array('map')) as $weight_type => $type) {
       foreach ($this->getOption($type . 's', array()) as $weight => $object) {
-        if ($col_object = $this->getCollection()->getObjectById($type, $object)) {
-          //$col_object->setWeight($weight_type . '.' . $weight);
-          //$import[] = $col_object;
-        }
-        else {
+        if (!$this->getCollection()->getObjectById($type, $object)) {
           if ($merge_object = Openlayers::load($type, $object)) {
             $merge_object->setWeight($weight_type . '.' . $weight);
             $import[$type . '_' . $merge_object->getMachineName()] = $merge_object;
@@ -363,5 +364,14 @@ abstract class Map extends Object implements MapInterface {
    */
   public function getTarget() {
     return $this->getOption('target');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function isAsynchronous() {
+    return array_reduce($this->getDependencies(), function($res, $obj) {
+      return $res + (int) $obj->isAsynchronous();
+    }, 0);
   }
 }

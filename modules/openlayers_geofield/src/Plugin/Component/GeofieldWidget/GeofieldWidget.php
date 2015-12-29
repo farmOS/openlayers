@@ -265,7 +265,7 @@ class GeofieldWidget extends Component {
       drupal_array_set_nested_value($build, $parents, $component);
     }
     else {
-      $build += $component;
+      $build['openlayers'][$this->getPluginId()] = $component;
     }
   }
 }

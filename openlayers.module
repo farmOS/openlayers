@@ -47,7 +47,7 @@ function openlayers_element_info() {
  * Renders the map and returns the markup in an renderable array.
  */
 function openlayers_element_process_callback($element, $form_state, $complete_form) {
-  /* @var \Drupal\openlayers\Types\Map $map */
+  /* @var \Drupal\openlayers\Types\MapInterface $map */
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $element['#map'])) == TRUE) {
     $element['map'] = $map->build();
   }
@@ -67,6 +67,20 @@ function openlayers_element_prerender_callback($element) {
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function openlayers_theme($existing, $type, $theme, $path) {
+  return array(
+    'openlayers' => array(
+      'path' => $path . '/theme',
+      'template' => 'openlayers',
+      'render element' => 'openlayers',
+      'file' => 'openlayers.theme.inc',
+    ),
+  );
 }
 
 /**

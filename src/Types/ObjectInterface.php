@@ -147,8 +147,8 @@ interface ObjectInterface extends PluginInspectionInterface {
    * If true the map this object relates to won't be processes right away by
    * Drupals behaviour attach.
    *
-   * @return bool
-   *   Whether or not this object has to be processed asynchronously.
+   * @return int
+   *   Return the number of asynchronous object contained in the parent object.
    */
   public function isAsynchronous();
 
@@ -212,6 +212,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return the module that provides this plugin.
    *
    * @return string
+   *   The module providing the plugin.
    */
   public function getProvider();
 
@@ -219,6 +220,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns the path to the plugin directory.
    *
    * @return string
+   *   The path to the plugin directory of the class.
    */
   public function getClassDirectory();
 
@@ -226,6 +228,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns the path to the class file.
    *
    * @return string
+   *   The path to the file containing the class definition.
    */
   public function getClassPath();
 
@@ -247,7 +250,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Set the weight of an object.
    *
    * @param int $weight
-   * @return void
+   *   The weight of the object.
    */
   public function setWeight($weight);
 
@@ -255,6 +258,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Get the weight of an object.
    *
    * @return int
+   *   The weight of the object.
    */
   public function getWeight();
 
@@ -262,6 +266,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return a flat array containing Openlayers Objects from the options array.
    *
    * @return ObjectInterface[]
+   *   Return a list of objects.
    */
   public function optionsToObjects();
 
@@ -339,4 +344,12 @@ interface ObjectInterface extends PluginInspectionInterface {
    *   The parent object.
    */
   public function removeObject($object_machine_name);
+
+  /**
+   * Return all the dependencies objects of the parent object.
+   *
+   * @return ObjectInterface[]
+   *   The dependencies objects.
+   */
+  public function getDependencies();
 }

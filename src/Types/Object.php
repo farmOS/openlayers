@@ -462,6 +462,16 @@ abstract class Object extends PluginBase implements ObjectInterface {
   /**
    * {@inheritdoc}
    */
+  public function getDependencies() {
+    $objects = $this->getCollection()->getFlatList();
+    unset($objects[$this->getType() . '_' . $this->getMachineName()]);
+
+    return $objects;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isAsynchronous() {
     return FALSE;
   }
