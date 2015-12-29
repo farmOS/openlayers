@@ -195,7 +195,6 @@ class GeofieldWidget extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-
     $component = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -265,7 +264,7 @@ class GeofieldWidget extends Component {
       drupal_array_set_nested_value($build, $parents, $component);
     }
     else {
-      $build['openlayers'][$this->getPluginId()] = $component;
+      $build += $component;
     }
   }
 }
