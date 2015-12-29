@@ -352,4 +352,23 @@ interface ObjectInterface extends PluginInspectionInterface {
    *   The dependencies objects.
    */
   public function getDependencies();
+
+  /**
+   * Return the object unique ID.
+   *
+   * @return string
+   *   The object ID.
+   */
+  public function getId();
+
+  /**
+   * Set the object ID.
+   *
+   * @param string $id
+   *   The object ID.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function setId($id);
 }

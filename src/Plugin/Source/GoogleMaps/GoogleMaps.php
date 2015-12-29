@@ -4,10 +4,11 @@
  * Google maps API integration based on the example here:
  * http://openlayers.org/en/v3.0.0/examples/google-map.html
  * http://bl.ocks.org/elemoine/e82c7dd4b1d0ef45a9a4
+ *
+ * TODO: https://github.com/mapgears/ol3-google-maps/
  */
 
 namespace Drupal\openlayers\Plugin\Source\GoogleMaps;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Types\ObjectInterface;
 use Drupal\openlayers\Types\Source;
 
@@ -63,7 +64,7 @@ class GoogleMaps extends Source {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $map = NULL) {
-    $build['gmap'] = array(
+    $build['map']['gmap'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'gmap-' . $map->getId(),

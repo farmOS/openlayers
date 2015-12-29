@@ -17,6 +17,13 @@ use Drupal\openlayers\Types\ObjectInterface;
  */
 abstract class Object extends PluginBase implements ObjectInterface {
   /**
+   * A unique ID for the object.
+   *
+   * @var string
+   */
+  protected $id;
+
+  /**
    * The array containing the options.
    *
    * @var array
@@ -521,6 +528,29 @@ abstract class Object extends PluginBase implements ObjectInterface {
   public function getPluginDescription() {
     $plugin_definition = $this->getPluginDefinition();
     return isset($plugin_definition['description']) ? $plugin_definition['description'] : '';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getId() {
+    if (!isset($this->id)) {
+      $css_name = drupal_clean_css_identifier($this->getType() . '-' . $this->getMachineName());
+      // Use uniqid to ensure we've really an unique id - otherwise there will
+      // occur issues with caching.
+      $this->id = drupal_html_id('openlayers-' . $css_name . '-' . uniqid('', TRUE));
+    }
+
+    return $this->id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setId($id) {
+    $this->id = drupal_html_id(drupal_clean_css_identifier($id));
+
+    return $this;
   }
 
 }

@@ -13,13 +13,6 @@ use Drupal\openlayers\Openlayers;
  */
 abstract class Map extends Object implements MapInterface {
   /**
-   * A unique ID for the map.
-   *
-   * @var string
-   */
-  protected $id;
-
-  /**
    * {@inheritdoc}
    *
    * @return MapInterface
@@ -130,27 +123,6 @@ abstract class Map extends Object implements MapInterface {
     );
 
     return $attached;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getId() {
-    if (!isset($this->id)) {
-      $css_map_name = drupal_clean_css_identifier($this->getMachineName());
-      // Use uniqid to ensure we've really an unique id - otherwise there will
-      // occur issues with caching.
-      $this->id = drupal_html_id('openlayers-map-' . $css_map_name . '-' . uniqid('', TRUE));
-    }
-
-    return $this->id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setId($id) {
-    $this->id = drupal_html_id(drupal_clean_css_identifier($id));
   }
 
   /**
@@ -281,7 +253,6 @@ abstract class Map extends Object implements MapInterface {
             'style' => $styles,
             'class' => array(
               'openlayers-map-container',
-              ((bool) $asynchronous) ? 'asynchronous' : NULL,
             ),
           ),
           'map' => array(
@@ -291,6 +262,7 @@ abstract class Map extends Object implements MapInterface {
               'class' => array(
                 'openlayers-map',
                 $map->getMachineName(),
+                ((bool) $asynchronous) ? 'asynchronous' : NULL,
               ),
             ),
           ),
