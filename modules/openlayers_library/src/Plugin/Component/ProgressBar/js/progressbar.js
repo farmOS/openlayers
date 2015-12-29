@@ -51,7 +51,6 @@ Drupal.openlayers.pluginManager.register({
      * Show the progress bar.
      */
     Progress.prototype.show = function() {
-      console.log(this.el);
       this.el.style.visibility = 'visible';
     };
 
