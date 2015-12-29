@@ -64,7 +64,7 @@ class GoogleMaps extends Source {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $map = NULL) {
-    $build['map']['gmap'] = array(
+    $build['map']['map-container']['gmap'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'gmap-' . $map->getId(),
