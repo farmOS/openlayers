@@ -29,7 +29,7 @@ class Field extends Vector {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $geocoder_handlers = array();
     foreach (geocoder_handler_info() as $name => $handler) {
       $geocoder_handlers[$name] = $handler['title'];
@@ -94,7 +94,7 @@ class Field extends Vector {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     $fields = $form_state['values']['options']['fields'];
 
     $geocoder_handler = $form_state['values']['options']['geocoder_handler'];

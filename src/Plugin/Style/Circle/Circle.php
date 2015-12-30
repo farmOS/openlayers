@@ -20,7 +20,7 @@ class Circle extends Style {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['default'] = array(
       '#type' => 'fieldset',
       '#title' => t('Default'),
@@ -204,7 +204,7 @@ class Circle extends Style {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     parent::optionsFormSubmit($form, $form_state);
 
     $options = $this->getOptions();

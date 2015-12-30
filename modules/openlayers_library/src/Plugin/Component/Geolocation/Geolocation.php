@@ -21,7 +21,7 @@ class Geolocation extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['checkboxID'] = array(
       '#type' => 'textfield',
       '#title' => t('Checkbox HTML ID'),

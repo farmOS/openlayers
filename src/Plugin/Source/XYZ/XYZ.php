@@ -19,7 +19,7 @@ class XYZ extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['url'] = array(
       '#title' => t('URL(s)'),
       '#type' => 'textarea',
@@ -35,7 +35,7 @@ class XYZ extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     if ($form_state['values']['options']['url'] == '') {
       unset($form_state['item']->options['url']);
     }

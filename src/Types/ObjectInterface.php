@@ -101,7 +101,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsForm(&$form, &$form_state);
+  public function optionsForm(array &$form, array &$form_state);
 
   /**
    * Validation callback for the options form.
@@ -111,7 +111,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsFormValidate($form, &$form_state);
+  public function optionsFormValidate(array $form, array &$form_state);
 
   /**
    * Submit callback for the options form.
@@ -121,7 +121,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsFormSubmit($form, &$form_state);
+  public function optionsFormSubmit(array $form, array &$form_state);
 
   /**
    * Returns a list of attachments for building the render array.

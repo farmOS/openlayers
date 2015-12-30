@@ -22,7 +22,7 @@ class AutoZoom extends ZoomToSource implements ControlInterface {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     parent::optionsForm($form, $form_state);
 
     unset($form['options']['source']);

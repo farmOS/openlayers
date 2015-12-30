@@ -275,20 +275,20 @@ abstract class Object extends PluginBase implements ObjectInterface {
    *
    * @TODO What is this return? If it is the form, why is form by reference?
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     return array();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function optionsFormValidate($form, &$form_state) {
+  public function optionsFormValidate(array $form, array &$form_state) {
   }
 
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     if (isset($form_state['values']['options'])) {
       $options = array_merge((array) $this->getOptions(), (array) $form_state['values']['options']);
       $this->setOptions($options);

@@ -46,7 +46,7 @@ class InlineJS extends Interaction {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $attached = array();
 
     if ($this->moduleHandler->moduleExists('ace_editor')) {

@@ -20,7 +20,7 @@ class JSGeocoder extends Control {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['placeholder'] = array(
       '#type' => 'textfield',
       '#title' => 'Placeholder',

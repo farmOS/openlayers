@@ -22,7 +22,7 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('User interface'),
@@ -321,7 +321,7 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     // So we can use the map API instead of working with arrays.
     parent::optionsFormSubmit($form, $form_state);
 

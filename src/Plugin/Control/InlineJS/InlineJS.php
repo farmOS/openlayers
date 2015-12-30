@@ -20,7 +20,7 @@ class InlineJS extends Control {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $attached = array();
 
     if (module_exists('ace_editor')) {

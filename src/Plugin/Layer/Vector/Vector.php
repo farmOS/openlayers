@@ -20,7 +20,7 @@ class Vector extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $zoom_activity = $this->getOption('zoomActivity', '');
     // Ensure the values are sorted.
     if (!empty($zoom_activity)) {

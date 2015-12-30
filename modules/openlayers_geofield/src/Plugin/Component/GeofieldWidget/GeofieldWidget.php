@@ -24,7 +24,7 @@ class GeofieldWidget extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['dataType'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Data type'),

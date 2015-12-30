@@ -20,7 +20,7 @@ class Heatmap extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['opacity'] = array(
       '#type' => 'textfield',
       '#description' => 'Opacity (0, 1). Default is 1.',

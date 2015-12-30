@@ -1201,7 +1201,7 @@ function openlayers_examples_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_examples_layer_openmapsurfer_roads',
+      0 => 'openlayers_examples_layer_openstreetmap_de',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',

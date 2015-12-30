@@ -22,7 +22,7 @@ class Group extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['grouptitle'] = array(
       '#type' => 'textfield',
       '#title' => 'Layer group title',
@@ -165,7 +165,7 @@ class Group extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     $layers_enabled = array_filter($form_state['values']['grouplayers'], function($item) {
       return (bool) $item['enabled'];
     });

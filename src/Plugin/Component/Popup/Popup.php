@@ -22,7 +22,7 @@ class Popup extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['layers'] = array(
       '#type' => 'select',
       '#title' => t('Layers'),
@@ -69,7 +69,7 @@ class Popup extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     $form_state['values']['options']['autoPan'] = (bool) $form_state['values']['options']['autoPan'];
   }
 

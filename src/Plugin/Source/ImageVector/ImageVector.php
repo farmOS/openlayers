@@ -21,7 +21,7 @@ class ImageVector extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['source'] = array(
       '#type' => 'select',
       '#title' => t('Source'),

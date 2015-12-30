@@ -18,7 +18,7 @@ class Views extends Source {
   /**
    * @inheritDoc
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $options = array();
     foreach (views_get_all_views() as $view) {
       foreach ($view->display as $display) {

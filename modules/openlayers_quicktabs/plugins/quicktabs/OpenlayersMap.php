@@ -6,8 +6,9 @@
  */
 
 /**
- * Class for tab content of type "openlayers_map" - this is for rendering a map as tab
- * content.
+ * Class for tab content of type "openlayers_map".
+ *
+ * This is for rendering a map as tab content.
  */
 class OpenlayersMap extends QuickContent {
 

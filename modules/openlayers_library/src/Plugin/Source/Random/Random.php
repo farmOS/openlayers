@@ -19,7 +19,7 @@ class Random extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     foreach (Openlayers::getGeometryTypes() as $geometry_type => $geometry) {
       if (!in_array($geometry_type, array('Point', 'LineString', 'Polygon'))) {
         continue;
@@ -62,7 +62,7 @@ class Random extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     parent::optionsFormSubmit($form, $form_state);
 
     $options = $this->getOptions();

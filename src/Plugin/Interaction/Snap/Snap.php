@@ -21,7 +21,7 @@ class Snap extends Interaction {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['pixelTolerance'] = array(
       '#type' => 'textfield',
       '#title' => 'Pixel tolerance',
