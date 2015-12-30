@@ -65,7 +65,7 @@ class Openlayers {
     ctools_include('export');
     $exports = ctools_export_crud_load_all('openlayers_' . drupal_strtolower(check_plain($type)) . 's');
     uasort($exports, function($a, $b) {
-      return strcmp($a->name, $b->name);
+      return strcasecmp($a->name, $b->name);
     });
     return $exports;
   }
