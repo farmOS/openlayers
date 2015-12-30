@@ -66,6 +66,8 @@ drush libraries-list
 Do not forget to configure jquery_update and use at least jQuery 1.10.
 
 # Getting help
+Has this module is a complete rewrite, it still needs documentation and we, maintainers, still need to work on that.
+
 To create your first map, you must first understand how Openlayers 3, the JS library, works.
 
 Each map you create is composed of a couple of basic objects: the controls, the interactions, the layers.
@@ -87,8 +89,26 @@ To quickly create a map, here are the steps in this following order:
 * Create your layer, this will need a source and a style to be created.
 * Create your map.
 
+# Displaying maps
+
+You can find all the available maps in the maps tabs in **admin/structure/openlayers/maps**.
+
+To render a map on your site, you have many options:
+* Using the API, see [this example](https://gist.github.com/drupol/fee9d808b711f658d79b)
+* In a block, enable submodule **Openlayers Block**, then tick the checkbox in the map settings, you'll have a new block in **admin/structure/block**,</li>
+* In a field, enable submodule **Openlayers Field** and you'll have a new field type 'Openlayers map' available,</li>
+* In a [Panels](https://www.drupal.org/project/panels), enable submodule **Openlayers Content Types**,</li>
+* In a [Box](https://www.drupal.org/project/boxes), enable submodule **Openlayers Boxes**,</li>
+* In a [Quicktabs](https://www.drupal.org/project/quicktabs), enable submodule **Openlayers Quicktabs**,</li>
+* In a [Views](https://www.drupal.org/project/views), enable submodule **Openlayers Views**.</li>
+
+With Openlayers 3, it's up to you to decide how you want to integrate the map in your content.
+
 # Sub-modules
 Find the documentation of each sub-modules in their README file.
+
+# Extend Openlayers
+You can extend or alter the module objects by creating a submodule. Have a look at the submodule **openlayers_library** to get started, there's plenty of examples in it.
 
 # Included libraries
 * Spin.js: http://fgnass.github.io/spin.js/
