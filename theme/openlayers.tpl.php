@@ -8,10 +8,11 @@
  */
 ?>
 
-<?php print render($openlayers['map']); ?>
 <div id="openlayers-container-<?php print $openlayers['id']; ?>" class="openlayers-container contextual-links-region">
   <div id="openlayers-map-container-<?php print $openlayers['id']; ?>" class="openlayers-map-container" style="<?php print $openlayers['styles']; ?>">
+    <?php print render($openlayers['map_prefix']); ?>
     <div id="<?php print $openlayers['id']; ?>" class="<?php print $openlayers['classes']; ?>"></div>
+    <?php print render($openlayers['map_suffix']); ?>
   </div>
 </div>
 

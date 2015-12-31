@@ -229,7 +229,8 @@ abstract class Map extends Object implements MapInterface {
       '#theme' => 'openlayers',
       '#map' => $map,
       '#attached' => $map->getCollection()->getAttached(),
-      'map' => array(),
+      'map_prefix' => array(),
+      'map_suffix' => array(),
       'capabilities' => $capabilities,
     );
 

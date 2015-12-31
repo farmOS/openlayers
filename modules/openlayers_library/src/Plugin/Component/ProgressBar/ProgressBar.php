@@ -23,7 +23,7 @@ class ProgressBar extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['map']['map-container'][$this->getPluginId()] = array(
+    $build['map_suffix'][$this->getPluginId()] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'progress-' . $context->getId(),
