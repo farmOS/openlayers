@@ -16,10 +16,6 @@
   </div>
 </div>
 
-<?php if (!empty($openlayers['description'])): ?>
-  <div class="description"><?php print $openlayers['description']; ?></div>
-<?php endif; ?>
-
 <?php if (isset($openlayers['parameters'])): ?>
   <?php print render($openlayers['parameters']); ?>
 <?php endif; ?>

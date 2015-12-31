@@ -24,9 +24,6 @@ function template_preprocess_openlayers(&$variables) {
   // The map ID.
   $variables['openlayers']['id'] = $map->getId();
 
-  // The map ID.
-  $variables['openlayers']['description'] = trim($map->getDescription());
-
   // The map container CSS styles.
   $variables['openlayers']['styles'] = implode(array_map(function ($key) use ($map) {
     return $key . ':' . $map->getOption($key) . ';';
