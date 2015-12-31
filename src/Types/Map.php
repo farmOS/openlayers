@@ -160,22 +160,13 @@ abstract class Map extends Object implements MapInterface {
     // Transform the options into objects.
     $map->getCollection()->import($map->optionsToObjects());
 
-    // Run prebuild hook to all objects who implements it.
-    $map->preBuild($build, $map);
-
-    $styles = array(
-      'width' => $map->getOption('width'),
-      'height' => $map->getOption('height'),
-    );
-
-    $styles = implode(array_map(function ($key, $value) {
-      return $key . ':' . $value . ';';
-    }, array_keys($styles), $styles));
-
     // If this is an asynchronous map flag it as such.
     if ($asynchronous = $this->isAsynchronous()) {
       $this->setOption('async', $asynchronous);
     }
+
+    // Run prebuild hook to all objects who implements it.
+    $map->preBuild($build, $map);
 
     $capabilities = array();
     if ((bool) $this->getOption('capabilities', FALSE) === TRUE) {
@@ -237,42 +228,8 @@ abstract class Map extends Object implements MapInterface {
     $build = array(
       '#theme' => 'openlayers',
       '#map' => $map,
-      'map' => array(
-        '#type' => 'container',
-        '#attributes' => array(
-          'id' => 'openlayers-container-' . $map->getId(),
-          'class' => array(
-            'contextual-links-region',
-            'openlayers-container',
-          ),
-        ),
-        'map-container' => array(
-          '#type' => 'container',
-          '#attributes' => array(
-            'id' => 'map-container-' . $map->getId(),
-            'style' => $styles,
-            'class' => array(
-              'openlayers-map-container',
-            ),
-          ),
-          'map' => array(
-            '#type' => 'container',
-            '#attributes' => array(
-              'id' => $map->getId(),
-              'class' => array(
-                'openlayers-map',
-                $map->getMachineName(),
-                ((bool) $asynchronous) ? 'asynchronous' : NULL,
-              ),
-            ),
-          ),
-        ),
-        '#attached' => $map->getCollection()->getAttached(),
-      ),
-      'description' => array(
-        '#theme' => 'form_element',
-        '#description' => $map->getDescription(),
-      ),
+      '#attached' => $map->getCollection()->getAttached(),
+      'map' => array(),
       'capabilities' => $capabilities,
     );
 

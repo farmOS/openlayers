@@ -8,12 +8,15 @@
  */
 ?>
 
-<?php if (isset($openlayers['map'])): ?>
-  <?php print render($openlayers['map']); ?>
-<?php endif; ?>
+<?php print render($openlayers['map']); ?>
+<div id="openlayers-container-<?php print $openlayers['id']; ?>" class="openlayers-container contextual-links-region">
+  <div id="openlayers-map-container-<?php print $openlayers['id']; ?>" class="openlayers-map-container" style="<?php print $openlayers['styles']; ?>">
+    <div id="<?php print $openlayers['id']; ?>" class="<?php print $openlayers['classes']; ?>"></div>
+  </div>
+</div>
 
-<?php if (isset($openlayers['description'])): ?>
-  <?php print render($openlayers['description']); ?>
+<?php if (!empty($openlayers['description'])): ?>
+  <div class="description"><?php print $openlayers['description']; ?></div>
 <?php endif; ?>
 
 <?php if (isset($openlayers['parameters'])): ?>
