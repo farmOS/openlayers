@@ -64,12 +64,16 @@ class GoogleMaps extends Source {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $map = NULL) {
-    $build['map']['map-container']['gmap'] = array(
+    $styles = implode(array_map(function ($key) use ($map) {
+      return $key . ':' . $map->getOption($key) . ';';
+    }, array('width', 'height')));
+
+    $build['map_suffix']['gmap'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'id' => 'gmap-' . $map->getId(),
         'class' => array('openlayers', 'gmap-map'),
-        'style' => $build['map']['map-container']['#attributes']['style'],
+        'style' => $styles,
       ),
     );
   }
