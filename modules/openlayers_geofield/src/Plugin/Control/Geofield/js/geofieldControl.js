@@ -75,7 +75,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Triangle) {
-    var triangleLabel = options.triangleLabel || '\u25B2';
+    var triangleLabel = options.triangleLabel || '\u25B3';
     var triangleTipLabel = options.triangleTipLabel || 'Draw a triangle';
     var triangleElement = document.createElement('button');
     triangleElement.className = className + '-triangle';
@@ -88,7 +88,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Square) {
-    var squareLabel = options.squareLabel || '\u25A0';
+    var squareLabel = options.squareLabel || '\u25FB';
     var squareTipLabel = options.squareTipLabel || 'Draw a square';
     var squareElement = document.createElement('button');
     squareElement.className = className + '-square';
@@ -101,7 +101,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Box) {
-    var boxLabel = options.boxLabel || '\u25AE';
+    var boxLabel = options.boxLabel || '\u25AF';
     var boxTipLabel = options.boxTipLabel || 'Draw a box';
     var boxElement = document.createElement('button');
     boxElement.className = className + '-box';
