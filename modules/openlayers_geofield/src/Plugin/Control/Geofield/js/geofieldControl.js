@@ -192,7 +192,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (options.Snap) {
-    var snapLabel = options.snapLabel || '\u2609';
+    var snapLabel = options.snapLabel || '\u25CE';
     var snapTipLabel = options.snapTipLabel || 'Snap to features';
     var snapElement = document.createElement('button');
     snapElement.className = className + '-snap';
