@@ -23,7 +23,7 @@ ol.control.Geofield = function(opt_options) {
   optionsElements = new ol.Collection();
 
   if (draw.Point) {
-    var pointLabel = options.pointLabel || '\u25CB';
+    var pointLabel = options.pointLabel || '\u25CF';
     var pointTipLabel = options.pointTipLabel || 'Draw a point';
     var pointElement = document.createElement('button');
     pointElement.className = className + '-point';
@@ -36,7 +36,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.MultiPoint) {
-    var multipointLabel = options.multipointLabel || '\u25CB';
+    var multipointLabel = options.multipointLabel || '\u25CF';
     var multipointTipLabel = options.multipointTipLabel || 'Draw a multipoint';
     var multipointElement = document.createElement('button');
     multipointElement.className = className + '-multipoint';
@@ -114,7 +114,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Circle) {
-    var circleLabel = options.circleLabel || '\u25CF';
+    var circleLabel = options.circleLabel || '\u25EF';
     var circleTipLabel = options.circleTipLabel || 'Draw a circle';
     var circleElement = document.createElement('button');
     circleElement.className = className + '-circle';
