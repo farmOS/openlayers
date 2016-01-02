@@ -207,28 +207,32 @@ ol.control.Geofield = function(opt_options) {
   var cssClasses = className + ' ' + 'ol-control';
 
   var drawElement = document.createElement('div');
-  drawElement.className = 'draw';
+  drawElement.className = 'draw ol-control-group';
   drawElements.forEach(function(element) {
     drawElement.appendChild(element);
   });
 
   var actionsElement = document.createElement('div');
-  actionsElement.className = 'actions';
+  actionsElement.className = 'actions ol-control-group';
   actionsElements.forEach(function(element) {
     actionsElement.appendChild(element);
   });
 
   var optionsElement = document.createElement('div');
-  optionsElement.className = 'options';
+  optionsElement.className = 'options ol-control-group';
   optionsElements.forEach(function(element) {
     optionsElement.appendChild(element);
   });
 
+  var controlsElement = document.createElement('div');
+  controlsElement.className = 'ol-geofield-controls';
+  controlsElement.appendChild(drawElement);
+  controlsElement.appendChild(actionsElement);
+  controlsElement.appendChild(optionsElement);
+
   var element = document.createElement('div');
   element.className = cssClasses;
-  element.appendChild(drawElement);
-  element.appendChild(actionsElement);
-  element.appendChild(optionsElement);
+  element.appendChild(controlsElement);
 
   ol.control.Control.call(this, {
     element: element,

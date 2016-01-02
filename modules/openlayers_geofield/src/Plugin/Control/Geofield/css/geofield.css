@@ -1,50 +1,25 @@
 .ol-geofield.ol-control {
-  top: .5em;
-  right: 4em;
-  display: inline-flex;
+  background: none;
+  position: absolute;
+  bottom: 4em;
+  text-align: center;
+  width: 100%;
 }
-
-.ol-geofield.ol-control div.draw button:only-child {
-  border-radius: 2px 2px 2px 2px;
-}
-.ol-geofield.ol-control div.draw button {
-  border-radius: 0;
-}
-.ol-geofield.ol-control div.draw button:first-child {
-  border-radius: 2px 0 0 2px;
-}
-.ol-geofield.ol-control div.draw button:last-child {
-  border-radius: 0 2px 2px 0;
-}
-.ol-geofield.ol-control div.draw button:only-child {
-  border-radius: 2px 2px 2px 2px;
-}
-
-.ol-geofield.ol-control div.actions button {
-  border-radius: 0;
-}
-.ol-geofield.ol-control div.actions button:first-child {
-  border-radius: 2px 0 0 2px;
-}
-.ol-geofield.ol-control div.actions button:last-child {
-  border-radius: 0 2px 2px 0;
-}
-.ol-geofield.ol-control div.actions button:only-child {
-  border-radius: 2px 2px 2px 2px;
-}
-
-.ol-geofield.ol-control div.actions {
-  margin-left: 1em;
-}
-
-.ol-geofield.ol-control div.options {
-  margin-left: 1em;
-}
-
-.ol-geofield.ol-control button {
+.ol-geofield-controls {
   display: inline-block;
 }
-.ol-geofield.ol-control button.enable {
+.ol-geofield-controls .ol-control-group {
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 4px;
+  padding: 2px;
+  position: relative;
+  float: left;
+  margin: 0 0 0.5em 1em;
+}
+.ol-geofield-controls button {
+  display: inline-block;
+}
+.ol-geofield-controls button.enable {
   text-decoration: none;
   background-color: #4c6079;
   background-color: rgba(0,60,136,0.7);
