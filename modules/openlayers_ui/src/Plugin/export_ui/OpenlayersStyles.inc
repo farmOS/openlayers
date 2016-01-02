@@ -10,7 +10,7 @@
 function openlayers_ui_OpenlayersStyles_ctools_export_ui() {
   return array(
     'schema' => 'openlayers_styles',
-    'access' => 'administer styles',
+    'access' => 'administer openlayers',
     'menu' => array(
       'menu prefix' => 'admin/structure/openlayers',
       'menu item' => 'styles',
