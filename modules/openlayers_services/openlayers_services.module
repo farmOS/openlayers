@@ -58,7 +58,7 @@ function openlayers_services_theme($existing, $type, $theme, $path) {
         'styles' => '',
       ),
       'template' => 'openlayers-map--iframe',
-      'path' => drupal_get_path('module', 'openlayers_services') . '/themes',
+      'path' => $path . '/themes',
     ),
   );
 }
