@@ -24,6 +24,7 @@ class GeoJSON extends Source {
     $form['options']['url'] = array(
       '#title' => t('URL'),
       '#type' => 'textfield',
+      '#maxlength' => '256',
       '#default_value' => $this->getOption('url'),
     );
     $form['options']['useBBOX'] = array(
