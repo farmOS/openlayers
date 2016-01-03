@@ -431,7 +431,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
     }
   }
 
-  $element['openlayers'] = array(
+  $element += array(
     '#type' => 'openlayers',
     '#map' => $map,
   );
