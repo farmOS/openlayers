@@ -11,7 +11,9 @@ Drupal.openlayers.pluginManager.register({
           layersInside.extend(getLayersFromObject(layer).getArray());
         } else {
           if (typeof layer.getSource === 'function') {
-            layersInside.push(layer);
+            if (layer.getSource() !== 'null' && layer.getSource() instanceof ol.source.Vector) {
+              layersInside.push(layer);
+            }
           }
         }
       });
