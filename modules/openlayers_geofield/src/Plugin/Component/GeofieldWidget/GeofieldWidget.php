@@ -224,7 +224,11 @@ class GeofieldWidget extends Component {
       );
     }
     else {
+      $parents = $this->getOption('parents');
+      $parents[] = 'dataType';
+
       $component['dataType'] = array(
+        '#parents' => $parents,
         '#type' => 'hidden',
         '#default_value' => reset($data_type),
         '#value' => reset($data_type),
@@ -239,14 +243,17 @@ class GeofieldWidget extends Component {
     if (!empty($geom['geom'])) {
       $wkt = $geom['geom']->out('wkt');
     }
+    $parents = $this->getOption('parents');
+    $parents[] = 'geom';
+
     $component['data'] = array(
+      '#parents' => $parents,
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
       '#attributes' => array(
         'class' => array('openlayers-geofield-data'),
       ),
       '#default_value' => $wkt,
-      '#value' => $wkt,
     );
 
     // Now add the component into the build array. This is a bit complex due
@@ -265,7 +272,7 @@ class GeofieldWidget extends Component {
       drupal_array_set_nested_value($build, $parents, $component);
     }
     else {
-      $build += $component;
+      $build['parameters'][$this->getPluginId()] = $component;
     }
   }
 }
