@@ -43,43 +43,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#default_value' => \Drupal\openlayers\Config::get('openlayers.debug'),
   );
 
-  foreach (\Drupal\openlayers\Openlayers::loadAllExportable('Map') as $machine_name => $data) {
-    if (!is_object($data) || (property_exists($data, 'disabled') && ($data->disabled == 1 || $data->disabled == TRUE))) {
-      continue;
-    }
-    $options[$machine_name] = $data->name;
-  }
-
-  $map = \Drupal\openlayers\Config::get('openlayers.default_ui_map');
-  if (isset($form_state['values']['openlayers_default_map'])) {
-    $map = $form_state['values']['openlayers_default_map'];
-  }
-
-  // @todo: Is this setting really needed ?
-  $form['openlayers_default_map'] = array(
-    '#type' => 'select',
-    '#title' => t('Default UI map'),
-    '#options' => $options,
-    '#default_value' => $map,
-    '#ajax' => array(
-      'callback' => '_openlayers_ajax_reload_default_map',
-      'method' => 'replace',
-      'wrapper' => 'default_map_ajax',
-      'effect' => 'fade',
-    ),
-  );
-
-  $form['default_ui_map'] = array(
-    '#prefix' => '<div id="default_map_ajax">',
-    '#suffix' => '</div>',
-    '#type' => 'openlayers',
-    '#map' => $map,
-  );
-
-  // This is for preventing 'system/ajax' as destination when using AJAX maps.
-  // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
-  $form['current_path'] = array('#type' => 'hidden', '#value' => current_path());
-
   $form['plugin-info'] = array(
     '#type' => 'fieldset',
     '#title' => 'Plugin information',
@@ -182,16 +145,6 @@ function openlayers_ui_admin_settings($form, &$form_state) {
 }
 
 /**
- * Ajax callback for the form 'openlayers_ui_admin_settings'.
- */
-function _openlayers_ajax_reload_default_map($form, &$form_state) {
-  // This is for preventing 'system/ajax' as destination when using AJAX maps.
-  // See: http://drupal.stackexchange.com/questions/86958/get-current-url-arguments-inside-ajax-callback
-  $_SESSION['current_path'] = $form_state['input']['current_path'];
-  return $form['default_ui_map'];
-}
-
-/**
  * Submit callback of the Openlayers settings page.
  */
 function openlayers_ui_admin_settings_submit($form, &$form_state) {
@@ -199,13 +152,15 @@ function openlayers_ui_admin_settings_submit($form, &$form_state) {
 
   if (isset($values['variant'])) {
     \Drupal\openlayers\Config::set('openlayers.variant', $values['variant']);
-  } else {
+  }
+  else {
     \Drupal\openlayers\Config::clear('openlayers.variant');
   }
 
   if (isset($values['debug'])) {
     \Drupal\openlayers\Config::set('openlayers.debug', $values['debug']);
-  } else {
+  }
+  else {
     \Drupal\openlayers\Config::clear('openlayers.debug');
   }
 
