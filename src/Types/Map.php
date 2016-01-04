@@ -160,11 +160,6 @@ abstract class Map extends Object implements MapInterface {
     // Transform the options into objects.
     $map->getCollection()->import($map->optionsToObjects());
 
-    // If this is an asynchronous map flag it as such.
-    if ($asynchronous = $this->isAsynchronous()) {
-      $this->setOption('async', $asynchronous);
-    }
-
     // Run prebuild hook to all objects who implements it.
     $map->preBuild($build, $map);
 
