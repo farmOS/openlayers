@@ -1,5 +1,5 @@
 /**
- * Openlayers 3 Layer Switcher Control.
+ * OpenLayers 3 Layer Switcher Control.
  * See [the examples](./examples) for usage.
  * @constructor
  * @extends {ol.control.Control}
@@ -11,7 +11,7 @@ ol.control.LayerSwitcher = function(opt_options) {
   var options = opt_options || {};
 
   var tipLabel = options.tipLabel ?
-    options.tipLabel : 'Legend';
+      options.tipLabel : 'Legend';
 
   this.mapListeners = [];
 
@@ -37,6 +37,7 @@ ol.control.LayerSwitcher = function(opt_options) {
 
   button.onclick = function(e) {
     this_.showPanel();
+    e.preventDefault();
   };
 
   element.onmouseout = function(e) {
@@ -159,7 +160,7 @@ ol.control.LayerSwitcher.prototype.renderLayer_ = function(lyr, idx) {
   var li = document.createElement('li');
 
   var lyrTitle = lyr.get('title');
-  var lyrId = lyr.get('title').replace(' ', '-') + '_' + idx;
+  var lyrId = lyr.get('title').replace(/\s+/g, '-') + '_' + idx;
 
   var label = document.createElement('label');
 

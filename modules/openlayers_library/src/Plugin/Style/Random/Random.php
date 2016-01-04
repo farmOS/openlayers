@@ -20,7 +20,7 @@ class Random extends Style {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['style'] = array(
       '#type' => 'select',
       '#title' => t('Styles'),

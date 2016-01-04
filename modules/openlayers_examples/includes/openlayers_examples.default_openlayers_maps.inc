@@ -224,7 +224,7 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_examples_component_simple_popup_cities',
-    )
+    ),
   );
   $export['openlayers_examples_map_geojson_cluster'] = $ol_map;
 
@@ -1201,7 +1201,7 @@ function openlayers_examples_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_examples_layer_openmapsurfer_roads',
+      0 => 'openlayers_examples_layer_openstreetmap_de',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_doubleclickzoom',
@@ -1332,7 +1332,6 @@ function openlayers_examples_default_openlayers_maps() {
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
       1 => 'openlayers_interaction_mousewheelzoom',
-      2 => 'openlayers_examples_interaction_translate',
     ),
   );
   $export['openlayers_examples_map_features_interactions'] = $ol_map;

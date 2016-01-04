@@ -5,9 +5,8 @@
  */
 
 function _openlayers_services_retrieve($name) {
+  /** @var \Drupal\openlayers\Types\MapInterface $map */
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $name)) == TRUE) {
-    $build = $map->build();
-    $render = drupal_render($build);
 
     array_map(
       'drupal_static_reset',
@@ -15,7 +14,7 @@ function _openlayers_services_retrieve($name) {
         'drupal_add_css',
         'drupal_add_js',
         'libraries_load',
-        'drupal_add_library'
+        'drupal_add_library',
       )
     );
 
@@ -23,7 +22,7 @@ function _openlayers_services_retrieve($name) {
     drupal_add_css(drupal_get_path('module', 'openlayers_services') . '/css/reset.css');
 
     return theme('openlayers_map_iframe', array(
-      'page' => $render,
+      'page' => $map->render(),
       'scripts' => drupal_get_js(),
       'styles' => drupal_get_css(),
     ));

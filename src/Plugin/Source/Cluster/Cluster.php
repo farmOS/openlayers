@@ -20,7 +20,7 @@ class Cluster extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['source'] = array(
       '#type' => 'select',
       '#title' => t('Source'),
@@ -54,7 +54,7 @@ class Cluster extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     if (!empty($form_state['values']['options']['zoomDistance'])) {
       $zoom_distance = array();
       foreach (explode("\n", $form_state['values']['options']['zoomDistance']) as $data) {

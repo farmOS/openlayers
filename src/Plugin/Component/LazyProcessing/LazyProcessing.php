@@ -19,7 +19,7 @@ class LazyProcessing extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['documentation'] = array(
       '#type' => 'fieldset',
       '#title' => t('How to use'),

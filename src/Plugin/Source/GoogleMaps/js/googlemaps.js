@@ -65,7 +65,7 @@ Drupal.openlayers.pluginManager.register({
       Drupal.openlayers.pluginManager.getPlugin('openlayers.Source:GoogleMaps').scriptLoading = true;
 
       var params = {
-        v: 3,
+        v: 3.22,
         callback: 'Drupal.openlayers.openlayers_source_internal_googlemaps_initialize'
       };
 

@@ -84,8 +84,8 @@ function openlayers_field_field_formatter_info() {
       'label' => t('Openlayers map (geocoded field)'),
       'field types' => array('addressfield', 'text'),
       'settings'  => array(
-        'map' => '',
-        'geocoder_handler' => '',
+        'map_layer' => '',
+        'geocoder_handler' => 'google',
         'geocoder_cache' => '',
       ),
     ),
@@ -100,28 +100,34 @@ function openlayers_field_field_formatter_settings_form($field, $instance, $view
   $settings = $display['settings'];
   $element = array();
 
-  // This following code is only selecting map with a particular source.
-  // Had to be disabled because it's too slow. We need to find a better way.
-  /*
-  $sources = \Drupal\openlayers\Openlayers::loadAll('source');
-  $maps = array();
-  foreach ($sources as $index => $source) {
-    if ($source->getFactoryService() != 'openlayers.Source:Field') {
-      $maps += $source->getParents();
-    }
-  }
-  */
-
   switch ($display['type']) {
     case 'openlayers_map_formatter':
       break;
 
     case 'openlayers_addressfield_textfield_formatter':
-      $element['map'] = array(
+
+      $options = array();
+      /** @var \Drupal\openlayers\Types\MapInterface $map */
+      foreach (\Drupal\openlayers\Openlayers::loadAll('map') as $map) {
+        /** @var \Drupal\openlayers\Types\LayerInterface $layer */
+        foreach ($map->getCollection()->getObjects('layer') as $layer) {
+          if ($source = $layer->getSource()) {
+            if ('openlayers.Source:Field' == $source->getFactoryService()) {
+              $key = $map->getMachineName() . ':' . $layer->getMachineName();
+              $value = sprintf("%s: %s (%s)", $map->getName(), $layer->getName(), $layer->getMachineName());
+              $options[$map->getName()][$key] = $value;
+            }
+          }
+        }
+      }
+
+      $element['map_layer'] = array(
         '#type' => 'select',
-        '#title' => t('Select an Openlayers map'),
-        '#options' => \Drupal\openlayers\Openlayers::loadAllAsOptions('map'),
-        '#default_value' => $settings['map'],
+        '#title' => 'Base map to use and vector layer to fill with the features',
+        '#description' => 'You may choose only vector layer having a Field type source',
+        '#options' => $options,
+        '#default_value' => $settings['map_layer'],
+        '#required' => TRUE,
       );
 
       $geocoder_handlers = array();
@@ -181,8 +187,13 @@ function openlayers_field_field_formatter_settings_summary($field, $instance, $v
           break;
       }
 
+      list($map, $layer) = explode(':', $settings['map_layer'], 2);
+
       $summary[] = t('Openlayers map: @map', array(
-        '@map' => $settings['map'],
+        '@map' => $map,
+      ));
+      $summary[] = t('Openlayers layer: @layer', array(
+        '@layer' => $layer,
       ));
       $summary[] = t('Geocoder handler: @geocoder_handler', array(
         '@geocoder_handler' => $settings['geocoder_handler'],
@@ -217,15 +228,8 @@ function openlayers_field_field_formatter_view($entity_type, $entity, $field, $i
 
     // Render an addressfield or a textield.
     case 'openlayers_addressfield_textfield_formatter':
-      $sources = array();
       $fields = array();
-      $map = \Drupal\openlayers\Openlayers::load('map', $settings['map']);
 
-      foreach ($map->getCollection()->getFlatList(array('source')) as $source) {
-        if ($source->getFactoryService() == 'openlayers.Source:Field') {
-          $sources[] = $source;
-        }
-      }
       foreach ($items as $delta => $item) {
         // If item is an array without a 'value' key (ex: addressfield),
         // we convert it to string, else we take the 'safe_value' of the field.
@@ -243,10 +247,18 @@ function openlayers_field_field_formatter_view($entity_type, $entity, $field, $i
         );
       }
 
-      foreach ($sources as $source) {
-        $source->setOption('geocoder_handler', $settings['geocoder_handler']);
-        $source->setOption('geocoder_cache', $settings['geocoder_cache']);
-        $source->setOption('fields', $fields);
+      list($map, $layer) = explode(':', $settings['map_layer'], 2);
+
+      /** @var \Drupal\openlayers\Types\MapInterface $map */
+      $map = \Drupal\openlayers\Openlayers::load('map', $map);
+
+      /** @var \Drupal\openlayers\Types\LayerInterface $layer */
+      if ($layer = $map->getCollection()->getObjectById('layer', $layer)) {
+        if ($source = $layer->getSource()) {
+          $source->setOption('geocoder_handler', $settings['geocoder_handler']);
+          $source->setOption('geocoder_cache', $settings['geocoder_cache']);
+          $source->setOption('fields', $fields);
+        }
       }
 
       $element[0] = array(
@@ -282,7 +294,7 @@ function openlayers_field_field_widget_form(&$form, &$form_state, $field, $insta
 
   foreach ($allowed_maps as $machine_name) {
     $map = \Drupal\openlayers\Openlayers::load('map', $machine_name);
-    $options[$machine_name] = $map->name;
+    $options[$machine_name] = $map->getMachineName();
   }
 
   if (empty($options)) {

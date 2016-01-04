@@ -36,7 +36,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       $output .= t('The following is a dump of the data that is rendered from this display. It is used for debugging purposes only.') . '
         ' . var_export($data, TRUE);
 
-      return $output;
+      return '<pre>' . $output . '</pre>';
     }
   }
 
@@ -94,6 +94,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       '#title' => t('Data Source'),
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
+      '#weight' => 2,
     );
     $form['data_source']['value'] = array(
       '#type' => 'select',
@@ -197,6 +198,7 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
       '#description' => t('Attributes are field data attached to each feature.  This can be used with styling to create Variable styling.'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
+      '#weight' => 3,
     );
     $variable_fields = array();
     foreach ($this->view->display_handler->get_handlers('field') as $field => $handler) {

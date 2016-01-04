@@ -251,8 +251,8 @@
     asyncIsReadyCallbacks: {},
     asyncIsReady: function (map_id) {
       if (Drupal.settings.openlayers.maps[map_id] !== undefined) {
-        Drupal.settings.openlayers.maps[map_id].map.async--;
-        if (!Drupal.settings.openlayers.maps[map_id].map.async) {
+        Drupal.settings.openlayers.maps[map_id].map.opt.async--;
+        if (!Drupal.settings.openlayers.maps[map_id].map.opt.async) {
           $('#' + map_id).once('openlayers-map', function () {
             Drupal.openlayers.processMap(map_id, document);
           });

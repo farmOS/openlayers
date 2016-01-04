@@ -37,7 +37,7 @@ class SpinJS extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['lines'] = array(
       '#type' => 'textfield',
       '#title' => 'Lines',
@@ -163,7 +163,7 @@ class SpinJS extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     $form_state['values']['options']['shadow'] = (bool) $form_state['values']['options']['shadow'];
     $form_state['values']['options']['hwaccel'] = (bool) $form_state['values']['options']['hwaccel'];
     parent::optionsFormSubmit($form, $form_state);

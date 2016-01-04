@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+
 use Drupal\Component\Plugin\PluginInspectionInterface;
 
 /**
@@ -17,6 +18,13 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function init();
 
   /**
+   * Initializes the Collection,
+   * Import objects from options,
+   * Import the current object.
+   */
+  public function initCollection();
+
+  /**
    * The type of this object.
    *
    * @return string|FALSE
@@ -25,10 +33,12 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function getType();
 
   /**
-   * @TODO was does this?
+   * Remove an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
+   *   The option to remove.
+   *   This can be a string or an array of parents keys if the option
+   *   is in a multilevel array.
    */
   public function clearOption($parents);
 
@@ -45,6 +55,9 @@ interface ObjectInterface extends PluginInspectionInterface {
    *
    * @param array $options
    *   The options array.
+   *
+   * @return ObjectInterface
+   *   The current object.
    */
   public function setOptions(array $options = array());
 
@@ -52,7 +65,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
+   *   TODO Define how this has to look like if it is an array.
    * @param mixed $default_value
    *   The default value to return if the option isn't set. Set to NULL if not
    *   defined.
@@ -66,12 +79,19 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Set an option.
    *
    * @param string|array $parents
-   * @TODO Define how this has to look like if it is an array.
-   *
+   *   TODO: Define how this has to look like if it is an array.
    * @param mixed $value
    *   The value to set.
+   *
+   * @return ObjectInterface
+   *   The current object.
    */
-  public function setOption($parents, $value);
+  public function setOption($parents, $value = NULL);
+
+  /**
+   * Reset the object's Collection.
+   */
+  public function resetCollection();
 
   /**
    * Provides the options form to configure this object.
@@ -81,7 +101,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsForm(&$form, &$form_state);
+  public function optionsForm(array &$form, array &$form_state);
 
   /**
    * Validation callback for the options form.
@@ -91,7 +111,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsFormValidate($form, &$form_state);
+  public function optionsFormValidate(array $form, array &$form_state);
 
   /**
    * Submit callback for the options form.
@@ -101,7 +121,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * @param array $form_state
    *   The form_state array by reference.
    */
-  public function optionsFormSubmit($form, &$form_state);
+  public function optionsFormSubmit(array $form, array &$form_state);
 
   /**
    * Returns a list of attachments for building the render array.
@@ -114,7 +134,7 @@ interface ObjectInterface extends PluginInspectionInterface {
   /**
    * Defines dependencies.
    *
-   * @TODO Define how this has to look like.
+   * TODO Define how this has to look like.
    *
    * @return array
    *   The dependencies.
@@ -127,8 +147,8 @@ interface ObjectInterface extends PluginInspectionInterface {
    * If true the map this object relates to won't be processes right away by
    * Drupals behaviour attach.
    *
-   * @return bool
-   *   Whether or not this object has to be processed asynchronously.
+   * @return int
+   *   Return the number of asynchronous object contained in the parent object.
    */
   public function isAsynchronous();
 
@@ -160,6 +180,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return an object, CTools Exportable.
    *
    * @return \StdClass
+   *   The object as CTools exportable.
    */
   public function getExport();
 
@@ -191,6 +212,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Return the module that provides this plugin.
    *
    * @return string
+   *   The module providing the plugin.
    */
   public function getProvider();
 
@@ -198,6 +220,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns the path to the plugin directory.
    *
    * @return string
+   *   The path to the plugin directory of the class.
    */
   public function getClassDirectory();
 
@@ -205,6 +228,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Returns the path to the class file.
    *
    * @return string
+   *   The path to the file containing the class definition.
    */
   public function getClassPath();
 
@@ -226,7 +250,7 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Set the weight of an object.
    *
    * @param int $weight
-   * @return void
+   *   The weight of the object.
    */
   public function setWeight($weight);
 
@@ -234,13 +258,15 @@ interface ObjectInterface extends PluginInspectionInterface {
    * Get the weight of an object.
    *
    * @return int
+   *   The weight of the object.
    */
   public function getWeight();
 
   /**
    * Return a flat array containing Openlayers Objects from the options array.
    *
-   * @return Object[]
+   * @return ObjectInterface[]
+   *   Return a list of objects.
    */
   public function optionsToObjects();
 
@@ -279,9 +305,70 @@ interface ObjectInterface extends PluginInspectionInterface {
   public function i18nStringsRefresh();
 
   /**
+   * Set the Factory Service of the object.
+   *
+   * @param string $factory_service
+   *   The object's factory service.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function setFactoryService($factory_service);
+
+  /**
    * Return the Factory Service of the object.
    *
-   * @return string
+   * @return string|FALSE
+   *   The factory service otherwise FALSE.
    */
   public function getFactoryService();
+
+  /**
+   * Add an object into the collection of the parent object.
+   *
+   * @param \Drupal\openlayers\Types\ObjectInterface $object
+   *   The object to add.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function addObject(ObjectInterface $object);
+
+  /**
+   * Remove an object from the collection.
+   *
+   * @param string $object_machine_name
+   *   The machine name of the object to remove.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function removeObject($object_machine_name);
+
+  /**
+   * Return all the dependencies objects of the parent object.
+   *
+   * @return ObjectInterface[]
+   *   The dependencies objects.
+   */
+  public function getDependencies();
+
+  /**
+   * Return the object unique ID.
+   *
+   * @return string
+   *   The object ID.
+   */
+  public function getId();
+
+  /**
+   * Set the object ID.
+   *
+   * @param string $id
+   *   The object ID.
+   *
+   * @return ObjectInterface
+   *   The parent object.
+   */
+  public function setId($id);
 }

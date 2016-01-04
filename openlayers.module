@@ -47,7 +47,7 @@ function openlayers_element_info() {
  * Renders the map and returns the markup in an renderable array.
  */
 function openlayers_element_process_callback($element, $form_state, $complete_form) {
-  /* @var \Drupal\openlayers\Types\Map $map */
+  /* @var \Drupal\openlayers\Types\MapInterface $map */
   if (($map = \Drupal\openlayers\Openlayers::load('Map', $element['#map'])) == TRUE) {
     $element['map'] = $map->build();
   }
@@ -67,6 +67,20 @@ function openlayers_element_prerender_callback($element) {
   }
 
   return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function openlayers_theme($existing, $type, $theme, $path) {
+  return array(
+    'openlayers' => array(
+      'path' => $path . '/theme',
+      'template' => 'openlayers',
+      'render element' => 'openlayers',
+      'file' => 'openlayers.theme.inc',
+    ),
+  );
 }
 
 /**
@@ -178,7 +192,7 @@ function openlayers_i18n_string_remove($name, $string = NULL, $options = array()
  */
 function openlayers_i18n_string_refresh() {
   foreach (\Drupal\openlayers\Openlayers::getPluginTypes() as $type) {
-    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $machine_name => $exportable) {
+    foreach (\Drupal\openlayers\Openlayers::loadAllExportable($type) as $exportable) {
       $object = \Drupal\openlayers\Openlayers::load($type, $exportable);
       $object->i18nStringsRefresh();
     }
@@ -282,7 +296,7 @@ function openlayers_libraries_info() {
   $libraries['openlayers3'] = array(
     'name' => 'Openlayers 3',
     'vendor url' => 'http://openlayers.org/',
-    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.10.1/v3.10.1.zip',
+    'download url' => 'https://github.com/openlayers/ol3/releases/download/v3.11.2/v3.11.2.zip',
     'version callback' => array('\Drupal\openlayers\Openlayers', 'getLibraryVersion'),
     'version arguments' => array(),
     'library path' => $module_path,

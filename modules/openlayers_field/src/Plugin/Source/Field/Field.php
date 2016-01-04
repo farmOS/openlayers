@@ -29,7 +29,7 @@ class Field extends Vector {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $geocoder_handlers = array();
     foreach (geocoder_handler_info() as $name => $handler) {
       $geocoder_handlers[$name] = $handler['title'];
@@ -94,7 +94,7 @@ class Field extends Vector {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     $fields = $form_state['values']['options']['fields'];
 
     $geocoder_handler = $form_state['values']['options']['geocoder_handler'];
@@ -162,12 +162,15 @@ class Field extends Vector {
       $json = FALSE;
       if (isset($field['wkt']) && !empty($field['wkt'])) {
         geophp_load();
-        $json = \geoPHP::load($field['wkt'], 'wkt')->out('json');
+        $geophp = \geoPHP::load($field['wkt'], 'wkt');
+        if (is_object($geophp)) {
+          $json = $geophp->out('json');
+        }
       }
       else {
         if (isset($field['address']) && !empty($field['address'])) {
           $geocoder = geocoder($this->getOption('geocoder_handler', 'google'), $field['address'], array(), $this->getOption('geocoder_cache', 2));
-          if (!is_null($geocoder)) {
+          if (is_object($geocoder)) {
             $json = $geocoder->out('json');
           }
         }

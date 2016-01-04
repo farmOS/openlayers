@@ -21,7 +21,7 @@ class DragPan extends Interaction {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['decay'] = array(
       '#type' => 'textfield',
       '#title' => t('Decay'),

@@ -9,8 +9,9 @@ use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Plugin\Source\Vector\Vector;
 use Drupal\openlayers\Types\Component;
+use Drupal\openlayers\Types\LayerInterface;
 use Drupal\openlayers\Types\ObjectInterface;
-use \geoPHP;
+use geoPHP;
 
 /**
  * Class GeofieldWidget.
@@ -23,7 +24,7 @@ class GeofieldWidget extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['dataType'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Data type'),
@@ -195,7 +196,6 @@ class GeofieldWidget extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-
     $component = array(
       '#type' => 'container',
       '#attributes' => array(
@@ -224,7 +224,11 @@ class GeofieldWidget extends Component {
       );
     }
     else {
+      $parents = $this->getOption('parents');
+      $parents[] = 'dataType';
+
       $component['dataType'] = array(
+        '#parents' => $parents,
         '#type' => 'hidden',
         '#default_value' => reset($data_type),
         '#value' => reset($data_type),
@@ -239,14 +243,17 @@ class GeofieldWidget extends Component {
     if (!empty($geom['geom'])) {
       $wkt = $geom['geom']->out('wkt');
     }
+    $parents = $this->getOption('parents');
+    $parents[] = 'geom';
+
     $component['data'] = array(
+      '#parents' => $parents,
       '#type' => ($this->getOption('showInputField')) ? 'textarea' : 'hidden',
       '#title' => 'Data',
       '#attributes' => array(
         'class' => array('openlayers-geofield-data'),
       ),
       '#default_value' => $wkt,
-      '#value' => $wkt,
     );
 
     // Now add the component into the build array. This is a bit complex due
@@ -265,7 +272,7 @@ class GeofieldWidget extends Component {
       drupal_array_set_nested_value($build, $parents, $component);
     }
     else {
-      $build += $component;
+      $build['parameters'][$this->getPluginId()] = $component;
     }
   }
 }

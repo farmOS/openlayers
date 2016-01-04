@@ -19,7 +19,7 @@ class Tile extends Layer {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['opacity'] = array(
       '#type' => 'textfield',
       '#title' => t('Opacity'),

@@ -19,7 +19,7 @@ class Icon extends Style {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['path'] = array(
       '#type' => 'textfield',
       '#title' => 'Path',

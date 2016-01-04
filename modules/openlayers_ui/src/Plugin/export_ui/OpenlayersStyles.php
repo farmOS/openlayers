@@ -6,6 +6,7 @@
 
 namespace Drupal\openlayers_ui\UI;
 use Drupal\openlayers\Openlayers;
+use Drupal\openlayers\Types\MapInterface;
 
 /**
  * Class openlayers_components_ui.
@@ -82,14 +83,25 @@ class OpenlayersStyles extends \OpenlayersObjects {
         break;
     }
 
-    // Generate a map and use the style on it to make a preview.
-    $map = Openlayers::load('map', 'openlayers_ui_map_style_demo');
-    foreach ($map->getCollection()->getFlatList(array('layer')) as $layer) {
-      $layer->setStyle($object);
-      $map->getCollection()->import(array($layer));
+    switch ($item->type) {
+      case t('Default'):
+      default:
+        $type = t('In code');
+        break;
+
+      case t('Normal'):
+        $type = t('In database');
+        break;
+
+      case t('Overridden'):
+        $type = t('Database overriding code');
     }
-    $map_build = $map->build();
-    $map_render = drupal_render($map_build);
+
+    // Generate a map and use the style on it to make a preview.
+    /** @var MapInterface $map */
+    $map = Openlayers::load('map', 'openlayers_ui_map_style_demo');
+    $layer = $map->getCollection()->getObjectById('layer', 'openlayers_ui_layer_style_demo');
+    $map_render = $map->addLayer($layer->setStyle($object))->render();
 
     $this->rows[$name]['data'] = array();
     $this->rows[$name]['class'] = !empty($item->disabled) ? array('ctools-export-ui-disabled') : array('ctools-export-ui-enabled');
@@ -101,7 +113,7 @@ class OpenlayersStyles extends \OpenlayersObjects {
     }
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
+    $this->rows[$name]['data'][] = array('data' => $type, 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(
       'links' => $operations,

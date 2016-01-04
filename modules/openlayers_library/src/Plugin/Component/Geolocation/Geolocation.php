@@ -21,7 +21,7 @@ class Geolocation extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['checkboxID'] = array(
       '#type' => 'textfield',
       '#title' => t('Checkbox HTML ID'),
@@ -58,55 +58,52 @@ class Geolocation extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build = array(
-      'map' => $build,
-      'Geolocation' => array(
-        '#type' => 'fieldset',
-        '#title' => 'Example Geolocation component',
-        'info' => array(
-          '#markup' => '<div id="info"></div>',
+    $build['parameters'][$this->getPluginId()] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Example Geolocation component',
+      'info' => array(
+        '#markup' => '<div id="info"></div>',
+      ),
+      'trackPosition' => array(
+        '#type' => 'checkbox',
+        '#title' => 'Track position',
+        '#attributes' => array(
+          'id' => 'trackPosition',
         ),
-        'trackPosition' => array(
-          '#type' => 'checkbox',
-          '#title' => 'Track position',
-          '#attributes' => array(
-            'id' => 'trackPosition',
-          ),
+      ),
+      'positionAccuracy' => array(
+        '#type' => 'textfield',
+        '#title' => 'Position accuracy',
+        '#attributes' => array(
+          'id' => 'positionAccuracy',
         ),
-        'positionAccuracy' => array(
-          '#type' => 'textfield',
-          '#title' => 'Position accuracy',
-          '#attributes' => array(
-            'id' => 'positionAccuracy',
-          ),
+      ),
+      'altitude' => array(
+        '#type' => 'textfield',
+        '#title' => 'Altitude',
+        '#attributes' => array(
+          'id' => 'altitude',
         ),
-        'altitude' => array(
-          '#type' => 'textfield',
-          '#title' => 'Altitude',
-          '#attributes' => array(
-            'id' => 'altitude',
-          ),
+      ),
+      'altitudeAccuracy' => array(
+        '#type' => 'textfield',
+        '#title' => 'Altitude accuracy',
+        '#attributes' => array(
+          'id' => 'altitudeAccuracy',
         ),
-        'altitudeAccuracy' => array(
-          '#type' => 'textfield',
-          '#title' => 'Altitude accuracy',
-          '#attributes' => array(
-            'id' => 'altitudeAccuracy',
-          ),
+      ),
+      'heading' => array(
+        '#type' => 'textfield',
+        '#title' => 'Heading',
+        '#attributes' => array(
+          'id' => 'heading',
         ),
-        'heading' => array(
-          '#type' => 'textfield',
-          '#title' => 'Heading',
-          '#attributes' => array(
-            'id' => 'heading',
-          ),
-        ),
-        'speed' => array(
-          '#type' => 'textfield',
-          '#title' => 'Speed',
-          '#attributes' => array(
-            'id' => 'speed',
-          ),
+      ),
+      'speed' => array(
+        '#type' => 'textfield',
+        '#title' => 'Speed',
+        '#attributes' => array(
+          'id' => 'speed',
         ),
       ),
     );

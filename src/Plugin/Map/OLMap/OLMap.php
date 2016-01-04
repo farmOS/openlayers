@@ -6,7 +6,6 @@
 
 namespace Drupal\openlayers\Plugin\Map\OLMap;
 
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Map;
@@ -23,7 +22,7 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['ui'] = array(
       '#type' => 'fieldset',
       '#title' => t('User interface'),
@@ -141,7 +140,7 @@ class OLMap extends Map {
     $i = 0;
     $data = array();
     $map_options = $this->getOptions();
-    /* @var \Drupal\openlayers\Types\Object $object */
+    /** @var \Drupal\openlayers\Types\Object $object */
     foreach ($this->getCollection()->getFlatList() as $object) {
       $weight = 0;
       if (isset($map_options['capabilities']['options']['table'][$object->getMachineName()])) {
@@ -322,7 +321,7 @@ class OLMap extends Map {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     // So we can use the map API instead of working with arrays.
     parent::optionsFormSubmit($form, $form_state);
 

@@ -56,9 +56,9 @@ Drupal.openlayers.pluginManager.register({
             var name = feature.get('name') || '';
             var description = feature.get('description') || '';
 
-            overlay.setPosition(coordinates);
             content.innerHTML = '<div class="ol-popup-name">' + name + '</div><div class="ol-popup-description">' + description + '</div>';
             container.style.display = 'block';
+            overlay.setPosition(coordinates);
 
             if (data.opt.zoom !== 'disabled') {
               if (data.opt.enableAnimations == 1) {

@@ -21,7 +21,7 @@ class Attribution extends Control {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['collapsible'] = array(
       '#type' => 'checkbox',
       '#title' => t('Collapsible'),

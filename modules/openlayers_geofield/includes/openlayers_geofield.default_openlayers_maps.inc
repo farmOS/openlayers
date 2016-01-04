@@ -83,7 +83,6 @@ function openlayers_geofield_default_openlayers_maps() {
     ),
     'components' => array(
       0 => 'openlayers_geofield_component_zoom_to_source',
-      1 => 'openlayers_geofield_component_geofield_formatter',
     ),
   );
   $export['openlayers_geofield_map_geofield_formatter'] = $ol_map;

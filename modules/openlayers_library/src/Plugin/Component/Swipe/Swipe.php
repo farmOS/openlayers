@@ -22,19 +22,18 @@ class Swipe extends Component {
    * {@inheritdoc}
    */
   public function postBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['Swipe'] = array(
+    $build['parameters'][$this->getPluginId()] = array(
       '#type' => 'fieldset',
       '#title' => 'Example Swipe component',
-      'info' => array(
-        '#markup' => 'This example is based on the <a href="http://openlayers.org/en/master/examples/layer-swipe.html">offical swipe example</a>. You need the <em><a href="https://drupal.org/project/elements">elements</a></em> module to get it working properly.'
-      ),
       'swipe' => array(
         '#type' => 'rangefield',
         '#attributes' => array(
           'id' => 'swipe',
-          'style' => 'width: 100%;'
+          'style' => 'width: 100%;',
         ),
       ),
     );
+
+    $build['description']['#description'] = 'This example is based on the <a href="http://openlayers.org/en/master/examples/layer-swipe.html">offical swipe example</a>. You need the <em><a href="https://drupal.org/project/elements">elements</a></em> module to get it working properly.';
   }
 }

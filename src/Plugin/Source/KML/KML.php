@@ -20,7 +20,7 @@ class KML extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['url'] = array(
       '#title' => t('URL'),
       '#type' => 'textfield',

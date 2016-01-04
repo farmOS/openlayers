@@ -6,7 +6,6 @@
 
 namespace Drupal\openlayers\Types;
 
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\openlayers\Types\Object;
 use Drupal\service_container\Messenger\MessengerInterface;
@@ -28,6 +27,8 @@ use Drupal\service_container\Messenger\MessengerInterface;
 class Error extends Object implements ControlInterface, ComponentInterface, LayerInterface, SourceInterface, StyleInterface {
 
   /**
+   * Contains the error message string.
+   *
    * @var string
    */
   public $errorMessage;
@@ -65,9 +66,9 @@ class Error extends Object implements ControlInterface, ComponentInterface, Laye
    * {@inheritdoc}
    */
   public function init() {
-    parent::init();
     $this->loggerChannel->error($this->getMessage(), array('channel' => 'openlayers'));
     $this->messenger->addMessage($this->getMessage(), 'error', FALSE);
+    return parent::init();
   }
 
   /**
@@ -119,5 +120,48 @@ class Error extends Object implements ControlInterface, ComponentInterface, Laye
   public function setSource(SourceInterface $source) {
 
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setVisible($visibility) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOpacity($opacity) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setZIndex($zindex) {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getVisible() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOpacity() {
+
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getZIndex() {
+
+  }
+
 
 }

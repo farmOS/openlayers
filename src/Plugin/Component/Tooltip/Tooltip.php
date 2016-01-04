@@ -21,7 +21,7 @@ class Tooltip extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['layer'] = array(
       '#type' => 'select',
       '#title' => t('Layer'),

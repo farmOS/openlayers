@@ -21,7 +21,7 @@ class Select extends Interaction {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['multi'] = array(
       '#type' => 'checkbox',
       '#title' => t('Multi select ?'),

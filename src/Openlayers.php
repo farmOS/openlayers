@@ -5,8 +5,6 @@
  */
 
 namespace Drupal\openlayers;
-use Drupal\openlayers\Types\Error;
-use Drupal\openlayers\Types\Object;
 use Drupal\openlayers\Types\ObjectInterface;
 
 /**
@@ -26,7 +24,7 @@ class Openlayers {
   public static function getOLObjectsOptions($object_type) {
     $options = array();
     $service_basename = 'openlayers.' . $object_type;
-    foreach (\Drupal::service($service_basename)->getDefinitions() as $service => $data) {
+    foreach (\Drupal::service($service_basename)->getDefinitions() as $data) {
       $name = isset($data['label']) ? $data['label'] : $data['id'];
       $options[$service_basename . ':' . $data['id']] = $name;
     }
@@ -55,27 +53,11 @@ class Openlayers {
   }
 
   /**
-   * Load a CTools exportable.
-   *
-   * @param string $object_type
-   *   Type of object to load:
-   *   map|layer|source|control|interaction|style|component .
-   * @param string $export_id
-   *   The exportable id.
-   *
-   * @return array
-   *   The exported object.
-   */
-  public static function loadExportable($object_type, $export_id) {
-    ctools_include('export');
-    return ctools_export_crud_load('openlayers_' . drupal_strtolower(check_plain($object_type)) . 's', $export_id);
-  }
-
-  /**
    * Gets all available OL objects.
    *
    * @param string $type
-   *   The plugin type
+   *   The plugin type.
+   *
    * @return array
    *   Array of Openlayers CTools object instances. (stdClass)
    */
@@ -83,9 +65,29 @@ class Openlayers {
     ctools_include('export');
     $exports = ctools_export_crud_load_all('openlayers_' . drupal_strtolower(check_plain($type)) . 's');
     uasort($exports, function($a, $b) {
-      return strcmp($a->name, $b->name);
+      return strcasecmp($a->name, $b->name);
     });
     return $exports;
+  }
+
+  /**
+   * Load all objects.
+   *
+   * @param string $object_type
+   *   Type of object to load:
+   *   map|layer|source|control|interaction|style|component.
+   *
+   * @return \Drupal\openlayers\Types\ObjectInterface[]
+   *   The array of objects.
+   */
+  public static function loadAll($object_type = NULL) {
+    $objects = array();
+    foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
+      if (is_object($exportable)) {
+        $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
+      }
+    }
+    return $objects;
   }
 
   /**
@@ -97,16 +99,15 @@ class Openlayers {
    * @param array|string|object $export
    *   The exported object.
    *
-   * @return Object|Error
+   * @return ObjectInterface|Error
    *   Returns the instance of the requested object or an instance of
    *   Error on error.
    */
   public static function load($object_type = NULL, $export) {
-    $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
-
-    /* @var \Drupal\openlayers\Types\Object $object */
+    /** @var \Drupal\openlayers\Types\ObjectInterface $object */
     $object = NULL;
     $configuration = array();
+    $object_type = drupal_ucfirst(drupal_strtolower(check_plain($object_type)));
 
     if (is_array($export)) {
       $configuration = $export;
@@ -166,29 +167,24 @@ class Openlayers {
       $object->disabled = 1;
     }
 
-    $object->init();
-
-    return $object;
+    return $object->init();
   }
 
   /**
-   * Load all objects.
+   * Load a CTools exportable.
    *
    * @param string $object_type
    *   Type of object to load:
-   *   map|layer|source|control|interaction|style|component.
+   *   map|layer|source|control|interaction|style|component .
+   * @param string $export_id
+   *   The exportable id.
    *
-   * @return \Drupal\openlayers\Types\Object[]
-   *   The array of objects.
+   * @return array
+   *   The exported object.
    */
-  public static function loadAll($object_type = NULL) {
-    $objects = array();
-    foreach (Openlayers::loadAllExportable($object_type) as $exportable) {
-      if (is_object($exportable)) {
-        $objects[$exportable->machine_name] = Openlayers::load($object_type, $exportable);
-      }
-    }
-    return $objects;
+  public static function loadExportable($object_type, $export_id) {
+    ctools_include('export');
+    return ctools_export_crud_load('openlayers_' . drupal_strtolower(check_plain($object_type)) . 's', $export_id);
   }
 
   /**
@@ -210,7 +206,9 @@ class Openlayers {
    * @param array $filter
    *   The values to filter out of the result array.
    *
-   * @return array
+   * @return string[]
+   *   Return an array of strings. Those strings are the plugin type name
+   *   in lowercase.
    */
   public static function getPluginTypes(array $filter = array()) {
     $plugins = array();
@@ -235,6 +233,8 @@ class Openlayers {
    * Return information about the Openlayers 3 if installed.
    *
    * @return array|false
+   *   Return an array from hook_libraries_info() if the library is found,
+   *   otherwise return False.
    */
   public static function getLibrary() {
     return libraries_detect('openlayers3');
@@ -244,13 +244,15 @@ class Openlayers {
    * Return the version of the Openlayers library in use.
    *
    * @return string
+   *   Return the version of the Openlayers library set in the configuration.
    */
   public static function getLibraryVersion() {
     $variant = \Drupal\openlayers\Config::get('openlayers.variant');
 
     if (strpos($variant, 'local-') !== FALSE) {
       $version = self::getLocalLibraryVersion();
-    } else {
+    }
+    else {
       $version = \Drupal\openlayers\Config::get('openlayers.variant', NULL);
     }
 
@@ -261,6 +263,7 @@ class Openlayers {
    * Return the version of the Openlayers library in use.
    *
    * @return string
+   *   Return the version of the Openlayers library in the filesystem.
    */
   public static function getLocalLibraryVersion() {
     $version = FALSE;
@@ -279,7 +282,6 @@ class Openlayers {
 
     return $version;
   }
-
 
   /**
    * Apply a function recursively to all the value of an array.
@@ -348,13 +350,14 @@ class Openlayers {
         $array[$key] = self::removeEmptyElements($value);
       }
     }
+
     return $array;
   }
 
   /**
    * Returns an array with positioning options.
    *
-   * @return array
+   * @return string[]
    *   Array with positioning options.
    */
   public static function positioningOptions() {
@@ -374,7 +377,7 @@ class Openlayers {
   /**
    * The list of geometries available.
    *
-   * @return array
+   * @return string[]
    *   The list of geometries.
    */
   public static function getGeometryTypes() {
@@ -392,16 +395,28 @@ class Openlayers {
   }
 
   /**
-   * Returns the list of files libraries or js/css files needed according to
-   * the settings.
+   * Returns the list of attached libraries or js/css files.
    *
    * @return array
+   *   Array containing the attachment libraries to load.
    */
   public static function getAttached() {
     $attached = array();
 
+    if (!self::detectLibrary()) {
+      $configuration = array(
+        'errorMessage' => t('Unable to load the Openlayers JS library variant, please <a href="@openlayers_admin">update your settings</a> and select a valid variant of the library.', array('@openlayers_admin' => '/admin/structure/openlayers')),
+      );
+      \Drupal::service('openlayers.Types')->createInstance('Error', $configuration)->init();
+
+      return $attached;
+    }
+
     $attached['libraries_load'] = array(
-      'openlayers3' => array('openlayers3', Config::get('openlayers.variant', NULL)),
+      'openlayers3' => array(
+        'openlayers3',
+        Config::get('openlayers.variant', NULL),
+      ),
     );
 
     if (Config::get('openlayers.debug', FALSE)) {
@@ -409,6 +424,18 @@ class Openlayers {
     };
 
     return $attached;
+  }
+
+  /**
+   * Check if the Openlayers library and settings are properly found.
+   *
+   * @return bool|array
+   *   Return the library array is found, FALSE otherwise.
+   */
+  public static function detectLibrary() {
+    $library = libraries_detect('openlayers3');
+
+    return isset($library['variants'][\Drupal\openlayers\Config::get('openlayers.variant', NULL)]) ? $library : FALSE;
   }
 
 }

@@ -100,9 +100,24 @@ class OpenlayersMaps extends \OpenlayersObjects {
     if (!empty($this->plugin['export']['admin_title'])) {
       $this->rows[$name]['data'][] = array('data' => check_plain($item->{$this->plugin['export']['admin_title']}), 'class' => array('ctools-export-ui-title'));
     }
+
+    switch ($item->type) {
+      case t('Default'):
+      default:
+        $type = t('In code');
+        break;
+
+      case t('Normal'):
+        $type = t('In database');
+        break;
+
+      case t('Overridden'):
+        $type = t('Database overriding code');
+    }
+
     $this->rows[$name]['data'][] = array('data' => check_plain($name), 'class' => array('ctools-export-ui-name'));
     $this->rows[$name]['data'][] = array('data' => check_plain($item->factory_service), 'class' => array('ctools-export-ui-service'));
-    $this->rows[$name]['data'][] = array('data' => check_plain($item->{$schema['export']['export type string']}), 'class' => array('ctools-export-ui-storage'));
+    $this->rows[$name]['data'][] = array('data' => $type, 'class' => array('ctools-export-ui-storage'));
 
     $ops = theme('links__ctools_dropbutton', array(
       'links' => $operations,

@@ -14,7 +14,7 @@ class openlayers extends boxes_box {
    */
   public function options_defaults() {
     return array(
-      'map' => ''
+      'map' => '',
     );
   }
 

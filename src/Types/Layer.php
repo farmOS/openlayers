@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers\Types;
+
 use Drupal\openlayers\Openlayers;
 
 /**
@@ -19,10 +20,7 @@ abstract class Layer extends Object implements LayerInterface {
   protected $options = array();
 
   /**
-   * Returns the source of this layer.
-   *
-   * @return SourceInterface|FALSE
-   *   The source assigned to this layer.
+   * {@inheritdoc}
    */
   public function getSource() {
     $source = $this->getObjects('source');
@@ -33,10 +31,7 @@ abstract class Layer extends Object implements LayerInterface {
   }
 
   /**
-   * Returns the style of this layer.
-   *
-   * @return StyleInterface|FALSE
-   *   The style assigned to this layer.
+   * {@inheritdoc}
    */
   public function getStyle() {
     $style = $this->getObjects('style');
@@ -47,25 +42,20 @@ abstract class Layer extends Object implements LayerInterface {
   }
 
   /**
-   * Set the source of this layer.
-   *
-   * @param SourceInterface $source
-   *   The source object.
+   * {@inheritdoc}
    */
   public function setSource(SourceInterface $source) {
-    /* @var Source $source */
     $this->setOption('source', $source->getMachineName());
+    return $this->addObject($source);
   }
 
   /**
-   * Set the style of this layer.
-   *
-   * @param StyleInterface $style
-   *   The style object.
+   * {@inheritdoc}
    */
   public function setStyle(StyleInterface $style) {
-    /* @var Style $style */
+    /** @var Style $style */
     $this->setOption('style', $style->getMachineName());
+    return $this->addObject($style);
   }
 
   /**
@@ -74,14 +64,64 @@ abstract class Layer extends Object implements LayerInterface {
   public function optionsToObjects() {
     $import = parent::optionsToObjects();
 
-    if ($style = $this->getOption('style')) {
-      $import = array_merge($import, Openlayers::load('style', $style)->getCollection()->getFlatList());
-    }
-
-    if ($source = $this->getOption('source')) {
-      $import = array_merge($import, Openlayers::load('source', $source)->getCollection()->getFlatList());
+    foreach (array('style', 'source') as $option) {
+      if ($option_value = $this->getOption($option, FALSE)) {
+        if ($object = $this->getCollection()
+          ->getObjectById($option, $option_value)
+        ) {
+          $import = array_merge($import, $object->getCollection()
+            ->getFlatList());
+        }
+        else {
+          $import = array_merge($import, Openlayers::load($option, $option_value)
+            ->getCollection()
+            ->getFlatList());
+        }
+      }
     }
 
     return $import;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOpacity($opacity) {
+    return $this->setOption('opacity', floatval($opacity));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOpacity() {
+    return $this->getOption('opacity');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setZIndex($zindex) {
+    return $this->setOption('zIndex', intval($zindex));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getZIndex() {
+    return $this->getOption('zIndex');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setVisible($visibility) {
+    return $this->setOption('visible', (bool) $visibility);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getVisible() {
+    return (bool) $this->getOption('visible');
   }
 }

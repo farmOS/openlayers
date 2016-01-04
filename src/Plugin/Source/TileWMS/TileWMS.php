@@ -20,7 +20,7 @@ class TileWMS extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['url'] = array(
       '#type' => 'textarea',
       '#title' => t('Base URL (template)'),
@@ -42,7 +42,7 @@ class TileWMS extends Source {
   /**
    * {@inheritdoc}
    */
-  public function optionsFormSubmit($form, &$form_state) {
+  public function optionsFormSubmit(array $form, array &$form_state) {
     // If an options array is not set, create it.
     if (!isset($form_state['item']->options)) {
       $form_state['item']->options = array();

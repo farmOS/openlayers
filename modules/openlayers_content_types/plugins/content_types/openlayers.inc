@@ -74,9 +74,9 @@ function openlayers_content_types_openlayers_content_type_edit_form_submit($form
 function openlayers_content_types_openlayers_content_type_admin_info($subtype, $conf, $contexts) {
   $map_name = t('Unknown');
   try {
-    /** @var Drupal\openlayers\Types\Map $map */
+    /** @var Drupal\openlayers\Types\MapInterface $map */
     if (($map = \Drupal\openlayers\Openlayers::load('Map', $conf['map'])) == TRUE) {
-      $map_name = $map->name;
+      $map_name = $map->getName();
     }
   }
   catch (Exception $e) {

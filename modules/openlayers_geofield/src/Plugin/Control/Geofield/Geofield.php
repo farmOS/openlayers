@@ -20,7 +20,7 @@ class Geofield extends Control {
   /**
    * @inheritDoc
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['draw'] = array(
       '#type' => 'checkboxes',
       '#title' => 'Draw actions',

@@ -23,7 +23,7 @@ ol.control.Geofield = function(opt_options) {
   optionsElements = new ol.Collection();
 
   if (draw.Point) {
-    var pointLabel = options.pointLabel || '\u25CB';
+    var pointLabel = options.pointLabel || '\u25CF';
     var pointTipLabel = options.pointTipLabel || 'Draw a point';
     var pointElement = document.createElement('button');
     pointElement.className = className + '-point';
@@ -36,7 +36,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.MultiPoint) {
-    var multipointLabel = options.multipointLabel || '\u25CB';
+    var multipointLabel = options.multipointLabel || '\u25CF';
     var multipointTipLabel = options.multipointTipLabel || 'Draw a multipoint';
     var multipointElement = document.createElement('button');
     multipointElement.className = className + '-multipoint';
@@ -75,7 +75,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Triangle) {
-    var triangleLabel = options.triangleLabel || '\u25B2';
+    var triangleLabel = options.triangleLabel || '\u25B3';
     var triangleTipLabel = options.triangleTipLabel || 'Draw a triangle';
     var triangleElement = document.createElement('button');
     triangleElement.className = className + '-triangle';
@@ -88,7 +88,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Square) {
-    var squareLabel = options.squareLabel || '\u25A0';
+    var squareLabel = options.squareLabel || '\u25FB';
     var squareTipLabel = options.squareTipLabel || 'Draw a square';
     var squareElement = document.createElement('button');
     squareElement.className = className + '-square';
@@ -101,7 +101,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Box) {
-    var boxLabel = options.boxLabel || '\u25AE';
+    var boxLabel = options.boxLabel || '\u25AF';
     var boxTipLabel = options.boxTipLabel || 'Draw a box';
     var boxElement = document.createElement('button');
     boxElement.className = className + '-box';
@@ -114,7 +114,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (draw.Circle) {
-    var circleLabel = options.circleLabel || '\u25CF';
+    var circleLabel = options.circleLabel || '\u25EF';
     var circleTipLabel = options.circleTipLabel || 'Draw a circle';
     var circleElement = document.createElement('button');
     circleElement.className = className + '-circle';
@@ -192,7 +192,7 @@ ol.control.Geofield = function(opt_options) {
   }
 
   if (options.Snap) {
-    var snapLabel = options.snapLabel || '\u2609';
+    var snapLabel = options.snapLabel || '\u25CE';
     var snapTipLabel = options.snapTipLabel || 'Snap to features';
     var snapElement = document.createElement('button');
     snapElement.className = className + '-snap';
@@ -207,28 +207,32 @@ ol.control.Geofield = function(opt_options) {
   var cssClasses = className + ' ' + 'ol-control';
 
   var drawElement = document.createElement('div');
-  drawElement.className = 'draw';
+  drawElement.className = 'draw ol-control-group';
   drawElements.forEach(function(element) {
     drawElement.appendChild(element);
   });
 
   var actionsElement = document.createElement('div');
-  actionsElement.className = 'actions';
+  actionsElement.className = 'actions ol-control-group';
   actionsElements.forEach(function(element) {
     actionsElement.appendChild(element);
   });
 
   var optionsElement = document.createElement('div');
-  optionsElement.className = 'options';
+  optionsElement.className = 'options ol-control-group';
   optionsElements.forEach(function(element) {
     optionsElement.appendChild(element);
   });
 
+  var controlsElement = document.createElement('div');
+  controlsElement.className = 'ol-geofield-controls';
+  controlsElement.appendChild(drawElement);
+  controlsElement.appendChild(actionsElement);
+  controlsElement.appendChild(optionsElement);
+
   var element = document.createElement('div');
   element.className = cssClasses;
-  element.appendChild(drawElement);
-  element.appendChild(actionsElement);
-  element.appendChild(optionsElement);
+  element.appendChild(controlsElement);
 
   ol.control.Control.call(this, {
     element: element,

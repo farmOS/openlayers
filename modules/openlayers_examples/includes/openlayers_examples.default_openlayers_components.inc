@@ -115,13 +115,13 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
-    'layers' => array(
+    'frontend_layers' => array(
       'openlayers_examples_layer_views_geojson_popup' => 'openlayers_examples_layer_views_geojson_popup',
     ),
     'positioning' => 'top-right',
     'autoPan' => TRUE,
     'autoPanAnimation' => 1000,
-    'autoPanMargin' => 20
+    'autoPanMargin' => 20,
   );
   $export['openlayers_examples_component_simple_popup'] = $ol_component;
 
@@ -133,7 +133,7 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
-    'layers' => array(
+    'frontend_layers' => array(
       'openlayers_examples_layer_cluster_cities' => 'openlayers_examples_layer_cluster_cities',
     ),
     'positioning' => 'top-right',
@@ -198,13 +198,13 @@ map.getLayers().forEach(function(layer){
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:Popup';
   $ol_component->options = array(
-    'layers' => array(
+    'frontend_layers' => array(
       'openlayers_examples_layer_vector_kml_earthquakes_heatmap' => 'openlayers_examples_layer_vector_kml_earthquakes_heatmap',
     ),
     'positioning' => 'top-right',
     'autoPan' => TRUE,
     'autoPanAnimation' => 1000,
-    'autoPanMargin' => 20
+    'autoPanMargin' => 20,
   );
   $export['openlayers_examples_component_simple_popup_earthquakes'] = $ol_component;
 
@@ -369,7 +369,7 @@ map.on(\'click\', function(evt) {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:ViewSync';
   $ol_component->options = array(
-    'group' => 'openlayers_examples'
+    'group' => 'openlayers_examples',
   );
   $export['openlayers_examples_component_viewsync'] = $ol_component;
 

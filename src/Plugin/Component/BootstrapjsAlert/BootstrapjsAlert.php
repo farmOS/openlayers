@@ -38,7 +38,7 @@ class BootstrapjsAlert extends Component {
   /**
    * {@inheritdoc}
    */
-  public function optionsForm(&$form, &$form_state) {
+  public function optionsForm(array &$form, array &$form_state) {
     $form['options']['message'] = array(
       '#type' => 'textarea',
       '#title' => t('Text to display'),
