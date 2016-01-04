@@ -18,7 +18,13 @@ function openlayers_ui_admin_settings($form, &$form_state) {
   );
 
   $library = libraries_detect('openlayers3');
-  $options_variants = array();
+
+  $current_variant = \Drupal\openlayers\Config::get('openlayers.variant');
+  if (!\Drupal\openlayers\Openlayers::detectLibrary()) {
+    $current_variant = NULL;
+  }
+
+  $options_variants = array('' => t('- Select the library variant -'));
   foreach ($library['variants'] as $version => $variant) {
     list($optgroup) = explode(':', $version, 2);
     if (empty($optgroup)) {
@@ -32,7 +38,7 @@ function openlayers_ui_admin_settings($form, &$form_state) {
     '#type' => 'select',
     '#title' => 'Select the Openlayers library variant to use.',
     '#options' => $options_variants,
-    '#default_value' => \Drupal\openlayers\Config::get('openlayers.variant'),
+    '#default_value' => $current_variant,
   );
 
   $form['origin']['debug'] = array(
