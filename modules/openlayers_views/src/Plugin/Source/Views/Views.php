@@ -22,14 +22,14 @@ class Views extends Source {
     $options = array();
     foreach (views_get_all_views() as $view) {
       foreach ($view->display as $display) {
-        if ($display['id'] != 'default') {
-          $view->set_display($display['id']);
+        if ($display->id != 'default') {
+          $view->set_display($display->id);
           $viewname = sprintf('%s (%s)', $view->human_name, $view->name);
           if ($view->display_handler->get_option('style_plugin') == 'openlayers_source_vector') {
-            $options[$viewname][$view->name . ':' . $display['id']] = sprintf('%s:%s', $view->human_name, $display['id']);
+            $options[$viewname][$view->name . ':' . $display->id] = sprintf('%s:%s', $view->human_name, $display->id);
           }
           if ($view->display_handler->get_option('style_plugin') == 'openlayers_map_views') {
-            $options[$viewname][$view->name . ':' . $display['id']] = sprintf('%s:%s', $view->human_name, $display['id']);
+            $options[$viewname][$view->name . ':' . $display->id] = sprintf('%s:%s', $view->human_name, $display->id);
           }
         }
       }
