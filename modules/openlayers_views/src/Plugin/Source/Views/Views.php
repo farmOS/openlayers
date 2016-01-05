@@ -54,7 +54,9 @@ class Views extends Source {
     $features = array();
 
     $source = Openlayers::loadExportable('source', $this->getMachineName());
-    $this->setOptions($source->options);
+    if (is_object($source)) {
+      $this->setOptions($source->options);
+    }
 
     if ($view = $this->getOption('view', FALSE)) {
       list($views_id, $display_id) = explode(':', $view, 2);
