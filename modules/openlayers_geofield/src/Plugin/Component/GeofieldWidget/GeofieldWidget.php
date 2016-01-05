@@ -5,11 +5,10 @@
  */
 
 namespace Drupal\openlayers_geofield\Plugin\Component\GeofieldWidget;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Plugin\Source\Vector\Vector;
 use Drupal\openlayers\Types\Component;
-use Drupal\openlayers\Types\LayerInterface;
 use Drupal\openlayers\Types\ObjectInterface;
 use geoPHP;
 
@@ -126,6 +125,7 @@ class GeofieldWidget extends Component {
    *
    * @return array
    *   An array containing the Geometry and the features.
+   *
    * @throws \exception
    */
   private function initialDataToGeomFeatures() {
@@ -275,4 +275,5 @@ class GeofieldWidget extends Component {
       $build['parameters'][$this->getPluginId()] = $component;
     }
   }
+
 }

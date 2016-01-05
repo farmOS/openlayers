@@ -6,7 +6,6 @@
 
 namespace Drupal\openlayers_field\Plugin\Source\Field;
 
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
 use Drupal\openlayers\Plugin\Source\Vector\Vector;
 use Drupal\openlayers\Types\Source;
 

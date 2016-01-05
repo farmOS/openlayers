@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers\Plugin\Style\Icon;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+
 use Drupal\openlayers\Types\Style;
 
 /**

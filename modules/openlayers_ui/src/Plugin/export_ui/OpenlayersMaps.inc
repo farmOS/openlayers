@@ -643,7 +643,8 @@ function openlayers_map_form_components($form, &$form_state) {
             '#attributes' => array(
               'class' => array('entry-order-weight'),
             ),
-          )),
+          ),
+        ),
         array(
           'data' => array(
             '#type' => 'checkbox',
@@ -651,7 +652,8 @@ function openlayers_map_form_components($form, &$form_state) {
             '#title_display' => 'invisible',
             '#default_value' => $entry['enabled'],
             '#parents' => array('components', $id, 'enabled'),
-          )),
+          ),
+        ),
         check_plain($entry['name']),
         check_plain($entry['machine_name']),
         check_plain($entry['description']),
@@ -730,6 +732,8 @@ function openlayers_map_form_preview($form, &$form_state) {
 
   $alternative_template = 'openlayers--' . str_replace('_', '-', $map->getMachineName()) . '.tpl.php';
 
+  $value = file_get_contents(drupal_get_path('module', 'openlayers') . '/theme/openlayers.tpl.php');
+
   $form['information']['theme'] = array(
     '#weight' => 20,
     '#type' => 'fieldset',
@@ -739,8 +743,9 @@ function openlayers_map_form_preview($form, &$form_state) {
     'template_content' => array(
       '#title' => 'Openlayers map template',
       '#type' => 'textarea',
-      '#default_value' => file_get_contents(drupal_get_path('module', 'openlayers') . '/theme/openlayers.tpl.php'),
-      '#description' => t('The default Openlayers template is <strong>openlayers.tpl.php</strong> for all the maps. You may override it by creating a file with the same name in your theme template\'s directory. You can also name it <em>openlayers--[map_machine_name].tpl.php</em> if you want to alter the display of this particular map only. For example: <strong>@template</strong>.', array('@template' => $alternative_template)),
+      '#default_value' => $value,
+      '#value' => $value,
+      '#description' => t("The default Openlayers template is <strong>openlayers.tpl.php</strong> for all the maps. You may override it by creating a file with the same name in your theme template's directory. You can also name it <em>openlayers--[map_machine_name].tpl.php</em> if you want to alter the display of this particular map only. For example: <strong>@template</strong>.", array('@template' => $alternative_template)),
     ),
   );
 

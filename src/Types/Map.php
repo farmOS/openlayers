@@ -169,11 +169,14 @@ abstract class Map extends Object implements MapInterface {
           'options',
           'container_type',
         ), 'fieldset'),
+        '#collapsed' => TRUE,
+        '#collapsible' => TRUE,
         '#attached' => array(
           'library' => array(
             array('system', 'drupal.collapse'),
           ),
         ),
+/*
         '#attributes' => array(
           'class' => array(
             $this->getOption(array(
@@ -188,6 +191,7 @@ abstract class Map extends Object implements MapInterface {
             ), TRUE) ? 'collapsed' : '',
           ),
         ),
+*/
         '#title' => $this->getOption(array(
           'capabilities',
           'options',
@@ -251,10 +255,8 @@ abstract class Map extends Object implements MapInterface {
    * {@inheritdoc}
    */
   public function setSize(array $size = array()) {
-    list($width, $height) = $size;
-    $this->setOption('width', $width);
-    $this->setOption('height', $height);
-    return $this;
+    list($width, $height) = array_values($size);
+    return $this->setOption('width', $width)->setOption('height', $height);
   }
 
   /**

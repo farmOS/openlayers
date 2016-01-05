@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_library\Plugin\Component\Timezones;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+
 use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Component;
 use Drupal\openlayers\Types\ObjectInterface;
@@ -49,4 +49,5 @@ class Timezones extends Component {
 
     $build['description']['#description'] = 'This example is based on the <a href="http://openlayers.org/en/master/examples/kml-timezones.html">offical example</a>. You need the <em><a href="https://drupal.org/project/bootstrap_library">Bootstrap Library</a></em> module to get it working properly.';
   }
+
 }

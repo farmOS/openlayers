@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers_library\Plugin\Control\OL3LayerSwitcher;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+
 use Drupal\openlayers\Types\Control;
 
 /**
@@ -27,4 +27,5 @@ class OL3LayerSwitcher extends Control {
       '#default_value' => $this->getOption('collapsible'),
     );
   }
+
 }

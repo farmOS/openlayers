@@ -5,7 +5,7 @@
  */
 
 namespace Drupal\openlayers\Plugin\Layer\Vector;
-use Drupal\openlayers\Component\Annotation\OpenlayersPlugin;
+
 use Drupal\openlayers\Types\Layer;
 use Drupal\openlayers\Types\ObjectInterface;
 
