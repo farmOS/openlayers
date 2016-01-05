@@ -101,6 +101,7 @@ To render a map on your site, you have many options:
 * In a [Box](https://www.drupal.org/project/boxes), enable submodule **Openlayers Boxes**,</li>
 * In a [Quicktabs](https://www.drupal.org/project/quicktabs), enable submodule **Openlayers Quicktabs**,</li>
 * In a [Views](https://www.drupal.org/project/views), enable submodule **Openlayers Views**.</li>
+* In any content using the appropriate input format and the contrib module [Openlayers filters](https://www.drupal.org/project/openlayers_filters).</li>
 
 With Openlayers 3, it's up to you to decide how you want to integrate the map in your content.
 
