@@ -59,9 +59,7 @@ abstract class Map extends Object implements MapInterface {
    *   The Map object.
    */
   public function removeLayer($layer_id) {
-    $layers = $this->getOption('layers', array());
-    unset($layers[$layer_id]);
-    return $this->setOption('layers', $layers)->removeObject($layer_id);
+    return $this->removeObject($layer_id);
   }
 
   /**
@@ -71,10 +69,7 @@ abstract class Map extends Object implements MapInterface {
    *   The Map object.
    */
   public function removeComponent($component_id) {
-    $components = $this->getOption('components', array());
-    unset($components[$component_id]);
-    return $this->setOption('components', $components)
-      ->removeObject($component_id);
+    return $this->removeObject($component_id);
   }
 
   /**
@@ -84,9 +79,7 @@ abstract class Map extends Object implements MapInterface {
    *   The Map object.
    */
   public function removeControl($control_id) {
-    $controls = $this->getOption('controls', array());
-    unset($controls[$control_id]);
-    return $this->setOption('controls', $controls)->removeObject($control_id);
+    return $this->removeObject($control_id);
   }
 
   /**
@@ -96,10 +89,7 @@ abstract class Map extends Object implements MapInterface {
    *   The Map object.
    */
   public function removeInteraction($interaction_id) {
-    $interactions = $this->getOption('interactions', array());
-    unset($interactions[$interaction_id]);
-    return $this->setOption('interactions', $interactions)
-      ->removeObject($interaction_id);
+    return $this->removeObject($interaction_id);
   }
 
   /**
