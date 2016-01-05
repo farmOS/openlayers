@@ -26,7 +26,7 @@ class Vector extends Layer {
     if (!empty($zoom_activity)) {
       $zoom_activity = array_map('intval', explode("\n", trim($this->getOption('zoomActivity', ''))));
       sort($zoom_activity);
-      implode(PHP_EOL, $zoom_activity);
+      $zoom_activity = implode(PHP_EOL, $zoom_activity);
     }
     $form['options']['zoomActivity'] = array(
       '#title' => t('Show on certain zoom levels only'),
