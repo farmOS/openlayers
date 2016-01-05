@@ -27,7 +27,7 @@ class GeofieldWidget extends Component {
     $form['options']['dataType'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Data type'),
-      '#description' => t('If more than one type is choosen a control to select the type to use is displayed when drawing.'),
+      '#description' => t('If multiple, a control to select the type to use is displayed when drawing.'),
       '#multiple' => TRUE,
       '#options' => array(
         'GeoJSON' => 'GeoJSON',
