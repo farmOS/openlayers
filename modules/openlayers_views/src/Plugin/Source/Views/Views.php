@@ -5,6 +5,7 @@
  */
 
 namespace Drupal\openlayers_views\Plugin\Source\Views;
+use Drupal\openlayers\Openlayers;
 use Drupal\openlayers\Types\Source;
 
 /**
@@ -35,7 +36,7 @@ class Views extends Source {
       }
     }
 
-    $form['view'] = array(
+    $form['options']['view'] = array(
       '#type' => 'select',
       '#title' => 'View and display',
       '#options' => $options,
@@ -51,6 +52,9 @@ class Views extends Source {
    */
   public function init() {
     $features = array();
+
+    $source = Openlayers::loadExportable('source', $this->getMachineName());
+    $this->setOptions($source->options);
 
     if ($view = $this->getOption('view', FALSE)) {
       list($views_id, $display_id) = explode(':', $view, 2);
