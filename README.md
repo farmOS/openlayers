@@ -97,6 +97,7 @@ To render a map on your site, you have many options:
 * Using the API, see [this example](https://gist.github.com/drupol/fee9d808b711f658d79b)
 * In a block, enable submodule **Openlayers Block**, then tick the checkbox in the map settings, you'll have a new block in **admin/structure/block**,</li>
 * In a field, enable submodule **Openlayers Field** and you'll have a new field type 'Openlayers map' available,</li>
+* On any site, enable submodule **Openlayers Services**, then tick the checkbox in the map settings, you'll get an embed url that you can use on any site to display the map only.
 * In a [Panels](https://www.drupal.org/project/panels), enable submodule **Openlayers Content Types**,</li>
 * In a [Box](https://www.drupal.org/project/boxes), enable submodule **Openlayers Boxes**,</li>
 * In a [Quicktabs](https://www.drupal.org/project/quicktabs), enable submodule **Openlayers Quicktabs**,</li>
