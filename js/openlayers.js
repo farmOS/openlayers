@@ -111,15 +111,7 @@
               map_id: map_id
             }
           ]);
-
-          var layers = [];
-
-          settings.layer.map(function (data, key) {
-            layers.push(data);
-          });
-
-          for (var i in layers) {
-            var data = jQuery.extend(true, {}, layers[i]);
+          settings.layer.map(function (data) {
             data.opt.source = Drupal.openlayers.instances[map_id].sources[data.opt.source];
             if (data.opt.style !== undefined && Drupal.openlayers.instances[map_id].styles[data.opt.style] !== undefined) {
               data.opt.style = Drupal.openlayers.instances[map_id].styles[data.opt.style];
@@ -130,16 +122,10 @@
               if (data.opt.name !== undefined) {
                 layer.set('title', data.opt.name);
               }
-              layers[i] = layer;
-            }
-          }
 
-          $.map(layers, function (layer) {
-            if (layer.get('addToMap') === undefined) {
               map.addLayer(layer);
             }
           });
-
           $(document).trigger('openlayers.layers_post_alter', [
             {
               layers: settings.layer,
@@ -307,11 +293,13 @@
         // Store object to the instances cache.
         if (type == 'maps') {
           Drupal.openlayers.instances[map_id][instances_type] = object;
+          return Drupal.openlayers.instances[map_id][instances_type];
         }
         else {
           Drupal.openlayers.instances[map_id][instances_type][data.mn] = object;
+          return Drupal.openlayers.instances[map_id][instances_type][data.mn];
         }
-        return object;
+        //return object;
       }
       else {
         $(document).trigger('openlayers.object_error', [

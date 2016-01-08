@@ -6,7 +6,7 @@ Drupal.openlayers.pluginManager.register({
     for (var i in data.opt.grouplayers) {
       if (data.objects.layers[data.opt.grouplayers[i]] !== undefined) {
         layers[i] = data.objects.layers[data.opt.grouplayers[i]];
-        Drupal.openlayers.instances[data.map_id].layers[data.opt.grouplayers[i]].set('addToMap', false);
+        data.map.removeLayer(layers[i]);
       }
     }
 
