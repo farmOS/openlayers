@@ -186,7 +186,7 @@ class Group extends Layer {
 
     foreach ($this->getOption('grouplayers', array()) as $weight => $object) {
       if ($merge_object = Openlayers::load('layer', $object)) {
-        $merge_object->setWeight($weight);
+        $merge_object->setWeight($this->getWeight() - 1);
         $import[] = $merge_object;
       }
     }

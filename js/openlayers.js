@@ -112,16 +112,10 @@
             }
           ]);
 
-          var groups = {};
-          var layers = {};
+          var layers = [];
 
           settings.layer.map(function (data, key) {
-            if (data.fs === 'openlayers.Layer:Group') {
-              groups[data.mn] = data;
-            }
-            else {
-              layers[data.mn] = data;
-            }
+            layers.push(data);
           });
 
           for (var i in layers) {
@@ -140,32 +134,10 @@
             }
           }
 
-          for (var i in groups) {
-            data = jQuery.extend(true, {}, groups[i]);
-            var candidates = [];
-            data.opt.grouplayers.map(function (layer_machine_name) {
-              candidates.push(layers[layer_machine_name]);
-              delete layers[layer_machine_name];
-            });
-            data.opt.grouplayers = candidates;
-            layer = Drupal.openlayers.getObject(context, 'layers', data, map_id);
-
-            if (layer) {
-              groups[i] = layer;
-            }
-          }
-
           $.map(layers, function (layer) {
-            map.addLayer(layer);
-          });
-
-          // Todo: See why it's not ordered properly automatically.
-          var groupsOrdered = [];
-          for (var i in groups) {
-            groupsOrdered.push(groups[i]);
-          }
-          groupsOrdered.reverse().map(function (layer) {
-            map.addLayer(layer);
+            if (layer.get('addToMap') === undefined) {
+              map.addLayer(layer);
+            }
           });
 
           $(document).trigger('openlayers.layers_post_alter', [
