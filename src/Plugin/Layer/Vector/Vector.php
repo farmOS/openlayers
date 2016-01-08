@@ -52,15 +52,4 @@ class Vector extends Layer {
     return $js;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function preBuild(array &$build, ObjectInterface $context = NULL) {
-    $layers = $context->getObjects('layer');
-    foreach ($layers as $layer) {
-      if (!in_array($layer->getFactoryService(), array('openlayers.Layer:Vector', 'openlayers.Layer:Heatmap'))) {
-        $layer->setOption('type', 'base');
-      }
-    }
-  }
 }

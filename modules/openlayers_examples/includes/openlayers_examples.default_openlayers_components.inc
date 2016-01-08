@@ -65,15 +65,39 @@ function openlayers_examples_default_openlayers_components() {
   $ol_component->description = '';
   $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
   $ol_component->options = array(
-    'source' => 'views_geojson_openlayers_examples_geojson_feed_2',
+    'source' => array('views_geojson_openlayers_examples_geojson_feed_2'),
     'animations' => array(
       'pan' => '500',
       'zoom' => '500',
     ),
-    'zoom' => 'disabled',
+    'zoom' => 'auto',
+    'max_zoom' => 15,
     'enableAnimations' => 1,
+    'process_once' => 1,
   );
   $export['openlayers_examples_component_zoom_to_source'] = $ol_component;
+
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_zoomtosource_london_tube';
+  $ol_component->name = 'Openlayers examples: Zoom To Source for London Tube map';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
+  $ol_component->options = array(
+    'source' => array(
+      'openlayers_examples_source_geojson_london_tube_lines',
+    ),
+    'animations' => array(
+      'pan' => 500,
+      'zoom' => 500,
+    ),
+    'zoom' => 'auto',
+    'enableAnimations' => 1,
+    'max_zoom' => 15,
+    'process_once' => 1,
+  );
+  $export['openlayers_examples_component_zoomtosource_london_tube'] = $ol_component;
 
   $ol_component = new stdClass();
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
@@ -106,6 +130,18 @@ function openlayers_examples_default_openlayers_components() {
     'positioning' => 'top-right',
   );
   $export['openlayers_examples_component_tooltip_earthquakes'] = $ol_component;
+
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_tooltip_timezones';
+  $ol_component->name = 'Openlayers examples: Timezones tooltip';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:Tooltip';
+  $ol_component->options = array(
+    'layer' => 'openlayers_examples_layer_vector_kml_timezones',
+    'positioning' => 'top-right',
+  );
 
   $ol_component = new stdClass();
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
@@ -486,6 +522,50 @@ osm.on(\'postcompose\', function(event) {
 });',
   );
   $export['openlayers_examples_component_layerclipping'] = $ol_component;
+
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_zoomtosource_london_tube';
+  $ol_component->name = 'Openlayers examples: London Tube Zoom To Source ';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:ZoomToSource';
+  $ol_component->options = array(
+    'source' => array(
+      'openlayers_examples_source_geojson_london_tube_lines' => 'openlayers_examples_source_geojson_london_tube_lines',
+    ),
+    'animations' => array(
+      'pan' => 500,
+      'zoom' => 500,
+    ),
+    'zoom' => 'auto',
+    'enableAnimations' => 1,
+    'max_zoom' => 15,
+    'process_once' => 1,
+  );
+  $export['openlayers_examples_component_zoomtosource_london_tube'] = $ol_component;
+
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_popup_london_tube';
+  $ol_component->name = 'Openlayers examples: London Tube Stations Popup';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:Popup';
+  $ol_component->options = array(
+    'layers' => array(
+      'openlayers_examples_layer_vector_london_tube_stations' => 'openlayers_examples_layer_vector_london_tube_stations',
+    ),
+    'closer' => 1,
+    'positioning' => 'top-left',
+    'autoPan' => TRUE,
+    'autoPanAnimation' => '1000',
+    'autoPanMargin' => '20',
+    'frontend_layers' => array(
+      'openlayers_examples_layer_vector_london_tube_stations' => 'openlayers_examples_layer_vector_london_tube_stations',
+    ),
+  );
+  $export['openlayers_examples_component_popup_london_tube'] = $ol_component;
 
   return $export;
 }

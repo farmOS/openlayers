@@ -165,8 +165,10 @@ function openlayers_map_form_layers($form, &$form_state) {
   foreach ($map->getOption('layers', array()) as $weight => $layer) {
     /** @var Drupal\openlayers\Types\LayerInterface $layer */
     $layer = \Drupal\openlayers\Openlayers::load('layer', $layer);
-    $all_layers[$layer->getMachineName()]->setWeight($weight);
-    $all_layers[$layer->getMachineName()]->enabled = 1;
+    if (isset($all_layers[$layer->getMachineName()])) {
+      $all_layers[$layer->getMachineName()]->setWeight($weight);
+      $all_layers[$layer->getMachineName()]->enabled = 1;
+    }
   }
 
   uasort($all_layers, function(\Drupal\openlayers\Types\LayerInterface $a, \Drupal\openlayers\Types\LayerInterface $b) {
