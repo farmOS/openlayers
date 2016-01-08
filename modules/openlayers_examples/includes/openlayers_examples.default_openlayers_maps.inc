@@ -1277,8 +1277,8 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'renderer' => 'canvas',
     'layers' => array(
-      0 => 'openlayers_examples_layer_group_overlay',
-      1 => 'openlayers_examples_layer_group_base',
+      0 => 'openlayers_examples_layer_group_base',
+      1 => 'openlayers_examples_layer_group_overlay',
     ),
     'controls' => array(
       0 => 'openlayers_examples_control_ol3layerswitcher',
