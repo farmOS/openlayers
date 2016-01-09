@@ -8,3 +8,4 @@ dependencies[] = openlayers_library
 dependencies[] = views_geojson
 dependencies[] = openlayers_block_switcher
 dependencies[] = openlayers_geofield
+dependencies[] = openlayers_cesium

@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Main file of the Openlayers Cesium module.
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function openlayers_cesium_libraries_info() {
+  // During an upgrade from Openlayers 7.x-2.x branch, the new registry_autoload
+  // dependency may not be enabled, which makes it impossible to use the new
+  // namespaced classes. So provide a fallback variable instead.
+  $js_css_group = 'openlayers';
+  if (class_exists('\Drupal\openlayers\Config')) {
+    $js_css_group = \Drupal\openlayers\Config::get('openlayers.js_css.group');
+  }
+
+  $libraries['ol3-cesium'] = array(
+    'name' => 'Openlayers 3 Cesium',
+    'vendor url' => 'https://github.com/openlayers/ol3-cesium',
+    'download url' => 'https://github.com/openlayers/ol3-cesium/releases',
+    'version' => '*',
+    'files' => array(
+      'js' => array(
+        'ol3cesium.js' => array(
+          'weight' => 2,
+          'group' => $js_css_group,
+        ),
+      ),
+    ),
+    'dependencies' => array(
+      'cesium',
+      'openlayers3',
+    ),
+  );
+
+  $libraries['cesium'] = array(
+    'name' => 'Cesium',
+    'vendor url' => 'http://cesiumjs.org',
+    'download url' => 'http://cesiumjs.org/downloads.html',
+    'version arguments' => array(
+      'file' => 'package.json',
+      'pattern' => '/((?:\d+\.?){2,3})/',
+      'lines' => 3,
+    ),
+    'files' => array(
+      'js' => array('Build/Cesium/Cesium.js'),
+      'css' => array('Build/Cesium/Widgets/widgets.css'),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array('Build/Cesium/Cesium.js'),
+          'css' => array('Build/Cesium/Widgets/widgets.css'),
+        ),
+      ),
+      'unminified' => array(
+        'files' => array(
+          'js' => array('Build/CesiumUnminified/Cesium.js'),
+          'css' => array('Build/CesiumUnminified/Widgets/widgets.css'),
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}

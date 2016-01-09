@@ -567,5 +567,15 @@ osm.on(\'postcompose\', function(event) {
   );
   $export['openlayers_examples_component_popup_london_tube'] = $ol_component;
 
+  $ol_component = new stdClass();
+  $ol_component->disabled = FALSE; /* Edit this to true to make a default ol_component disabled initially */
+  $ol_component->api_version = 1;
+  $ol_component->machine_name = 'openlayers_examples_component_ol3cesium';
+  $ol_component->name = 'Openlayers examples: Openlayers Cesium';
+  $ol_component->description = '';
+  $ol_component->factory_service = 'openlayers.Component:OL3Cesium';
+  $ol_component->options = array();
+  $export['openlayers_examples_component_ol3cesium'] = $ol_component;
+
   return $export;
 }

@@ -1,0 +1,9 @@
+name = "Openlayers Cesium"
+description = "Openlayers Cesium integration"
+core = 7.x
+php = 5.3.10
+package = "Openlayers"
+
+dependencies[] = openlayers
+
+registry_autoload[] = PSR-4
