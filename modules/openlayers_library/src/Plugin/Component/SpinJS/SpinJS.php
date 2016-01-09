@@ -23,8 +23,8 @@ class SpinJS extends Component {
   /**
    * {@inheritdoc}
    */
-  public function preBuild(array &$build, ObjectInterface $context = NULL) {
-    $build['spinjs']['#attached']['js'][] = array(
+  public function postBuild(array &$build, ObjectInterface $context = NULL) {
+    $build['#attached']['js'][] = array(
       'data' => array(
         'spinjs' => array(
           $context->getId() => $this->getOptions(),
