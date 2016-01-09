@@ -50,6 +50,7 @@ function template_preprocess_openlayers(&$variables) {
           ((bool) $map->isAsynchronous()) ? 'asynchronous' : NULL,
         )
       ),
+      'tabindex' => 0,
     ),
   );
 
