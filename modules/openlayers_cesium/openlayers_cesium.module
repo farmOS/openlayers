@@ -46,7 +46,11 @@ function openlayers_cesium_libraries_info() {
       'lines' => 3,
     ),
     'files' => array(
-      'js' => array('Build/Cesium/Cesium.js'),
+      'js' => array(
+        'Build/Cesium/Cesium.js' => array(
+          'preprocess' => FALSE,
+        ),
+      ),
       'css' => array('Build/Cesium/Widgets/widgets.css'),
     ),
     'variants' => array(
