@@ -32,6 +32,15 @@ class OL3Cesium extends Component {
       $attached['libraries_load']['openlayers3_integration'] = array('openlayers3_integration', 'debug');
     };
 
+    $library = libraries_detect('cesium');
+    if ($library['installed'] == TRUE) {
+      $attached['js'][] = array(
+        'data' => "CESIUM_BASE_URL = '" . url($library['library path']) . "/Build/Cesium/';",
+        'scope' => 'header',
+        'type' => 'inline',
+      );
+    }
+
     return $attached;
   }
 

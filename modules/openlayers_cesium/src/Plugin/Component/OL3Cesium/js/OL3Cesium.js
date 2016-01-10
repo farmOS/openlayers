@@ -1,6 +1,7 @@
 Drupal.openlayers.pluginManager.register({
   fs: 'openlayers.Component:OL3Cesium',
   init: function(data) {
-    new olcs.OLCesium({map: data.map}).setEnabled(true);
+    var ol3d = new olcs.OLCesium({map: data.map});
+    ol3d.setEnabled(true);
   }
 });
