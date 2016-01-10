@@ -8,6 +8,7 @@ namespace Drupal\openlayers_cesium\Plugin\Component\OL3Cesium;
 
 use Drupal\openlayers\Config;
 use Drupal\openlayers\Types\Component;
+use Drupal\openlayers\Types\ObjectInterface;
 
 /**
  * Class OL3Cesium.
@@ -22,7 +23,6 @@ class OL3Cesium extends Component {
    * @inheritDoc
    */
   public function attached() {
-
     $attached = parent::attached();
     $attached['libraries_load'][] = array(
       'ol3-cesium',
@@ -34,11 +34,8 @@ class OL3Cesium extends Component {
 
     $library = libraries_detect('cesium');
     if ($library['installed'] == TRUE) {
-      $attached['js'][] = array(
-        'data' => "CESIUM_BASE_URL = '" . url($library['library path']) . "/Build/Cesium/';",
-        'scope' => 'header',
-        'type' => 'inline',
-      );
+      $data = "var CESIUM_BASE_URL = '" . url($library['library path'] . '/Build/Cesium/') . "';";
+      $attached['js'][] = drupal_realpath(file_unmanaged_save_data($data, 'public://openlayers_cesium_base_url.js', FILE_EXISTS_REPLACE));
     }
 
     return $attached;
