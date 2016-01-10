@@ -86,7 +86,7 @@ function openlayers_cesium_libraries_info_alter(&$libraries) {
 
   if ($library['installed'] == TRUE) {
     $data = "var CESIUM_BASE_URL = '" . url($library['library path'] . '/Build/Cesium/') . "';";
-    $jsfile = url(file_unmanaged_save_data($data, 'public://openlayers_cesium_base_url.js', FILE_EXISTS_REPLACE));
+    $jsfile = file_create_url(file_unmanaged_save_data($data, 'public://openlayers_cesium_base_url.js', FILE_EXISTS_REPLACE));
 
     $libraries['ol3-cesium']['files']['js'][$jsfile] = array(
       'data' => $jsfile,
