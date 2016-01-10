@@ -1527,13 +1527,14 @@ function openlayers_examples_default_openlayers_maps() {
     'provideBlock' => 0,
     'provideIframe' => 1,
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_examples_layer_group_cesium_backgrounds',
     ),
     'controls' => array(
       0 => 'openlayers_control_attribution',
       1 => 'openlayers_control_rotate',
       2 => 'openlayers_control_zoom',
       4 => 'openlayers_control_fullscreen',
+      5 => 'openlayers_examples_control_ol3layerswitcher',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',

@@ -857,5 +857,27 @@ function openlayers_examples_default_openlayers_layers() {
   );
   $export['openlayers_examples_layer_group_london_tube_overlays'] = $ol_layer;
 
+  $ol_layer = new stdClass();
+  $ol_layer->disabled = FALSE; /* Edit this to true to make a default ol_layer disabled initially */
+  $ol_layer->api_version = 1;
+  $ol_layer->machine_name = 'openlayers_examples_layer_group_cesium_backgrounds';
+  $ol_layer->name = 'Openlayers examples: Cesium map backgrounds';
+  $ol_layer->description = '';
+  $ol_layer->factory_service = 'openlayers.Layer:Group';
+  $ol_layer->options = array(
+    'visible' => 1,
+    'grouptitle' => 'Base layers',
+    'grouplayers' => array(
+      0 => 'openlayers_examples_layer_mapquest_sat',
+      1 => 'openlayers_layer_tile_mapquest_osm',
+      2 => 'openlayers_examples_layer_openstreetmap_mapnik',
+      3 => 'openlayers_examples_layer_openmapsurfer_roads',
+      4 => 'openlayers_examples_layer_openstreetmap_de',
+      5 => 'openlayers_examples_layer_openstreetmap_hot',
+      6 => 'openlayers_examples_layer_tile_mapbox_example2',
+    ),
+  );
+  $export['openlayers_examples_layer_group_cesium_backgrounds'] = $ol_layer;
+
   return $export;
 }
