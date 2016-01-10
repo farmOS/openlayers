@@ -1535,6 +1535,7 @@ function openlayers_examples_default_openlayers_maps() {
       2 => 'openlayers_control_zoom',
       4 => 'openlayers_control_fullscreen',
       5 => 'openlayers_examples_control_ol3layerswitcher',
+      6 => 'openlayers_examples_control_ol3cesiumcontrol',
     ),
     'interactions' => array(
       0 => 'openlayers_interaction_dragpan',
