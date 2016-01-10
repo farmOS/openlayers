@@ -29,10 +29,15 @@ function openlayers_cesium_libraries_info() {
           'group' => $js_css_group,
         ),
       ),
+      'css' => array(
+        'ol.css' => array(
+          'weight' => 2,
+          'group' => $js_css_group,
+        ),
+      ),
     ),
     'dependencies' => array(
       'cesium',
-      'openlayers3',
     ),
   );
 
