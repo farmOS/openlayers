@@ -72,3 +72,25 @@ function openlayers_cesium_libraries_info() {
 
   return $libraries;
 }
+
+/**
+ * Implements hook_libraries_info_alter().
+ */
+function openlayers_cesium_libraries_info_alter(&$libraries) {
+  $js_css_group = 'openlayers';
+  if (class_exists('\Drupal\openlayers\Config')) {
+    $js_css_group = \Drupal\openlayers\Config::get('openlayers.js_css.group');
+  }
+
+  $library = libraries_detect('cesium');
+
+  if ($library['installed'] == TRUE) {
+    $data = "var CESIUM_BASE_URL = '" . url($library['library path'] . '/Build/Cesium/') . "';";
+    $jsfile = file_create_url(file_unmanaged_save_data($data, 'public://openlayers_cesium_base_url.js', FILE_EXISTS_REPLACE));
+
+    $libraries['ol3-cesium']['files']['js'][$jsfile] = array(
+      'weight' => 2,
+      'group' => $js_css_group,
+    );
+  }
+}
