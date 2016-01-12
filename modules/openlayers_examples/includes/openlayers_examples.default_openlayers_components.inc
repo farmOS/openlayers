@@ -142,6 +142,7 @@ function openlayers_examples_default_openlayers_components() {
     'layer' => 'openlayers_examples_layer_vector_kml_timezones',
     'positioning' => 'top-right',
   );
+  $export['openlayers_examples_component_tooltip_timezones'] = $ol_component;
 
   $ol_component = new stdClass();
   $ol_component->disabled = FALSE; /* Edit this to true to make a default component disabled initially */
