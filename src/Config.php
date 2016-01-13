@@ -57,7 +57,7 @@ class Config {
     if (is_array($parents)) {
       $notfound = FALSE;
       foreach ($parents as $parent) {
-        if (isset($options[$parent])) {
+        if (array_key_exists($parent, $options)) {
           $options = $options[$parent];
         }
         else {
@@ -70,7 +70,8 @@ class Config {
       }
     }
 
-    if ($value = Config::defaults(implode('.', $parents))) {
+    $value = Config::defaults(implode('.', $parents));
+    if (isset($value)) {
       return $value;
     }
 
