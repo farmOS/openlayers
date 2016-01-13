@@ -147,9 +147,6 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
     }
   }
 
-  // Ensure geophp is available.
-  geophp_load();
-
   // Transform into centroid or bounding if needed.
   if ($display['settings']['data'] != 'full') {
     if ($display['settings']['data'] == 'centroid') {
@@ -548,7 +545,6 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
   drupal_array_set_nested_value($form_state['values'], $geocoder_field_parents, $values);
 
   if ($field_value = geocoder_widget_get_field_value($element['#entity_type'], $field_state['instance'], NULL, $values)) {
-    geophp_load();
     $geometry = geoPHP::load($field_value[$langcode][$delta]['geom']);
     // Openlayers can only use WKT, so translate.
     $field_value[$langcode][$delta]['geom'] = $geometry->out('wkt');

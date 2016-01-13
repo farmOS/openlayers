@@ -129,7 +129,6 @@ class GeofieldWidget extends Component {
    * @throws \exception
    */
   private function initialDataToGeomFeatures() {
-    geophp_load();
     $initial_data = $this->getOption('initialData', '');
     $geom  = new \GeometryCollection(array());
     $features = array();

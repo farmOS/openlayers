@@ -5,7 +5,6 @@ package = "Openlayers"
 
 dependencies[] = views
 dependencies[] = openlayers
-dependencies[] = geophp
 
 files[] = views/openlayers_views_plugin_style_source_vector.inc
 files[] = views/openlayers_views_plugin_display_openlayers.inc

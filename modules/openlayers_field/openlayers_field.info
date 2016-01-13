@@ -4,6 +4,7 @@ core = 7.x
 package = "Openlayers"
 
 dependencies[] = openlayers
+dependencies[] = geocoder (>= 2.x)
+dependencies[] = composer_manager
 
-registry_autoload[] = PSR-0
 registry_autoload[] = PSR-4
