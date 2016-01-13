@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Class openlayers_config.
+ * Class Config.
  */
 
 namespace Drupal\openlayers;
 
 /**
- * Class openlayers_config.
+ * Class Config.
  */
 class Config {
 
