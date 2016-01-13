@@ -158,7 +158,7 @@ class Openlayers {
         'description' => 'Error',
         'factory_service' => '',
         'machine_name' => $export,
-        'errorMessage' => 'Unable to load CTools exportable @type @machine_name.',
+        'errorMessage' => 'Unable to load CTools exportable @type (<em>@machine_name</em>).',
       );
       $object = \Drupal::service('openlayers.Types')->createInstance('Error', $configuration);
     }

@@ -303,7 +303,9 @@ class openlayers_views_plugin_style_source_vector extends views_plugin_style {
           switch ($this->options['data_source']['value']) {
             case 'wkt':
               $handler = $handlers[$this->options['data_source']['wkt']];
-              $wkt = $handler->allow_advanced_render() ? $handler->advanced_render($record) : $handler->render($record);
+              if (is_object($handler)) {
+                $wkt = $handler->allow_advanced_render() ? $handler->advanced_render($record) : $handler->render($record);
+              }
               break;
 
             case 'other_latlon':
