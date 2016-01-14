@@ -52,7 +52,7 @@ class InlineJS extends Interaction {
     if ($this->moduleHandler->moduleExists('ace_editor')) {
       $attached = array(
         'library' => array(
-          array('ace_editor', 'ace-editor'),
+          array('ace_editor', 'ace'),
         ),
         'js' => array(
           $this->drupal7->drupal_get_path('module', 'openlayers') . '/js/openlayers.editor.js',
