@@ -29,9 +29,9 @@ class Field extends Vector {
    * {@inheritdoc}
    */
   public function optionsForm(array &$form, array &$form_state) {
-
     $geocoder_plugins = (array) $this->getOption('geocoder_handlers', array('GoogleMaps'));
-    $plugins = array_combine(array_values(\Drupal\geocoder\Geocoder::getProviderPlugins()), array_values(\Drupal\geocoder\Geocoder::getProviderPlugins()));
+    $providers = \Drupal\geocoder\Geocoder::getPlugins('Provider');
+    $plugins = array_combine(array_values($providers), array_values($providers));
     $plugins_array = array();
 
     $i = 0;
@@ -210,8 +210,7 @@ class Field extends Vector {
     foreach ($fields as $index => &$field) {
       if (isset($field['address']) && !empty($field['address'])) {
         if ($addressCollection = Geocoder::geocode($geocoder_handlers, $field['address'])) {
-          $dumper = \Drupal::service('geocoder.Dumper')->createInstance('geojson');
-          $geojson = $dumper->dump($addressCollection->first());
+          $geojson = Geocoder::getPlugin('Dumper', 'geojson')->dump($addressCollection->first());
           $feature = json_decode($geojson, TRUE);
 
           if (isset($field['title']) && !empty($field['title'])) {
@@ -289,8 +288,7 @@ class Field extends Vector {
           }
 
           if ($addressCollection = Geocoder::geocode($geocoder_handlers, $field['address'])) {
-            $dumper = \Drupal::service('geocoder.Dumper')->createInstance('geojson');
-            $geojson = $dumper->dump($addressCollection->first());
+            $geojson = Geocoder::getPlugin('Dumper', 'geojson')->dump($addressCollection->first());
             $feature = json_decode($geojson, TRUE);
 
             if (isset($field['title']) && !empty($field['title'])) {

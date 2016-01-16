@@ -3,6 +3,7 @@ description = Allows you to embed any Openlayers map into an iframe.
 core = 7.x
 package = "Openlayers"
 
+dependencies[] = openlayers
 dependencies[] = services
 dependencies[] = services:rest_server
 dependencies[] = services_rrf
