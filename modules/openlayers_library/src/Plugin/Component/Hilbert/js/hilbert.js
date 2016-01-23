@@ -15,7 +15,7 @@ Drupal.openlayers.pluginManager.register({
 
       for (var i=0; i<point_count; i++) {
         var coords = hilbert.d2xy(depth, i).map(function(item) {
-          return item * 100000;
+          return item * 10000000 / Math.sqrt(point_count);
         });
         origin.appendCoordinate(coords);
       }
