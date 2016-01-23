@@ -1548,5 +1548,43 @@ function openlayers_examples_default_openlayers_maps() {
   );
   $export['openlayers_examples_map_cesium'] = $ol_map;
 
+  $ol_map = new stdClass();
+  $ol_map->disabled = FALSE;
+  $ol_map->api_version = 1;
+  $ol_map->machine_name = 'openlayers_examples_map_hilbert';
+  $ol_map->name = 'Openlayers examples: Hilbert fractal';
+  $ol_map->description = '';
+  $ol_map->factory_service = 'openlayers.Map:OLMap';
+  $ol_map->options = array(
+    'width' => 'auto',
+    'height' => '400px',
+    'view' => array(
+      'center' => array(
+        'lat' => 0,
+        'lon' => 0,
+      ),
+      'rotation' => 0,
+      'zoom' => 2,
+    ),
+    'contextualLinks' => 0,
+    'provideBlock' => 0,
+    'provideIframe' => 1,
+    'controls' => array(
+      0 => 'openlayers_control_attribution',
+      1 => 'openlayers_control_rotate',
+      2 => 'openlayers_control_zoom',
+      4 => 'openlayers_control_fullscreen',
+    ),
+    'interactions' => array(
+      0 => 'openlayers_interaction_dragpan',
+      1 => 'openlayers_interaction_dragrotate',
+      2 => 'openlayers_interaction_mousewheelzoom',
+    ),
+    'components' => array(
+      0 => 'openlayers_examples_component_hilbert',
+    ),
+  );
+  $export['openlayers_examples_map_hilbert'] = $ol_map;
+
   return $export;
 }
