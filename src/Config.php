@@ -48,7 +48,7 @@ class Config {
    *   The configuration value.
    */
   static public function get($parents, $default_value = NULL) {
-    $options = \Drupal::service('variable')->get('openlayers_config');
+    $options = \Drupal::service('variable')->get('openlayers_config', array());
 
     if (is_string($parents)) {
       $parents = explode('.', $parents);
