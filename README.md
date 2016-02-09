@@ -63,7 +63,13 @@ You may also use drush to do so:
 drush libraries-list
 ```
 
-Do not forget to configure jquery_update and use at least jQuery 1.10.
+Openlayers requires jQuery 1.10 or higher to function. The easiest way to
+ensure that the correct version is used is through the jQuery Update module.
+Do not forget to configure jQuery Update via
+admin/config/development/jquery_update, and select jQuery 1.10 or higher.
+Note that jQuery Update offers separate settings for the regular and
+administration themes, so set both if you are using the Openlayers UI or need
+openlayers in the administrative interface.
 
 # Getting help
 Has this module is a complete rewrite, it still needs documentation and we, maintainers, still need to work on that.
