@@ -201,7 +201,7 @@ function openlayers_geofield_field_formatter_view($entity_type, $entity, $field,
   list($map_name, $layer_name) = explode(':', $display['settings']['map_layer_preset'], 2);
 
   /** @var \Drupal\openlayers\Types\MapInterface $map */
-  if (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE) {
+  if (count($items) && (($map = \Drupal\openlayers\Openlayers::load('Map', $map_name)) == TRUE)) {
     /** @var \Drupal\openlayers\Types\LayerInterface $layer */
     if ($layer = $map->getCollection()->getObjectById('layer', $layer_name)) {
       if ($layer->getSource() instanceof \Drupal\openlayers\Plugin\Source\Vector\Vector) {
