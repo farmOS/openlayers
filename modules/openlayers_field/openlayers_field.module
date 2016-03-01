@@ -92,6 +92,8 @@ function openlayers_field_field_formatter_info() {
       'field types' => array('addressfield', 'text'),
       'settings'  => array(
         'map_layer' => '',
+        'geocoder_handler' => 'google',
+        'geocoder_cache' => '',
       ),
     ),
   );
@@ -156,6 +158,30 @@ function openlayers_field_field_formatter_settings_form($field, $instance, $view
         '#default_value' => $settings['map_layer'],
         '#required' => TRUE,
       );
+
+      $geocoder_handlers = array();
+      foreach (geocoder_handler_info() as $name => $handler) {
+        $geocoder_handlers[$name] = $handler['title'];
+      }
+
+      $element['geocoder_handler'] = array(
+        '#type' => 'select',
+        '#title' => t('Geocoder handler'),
+        '#options' => $geocoder_handlers,
+        '#default_value' => $settings['geocoder_handler'],
+      );
+
+      $element['geocoder_cache'] = array(
+        '#type' => 'select',
+        '#title' => t('Geocoder cache type'),
+        '#description' => t('Type of geocoder cache to use'),
+        '#options' => array(
+          0 => t('No caching'),
+          1 => t('Static-cache but no persistent-cache'),
+          2 => t('Both static-cache and persistent-cache'),
+        ),
+        '#default_value' => $settings['geocoder_cache'],
+      );
       break;
   }
 
@@ -186,6 +212,21 @@ function openlayers_field_field_formatter_settings_summary($field, $instance, $v
       break;
 
     case 'openlayers_addressfield_textfield_formatter':
+      $geocoder_cache = 'Not defined.';
+      switch ($settings['geocoder_cache']) {
+        case 0:
+          $geocoder_cache = 'No cache';
+          break;
+
+        case 1:
+          $geocoder_cache = 'Static cache only';
+          break;
+
+        case 2:
+          $geocoder_cache = 'Static and persistent cache';
+          break;
+      }
+
       list($map, $layer) = explode(':', $settings['map_layer'], 2);
 
       $summary[] = t('Openlayers map: @map', array(
@@ -193,6 +234,12 @@ function openlayers_field_field_formatter_settings_summary($field, $instance, $v
       ));
       $summary[] = t('Openlayers layer: @layer', array(
         '@layer' => $layer,
+      ));
+      $summary[] = t('Geocoder handler: @geocoder_handler', array(
+        '@geocoder_handler' => $settings['geocoder_handler'],
+      ));
+      $summary[] = t('Geooder cache: @geocoder_cache', array(
+        '@geocoder_cache' => $geocoder_cache,
       ));
 
       break;
@@ -248,6 +295,8 @@ function openlayers_field_field_formatter_view($entity_type, $entity, $field, $i
       /** @var \Drupal\openlayers\Types\LayerInterface $layer */
       if ($layer = $map->getCollection()->getObjectById('layer', $layer)) {
         if ($source = $layer->getSource()) {
+          $source->setOption('geocoder_handler', $settings['geocoder_handler']);
+          $source->setOption('geocoder_cache', $settings['geocoder_cache']);
           $source->setOption('fields', $fields);
         }
       }

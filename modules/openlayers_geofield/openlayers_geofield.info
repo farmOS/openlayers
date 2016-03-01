@@ -5,6 +5,5 @@ package = "Openlayers"
 
 dependencies[] = openlayers
 dependencies[] = geofield
-dependencies[] = composer_manager
 
 registry_autoload[] = PSR-4
