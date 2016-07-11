@@ -419,11 +419,16 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
         $action_feature['modify'] = 'modify';
       }
 
+      // Get the initial data from $form_state['input'], if it exists.
+      // Otherwise, use the field's $items. This allows the Geocoder button
+      // to populate the map, replacing any other shapes.
+      $initial_data = !empty($form_state['input'][$field_name][$langcode]) ? $form_state['input'][$field_name][$langcode] : $items;
+
       $component->setOption('dataType', array('WKT' => 'WKT'));
       $component->setOption('dataProjection', 'EPSG:4326');
       $component->setOption('typeOfFeature', $feature_types);
       $component->setOption('actionFeature', $action_feature);
-      $component->setOption('initialData', $items);
+      $component->setOption('initialData', $initial_data);
       $component->setOption('featureLimit', $field['cardinality']);
       $component->setOption('inputFieldName', 'geom');
       $component->setOption('showInputField', !empty($settings['showInputField']));
@@ -555,8 +560,12 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
     $field_value[$langcode][$delta]['input_format'] = 'wkt';
     // Override the field's value in the 'input' array to substitute the new
     // field value for the one that was submitted.
-    drupal_array_set_nested_value($form_state, array_merge(array('values'), array_slice($button['#array_parents'], 0, -4), array($field_name)), $field_value);
+    drupal_array_set_nested_value($form_state, array_merge(array('input'), array_slice($button['#array_parents'], 0, -4), array($field_name)), $field_value);
   }
+
+  // Rebuild the form to ensure that the map is recreated from scratch.
+  // See field_add_more_submit() in core field.form.inc for similar usage.
+  $form_state['rebuild'] = TRUE;
 }
 
 /**
