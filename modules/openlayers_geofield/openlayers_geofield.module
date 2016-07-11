@@ -508,7 +508,7 @@ function openlayers_geofield_field_widget_form(&$form, &$form_state, $field, $in
       // of the geocoder field.
       '#limit_validation_errors' => array(),
       '#ajax' => array(
-        'callback' => 'openlayers_widget_geocode',
+        'callback' => 'openlayers_geofield_geocode_ajax_callback',
         'wrapper' => $wrapper_id,
         'effect' => 'fade',
       ),
@@ -566,6 +566,23 @@ function openlayers_openlayers_use_geocoder_submit($form, &$form_state) {
   // Rebuild the form to ensure that the map is recreated from scratch.
   // See field_add_more_submit() in core field.form.inc for similar usage.
   $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Return the altered form element from an AJAX request.
+ *
+ * @see openlayers_geofield_field_widget_form()
+ */
+function openlayers_geofield_geocode_ajax_callback($form, $form_state) {
+  $button = $form_state['triggering_element'];
+
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+
+  // Return the map, but remove the '_weight' element inserted
+  // by the field API.
+  unset($element['_weight']);
+  return $element;
 }
 
 /**
