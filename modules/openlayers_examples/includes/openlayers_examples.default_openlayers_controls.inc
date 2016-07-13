@@ -116,7 +116,7 @@ function openlayers_examples_default_openlayers_controls() {
       'openlayers_examples_layer_openstreetmap_de' => 'openlayers_examples_layer_openstreetmap_de',
       'openlayers_examples_layer_openstreetmap_hot' => 'openlayers_examples_layer_openstreetmap_hot',
       'openlayers_examples_layer_openstreetmap_mapnik' => 'openlayers_examples_layer_openstreetmap_mapnik',
-      'openlayers_layer_tile_mapquest_osm' => 'openlayers_layer_tile_mapquest_osm',
+      'openlayers_layer_tile_osm' => 'openlayers_layer_tile_osm',
     ),
     'multiselect' => 0,
   );

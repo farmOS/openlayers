@@ -253,7 +253,7 @@ function openlayers_examples_default_openlayers_maps() {
       'maxZoom' => '0',
     ),
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
       1 => 'openlayers_examples_layer_cluster_cities',
     ),
     'controls' => array(
@@ -294,7 +294,7 @@ function openlayers_examples_default_openlayers_maps() {
       'maxZoom' => '0',
     ),
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
       1 => 'openlayers_examples_layer_views_geojson_popup',
     ),
     'controls' => array(
@@ -340,7 +340,7 @@ function openlayers_examples_default_openlayers_maps() {
       1 => 'openlayers_examples_layer_mapquest_hyb',
       2 => 'openlayers_examples_layer_mapquest_sat',
       3 => 'openlayers_examples_layer_stamen3',
-      4 => 'openlayers_layer_tile_mapquest_osm',
+      4 => 'openlayers_layer_tile_osm',
       5 => 'openlayers_examples_layer_openstreetmap_mapnik',
       6 => 'openlayers_examples_layer_vector_kml_earthquakes',
       7 => 'openlayers_examples_layer_views_geojson',
@@ -383,7 +383,7 @@ function openlayers_examples_default_openlayers_maps() {
       'zoom' => '2',
     ),
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
     ),
     'controls' => array(
       0 => 'openlayers_control_rotate',
@@ -547,7 +547,7 @@ function openlayers_examples_default_openlayers_maps() {
       8 => 'openlayers_examples_layer_opencyclemap_outdoors',
       9 => 'openlayers_examples_layer_opencyclemap',
       10 => 'openlayers_examples_layer_openstreetmap_hot',
-      11 => 'openlayers_layer_tile_mapquest_osm',
+      11 => 'openlayers_layer_tile_osm',
       12 => 'openlayers_examples_layer_openstreetmap_de',
       13 => 'openlayers_examples_layer_openstreetmap_mapnik',
     ),
@@ -936,7 +936,7 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'renderer' => 'canvas',
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
       1 => 'openlayers_examples_layer_mapquest_sat',
     ),
     'controls' => array(
@@ -1201,7 +1201,7 @@ function openlayers_examples_default_openlayers_maps() {
     'provideBlock' => 0,
     'provideIframe' => 1,
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
     ),
     'controls' => array(
       0 => 'openlayers_control_rotate',
@@ -1278,7 +1278,7 @@ function openlayers_examples_default_openlayers_maps() {
     ),
     'renderer' => 'canvas',
     'layers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
       1 => 'openlayers_examples_layer_tilewms',
     ),
     'controls' => array(

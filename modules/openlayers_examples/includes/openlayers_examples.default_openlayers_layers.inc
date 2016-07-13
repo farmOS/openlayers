@@ -788,7 +788,7 @@ function openlayers_examples_default_openlayers_layers() {
   $ol_layer->options = array(
     'grouptitle' => 'Base layers',
     'grouplayers' => array(
-      0 => 'openlayers_layer_tile_mapquest_osm',
+      0 => 'openlayers_layer_tile_osm',
       1 => 'openlayers_examples_layer_openstreetmap_mapnik',
       2 => 'openlayers_examples_layer_openstreetmap_hot',
       3 => 'openlayers_examples_layer_openstreetmap_de',
@@ -869,7 +869,7 @@ function openlayers_examples_default_openlayers_layers() {
     'grouptitle' => 'Base layers',
     'grouplayers' => array(
       0 => 'openlayers_examples_layer_mapquest_sat',
-      1 => 'openlayers_layer_tile_mapquest_osm',
+      1 => 'openlayers_layer_tile_osm',
       2 => 'openlayers_examples_layer_openstreetmap_mapnik',
       3 => 'openlayers_examples_layer_openmapsurfer_roads',
       4 => 'openlayers_examples_layer_openstreetmap_de',
