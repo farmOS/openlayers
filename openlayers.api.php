@@ -110,6 +110,26 @@ function hook_default_openlayers_sources_alter(&$exports) {
 }
 
 /**
+ * This hook allows modules to provide their own controls.
+ *
+ * @return array
+ *   Array of controls.
+ */
+function hook_default_openlayers_controls() {
+
+}
+
+/**
+ * This hook allows modules to alter default controls.
+ *
+ * @param array $exports
+ *   Array of default controls.
+ */
+function hook_default_openlayers_controls_alter(&$exports) {
+
+}
+
+/**
  * This hook allows modules to provide their own interactions.
  *
  * @return array
